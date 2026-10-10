@@ -33,6 +33,7 @@ PREVIEW=/tmp/tak node tools/make-blossoms.mjs boog   # 6 varianten van één ont
 
 ```bash
 npm run server     # http://127.0.0.1:8000, dient de app én de API; gegevens in server/data/
+npm run testvrienden -- --code JOUW-CODE   # nagebootste vrienden die meespelen, om Start en Vrienden uit te proberen (zie docs/ACCOUNTS.md)
 ```
 
 Met de server erbij verschijnt *Vrienden* in het menu en kun je een account maken om je voortgang op meer apparaten te hebben.

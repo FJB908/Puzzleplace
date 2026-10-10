@@ -61,6 +61,19 @@ Alles onder `/api`, JSON, sleutel als `Authorization: Bearer ...`. Fouten: `{ er
 
 De logica staat los van HTTP in `server/api.mjs` (`createApi(...).handle(...)`), zodat de tests (`tests/server.test.mjs`) hem zonder netwerk kunnen aanroepen.
 
+## Test-vrienden
+
+Zonder echte mensen kun je Start, Vrienden en een partij toch uitproberen met `tools/testvrienden.mjs`: zeven nagebootste vrienden die via de gewone API een vriendverzoek sturen, een partij Woordtuin beginnen en **echt meespelen** (ze reageren op jouw zetten, met een eigen tempo en sterkte).
+
+```bash
+npm run server                                                         # in een ander venster
+npm run testvrienden -- --code K7P4-QM2X                               # jouw vriendencode (onder Vrienden); jij accepteert de verzoeken zelf
+npm run testvrienden -- --email jij@voorbeeld.nl --wachtwoord geheim   # ze zijn dan al je vriend (twee verzoeken blijven openstaan)
+npm run testvrienden -- --opruimen                                     # alles weer weg
+```
+
+Opties: `--server <adres>` (standaard `http://127.0.0.1:8000`), `--eens` (alleen klaarzetten en stoppen), `--snel` (ze reageren snel). Zonder `--eens` blijft het script draaien en spelen ze mee tot je Ctrl+C drukt. Opnieuw draaien maakt geen dubbele vrienden of partijen. De test-vrienden hebben het adres `naam@test.puzzelplaats.invalid` en wachtwoord `testvriend-123`; draai dit alleen tegen je eigen test-server. Meld je binnen korte tijd heel vaak aan of in, dan zegt de server "Dit gaat te snel": even een kwartier wachten.
+
 ## Een spel voor twee spelers toevoegen
 
 De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **wie aan de beurt is** en **de versie** (geen dubbele zetten). De regels zijn één module per spel in `server/games/`, aangemeld in `server/games/index.mjs`. Het voorbeeld is `server/games/woordtuin.mjs`.
