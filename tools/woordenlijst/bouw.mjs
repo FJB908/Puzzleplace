@@ -134,4 +134,14 @@ if (process.env.REVIEW) {
     writeFileSync(join(dir, `${taal}-D-ontbreekt.txt`), rijen(rest, 10));
   }
 }
+// Steekproef voor een onafhankelijke controle: STEEKPROEF=<aantal> REVIEW=<map>  schrijft <taal>-S-alledaags.txt en <taal>-S-overig.txt met willekeurige woorden
+if (process.env.STEEKPROEF && process.env.REVIEW) {
+  const n = Number(process.env.STEEKPROEF);
+  let zaad = 1234567; const rnd = () => { zaad = (Math.imul(zaad, 1664525) + 1013904223) >>> 0; return zaad / 4294967296; };
+  const trek = (lijst) => { const a = lijst.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a.slice(0, n); };
+  const toon = (w) => { const r = perWoord.get(w); const b = r.hoofd ? r.bron[0].toUpperCase() + r.bron.slice(1) : r.bron; return b === w ? w : `${w}=${b}`; };
+  const rijen = (lijst, per = 14) => { const o = []; for (let i = 0; i < lijst.length; i += per) o.push(lijst.slice(i, i + per).join(' ')); return o.join('\n') + '\n'; };
+  writeFileSync(join(process.env.REVIEW, `${taal}-S-alledaags.txt`), rijen(trek(gewoon).map(toon)));
+  writeFileSync(join(process.env.REVIEW, `${taal}-S-overig.txt`), rijen(trek(woorden.filter((w) => !alledaags(w))).map(toon)));
+}
 if (process.env.DUMP) writeFileSync(process.env.DUMP, woorden.map((w) => { const r = perWoord.get(w); return `${alledaags(w) ? '+' : ' '}${w}\t${r.aantal}\t${r.zl}\t${r.ze}`; }).join('\n') + '\n');

@@ -32,7 +32,8 @@ except ImportError:
 wf = a.wf or taal
 wf_ok = zipf_frequency is not None and (wf in available_languages('best') or wf in available_languages('small') or wf in available_languages('large'))
 
-LETTER = re.compile(r"^[^\W\d_]+$", re.UNICODE)
+# Catalaans schrijft "col·legi" (l·l): de punt hoort bij het woord en verdwijnt bij het vouwen (js/shared/talen.js)
+LETTER = re.compile(r"^[^\W\d_]+(?:·[^\W\d_]+)*$" if taal == 'ca' else r"^[^\W\d_]+$", re.UNICODE)
 
 # 1. kandidaten uit de frequentielijst. We tellen apart: het woord precies in kleine letters (zo komt het in gewone tekst voor) en met een
 #    hoofdletter (begin van een zin, of bij het Duits een zelfstandig naamwoord). Namen vallen zo niet onder de gewone woorden.

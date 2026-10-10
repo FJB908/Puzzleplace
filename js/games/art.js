@@ -2,6 +2,10 @@
 // Ze gebruiken alleen kleurvariabelen uit de stijl (klassen .ga-*), dus ze passen zich vanzelf aan
 // licht, donker en hoog contrast aan.
 
+import { KUNST } from './art-woorden.js';
+import { FREQ } from './woordzoeker/frequentie.js';
+import { getTaal } from '../i18n/index.js';
+
 const wrap = (inner, size = 11) => `<svg class="game-art" viewBox="0 0 160 120" style="font-size:${size}px" aria-hidden="true" focusable="false">${inner}</svg>`;
 
 // Sudoku: een rooster met cijfers, één eigen cijfer en een gekozen vakje
@@ -23,12 +27,26 @@ function sudoku() {
     <rect class="ga-frame" width="108" height="108" rx="9"/>${nums}</g>`, 8);
 }
 
-// Woordzoeker: letters met twee markeerstiften
+// De woorden in de illustraties zijn echte woorden uit de taal van de speler (tools/inhoud/maak.mjs kiest ze uit de puzzels van die taal)
+const woorden = () => KUNST[getTaal()] || KUNST.en || KUNST.nl;
+// Opvulletters die eruitzien als tekst in die taal: willekeurig maar vast per taal, naar de letterfrequentie van de taal
+function opvul(taal, aantal) {
+  const f = FREQ[taal] || FREQ.en, letters = Object.keys(f), totaal = letters.reduce((a, c) => a + f[c], 0);
+  let zaad = [...taal].reduce((a, c) => a * 31 + c.charCodeAt(0), 7);
+  const rnd = () => { zaad = (Math.imul(zaad, 1664525) + 1013904223) >>> 0; return zaad / 4294967296; };
+  return Array.from({ length: aantal }, () => { let x = rnd() * totaal; for (const c of letters) { x -= f[c]; if (x <= 0) return c; } return letters[0]; });
+}
+
+// Woordzoeker: letters met twee markeerstiften (twee woorden en een schuin woord)
 function woordzoeker() {
-  const rows = ['TULPEN', 'ZBLOEM', 'KROOSA', 'NMADEL', 'IEBHOK', 'RVTRAS'];
-  const S = 18;
+  const [w6, w5, w4] = woorden().wz;
+  const N = 6, S = 18;
+  const cel = opvul(getTaal(), N * N);
+  [...w6].forEach((ch, c) => { cel[c] = ch; });                                    // rij 0
+  [...w5].forEach((ch, c) => { cel[N + 1 + c] = ch; });                            // rij 1, kolom 1 tot en met 5
+  [...w4].forEach((ch, i) => { cel[(2 + i) * N + 1 + i] = ch; });                  // schuin vanaf rij 2, kolom 1
   let letters = '';
-  rows.forEach((row, r) => [...row].forEach((ch, c) => { letters += `<text class="ga-g" x="${c * S + S / 2}" y="${r * S + S / 2 + 4}" text-anchor="middle">${ch}</text>`; }));
+  cel.forEach((ch, i) => { const r = Math.floor(i / N), c = i % N; letters += `<text class="ga-g" x="${c * S + S / 2}" y="${r * S + S / 2 + 4}" text-anchor="middle">${ch}</text>`; });
   const pill = (r, c1, c2, cls) => `<line class="ga-pill ${cls}" x1="${c1 * S + S / 2}" y1="${r * S + S / 2}" x2="${c2 * S + S / 2}" y2="${r * S + S / 2}"/>`;
   return wrap(`<g transform="translate(26 6)">
     <rect class="ga-board" width="108" height="108" rx="9"/>
@@ -37,14 +55,14 @@ function woordzoeker() {
     <rect class="ga-frame" width="108" height="108" rx="9"/>${letters}</g>`);
 }
 
-// Kruiswoord: kruisende woorden
+// Kruiswoord: kruisende woorden (een horizontaal woord van 5 letters en twee verticale van 4 die het kruisen)
 function kruiswoord() {
   const S = 18;
-  const cells = [
-    [0, 2, 'R', 1], [1, 2, 'O'], [2, 2, 'O'], [3, 2, 'S'],
-    [2, 0, 'B', 2], [2, 1, 'L'], [2, 3, 'E'], [2, 4, 'M', 3],
-    [3, 4, 'A'], [4, 4, 'A'], [5, 4, 'N'],
-  ];
+  const { h, v1, v2 } = woorden().kw;
+  const cells = [];
+  [...v1].forEach((ch, i) => cells.push([i, 2, ch, i === 0 ? 1 : 0]));
+  [...h].forEach((ch, i) => { if (i !== 2) cells.push([2, i, ch, i === 0 ? 2 : i === 4 ? 3 : 0]); });
+  [...v2].forEach((ch, i) => { if (i) cells.push([2 + i, 4, ch, 0]); });
   const sel = '2,3';
   let out = '';
   for (const [r, c, ch, n] of cells) {
@@ -58,7 +76,7 @@ function kruiswoord() {
 
 // Woordtuin: een bordje met roze en blauwgroene vakjes en een woord dat net gekozen wordt
 function woordtuin() {
-  const rows = ['ROZEN', 'TUINA', 'BLOEM', 'KERST', 'ZONDE'];
+  const rows = woorden().wt;
   const own = ['mmmm.', 'tttt.', 'm.mmm', '..ttt', '.....'];
   const pick = new Set(['2,0', '2,1', '2,2', '2,3', '2,4']);
   const S = 21;

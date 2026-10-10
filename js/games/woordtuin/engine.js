@@ -87,13 +87,13 @@ function scan(letters, size, alledaags = false, taal = 'nl') {
 }
 
 // Is het een goed bord? Genoeg woorden, bijna elk vakje komt in een woord voor en er zijn een paar mooie lange woorden.
-function boardQuality(letters, size, taal) {
+export function boardQuality(letters, size, taal) {
   const words = scan(letters, size, true, taal);          // een goed bord heeft genoeg ALLEDAAGSE woorden: die zoekt iedereen
   const covered = new Set(); for (const m of words) for (const i of m.path) covered.add(i);
   const long = new Set(words.filter((m) => m.word.length >= 6).map((m) => m.word)).size;
   return { count: words.length, coverage: covered.size / letters.length, long };
 }
-const GOED = (size) => ({ count: Math.round(size * size * 3), coverage: 0.92, long: 3 });
+export const GOED = (size) => ({ count: Math.round(size * size * 3), coverage: 0.92, long: 3 });
 // Een bord moet er ook natuurlijk uitzien: een gewoon aandeel klinkers (zoals de taal dat heeft) en niet te veel van dezelfde letter
 function zietErGoedUit(letters, taal, zak) {
   const n = letters.length, klinkers = TALEN[taal].klinkers;

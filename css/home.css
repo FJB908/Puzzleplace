@@ -43,8 +43,8 @@ html[data-theme="dark"] .fr-uit { border: 1px solid var(--border); }
 .fr-uit .tile { --tile: 2.8rem; flex: none; }
 .fr-uit > div:not(.fr-acties) { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
 .fr-uit .muted { font-size: .95rem; }
-.fr-uit .fr-acties { flex: 1 1 100%; }
-.fr-uit .fr-acties .btn { flex: none; white-space: nowrap; padding-inline: 1rem; font-size: 1rem; min-height: 2.8rem; }
+.fr-uit .fr-acties { flex: 1 1 100%; flex-wrap: wrap; }
+.fr-uit .fr-acties .btn { flex: 1 1 auto; justify-content: center; text-align: center; padding-inline: 1rem; font-size: 1rem; min-height: 2.8rem; }
 .fr-uit .btn { min-height: 2.9rem; }
 
 /* Verder spelen / kies een spel */

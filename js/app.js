@@ -148,7 +148,12 @@ async function render(moveFocus = true) {
 
   // Zachte overgang tussen pagina's (waar de browser dat kan), anders direct wisselen.
   if (moveFocus && motionOK() && document.startViewTransition && current) {
-    try { await document.startViewTransition(swap).updateCallbackDone; } catch { /* al gewisseld of onderbroken */ }
+    // Wisselt de browser niet binnen een halve seconde (hij kan een overgang uitstellen of overslaan), dan wisselen we zelf: je blijft nooit op het oude scherm hangen
+    let gewisseld = false;
+    const eenmaal = () => { if (!gewisseld) { gewisseld = true; swap(); } };
+    const vangnet = setTimeout(eenmaal, 500);
+    try { await document.startViewTransition(eenmaal).updateCallbackDone; } catch { eenmaal(); /* onderbroken */ }
+    clearTimeout(vangnet);
   } else swap();
 
   const s = store.getSettings();

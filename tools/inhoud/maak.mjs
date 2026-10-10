@@ -190,6 +190,30 @@ async function proefdraaien(taal, fouten, waarsch) {
   void stamp;
 }
 
+// ----- Woorden voor de illustraties (js/games/art.js): echte woorden uit de eigen taal, geen Nederlandse in een Duitse app -----
+function kunstWoorden(themas, entries) {
+  const thema = (id) => themas.find((t) => t.id === id)?.words || [];
+  const alle = themas.flatMap((t) => t.words);
+  const kies = (lijst, lengte, nietIn = []) => lijst.find((w) => w.length === lengte && !nietIn.includes(w));
+  const bloemen = thema('bloemen');
+  const w6 = kies(bloemen, 6) || kies(alle, 6), w5 = kies(bloemen, 5, [w6]) || kies(alle, 5, [w6]), w4 = kies(thema('dieren'), 4, [w6, w5]) || kies(alle, 4, [w6, w5]);
+  // kruiswoord: horizontaal (5) kruist twee verticale woorden (4): v1[2] = h[2] en h[4] = v2[0]
+  let kw = null;
+  for (const max of [1, 2, 3]) {
+    const a = entries.filter((e) => e.level <= max).map((e) => e.answer);
+    const h5 = a.filter((w) => w.length === 5), v4 = a.filter((w) => w.length === 4);
+    for (const h of h5) {
+      const v1 = v4.find((v) => v[2] === h[2]);
+      const v2 = v4.find((v) => v[0] === h[4] && v !== v1);
+      if (v1 && v2) { kw = { h, v1, v2 }; break; }
+    }
+    if (kw) break;
+  }
+  const rij = entries.filter((e) => e.level === 1 && e.answer.length === 5).map((e) => e.answer);
+  const wt = [...new Set([...bloemen.filter((w) => w.length === 5), ...rij])].slice(0, 5);
+  return { wz: [w6, w5, w4], kw, wt };
+}
+
 // ----- Per taal -----
 async function doeTaal(taal, { spelling = false, schrijven = true } = {}) {
   const fouten = [], waarsch = [];
@@ -201,7 +225,9 @@ async function doeTaal(taal, { spelling = false, schrijven = true } = {}) {
   const entries = controleerKruiswoord(taal, kw, fouten, waarsch);
   if (spelling) await controleerSpelling(taal, wz, kw, fouten, waarsch);
   if (schrijven) { schrijfWoordzoeker(taal, themas); schrijfKruiswoord(taal, entries); await proefdraaien(taal, fouten, waarsch); }
-  return { fouten, waarsch, themas, entries };
+  const kunst = !fouten.length ? kunstWoorden(themas, entries) : null;
+  if (kunst && (kunst.wz.some((w) => !w) || !kunst.kw || kunst.wt.length < 5)) waarsch.push('te weinig woorden van de juiste lengte voor de illustraties (6, 5 en 4 letters; 5 + 4 + 4 die kruisen; vijf van 5 letters)');
+  return { fouten, waarsch, themas, entries, kunst };
 }
 
 const args = process.argv.slice(2);
@@ -211,11 +237,17 @@ const spelling = args.includes('--spelling');
 const talen = taalArg ? [taalArg] : Object.keys(TALEN).filter((t) => existsSync(inDir(t)));
 if (taalArg && !TALEN[taalArg]) { console.error(`Onbekende taal: ${taalArg}`); process.exit(1); }
 let totaal = 0;
+const kunstAlle = {};
 for (const taal of talen) {
-  const { fouten, waarsch, themas, entries } = await doeTaal(taal, { spelling });
+  const { fouten, waarsch, themas, entries, kunst } = await doeTaal(taal, { spelling });
+  if (kunst) kunstAlle[taal] = kunst;
   const per = entries ? [1, 2, 3].map((n) => entries.filter((e) => e.level === n).length).join('/') : '-';
   if (waarsch.length) console.log(`${taal}: ${waarsch.length} waarschuwingen\n  ${waarsch.slice(0, 60).join('\n  ')}`);
   if (fouten.length) { console.error(`${taal}: ${fouten.length} FOUTEN\n  ${fouten.slice(0, 60).join('\n  ')}`); totaal += fouten.length; }
   console.log(`${taal}: ${fouten.length ? 'NIET GOED' : 'goed'} (woordzoeker: ${themas ? themas.reduce((a, t) => a + t.words.length, 0) : 0} woorden in ${themas?.length ?? 0} thema's; kruiswoord: ${entries?.length ?? 0} woorden, niveau 1/2/3: ${per})`);
+}
+if (!taalArg && !totaal) {          // alleen bij een volledige run: dan staan alle talen er in
+  const regels = Object.entries(kunstAlle).map(([t, k]) => `  ${t}: ${JSON.stringify(k)},`).join('\n');
+  writeFileSync(join(ROOT, 'js/games/art-woorden.js'), `// Woorden voor de illustraties van de spellen (js/games/art.js), per taal: echte woorden uit de woordzoeker- en kruiswoordpuzzels van die taal.\n// GEGENEREERD door tools/inhoud/maak.mjs: niet met de hand aanpassen.\nexport const KUNST = {\n${regels}\n};\n`);
 }
 process.exit(totaal ? 1 : 0);
