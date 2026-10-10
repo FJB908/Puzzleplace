@@ -64,6 +64,7 @@ navEl.append(...NAV.map((item) => h('a', { href: item.href, 'data-nav': item.id 
 
 function updateNav(active) {
   navEl.hidden = active == null; // tijdens het spelen geen menu
+  if (!navEl.hidden) document.documentElement.style.setProperty('--nav-h', `${navEl.offsetHeight}px`);
   navEl.querySelectorAll('a').forEach((a) => {
     if (a.dataset.nav === active) a.setAttribute('aria-current', 'page');
     else a.removeAttribute('aria-current');
@@ -124,6 +125,7 @@ async function render(moveFocus = true) {
 if ((navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2)) document.documentElement.dataset.lite = 'true';
 
 applySettings();
+new ResizeObserver(() => { if (!navEl.hidden) document.documentElement.style.setProperty('--nav-h', `${navEl.offsetHeight}px`); }).observe(navEl);
 initAmbient();
 initRipple();
 window.addEventListener('hashchange', () => render(true));

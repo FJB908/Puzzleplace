@@ -1,0 +1,106 @@
+/* Woordzoeker. Het rooster schaalt mee met de breedte van het scherm. De letters schalen mee
+   met het vakje (container-eenheden: cqh). De markeerstift is een SVG-laag onder de letters. */
+
+.ws {
+  display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+  --pill-0: #f4a9be; --pill-1: #8fcbd3; --pill-2: #f3d28f; --pill-3: #c9b6ef; --pill-4: #a6dcbd; --pill-5: #f7b898;
+}
+html[data-theme="dark"] .ws { --pill-0: #c9607f; --pill-1: #3f8e98; --pill-2: #b88f36; --pill-3: #7f65b5; --pill-4: #3f9167; --pill-5: #b8693f; }
+.ws-main, .ws-side { width: min(100%, 36rem); display: flex; flex-direction: column; gap: 1rem; }
+
+/* ----- Kop: thema en voortgang ----- */
+.ws-head { display: flex; flex-direction: column; gap: .5rem; }
+.ws-theme { color: var(--text-muted); font-size: 1.05rem; }
+.ws-theme strong { color: var(--text); }
+.ws-progress { display: flex; align-items: center; gap: .9rem; }
+.ws-bar { flex: 1; height: .8rem; border-radius: 99px; background: var(--surface-2); position: relative; }
+.ws-bar i {
+  display: block; height: 100%; border-radius: 99px; width: 0; position: relative;
+  background: linear-gradient(90deg, var(--blush), var(--accent));
+  transition: width .7s cubic-bezier(.2, .8, .3, 1);
+}
+.ws-bar i::after {                        /* een bloesem rijdt mee op het eind van de balk */
+  content: ""; position: absolute; right: -.85rem; top: 50%; width: 1.7rem; height: 1.7rem; margin-top: -.85rem;
+  background: url("../../assets/blossom.svg") center / contain no-repeat;
+}
+.ws-count { font-weight: 700; font-size: 1rem; min-width: 8.5rem; text-align: right; }
+html[data-contrast="high"] .ws-bar { border: 2px solid var(--border); }
+
+/* ----- Rooster ----- */
+.ws-board {
+  position: relative; display: grid; grid-template-columns: repeat(var(--n), 1fr); grid-auto-rows: 1fr;
+  width: 100%; aspect-ratio: 1; padding: 2%;
+  background: var(--surface); border-radius: 1.1rem; box-shadow: var(--shadow);
+  touch-action: manipulation; user-select: none; -webkit-user-select: none;
+}
+html[data-theme="dark"] .ws-board { border: 1px solid var(--border); }
+html[data-contrast="high"] .ws-board { border: 3px solid var(--border); }
+.ws-pills { position: absolute; inset: 2%; width: 96%; height: 96%; pointer-events: none; overflow: visible; }
+
+.ws-cell {
+  container-type: size; position: relative; z-index: 1;
+  display: grid; place-items: center; min-width: 0;
+  color: var(--text);
+  border-radius: 50%; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .12s ease;
+}
+.ws-l { font-size: 1rem; font-size: 54cqh; font-weight: 700; line-height: 1; }
+.ws-cell:active { transform: scale(.9); }
+.ws-cell:focus-visible { outline: .22rem solid var(--focus); outline-offset: -.15rem; border-radius: .6rem; }
+.ws-cell.start { color: var(--on-primary); }
+.ws-cell.start::before { content: ""; position: absolute; inset: 6%; border-radius: 50%; background: var(--primary); z-index: -1; animation: ws-pop .25s ease both; }
+@keyframes ws-pop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Markeerstift */
+.ws-pill { stroke-width: .8; stroke-linecap: round; fill: none; opacity: .55; }
+.ws-pill.sel { stroke: var(--primary); opacity: .35; }
+.ws-pill.done.c0 { stroke: var(--pill-0); } .ws-pill.done.c1 { stroke: var(--pill-1); } .ws-pill.done.c2 { stroke: var(--pill-2); }
+.ws-pill.done.c3 { stroke: var(--pill-3); } .ws-pill.done.c4 { stroke: var(--pill-4); } .ws-pill.done.c5 { stroke: var(--pill-5); }
+html[data-theme="dark"] .ws-pill { opacity: .7; }
+html[data-contrast="high"] .ws-pill.done { stroke: var(--primary); opacity: .35; }
+.ws-pill.draw { stroke-dasharray: var(--len); animation: pill-draw .55s cubic-bezier(.3, .7, .3, 1) both; }
+@keyframes pill-draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.ws-pill.miss { stroke: var(--danger); opacity: .45; animation: pill-miss .9s ease both; }
+@keyframes pill-miss { 0% { opacity: .55; } 20% { transform: translateX(.08px); } 40% { transform: translateX(-.08px); } 100% { opacity: 0; } }
+
+/* Letter van een gevonden woord: een beetje opvallender; golf bij het vinden */
+.ws-cell.found { color: var(--text); }
+.ws-cell.wave { animation: ws-letter .7s ease both; animation-delay: var(--wd, 0ms); }
+@keyframes ws-letter { 0%, 100% { transform: none; } 40% { transform: scale(1.35); } }
+
+/* Tip: het vakje pulseert */
+.ws-cell.hint::after { content: ""; position: absolute; inset: -4%; border-radius: 50%; border: .2rem solid var(--accent); animation: ws-hint 1s ease-out 3; pointer-events: none; }
+@keyframes ws-hint { 0% { transform: scale(.7); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+
+.ws.won .ws-board { box-shadow: 0 0 0 3px var(--accent), 0 0 44px color-mix(in srgb, var(--accent) 55%, transparent); transition: box-shadow .6s ease; }
+
+.ws-message { min-height: 3.2em; text-align: center; color: var(--text); font-size: 1.05rem; padding: 0 .25rem; }
+
+/* ----- Woordenlijst ----- */
+.ws-words { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .15rem .5rem; }
+.ws-chip {
+  display: flex; align-items: center; gap: .6rem; width: 100%; min-height: 2.9rem; padding: .3rem .5rem; border: 0; border-radius: .8rem;
+  background: transparent; color: var(--text); font: inherit; font-size: 1.05rem; font-weight: 700; letter-spacing: .04em; text-align: left; cursor: pointer;
+  transition: background-color .15s, color .3s;
+}
+.ws-chip:hover { background: var(--primary-soft); }
+.ws-dot { width: 1.05rem; height: 1.05rem; border-radius: 50%; flex: none; border: 2px solid var(--control-border); background: transparent; transition: background-color .3s, border-color .3s, transform .4s cubic-bezier(.3, 1.8, .5, 1); position: relative; }
+.ws-chip.found { color: var(--text-muted); cursor: default; }
+.ws-chip.found:hover { background: transparent; }
+.ws-chip.found .ws-w { text-decoration: line-through; text-decoration-thickness: .12em; text-decoration-color: var(--accent); }
+.ws-chip.found .ws-dot { background: var(--dot, var(--accent)); border-color: var(--dot, var(--accent)); transform: scale(1.15); }
+.ws-chip.found .ws-dot::after { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2a30' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-9'/%3E%3C/svg%3E") center / 85% no-repeat; }
+.ws-chip.just { animation: chip-just .9s ease both; }
+@keyframes chip-just { 0% { background: transparent; } 25% { background: var(--blush); transform: scale(1.05); } 100% { background: transparent; transform: none; } }
+
+.ws-actions { display: flex; justify-content: center; border-top: 1px solid var(--border); padding-top: .5rem; }
+.ws-actions .action-btn { flex-direction: row; gap: .6rem; min-height: 3.5rem; padding: .4rem 1.4rem; font-size: 1rem; color: var(--text-muted); border-radius: 99px; }
+.ws-actions .action-btn .icon { color: var(--primary); }
+
+/* ----- Breed scherm: rooster links, woorden rechts ----- */
+@media (min-width: 62rem) {
+  .ws { flex-direction: row; align-items: flex-start; justify-content: center; gap: 3rem; }
+  .ws-main { flex: 1 1 0; max-width: min(38rem, max(22rem, calc(100dvh - 15rem))); }
+  .ws-side { flex: none; width: 22rem; padding-top: 3.2rem; }
+  .ws-words { grid-template-columns: repeat(2, 1fr); }
+}

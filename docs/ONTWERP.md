@@ -28,15 +28,41 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 ## Uiterlijk
 
 - **Minimalistisch:** knoppen hebben meestal geen kader. Alleen de hoofdactie op een scherm (bijv. "Spel starten") is een gevulde knop; al het andere is tekst met een pictogram. Keuzelijsten zijn rijen met dunne lijnen en een rondje met vinkje rechts. Alleen in "Extra duidelijk" komen de kaders terug.
-- **Kersenbloesem, realistisch en per pagina anders.** Zeven getekende ontwerpen: een brede tak vanuit rechtsboven (Spellen en Spel), vanuit linksboven (Instellingen), een volle bloeiende boog (Start), een luchtige spray (Hulp) en drie takjes (hoofdkaart en winscherm). Elke tak heeft schors met textuur en korstmos, jonge bruine en groene blaadjes, knoppen, half geopende en open bloemen met meeldraden, en diepte (bloemen achteraan zijn kleiner en lichter). Alles staat in een eigen strook boven de kop, nooit achter tekst. De tekeningen worden gegenereerd door `tools/make-blossoms.mjs` met een vaste seed (andere seed = ander ontwerp). Elke tak bestaat uit twee lagen: de schors met textuurfilter (wordt één keer getekend) en de bloemen (die bewegen), zodat het filter niet bij elke animatiestap opnieuw wordt berekend. Op apparaten met weinig geheugen of processorkernen gaan het wiegen en de vallende blaadjes vanzelf uit.
+- **Kersenbloesem, realistisch en per pagina anders.** Zeven getekende ontwerpen: een brede tak vanuit rechtsboven (Spellen en Spel), vanuit linksboven (Instellingen), een volle bloeiende boog (Start), een luchtige spray (Hulp) en drie takjes (hoofdkaart en winscherm). Elke tak heeft schors met textuur en korstmos, jonge bruine en groene blaadjes, knoppen, half geopende en open bloemen met meeldraden, en diepte (bloemen achteraan zijn kleiner en lichter). Alles staat in een eigen strook boven de kop, nooit achter tekst, en aan de onderkant en de zijkant wordt niets afgekapt: de generator laat takken en bloemen ruim binnen de tekening en kort twijgen in als ze er buiten zouden vallen. Alleen waar een tak van buiten het beeld komt (boven en aan één zijkant) wordt hij natuurlijk afgesneden. De tekeningen worden gegenereerd door `tools/make-blossoms.mjs` met een vaste seed (andere seed = ander ontwerp). Elke tak bestaat uit twee lagen: de schors met textuurfilter (wordt één keer getekend) en de bloemen (die bewegen), zodat het filter niet bij elke animatiestap opnieuw wordt berekend. Op apparaten met weinig geheugen of processorkernen gaan het wiegen en de vallende blaadjes vanzelf uit.
 - **Beweging en effecten** (allemaal uit bij "Rustige weergave" en als het besturingssysteem minder beweging vraagt):
   - Bij elke pagina gaan de bloemen één voor één open, daarna wiegt de tak heel zachtjes. Bij een andere pagina wisselt de tak met een korte overgang.
   - De onderdelen van een pagina schuiven na elkaar in; pagina's lopen zacht in elkaar over (View Transitions waar de browser dat kan).
-  - Rustig vallende blaadjes op de achtergrond (zeven stuks, alleen CSS-beweging).
+  - Heel subtiele, kleine en langzame vallende blaadjes op de achtergrond (zeven stuks, alleen CSS-beweging, bewust zo licht dat ze de tekst nooit storen).
   - Gevulde knoppen krijgen een zachte rimpel; rijen, tegels, keuzerondjes en het menu reageren met een kleine beweging; de bloesem boven het gekozen menu-onderdeel gaat open.
   - Dialogen zweven erin en uit; het winscherm heeft een bloeiend takje.
   - Sudoku: een goed cijfer "plopt" in het vakje, een fout cijfer schudt, een voltooide rij, kolom of blokje laat een golf van licht lopen met opspattende blaadjes, een verloren leven (bloesem) valt uiteen in blaadjes, en bij winnen licht het rooster op en regent het blaadjes.
 - **Kleuren:** gebroken wit, donkerblauwgroen voor acties, roze/roos als accent. Licht, donker en hoog contrast.
+
+## Start, Spellen en spelstart
+
+- **Start:** de datum en een begroeting, daarna één hoofdkaart. Heb je een spel bezig, dan toont die kaart het plaatje van dat spel, het niveau, hoe lang geleden, een voortgangsbalk met een meerijdende bloesem en "Verder spelen". Anders: "Kies een spel". Daaronder de puzzel van de dag op een afscheurkalender, en alle spellen als tegels met een eigen illustratie. De hoofdactie staat op een gewone telefoon zonder scrollen in beeld.
+- **Spellen:** elk spel is een grote kaart met een getekende illustratie op een eigen tint, een korte uitleg en jouw stand ("Bezig · 44%", "3 keer opgelost"). De kaart reageert op aanraken met een kleine beweging.
+- **Spelstart:** boven in een groot plaatje, dan de niveaukeuze, dan "Zo werkt het", en onderaan altijd zichtbaar de knop "Spel starten" of "Verder spelen". Het niveau kies je met kaarten met **bloesems**: meer bloesems is moeilijker. De gekozen kaart krijgt een roze rand en een vinkje (dus niet alleen kleur). Heb je een spel bezig, dan staat het niveau vast; "Nieuw spel" laat je opnieuw kiezen.
+- **Zwevend menu** onderaan met een bloesem boven de gekozen pagina; het menu verdwijnt tijdens het spelen.
+- **Compacte spelkop:** Terug en Uitleg op één regel, de naam en het niveau op de regel daaronder. Zo blijft er zoveel mogelijk ruimte voor het spel.
+
+## Woordzoeker: keuzes
+
+- **Thema per puzzel** (bloemen, in de tuin, het weer, ...): de woorden hebben een rode draad en zijn prettiger om te zoeken. 15 thema's met ruim 20 woorden elk.
+- **Vier niveaus:** 8x8 met 6 woorden en alleen rechtdoor en naar beneden, tot 13x13 met 15 woorden in alle acht de richtingen (ook achterstevoren en schuin omhoog).
+- **Kiezen zonder gevoelige bewegingen:** tik op de eerste en dan op de laatste letter. De tweede tik hoeft niet precies te zijn; de dichtstbijzijnde rechte lijn wordt gekozen. Met een muis kan je ook slepen. Met het toetsenbord: pijltjes en Enter.
+- **Geen straf.** Een misser geeft een zachte melding en kost niets. Wel een duidelijke beloning bij elk gevonden woord: een markeerstift in een van zes zachte kleuren die zich tekent, een golf van licht over de letters, opspattende blaadjes, het woord wordt doorgestreept met een gekleurd bolletje, en een bloesem rijdt mee op de voortgangsbalk. Is het laatste woord gevonden, dan lichten rooster en blaadjes op.
+- **Een woord telt als het op de lijn staat**, niet alleen op de plek waar de puzzel het neerzette; komt een woord toevallig twee keer voor, dan zijn beide goed. Woorden die in elkaar zitten (zoals KOE en KOEK) komen nooit samen in één puzzel.
+- **Tip:** tik op een woord in de lijst (of op "Tip") en het eerste vakje van dat woord gaat pulseren.
+
+## Kruiswoordpuzzel: keuzes
+
+- **Vrije puzzel**: woorden kruisen elkaar zonder zwarte vakken, de vorm is dus meteen te zien. De generator bouwt het rooster uit 350 woorden met omschrijving en probeert tot 40 keer; er geldt dat woorden elkaar alleen mogen kruisen (nooit naast elkaar liggen), zodat elke reeks letters in het rooster precies een woord is. Dat wordt voor elke puzzel gecontroleerd en in de tests.
+- **Vier niveaus:** 8 woorden met alleen bekende woorden, tot 22 woorden dicht op elkaar in 13x13.
+- **Omschrijving en toetsenbord altijd in beeld:** bovenaan het rooster blijft de omschrijving staan (met pijlen naar de vorige en volgende), onderaan een groot toetsenbord. Je kunt ook met je eigen toetsenbord typen. Tik nog eens op een vakje om te wisselen tussen horizontaal en verticaal.
+- **Meteen feedback per woord, geen straf:** is een woord vol en goed, dan licht het op, krijg je een beloning en spring je door naar het volgende woord. Is het fout, dan schudt het even met een vriendelijke melding. Er is geen "controle"-knop nodig.
+- **Tip** onthult één letter, **Woord** het hele woord. Onthulde letters worden roze en staan vast.
+- **IJ komt niet voor** in de woorden (die zou twee vakjes beslaan).
 
 ## Sudoku: keuzes
 

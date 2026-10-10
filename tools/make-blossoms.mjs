@@ -226,8 +226,20 @@ function compose(name, seed, o) {
   const LEAVES = [leafShape(P, R, 40, 'l1'), leafShape(P, R, 40, 'l2'), leafShape(P, R, 34, 'l1')];
   LEAVES.forEach((l, i) => syms.push(`<g id="${P}lf${i}">${l}</g>`));
 
-  const B = o.bounds;
-  const inside = (x, y, m) => x > B.x0 + m && x < B.x1 - m && y > B.y0 + m && y < B.y1 - m;
+  // Een tak komt van buiten het beeld (de 'entry'-kanten) en mag daar worden afgesneden. Aan alle
+  // andere kanten blijft alles, ook de bloemen, ruim binnen de tekening zodat er niets wordt afgekapt.
+  const pad = o.r * 1.3 + 8;
+  const B = {
+    x0: o.entry.includes('left') ? -60 : pad, x1: o.entry.includes('right') ? o.w + 60 : o.w - pad,
+    y0: o.entry.includes('top') ? -60 : pad,  y1: o.entry.includes('bottom') ? o.h + 60 : o.h - pad,
+  };
+  const inside = (x, y, m = 0) => x > B.x0 + m && x < B.x1 - m && y > B.y0 + m && y < B.y1 - m;
+  // Groeit een tak buiten de tekening, maak hem dan korter tot hij past.
+  const fit = (make, len) => {
+    let pts = make(len);
+    for (let k = 0; k < 10 && !inside(pts.at(-1).x, pts.at(-1).y); k++) pts = make((len *= .88));
+    return pts;
+  };
 
   function place(kind, x, y, rot, r, depth) {
     const id = pick(R, kinds[kind]);
@@ -248,7 +260,7 @@ function compose(name, seed, o) {
       const spreadA = ang + (k - (n - 1) / 2) * (30 + R() * 16) + (R() - .5) * 18 + angDiff(ang, 90) * .12;
       const len = r * (.55 + R() * .75);
       const fx = sx + Math.cos(rad(spreadA)) * len, fy = sy + Math.sin(rad(spreadA)) * len;
-      if (!inside(fx, fy, r * .3)) continue;
+      if (!inside(fx, fy)) continue;
       const cx = sx + Math.cos(rad(spreadA + 14)) * len * .55, cy = sy + Math.sin(rad(spreadA + 14)) * len * .55;
       limbs.push(`<path d="M${f(sx)} ${f(sy)}Q${f(cx)} ${f(cy)} ${f(fx)} ${f(fy)}" fill="none" stroke="#8d5b57" stroke-width="1.15" stroke-linecap="round"/>`);
       const depth = R();
@@ -264,7 +276,7 @@ function compose(name, seed, o) {
     const w1 = Math.max(1.3, w0 * .3);
     const sideBend = side * (8 + R() * 30) * (R() < .5 ? 1 : -.5);
     const toDown = angDiff(a, 90) * (o.gravity ?? .25);
-    const pts = grow({ x, y, a, len, w0, w1, N, steps: 22, kink: 9, noiseAmp: 6, bend: (t) => sideBend * t + toDown * t * t });
+    const pts = fit((L) => grow({ x, y, a, len: L, w0, w1, N, steps: 22, kink: 9, noiseAmp: 6, bend: (t) => sideBend * t + toDown * t * t }), len);
     const colors = { base: depth >= 2 ? BARK.young : BARK.mid, light: BARK.light };
     limbs.push(limb(pts, colors, R, N, P));
     const end = pts[pts.length - 1];
@@ -287,7 +299,7 @@ function compose(name, seed, o) {
   }
 
   // hoofdtak
-  const main = grow({ x: o.start.x, y: o.start.y, a: o.start.a, len: o.len, w0: o.w0, w1: o.w1, N, steps: 54, kink: 5, noiseAmp: 4, bend: o.bend });
+  const main = fit((L) => grow({ x: o.start.x, y: o.start.y, a: o.start.a, len: L, w0: o.w0, w1: o.w1, N, steps: 54, kink: 5, noiseAmp: 4, bend: o.bend }), o.len);
   limbs.push(limb(main, { base: BARK.old, light: BARK.light }, R, N, P));
   for (const b of o.branches) {
     const p = main[Math.floor(b.t * (main.length - 1))];
@@ -318,7 +330,7 @@ const DESIGNS = {
   'hang-rechts': () => ({
     w: 640, h: 300, r: 27, depth: 2, gravity: .24, fork: 40,
     variants: { open: 6, cup: 3, bud: 3 },
-    bounds: { x0: -40, y0: -40, x1: 680, y1: 340 },
+    entry: ['top', 'right'],
     start: { x: 700, y: -28, a: 156 }, len: 640, w0: 26, w1: 5,
     bend: (t) => -16 * Math.sin(t * Math.PI * .9) + 26 * t * t,
     branches: [{ t: .16, side: 1, lenK: .34, w: 9 }, { t: .32, side: -1, lenK: .3, w: 8 }, { t: .48, side: 1, lenK: .3, w: 7 }, { t: .64, side: -1, lenK: .28, w: 6 }, { t: .8, side: 1, lenK: .26, w: 5 }],
@@ -327,7 +339,7 @@ const DESIGNS = {
   'hang-links': () => ({
     w: 640, h: 300, r: 27, depth: 2, gravity: .3, fork: 36,
     variants: { open: 6, cup: 3, bud: 3 },
-    bounds: { x0: -40, y0: -40, x1: 680, y1: 340 },
+    entry: ['top', 'left'],
     start: { x: -60, y: -20, a: 26 }, len: 600, w0: 24, w1: 5,
     bend: (t) => 18 * Math.sin(t * Math.PI * 1.1) - 12 * t * t,
     branches: [{ t: .18, side: -1, lenK: .36, w: 9 }, { t: .36, side: 1, lenK: .3, w: 8 }, { t: .54, side: -1, lenK: .3, w: 7 }, { t: .72, side: 1, lenK: .27, w: 6 }],
@@ -336,7 +348,7 @@ const DESIGNS = {
   'boog': () => ({
     w: 900, h: 300, r: 38, density: 1.7, depth: 2, gravity: .3, fork: 42,
     variants: { open: 7, cup: 4, bud: 3 },
-    bounds: { x0: -40, y0: -40, x1: 940, y1: 340 },
+    entry: ['top', 'right'],
     start: { x: 950, y: -10, a: 168 }, len: 1000, w0: 28, w1: 6,
     bend: (t) => 22 * Math.sin(t * Math.PI * 1.4) + 8 * t,
     branches: [{ t: .1, side: 1, lenK: .22, w: 9 }, { t: .22, side: -1, lenK: .2, w: 8 }, { t: .34, side: 1, lenK: .22, w: 9 }, { t: .46, side: -1, lenK: .2, w: 8 }, { t: .58, side: 1, lenK: .22, w: 8 }, { t: .7, side: -1, lenK: .2, w: 7 }, { t: .82, side: 1, lenK: .2, w: 6 }],
@@ -345,7 +357,7 @@ const DESIGNS = {
   'spray': () => ({
     w: 640, h: 300, r: 31, depth: 1, gravity: .2, fork: 44,
     variants: { open: 5, cup: 3, bud: 2 },
-    bounds: { x0: -40, y0: -40, x1: 680, y1: 340 },
+    entry: ['top', 'right'],
     start: { x: 690, y: 40, a: 178 }, len: 470, w0: 20, w1: 5,
     bend: (t) => -10 * Math.sin(t * Math.PI) + 16 * t * t,
     branches: [{ t: .22, side: 1, lenK: .4, w: 8 }, { t: .5, side: -1, lenK: .36, w: 7 }, { t: .76, side: 1, lenK: .3, w: 6 }],
@@ -354,7 +366,7 @@ const DESIGNS = {
   'takje-a': () => ({
     w: 360, h: 220, r: 23, depth: 1, gravity: .22, fork: 40,
     variants: { open: 4, cup: 2, bud: 2 },
-    bounds: { x0: -30, y0: -30, x1: 390, y1: 250 },
+    entry: ['top', 'right'],
     start: { x: 392, y: -20, a: 154 }, len: 340, w0: 15, w1: 4,
     bend: (t) => -10 * Math.sin(t * Math.PI) + 22 * t * t,
     branches: [{ t: .28, side: 1, lenK: .4, w: 6 }, { t: .5, side: -1, lenK: .36, w: 5 }, { t: .72, side: 1, lenK: .3, w: 4 }],
@@ -362,7 +374,7 @@ const DESIGNS = {
   'takje-b': () => ({
     w: 360, h: 220, r: 23, depth: 1, gravity: .26, fork: 38,
     variants: { open: 4, cup: 2, bud: 2 },
-    bounds: { x0: -30, y0: -30, x1: 390, y1: 250 },
+    entry: ['top', 'left'],
     start: { x: -30, y: -16, a: 28 }, len: 330, w0: 14, w1: 4,
     bend: (t) => 14 * Math.sin(t * Math.PI) - 12 * t * t,
     branches: [{ t: .3, side: -1, lenK: .4, w: 6 }, { t: .56, side: 1, lenK: .34, w: 5 }, { t: .78, side: -1, lenK: .28, w: 4 }],
@@ -370,7 +382,7 @@ const DESIGNS = {
   'takje-c': () => ({
     w: 360, h: 220, r: 24, depth: 1, gravity: .4, fork: 34,
     variants: { open: 4, cup: 2, bud: 2 },
-    bounds: { x0: -30, y0: -30, x1: 390, y1: 250 },
+    entry: ['top'],
     start: { x: 250, y: -24, a: 112 }, len: 240, w0: 13, w1: 4,
     bend: (t) => -16 * Math.sin(t * Math.PI * 1.1) + 24 * t * t,
     branches: [{ t: .3, side: 1, lenK: .5, w: 6 }, { t: .55, side: -1, lenK: .45, w: 5 }],
@@ -378,7 +390,7 @@ const DESIGNS = {
 };
 
 // gekozen seeds (zie PREVIEW voor het uitzoeken)
-const SEEDS = { 'hang-rechts': 6, 'hang-links': 1, 'boog': 4, 'spray': 2, 'takje-a': 5, 'takje-b': 1, 'takje-c': 2 };
+const SEEDS = { 'hang-rechts': 3, 'hang-links': 2, 'boog': 4, 'spray': 2, 'takje-a': 5, 'takje-b': 2, 'takje-c': 2 };
 
 // ---------- losse onderdelen ----------
 function singleFlower(seed) {
@@ -397,7 +409,10 @@ if (process.env.PREVIEW) {
   await mkdir(dir, { recursive: true });
   for (const name of Object.keys(DESIGNS)) {
     if (only && only !== name) continue;
-    for (let s = 1; s <= 6; s++) await writeFile(`${dir}/${name}-${s}.svg`, compose(name.replace(/\W/g, ''), s, DESIGNS[name]()));
+    const o0 = DESIGNS[name]();
+    const cells = [];
+    for (let sd = 1; sd <= 6; sd++) cells.push(`<figure><figcaption>${name} ${sd}</figcaption><div class="art-stack" style="aspect-ratio:${o0.w}/${o0.h}">${compose(name.replace(/\W/g, ''), sd, DESIGNS[name]()).replace(/^<div class="art-stack">|<\/div>$/g, '')}</div></figure>`);
+    await writeFile(`${dir}/${name}.html`, `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#ddd;font:14px sans-serif}main{display:grid;grid-template-columns:repeat(2,${o0.w > 700 ? 640 : 420}px);gap:8px;padding:8px}figure{margin:0;background:#fbf8f5;position:relative;outline:1px dashed #c33}figcaption{position:absolute;z-index:3;left:4px;top:4px;font-weight:bold}.art-stack{position:relative;width:100%}.art-stack>svg{position:absolute;inset:0;width:100%;height:100%}</style><main>${cells.join('')}</main>`);
   }
   console.log('voorvertoning in', dir);
 } else {

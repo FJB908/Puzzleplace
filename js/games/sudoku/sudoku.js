@@ -209,8 +209,14 @@ export function mount(container, ctx) {
     return true;
   }
 
+  // Hoeveel van de lege vakjes staan goed?
+  const progress = () => {
+    const open = puzzle.filter((v) => !v).length;
+    return open ? values.filter((v, i) => !puzzle[i] && v === solution[i]).length / open : 1;
+  };
+
   function afterChange() {
-    ctx.save(state);
+    ctx.save(state, { progress: progress() });
     render();
     if (values.every((v, i) => v === solution[i])) win();
   }
@@ -328,7 +334,7 @@ export function mount(container, ctx) {
     for (const [i, v, n] of [...record].reverse()) { values[i] = v; notes[i] = n; }
     selected = record[0][0];
     say('Je laatste stap is teruggedraaid.');
-    ctx.save(state);
+    ctx.save(state, { progress: progress() });
     render();
     cells[selected].focus({ preventScroll: true });
   }
@@ -383,6 +389,6 @@ export function mount(container, ctx) {
   }
 
   render();
-  if (!ctx.saved) ctx.save(state);     // nieuw spel meteen bewaren, zodat "Verder spelen" klopt
+  if (!ctx.saved) ctx.save(state, { progress: progress() });     // nieuw spel meteen bewaren, zodat "Verder spelen" klopt
   if (state.lives <= 0) gameOver();   // een eerder verloren spel: opnieuw de keuze tonen
 }

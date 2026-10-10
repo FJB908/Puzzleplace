@@ -99,8 +99,8 @@ export function initAmbient() {
   for (let i = 0; i < 7; i++) {
     const p = document.createElement('span');
     p.className = `petal p-${'abc'[i % 3]}`;
-    const s = rand(14, 26);
-    p.style.cssText = `--x:${rand(2, 96).toFixed(0)}%;--s:${s.toFixed(0)}px;--t:${rand(17, 27).toFixed(1)}s;--d:${(-rand(0, 24)).toFixed(1)}s;--sway:${rand(40, 110).toFixed(0)}px;--flip:${rand(.4, 1).toFixed(2)}`;
+    const s = rand(11, 19);
+    p.style.cssText = `--x:${rand(2, 96).toFixed(0)}%;--s:${s.toFixed(0)}px;--t:${rand(22, 34).toFixed(1)}s;--d:${(-rand(0, 24)).toFixed(1)}s;--sway:${rand(40, 110).toFixed(0)}px;--flip:${rand(.4, 1).toFixed(2)}`;
     field.append(p);
   }
   document.body.prepend(field);

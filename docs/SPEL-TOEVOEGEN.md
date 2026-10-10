@@ -3,7 +3,10 @@
 1. Maak `js/games/mijnspel.js` en exporteer `mount(container, ctx)`. Begin met een kopie van `js/games/demo.js`; daar staat uitgelegd wat `ctx` bevat.
 2. Zet in `js/games/registry.js` bij het spel `status: 'ready'` en `load: () => import('./mijnspel.js')`. Heeft het spel veel ruimte nodig (zoals een groot rooster), zet dan ook `wide: true`.
 3. Eigen stijl? Maak `css/games/mijnspel.css` en link die in `index.html` **onder** `css/styles.css` (anders winnen de basisknoppen). Gebruik de kleurvariabelen (`var(--primary)`, `var(--text)`, ...), dan werken donker en hoog contrast vanzelf.
-4. Draai `npm run build` om `dist/puzzelplaats.html` te verversen.
+4. Geef het spel een illustratie in `js/games/art.js` en een tint in `css/styles.css` (`.game--mijnspel { --tint: ...; --tint-2: ...; }`, en een donkere variant). Die komen op de kaarten en het startscherm.
+5. Wil je dat het spel op de kaart een voortgangsbalk toont? Geef dan bij `ctx.save(state, { progress })` een getal van 0 tot 1 mee.
+6. Schrijf een test voor de logica in `tests/` (zie de engines van de bestaande spellen).
+7. Draai `npm run build` om `dist/puzzelplaats.html` te verversen.
 
 Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren van voortgang, "Verder spelen", het felicitatiescherm en de puzzel van de dag werken vanzelf.
 
@@ -19,4 +22,4 @@ Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren va
 - Tekst in gewoon Nederlands.
 
 
-Sudoku (`js/games/sudoku/`) is het voorbeeld: `engine.js` bevat alleen logica (met tests in `tests/`), `sudoku.js` het scherm.
+De drie spellen in `js/games/` zijn de voorbeelden: `engine.js` bevat alleen logica (met tests in `tests/`), het andere bestand het scherm. Een spel mag een functie teruggeven uit `mount` om op te ruimen (de kruiswoordpuzzel doet dat voor zijn toetsenbord).

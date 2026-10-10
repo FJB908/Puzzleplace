@@ -47,12 +47,13 @@ export async function playView({ id, mode }, app) {
   }
 
   const node = h('div', { class: 'view' },
+    // Compacte kop: terug, de naam en het niveau in het midden, uitleg rechts. Zo blijft er zoveel mogelijk ruimte voor het spel.
     h('div', { class: 'play-bar' },
       h('a', { class: 'btn btn-quiet back', href: backHref }, icon('back'), 'Terug'),
-      helpButton),
-    h('header', { class: 'play-title' },
-      h('h1', { tabindex: '-1' }, daily ? `Puzzel van de dag: ${game.name}` : game.name),
-      h('p', { class: 'muted' }, level)),
+      helpButton,
+      h('header', { class: 'play-title' },
+        h('h1', { tabindex: '-1' }, daily ? `Dagpuzzel: ${game.name}` : game.name),
+        h('p', { class: 'muted' }, level))),
     stage,
     h('p', { class: 'save-note' }, 'Je voortgang wordt vanzelf bewaard.'),
   );
@@ -68,10 +69,11 @@ export async function playView({ id, mode }, app) {
     saved: slot.state,
     settings: { ...store.getSettings() },
     announce,
-    save(state) {
+    // meta.progress (0 tot 1) laat op de kaarten zien hoe ver je bent
+    save(state, meta = {}) {
       if (finished) return;
       store.updateGame(id, (r) => {
-        r.slots[slotName] = { ...r.slots[slotName], state, updatedAt: Date.now() };
+        r.slots[slotName] = { ...r.slots[slotName], state, updatedAt: Date.now(), ...(meta.progress != null ? { progress: meta.progress } : {}) };
       });
       store.setLastGame(id, slotName);
     },

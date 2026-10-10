@@ -4,7 +4,14 @@
 import { h, icon, confirmDialog } from '../ui.js';
 import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
+import { gameArt } from '../games/art.js';
 import { notFoundView } from './notFound.js';
+
+// Het aantal bloesems laat zien hoe moeilijk een niveau is (1 tot 4)
+function bloomRow(n, total) {
+  return h('span', { class: 'lv-bloom', 'aria-hidden': 'true' },
+    Array.from({ length: total }, (_, k) => h('i', { class: k < n ? 'on' : '' })));
+}
 
 export function gameDetailView({ id }, app) {
   const game = getGameInfo(id);
@@ -15,13 +22,18 @@ export function gameDetailView({ id }, app) {
   const saved = record.slots.normal;
   const resumable = ready && saved && saved.state != null;
   let level = resumable ? saved.difficulty : record.difficulty;
+  if (!game.difficulties.some((d) => d.id === level)) level = game.difficulties[0].id;
 
-  const header = h('header', { class: 'page-header' },
+  const art = h('div', { class: 'art-box', 'aria-hidden': 'true' });
+  art.innerHTML = gameArt(id);
+
+  const header = h('header', { class: `detail-hero game--${id}` },
     h('a', { class: 'btn btn-quiet back', href: '#/spellen' }, icon('back'), 'Terug'),
-    h('div', { class: 'card-link', style: 'grid-template-columns:auto 1fr' },
-      h('span', { class: 'tile' }, icon(game.icon)),
-      h('h1', { tabindex: '-1' }, game.name)),
-    h('p', {}, game.summary),
+    h('div', { class: 'dh-panel' }, art),
+    h('div', { class: 'dh-text' },
+      h('h1', { tabindex: '-1' }, game.name),
+      h('p', {}, game.summary),
+      record.completed ? h('span', { class: 'chip chip-done' }, icon('check'), record.completed === 1 ? 'Al één keer opgelost' : `Al ${record.completed} keer opgelost`) : null),
   );
 
   const howTo = h('details', { class: 'disclosure' },
@@ -40,18 +52,21 @@ export function gameDetailView({ id }, app) {
     };
   }
 
-  const levelPicker = h('fieldset', {},
+  // Niveaukeuze: kaarten met bloesems, geen saaie lijst
+  const levelPicker = h('fieldset', { class: 'levels' },
     h('legend', {}, 'Hoe moeilijk?'),
-    h('div', { class: 'options options--stack' },
-      game.difficulties.map((d) => h('label', { class: 'option' },
+    h('div', { class: 'level-grid' },
+      game.difficulties.map((d, i) => h('label', { class: 'level' },
         h('input', {
           type: 'radio', name: 'level', value: d.id, checked: d.id === level,
           disabled: resumable, // een bewaard spel heeft zijn eigen niveau
           onchange: () => { level = d.id; store.updateGame(id, (r) => { r.difficulty = d.id; }); },
         }),
-        h('span', { class: 'option-body' }, h('strong', {}, d.label), h('small', {}, d.hint)),
-      ))),
-    resumable ? h('p', { class: 'field-hint' }, 'Kies "Nieuw spel" om een ander niveau te kiezen.') : null,
+        h('span', { class: 'level-body' },
+          bloomRow(i + 1, game.difficulties.length),
+          h('strong', {}, d.label),
+          h('small', {}, d.hint))))),
+    resumable ? h('p', { class: 'field-hint' }, 'Je speelt dit spel al. Kies "Nieuw spel" om een ander niveau te kiezen.') : null,
   );
 
   async function startNew() {
@@ -67,16 +82,16 @@ export function gameDetailView({ id }, app) {
     location.hash = `#/spel/${id}/speel`;
   }
 
-  // Bewaard spel: "Verder spelen" is de hoofdkeuze. Anders is "Spel starten" dat.
+  // Altijd zichtbaar onderaan: de hoofdactie
   const actions = resumable
     ? [
-        h('a', { class: 'btn btn-primary btn-block', href: `#/spel/${id}/speel` }, icon('play'), 'Verder spelen'),
+        h('a', { class: 'btn btn-primary btn-block', href: `#/spel/${id}/speel` }, icon('play'), saved.progress != null ? `Verder spelen · ${Math.round(saved.progress * 100)}%` : 'Verder spelen'),
         h('button', { type: 'button', class: 'btn btn-block', onclick: startNew }, 'Nieuw spel'),
       ]
     : [h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: startNew }, icon('play'), 'Spel starten')];
 
   return {
     title: game.name, nav: 'games', decor: 'hang-rechts',
-    node: h('div', { class: 'view' }, header, howTo, levelPicker, h('div', { class: 'stack' }, actions)),
+    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions)),
   };
 }

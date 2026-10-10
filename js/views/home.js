@@ -1,13 +1,14 @@
-// Start: het eerste wat je ziet. Eén duidelijke volgende stap, geen drukte.
+// Start: het eerste wat je ziet. Eén duidelijke volgende stap, daaronder de dagpuzzel en de spellen.
 //   1. (eerste keer) Is de tekst goed leesbaar?
-//   2. Hoofdkaart: verder waar je was, of een spel kiezen
-//   3. Puzzel van de dag (alleen als er speelbare spellen zijn)
-//   4. Alle spellen
+//   2. Hoofdkaart: verder waar je was (met voortgang), of een spel kiezen
+//   3. Puzzel van de dag, met een afscheurkalender
+//   4. Alle spellen als tegels met een eigen illustratie
 
 import { h, icon, whenText } from '../ui.js';
 import { mountArt } from '../decor.js';
 import * as store from '../store.js';
-import { getGameInfo, dailyGame } from '../games/registry.js';
+import { games, getGameInfo, dailyGame, isReady } from '../games/registry.js';
+import { gameArt } from '../games/art.js';
 
 function greeting() {
   const hour = new Date().getHours();
@@ -15,6 +16,8 @@ function greeting() {
   const name = store.getName();
   return name ? `${part}, ${name}` : part;
 }
+
+const art = (id) => { const d = h('div', { class: 'art-box', 'aria-hidden': 'true' }); d.innerHTML = gameArt(id); return d; };
 
 const SIZES = [
   { id: 'normal', label: 'Normaal' },
@@ -44,10 +47,9 @@ function welcomeCard(app) {
 
 // Hoofdkaart: donkerblauw vlak met een bloeiend takje bovenin
 function heroArt() {
-  const art = h('div', { class: 'hero-art', 'aria-hidden': 'true' });
-  const s = store.getSettings();
-  if (s.decor !== false) mountArt(art, 'takje-a');
-  return art;
+  const el = h('div', { class: 'hero-art', 'aria-hidden': 'true' });
+  if (store.getSettings().decor !== false) mountArt(el, 'takje-a');
+  return el;
 }
 
 function mainCard() {
@@ -58,9 +60,17 @@ function mainCard() {
   if (info && slot && slot.state != null) {
     const href = `#/spel/${info.id}/speel${last.slot === 'daily' ? '/dagelijks' : ''}`;
     const level = info.difficulties.find((d) => d.id === slot.difficulty)?.label;
+    const pct = slot.progress != null ? Math.round(slot.progress * 100) : null;
     return h('section', { class: 'hero', 'aria-labelledby': 'hero-title' }, heroArt(),
       h('h2', { id: 'hero-title' }, `Verder met ${info.name}`),
-      h('p', {}, `${level ? `${level} · ` : ''}laatst gespeeld ${whenText(slot.updatedAt)}`),
+      h('div', { class: 'hero-row' },
+        h('div', { class: 'hero-thumb' }, art(info.id)),
+        h('p', {}, `${level ? `${level} · ` : ''}laatst gespeeld ${whenText(slot.updatedAt)}`)),
+      pct != null
+        ? h('div', { class: 'hero-progress' },
+            h('div', { class: 'ws-bar', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': String(pct), 'aria-label': 'Voortgang' }, h('i', { style: `width:${pct}%` })),
+            h('span', {}, `${pct}% klaar`))
+        : null,
       h('a', { class: 'btn btn-block', href }, icon('play'), 'Verder spelen'),
     );
   }
@@ -71,40 +81,50 @@ function mainCard() {
   );
 }
 
+// Puzzel van de dag, met een afscheurkalender
 function dailyCard() {
   const game = dailyGame();
   if (!game) return null;
+  const now = new Date();
   const done = store.getGame(game.id).dailyDone === store.todayKey();
-  return h('a', { class: 'card card-link', href: `#/spel/${game.id}/speel/dagelijks` },
-    h('span', { class: 'tile' }, icon('daily')),
-    h('span', {},
-      h('span', { class: 'title' }, 'Puzzel van de dag'), h('br'),
-      h('span', { class: 'desc' }, game.name), h('br'),
-      done ? h('span', { class: 'badge badge-done' }, '✓ Vandaag gedaan') : null,
-    ),
-    icon('chevron'),
+  const month = now.toLocaleDateString('nl-NL', { month: 'short' }).replace('.', '');
+  return h('a', { class: `daily${done ? ' is-done' : ''}`, href: `#/spel/${game.id}/speel/dagelijks` },
+    h('span', { class: 'cal', 'aria-hidden': 'true' }, h('small', {}, month), h('b', {}, String(now.getDate()))),
+    h('span', { class: 'daily-text' },
+      h('span', { class: 'kicker' }, 'Puzzel van de dag'),
+      h('strong', {}, game.name),
+      h('span', { class: 'muted' }, 'Elke dag een nieuwe'),
+      done ? h('span', { class: 'chip chip-done' }, icon('check'), 'Vandaag gedaan') : h('span', { class: 'chip chip-busy' }, 'Nog te doen')),
   );
 }
 
+function tile(game) {
+  const ready = isReady(game);
+  const rec = store.getGame(game.id);
+  const busy = ready && rec.slots.normal?.state != null;
+  return h('li', {}, h('a', { class: `tile-game game--${game.id}`, href: `#/spel/${game.id}` },
+    h('span', { class: 'tg-art' }, art(game.id)),
+    h('span', { class: 'tg-name' }, game.name),
+    busy ? h('span', { class: 'chip chip-busy' }, 'Bezig') : !ready ? h('span', { class: 'chip' }, 'Binnenkort') : null));
+}
+
 export function homeView(_params, app) {
-  const last = store.getLastGame();
-  const resuming = last && store.hasProgress(last.id, last.slot);
+  const date = new Date().toLocaleDateString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' });
 
   const node = h('div', { class: 'view' },
     h('header', { class: 'page-header' },
+      h('p', { class: 'kicker' }, date),
       h('h1', { tabindex: '-1' }, greeting()),
       h('p', {}, 'Wat wil je vandaag doen?'),
     ),
     store.getSettings().welcomeDone ? null : welcomeCard(app),
     mainCard(),
     dailyCard(),
-    // Als de hoofdkaart al "verder spelen" is, blijft "alle spellen" hier als tweede keuze.
-    resuming
-      ? h('a', { class: 'card card-link', href: '#/spellen' },
-          h('span', { class: 'tile' }, icon('games')),
-          h('span', {}, h('span', { class: 'title' }, 'Alle spellen'), h('br'), h('span', { class: 'desc' }, 'Kies iets anders')),
-          icon('chevron'))
-      : null,
+    h('section', { 'aria-labelledby': 'tiles-title', class: 'stack' },
+      h('div', { class: 'section-head' },
+        h('h2', { id: 'tiles-title' }, 'Spellen'),
+        h('a', { class: 'link-quiet', href: '#/spellen' }, 'Alles bekijken')),
+      h('ul', { class: 'tiles' }, games.map(tile))),
     h('p', { class: 'muted' }, 'Even vastgelopen? ', h('a', { href: '#/hulp' }, 'Bekijk de hulp')),
   );
   return { title: 'Start', nav: 'home', view: 'home', decor: 'boog', node };
