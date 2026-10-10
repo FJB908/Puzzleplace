@@ -1,6 +1,6 @@
 // Offline-ondersteuning: eerst het netwerk (altijd de nieuwste versie), anders
 // de laatst bewaarde kopie. Verhoog VERSION bij een release om oude kopieën op te ruimen.
-const VERSION = 'puzzelplaats-v5';
+const VERSION = 'puzzelplaats-v6';
 
 self.addEventListener('install', () => self.skipWaiting());
 

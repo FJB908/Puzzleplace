@@ -14,13 +14,13 @@ const MAX_FRIENDS = 200, MAX_PENDING = 25, MAX_MATCHES = 50;
 
 export class RuleError extends Error {}                 // een spelregel is overtreden (bijv. "dat woord bestaat niet")
 
-export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0' }) {
+export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0', facebook = null }) {
   const D = db.data;
   const day = (t) => new Date(t).toISOString().slice(0, 10);
 
   // ----- Hulpjes -----
   const userById = (id) => D.users[id] || null;
-  const selfView = (u) => ({ id: u.id, name: u.name, email: u.email, code: formatCode(u.code), createdAt: u.createdAt });
+  const selfView = (u) => ({ id: u.id, name: u.name, email: u.email ?? null, code: formatCode(u.code), createdAt: u.createdAt, hasPassword: !!u.pass, facebook: !!u.facebookId });
   // Wat anderen van je zien: alleen je naam en een datum (geen tijdstip, dat is privacy-vriendelijker)
   const otherView = (u) => (u ? { id: u.id, name: u.name, lastSeen: day(u.lastSeen) } : { id: null, name: 'Verwijderd account', lastSeen: null });
   const fkey = (a, b) => [a, b].sort().join('|');
@@ -77,8 +77,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const email = String(req.body.email ?? '').trim().toLowerCase();
     if (!limiter.hit(`login-mail:${email}`, 8, 15 * 60_000)) fail(429, 'te-snel', 'Er is te vaak geprobeerd in te loggen. Wacht een kwartier en probeer het dan nog eens.');
     const user = userById(D.emails[email]);
-    const ok = await verifySecret(String(req.body.password ?? ''), user ? user.pass : DUMMY);
-    if (!user || !ok) fail(401, 'inloggen', 'Het e-mailadres of het wachtwoord klopt niet.');
+    const ok = await verifySecret(String(req.body.password ?? ''), user?.pass || DUMMY);
+    if (!user || !user.pass || !ok) fail(401, 'inloggen', 'Het e-mailadres of het wachtwoord klopt niet.');
     limiter.reset(`login-mail:${email}`);
     user.lastSeen = now();
     const token = newSession(user.id);
@@ -92,8 +92,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     if (!limiter.hit(`recover-mail:${email}`, 5, 3600_000)) fail(429, 'te-snel', 'Er is te vaak geprobeerd. Wacht een uur en probeer het dan nog eens.');
     const password = cleanPassword(req.body.password);
     const user = userById(D.emails[email]);
-    const ok = await verifySecret(cleanCode(req.body.recoveryCode), user ? user.recovery : DUMMY);
-    if (!user || !ok) fail(401, 'herstel', 'Het e-mailadres of de herstelcode klopt niet.');
+    const ok = await verifySecret(cleanCode(req.body.recoveryCode), user?.recovery || DUMMY);
+    if (!user || !user.recovery || !ok) fail(401, 'herstel', 'Het e-mailadres of de herstelcode klopt niet.');
     const recoveryCode = newRecoveryCode();
     user.pass = await hashSecret(password);
     user.recovery = await hashSecret(cleanCode(recoveryCode));
@@ -126,6 +126,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function changePassword(req) {
     const { user, key } = auth(req);
     limit(req, 'pw', 10, 3600_000);
+    if (!user.pass) fail(400, 'wachtwoord', 'Dit account heeft geen wachtwoord: je logt in met Facebook.');
     if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je huidige wachtwoord klopt niet.');
     user.pass = await hashSecret(cleanPassword(req.body.newPassword, 'nieuw'));
     revokeSessions(user.id, key);
@@ -136,6 +137,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function newRecovery(req) {                                // als je de herstelcode kwijt bent: een nieuwe, na je wachtwoord
     const { user } = auth(req);
     limit(req, 'recovery-new', 10, 3600_000);
+    if (!user.pass) fail(400, 'wachtwoord', 'Dit account heeft geen wachtwoord: je logt in met Facebook.');
     if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je wachtwoord klopt niet.');
     const recoveryCode = newRecoveryCode();
     user.recovery = await hashSecret(cleanCode(recoveryCode));
@@ -154,9 +156,11 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function deleteAccount(req) {
     const { user } = auth(req);
     limit(req, 'delete', 5, 3600_000);
-    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je wachtwoord klopt niet.');
+    if (user.pass && !(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je wachtwoord klopt niet.');
     revokeSessions(user.id);
-    delete D.emails[user.email]; delete D.codes[user.code]; delete D.users[user.id];
+    if (user.email) delete D.emails[user.email];
+    if (user.facebookId) delete D.facebook[user.facebookId];
+    delete D.codes[user.code]; delete D.users[user.id];
     for (const [k, f] of Object.entries(D.friendships)) if (f.a === user.id || f.b === user.id) delete D.friendships[k];
     for (const [mid, m] of Object.entries(D.matches)) {
       if (!m.players.includes(user.id)) continue;
@@ -166,6 +170,78 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     }
     db.save();
     return { body: { ok: true } };
+  }
+
+  // ----- Inloggen met Facebook -----
+  // De gewone OAuth-route: de app stuurt je naar Facebook, Facebook stuurt je met een code terug naar de server, de server
+  // haalt je naam en e-mailadres op en geeft de app een eenmalig kaartje (ticket) dat alleen werkt in de browser die het
+  // vroeg (nonce). Zo komt er geen sleutel in een adres te staan en kan niemand je op een vreemd account laten inloggen.
+  const fbStates = new Map(), fbTickets = new Map();       // kort bewaard, alleen in het geheugen
+  const sweepFb = () => { for (const m of [fbStates, fbTickets]) for (const [k, v] of m) if (v.exp < now()) m.delete(k); };
+  const GRAPH = 'https://graph.facebook.com/v21.0';
+  const fbRedirect = (hash) => ({ status: 302, body: null, redirect: `${facebook.publicUrl}/#/account/facebook/${hash}` });
+
+  function facebookStart(req) {
+    if (!facebook) fail(404, 'facebook', 'Inloggen met Facebook staat hier niet aan.');
+    limit(req, 'fb-start', 30, 15 * 60_000);
+    const nonce = String(req.query.nonce ?? '');
+    if (nonce.length < 20 || nonce.length > 100) fail(400, 'facebook', 'Dit verzoek klopt niet. Probeer het nog eens.');
+    sweepFb();
+    const state = newToken();
+    fbStates.set(state, { nonce: sha(nonce), exp: now() + 10 * 60_000 });
+    const q = new URLSearchParams({ client_id: facebook.appId, redirect_uri: `${facebook.publicUrl}/api/auth/facebook/callback`, state, scope: 'public_profile,email', response_type: 'code' });
+    return { status: 302, body: null, redirect: `https://www.facebook.com/v21.0/dialog/oauth?${q}` };
+  }
+
+  async function facebookProfile(code) {
+    const f = facebook.fetch || globalThis.fetch;
+    const t = new URLSearchParams({ client_id: facebook.appId, client_secret: facebook.appSecret, redirect_uri: `${facebook.publicUrl}/api/auth/facebook/callback`, code });
+    const tokenRes = await f(`${GRAPH}/oauth/access_token?${t}`);
+    const token = (await tokenRes.json())?.access_token;
+    if (!tokenRes.ok || !token) throw new Error('facebook-token');
+    const me = await f(`${GRAPH}/me?${new URLSearchParams({ fields: 'id,first_name,name,email', access_token: token })}`);
+    const p = await me.json();
+    if (!me.ok || !p?.id) throw new Error('facebook-profiel');
+    return p;
+  }
+
+  async function facebookCallback(req) {
+    if (!facebook) fail(404, 'facebook', 'Inloggen met Facebook staat hier niet aan.');
+    limit(req, 'fb-callback', 30, 15 * 60_000);
+    const st = fbStates.get(String(req.query.state ?? ''));
+    fbStates.delete(String(req.query.state ?? ''));
+    if (!st || st.exp < now() || !req.query.code) return fbRedirect('fout');          // geannuleerd, verlopen of onbekend
+    let p;
+    try { p = await facebookProfile(String(req.query.code)); } catch (e) { console.error('Facebook-inlog mislukt:', e.message); return fbRedirect('fout'); }
+    const fbId = String(p.id);
+    const email = (() => { try { return p.email ? cleanEmail(p.email) : null; } catch { return null; } })();
+    let user = userById(D.facebook[fbId]), isNew = false;
+    if (!user && email && D.emails[email]) {                    // hetzelfde e-mailadres (door Facebook bevestigd): dezelfde persoon
+      user = userById(D.emails[email]); user.facebookId = fbId; D.facebook[fbId] = user.id;
+    }
+    if (!user) {
+      let name; try { name = cleanName(String(p.first_name || p.name || '').slice(0, 24)); } catch { name = 'Speler'; }
+      const id = newId(), code = uniqueCode();
+      user = D.users[id] = { id, name, email, pass: null, recovery: null, facebookId: fbId, code, createdAt: now(), lastSeen: now(), sync: null };
+      if (email) D.emails[email] = id;
+      D.facebook[fbId] = id; D.codes[code] = id; isNew = true;
+    }
+    user.lastSeen = now();
+    const ticket = newToken();
+    fbTickets.set(ticket, { userId: user.id, nonce: st.nonce, isNew, exp: now() + 60_000 });
+    db.save();
+    return fbRedirect(ticket);
+  }
+
+  function facebookClaim(req) {
+    limit(req, 'fb-claim', 30, 15 * 60_000);
+    sweepFb();
+    const t = fbTickets.get(String(req.body.ticket ?? ''));
+    fbTickets.delete(String(req.body.ticket ?? ''));          // één keer te gebruiken
+    if (!t || t.exp < now() || t.nonce !== sha(String(req.body.nonce ?? ''))) fail(401, 'facebook', 'Inloggen met Facebook is niet gelukt. Probeer het nog eens.');
+    const user = userById(t.userId);
+    if (!user) fail(401, 'facebook', 'Dit account bestaat niet meer.');
+    return { body: { token: newSession(user.id), user: selfView(user), isNew: t.isNew } };
   }
 
   // ----- Vrienden -----
@@ -335,7 +411,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
 
   // ----- Routes -----
   const routes = [
-    ['GET', '/api/ping', () => ({ body: { ok: true, app: 'puzzelplaats', version, accounts: true } })],
+    ['GET', '/api/ping', () => ({ body: { ok: true, app: 'puzzelplaats', version, accounts: true, facebook: !!facebook } })],
+    ['GET', '/api/auth/facebook/start', facebookStart], ['GET', '/api/auth/facebook/callback', facebookCallback], ['POST', '/api/auth/facebook/claim', facebookClaim],
     ['POST', '/api/signup', signup], ['POST', '/api/login', login], ['POST', '/api/recover', recover],
     ['POST', '/api/logout', (req) => { const { key } = auth(req); delete D.sessions[key]; db.save(); return { body: { ok: true } }; }],
     ['GET', '/api/me', me], ['PATCH', '/api/me', rename], ['DELETE', '/api/me', deleteAccount],
@@ -360,7 +437,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
         if (r.method !== req.method) continue;
         req.params = Object.fromEntries(r.names.map((n, i) => [n, decodeURIComponent(m[i + 1])]));
         const res = await r.fn(req);
-        return { status: res.status ?? 200, body: res.body };
+        return { status: res.status ?? 200, body: res.body, ...(res.redirect ? { redirect: res.redirect } : {}) };
       }
       return { status: known ? 405 : 404, body: { error: { code: known ? 'methode' : 'onbekend', message: 'Dit bestaat niet.' } } };
     } catch (e) {

@@ -23,17 +23,22 @@ let memory = '';
 export const hasBackend = () => available === true;
 export const backendKnown = () => available !== null;       // is er al gekeken of er een server is?
 
+export const apiUrl = (path) => `${base ?? ''}${path}`;
+
 export const on = (fn) => { listeners.add(fn); return () => listeners.delete(fn); };
 const emit = (event) => listeners.forEach((fn) => fn(event));
 
 export async function detect() {
   if (base === null) { available = false; return false; }
+  let facebook = false;
   try {
     const res = await fetch(`${base}/api/ping`, { signal: AbortSignal.timeout(2500), cache: 'no-store' });
     const json = res.ok ? await res.json() : null;
     available = json?.app === 'puzzelplaats' && json.accounts === true;
+    facebook = available && json.facebook === true;
   } catch { available = false; }
   FEATURES.accounts = FEATURES.friends = available;
+  FEATURES.facebookLogin = facebook;                       // alleen als de server een Facebook-app kent
   return available;
 }
 

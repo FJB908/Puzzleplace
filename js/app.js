@@ -46,7 +46,7 @@ const ROUTES = [
   [/^\/spel\/([\w-]+)\/speel(?:\/(dagelijks))?$/, playView, (m) => ({ id: m[1], mode: m[2] })],
   [/^\/instellingen$/, settingsView, () => ({})],
   [/^\/hulp$/, helpView, () => ({})],
-  [/^\/account(?:\/(\w+))?$/, accountView, (m) => ({ sub: m[1] })],
+  [/^\/account(?:\/(\w+)(?:\/([\w-]+))?)?$/, accountView, (m) => ({ sub: m[1], arg: m[2] })],
   [/^\/vrienden$/, friendsView, () => ({})],
   [/^\/partij\/([\w-]+)$/, partijView, (m) => ({ id: m[1] })],
   [/^\/vrienden\/toevoegen\/([A-Za-z0-9-]{4,20})$/, friendsView, (m) => ({ code: m[1] })],
@@ -164,23 +164,22 @@ render(true);
 (async () => {
   if (!(await detect())) { if (/^\/(vrienden|partij|account)(\/|$)/.test(location.hash.replace(/^#/, ''))) render(false); return; }
   buildNav();
-  let lastIncoming = 0, lastUser = null;
-  auth.subscribe(({ user, counts }) => {
+  let lastUser = null, ready = false;
+  auth.subscribe(({ user }) => {
     updateBadge();
     const onHome = (location.hash.replace(/^#/, '') || '/') === '/';
-    if (onHome && (user?.id !== lastUser || counts.incoming !== lastIncoming)) render(false);
-    lastUser = user?.id; lastIncoming = counts.incoming;
+    if (ready && onHome && user?.id !== lastUser) render(false);         // in- of uitgelogd: Start opnieuw tekenen (de rest ververst Start zelf)
+    lastUser = user?.id;
   });
-  // Is de lijst met partijen (opnieuw) geladen, dan kan Start een melding "… wacht op jou" tonen
-  matches.subscribe(() => { if ((location.hash.replace(/^#/, '') || '/') === '/') render(false); });
   await auth.restore();
+  ready = true;
   updateBadge();
   social.startPolling();
   matches.init();
   sync.init();
-  // Schermen die door de server iets nieuws kunnen tonen, opnieuw tekenen (Start gebeurt via de melding hierboven)
+  // Schermen die pas met de server compleet zijn (Start met vrienden, account, partijen), nu opnieuw tekenen
   const route = location.hash.replace(/^#/, '') || '/';
-  if (/^\/(account|vrienden|partij|instellingen|hulp)(\/|$)/.test(route)) render(false);
+  if (route === '/' || /^\/(account|vrienden|partij|instellingen|hulp)(\/|$)/.test(route)) render(false);
 })();
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {

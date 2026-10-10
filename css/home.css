@@ -1,0 +1,73 @@
+/* Start: compact, zodat je in één blik ziet wat er te doen is */
+.view--home { gap: .9rem; }
+.home-titel { font-size: 1.55rem; }
+
+/* Eerste keer: tekstgrootte */
+.welcome { gap: .75rem; }
+.welcome h2 { font-size: 1.2rem; }
+.seg { display: flex; gap: .4rem; }
+.seg .btn { flex: 1 1 0; min-width: 0; min-height: 3rem; padding-inline: .4rem; }
+.seg .btn[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+
+/* Vrienden */
+.fr-sectie { display: flex; flex-direction: column; gap: .45rem; }
+.fr-sectie h2 { font-size: 1.1rem; }
+.fr-lijst { list-style: none; margin: 0; padding: 0; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.fr-lijst:empty { display: none; }
+.fr-lijst > li + li { border-top: 1px solid var(--border); }
+html[data-theme="dark"] .fr-lijst { border: 1px solid var(--border); }
+html[data-contrast="high"] .fr-lijst { border: 3px solid var(--border); }
+.fr { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; padding: .65rem .75rem; min-height: 4rem; color: var(--text); text-decoration: none; }
+.fr .avatar { width: 2.4rem; height: 2.4rem; font-size: 1.1rem; }
+.fr .who { flex: 1 1 5rem; min-width: 0; display: flex; flex-direction: column; }
+.fr .who strong { font-size: 1.1rem; overflow-wrap: anywhere; }
+.fr .who .muted, .fr .who .beurt-tekst { font-size: .95rem; overflow-wrap: anywhere; }
+.fr .btn { min-height: 2.6rem; padding-inline: .8rem; font-size: 1rem; flex: none; white-space: nowrap; }
+.fr > .icon { flex: none; color: var(--text-muted); }
+.fr-acties { display: flex; gap: .25rem; flex: none; }
+a.fr:hover { background: var(--primary-soft); }
+a.fr:active { background: var(--primary-soft); }
+.fr.is-beurt { background: var(--blush); box-shadow: inset .3rem 0 0 var(--accent); }
+.fr.is-beurt:hover { background: var(--blush); filter: brightness(.97); }
+html[data-contrast="high"] .fr.is-beurt { background: var(--surface); }
+.fr-voet:empty { display: none; }
+.fr-leeg { display: flex; flex-direction: column; gap: .6rem; padding: .9rem 1rem; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+.fr-leeg p { margin: 0; }
+.fr-leeg .fr-acties { flex-wrap: wrap; }
+html[data-theme="dark"] .fr-leeg { border: 1px solid var(--border); }
+
+/* Uitgelogd: één regel met de uitnodiging */
+.fr-uit { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .9rem; padding: .85rem 1rem; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+html[data-theme="dark"] .fr-uit { border: 1px solid var(--border); }
+.fr-uit .tile { --tile: 2.8rem; flex: none; }
+.fr-uit > div:not(.fr-acties) { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.fr-uit .muted { font-size: .95rem; }
+.fr-uit .fr-acties { flex: 1 1 100%; }
+.fr-uit .fr-acties .btn { flex: none; white-space: nowrap; padding-inline: 1rem; font-size: 1rem; min-height: 2.8rem; }
+.fr-uit .btn { min-height: 2.9rem; }
+
+/* Verder spelen / kies een spel */
+.rij { display: flex; align-items: center; gap: .9rem; padding: .75rem 1rem; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); color: var(--text); text-decoration: none; transition: transform .2s cubic-bezier(.2, .8, .3, 1.3); }
+html[data-theme="dark"] .rij { border: 1px solid var(--border); }
+html[data-contrast="high"] .rij { border: 3px solid var(--border); }
+.rij:hover { transform: translateY(-2px); }
+.rij:active { transform: scale(.98); }
+.rij .tile { --tile: 2.8rem; flex: none; }
+.rij > .icon { flex: none; color: var(--primary); }
+.rij-tekst { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.rij-tekst strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.rij-tekst .muted { font-size: .95rem; }
+.rij-art { flex: none; width: 3.3rem; height: 2.6rem; border-radius: .9rem; padding: .2rem; background: linear-gradient(145deg, var(--tint), var(--tint-2)); }
+.rij-art .art-box, .rij-art svg { width: 100%; height: 100%; }
+.rij-spel .ws-bar { flex: none; height: .5rem; margin-top: .45rem; margin-right: .6rem; }
+.rij-spel .ws-bar i::after { width: 1.1rem; height: 1.1rem; margin-top: -.55rem; right: -.55rem; }
+.rij-actie { flex: none; display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 50%; background: var(--primary); color: var(--on-primary); }
+.rij-actie .icon { width: 1.3rem; height: 1.3rem; }
+html[data-textsize="xlarge"] .rij-art { display: none; }
+
+/* Puzzel van de dag: dezelfde kaart, maar lager */
+.view--home .daily { padding: .7rem 1rem .7rem 1.35rem; gap: .85rem; }
+.view--home .cal { width: 3.1rem; }
+.view--home .cal b { font-size: 1.4rem; padding: .15rem 0 .2rem; }
+.view--home .daily-text strong { font-size: 1.1rem; }
+.view--home .daily-text .chip { margin-top: .15rem; }

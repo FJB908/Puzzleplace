@@ -31,6 +31,12 @@ export function uitslagTekst(match, myId, oppName) {
   return `${oppName} won met ${hun} tegen ${mijn}${r.tiebreak ? ' (bij gelijk aantal gaven de beschermde vakjes de doorslag)' : ''}.`;
 }
 
+// Een nieuwe partij met een vriend: meteen beginnen, zonder tussenvenster. Elk krijgt 3 tips (een vriendelijke partij).
+export async function nieuwePartij(friend) {
+  try { const m = await matches.create(friend.id, 'woordtuin', { tips: 3 }); location.hash = `#/partij/${m.id}`; }
+  catch (e) { await choiceDialog({ title: 'Dat lukte niet', text: e.message, actions: [{ label: 'Sluiten', value: true, primary: true, autofocus: true }] }); }
+}
+
 export function partijView({ id }, app) {
   if (!backendKnown()) return { ...loadingView(), nav: null };
   const user = auth.getUser();

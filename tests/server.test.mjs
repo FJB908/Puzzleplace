@@ -361,3 +361,111 @@ test('gegevens blijven bewaard na een herstart', async () => {
   await new Promise((r) => { again.server.close(r); again.server.closeAllConnections?.(); });
   await s.close();
 });
+
+// ----- Inloggen met Facebook (Facebook zelf wordt nagebootst) -----
+function nepFacebook(profiel) {
+  const log = [];
+  const fetchFn = async (url) => {
+    log.push(String(url));
+    const u = new URL(url);
+    if (u.pathname.endsWith('/oauth/access_token')) return { ok: u.searchParams.get('code') === 'goede-code', json: async () => (u.searchParams.get('code') === 'goede-code' ? { access_token: 'tok' } : { error: {} }) };
+    if (u.pathname.endsWith('/me')) return { ok: true, json: async () => profiel };
+    throw new Error('onverwacht ' + url);
+  };
+  return { facebook: { appId: '123', appSecret: 'geheim', publicUrl: 'https://puzzel.example', fetch: fetchFn }, log };
+}
+const handmatig = (s, path, method = 'GET') => fetch(s.base + path, { method, redirect: 'manual', headers: { 'X-Forwarded-For': '10.9.9.9' } });
+
+async function facebookInloggen(s, { code = 'goede-code', nonce = 'n'.repeat(30), kloppendeNonce = nonce } = {}) {
+  const start = await handmatig(s, `/api/auth/facebook/start?nonce=${nonce}`);
+  assert.equal(start.status, 302);
+  const naarFb = new URL(start.headers.get('location'));
+  assert.equal(naarFb.hostname, 'www.facebook.com');
+  assert.equal(naarFb.searchParams.get('client_id'), '123');
+  assert.equal(naarFb.searchParams.get('redirect_uri'), 'https://puzzel.example/api/auth/facebook/callback');
+  const state = naarFb.searchParams.get('state');
+  const terug = await handmatig(s, `/api/auth/facebook/callback?code=${code}&state=${state}`);
+  assert.equal(terug.status, 302);
+  const loc = terug.headers.get('location');
+  const ticket = loc.split('/#/account/facebook/')[1];
+  assert.ok(loc.startsWith('https://puzzel.example/#/account/facebook/'));
+  return { ticket, state, claim: (t = ticket, n = kloppendeNonce) => s.call('POST', '/api/auth/facebook/claim', { ticket: t, nonce: n }) };
+}
+
+test('Facebook staat uit zonder instellingen', async () => {
+  const s = await start();
+  assert.equal((await s.call('GET', '/api/ping')).json.facebook, false);
+  assert.equal((await handmatig(s, '/api/auth/facebook/start?nonce=' + 'x'.repeat(30))).status, 404);
+  await s.close();
+});
+
+test('Facebook: nieuw account, eenmalig ticket, en weer inloggen geeft hetzelfde account', async () => {
+  const nep = nepFacebook({ id: 'fb-1', first_name: 'Marietje', name: 'Marietje de Vries', email: 'Marietje@Voorbeeld.nl' });
+  const s = await start({ api: { facebook: nep.facebook } });
+  assert.equal((await s.call('GET', '/api/ping')).json.facebook, true);
+  const eerste = await facebookInloggen(s);
+  const r = await eerste.claim();
+  assert.equal(r.status, 200, JSON.stringify(r.json));
+  assert.equal(r.json.user.name, 'Marietje'); assert.equal(r.json.user.email, 'marietje@voorbeeld.nl');
+  assert.equal(r.json.user.hasPassword, false); assert.equal(r.json.isNew, true);
+  assert.equal((await s.call('GET', '/api/me', undefined, r.json.token)).status, 200, 'de sleutel werkt');
+  assert.equal((await eerste.claim()).status, 401, 'een ticket werkt maar één keer');
+  const tweede = await facebookInloggen(s);
+  const r2 = await tweede.claim();
+  assert.equal(r2.json.user.id, r.json.user.id, 'zelfde persoon, zelfde account');
+  assert.equal(r2.json.isNew, false);
+  assert.ok(nep.log.every((u) => u.startsWith('https://graph.facebook.com/')), 'alleen Facebook wordt gebeld');
+  // zonder wachtwoord: inloggen met dit e-mailadres kan niet, wachtwoord wijzigen ook niet, account verwijderen wel
+  assert.equal((await s.call('POST', '/api/login', { email: 'marietje@voorbeeld.nl', password: 'rozen-molen-zomer' })).status, 401);
+  assert.equal((await s.call('POST', '/api/login', { email: 'marietje@voorbeeld.nl', password: '' })).status, 401);
+  assert.equal((await s.call('POST', '/api/recover', { email: 'marietje@voorbeeld.nl', recoveryCode: 'AAAA-AAAA-AAAA', password: 'nieuw-wachtwoord-1' })).status, 401);
+  assert.equal((await s.call('POST', '/api/me/password', { password: 'x', newPassword: 'nieuw-wachtwoord-1' }, r2.json.token)).status, 400);
+  assert.equal((await s.call('DELETE', '/api/me', {}, r2.json.token)).status, 200);
+  assert.equal(Object.keys(s.db.data.facebook).length, 0);
+  await s.close();
+});
+
+test('Facebook: een bestaand account met hetzelfde e-mailadres wordt gekoppeld', async () => {
+  const nep = nepFacebook({ id: 'fb-2', first_name: 'Anna', email: 'anna@voorbeeld.nl' });
+  const s = await start({ api: { facebook: nep.facebook } });
+  const anna = await signup(s, 'Anna', 'anna@voorbeeld.nl');
+  const r = await (await facebookInloggen(s)).claim();
+  assert.equal(r.json.user.id, anna.user.id);
+  assert.equal(r.json.isNew, false);
+  assert.equal((await s.call('POST', '/api/login', { email: 'anna@voorbeeld.nl', password: anna.password })).status, 200, 'het wachtwoord blijft werken');
+  await s.close();
+});
+
+test('Facebook: zonder e-mailadres of met een rare naam lukt het ook', async () => {
+  const s = await start({ api: { facebook: nepFacebook({ id: 'fb-3', first_name: '<b>', name: '' }).facebook } });
+  const r = await (await facebookInloggen(s)).claim();
+  assert.equal(r.status, 200);
+  assert.equal(r.json.user.name, 'Speler'); assert.equal(r.json.user.email, null);
+  await s.close();
+});
+
+test('Facebook: misbruik wordt tegengehouden', async () => {
+  const s = await start({ api: { facebook: nepFacebook({ id: 'fb-4', first_name: 'Piet' }).facebook } });
+  // een ticket in een andere browser (andere nonce) werkt niet, en is daarna verbrand
+  const x = await facebookInloggen(s, { kloppendeNonce: 'andere-browser-'.repeat(2) });
+  assert.equal((await x.claim()).status, 401);
+  const y = await facebookInloggen(s);
+  assert.equal((await y.claim(y.ticket, 'andere-browser-'.repeat(2))).status, 401);
+  assert.equal((await y.claim()).status, 401, 'verbrand na een foute poging');
+  // een state die niet van ons is, of dubbel gebruikt wordt
+  const fout = await handmatig(s, '/api/auth/facebook/callback?code=goede-code&state=verzonnen');
+  assert.ok(fout.headers.get('location').endsWith('/#/account/facebook/fout'));
+  const st = await handmatig(s, '/api/auth/facebook/start?nonce=' + 'q'.repeat(30));
+  const state = new URL(st.headers.get('location')).searchParams.get('state');
+  const eerste = await handmatig(s, `/api/auth/facebook/callback?code=goede-code&state=${state}`);
+  assert.ok(!eerste.headers.get('location').endsWith('/fout'));
+  const tweede = await handmatig(s, `/api/auth/facebook/callback?code=goede-code&state=${state}`);
+  assert.ok(tweede.headers.get('location').endsWith('/fout'), 'een state werkt maar één keer');
+  // Facebook weigert de code (geannuleerd of verlopen) of er is te kort een nonce
+  const st2 = await handmatig(s, '/api/auth/facebook/start?nonce=' + 'r'.repeat(30));
+  const geweigerd = await handmatig(s, `/api/auth/facebook/callback?code=slechte-code&state=${new URL(st2.headers.get('location')).searchParams.get('state')}`);
+  assert.ok(geweigerd.headers.get('location').endsWith('/fout'));
+  assert.equal((await handmatig(s, '/api/auth/facebook/start?nonce=kort')).status, 400);
+  assert.equal((await s.call('POST', '/api/auth/facebook/claim', {})).status, 401);
+  await s.close();
+});

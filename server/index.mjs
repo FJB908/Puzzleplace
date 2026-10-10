@@ -9,6 +9,7 @@
 //   DATA_DIR      waar de gegevens staan (standaard server/data)
 //   ALLOW_ORIGIN  alleen nodig als de app op een ANDER adres staat dan de server (bijv. https://mijnapp.nl)
 //   TRUST_PROXY   zet op 1 als de server achter een proxy staat die X-Forwarded-For meegeeft
+//   FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, PUBLIC_URL   zet je deze alle drie, dan verschijnt "Doorgaan met Facebook" (zie docs/ACCOUNTS.md)
 
 import { createServer as httpServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
@@ -85,6 +86,7 @@ export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trus
     const auth = req.headers.authorization || '';
     const token = auth.startsWith('Bearer ') ? auth.slice(7).trim() : '';
     const out = await api.handle({ method: req.method, path: url.pathname, query: Object.fromEntries(url.searchParams), body, token, ip: clientIp(req) });
+    if (out.redirect) return send(res, 302, '', { ...cors, Location: out.redirect, 'Cache-Control': 'no-store' });
     return json(out.status, out.body);
   }
 
@@ -129,7 +131,10 @@ export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trus
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const port = Number(process.env.PORT || 8000), host = process.env.HOST || '127.0.0.1';
   const dataDir = process.env.DATA_DIR || fileURLToPath(new URL('./data/', import.meta.url));
-  const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1' });
+  const { FACEBOOK_APP_ID: appId, FACEBOOK_APP_SECRET: appSecret } = process.env;
+  const publicUrl = (process.env.PUBLIC_URL || `http://localhost:${port}`).replace(/\/+$/, '');
+  const facebook = appId && appSecret ? { appId, appSecret, publicUrl } : null;
+  const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook } });
   server.listen(port, host, () => console.log(`Puzzelplaats draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${port}  (gegevens in ${dataDir})`));
   const stop = () => { db.flush(); server.close(() => process.exit(0)); setTimeout(() => process.exit(0), 2000).unref(); };
   process.on('SIGINT', stop); process.on('SIGTERM', stop);

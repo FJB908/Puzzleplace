@@ -551,15 +551,8 @@ html[data-contrast="high"] .chip { border: 2px solid var(--border); }
 html[data-contrast="high"] .ws-bar { border: 2px solid var(--border); }
 
 /* Hoofdkaart: terug naar je spel, met voortgang */
-.hero-row { display: flex; align-items: center; gap: 1rem; }
-.hero-thumb { flex: none; width: 5.2rem; height: 3.9rem; border-radius: 1rem; background: rgba(255, 255, 255, .16); padding: .25rem; }
 .hero h2 { font-size: 1.4rem; }
-.hero-row p { opacity: .9; font-size: 1rem; }
-.hero-progress { display: flex; align-items: center; gap: 1rem; font-weight: 700; font-size: .95rem; }
-.hero-progress .ws-bar { background: rgba(255, 255, 255, .22); }
-.hero-progress .ws-bar i { background: linear-gradient(90deg, #fbd6e1, #fff); }
-html[data-textsize="xlarge"] .hero-thumb { display: none; }
-
+html[data-textsize="xlarge"] 
 /* Puzzel van de dag */
 .daily {
   position: relative; overflow: hidden; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 1rem;
@@ -581,15 +574,7 @@ html[data-theme="dark"] .cal small { color: #2a0f1a; }
 .daily-text .muted { font-size: .95rem; }
 .daily.is-done .cal b { color: var(--text-muted); }
 
-/* Spellen als tegels op de startpagina */
-.tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); gap: .75rem; }
-.tile-game { display: flex; flex-direction: column; align-items: center; gap: .45rem; text-align: center; color: var(--text); text-decoration: none; transition: transform .25s cubic-bezier(.2, .8, .3, 1.3); }
-.tile-game:hover { transform: translateY(-4px); }
-.tile-game:active { transform: scale(.96); }
-.tg-art { width: 100%; aspect-ratio: 4 / 3; padding: .4rem; border-radius: 1.2rem; background: linear-gradient(145deg, var(--tint), var(--tint-2)); box-shadow: var(--shadow); }
-html[data-contrast="high"] .tg-art { border: 3px solid var(--border); }
-.tg-name { font-weight: 700; font-size: 1rem; line-height: 1.2; overflow-wrap: anywhere; }
-
+html[data-contrast="high"] 
 /* Spellenoverzicht: grote kaarten */
 .game-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
 .game-card {

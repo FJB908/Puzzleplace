@@ -67,7 +67,7 @@ richting, geen garantie* (wat er nog met echte spelers getest moet worden staat 
 - **Je ziet wat je doet.** Terwijl je een woord maakt, lichten de vakjes op die je zou pakken, en staat er "Dit pakt 2 vakjes van Anna en kleurt 3 nieuwe." Pas daarna druk je op **Klaar**. Geen misklikken, geen spijt.
 - **Gewoon mooi.** Een gepakt vakje bloeit open in jouw kleur (we hebben de bloesemanimatie al). Beschermde vakjes krijgen een rand.
 - **Voor iedereen.** Kleur én symbool (✿ jij, ❧ de ander), grote vakjes, hardop voorgelezen door schermlezers. Wie niet kan vegen, **typt het woord** en de app laat zien waar het ligt. Geen timer.
-- **Samen op een eerlijke manier.** In een *vriendelijke partij* heeft ieder **3 tips**: het beginvakje van een woord licht op, met het aantal letters. Opa kan zo toch van zijn kleinkind winnen, of omgekeerd.
+- **Samen op een eerlijke manier.** Partijen met een vriend beginnen meteen ("Nieuwe partij", zonder tussenvenster) als *vriendelijke partij*: ieder heeft **3 tips**: het beginvakje van een woord licht op, met het aantal letters. Opa kan zo toch van zijn kleinkind winnen, of omgekeerd.
 - **Nooit wachten op een vriend.** Er is een **computertegenstander** in vier sterktes (dezelfde bot als in de metingen), zodat je altijd kunt spelen en de regels kunt leren.
 - **Een eigen stand.** Onder elke vriend: "Jullie staan 3–2." Geen ranglijst met vreemden.
 
@@ -108,12 +108,12 @@ De eerste versie was voor de meeste spelers te sterk (ook op Makkelijk: hij ziet
 
 | Niveau | Ziet | Slordig | Vooruit |
 |---|---|---|---|
-| Makkelijk | 3% | 60% | nee |
-| Gemiddeld | 8% | 30% | nee |
-| Moeilijk | 30% | nee | nee |
+| Makkelijk | 2% | 75% | nee |
+| Gemiddeld | 5% | 45% | nee |
+| Moeilijk | 20% | 10% | nee |
 | Extreem | alles | nee | 10 zetten |
 
-Gemeten met 40 partijen per rij (computer tegen computer, beginner wisselt): Makkelijk verliest met 8–28 van Gemiddeld, Gemiddeld met 3–36 van Moeilijk, Moeilijk met 4–35 van Extreem. Makkelijk wint nog wel van een computer die volkomen willekeurig speelt (26–12), zodat hij niet zinloos is.
+Gemeten met 40 partijen per rij (computer tegen computer, beginner wisselt): Makkelijk speelt ongeveer als een computer die volkomen willekeurig kiest (16–20), verliest met 15–23 van Gemiddeld, Gemiddeld met 3–35 van Moeilijk, Moeilijk met 1–37 van Extreem. Dat is bewust: Makkelijk en Gemiddeld zijn bedoeld voor wie net begint of rustig wil spelen.
 
 ## Zo is het gebouwd
 

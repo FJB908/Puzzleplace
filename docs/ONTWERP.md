@@ -40,7 +40,7 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 
 ## Start, Spellen en spelstart
 
-- **Start:** de datum en een begroeting, daarna één hoofdkaart. Heb je een spel bezig, dan toont die kaart het plaatje van dat spel, het niveau, hoe lang geleden, een voortgangsbalk met een meerijdende bloesem en "Verder spelen". Anders: "Kies een spel". Daaronder de puzzel van de dag op een afscheurkalender, en alle spellen als tegels met een eigen illustratie. De hoofdactie staat op een gewone telefoon zonder scrollen in beeld.
+- **Start:** een korte begroeting en daarna alleen wat er te doen is, compact zodat het op een gewone telefoon zonder scrollen past. Ingelogd staat **Vrienden** bovenaan (hooguit 5, één rij per vriend): eerst wie op jou wacht (met "Spelen"), dan vriendverzoeken (met Ja/Nee), dan partijen waarin de ander aan de beurt is, dan de rest (met "Nieuwe partij", die meteen begint). Heb je geen vrienden, dan staat daar "Deel mijn code". Daaronder één rij "Verder met ..." (met voortgangsbalk) of "Kies een spel", en de puzzel van de dag op een afscheurkalender. Uitgelogd staat de uitnodiging voor een account onderaan. Bewust niet op Start: een groot plaatje, een tegelraster met alle spellen (dat is *Spellen*), uitleg van de uitleg, en meldingsblokken: wat je moet weten staat al in de rijen.
 - **Spellen:** elk spel is een grote kaart met een getekende illustratie op een eigen tint, een korte uitleg en jouw stand ("Bezig · 44%", "3 keer opgelost"). De kaart reageert op aanraken met een kleine beweging.
 - **Spelstart:** boven in een groot plaatje, dan de niveaukeuze, dan "Zo werkt het", en onderaan altijd zichtbaar de knop "Spel starten" of "Verder spelen". Het niveau kies je met kaarten met **bloesems**: meer bloesems is moeilijker. De gekozen kaart krijgt een roze rand en een vinkje (dus niet alleen kleur). Heb je een spel bezig, dan staat het niveau vast; "Nieuw spel" laat je opnieuw kiezen.
 - **Zwevend menu** onderaan met een bloesem boven de gekozen pagina; het menu verdwijnt tijdens het spelen.
@@ -107,7 +107,7 @@ Er is een kleine eigen server (`server/`, zonder pakketten) die ook de app dient
 | Instellingen horen bij het apparaat | Je telefoon heeft andere tekstgrootte nodig dan je tablet |
 | Spelen met beurten via één algemeen `matches`-systeem | Elk volgend spel voor twee is alleen regels en een scherm, zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) |
 
-Nog niet gedaan: inloggen met Facebook of Google (zie onderaan `ACCOUNTS.md`), meldingen als de app dicht is, delen van resultaten.
+Inloggen met Facebook staat klaar, maar werkt pas als je een Facebook-app koppelt (zie `ACCOUNTS.md`). Nog niet gedaan: Google, meldingen als de app dicht is, delen van resultaten.
 
 Bewust niet gepland: openbare ranglijsten of chat met vreemden.
 

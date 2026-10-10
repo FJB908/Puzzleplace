@@ -9,15 +9,17 @@ export function suggestPassword() {
   return `${pick()}-${pick()}-${pick()}`;
 }
 
-export function field({ label, name, type = 'text', autocomplete, hint, value = '', inputmode, maxlength, required = true, enterkeyhint, autofocus = false }) {
+// suggestions: een lijstje waaruit het veld kan voorstellen (bijv. je eerder gebruikte e-mailadres)
+export function field({ label, name, type = 'text', autocomplete, hint, value = '', inputmode, maxlength, required = true, enterkeyhint, autofocus = false, suggestions = [] }) {
   const id = `f-${name}`;
   const err = h('p', { class: 'field-error', id: `${id}-err`, role: 'alert', hidden: true });
   const input = h('input', {
-    class: 'text-input', id, name, type, value, autocomplete, inputmode, maxlength, required, enterkeyhint, autofocus,
+    class: 'text-input', id, name, type, value, autocomplete, list: suggestions.length ? `${id}-opties` : null, inputmode, maxlength, required, enterkeyhint, autofocus,
     autocapitalize: type === 'text' && name === 'naam' ? 'words' : 'off', spellcheck: 'false',
     'aria-describedby': [hint ? `${id}-hint` : '', `${id}-err`].filter(Boolean).join(' '),
   });
-  const el = h('div', { class: 'field' }, h('label', { class: 'label', for: id }, label), hint ? h('p', { class: 'field-hint', id: `${id}-hint` }, hint) : null, input, err);
+  const el = h('div', { class: 'field' }, h('label', { class: 'label', for: id }, label), hint ? h('p', { class: 'field-hint', id: `${id}-hint` }, hint) : null, input,
+    suggestions.length ? h('datalist', { id: `${id}-opties` }, suggestions.map((s) => h('option', { value: s }))) : null, err);
   return {
     name, el, input,
     error(msg) { err.textContent = msg; err.hidden = !msg; input.setAttribute('aria-invalid', String(!!msg)); },

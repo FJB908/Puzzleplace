@@ -14,7 +14,7 @@ export const APP = {
 export const FEATURES = {
   accounts: false,       // inloggen / account
   friends: false,        // vrienden
-  facebookLogin: false,  // "Doorgaan met Facebook": nog niet gebouwd (zie docs/ACCOUNTS.md)
+  facebookLogin: false,  // "Doorgaan met Facebook": gaat vanzelf aan als de server een Facebook-app heeft (zie docs/ACCOUNTS.md)
 };
 
 // Waar de server staat. Leeg = op hetzelfde adres als de app (zo draait `npm run dev`).

@@ -74,17 +74,14 @@ html[data-textsize="xlarge"] .code { font-size: 1.5rem; }
 html[data-theme="dark"] .nav a[data-badge]::after { color: #2a0f1a; }
 html[data-contrast="high"] .nav a[data-badge]::after { border: 2px solid var(--border); }
 
-/* ----- Melding op Start ----- */
-.notice-link { display: flex; align-items: center; gap: .85rem; padding: 1rem 1.1rem; border-radius: var(--radius); background: var(--blush); color: var(--text); text-decoration: none; transition: transform .25s cubic-bezier(.2, .8, .3, 1.3); }
-.notice-link:hover { transform: translateY(-3px); }
-.notice-link .avatar { width: 2.8rem; height: 2.8rem; font-size: 1.2rem; }
-.notice-link .bubble { display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: var(--surface); color: var(--accent); }
-.notice-link .bubble .icon { width: 1.5rem; height: 1.5rem; }
-.notice-link > span:not(.bubble) { flex: 1; min-width: 0; overflow-wrap: break-word; }
-.notice-link > .avatar, .notice-link > .bubble, .notice-link > .icon { flex: none; }
-.notice-link strong, .notice-link .muted { display: block; }
-html[data-textsize="xlarge"] .notice-link > .avatar, html[data-textsize="xlarge"] .notice-link > .bubble { display: none; }
-html[data-contrast="high"] .notice-link { border: 3px solid var(--border); background: var(--surface); }
+/* ----- Inloggen met Facebook ----- */
+.btn-facebook { background: #1877f2; color: #fff; gap: .7rem; white-space: nowrap; }
+.btn-facebook:hover, .btn-facebook:active { background: #1877f2; filter: brightness(1.08); }
+.fb-logo svg { width: 1.7rem; height: 1.7rem; display: block; }
+html[data-contrast="high"] .btn-facebook { border: 3px solid var(--border); }
+.fb-block { gap: .9rem; }
+.divider { display: flex; align-items: center; gap: .8rem; margin: 0; color: var(--text-muted); font-size: .95rem; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
 @media print {
   body > *:not(main), .view > *:not(.code-card), .code-actions { display: none !important; }

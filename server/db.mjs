@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname } from 'node:path';
 
-const empty = () => ({ v: 1, users: {}, emails: {}, codes: {}, sessions: {}, friendships: {}, matches: {} });
+const empty = () => ({ v: 1, users: {}, emails: {}, facebook: {}, codes: {}, sessions: {}, friendships: {}, matches: {} });
 
 export class Db {
   constructor(file = null) {

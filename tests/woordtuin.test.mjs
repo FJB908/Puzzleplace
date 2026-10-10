@@ -147,7 +147,8 @@ test('de computer wordt sterker per niveau', () => {
   };
   const tegen = (sterk, zwak, n = 10) => { let w = 0; for (let i = 0; i < n; i++) { const flip = i % 2; const win = speel('s' + i, flip ? zwak : sterk, flip ? sterk : zwak); if (win === (flip ? 2 : 1)) w++; } return w; };
   assert.ok(tegen('extreem', 'makkelijk') >= 8, 'extreem verslaat makkelijk');
-  assert.ok(tegen('gemiddeld', 'makkelijk') >= 6, 'gemiddeld verslaat makkelijk meestal');
+  assert.ok(tegen('moeilijk', 'makkelijk') >= 8, 'moeilijk verslaat makkelijk');
+  assert.ok(tegen('moeilijk', 'gemiddeld') >= 7, 'moeilijk verslaat gemiddeld meestal');
   assert.deepEqual(Object.keys(NIVEAUS), ['makkelijk', 'gemiddeld', 'moeilijk', 'extreem']);
 });
 

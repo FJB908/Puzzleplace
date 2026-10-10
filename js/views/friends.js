@@ -11,7 +11,7 @@ import { FEATURES } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as social from '../services/social.js';
 import * as matches from '../services/matches.js';
-import { uitslagTekst } from './partij.js';
+import { uitslagTekst, nieuwePartij } from './partij.js';
 import { field, form } from './forms.js';
 import { notFoundView, loadingView } from './notFound.js';
 import { backendKnown } from '../services/backend.js';
@@ -63,21 +63,6 @@ function stand(friendId, myId) {
     if (m.result.winner === myId) ik++; else if (m.result.winner === friendId) zij++;
   }
   return ik + zij ? `jullie staan ${ik}–${zij}` : '';
-}
-
-async function nieuwePartij(friend) {
-  const keuze = await choiceDialog({
-    title: `Woordtuin met ${friend.name}`, text: 'Hoe willen jullie spelen?',
-    actions: [
-      { label: 'Gewone partij', value: 0, primary: true, autofocus: true },
-      { label: 'Vriendelijke partij: 3 tips voor ieder', value: 3 },
-      { label: 'Annuleren', value: null },
-    ],
-    dismissValue: null,
-  });
-  if (keuze === null) return;
-  try { const m = await matches.create(friend.id, 'woordtuin', { tips: keuze }); location.hash = `#/partij/${m.id}`; }
-  catch (e) { await choiceDialog({ title: 'Dat lukte niet', text: e.message, actions: [{ label: 'Sluiten', value: true, primary: true, autofocus: true }] }); }
 }
 
 function partijRij(m, myId) {

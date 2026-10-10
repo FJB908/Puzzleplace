@@ -15,6 +15,7 @@ import { h, icon, avatar, copyText, choiceDialog, confirmDialog, announce } from
 import { FEATURES } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as sync from '../services/sync.js';
+import * as emails from '../services/emails.js';
 import * as store from '../store.js';
 import { field, passwordField, form } from './forms.js';
 import { notFoundView, loadingView } from './notFound.js';
@@ -31,6 +32,22 @@ export const rememberFriendCode = (code) => stash.set(PENDING_FRIEND, code);
 const page = (title, node, extra = {}) => ({ title, nav: 'settings', decor: 'spray', node, ...extra });
 const back = (href = '#/account', label = 'Terug') => h('a', { class: 'btn btn-quiet back', href }, icon('back'), label);
 const header = (title, text, backHref) => h('header', { class: 'page-header' }, backHref ? back(backHref) : null, h('h1', { tabindex: '-1' }, title), text ? h('p', {}, text) : null);
+
+// "Doorgaan met Facebook": alleen als de server een Facebook-app heeft. Staat bovenaan, want met één tik ben je er.
+const FB_LOGO = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#fff"/><path fill="#1877f2" d="M13.4 21v-7.3h2.5l.4-2.9h-2.9V9c0-.8.2-1.4 1.4-1.4h1.600V5c-.3 0-1.200-.1-2.300-.1-2.300 0-3.800 1.400-3.800 3.900v2.100H7.800v2.900h2.500V21z"/></svg>';
+function facebookBlock(label = 'Doorgaan met Facebook') {
+  if (!FEATURES.facebookLogin) return null;
+  const logo = h('span', { class: 'fb-logo' }); logo.innerHTML = FB_LOGO;
+  return h('div', { class: 'stack fb-block' },
+    h('button', { type: 'button', class: 'btn btn-facebook btn-block', onclick: () => auth.startFacebook() }, logo, label),
+    h('p', { class: 'divider' }, h('span', {}, 'of met je e-mailadres')));
+}
+
+// Waar je na inloggen heen gaat: eerst een vriend toevoegen als je via een link kwam, anders naar Start
+function afterLogin() {
+  const pending = stash.get(PENDING_FRIEND);
+  location.hash = pending ? `#/vrienden/toevoegen/${pending}` : '#/';
+}
 
 // ----- Niet ingelogd -----
 function intro() {
@@ -50,13 +67,15 @@ function intro() {
 function signupView() {
   const pending = stash.get(PENDING_FRIEND);
   const f = { naam: field({ label: 'Je voornaam', name: 'naam', autocomplete: 'given-name', maxlength: 24, enterkeyhint: 'next', hint: 'Zo zien je vrienden je.' }),
-    email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'email', inputmode: 'email', enterkeyhint: 'next', hint: 'Hiermee log je in. We sturen er geen reclame naartoe.' }),
+    email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'email', inputmode: 'email', enterkeyhint: 'next', hint: 'Hiermee log je in. We sturen er geen reclame naartoe.', suggestions: emails.remembered() }),
     wachtwoord: passwordField({ name: 'wachtwoord', autocomplete: 'new-password', suggest: true, hint: 'Minstens 8 tekens. Drie woorden achter elkaar is veilig en makkelijk te onthouden.' }) };
   return page('Account maken', h('div', { class: 'view' },
     header('Account maken', pending ? 'Maak eerst een account, daarna kun je je vriend of vriendin toevoegen.' : null, '#/account'),
+    facebookBlock(),
     form({ fields: [f.naam, f.email, f.wachtwoord], submitLabel: 'Account maken', busyLabel: 'Account wordt gemaakt…',
       onSubmit: async (v) => {
         const r = await auth.signUp({ name: v.naam, email: v.email, password: v.wachtwoord });
+        emails.remember(v.email);
         stash.set(PENDING_RECOVERY, r.recoveryCode);
         location.hash = '#/account/klaar';
       } }),
@@ -64,19 +83,21 @@ function signupView() {
 }
 
 function loginView() {
-  const f = { email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', enterkeyhint: 'next' }),
+  const known = emails.remembered();
+  const f = { email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', enterkeyhint: 'next', value: known[0] || '', suggestions: known }),
     wachtwoord: passwordField({ name: 'wachtwoord' }) };
   const wrong = new Set(['inloggen']);
   return page('Inloggen', h('div', { class: 'view' },
     header('Inloggen', null, '#/account'),
+    facebookBlock(),
     form({ fields: [f.email, f.wachtwoord], submitLabel: 'Inloggen', busyLabel: 'Even kijken…',
       extra: h('p', { class: 'center' }, h('a', { href: '#/account/herstel' }, 'Wachtwoord vergeten?')),
       onSubmit: async (v) => {
         try { await auth.signIn({ email: v.email, password: v.wachtwoord }); }
         catch (e) { if (wrong.has(e.code)) e.code = 'wachtwoord'; throw e; }   // de melding bij het wachtwoordveld
+        emails.remember(v.email);
         announce('Je bent ingelogd.');
-        const pending = stash.get(PENDING_FRIEND);
-        location.hash = pending ? `#/vrienden/toevoegen/${pending}` : '#/account';
+        afterLogin();
       } }),
     h('p', { class: 'muted' }, 'Nog geen account? ', h('a', { href: '#/account/nieuw' }, 'Maak er een'), '.')));
 }
@@ -101,8 +122,7 @@ function readyView() {
   const ok = h('input', { type: 'checkbox', id: 'bewaard', onchange: () => { go.disabled = !ok.checked; } });
   const go = h('button', { type: 'button', class: 'btn btn-primary btn-block', disabled: true, onclick: () => {
     stash.set(PENDING_RECOVERY, '');
-    const pending = stash.get(PENDING_FRIEND);
-    location.hash = pending ? `#/vrienden/toevoegen/${pending}` : '#/vrienden';
+    afterLogin();
   } }, 'Doorgaan');
   return page('Account klaar', h('div', { class: 'view' },
     h('header', { class: 'page-header' }, h('h1', { tabindex: '-1' }, `Gelukt, ${user.name}!`), h('p', {}, 'Je account is klaar. Nog één belangrijk ding.')),
@@ -111,7 +131,7 @@ function readyView() {
       h('p', {}, 'Vergeet je ooit je wachtwoord, dan kies je met deze code een nieuw wachtwoord. Schrijf hem op papier, of bewaar hem bij je belangrijke papieren. We kunnen hem niet voor je terugvinden, maar je kunt later wel een nieuwe laten maken.')),
     h('label', { class: 'check', for: 'bewaard' }, ok, h('span', {}, 'Ik heb de code bewaard')),
     go,
-    h('a', { class: 'link-quiet center', href: '#/vrienden', onclick: () => stash.set(PENDING_RECOVERY, '') }, 'Ik doe dit later')), { decor: null });
+    h('a', { class: 'link-quiet center', href: '#/', onclick: () => stash.set(PENDING_RECOVERY, '') }, 'Ik doe dit later')), { decor: null });
 }
 
 function newRecoveryView() {
@@ -127,7 +147,7 @@ function newRecoveryView() {
 }
 
 function recoverView() {
-  const f = { email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email' }),
+  const f = { email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', value: emails.remembered()[0] || '', suggestions: emails.remembered() }),
     herstelCode: field({ label: 'Je herstelcode', name: 'herstelcode', autocomplete: 'off', hint: 'Dat is de code van 12 tekens die je bij het aanmelden kreeg, zoals K7P4-QM2X-9TBR.' }),
     wachtwoord: passwordField({ label: 'Een nieuw wachtwoord', name: 'wachtwoord', autocomplete: 'new-password', suggest: true }) };
   return page('Wachtwoord vergeten', h('div', { class: 'view' },
@@ -175,7 +195,7 @@ function overview(app) {
     if (!choice) return;
     await sync.syncNow();                                          // eerst nog alles opslaan in je account
     await auth.signOut();
-    if (choice === 'wis') { store.resetAll(); }
+    if (choice === 'wis') { store.resetAll(); emails.forgetAll(); }
     location.hash = '#/';
   }
 
@@ -184,13 +204,13 @@ function overview(app) {
 
   const node = h('div', { class: 'view' },
     h('header', { class: 'page-header profile' }, back('#/instellingen'),
-      h('div', { class: 'profile-row' }, avatar(user.name, user.id), h('div', {}, h('h1', { tabindex: '-1' }, user.name), h('p', {}, user.email)))),
+      h('div', { class: 'profile-row' }, avatar(user.name, user.id), h('div', {}, h('h1', { tabindex: '-1' }, user.name), h('p', {}, user.email || 'Ingelogd met Facebook')))),
     s.el,
     row('friends', 'Vrienden', 'Je vriendencode en je vrienden', '#/vrienden'),
     renameDetails,
-    h('div', { class: 'list' },
+    user.hasPassword ? h('div', { class: 'list' },
       row('settings', 'Wachtwoord wijzigen', 'Kies een nieuw wachtwoord', '#/account/wachtwoord'),
-      row('help', 'Nieuwe herstelcode', 'Als je de oude kwijt bent', '#/account/herstelcode')),
+      row('help', 'Nieuwe herstelcode', 'Als je de oude kwijt bent', '#/account/herstelcode')) : null,
     h('div', { class: 'stack' },
       h('button', { type: 'button', class: 'btn btn-block', onclick: logout }, 'Uitloggen'),
       h('a', { class: 'btn btn-danger btn-block', href: '#/account/verwijderen' }, 'Account verwijderen')));
@@ -208,17 +228,31 @@ function changePasswordView() {
 }
 
 function deleteView() {
+  const heeftWachtwoord = auth.getUser().hasPassword;
   const f = passwordField({ label: 'Je wachtwoord', name: 'wachtwoord', hint: 'Ter controle.' });
   return page('Account verwijderen', h('div', { class: 'view' },
     header('Account verwijderen', 'Je account, je vrienden en je opgeslagen voortgang op onze server worden gewist. Wat op je apparaten staat, blijft staan.', '#/account'),
-    form({ fields: [f], submitLabel: 'Ja, verwijder mijn account', onSubmit: async (v) => {
+    form({ fields: heeftWachtwoord ? [f] : [], submitLabel: 'Ja, verwijder mijn account', onSubmit: async (v) => {
       if (!(await confirmDialog({ title: 'Zeker weten?', text: 'Dit kan niet ongedaan worden gemaakt.', confirmLabel: 'Ja, verwijderen' }))) return;
       await auth.deleteAccount(v.wachtwoord);
+      emails.forgetAll();
       location.hash = '#/';
     } })));
 }
 
-export function accountView({ sub }, app) {
+// Terug van Facebook: het ticket inwisselen. Mislukt dat (geannuleerd, verlopen), dan een rustige uitleg.
+function facebookView(ticket) {
+  const status = h('p', { class: 'muted', role: 'status' }, 'Even kijken…');
+  const mislukt = (text) => status.replaceChildren(text) || node.append(
+    h('div', { class: 'stack' }, h('a', { class: 'btn btn-primary btn-block', href: '#/account/inloggen' }, 'Opnieuw proberen'), h('a', { class: 'btn btn-block', href: '#/' }, 'Terug naar Start')));
+  const node = h('div', { class: 'view' }, h('header', { class: 'page-header' }, h('h1', { tabindex: '-1' }, 'Inloggen met Facebook')), status);
+  if (ticket === 'fout') mislukt('Het inloggen met Facebook is niet gelukt, of je hebt het geannuleerd. Je kunt het nog eens proberen, of inloggen met je e-mailadres.');
+  else auth.claimFacebook(ticket).then(({ user }) => { if (user.email) emails.remember(user.email); announce('Je bent ingelogd.'); afterLogin(); })
+    .catch((e) => mislukt(e.message || 'Het inloggen met Facebook is niet gelukt.'));
+  return page('Inloggen met Facebook', node);
+}
+
+export function accountView({ sub, arg }, app) {
   if (!backendKnown()) return loadingView();
   if (!FEATURES.accounts) return notFoundView();
   const user = auth.getUser();
@@ -226,6 +260,7 @@ export function accountView({ sub }, app) {
   if (sub === 'inloggen') return user ? overview(app) : loginView();
   if (sub === 'herstel') return recoverView();
   if (sub === 'klaar') return readyView();
+  if (sub === 'facebook' && arg) return FEATURES.facebookLogin ? facebookView(arg) : notFoundView();
   if (!user) return intro();
   if (sub === 'wachtwoord') return changePasswordView();
   if (sub === 'herstelcode') return newRecoveryView();

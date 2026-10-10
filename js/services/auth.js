@@ -3,7 +3,7 @@
 // Je blijft ingelogd op dit apparaat (de sleutel staat in de opslag van de browser). Op een gedeelde
 // computer log je uit; dat staat duidelijk bij Account.
 
-import { api, getToken, setToken, on, hasBackend } from './backend.js';
+import { api, apiUrl, getToken, setToken, on, hasBackend } from './backend.js';
 
 let user = null;
 let counts = { incoming: 0, yourTurn: 0 };
@@ -45,6 +45,23 @@ export async function signIn({ email, password }) {
   setToken(r.token); set(r.user);
   await refresh();
   return r.user;
+}
+
+// Inloggen met Facebook: de server stuurt je naar Facebook en daarna terug naar de app met een eenmalig ticket.
+// De nonce blijft in deze browser; alleen wie hem kent kan het ticket inwisselen.
+const NONCE_KEY = 'pp-fb-nonce';
+export function startFacebook() {
+  const a = new Uint8Array(24); crypto.getRandomValues(a);
+  const nonce = [...a].map((b) => b.toString(16).padStart(2, '0')).join('');
+  try { sessionStorage.setItem(NONCE_KEY, nonce); } catch { /* dan lukt het niet; de server meldt dat netjes */ }
+  location.href = apiUrl(`/api/auth/facebook/start?nonce=${nonce}`);
+}
+export async function claimFacebook(ticket) {
+  let nonce = ''; try { nonce = sessionStorage.getItem(NONCE_KEY) || ''; sessionStorage.removeItem(NONCE_KEY); } catch { /* zie boven */ }
+  const r = await api('POST', '/api/auth/facebook/claim', { ticket, nonce });
+  setToken(r.token); set(r.user);
+  await refresh();
+  return { user: r.user, isNew: r.isNew };
 }
 
 export async function recover({ email, recoveryCode, password }) {

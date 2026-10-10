@@ -259,9 +259,9 @@ const verschil = (state, p) => { const n = counts(state); return n[p] - n[other(
 // De computer. De sterkte zit in hoeveel woorden hij ziet, hoe vaak hij gewoon een woord pakt in plaats van het beste
 // ("slordig") en of hij vooruitkijkt (zo gemeten, zie docs/NIEUW-SPEL-VOOR-TWEE.md).
 export const NIVEAUS = {
-  makkelijk: { ziet: 0.03, slordig: 0.6, vooruit: 0 },
-  gemiddeld: { ziet: 0.08, slordig: 0.3, vooruit: 0 },
-  moeilijk: { ziet: 0.3, slordig: 0, vooruit: 0 },
+  makkelijk: { ziet: 0.02, slordig: 0.75, vooruit: 0 },
+  gemiddeld: { ziet: 0.05, slordig: 0.45, vooruit: 0 },
+  moeilijk: { ziet: 0.2, slordig: 0.1, vooruit: 0 },
   extreem: { ziet: 1, slordig: 0, vooruit: 10 },
 };
 
