@@ -1,0 +1,51 @@
+# Kruiswoordpuzzel. De woorden en omschrijvingen zelf staan per taal in js/games/kruiswoord/talen/.
+kruiswoord.gridAria | Crossword grid | Kruiswoordrooster
+kruiswoord.prevClue | Previous clue | Vorige omschrijving
+kruiswoord.nextClue | Next clue | Volgende omschrijving
+kruiswoord.clueGroup | Clue | Omschrijving
+kruiswoord.start | Tap a cell to begin. | Tik op een vakje om te beginnen.
+kruiswoord.backspace | Back and clear the letter | Terug en wis de letter
+kruiswoord.keyboard | Keyboard | Toetsenbord
+kruiswoord.word | Word | Woord
+kruiswoord.allClues | All clues | Alle omschrijvingen
+kruiswoord.acrossTitle | Across | Horizontaal
+kruiswoord.downTitle | Down | Verticaal
+# {n} is het nummer van de omschrijving. "across" = van links naar rechts, "down" = van boven naar beneden.
+kruiswoord.entryAcross | {n} across | {n} horizontaal
+kruiswoord.entryDown | {n} down | {n} verticaal
+kruiswoord.clueAcross | {n} across → | {n} horizontaal →
+kruiswoord.clueDown | {n} down ↓ | {n} verticaal ↓
+kruiswoord.lettersCount_one | {n} letter | {n} letter
+kruiswoord.lettersCount_other | {n} letters | {n} letters
+kruiswoord.chooseCell | Choose a cell | Kies een vakje
+kruiswoord.chooseHint | Tap the grid. The clue appears here. | Tik op het rooster. De omschrijving verschijnt hier.
+kruiswoord.doneCount | {n} of {total} done | {n} van {total} klaar
+kruiswoord.doneValue | {n} of {total} words done | {n} van {total} woorden klaar
+# Schermlezertekst bij een vakje: {state} is "letter X" of "empty", {numbers} bijvoorbeeld "3 across, 5 down"
+kruiswoord.cellAria | Row {r}, column {c}: {state}. {numbers} | Rij {r}, kolom {c}: {state}. {numbers}
+kruiswoord.cellLetter | letter {letter} | letter {letter}
+kruiswoord.cellEmpty | empty | leeg
+# {entry} is bijvoorbeeld "3 across", {clue} de omschrijving, {letters} bijvoorbeeld "5 letters"
+kruiswoord.say.entry | {entry}: {clue} ({letters}). | {entry}: {clue} ({letters}).
+# {word} is het woord, {n} het aantal woorden dat nog moet
+kruiswoord.say.good_one | Good! {word} is right. {n} to go. | Goed! {word} klopt. Nog {n} te gaan.
+kruiswoord.say.good_other | Good! {word} is right. {n} to go. | Goed! {word} klopt. Nog {n} te gaan.
+kruiswoord.say.notYet | This word is not right yet. Read the clue again, you cannot do anything wrong. | Dit woord klopt nog niet. Lees de omschrijving nog eens, je kunt niets verkeerd doen.
+kruiswoord.say.alreadyRevealed | This cell has already been revealed. | Dit vakje is al onthuld.
+kruiswoord.say.tip | Hint: this cell contains a {letter}. | Tip: in dit vakje staat een {letter}.
+kruiswoord.say.theWord | The word was {word}. | Het woord was {word}.
+kruiswoord.say.won | Done! You solved the whole puzzle. | Gelukt! Je hebt de hele puzzel opgelost.
+
+# Kruiswoordpuzzel in de lijst met spellen en op de pagina voor het spelen.
+kruiswoord.name | Crossword | Kruiswoord­puzzel
+kruiswoord.summary | Solve the clues and fill in the words. | Los de omschrijvingen op en vul de woorden in.
+kruiswoord.howTo.1 | Every white cell belongs to a word. The clue is shown above the grid, with the number of letters. | Elk wit vakje hoort bij een woord. De omschrijving staat bovenaan het rooster, met het aantal letters.
+kruiswoord.howTo.2 | Tap a cell and type with the keyboard below the grid, or with your own keyboard. Tap the same cell again to switch between across and down. | Tik op een vakje en typ met het toetsenbord onder het rooster, of met je eigen toetsenbord. Tik nog eens op hetzelfde vakje om te wisselen tussen horizontaal en verticaal.
+kruiswoord.howTo.3 | Words cross each other: a letter also helps with the other word. | Woorden kruisen elkaar: een letter helpt dus ook bij het andere woord.
+kruiswoord.howTo.4 | Once a word is full you see straight away whether it is right. A correct word lights up, a wrong word shakes a little. Mistakes cost nothing. | Is een woord vol, dan zie je meteen of het klopt. Een goed woord licht op, een fout woord schudt even. Fouten kosten niets.
+kruiswoord.howTo.5 | With "{hint}" you reveal one letter, with "{word}" the whole word. Below the grid are all the clues. | Met "{hint}" onthul je één letter, met "{word}" het hele woord. Onder het rooster staan alle omschrijvingen.
+# De hints bij de vier niveaus (aantal woorden)
+kruiswoord.level.makkelijk | 8 words · well-known words | 8 woorden · bekende woorden
+kruiswoord.level.gemiddeld | 12 words | 12 woorden
+kruiswoord.level.moeilijk | 16 words · some harder ones | 16 woorden · ook lastigere
+kruiswoord.level.extreem | 22 words · packed close together | 22 woorden · dicht op elkaar

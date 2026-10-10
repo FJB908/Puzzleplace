@@ -3,13 +3,13 @@
 // een zet gebeurt. Zo is het scherm voor beide precies hetzelfde.
 
 import { h, icon } from '../../ui.js';
+import { t, foutTekst } from '../../i18n/index.js';
+import { TALEN, vouw, isAlfabet, typInvoer } from '../../shared/talen.js';
 import { maakBord, HEK } from './bord.js';
-import { checkMove, MoveError, counts, pathsFor, MIN_LEN, other } from './engine.js';
+import { checkMove, MoveError, counts, pathsFor, MIN_LEN, other, taalVan } from './engine.js';
 
-const meervoud = (n, een, veel) => `${n} ${n === 1 ? een : veel}`;
-const hoofd = (t) => t.charAt(0).toUpperCase() + t.slice(1);
-
-export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen = {}, tips = null, onZet, onTip, onTerug = null, kanTerug = () => true }) {
+// tegenComputer: de tegenstander is de computer (dan zeggen we "de computer" in plaats van een naam)
+export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('match.opponent') }, tegenComputer = false, tips = null, onZet, onTip, onTerug = null, kanTerug = () => true }) {
   let state = null, busy = false, tipsOver = tips, plekken = [], plek = 0;
 
   const bord = maakBord({ onChange: (path, bron) => bijwerken(bron) });
@@ -33,46 +33,50 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
   // ----- Typen -----
   const invoer = h('input', {
     type: 'text', class: 'wt-invoer', autocomplete: 'off', autocapitalize: 'none', spellcheck: 'false', enterkeyhint: 'done',
-    'aria-label': 'Typ een woord dat op het bord ligt', placeholder: 'bijvoorbeeld: tuin',
+    'aria-label': t('woordtuin.typeAria'), placeholder: t('woordtuin.typePlaceholder'),
     oninput: typen, onkeydown: (e) => { if (e.key === 'Enter') { e.preventDefault(); klaar(); } },
   });
-  const anderePlek = h('button', { type: 'button', class: 'btn btn-quiet', hidden: true, onclick: () => { if (plekken.length > 1) { plek = (plek + 1) % plekken.length; bord.setPath(plekken[plek], 'typen'); } } }, 'Andere plek');
+  const anderePlek = h('button', { type: 'button', class: 'btn btn-quiet', hidden: true, onclick: () => { if (plekken.length > 1) { plek = (plek + 1) % plekken.length; bord.setPath(plekken[plek], 'typen'); } } }, t('woordtuin.otherPlace'));
   const typBlok = h('div', { class: 'wt-typ-body', hidden: true }, invoer, anderePlek);
   const typKnop = h('button', { type: 'button', class: 'btn', 'aria-expanded': 'false', onclick: () => {
     typBlok.hidden = !typBlok.hidden; typKnop.setAttribute('aria-expanded', String(!typBlok.hidden));
     if (!typBlok.hidden) invoer.focus();
-  } }, icon('pencil'), 'Typen');
+  } }, icon('pencil'), t('woordtuin.type'));
 
   // ----- Knoppen -----
-  const wis = h('button', { type: 'button', class: 'btn', onclick: () => { invoer.value = ''; plekken = []; bord.clear(); } }, icon('eraser'), 'Wis');
-  const klaarKnop = h('button', { type: 'button', class: 'btn btn-primary', disabled: true, onclick: klaar }, icon('check'), 'Klaar');
-  const tipKnop = onTip ? h('button', { type: 'button', class: 'btn', onclick: tip }, icon('bulb'), h('span', {}, 'Tip')) : null;
-  const terugKnop = onTerug ? h('button', { type: 'button', class: 'btn', onclick: terug }, icon('undo'), 'Zet terug') : null;
+  const wis = h('button', { type: 'button', class: 'btn', onclick: () => { invoer.value = ''; plekken = []; bord.clear(); } }, icon('eraser'), t('woordtuin.clear'));
+  const klaarKnop = h('button', { type: 'button', class: 'btn btn-primary', disabled: true, onclick: klaar }, icon('check'), t('woordtuin.done'));
+  const tipKnop = onTip ? h('button', { type: 'button', class: 'btn', onclick: tip }, icon('bulb'), h('span', {}, t('common.hint'))) : null;
+  const terugKnop = onTerug ? h('button', { type: 'button', class: 'btn', onclick: terug }, icon('undo'), t('woordtuin.undo')) : null;
   const knoppen = h('div', { class: 'wt-knoppen' }, wis, klaarKnop);
   const extra = h('div', { class: 'wt-extra' }, tipKnop, terugKnop, typKnop);
 
-  const hekje = h('span', {}); hekje.innerHTML = `${HEK} Hekje: niet af te pakken`;
+  const hekje = h('span', {}); hekje.innerHTML = HEK; hekje.append(` ${t('woordtuin.legend')}`);
   const legenda = h('p', { class: 'wt-legenda' }, hekje);
   const el = h('div', { class: 'wt' }, stand, h('div', { class: 'wt-info' }, beurt, laatste), bord.el, legenda, woordBlok, typBlok, extra, knoppen);
 
   // ----- Weergave -----
-  // In een zin: "van de computer", "Anna speelde" (names is voor de stand, zinnen voor de zinnen)
-  const naam = (p) => zinnen[p] ?? names[p];
   const aanDeBeurt = () => !!state && !state.over && state.turn === me && !busy;
+  const hun = other(me);
+  // Wie is de ander in een zin? De computer, of een naam. `pc` en `other` zijn de twee soorten zinnen in het taalpakket.
+  const wie = (p) => (p === me ? 'me' : tegenComputer ? 'pc' : 'other');
+  const zinMet = (basis, p, params = {}) => t(`woordtuin.${basis}.${wie(p)}`, { name: names[p], ...params });
 
   function bijwerkenStand() {
     const c = counts(state);
-    mijnTal.textContent = c[me]; hunTal.textContent = c[other(me)]; open = c[0];
-    stand.setAttribute('aria-label', `Stand: ${names[me]} ${c[me]}, ${names[other(me)]} ${c[other(me)]}, nog ${c[0]} open`);
-    const nog = open ? ` Nog ${meervoud(open, 'vakje', 'vakjes')} open.` : '';
-    if (state.over) beurt.textContent = 'Het spel is afgelopen.';
-    else if (state.turn === me) beurt.textContent = `Jij bent aan de beurt.${nog}`;
-    else beurt.textContent = `${hoofd(naam(state.turn))} is aan de beurt.${nog}`;
+    mijnTal.textContent = c[me]; hunTal.textContent = c[hun]; open = c[0];
+    stand.setAttribute('aria-label', t('woordtuin.standAria', { me: names[me], mine: c[me], them: names[hun], theirs: c[hun], open: c[0] }));
+    const nog = open ? ` ${t('woordtuin.openLeft', { n: open })}` : '';
+    if (state.over) beurt.textContent = t('woordtuin.gameOver');
+    else if (state.turn === me) beurt.textContent = `${t('woordtuin.yourTurn')}${nog}`;
+    else beurt.textContent = `${tegenComputer ? t('woordtuin.theirTurnPc') : t('woordtuin.theirTurn', { name: names[state.turn] })}${nog}`;
     beurt.classList.toggle('jij', !state.over && state.turn === me);
-    if (state.passed && !state.over) laatste.textContent = `${hoofd(naam(other(state.turn)))} kan geen woord meer maken en slaat over.`;
+    if (state.passed && !state.over) laatste.textContent = zinMet('passed', other(state.turn));
     else if (state.last) {
-      const l = state.last, wie = l.player === me ? 'Jij speelde' : `${hoofd(naam(l.player))} speelde`;
-      laatste.textContent = `${wie} ${l.word.toUpperCase()}${l.took.length ? ` en pakte ${meervoud(l.took.length, 'vakje', 'vakjes')} af` : ''}.`;
+      const l = state.last, word = l.word.toUpperCase();
+      laatste.textContent = l.took.length
+        ? t(`woordtuin.last.${wie(l.player)}.took`, { name: names[l.player], word, n: l.took.length })
+        : t(`woordtuin.last.${wie(l.player)}`, { name: names[l.player], word });
     } else laatste.textContent = '';
   }
 
@@ -92,22 +96,23 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
     woord.textContent = path.map((i) => state.letters[i]).join('');
     let ok = false;
     bord.setPreview(null);
-    if (!aanDeBeurt()) uitleg.textContent = busy ? 'Even wachten…' : '';
-    else if (!path.length) uitleg.textContent = 'Veeg of tik op de letters om een woord te maken.';
-    else if (path.length < MIN_LEN) uitleg.textContent = `Kies nog minstens ${MIN_LEN - path.length} ${MIN_LEN - path.length === 1 ? 'letter' : 'letters'}.`;
+    if (!aanDeBeurt()) uitleg.textContent = busy ? t('woordtuin.waiting') : '';
+    else if (!path.length) uitleg.textContent = t('woordtuin.hint.swipe');
+    else if (path.length < MIN_LEN) uitleg.textContent = t('woordtuin.hint.more', { n: MIN_LEN - path.length });
     else {
       try {
         const c = checkMove(state, me, path);
         ok = true;
-        const hun = naam(other(me));
-        const delen = [];
-        if (c.took.length) delen.push(`pakt ${meervoud(c.took.length, 'vakje', 'vakjes')} van ${hun}`);
-        if (c.fresh.length) delen.push(`kleurt ${meervoud(c.fresh.length, 'nieuw vakje', 'nieuwe vakjes')}`);
-        uitleg.textContent = `Mooi woord. Dit ${delen.join(' en ')}.${c.kept.length ? ` ${meervoud(c.kept.length, 'vakje is', 'vakjes zijn')} beschermd en blijft van ${hun}.` : ''}`;
+        // Wat dit woord oplevert, in korte zinnen achter elkaar
+        const zinnen = [t('woordtuin.preview.nice')];
+        if (c.took.length) zinnen.push(t('woordtuin.preview.take', { n: c.took.length }));
+        if (c.fresh.length) zinnen.push(t('woordtuin.preview.fresh', { n: c.fresh.length }));
+        if (c.kept.length) zinnen.push(t('woordtuin.preview.kept', { n: c.kept.length }));
+        uitleg.textContent = zinnen.join(' ');
         bord.setPreview({ take: c.took, kept: c.kept });
       } catch (e) {
         if (!(e instanceof MoveError)) throw e;
-        uitleg.textContent = e.message;
+        uitleg.textContent = foutTekst(e);
       }
     }
     klaarKnop.disabled = !ok;
@@ -115,16 +120,21 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
     el.classList.toggle('klaar-om', ok);
   }
 
-  function typen() {
-    const w = invoer.value.toLowerCase().replace(/[^a-z]/g, '');
-    if (invoer.value !== w) invoer.value = w;
+  // Wat je typt: je ziet je eigen letters (met accenten), het bord rekent met de letters zonder accenten (zie shared/talen.js)
+  function typen(e) {
+    const taal = state ? taalVan(state) : 'en';
+    if (!e?.isComposing) {
+      const schoon = [...invoer.value.normalize('NFC')].filter((c) => isAlfabet(vouw(c, taal), taal)).join('');
+      if (invoer.value !== schoon) invoer.value = schoon;
+    }
+    const w = typInvoer(invoer.value, taal);
     plekken = []; plek = 0; anderePlek.hidden = true;
     if (!state || !aanDeBeurt()) return;
     if (w.length < MIN_LEN) { bord.clear(); return; }
     plekken = pathsFor(state, me, w);
     if (!plekken.length) {
       bord.clear();
-      uitleg.textContent = 'Dit woord ligt niet op het bord, of het kleurt niets nieuws.';
+      uitleg.textContent = t('woordtuin.notOnBoard');
       return;
     }
     anderePlek.hidden = plekken.length < 2;
@@ -135,13 +145,13 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
   async function klaar() {
     if (klaarKnop.disabled || busy) return;
     const path = bord.getPath();
-    busy = true; klaarKnop.disabled = true; bord.setEnabled(false); uitleg.textContent = 'Even wachten…';
+    busy = true; klaarKnop.disabled = true; bord.setEnabled(false); uitleg.textContent = t('woordtuin.waiting');
     try {
       await onZet(path);
       invoer.value = ''; plekken = []; anderePlek.hidden = true;
       bord.setPath([], 'klaar');
     } catch (e) {
-      uitleg.textContent = e.message || 'Dat lukte niet. Probeer het nog eens.';
+      uitleg.textContent = foutTekst(e);
     } finally {
       busy = false; beschikbaar(); bijwerken();
     }
@@ -149,25 +159,25 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
 
   async function tip() {
     if (!aanDeBeurt()) return;
-    if (tipsOver !== null && tipsOver <= 0) { uitleg.textContent = 'Je hebt geen tips meer in deze partij.'; return; }
+    if (tipsOver !== null && tipsOver <= 0) { uitleg.textContent = t('woordtuin.noHintsLeft'); return; }
     try {
-      const t = await onTip();
-      if (!t) { uitleg.textContent = 'Er is geen woord meer te vinden.'; return; }
+      const hint = await onTip();
+      if (!hint) { uitleg.textContent = t('woordtuin.noWordLeft'); return; }
       if (tipsOver !== null) { tipsOver--; tipLabel(); }
-      bord.wijs(t.start);
-      uitleg.textContent = `Tip: zoek een woord van ${t.length} letters dat begint bij het oplichtende vakje.`;
-    } catch (e) { uitleg.textContent = e.message || 'Dat lukte niet.'; }
+      bord.wijs(hint.start);
+      uitleg.textContent = t('woordtuin.hintText', { n: hint.length });
+    } catch (e) { uitleg.textContent = foutTekst(e); }
   }
   function tipLabel() {
     if (!tipKnop) return;
-    tipKnop.lastChild.textContent = tipsOver === null ? 'Tip' : `Tip (${tipsOver} over)`;
+    tipKnop.lastChild.textContent = tipsOver === null ? t('common.hint') : t('woordtuin.hintLeft', { n: tipsOver });
     tipKnop.disabled = tipsOver !== null && tipsOver <= 0;
   }
 
   async function terug() {
     if (busy || !onTerug) return;
     busy = true; terugKnop.disabled = true;
-    try { await onTerug(); } catch (e) { uitleg.textContent = e.message || 'Dat lukte niet.'; } finally { busy = false; beschikbaar(); bijwerken(); }
+    try { await onTerug(); } catch (e) { uitleg.textContent = foutTekst(e); } finally { busy = false; beschikbaar(); bijwerken(); }
   }
 
   tipLabel();
@@ -176,6 +186,8 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
     el, bord,
     setState(s, { animeer = false } = {}) {
       state = s;
+      const taal = taalVan(s);
+      invoer.lang = TALEN[taal].locale;                         // voor de spellingcontrole en het toetsenbord van de telefoon
       bord.setState(s, me);
       if (!aanDeBeurt()) { bord.setPath([], 'stand'); invoer.value = ''; }
       beschikbaar();

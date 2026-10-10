@@ -4,13 +4,15 @@
 // Zo niet (gewone website, of het losse bestand), dan blijft alles verborgen.
 
 import { API_BASE, FEATURES } from '../config.js';
+import { t } from '../i18n/index.js';
 
 const TOKEN_KEY = 'puzzelplaats:sessie';
 const listeners = new Set();
 let available = null;                       // null = nog niet gecontroleerd
 
+// Een fout van de server of van het netwerk. `key` (en `params`) verwijzen naar een vertaalde tekst, zie foutTekst() in js/i18n/index.js.
 export class ApiFail extends Error {
-  constructor(status, code, message) { super(message); this.status = status; this.code = code; }
+  constructor(status, code, message, key = null, params = null) { super(message); this.status = status; this.code = code; this.key = key; this.params = params; }
 }
 
 // Het losse bestand (file://) heeft geen eigen adres: zonder API_BASE is er geen server
@@ -43,7 +45,7 @@ export async function detect() {
 }
 
 export async function api(method, path, body, { quiet = false } = {}) {
-  if (base === null) throw new ApiFail(0, 'geen-server', 'Er is geen server beschikbaar.');
+  if (base === null) throw new ApiFail(0, 'geen-server', t('err.noServer'), 'noServer');
   const token = get() || memory;
   let res;
   try {
@@ -53,13 +55,13 @@ export async function api(method, path, body, { quiet = false } = {}) {
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
   } catch {
-    throw new ApiFail(0, 'netwerk', 'Er is geen verbinding met de server. Controleer je internet en probeer het nog eens.');
+    throw new ApiFail(0, 'netwerk', t('err.network'), 'network');
   }
   let json = null;
   try { json = await res.json(); } catch { /* geen json */ }
   if (res.ok) return json;
   const err = json?.error || {};
-  const fail = new ApiFail(res.status, err.code || 'fout', err.message || 'Er ging iets mis. Probeer het later nog eens.');
+  const fail = new ApiFail(res.status, err.code || 'fout', err.message || t('err.generic'), err.key || (err.message ? null : 'generic'), err.params || null);
   fail.data = json;
   if (res.status === 401 && token && !quiet && !['inloggen', 'herstel', 'wachtwoord'].includes(fail.code)) { setToken(''); emit('uitgelogd'); }
   throw fail;

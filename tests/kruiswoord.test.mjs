@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { generate, validate, LEVELS, cellsOf } from '../js/games/kruiswoord/engine.js';
-import { ENTRIES } from '../js/games/kruiswoord/woorden.js';
+import { laadWoorden } from '../js/games/kruiswoord/woorden.js';
+
+// Dit bestand test de puzzel met de Nederlandse woorden (de standaardtaal van de generator); de andere talen staan in talen-puzzels.test.mjs
+const ENTRIES = await laadWoorden('nl');
 
 test('woordenlijst: alleen A-Z, geen IJ, geen dubbele antwoorden, antwoord niet in de omschrijving', () => {
   const seen = new Set();

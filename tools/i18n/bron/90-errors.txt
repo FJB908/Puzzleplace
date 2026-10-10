@@ -1,0 +1,65 @@
+# Foutmeldingen van de server en de app. Ze komen letterlijk bij de speler terecht: gewoon, vriendelijk, nooit een verwijt.
+# {name} is een naam van een persoon.
+err.notLoggedIn | You are not logged in. Log in to continue. | Je bent niet ingelogd. Log in om verder te gaan.
+err.loggedOut | You have been logged out. Log in again. | Je bent uitgelogd. Log opnieuw in.
+err.accountGone | This account no longer exists. | Dit account bestaat niet meer.
+err.tooFast | This is going too fast. Wait a few minutes and try again. | Dit gaat te snel. Wacht een paar minuten en probeer het dan nog eens.
+err.emailTaken | An account already exists for this email address. Do you want to log in? | Op dit e-mailadres bestaat al een account. Wil je inloggen?
+err.tooManyLogins | Too many login attempts. Wait a quarter of an hour and try again. | Er is te vaak geprobeerd in te loggen. Wacht een kwartier en probeer het dan nog eens.
+err.loginWrong | The email address or the password is not correct. | Het e-mailadres of het wachtwoord klopt niet.
+err.tooManyRecover | Too many attempts. Wait an hour and try again. | Er is te vaak geprobeerd. Wacht een uur en probeer het dan nog eens.
+err.recoverWrong | The email address or the recovery code is not correct. | Het e-mailadres of de herstelcode klopt niet.
+err.noPasswordFacebook | This account has no password: you log in with Facebook. | Dit account heeft geen wachtwoord: je logt in met Facebook.
+err.currentPasswordWrong | Your current password is not correct. | Je huidige wachtwoord klopt niet.
+err.passwordWrong | Your password is not correct. | Je wachtwoord klopt niet.
+err.facebookOff | Logging in with Facebook is not turned on here. | Inloggen met Facebook staat hier niet aan.
+err.facebookBadRequest | This request is not valid. Please try again. | Dit verzoek klopt niet. Probeer het nog eens.
+err.facebookFailed | Logging in with Facebook did not work. Please try again. | Inloggen met Facebook is niet gelukt. Probeer het nog eens.
+err.tooManyLookups | You have tried many codes. Try again later. | Je hebt veel codes geprobeerd. Probeer het later nog eens.
+err.codeUnknown | We do not know this friend code. Check that you typed it correctly. | Deze vriendencode kennen we niet. Controleer of je alles goed hebt overgetypt.
+err.ownCode | This is your own friend code. Give it to a friend. | Dit is je eigen vriendencode. Geef hem aan een vriend of vriendin.
+err.alreadyFriends | You and {name} are already friends. | Jij en {name} zijn al vrienden.
+err.alreadyRequested | You have already sent {name} a request. Be patient. | Je hebt {name} al een verzoek gestuurd. Even geduld.
+err.tooManyRequests | You already have many requests open. Wait until some have been answered. | Je hebt al veel verzoeken openstaan. Wacht tot sommige zijn beantwoord.
+err.maxFriends | You have reached the maximum number of friends. | Je hebt het maximale aantal vrienden bereikt.
+err.requestGone | This request no longer exists. | Dit verzoek bestaat niet meer.
+err.friendGone | This friend is no longer in your list. | Deze vriend bestaat niet meer in je lijst.
+err.syncInvalid | This does not look like valid progress. | Dit lijkt geen geldige voortgang.
+err.matchGone | This game does not exist (any more). | Deze partij bestaat niet (meer).
+err.gameUnavailable | This game cannot be played against a friend yet. | Dit spel kan nog niet tegen een vriend worden gespeeld.
+err.onlyFriends | You can only play with friends. | Je kunt alleen spelen met vrienden.
+err.tooManyMatches | You have many games running. Finish a few first. | Je hebt veel partijen lopen. Maak er eerst een paar af.
+err.lang.unknown | This game is not available in that language. | Dit spel is niet beschikbaar in die taal.
+err.matchOver | This game has already finished. | Deze partij is al afgelopen.
+err.notYourTurn | It is not your turn yet. | Je bent nog niet aan de beurt.
+err.versionChanged | The position has changed in the meantime. Refresh and try again. | De stand is intussen veranderd. Ververs en probeer het opnieuw.
+err.notPlaying | You are not part of this game. | Je doet niet mee aan deze partij.
+err.name.length | Choose a name of 2 to 24 characters. | Kies een naam van 2 tot 24 tekens.
+err.name.chars | This name contains characters that are not allowed. | Deze naam bevat tekens die niet kunnen.
+err.name.brackets | Do not use < or > in your name. | Gebruik geen < of > in je naam.
+err.email.invalid | This email address does not look right. It looks like this: name@example.com | Dit e-mailadres lijkt niet te kloppen. Het ziet er zo uit: naam@voorbeeld.nl
+# Het voorbeeld rozen-molen-zomer: drie woorden uit jouw taal, zoals bij "forms.passwordWords"
+err.password.short | A password must have at least 8 characters. Tip: three words in a row, like roses-mill-summer. | Een wachtwoord moet minstens 8 tekens hebben. Tip: drie woorden achter elkaar, zoals rozen-molen-zomer.
+err.password.long | This password is too long (at most 128 characters). | Dit wachtwoord is te lang (maximaal 128 tekens).
+err.network | There is no connection to the server. Check your internet and try again. | Er is geen verbinding met de server. Controleer je internet en probeer het nog eens.
+err.noServer | There is no server available. | Er is geen server beschikbaar.
+err.generic | Something went wrong. Please try again later. | Er ging iets mis. Probeer het later nog eens.
+err.syncConflict | Something changed on another device in the meantime. | Er is intussen iets veranderd op een ander apparaat.
+err.syncFailed | Syncing did not work. Please try again shortly. | Het synchroniseren lukte niet. Probeer het straks nog eens.
+err.server | Something went wrong on our side. Please try again later. | Er ging iets mis aan onze kant. Probeer het later nog eens.
+err.tooBig | This is too big to send. | Dit is te groot om te versturen.
+err.badJson | This message cannot be read. | Dit bericht is niet te lezen.
+err.unknown | This does not exist. | Dit bestaat niet.
+# Fouten bij een woord in Woordtuin (ook van de server). {n} is het aantal letters.
+err.move.over | This game is over. | Deze partij is afgelopen.
+err.move.path | This path is not valid. | Dit pad klopt niet.
+err.move.minLength_one | A word has at least {n} letter. | Een woord heeft minstens {n} letter.
+err.move.minLength_other | A word has at least {n} letters. | Een woord heeft minstens {n} letters.
+err.move.maxLength_one | A word has at most {n} letter. | Een woord heeft hoogstens {n} letter.
+err.move.maxLength_other | A word has at most {n} letters. | Een woord heeft hoogstens {n} letters.
+err.move.reuse | You can use a letter only once. | Je kunt een letter maar één keer gebruiken.
+err.move.adjacent | The letters of a word must be next to each other. | De letters van een woord moeten aan elkaar grenzen.
+err.move.unknown | We do not know this word. Try another word. | Dit woord kennen we niet. Probeer een ander woord.
+# {word} is het woord dat de speler probeerde
+err.move.played | "{word}" has already been played in this game. Choose another word. | "{word}" is in deze partij al gespeeld. Kies een ander woord.
+err.move.noFresh | Every word must colour at least one open square. Look for a word with a white square. | Elk woord moet minstens één open vakje kleuren. Zoek een woord met een wit vakje.

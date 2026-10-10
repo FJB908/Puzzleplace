@@ -6,13 +6,16 @@
 
 import { hashSecret, verifySecret, DUMMY, newToken, sha, newId, newFriendCode, newRecoveryCode, cleanCode, formatCode } from './crypto.mjs';
 import { createLimiter } from './ratelimit.mjs';
-import { ApiError, fail, cleanName, cleanEmail, cleanPassword, isObject } from './validate.mjs';
+import { ApiError, fail, engelseTekst, cleanName, cleanEmail, cleanPassword, isObject } from './validate.mjs';
 
 const DAY = 86400000;
 const SESSION_DAYS = 90;
 const MAX_FRIENDS = 200, MAX_PENDING = 25, MAX_MATCHES = 50;
 
-export class RuleError extends Error {}                 // een spelregel is overtreden (bijv. "dat woord bestaat niet")
+// Een spelregel is overtreden (bijv. "dat woord bestaat niet"). `key` en `params` verwijzen naar een tekst in het taalpakket (err.<key>)
+export class RuleError extends Error {
+  constructor(key, params) { super(engelseTekst(key, params)); this.key = key; this.params = params || null; }
+}
 
 export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0', facebook = null }) {
   const D = db.data;
@@ -22,7 +25,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   const userById = (id) => D.users[id] || null;
   const selfView = (u) => ({ id: u.id, name: u.name, email: u.email ?? null, code: formatCode(u.code), createdAt: u.createdAt, hasPassword: !!u.pass, facebook: !!u.facebookId });
   // Wat anderen van je zien: alleen je naam en een datum (geen tijdstip, dat is privacy-vriendelijker)
-  const otherView = (u) => (u ? { id: u.id, name: u.name, lastSeen: day(u.lastSeen) } : { id: null, name: 'Verwijderd account', lastSeen: null });
+  const otherView = (u) => (u ? { id: u.id, name: u.name, lastSeen: day(u.lastSeen) } : { id: null, name: '', lastSeen: null });       // een verwijderd account heeft geen naam meer: de app zegt dat zelf
   const fkey = (a, b) => [a, b].sort().join('|');
 
   function newSession(userId) {
@@ -32,12 +35,12 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   }
 
   function auth(req) {
-    if (!req.token) fail(401, 'sessie', 'Je bent niet ingelogd. Log in om verder te gaan.');
+    if (!req.token) fail(401, 'sessie', 'notLoggedIn');
     const key = sha(req.token);
     const s = D.sessions[key];
-    if (!s || now() - s.used > SESSION_DAYS * DAY) { if (s) { delete D.sessions[key]; db.save(); } fail(401, 'sessie', 'Je bent uitgelogd. Log opnieuw in.'); }
+    if (!s || now() - s.used > SESSION_DAYS * DAY) { if (s) { delete D.sessions[key]; db.save(); } fail(401, 'sessie', 'loggedOut'); }
     const user = userById(s.userId);
-    if (!user) { delete D.sessions[key]; fail(401, 'sessie', 'Dit account bestaat niet meer.'); }
+    if (!user) { delete D.sessions[key]; fail(401, 'sessie', 'accountGone'); }
     if (now() - s.used > 3600_000) { s.used = now(); db.save(); }
     return { user, key };
   }
@@ -51,8 +54,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     throw new Error('geen vrije vriendencode');
   }
 
-  function limit(req, name, max, windowMs, message = 'Dit gaat te snel. Wacht een paar minuten en probeer het dan nog eens.') {
-    if (!limiter.hit(`${name}:${req.ip}`, max, windowMs)) fail(429, 'te-snel', message);
+  function limit(req, name, max, windowMs, key = 'tooFast') {
+    if (!limiter.hit(`${name}:${req.ip}`, max, windowMs)) fail(429, 'te-snel', key);
   }
 
   // ----- Accounts -----
@@ -60,10 +63,10 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     limit(req, 'signup', 10, 3600_000);
     const b = req.body;
     const name = cleanName(b.name), email = cleanEmail(b.email), password = cleanPassword(b.password);
-    if (D.emails[email]) fail(409, 'email', 'Op dit e-mailadres bestaat al een account. Wil je inloggen?');
+    if (D.emails[email]) fail(409, 'email', 'emailTaken');
     const recoveryCode = newRecoveryCode();
     const [pass, rec] = await Promise.all([hashSecret(password), hashSecret(cleanCode(recoveryCode))]);
-    if (D.emails[email]) fail(409, 'email', 'Op dit e-mailadres bestaat al een account. Wil je inloggen?');   // iemand anders was net sneller
+    if (D.emails[email]) fail(409, 'email', 'emailTaken');   // iemand anders was net sneller
     const id = newId(), code = uniqueCode();
     D.users[id] = { id, name, email, pass, recovery: rec, code, createdAt: now(), lastSeen: now(), sync: null };
     D.emails[email] = id; D.codes[code] = id;
@@ -75,10 +78,10 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function login(req) {
     limit(req, 'login-ip', 30, 15 * 60_000);
     const email = String(req.body.email ?? '').trim().toLowerCase();
-    if (!limiter.hit(`login-mail:${email}`, 8, 15 * 60_000)) fail(429, 'te-snel', 'Er is te vaak geprobeerd in te loggen. Wacht een kwartier en probeer het dan nog eens.');
+    if (!limiter.hit(`login-mail:${email}`, 8, 15 * 60_000)) fail(429, 'te-snel', 'tooManyLogins');
     const user = userById(D.emails[email]);
     const ok = await verifySecret(String(req.body.password ?? ''), user?.pass || DUMMY);
-    if (!user || !user.pass || !ok) fail(401, 'inloggen', 'Het e-mailadres of het wachtwoord klopt niet.');
+    if (!user || !user.pass || !ok) fail(401, 'inloggen', 'loginWrong');
     limiter.reset(`login-mail:${email}`);
     user.lastSeen = now();
     const token = newSession(user.id);
@@ -89,11 +92,11 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function recover(req) {
     limit(req, 'recover-ip', 10, 3600_000);
     const email = String(req.body.email ?? '').trim().toLowerCase();
-    if (!limiter.hit(`recover-mail:${email}`, 5, 3600_000)) fail(429, 'te-snel', 'Er is te vaak geprobeerd. Wacht een uur en probeer het dan nog eens.');
+    if (!limiter.hit(`recover-mail:${email}`, 5, 3600_000)) fail(429, 'te-snel', 'tooManyRecover');
     const password = cleanPassword(req.body.password);
     const user = userById(D.emails[email]);
     const ok = await verifySecret(cleanCode(req.body.recoveryCode), user?.recovery || DUMMY);
-    if (!user || !user.recovery || !ok) fail(401, 'herstel', 'Het e-mailadres of de herstelcode klopt niet.');
+    if (!user || !user.recovery || !ok) fail(401, 'herstel', 'recoverWrong');
     const recoveryCode = newRecoveryCode();
     user.pass = await hashSecret(password);
     user.recovery = await hashSecret(cleanCode(recoveryCode));
@@ -126,8 +129,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function changePassword(req) {
     const { user, key } = auth(req);
     limit(req, 'pw', 10, 3600_000);
-    if (!user.pass) fail(400, 'wachtwoord', 'Dit account heeft geen wachtwoord: je logt in met Facebook.');
-    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je huidige wachtwoord klopt niet.');
+    if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
+    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'currentPasswordWrong');
     user.pass = await hashSecret(cleanPassword(req.body.newPassword, 'nieuw'));
     revokeSessions(user.id, key);
     db.save();
@@ -137,8 +140,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function newRecovery(req) {                                // als je de herstelcode kwijt bent: een nieuwe, na je wachtwoord
     const { user } = auth(req);
     limit(req, 'recovery-new', 10, 3600_000);
-    if (!user.pass) fail(400, 'wachtwoord', 'Dit account heeft geen wachtwoord: je logt in met Facebook.');
-    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je wachtwoord klopt niet.');
+    if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
+    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'passwordWrong');
     const recoveryCode = newRecoveryCode();
     user.recovery = await hashSecret(cleanCode(recoveryCode));
     db.save();
@@ -156,7 +159,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function deleteAccount(req) {
     const { user } = auth(req);
     limit(req, 'delete', 5, 3600_000);
-    if (user.pass && !(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'Je wachtwoord klopt niet.');
+    if (user.pass && !(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'passwordWrong');
     revokeSessions(user.id);
     if (user.email) delete D.emails[user.email];
     if (user.facebookId) delete D.facebook[user.facebookId];
@@ -182,10 +185,10 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   const fbRedirect = (hash) => ({ status: 302, body: null, redirect: `${facebook.publicUrl}/#/account/facebook/${hash}` });
 
   function facebookStart(req) {
-    if (!facebook) fail(404, 'facebook', 'Inloggen met Facebook staat hier niet aan.');
+    if (!facebook) fail(404, 'facebook', 'facebookOff');
     limit(req, 'fb-start', 30, 15 * 60_000);
     const nonce = String(req.query.nonce ?? '');
-    if (nonce.length < 20 || nonce.length > 100) fail(400, 'facebook', 'Dit verzoek klopt niet. Probeer het nog eens.');
+    if (nonce.length < 20 || nonce.length > 100) fail(400, 'facebook', 'facebookBadRequest');
     sweepFb();
     const state = newToken();
     fbStates.set(state, { nonce: sha(nonce), exp: now() + 10 * 60_000 });
@@ -206,7 +209,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   }
 
   async function facebookCallback(req) {
-    if (!facebook) fail(404, 'facebook', 'Inloggen met Facebook staat hier niet aan.');
+    if (!facebook) fail(404, 'facebook', 'facebookOff');
     limit(req, 'fb-callback', 30, 15 * 60_000);
     const st = fbStates.get(String(req.query.state ?? ''));
     fbStates.delete(String(req.query.state ?? ''));
@@ -238,18 +241,18 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     sweepFb();
     const t = fbTickets.get(String(req.body.ticket ?? ''));
     fbTickets.delete(String(req.body.ticket ?? ''));          // één keer te gebruiken
-    if (!t || t.exp < now() || t.nonce !== sha(String(req.body.nonce ?? ''))) fail(401, 'facebook', 'Inloggen met Facebook is niet gelukt. Probeer het nog eens.');
+    if (!t || t.exp < now() || t.nonce !== sha(String(req.body.nonce ?? ''))) fail(401, 'facebook', 'facebookFailed');
     const user = userById(t.userId);
-    if (!user) fail(401, 'facebook', 'Dit account bestaat niet meer.');
+    if (!user) fail(401, 'facebook', 'accountGone');
     return { body: { token: newSession(user.id), user: selfView(user), isNew: t.isNew } };
   }
 
   // ----- Vrienden -----
   function codeLookup(req) {
     const { user } = auth(req);
-    if (!limiter.hit(`lookup:${user.id}`, 30, 3600_000)) fail(429, 'te-snel', 'Je hebt veel codes geprobeerd. Probeer het later nog eens.');
+    if (!limiter.hit(`lookup:${user.id}`, 30, 3600_000)) fail(429, 'te-snel', 'tooManyLookups');
     const found = userById(D.codes[cleanCode(req.params.code)]);
-    if (!found) fail(404, 'code', 'Deze vriendencode kennen we niet. Controleer of je alles goed hebt overgetypt.');
+    if (!found) fail(404, 'code', 'codeUnknown');
     return { body: { name: found.name, self: found.id === user.id } };
   }
 
@@ -275,20 +278,20 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const { user } = auth(req);
     limit(req, 'friend-req', 60, 3600_000);
     const target = userById(D.codes[cleanCode(req.body.code)]);
-    if (!target) fail(404, 'code', 'Deze vriendencode kennen we niet. Controleer of je alles goed hebt overgetypt.');
-    if (target.id === user.id) fail(400, 'zelf', 'Dit is je eigen vriendencode. Geef hem aan een vriend of vriendin.');
+    if (!target) fail(404, 'code', 'codeUnknown');
+    if (target.id === user.id) fail(400, 'zelf', 'ownCode');
     const key = fkey(user.id, target.id);
     const existing = D.friendships[key];
-    if (existing?.status === 'accepted') fail(409, 'al-vrienden', `Jij en ${target.name} zijn al vrienden.`);
-    if (existing && existing.from === user.id) fail(409, 'al-gevraagd', `Je hebt ${target.name} al een verzoek gestuurd. Even geduld.`);
+    if (existing?.status === 'accepted') fail(409, 'al-vrienden', 'alreadyFriends', { name: target.name });
+    if (existing && existing.from === user.id) fail(409, 'al-gevraagd', 'alreadyRequested', { name: target.name });
     if (existing) {                                                 // die ander vroeg jou al: dan is het meteen gelukt
       existing.status = 'accepted'; existing.acceptedAt = now();
       db.save();
       return { body: { status: 'accepted', friend: otherView(target) } };
     }
     const pending = Object.values(D.friendships).filter((f) => f.status === 'pending' && f.from === user.id).length;
-    if (pending >= MAX_PENDING) fail(429, 'te-veel', 'Je hebt al veel verzoeken openstaan. Wacht tot sommige zijn beantwoord.');
-    if (friendCount(user.id) >= MAX_FRIENDS) fail(400, 'te-veel', 'Je hebt het maximale aantal vrienden bereikt.');
+    if (pending >= MAX_PENDING) fail(429, 'te-veel', 'tooManyRequests');
+    if (friendCount(user.id) >= MAX_FRIENDS) fail(400, 'te-veel', 'maxFriends');
     const [a, b] = [user.id, target.id].sort();
     D.friendships[key] = { a, b, status: 'pending', from: user.id, at: now() };
     db.save();
@@ -299,9 +302,9 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const { user } = auth(req);
     const key = fkey(user.id, req.params.id);
     const f = D.friendships[key];
-    if (!f || f.status !== 'pending' || f.from === user.id) fail(404, 'verzoek', 'Dit verzoek bestaat niet meer.');
+    if (!f || f.status !== 'pending' || f.from === user.id) fail(404, 'verzoek', 'requestGone');
     if (accept) {
-      if (friendCount(user.id) >= MAX_FRIENDS) fail(400, 'te-veel', 'Je hebt het maximale aantal vrienden bereikt.');
+      if (friendCount(user.id) >= MAX_FRIENDS) fail(400, 'te-veel', 'maxFriends');
       f.status = 'accepted'; f.acceptedAt = now();
     } else delete D.friendships[key];
     db.save();
@@ -311,7 +314,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   function removeFriend(req) {                                      // een vriend verwijderen, of je eigen verzoek intrekken
     const { user } = auth(req);
     const key = fkey(user.id, req.params.id);
-    if (!D.friendships[key]) fail(404, 'vriend', 'Deze vriend bestaat niet meer in je lijst.');
+    if (!D.friendships[key]) fail(404, 'vriend', 'friendGone');
     delete D.friendships[key];
     for (const m of Object.values(D.matches)) if (m.status === 'active' && m.players.includes(user.id) && m.players.includes(req.params.id)) { m.status = 'done'; m.result = { abandoned: true }; m.turn = null; m.version++; m.updatedAt = now(); }
     db.save();
@@ -327,9 +330,9 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   function putSync(req) {
     const { user } = auth(req);
     const { baseVersion, data } = req.body;
-    if (!isObject(data) || !isObject(data.games)) fail(400, 'sync', 'Dit lijkt geen geldige voortgang.');
+    if (!isObject(data) || !isObject(data.games)) fail(400, 'sync', 'syncInvalid');
     const current = user.sync?.version ?? 0;
-    if (baseVersion !== current) return { status: 409, body: { error: { code: 'versie', message: 'Er is intussen iets veranderd op een ander apparaat.' }, version: current, data: user.sync?.data ?? null } };
+    if (baseVersion !== current) return { status: 409, body: { error: { code: 'versie', key: 'syncConflict', message: engelseTekst('syncConflict') }, version: current, data: user.sync?.data ?? null } };
     user.sync = { version: current + 1, data, at: now() };
     db.save();
     return { body: { version: user.sync.version } };
@@ -337,6 +340,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
 
   // ----- Spellen met beurten (algemeen) -----
   // De regels van een spel staan in `games[id]`:
+  //   config(config) -> config                                   (optioneel) maakt de gekozen instellingen netjes; mag een RuleError gooien
+  //   prepare({ config })                                        (optioneel, mag async) klaarzetten wat het spel nodig heeft, bijvoorbeeld een woordenboek laden
   //   create({ players, config }) -> { pub, secret, turn }      pub: wat beide spelers zien, secret: alleen de server
   //   apply({ pub, secret, move, player, config }) -> { pub, secret, turn, result? }   turn = null als het spel is afgelopen
   // De server bepaalt wie aan de beurt is en controleert elke zet. Een client kan dus niet vals spelen.
@@ -349,24 +354,27 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   function myMatch(req) {
     const { user } = auth(req);
     const m = D.matches[req.params.id];
-    if (!m || !m.players.includes(user.id)) fail(404, 'partij', 'Deze partij bestaat niet (meer).');
+    if (!m || !m.players.includes(user.id)) fail(404, 'partij', 'matchGone');
     return { user, m };
   }
 
-  function createMatch(req) {
+  async function createMatch(req) {
     const { user } = auth(req);
     const rules = games[req.body.game];
-    if (!rules) fail(400, 'spel', 'Dit spel kan nog niet tegen een vriend worden gespeeld.');
+    if (!rules) fail(400, 'spel', 'gameUnavailable');
+    let config = isObject(req.body.config) ? req.body.config : {};
+    try {
+      if (rules.config) config = rules.config(config);
+      if (rules.prepare) await rules.prepare({ config });          // het enige wat hier kan wachten; daarna gaat alles in één keer
+    } catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.key, e.params); throw e; }
     const other = userById(req.body.with);
     const f = other && D.friendships[fkey(user.id, other.id)];
-    if (!f || f.status !== 'accepted') fail(403, 'vriend', 'Je kunt alleen spelen met vrienden.');
+    if (!f || f.status !== 'accepted') fail(403, 'vriend', 'onlyFriends');
     const active = Object.values(D.matches).filter((m) => m.status === 'active' && m.players.includes(user.id)).length;
-    if (active >= MAX_MATCHES) fail(429, 'te-veel', 'Je hebt veel partijen lopen. Maak er eerst een paar af.');
+    if (active >= MAX_MATCHES) fail(429, 'te-veel', 'tooManyMatches');
     const players = [user.id, other.id];
-    let config = isObject(req.body.config) ? req.body.config : {};
-    if (rules.config) config = rules.config(config);
     let made;
-    try { made = rules.create({ players, config }); } catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.message); throw e; }
+    try { made = rules.create({ players, config }); } catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.key, e.params); throw e; }
     const id = newId();
     D.matches[id] = { id, game: req.body.game, players, config, pub: made.pub, secret: made.secret ?? null, turn: made.turn ?? players[0], status: 'active', version: 1, createdAt: now(), updatedAt: now() };
     db.save();
@@ -387,14 +395,16 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     return { body: { match: matchView(m, user.id) } };
   }
 
-  function move(req) {
+  async function move(req) {
     const { user, m } = myMatch(req);
-    if (m.status !== 'active') fail(409, 'klaar', 'Deze partij is al afgelopen.');
-    if (m.turn !== user.id) fail(409, 'beurt', 'Je bent nog niet aan de beurt.');
-    if (req.body.version !== m.version) fail(409, 'versie', 'De stand is intussen veranderd. Ververs en probeer het opnieuw.');
+    try { await games[m.game]?.prepare?.({ config: m.config }); }          // bijvoorbeeld het woordenboek van deze partij; daarna is alles weer synchroon
+    catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.key, e.params); throw e; }
+    if (m.status !== 'active') fail(409, 'klaar', 'matchOver');
+    if (m.turn !== user.id) fail(409, 'beurt', 'notYourTurn');
+    if (req.body.version !== m.version) fail(409, 'versie', 'versionChanged');
     let out;
     try { out = games[m.game].apply({ pub: m.pub, secret: m.secret, move: req.body.move, player: user.id, config: m.config }); }
-    catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.message); throw e; }
+    catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.key, e.params); throw e; }
     m.pub = out.pub; m.secret = out.secret ?? m.secret; m.turn = out.turn ?? null; m.version++; m.updatedAt = now();
     if (out.turn == null) { m.status = 'done'; m.result = out.result ?? null; }
     db.save();
@@ -403,7 +413,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
 
   function resign(req) {
     const { user, m } = myMatch(req);
-    if (m.status !== 'active') fail(409, 'klaar', 'Deze partij is al afgelopen.');
+    if (m.status !== 'active') fail(409, 'klaar', 'matchOver');
     m.status = 'done'; m.turn = null; m.result = { resigned: user.id }; m.version++; m.updatedAt = now();
     db.save();
     return { body: { match: matchView(m, user.id) } };
@@ -439,11 +449,11 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
         const res = await r.fn(req);
         return { status: res.status ?? 200, body: res.body, ...(res.redirect ? { redirect: res.redirect } : {}) };
       }
-      return { status: known ? 405 : 404, body: { error: { code: known ? 'methode' : 'onbekend', message: 'Dit bestaat niet.' } } };
+      return { status: known ? 405 : 404, body: { error: { code: known ? 'methode' : 'onbekend', key: 'unknown', message: engelseTekst('unknown') } } };
     } catch (e) {
-      if (e instanceof ApiError) return { status: e.status, body: { error: { code: e.code, message: e.message } } };
+      if (e instanceof ApiError) return { status: e.status, body: { error: { code: e.code, key: e.key, ...(e.params ? { params: e.params } : {}), message: e.message } } };
       console.error('Onverwachte fout:', e);
-      return { status: 500, body: { error: { code: 'server', message: 'Er ging iets mis aan onze kant. Probeer het later nog eens.' } } };
+      return { status: 500, body: { error: { code: 'server', key: 'server', message: engelseTekst('server') } } };
     }
   }
 

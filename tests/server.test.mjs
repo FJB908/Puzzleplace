@@ -249,7 +249,7 @@ test('account verwijderen haalt alles weg', async () => {
   assert.deepEqual((await s.call('GET', '/api/friends', undefined, b.token)).json.friends, []);
   const list = (await s.call('GET', '/api/matches', undefined, b.token)).json.matches;
   assert.equal(list[0].status, 'done', 'lopende partij wordt beëindigd');
-  assert.equal(list[0].players.find((p) => p.id !== b.user.id).name, 'Verwijderd account');
+  assert.equal(list[0].players.find((p) => p.id !== b.user.id).name, '', 'een verwijderd account heeft geen naam meer: de app zegt in de taal van de speler dat het verwijderd is');
   s.db.flush();
   const raw = readFileSync(s.file, 'utf8');
   for (const left of ['anna@voorbeeld.nl', '"name":"Anna"', a.user.code.replace('-', '')]) assert.ok(!raw.includes(left), `restant van het account: ${left}`);
@@ -310,7 +310,7 @@ test('sessies verlopen na 90 dagen zonder gebruik', async () => {
 test('de server: bestanden veilig serveren en slechte verzoeken afvangen', async () => {
   const s = await start();
   const home = await s.call('GET', '/');
-  assert.equal(home.status, 200); assert.match(home.text, /Puzzelplaats/);
+  assert.equal(home.status, 200); assert.match(home.text, /Puzzleplace/);
   assert.match(home.headers.get('content-security-policy'), /default-src 'self'/);
   assert.equal(home.headers.get('x-content-type-options'), 'nosniff');
   assert.equal((await s.call('GET', '/js/app.js')).status, 200);

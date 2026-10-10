@@ -1,0 +1,94 @@
+# Account: aanmelden, inloggen, herstellen, beheren.
+# De vriendelijke toon blijft: korte zinnen, nooit een verwijt. {name} is de voornaam van de speler.
+account.title | Account | Account
+account.password | Password | Wachtwoord
+account.yourPassword | Your password | Je wachtwoord
+account.currentPassword | Your current password | Je huidige wachtwoord
+account.newPasswordLabel | Your new password | Je nieuwe wachtwoord
+account.newPassword | A new password | Een nieuw wachtwoord
+account.firstName | Your first name | Je voornaam
+account.email | Your email address | Je e-mailadres
+account.facebook.continue | Continue with Facebook | Doorgaan met Facebook
+account.orEmail | or with your email address | of met je e-mailadres
+account.intro.text | With an account you can continue on all your devices and play with friends. | Met een account speel je op al je apparaten verder en kun je met vrienden spelen.
+account.intro.p1.title | Your progress on all your devices | Je voortgang op al je apparaten
+account.intro.p1.text | Start on your phone, carry on on your tablet. | Begin op je telefoon, ga verder op je tablet.
+account.intro.p2.title | Friends and family | Vrienden en familie
+account.intro.p2.text | Add someone with a code. No strangers, no searching. | Voeg iemand toe met een code. Geen vreemden, geen zoekopdrachten.
+# {game} is de naam van het spel Woordtuin
+account.intro.p3.title | Play {game} together | Samen {game} spelen
+account.intro.p3.text | Take turns making words, even when you are not online at the same time. | Woorden maken om beurten, ook als je niet tegelijk online bent.
+account.create | Create account | Account maken
+account.haveOne | I already have an account | Ik heb al een account
+account.optional | You can always keep playing without an account. Everything then works on this device. | Je kunt altijd zonder account blijven spelen. Alles werkt dan gewoon op dit apparaat.
+account.firstNameHint | This is how your friends see you. | Zo zien je vrienden je.
+account.emailHint | You log in with this. We never send advertising. | Hiermee log je in. We sturen er geen reclame naartoe.
+account.passwordHint | At least 8 characters. Three words in a row are safe and easy to remember. | Minstens 8 tekens. Drie woorden achter elkaar is veilig en makkelijk te onthouden.
+account.signup.pending | First create an account, then you can add your friend. | Maak eerst een account, daarna kun je je vriend of vriendin toevoegen.
+account.signup.busy | Creating your account… | Account wordt gemaakt…
+# Een link: [tekst](#/pad). Laat het deel (#/account/inloggen) staan en vertaal alleen de tekst tussen de haken.
+account.signup.haveAccount | Already have an account? [Log in](#/account/inloggen). | Heb je al een account? [Log dan in](#/account/inloggen).
+account.login | Log in | Inloggen
+account.login.busy | Checking… | Even kijken…
+account.forgot | Forgot your password? | Wachtwoord vergeten?
+account.login.noAccount | No account yet? [Create one](#/account/nieuw). | Nog geen account? [Maak er een](#/account/nieuw).
+account.loggedIn | You are logged in. | Je bent ingelogd.
+account.copy | Copy | Kopieer
+account.copied | Copied | Gekopieerd
+account.copyFailed | Did not work | Niet gelukt
+account.print | Print | Afdrukken
+account.recoveryCode | Your recovery code | Je herstelcode
+account.readyTitle | Account ready | Account klaar
+account.toAccount | Go to your account | Naar je account
+account.done.title | Done, {name}! | Gelukt, {name}!
+account.done.text | Your account is ready. One more important thing. | Je account is klaar. Nog één belangrijk ding.
+account.done.keep | Keep this code in a safe place. | Bewaar deze code op een veilige plek.
+account.done.keepText | If you ever forget your password, you use this code to choose a new one. Write it on paper, or keep it with your important papers. We cannot look it up for you, but you can always have a new one made later. | Vergeet je ooit je wachtwoord, dan kies je met deze code een nieuw wachtwoord. Schrijf hem op papier, of bewaar hem bij je belangrijke papieren. We kunnen hem niet voor je terugvinden, maar je kunt later wel een nieuwe laten maken.
+account.done.saved | I have saved the code | Ik heb de code bewaard
+account.done.continue | Continue | Doorgaan
+account.done.later | I'll do this later | Ik doe dit later
+account.newRecovery | New recovery code | Nieuwe herstelcode
+account.newRecovery.hint | To check it is you, before we make a new recovery code. The old one stops working afterwards. | Ter controle, voordat we een nieuwe herstelcode maken. De oude werkt daarna niet meer.
+account.newRecovery.make | Make a new recovery code | Nieuwe herstelcode maken
+account.newRecovery.keep | Keep this new code safe. The old one no longer works. | Bewaar deze nieuwe code goed. De oude werkt niet meer.
+account.forgotTitle | Forgot your password | Wachtwoord vergeten
+account.forgot.text | With your recovery code you choose a new password. | Met je herstelcode kies je een nieuw wachtwoord.
+account.recoveryLabel | Your recovery code | Je herstelcode
+account.recoveryHint | This is the 12-character code you received when you signed up, like K7P4-QM2X-9TBR. | Dat is de code van 12 tekens die je bij het aanmelden kreeg, zoals K7P4-QM2X-9TBR.
+account.setPassword | Set new password | Nieuw wachtwoord instellen
+account.lostBoth | Lost your recovery code too? Then we unfortunately cannot get into your account. You can create a new account; the progress on your devices stays. | Ook de herstelcode kwijt? Dan kunnen we helaas niet bij je account. Je kunt een nieuw account maken; de voortgang op je apparaten blijft bestaan.
+account.sync.title | Your progress on all your devices | Je voortgang op al je apparaten
+account.sync.now | Sync now | Nu synchroniseren
+account.sync.busy | Updating… | Even bijwerken…
+account.sync.failed | Did not work: {error} | Niet gelukt: {error}
+# {time} is een kloktijd, bijvoorbeeld 14:05
+account.sync.ok | Everything is up to date ({time}). | Alles is bijgewerkt ({time}).
+account.sync.soon | Will be updated shortly. | Wordt zo bijgewerkt.
+account.changeName | Change your name | Je naam wijzigen
+account.save | Save | Opslaan
+account.nameSaved | Name saved | Naam opgeslagen
+account.viaFacebook | Logged in with Facebook | Ingelogd met Facebook
+account.friendsHint | Your friend code and your friends | Je vriendencode en je vrienden
+account.changePassword | Change password | Wachtwoord wijzigen
+account.changePasswordHint | Choose a new password | Kies een nieuw wachtwoord
+account.newRecoveryHint | If you lost the old one | Als je de oude kwijt bent
+account.logout | Log out | Uitloggen
+account.logout.title | Log out? | Uitloggen?
+account.logout.text | Your progress is safe in your account. You can simply log in again later. | Je voortgang staat veilig in je account. Je kunt later gewoon weer inloggen.
+account.logout.wipe | Log out and erase everything on this device | Uitloggen en alles op dit apparaat wissen
+account.logout.stay | Stay logged in | Blijven ingelogd
+account.delete | Delete account | Account verwijderen
+account.delete.text | Your account, your friends and your saved progress on our server will be erased. What is on your devices stays. | Je account, je vrienden en je opgeslagen voortgang op onze server worden gewist. Wat op je apparaten staat, blijft staan.
+account.delete.passwordHint | To check it is you. | Ter controle.
+account.delete.confirmTitle | Are you sure? | Zeker weten?
+account.delete.confirmText | This cannot be undone. | Dit kan niet ongedaan worden gemaakt.
+account.delete.confirmYes | Yes, delete | Ja, verwijderen
+account.delete.submit | Yes, delete my account | Ja, verwijder mijn account
+account.changePassword.text | On your other devices you will have to log in again afterwards. | Op je andere apparaten moet je daarna opnieuw inloggen.
+account.changed.title | Done | Gelukt
+account.changed.text | Your password has been changed. | Je wachtwoord is gewijzigd.
+account.changed.ok | Fine | Prima
+account.facebook.title | Logging in with Facebook | Inloggen met Facebook
+account.facebook.failed | Logging in with Facebook did not work, or you cancelled. You can try again, or log in with your email address. | Het inloggen met Facebook is niet gelukt, of je hebt het geannuleerd. Je kunt het nog eens proberen, of inloggen met je e-mailadres.
+account.facebook.failedShort | Logging in with Facebook did not work. | Het inloggen met Facebook is niet gelukt.
+common.backHome | Back to Home | Terug naar Start

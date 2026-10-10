@@ -10,6 +10,8 @@
 //   #/account  #/vrienden       (alleen als FEATURES aan staat)
 
 import { h, icon, announce } from './ui.js';
+import { t, bepaalTaal, zetTaal, onTaal } from './i18n/index.js';
+import { taalView } from './views/taal.js';
 import { FEATURES, APP } from './config.js';
 import { setDecor } from './decor.js';
 import { initAmbient, initRipple, motionOK } from './effects.js';
@@ -32,10 +34,10 @@ import { notFoundView } from './views/notFound.js';
 
 // ----- Menu: één lijst; nieuwe onderdelen komen hier bij -----
 const NAV_ALL = [
-  { id: 'home', label: 'Start', href: '#/', icon: 'home' },
-  { id: 'games', label: 'Spellen', href: '#/spellen', icon: 'games' },
-  { id: 'friends', label: 'Vrienden', href: '#/vrienden', icon: 'friends', feature: 'friends' },
-  { id: 'settings', label: 'Instellingen', href: '#/instellingen', icon: 'settings' },
+  { id: 'home', label: () => t('nav.home'), href: '#/', icon: 'home' },
+  { id: 'games', label: () => t('nav.games'), href: '#/spellen', icon: 'games' },
+  { id: 'friends', label: () => t('nav.friends'), href: '#/vrienden', icon: 'friends', feature: 'friends' },
+  { id: 'settings', label: () => t('nav.settings'), href: '#/instellingen', icon: 'settings' },
 ];
 
 // [patroon, view, parameters uit het patroon]
@@ -45,6 +47,7 @@ const ROUTES = [
   [/^\/spel\/([\w-]+)$/, gameDetailView, (m) => ({ id: m[1] })],
   [/^\/spel\/([\w-]+)\/speel(?:\/(dagelijks))?$/, playView, (m) => ({ id: m[1], mode: m[2] })],
   [/^\/instellingen$/, settingsView, () => ({})],
+  [/^\/taal$/, taalView, () => ({})],
   [/^\/hulp$/, helpView, () => ({})],
   [/^\/account(?:\/(\w+)(?:\/([\w-]+))?)?$/, accountView, (m) => ({ sub: m[1], arg: m[2] })],
   [/^\/vrienden$/, friendsView, () => ({})],
@@ -74,7 +77,8 @@ let activeNav = null;
 function buildNav() {
   const items = NAV_ALL.filter((item) => !item.feature || FEATURES[item.feature]);
   navEl.style.setProperty('--nav-count', items.length);
-  navEl.replaceChildren(...items.map((item) => h('a', { href: item.href, 'data-nav': item.id }, icon(item.icon), item.label)));
+  navEl.setAttribute('aria-label', t('nav.main'));
+  navEl.replaceChildren(...items.map((item) => h('a', { href: item.href, 'data-nav': item.id }, icon(item.icon), item.label())));
   updateNav(activeNav);
   updateBadge();
 }
@@ -85,7 +89,7 @@ function updateBadge() {
   if (!link) return;
   const { incoming, yourTurn } = auth.getCounts();
   const n = auth.getUser() ? incoming + yourTurn : 0;
-  if (n > 0) { link.dataset.badge = String(n); link.setAttribute('aria-label', `Vrienden, ${n} nieuw`); }
+  if (n > 0) { link.dataset.badge = String(n); link.setAttribute('aria-label', t('nav.friendsNew', { n })); }
   else { delete link.dataset.badge; link.removeAttribute('aria-label'); }
 }
 
@@ -104,6 +108,7 @@ const main = document.getElementById('main');
 let current = null;
 let token = 0;
 
+let taalKiezen = false;              // geen taal herkend en nog niet gekozen: eerst vragen
 const app = { applySettings, refresh: () => render(false), announce };
 
 async function render(moveFocus = true) {
@@ -111,11 +116,12 @@ async function render(moveFocus = true) {
   const path = location.hash.replace(/^#/, '') || '/';
 
   let result = null;
-  for (const [pattern, view, toParams] of ROUTES) {
+  if (taalKiezen) result = taalView({ eerste: true, klaar: () => { taalKiezen = false; render(true); } }, app);
+  else for (const [pattern, view, toParams] of ROUTES) {
     const m = path.match(pattern);
     if (m) { result = await view(toParams(m), app); break; }
   }
-  if (!result && !ROUTES.some(([pattern]) => pattern.test(path))) result = notFoundView();
+  if (!result && !taalKiezen && !ROUTES.some(([pattern]) => pattern.test(path))) result = notFoundView();
   if (mine !== token || result == null) return; // ondertussen ergens anders heen of doorgestuurd
 
   const swap = () => {
@@ -157,11 +163,28 @@ new ResizeObserver(() => { if (!navEl.hidden) document.documentElement.style.set
 initAmbient();
 initRipple();
 window.addEventListener('hashchange', () => render(true));
-buildNav();
-render(true);
+
+// Teksten die in index.html staan en dus niet door een scherm worden getekend
+function applyStaticTexts() {
+  const skip = document.querySelector('.skip-link');
+  if (skip) skip.textContent = t('app.skipToContent');
+  const beschrijving = document.querySelector('meta[name="description"]');
+  if (beschrijving) beschrijving.setAttribute('content', t('app.description'));
+}
+
+// De taal: wat de bezoeker zelf koos, anders wat de browser aangeeft; geen van beide dan vragen we het.
+const taal = bepaalTaal(store.getSettings().taal);
+taalKiezen = !taal;
+zetTaal(taal || 'en').then(() => {
+  applyStaticTexts();
+  onTaal(() => { applyStaticTexts(); buildNav(); render(false); });
+  buildNav();
+  render(true);
+  startServer();
+});
 
 // Accounts en vrienden: alleen als er een server is. Geen server? Dan merkt niemand er iets van.
-(async () => {
+async function startServer() {
   if (!(await detect())) { if (/^\/(vrienden|partij|account)(\/|$)/.test(location.hash.replace(/^#/, ''))) render(false); return; }
   buildNav();
   let lastUser = null, ready = false;
@@ -180,7 +203,7 @@ render(true);
   // Schermen die pas met de server compleet zijn (Start met vrienden, account, partijen), nu opnieuw tekenen
   const route = location.hash.replace(/^#/, '') || '/';
   if (route === '/' || /^\/(account|vrienden|partij|instellingen|hulp)(\/|$)/.test(route)) render(false);
-})();
+}
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('sw.js').catch(() => { /* offline-modus is een extraatje */ });

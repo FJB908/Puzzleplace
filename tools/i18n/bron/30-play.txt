@@ -1,0 +1,17 @@
+# Het kader om een spel heen (bovenbalk, uitleg, slotbericht).
+play.howTo | Instructions | Uitleg
+play.howToTitle | How {game} works | Zo werkt {game}
+play.understood | Got it | Begrepen
+play.dailyTitle | Daily puzzle: {game} | Dagpuzzel: {game}
+play.autosave | Your progress is saved automatically. | Je voortgang wordt vanzelf bewaard.
+play.loading | The game is loading… | Het spel wordt geladen…
+play.loadFailed | The game could not be loaded. Check your connection and try again. | Het spel kon niet worden geladen. Controleer je verbinding en probeer het nog eens.
+# Slotbericht als je een spel hebt uitgespeeld (spellen kunnen een eigen titel en tekst meegeven)
+play.done.title | Well done! | Goed gedaan!
+play.done.text.daily | You have finished today's puzzle. | Je hebt de puzzel van de dag uitgespeeld.
+play.done.text | You have finished this game. | Je hebt dit spel uitgespeeld.
+play.done.announce | Well done! The game is finished. | Goed gedaan! Het spel is uitgespeeld.
+play.done.again | Play again | Nog een keer
+play.done.backHome | Back to Home | Terug naar Start
+play.done.otherGame | Choose another game | Ander spel kiezen
+play.done.toHome | Go to Home | Naar Start

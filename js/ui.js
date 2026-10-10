@@ -1,5 +1,6 @@
 import { mountArt } from './decor.js';
 import { motionOK } from './effects.js';
+import { t, datumTekst } from './i18n/index.js';
 
 // Kleine bouwstenen voor de schermen: elementen maken, iconen, dialogen.
 // Tekst gaat altijd via textContent (nooit innerHTML), dus veilig voor namen.
@@ -24,6 +25,20 @@ function append(el, children) {
   }
 }
 
+// Tekst met [links](#/pad): de tekst tussen [ ] wordt een link. Handig voor vertaalde teksten, waar de volgorde per taal anders is.
+export function richText(tekst) {
+  const uit = [];
+  let laatste = 0;
+  for (const m of tekst.matchAll(/\[([^\]]+)\]\(([^)\s]+)\)/g)) {
+    if (m.index > laatste) uit.push(tekst.slice(laatste, m.index));
+    const extern = /^https?:/.test(m[2]);
+    uit.push(h('a', { href: m[2], ...(extern ? { target: '_blank', rel: 'noopener' } : {}) }, m[1]));
+    laatste = m.index + m[0].length;
+  }
+  if (laatste < tekst.length) uit.push(tekst.slice(laatste));
+  return uit;
+}
+
 // ----- Iconen (vaste, eigen SVG-paden) -----
 const ICONS = {
   home: '<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>',
@@ -43,6 +58,7 @@ const ICONS = {
   verify: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
   backspace: '<path d="M20 12H5M11 6l-6 6 6 6"/>',
   eraser: '<path d="M4 16l9-9a2 2 0 0 1 3 0l3 3a2 2 0 0 1 0 3l-6 6H8zM9 11l5 5M12 20h8"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
   eye: '<path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   // spelpictogrammen
   sudoku: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>',
@@ -96,7 +112,7 @@ export function choiceDialog({ title, text, body, actions, dismissValue = null, 
 }
 
 // Veilige bevestiging: de veilige keuze staat bovenaan en heeft de focus.
-export async function confirmDialog({ title, text, confirmLabel, cancelLabel = 'Nee, terug' }) {
+export async function confirmDialog({ title, text, confirmLabel, cancelLabel = t('common.noGoBack') }) {
   const answer = await choiceDialog({
     title, text,
     actions: [
@@ -120,10 +136,13 @@ export function announce(message) {
 export function whenText(timestamp) {
   const day = (t) => new Date(t).setHours(0, 0, 0, 0);
   const diff = Math.round((day(Date.now()) - day(timestamp)) / 86400000);
-  if (diff <= 0) return 'vandaag';
-  if (diff === 1) return 'gisteren';
-  return `${diff} dagen geleden`;
+  if (diff <= 0) return t('time.today');
+  if (diff === 1) return t('time.yesterday');
+  return t('time.daysAgo', { n: diff });
 }
+
+// De naam van iemand om te laten zien; een verwijderd account heeft geen naam meer (de server stuurt dan een lege naam)
+export const persoonNaam = (p) => (p && p.id && p.name ? p.name : t('friends.deletedAccount'));
 
 // ----- Mensen: een ronde letter in een zachte kleur (geen foto's) -----
 export function avatar(name, id = name) {
@@ -152,8 +171,8 @@ export async function shareText({ title, text, url }) {
 export function dayText(isoDay) {
   if (!isoDay) return '';
   const diff = Math.round((new Date(new Date().toDateString()) - new Date(`${isoDay}T00:00:00`)) / 86400000);
-  if (diff <= 0) return 'vandaag';
-  if (diff === 1) return 'gisteren';
-  if (diff < 14) return `${diff} dagen geleden`;
-  return new Date(`${isoDay}T00:00:00`).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' });
+  if (diff <= 0) return t('time.today');
+  if (diff === 1) return t('time.yesterday');
+  if (diff < 14) return t('time.daysAgo', { n: diff });
+  return datumTekst(new Date(`${isoDay}T00:00:00`), { day: 'numeric', month: 'long' });
 }

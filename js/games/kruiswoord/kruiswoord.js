@@ -11,16 +11,19 @@
 import { h, icon } from '../../ui.js';
 import { generate, cellsOf } from './engine.js';
 import { burst, rain, motionOK } from '../../effects.js';
-
-const ROWS = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+import { t } from '../../i18n/index.js';
+import { TALEN, typInvoer } from '../../shared/talen.js';
+import { laadWoorden } from './woorden.js';
 
 function validState(s) {
   return s && s.puzzle && Array.isArray(s.puzzle.grid) && Array.isArray(s.letters) && s.letters.length === s.puzzle.rows * s.puzzle.cols;
 }
 
-export function mount(container, ctx) {
+export async function mount(container, ctx) {
+  const ROWS = TALEN[ctx.taal].toetsenbord;                                   // de indeling van het toetsenbord van deze taal
+  if (!validState(ctx.saved)) await laadWoorden(ctx.taal);                  // de woorden en omschrijvingen van de taal
   const state = validState(ctx.saved) ? ctx.saved : (() => {
-    const puzzle = generate(ctx.seed, ctx.difficulty);
+    const puzzle = generate(ctx.seed, ctx.difficulty, ctx.taal);
     return { puzzle, letters: new Array(puzzle.rows * puzzle.cols).fill(''), locked: [], sel: null };
   })();
   const { puzzle, letters } = state;
@@ -47,7 +50,7 @@ export function mount(container, ctx) {
 
   // ----- Opbouw -----
   const cells = [];
-  const board = h('div', { class: 'kw-board', role: 'grid', 'aria-label': `Kruiswoordpuzzel, ${R} rijen en ${C} kolommen`, style: `--cols:${C};--rows:${R}` });
+  const board = h('div', { class: 'kw-board', role: 'grid', 'aria-label': t('kruiswoord.gridAria'), style: `--cols:${C};--rows:${R}` });
   for (let r = 0; r < R; r++) {
     for (let c = 0; c < C; c++) {
       if (!isCell(r, c)) { board.append(h('div', { class: 'kw-block', 'aria-hidden': 'true' })); cells.push(null); continue; }
@@ -65,20 +68,20 @@ export function mount(container, ctx) {
   const clueNum = h('span', { class: 'kw-num' });
   const clueText = h('span', { class: 'kw-text' });
   const clueLen = h('span', { class: 'kw-len' });
-  const prev = h('button', { type: 'button', class: 'btn kw-step', 'aria-label': 'Vorige omschrijving', onclick: () => stepClue(-1) }, icon('back'));
-  const next = h('button', { type: 'button', class: 'btn kw-step', 'aria-label': 'Volgende omschrijving', onclick: () => stepClue(1) }, icon('chevron'));
-  const clueBar = h('div', { class: 'kw-clue', role: 'group', 'aria-label': 'Omschrijving' },
+  const prev = h('button', { type: 'button', class: 'btn kw-step', 'aria-label': t('kruiswoord.prevClue'), onclick: () => stepClue(-1) }, icon('back'));
+  const next = h('button', { type: 'button', class: 'btn kw-step', 'aria-label': t('kruiswoord.nextClue'), onclick: () => stepClue(1) }, icon('chevron'));
+  const clueBar = h('div', { class: 'kw-clue', role: 'group', 'aria-label': t('kruiswoord.clueGroup') },
     prev, h('div', { class: 'kw-clue-body', 'aria-live': 'polite' }, h('div', { class: 'kw-clue-head' }, clueNum, clueLen), clueText), next);
 
-  const message = h('p', { class: 'kw-message', role: 'status', 'aria-live': 'polite' }, 'Tik op een vakje om te beginnen.');
+  const message = h('p', { class: 'kw-message', role: 'status', 'aria-live': 'polite' }, t('kruiswoord.start'));
 
   const keyBtn = (ch) => h('button', { type: 'button', class: 'kw-key', 'aria-label': ch, onclick: () => typeLetter(ch) }, ch);
-  const back = h('button', { type: 'button', class: 'kw-key kw-back', 'aria-label': 'Terug en wis de letter', onclick: backspace }, icon('backspace'));
-  const keys = h('div', { class: 'kw-keys', role: 'group', 'aria-label': 'Toetsenbord' },
+  const back = h('button', { type: 'button', class: 'kw-key kw-back', 'aria-label': t('kruiswoord.backspace'), onclick: backspace }, icon('backspace'));
+  const keys = h('div', { class: 'kw-keys', role: 'group', 'aria-label': t('kruiswoord.keyboard') },
     ROWS.map((row, i) => h('div', { class: `kw-row r${i}` }, [...row].map(keyBtn), i === 2 ? back : null)));
 
-  const tipLetter = h('button', { type: 'button', class: 'btn action-btn', onclick: revealLetter }, icon('bulb'), h('span', { class: 'action-label' }, 'Tip'));
-  const tipWord = h('button', { type: 'button', class: 'btn action-btn', onclick: revealWord }, icon('eye'), h('span', { class: 'action-label' }, 'Woord'));
+  const tipLetter = h('button', { type: 'button', class: 'btn action-btn', onclick: revealLetter }, icon('bulb'), h('span', { class: 'action-label' }, t('common.hint')));
+  const tipWord = h('button', { type: 'button', class: 'btn action-btn', onclick: revealWord }, icon('eye'), h('span', { class: 'action-label' }, t('kruiswoord.word')));
   const actions = h('div', { class: 'kw-actions' }, tipLetter, tipWord);
 
   const listBtns = [];
@@ -90,8 +93,8 @@ export function mount(container, ctx) {
       listBtns[i] = b;
       return h('li', {}, b);
     })));
-  const list = h('details', { class: 'disclosure kw-list' }, h('summary', {}, 'Alle omschrijvingen'),
-    h('div', { class: 'disclosure-body kw-lists' }, section('Horizontaal', 'across'), section('Verticaal', 'down')));
+  const list = h('details', { class: 'disclosure kw-list' }, h('summary', {}, t('kruiswoord.allClues')),
+    h('div', { class: 'disclosure-body kw-lists' }, section(t('kruiswoord.acrossTitle'), 'across'), section(t('kruiswoord.downTitle'), 'down')));
   list.open = window.matchMedia('(min-width: 62rem)').matches;
 
 
@@ -105,7 +108,7 @@ export function mount(container, ctx) {
   container.append(root);
 
   // ----- Weergave -----
-  const say = (t) => { message.textContent = t; };
+  const say = (text) => { message.textContent = text; };
   const center = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
 
   function render() {
@@ -122,17 +125,17 @@ export function mount(container, ctx) {
       cell.tabIndex = isSel ? 0 : -1;
       cell.setAttribute('aria-selected', String(isSel));
       cell.querySelector('.kw-l').textContent = ch;
-      const nums = [wordOf[i].across >= 0 && `${puzzle.entries[wordOf[i].across].n} horizontaal`, wordOf[i].down >= 0 && `${puzzle.entries[wordOf[i].down].n} verticaal`].filter(Boolean).join(', ');
-      cell.setAttribute('aria-label', `Rij ${r + 1}, kolom ${c + 1}: ${ch ? `letter ${ch}` : 'leeg'}. ${nums}`);
+      const nums = [wordOf[i].across >= 0 && t('kruiswoord.entryAcross', { n: puzzle.entries[wordOf[i].across].n }), wordOf[i].down >= 0 && t('kruiswoord.entryDown', { n: puzzle.entries[wordOf[i].down].n })].filter(Boolean).join(', ');
+      cell.setAttribute('aria-label', t('kruiswoord.cellAria', { r: r + 1, c: c + 1, state: ch ? t('kruiswoord.cellLetter', { letter: ch }) : t('kruiswoord.cellEmpty'), numbers: nums }));
     });
 
     if (e) {
-      clueNum.textContent = `${e.n} ${e.dir === 'across' ? 'horizontaal →' : 'verticaal ↓'}`;
+      clueNum.textContent = t(e.dir === 'across' ? 'kruiswoord.clueAcross' : 'kruiswoord.clueDown', { n: e.n });
       clueText.textContent = e.clue;
-      clueLen.textContent = `${e.answer.length} letters`;
+      clueLen.textContent = t('kruiswoord.lettersCount', { n: e.answer.length });
     } else {
-      clueNum.textContent = 'Kies een vakje';
-      clueText.textContent = 'Tik op het rooster. De omschrijving verschijnt hier.';
+      clueNum.textContent = t('kruiswoord.chooseCell');
+      clueText.textContent = t('kruiswoord.chooseHint');
       clueLen.textContent = '';
     }
     puzzle.entries.forEach((en, i) => {
@@ -141,9 +144,9 @@ export function mount(container, ctx) {
       b.classList.toggle('current', !!e && e === en);
     });
     bar.style.width = `${(done.size / puzzle.entries.length) * 100}%`;
-    barText.textContent = `${done.size} van ${puzzle.entries.length} klaar`;
+    barText.textContent = t('kruiswoord.doneCount', { n: done.size, total: puzzle.entries.length });
     progressBar.setAttribute('aria-valuenow', String(done.size));
-    progressBar.setAttribute('aria-valuetext', `${done.size} van ${puzzle.entries.length} woorden klaar`);
+    progressBar.setAttribute('aria-valuetext', t('kruiswoord.doneValue', { n: done.size, total: puzzle.entries.length }));
     keys.classList.toggle('off', finished);
     tipLetter.disabled = tipWord.disabled = finished || !sel;
   }
@@ -179,7 +182,7 @@ export function mount(container, ctx) {
     sel = { r, c, dir: e.dir };
     state.sel = sel;
     render();
-    say(`${e.n} ${e.dir === 'across' ? 'horizontaal' : 'verticaal'}: ${e.clue} (${e.answer.length} letters).`);
+    say(t('kruiswoord.say.entry', { entry: t(e.dir === 'across' ? 'kruiswoord.entryAcross' : 'kruiswoord.entryDown', { n: e.n }), clue: e.clue, letters: t('kruiswoord.lettersCount', { n: e.answer.length }) }));
   }
 
   function stepClue(delta) {
@@ -283,7 +286,7 @@ export function mount(container, ctx) {
     const [x, y] = center(cells[idx(...cl[cl.length - 1])]);
     burst({ x, y, count: 8, power: 180, cone: [-170, -10], size: [10, 17], life: [1000, 1400] });
     const left = puzzle.entries.length - done.size;
-    say(left ? `Goed! ${e.answer} klopt. Nog ${left} te gaan.` : '');
+    say(left ? t('kruiswoord.say.good', { word: e.answer, n: left }) : '');
     render();
     // door naar het volgende woord dat nog niet klaar is
     if (left) setTimeout(() => { if (!finished && entryOf() === e) stepClue(1); }, 650);
@@ -292,7 +295,7 @@ export function mount(container, ctx) {
   function shake(e) {
     cellsOf(e).forEach(([r, c], n) => flash.set(idx(r, c), { kind: 'nope', delay: n * 40 }));
     clearFlash(800);
-    say('Dit woord klopt nog niet. Lees de omschrijving nog eens, je kunt niets verkeerd doen.');
+    say(t('kruiswoord.say.notYet'));
     render();
   }
 
@@ -309,9 +312,9 @@ export function mount(container, ctx) {
   function revealLetter() {
     if (finished || !sel) return;
     const i = idx(sel.r, sel.c);
-    if (letters[i] === answerAt(sel.r, sel.c) && locked.has(i)) { say('Dit vakje is al onthuld.'); return; }
+    if (letters[i] === answerAt(sel.r, sel.c) && locked.has(i)) { say(t('kruiswoord.say.alreadyRevealed')); return; }
     reveal(sel.r, sel.c);
-    say(`Tip: in dit vakje staat een ${answerAt(sel.r, sel.c)}.`);
+    say(t('kruiswoord.say.tip', { letter: answerAt(sel.r, sel.c) }));
     const at = { r: sel.r, c: sel.c };
     advance();
     afterEdit(at);
@@ -321,7 +324,7 @@ export function mount(container, ctx) {
     const e = entryOf();
     if (finished || !e) return;
     cellsOf(e).forEach(([r, c]) => reveal(r, c));
-    say(`Het woord was ${e.answer}.`);
+    say(t('kruiswoord.say.theWord', { word: e.answer }));
     const [r, c] = cellsOf(e)[0];
     afterEdit({ r, c });
   }
@@ -329,7 +332,7 @@ export function mount(container, ctx) {
   // ----- Winnen -----
   async function win() {
     finished = true;
-    say('Gelukt! Je hebt de hele puzzel opgelost.');
+    say(t('kruiswoord.say.won'));
     render();
     if (motionOK()) {
       root.classList.add('won');
@@ -345,7 +348,8 @@ export function mount(container, ctx) {
   // ----- Toetsenbord van de gebruiker -----
   function onKey(e) {
     if (document.querySelector('dialog[open]') || e.ctrlKey || e.metaKey || e.altKey) return;
-    if (/^[a-zA-Z]$/.test(e.key)) { typeLetter(e.key.toUpperCase()); e.preventDefault(); }
+    const letter = e.key.length === 1 ? typInvoer(e.key, ctx.taal).toUpperCase() : '';           // "é" op het toetsenbord is gewoon een "E"
+    if (letter.length === 1) { typeLetter(letter); e.preventDefault(); }
     else if (e.key === 'Backspace' || e.key === 'Delete') { backspace(); e.preventDefault(); }
     else if (e.key === 'ArrowLeft') { arrow(0, -1); e.preventDefault(); }
     else if (e.key === 'ArrowRight') { arrow(0, 1); e.preventDefault(); }

@@ -4,8 +4,10 @@
 // uit staan, ziet de gebruiker er niets van: geen lege knoppen of "binnenkort"
 // die verwarren. Zet er één aan en het menu en de schermen verschijnen vanzelf.
 
+import { t } from './i18n/index.js';
+
 export const APP = {
-  name: 'Puzzelplaats',
+  get name() { return t('app.name'); },
   version: '0.1.0',
 };
 
@@ -25,8 +27,9 @@ export const API_BASE = '';
 
 // Moeilijkheidsniveaus die elk spel standaard krijgt. Een spel kan eigen
 // niveaus meegeven in de registry.
+export const niveau = (id, hint) => ({ id, get label() { return t(`level.${id}`); }, get hint() { return hint(); } });
 export const DIFFICULTIES = [
-  { id: 'makkelijk', label: 'Makkelijk', hint: 'Rustig beginnen' },
-  { id: 'gemiddeld', label: 'Gemiddeld', hint: 'Een leuke uitdaging' },
-  { id: 'moeilijk',  label: 'Moeilijk',  hint: 'Voor ervaren puzzelaars' },
+  niveau('makkelijk', () => t('level.default.makkelijk')),
+  niveau('gemiddeld', () => t('level.default.gemiddeld')),
+  niveau('moeilijk', () => t('level.default.moeilijk')),
 ];

@@ -5,22 +5,26 @@
 // (hoeveel woorden hij ziet, hoe slordig hij kiest en of hij vooruitkijkt, zie NIVEAUS in engine.js).
 
 import { maakPaneel } from './paneel.js';
-import { newGame, applyMove, botMove, geefDoor, tip, result, counts, makeRng } from './engine.js';
+import { newGame, applyMove, botMove, geefDoor, tip, result, counts, makeRng, taalVan } from './engine.js';
+import { laadWoordenboek } from './woordenboek.js';
 import { burst, rain, motionOK } from '../../effects.js';
+import { t } from '../../i18n/index.js';
 
 const ME = 1, PC = 2;
 const geldig = (s) => s && s.game && Array.isArray(s.game.owner) && s.game.owner.length === s.game.size * s.game.size && typeof s.game.letters === 'string';
 
-export function mount(container, ctx) {
-  const state = geldig(ctx.saved) ? { stack: [], ...ctx.saved } : { game: newGame(ctx.seed, { first: ME }), stack: [] };
+export async function mount(container, ctx) {
+  // Het woordenboek van de taal van dit spel (een bewaard spel houdt zijn eigen taal)
+  await laadWoordenboek(geldig(ctx.saved) ? taalVan(ctx.saved.game) : ctx.taal);
+  const state = geldig(ctx.saved) ? { stack: [], ...ctx.saved } : { game: newGame(ctx.seed, { first: ME, lang: ctx.taal }), stack: [] };
   let dood = false, klaar = false;
   const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   const niveau = ctx.difficulty;
 
   const paneel = maakPaneel({
     me: ME,
-    names: { [ME]: 'Jij', [PC]: 'Computer' },
-    zinnen: { [PC]: 'de computer' },
+    names: { [ME]: t('woordtuin.you'), [PC]: t('woordtuin.computer') },
+    tegenComputer: true,
     onZet: async (path) => {
       state.stack = [...state.stack.slice(-4), state.game];                  // om "Zet terug" mogelijk te maken
       state.game = applyMove(state.game, ME, path);
@@ -30,7 +34,7 @@ export function mount(container, ctx) {
     onTip: async () => tip(state.game, ME, makeRng(`tip|${ctx.seed}|${state.game.played.length}`)),
     kanTerug: () => state.stack.length > 0,
     onTerug: async () => {
-      if (!state.stack.length) throw new Error('Er is niets om terug te zetten.');
+      if (!state.stack.length) throw new Error(t('woordtuin.nothingToUndo'));
       state.game = state.stack.pop();
       bewaar(); toon(false);
     },
@@ -49,7 +53,7 @@ export function mount(container, ctx) {
   // De computer is aan de beurt (en blijft het als jij niets meer kunt)
   async function verder() {
     while (!dood && !state.game.over && state.game.turn === PC) {
-      paneel.setBericht('De computer denkt na…');
+      paneel.setBericht(t('woordtuin.pcThinking'));
       await wacht(motionOK() ? 1100 : 400);
       if (dood) return;
       const zet = botMove(state.game, PC, niveau, makeRng(`pc|${ctx.seed}|${state.game.played.length}`));
@@ -72,8 +76,8 @@ export function mount(container, ctx) {
     }
     ctx.complete({
       delay: gewonnen && motionOK() ? 1200 : 0,
-      title: gewonnen ? 'Gewonnen, gefeliciteerd!' : gelijk ? 'Gelijkspel!' : 'Mooi gespeeld!',
-      text: gewonnen ? `Jij hebt ${wij} bloemen en de computer ${zij}.` : gelijk ? `Jullie hebben allebei ${wij} bloemen.` : `De computer won met ${zij} tegen ${wij}. Een volgende keer lukt het vast, probeer gerust nog eens.`,
+      title: t(gewonnen ? 'woordtuin.pc.won' : gelijk ? 'woordtuin.pc.draw' : 'woordtuin.pc.lost'),
+      text: gewonnen ? t('woordtuin.pc.score', { mine: wij, theirs: zij }) : gelijk ? t('woordtuin.pc.drawText', { n: wij }) : t('woordtuin.pc.lostText', { mine: wij, theirs: zij }),
       joy: gewonnen || gelijk,
     });
   }

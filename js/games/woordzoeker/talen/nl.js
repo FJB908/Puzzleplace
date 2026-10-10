@@ -1,4 +1,4 @@
-// Woordenlijsten voor Woordzoeker, per thema. Alleen hoofdletters A-Z (geen accenten of spaties).
+// Woordenlijsten voor Woordzoeker in het Nederlands, per thema. Alleen hoofdletters A-Z (geen accenten of spaties).
 // Bij elke puzzel hoort één thema; zo hebben de woorden een rode draad en is het prettiger om te zoeken.
 
 const lijst = (s) => s.trim().split(/\s+/);

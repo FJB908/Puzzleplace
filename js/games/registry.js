@@ -3,120 +3,70 @@
 //
 // Een spel heeft:
 //   id        korte naam zonder spaties (komt in de link voor)
-//   name      zoals de speler het ziet
+//   name      zoals de speler het ziet (in de taal van de app)
 //   icon      naam van een icoon uit js/ui.js
 //   summary   één zin op de kaart
 //   howTo     korte stappen ("Zo werkt het"), 3 tot 5 regels
 //   status    'ready' (speelbaar) of 'soon' (komt binnenkort)
 //   load      () => import('./mijnspel.js')   (alleen bij 'ready')
 //   difficulties  (optioneel) eigen niveaus, anders de standaard uit config.js
+// name, summary, howTo en difficulties komen uit het taalpakket: gebruik `spel('<id>', {...})` en zet de teksten in tools/i18n/bron.
 
-import { DIFFICULTIES } from '../config.js';
+import { DIFFICULTIES, niveau } from '../config.js';
+import { t, tLijst } from '../i18n/index.js';
+
+// De teksten van een spel (naam, samenvatting, uitleg en de hints bij de niveaus) staan in het taalpakket, onder  <id>.name, <id>.summary,
+// <id>.howTo.1 ... en <id>.level.<niveau>  (zie tools/i18n/bron/1xx-*.txt). `spel` maakt er de velden van de registry van; het zijn
+// "getters", dus ze volgen de taal van de app als die verandert (kopieer zo'n spel dus nooit met {...spel}: dan bevriest de tekst).
+// In de uitleg kunnen {plaatshouders} staan voor de namen van knoppen, zodat uitleg en knop altijd hetzelfde zeggen.
+const VIER = ['makkelijk', 'gemiddeld', 'moeilijk', 'extreem'];
+const spel = (id, rest, knoppen = () => ({})) => Object.defineProperties({ id, ...rest }, {
+  name: { enumerable: true, get: () => t(`${id}.name`) },
+  summary: { enumerable: true, get: () => t(`${id}.summary`) },
+  howTo: { enumerable: true, get: () => tLijst(`${id}.howTo`, knoppen()) },
+  difficulties: { enumerable: true, value: VIER.map((n) => niveau(n, () => t(`${id}.level.${n}`))) },
+});
 
 const GAMES = [
-  {
-    id: 'sudoku',
-    name: 'Sudoku',
+  spel('sudoku', {
     icon: 'sudoku',
-    summary: 'Vul de cijfers 1 tot en met 9 in het rooster in.',
-    howTo: [
-      'In elke rij, elke kolom en elk blokje van 3 bij 3 komt elk cijfer van 1 tot en met 9 precies één keer voor.',
-      'Tik op een leeg vakje en kies daarna een cijfer onderaan.',
-      'Staat een cijfer fout, dan zie je dat meteen en gaat er een bloesem (leven) af. Zijn ze op, dan begin je opnieuw.',
-      'Met "Potlood" zet je een cijfer klein in het vakje, als notitie. Notities kosten nooit een leven.',
-      'Met "Stap terug" maak je je laatste handeling ongedaan. Met "Tip" vul je één vakje voor je in, zonder leven te verliezen.',
-    ],
-    difficulties: [
-      { id: 'makkelijk', label: 'Makkelijk', hint: 'Rustig beginnen · 5 levens' },
-      { id: 'gemiddeld', label: 'Gemiddeld', hint: 'Een leuke uitdaging · 4 levens' },
-      { id: 'moeilijk', label: 'Moeilijk', hint: 'Voor ervaren puzzelaars · 3 levens' },
-      { id: 'extreem', label: 'Extreem', hint: 'Voor echte experts · 3 levens' },
-    ],
     status: 'ready',
     wide: true,
     load: () => import('./sudoku/sudoku.js'),
-  },
-  {
-    id: 'woordzoeker',
-    name: 'Woordzoeker',
+  }, () => ({ pencil: t('sudoku.pencil'), undo: t('sudoku.undo'), hint: t('common.hint') })),
+  spel('woordzoeker', {
     icon: 'woordzoeker',
-    summary: 'Zoek de verborgen woorden tussen de letters.',
-    howTo: [
-      'Elke puzzel heeft een thema, bijvoorbeeld bloemen. Rechts of onder het rooster staan de woorden die je zoekt.',
-      'Tik op de eerste letter van een woord en daarna op de laatste letter. De tweede tik hoeft niet precies te zijn.',
-      'Met een muis kun je ook slepen. Woorden kunnen rechtdoor, naar beneden en bij hogere niveaus ook schuin en achterstevoren staan.',
-      'Staat het woord in de lijst, dan wordt het gemarkeerd en doorgestreept. Een misser kost niets.',
-      'Even vastgelopen? Tik op een woord in de lijst of op "Tip": het eerste vakje van het woord licht op.',
-    ],
-    difficulties: [
-      { id: 'makkelijk', label: 'Makkelijk', hint: '8 bij 8 · 6 woorden' },
-      { id: 'gemiddeld', label: 'Gemiddeld', hint: '10 bij 10 · ook schuin' },
-      { id: 'moeilijk', label: 'Moeilijk', hint: '12 bij 12 · ook achterstevoren' },
-      { id: 'extreem', label: 'Extreem', hint: '13 bij 13 · 15 woorden' },
-    ],
     status: 'ready',
     wide: true,
     load: () => import('./woordzoeker/woordzoeker.js'),
-  },
-  {
-    id: 'kruiswoord',
-    name: 'Kruiswoord­puzzel',
+  }, () => ({ hint: t('common.hint') })),
+  spel('kruiswoord', {
     icon: 'kruiswoord',
-    summary: 'Los de omschrijvingen op en vul de woorden in.',
-    howTo: [
-      'Elk wit vakje hoort bij een woord. De omschrijving staat bovenaan het rooster, met het aantal letters.',
-      'Tik op een vakje en typ met het toetsenbord onder het rooster, of met je eigen toetsenbord. Tik nog eens op hetzelfde vakje om te wisselen tussen horizontaal en verticaal.',
-      'Woorden kruisen elkaar: een letter helpt dus ook bij het andere woord.',
-      'Is een woord vol, dan zie je meteen of het klopt. Een goed woord licht op, een fout woord schudt even. Fouten kosten niets.',
-      'Met "Tip" onthul je één letter, met "Woord" het hele woord. Onder het rooster staan alle omschrijvingen.',
-    ],
-    difficulties: [
-      { id: 'makkelijk', label: 'Makkelijk', hint: '8 woorden · bekende woorden' },
-      { id: 'gemiddeld', label: 'Gemiddeld', hint: '12 woorden' },
-      { id: 'moeilijk', label: 'Moeilijk', hint: '16 woorden · ook lastigere' },
-      { id: 'extreem', label: 'Extreem', hint: '22 woorden · dicht op elkaar' },
-    ],
     status: 'ready',
     wide: true,
     load: () => import('./kruiswoord/kruiswoord.js'),
-  },
-  {
-    id: 'woordtuin',
-    name: 'Woordtuin',
+  }, () => ({ hint: t('common.hint'), word: t('kruiswoord.word') })),
+  spel('woordtuin', {
     icon: 'woordtuin',
-    summary: 'Maak woorden en laat jouw bloemen groeien, tegen de computer of een vriend.',
-    howTo: [
-      'Het bord heeft 6 bij 6 letters. Maak een woord van 3 tot 7 letters door er met je vinger over te vegen, of tik de letters na elkaar aan. De letters moeten aan elkaar grenzen, ook schuin.',
-      'De vakjes van je woord worden van jou: ze bloeien open in jouw kleur. Maakt de ander later een woord door jouw vakjes, dan pakt die ze af.',
-      'Behalve beschermde vakjes: een vakje met alleen buren in dezelfde kleur (links, rechts, boven en onder) kan niet worden afgepakt. Dat zie je aan het hekje in de hoek.',
-      'Elk woord moet minstens één open vakje kleuren en kan maar één keer gespeeld worden. Alle gewone Nederlandse woorden tellen, ook meervouden en werkwoordsvormen ("roos", "rozen", "zegt"). Namen, afkortingen en Engelse woorden niet.',
-      'Zijn alle vakjes gekleurd? Dan wint wie de meeste bloemen heeft. Je ziet vooraf wat een woord oplevert, en met "Tip" licht een vakje op. Een woord dat niet bestaat kost niets.',
-    ],
-    difficulties: [
-      { id: 'makkelijk', label: 'Makkelijk', hint: 'Ziet weinig woorden en let niet altijd op' },
-      { id: 'gemiddeld', label: 'Gemiddeld', hint: 'Ziet maar een deel van de woorden' },
-      { id: 'moeilijk', label: 'Moeilijk', hint: 'Ziet veel woorden en kiest slim' },
-      { id: 'extreem', label: 'Extreem', hint: 'Ziet alles en denkt vooruit' },
-    ],
     status: 'ready',
     load: () => import('./woordtuin/woordtuin.js'),
-  },
+  }, () => ({ hint: t('common.hint') })),
 ];
 
 // Voorbeeldspel om de flow te testen. Alleen zichtbaar via  index.html?demo=1
 if (new URLSearchParams(location.search).has('demo')) {
   GAMES.push({
     id: 'demo',
-    name: 'Voorbeeldspel',
+    name: 'Example game',
     icon: 'puzzle',
-    summary: 'Alleen om het platform te testen: tik vijf keer op de knop.',
-    howTo: ['Tik vijf keer op de grote knop.', 'Je voortgang wordt vanzelf bewaard.'],
+    summary: 'Only to test the platform: tap the button five times.',
+    howTo: ['Tap the big button five times.', 'Your progress is saved automatically.'],
     status: 'ready',
     load: () => import('./demo.js'),
   });
 }
 
-const withDefaults = (g) => ({ difficulties: DIFFICULTIES, ...g });
+const withDefaults = (g) => Object.defineProperties({ difficulties: DIFFICULTIES }, Object.getOwnPropertyDescriptors(g));      // geen {...g}: dat bevriest de getters
 
 export const games = GAMES.map(withDefaults);
 export const getGameInfo = (id) => games.find((g) => g.id === id);

@@ -17,6 +17,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join, normalize, extname, sep } from 'node:path';
 import { Db } from './db.mjs';
 import { createApi } from './api.mjs';
+import { engelseTekst } from './validate.mjs';
 import { GAMES } from './games/index.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
@@ -77,10 +78,10 @@ export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trus
       catch (e) {
         res.on('finish', () => req.socket.destroy());
         res.setHeader?.('Connection', 'close');
-        return json(e.status || 400, { error: { code: 'groot', message: 'Dit is te groot om te versturen.' } });
+        return json(e.status || 400, { error: { code: 'groot', key: 'tooBig', message: engelseTekst('tooBig') } });
       }
       if (text) {
-        try { body = JSON.parse(text); } catch { return json(400, { error: { code: 'json', message: 'Dit bericht is niet te lezen.' } }); }
+        try { body = JSON.parse(text); } catch { return json(400, { error: { code: 'json', key: 'badJson', message: engelseTekst('badJson') } }); }
       }
     }
     const auth = req.headers.authorization || '';

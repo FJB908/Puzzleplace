@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { WOORDEN, ALLEDAAGS } from '../js/games/woordtuin/woorden.js';
+import { laadWoordenboek } from '../js/games/woordtuin/woordenboek.js';
 import {
   SIZE, newGame, makeBoard, checkMove, applyMove, legalMoves, hasMove, isProtected, counts, result, pathsFor, botMove, tip,
   geefDoor, isWord, MoveError, makeRng, NIVEAUS,
@@ -9,6 +9,8 @@ import {
 // Een klein bord waar we de woorden van kennen:  roos / kat / hond liggen op rij 0, 1 en 2
 const LETTERS = 'roosbq' + 'katzzz' + 'hondxx' + 'zzzzzz'.repeat(3);
 const bord = (owner = new Array(36).fill(0), extra = {}) => ({ size: 6, letters: LETTERS, owner, played: [], turn: 1, over: false, passed: false, last: null, ...extra });
+// Dit bestand test de regels met het Nederlandse woordenboek (partijen zonder taal zijn Nederlands); de andere talen staan in woordtuin-talen.test.mjs
+const { WOORDEN, ALLEDAAGS } = await laadWoordenboek('nl');
 const code = (fn) => { try { fn(); } catch (e) { return e instanceof MoveError ? e.code : `fout:${e.message}`; } return null; };
 
 test('woordenlijst: gewoon Nederlands, ruim genoeg, en geen rommel', () => {

@@ -8,7 +8,7 @@
 // vakken nodig. Bij het plaatsen geldt: een woord raakt een ander woord alleen door te kruisen, zodat
 // elke reeks van twee of meer letters in het rooster precies een woord uit de lijst is.
 
-import { ENTRIES } from './woorden.js';
+import { woorden } from './woorden.js';
 
 export const LEVELS = {
   makkelijk: { words: 8,  max: 9,  maxLevel: 1, minLen: 3, maxLen: 7 },
@@ -134,7 +134,8 @@ function finish(f) {
   return { rows, cols, grid, entries };
 }
 
-export function generate(seed, level = 'makkelijk') {
+export function generate(seed, level = 'makkelijk', taal = 'nl') {
+  const ENTRIES = woorden(taal);                       // de woorden van de taal moeten al geladen zijn (laadWoorden)
   const spec = LEVELS[level] || LEVELS.makkelijk;
   const rng = makeRng(`${seed}|${level}`);
   const pool = ENTRIES.filter((e) => e.level <= spec.maxLevel && e.answer.length >= spec.minLen && e.answer.length <= Math.min(spec.maxLen, spec.max));
@@ -151,7 +152,7 @@ export function generate(seed, level = 'makkelijk') {
   }
   const puzzle = finish(best);
   const problem = validate(puzzle);
-  if (problem) throw new Error(`Ongeldig kruiswoord: ${problem}`);
+  if (problem) throw new Error(`Ongeldig kruiswoord (${taal}, ${level}): ${problem}`);
   return puzzle;
 }
 

@@ -1,0 +1,33 @@
+# Basisteksten die overal terugkomen: naam van de app, menu, tijden.
+# Naam van de app: in het Engels "Puzzleplace". Vertalers: laat de naam staan zoals hij is, tenzij de taal een eigen gangbare naam nodig heeft (liever niet).
+app.name | Puzzleplace | Puzzelplaats
+app.description | Calm puzzling with big letters and a clear layout. | Rustig puzzelen met grote letters en een duidelijke opzet.
+app.skipToContent | Skip to content | Naar de inhoud
+app.noscript | Puzzleplace needs JavaScript. Turn on JavaScript in your browser and reload the page. | Puzzelplaats heeft JavaScript nodig. Zet JavaScript aan in je browser en laad de pagina opnieuw.
+
+nav.main | Main menu | Hoofdmenu
+nav.home | Home | Start
+nav.games | Games | Spellen
+nav.friends | Friends | Vrienden
+nav.settings | Settings | Instellingen
+# Schermlezertekst bij het menu-item Vrienden als er iets nieuws is. {n} is een getal.
+nav.friendsNew | Friends, {n} new | Vrienden, {n} nieuw
+
+common.noGoBack | No, go back | Nee, terug
+common.back | Back | Terug
+common.close | Close | Sluiten
+common.loading | Loading… | Even laden…
+common.retry | Try again | Opnieuw proberen
+common.somethingWentWrong | That did not work. | Dat lukte niet.
+
+# Relatieve tijd. {n} is het aantal dagen (altijd 2 of meer bij "daysAgo", maar de taal kan meervoudsvormen nodig hebben).
+time.today | today | vandaag
+time.yesterday | yesterday | gisteren
+time.daysAgo_one | {n} day ago | {n} dag geleden
+time.daysAgo_other | {n} days ago | {n} dagen geleden
+
+notFound.title | Page not found | Niet gevonden
+notFound.heading | This page does not exist | Deze pagina bestaat niet
+notFound.text | Maybe the link is out of date. Don't worry, your progress is safe. | Misschien is de link verouderd. Geen zorgen, je voortgang is veilig.
+notFound.toHome | Go to Home | Naar Start
+loading.title | Loading | Even laden

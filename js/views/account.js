@@ -11,7 +11,9 @@
 //
 // Bewust simpel: je meldt je aan met je voornaam, e-mailadres en een wachtwoord. Je kunt altijd zonder account blijven spelen.
 
-import { h, icon, avatar, copyText, choiceDialog, confirmDialog, announce } from '../ui.js';
+import { h, icon, avatar, copyText, choiceDialog, confirmDialog, announce, richText } from '../ui.js';
+import { t, tijdTekst, foutTekst } from '../i18n/index.js';
+import { getGameInfo } from '../games/registry.js';
 import { FEATURES } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as sync from '../services/sync.js';
@@ -30,17 +32,17 @@ const stash = {
 export const rememberFriendCode = (code) => stash.set(PENDING_FRIEND, code);
 
 const page = (title, node, extra = {}) => ({ title, nav: 'settings', decor: 'spray', node, ...extra });
-const back = (href = '#/account', label = 'Terug') => h('a', { class: 'btn btn-quiet back', href }, icon('back'), label);
+const back = (href = '#/account', label = t('common.back')) => h('a', { class: 'btn btn-quiet back', href }, icon('back'), label);
 const header = (title, text, backHref) => h('header', { class: 'page-header' }, backHref ? back(backHref) : null, h('h1', { tabindex: '-1' }, title), text ? h('p', {}, text) : null);
 
 // "Doorgaan met Facebook": alleen als de server een Facebook-app heeft. Staat bovenaan, want met één tik ben je er.
 const FB_LOGO = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#fff"/><path fill="#1877f2" d="M13.4 21v-7.3h2.5l.4-2.9h-2.9V9c0-.8.2-1.4 1.4-1.4h1.600V5c-.3 0-1.200-.1-2.300-.1-2.300 0-3.800 1.400-3.800 3.900v2.100H7.800v2.900h2.500V21z"/></svg>';
-function facebookBlock(label = 'Doorgaan met Facebook') {
+function facebookBlock(label = t('account.facebook.continue')) {
   if (!FEATURES.facebookLogin) return null;
   const logo = h('span', { class: 'fb-logo' }); logo.innerHTML = FB_LOGO;
   return h('div', { class: 'stack fb-block' },
     h('button', { type: 'button', class: 'btn btn-facebook btn-block', onclick: () => auth.startFacebook() }, logo, label),
-    h('p', { class: 'divider' }, h('span', {}, 'of met je e-mailadres')));
+    h('p', { class: 'divider' }, h('span', {}, t('account.orEmail'))));
 }
 
 // Waar je na inloggen heen gaat: eerst een vriend toevoegen als je via een link kwam, anders naar Start
@@ -52,144 +54,144 @@ function afterLogin() {
 // ----- Niet ingelogd -----
 function intro() {
   const point = (iconName, title, text) => h('li', { class: 'point' }, h('span', { class: 'tile' }, icon(iconName)), h('span', {}, h('strong', {}, title), h('br'), h('span', { class: 'muted' }, text)));
-  return page('Account', h('div', { class: 'view' },
-    header('Account', 'Met een account speel je op al je apparaten verder en kun je met vrienden spelen.', '#/instellingen'),
+  return page(t('account.title'), h('div', { class: 'view' },
+    header(t('account.title'), t('account.intro.text'), '#/instellingen'),
     h('ul', { class: 'points' },
-      point('games', 'Je voortgang op al je apparaten', 'Begin op je telefoon, ga verder op je tablet.'),
-      point('friends', 'Vrienden en familie', 'Voeg iemand toe met een code. Geen vreemden, geen zoekopdrachten.'),
-      point('woordtuin', 'Samen Woordtuin spelen', 'Woorden maken om beurten, ook als je niet tegelijk online bent.')),
+      point('games', t('account.intro.p1.title'), t('account.intro.p1.text')),
+      point('friends', t('account.intro.p2.title'), t('account.intro.p2.text')),
+      point('woordtuin', t('account.intro.p3.title', { game: getGameInfo('woordtuin').name }), t('account.intro.p3.text'))),
     h('div', { class: 'stack' },
-      h('a', { class: 'btn btn-primary btn-block', href: '#/account/nieuw' }, 'Account maken'),
-      h('a', { class: 'btn btn-block', href: '#/account/inloggen' }, 'Ik heb al een account')),
-    h('p', { class: 'muted' }, 'Je kunt altijd zonder account blijven spelen. Alles werkt dan gewoon op dit apparaat.')));
+      h('a', { class: 'btn btn-primary btn-block', href: '#/account/nieuw' }, t('account.create')),
+      h('a', { class: 'btn btn-block', href: '#/account/inloggen' }, t('account.haveOne'))),
+    h('p', { class: 'muted' }, t('account.optional'))));
 }
 
 function signupView() {
   const pending = stash.get(PENDING_FRIEND);
-  const f = { naam: field({ label: 'Je voornaam', name: 'naam', autocomplete: 'given-name', maxlength: 24, enterkeyhint: 'next', hint: 'Zo zien je vrienden je.' }),
-    email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'email', inputmode: 'email', enterkeyhint: 'next', hint: 'Hiermee log je in. We sturen er geen reclame naartoe.', suggestions: emails.remembered() }),
-    wachtwoord: passwordField({ name: 'wachtwoord', autocomplete: 'new-password', suggest: true, hint: 'Minstens 8 tekens. Drie woorden achter elkaar is veilig en makkelijk te onthouden.' }) };
-  return page('Account maken', h('div', { class: 'view' },
-    header('Account maken', pending ? 'Maak eerst een account, daarna kun je je vriend of vriendin toevoegen.' : null, '#/account'),
+  const f = { naam: field({ label: t('account.firstName'), name: 'naam', autocomplete: 'given-name', maxlength: 24, enterkeyhint: 'next', hint: t('account.firstNameHint') }),
+    email: field({ label: t('account.email'), name: 'email', type: 'email', autocomplete: 'email', inputmode: 'email', enterkeyhint: 'next', hint: t('account.emailHint'), suggestions: emails.remembered() }),
+    wachtwoord: passwordField({ name: 'wachtwoord', autocomplete: 'new-password', suggest: true, hint: t('account.passwordHint') }) };
+  return page(t('account.create'), h('div', { class: 'view' },
+    header(t('account.create'), pending ? t('account.signup.pending') : null, '#/account'),
     facebookBlock(),
-    form({ fields: [f.naam, f.email, f.wachtwoord], submitLabel: 'Account maken', busyLabel: 'Account wordt gemaakt…',
+    form({ fields: [f.naam, f.email, f.wachtwoord], submitLabel: t('account.create'), busyLabel: t('account.signup.busy'),
       onSubmit: async (v) => {
         const r = await auth.signUp({ name: v.naam, email: v.email, password: v.wachtwoord });
         emails.remember(v.email);
         stash.set(PENDING_RECOVERY, r.recoveryCode);
         location.hash = '#/account/klaar';
       } }),
-    h('p', { class: 'muted' }, 'Heb je al een account? ', h('a', { href: '#/account/inloggen' }, 'Log dan in'), '.')));
+    h('p', { class: 'muted' }, richText(t('account.signup.haveAccount')))));
 }
 
 function loginView() {
   const known = emails.remembered();
-  const f = { email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', enterkeyhint: 'next', value: known[0] || '', suggestions: known }),
+  const f = { email: field({ label: t('account.email'), name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', enterkeyhint: 'next', value: known[0] || '', suggestions: known }),
     wachtwoord: passwordField({ name: 'wachtwoord' }) };
   const wrong = new Set(['inloggen']);
-  return page('Inloggen', h('div', { class: 'view' },
-    header('Inloggen', null, '#/account'),
+  return page(t('account.login'), h('div', { class: 'view' },
+    header(t('account.login'), null, '#/account'),
     facebookBlock(),
-    form({ fields: [f.email, f.wachtwoord], submitLabel: 'Inloggen', busyLabel: 'Even kijken…',
-      extra: h('p', { class: 'center' }, h('a', { href: '#/account/herstel' }, 'Wachtwoord vergeten?')),
+    form({ fields: [f.email, f.wachtwoord], submitLabel: t('account.login'), busyLabel: t('account.login.busy'),
+      extra: h('p', { class: 'center' }, h('a', { href: '#/account/herstel' }, t('account.forgot'))),
       onSubmit: async (v) => {
         try { await auth.signIn({ email: v.email, password: v.wachtwoord }); }
         catch (e) { if (wrong.has(e.code)) e.code = 'wachtwoord'; throw e; }   // de melding bij het wachtwoordveld
         emails.remember(v.email);
-        announce('Je bent ingelogd.');
+        announce(t('account.loggedIn'));
         afterLogin();
       } }),
-    h('p', { class: 'muted' }, 'Nog geen account? ', h('a', { href: '#/account/nieuw' }, 'Maak er een'), '.')));
+    h('p', { class: 'muted' }, richText(t('account.login.noAccount')))));
 }
 
 // ----- Herstelcode -----
 function codeCard(code) {
   const copy = h('button', { type: 'button', class: 'btn', onclick: async () => {
     const ok = await copyText(code);
-    copy.lastChild.textContent = ok ? 'Gekopieerd' : 'Niet gelukt';
-    setTimeout(() => { copy.lastChild.textContent = 'Kopieer'; }, 2500);
-  } }, icon('check'), h('span', {}, 'Kopieer'));
+    copy.lastChild.textContent = ok ? t('account.copied') : t('account.copyFailed');
+    setTimeout(() => { copy.lastChild.textContent = t('account.copy'); }, 2500);
+  } }, icon('check'), h('span', {}, t('account.copy')));
   return h('section', { class: 'card code-card', 'aria-labelledby': 'herstel-titel' },
-    h('h2', { id: 'herstel-titel' }, 'Je herstelcode'),
+    h('h2', { id: 'herstel-titel' }, t('account.recoveryCode')),
     h('p', { class: 'code', 'aria-label': code.split('-').join(', ') }, code.split('-').map((g) => h('span', {}, g))),
-    h('div', { class: 'code-actions' }, copy, h('button', { type: 'button', class: 'btn', onclick: () => window.print() }, icon('pencil'), 'Afdrukken')));
+    h('div', { class: 'code-actions' }, copy, h('button', { type: 'button', class: 'btn', onclick: () => window.print() }, icon('pencil'), t('account.print'))));
 }
 
 function readyView() {
   const code = stash.get(PENDING_RECOVERY);
   const user = auth.getUser();
-  if (!user || !code) return page('Account', h('div', { class: 'view' }, header('Account', null, '#/account'), h('a', { class: 'btn btn-primary btn-block', href: '#/account' }, 'Naar je account')));
+  if (!user || !code) return page(t('account.title'), h('div', { class: 'view' }, header(t('account.title'), null, '#/account'), h('a', { class: 'btn btn-primary btn-block', href: '#/account' }, t('account.toAccount'))));
   const ok = h('input', { type: 'checkbox', id: 'bewaard', onchange: () => { go.disabled = !ok.checked; } });
   const go = h('button', { type: 'button', class: 'btn btn-primary btn-block', disabled: true, onclick: () => {
     stash.set(PENDING_RECOVERY, '');
     afterLogin();
-  } }, 'Doorgaan');
-  return page('Account klaar', h('div', { class: 'view' },
-    h('header', { class: 'page-header' }, h('h1', { tabindex: '-1' }, `Gelukt, ${user.name}!`), h('p', {}, 'Je account is klaar. Nog één belangrijk ding.')),
+  } }, t('account.done.continue'));
+  return page(t('account.readyTitle'), h('div', { class: 'view' },
+    h('header', { class: 'page-header' }, h('h1', { tabindex: '-1' }, t('account.done.title', { name: user.name })), h('p', {}, t('account.done.text'))),
     codeCard(code),
-    h('div', { class: 'notice' }, h('strong', {}, 'Bewaar deze code op een veilige plek.'),
-      h('p', {}, 'Vergeet je ooit je wachtwoord, dan kies je met deze code een nieuw wachtwoord. Schrijf hem op papier, of bewaar hem bij je belangrijke papieren. We kunnen hem niet voor je terugvinden, maar je kunt later wel een nieuwe laten maken.')),
-    h('label', { class: 'check', for: 'bewaard' }, ok, h('span', {}, 'Ik heb de code bewaard')),
+    h('div', { class: 'notice' }, h('strong', {}, t('account.done.keep')),
+      h('p', {}, t('account.done.keepText'))),
+    h('label', { class: 'check', for: 'bewaard' }, ok, h('span', {}, t('account.done.saved'))),
     go,
-    h('a', { class: 'link-quiet center', href: '#/', onclick: () => stash.set(PENDING_RECOVERY, '') }, 'Ik doe dit later')), { decor: null });
+    h('a', { class: 'link-quiet center', href: '#/', onclick: () => stash.set(PENDING_RECOVERY, '') }, t('account.done.later'))), { decor: null });
 }
 
 function newRecoveryView() {
-  const f = passwordField({ label: 'Je wachtwoord', name: 'wachtwoord', hint: 'Ter controle, voordat we een nieuwe herstelcode maken. De oude werkt daarna niet meer.' });
+  const f = passwordField({ label: t('account.yourPassword'), name: 'wachtwoord', hint: t('account.newRecovery.hint') });
   const out = h('div', { class: 'stack' });
-  return page('Nieuwe herstelcode', h('div', { class: 'view' },
-    header('Nieuwe herstelcode', null, '#/account'),
-    form({ fields: [f], submitLabel: 'Nieuwe herstelcode maken', onSubmit: async (v) => {
+  return page(t('account.newRecovery'), h('div', { class: 'view' },
+    header(t('account.newRecovery'), null, '#/account'),
+    form({ fields: [f], submitLabel: t('account.newRecovery.make'), onSubmit: async (v) => {
       const { api } = await import('../services/backend.js');
       const r = await api('POST', '/api/me/recovery', { password: v.wachtwoord });
-      out.replaceChildren(codeCard(r.recoveryCode), h('div', { class: 'notice' }, h('p', {}, 'Bewaar deze nieuwe code goed. De oude werkt niet meer.')));
+      out.replaceChildren(codeCard(r.recoveryCode), h('div', { class: 'notice' }, h('p', {}, t('account.newRecovery.keep'))));
     } }), out));
 }
 
 function recoverView() {
-  const f = { email: field({ label: 'Je e-mailadres', name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', value: emails.remembered()[0] || '', suggestions: emails.remembered() }),
-    herstelCode: field({ label: 'Je herstelcode', name: 'herstelcode', autocomplete: 'off', hint: 'Dat is de code van 12 tekens die je bij het aanmelden kreeg, zoals K7P4-QM2X-9TBR.' }),
-    wachtwoord: passwordField({ label: 'Een nieuw wachtwoord', name: 'wachtwoord', autocomplete: 'new-password', suggest: true }) };
-  return page('Wachtwoord vergeten', h('div', { class: 'view' },
-    header('Wachtwoord vergeten', 'Met je herstelcode kies je een nieuw wachtwoord.', '#/account/inloggen'),
-    form({ fields: [f.email, f.herstelCode, f.wachtwoord], submitLabel: 'Nieuw wachtwoord instellen',
+  const f = { email: field({ label: t('account.email'), name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', value: emails.remembered()[0] || '', suggestions: emails.remembered() }),
+    herstelCode: field({ label: t('account.recoveryLabel'), name: 'herstelcode', autocomplete: 'off', hint: t('account.recoveryHint') }),
+    wachtwoord: passwordField({ label: t('account.newPassword'), name: 'wachtwoord', autocomplete: 'new-password', suggest: true }) };
+  return page(t('account.forgotTitle'), h('div', { class: 'view' },
+    header(t('account.forgotTitle'), t('account.forgot.text'), '#/account/inloggen'),
+    form({ fields: [f.email, f.herstelCode, f.wachtwoord], submitLabel: t('account.setPassword'),
       onSubmit: async (v) => {
         const r = await auth.recover({ email: v.email, recoveryCode: v.herstelcode, password: v.wachtwoord }).catch((e) => { if (e.code === 'herstel') e.code = 'herstelcode'; throw e; });
         stash.set(PENDING_RECOVERY, r.recoveryCode);
         location.hash = '#/account/klaar';
       } }),
-    h('p', { class: 'muted' }, 'Ook de herstelcode kwijt? Dan kunnen we helaas niet bij je account. Je kunt een nieuw account maken; de voortgang op je apparaten blijft bestaan.')));
+    h('p', { class: 'muted' }, t('account.lostBoth'))));
 }
 
 // ----- Ingelogd -----
 function syncCard() {
   const text = h('p', { class: 'muted' });
-  const button = h('button', { type: 'button', class: 'btn', onclick: () => sync.syncNow() }, icon('check'), 'Nu synchroniseren');
+  const button = h('button', { type: 'button', class: 'btn', onclick: () => sync.syncNow() }, icon('check'), t('account.sync.now'));
   const show = (s) => {
-    const t = s.at ? new Date(s.at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : '';
-    text.textContent = s.state === 'bezig' ? 'Even bijwerken…' : s.state === 'fout' ? `Niet gelukt: ${s.error}` : s.at ? `Alles is bijgewerkt (${t}).` : 'Wordt zo bijgewerkt.';
+    const tijd = s.at ? tijdTekst(new Date(s.at), { hour: '2-digit', minute: '2-digit' }) : '';
+    text.textContent = s.state === 'bezig' ? t('account.sync.busy') : s.state === 'fout' ? t('account.sync.failed', { error: s.error }) : s.at ? t('account.sync.ok', { time: tijd }) : t('account.sync.soon');
     button.disabled = s.state === 'bezig';
   };
   show(sync.getStatus());
   const off = sync.subscribe(show);
-  return { el: h('section', { class: 'card stack', 'aria-labelledby': 'sync-titel' }, h('h2', { id: 'sync-titel' }, 'Je voortgang op al je apparaten'), text, button), off };
+  return { el: h('section', { class: 'card stack', 'aria-labelledby': 'sync-titel' }, h('h2', { id: 'sync-titel' }, t('account.sync.title')), text, button), off };
 }
 
 function overview(app) {
   const user = auth.getUser();
   const s = syncCard();
   let nameForm;
-  const renameDetails = h('details', { class: 'disclosure' }, h('summary', {}, 'Je naam wijzigen'),
-    h('div', { class: 'disclosure-body' }, (nameForm = form({ fields: [field({ label: 'Je voornaam', name: 'naam', value: user.name, autocomplete: 'given-name', maxlength: 24 })], submitLabel: 'Opslaan',
-      onSubmit: async (v) => { await auth.rename(v.naam); announce('Naam opgeslagen'); app.refresh(); } }))));
+  const renameDetails = h('details', { class: 'disclosure' }, h('summary', {}, t('account.changeName')),
+    h('div', { class: 'disclosure-body' }, (nameForm = form({ fields: [field({ label: t('account.firstName'), name: 'naam', value: user.name, autocomplete: 'given-name', maxlength: 24 })], submitLabel: t('account.save'),
+      onSubmit: async (v) => { await auth.rename(v.naam); announce(t('account.nameSaved')); app.refresh(); } }))));
 
   async function logout() {
     const choice = await choiceDialog({
-      title: 'Uitloggen?', text: 'Je voortgang staat veilig in je account. Je kunt later gewoon weer inloggen.',
+      title: t('account.logout.title'), text: t('account.logout.text'),
       actions: [
-        { label: 'Uitloggen', value: 'uit', primary: true, autofocus: true },
-        { label: 'Uitloggen en alles op dit apparaat wissen', value: 'wis' },
-        { label: 'Blijven ingelogd', value: null },
+        { label: t('account.logout'), value: 'uit', primary: true, autofocus: true },
+        { label: t('account.logout.wipe'), value: 'wis' },
+        { label: t('account.logout.stay'), value: null },
       ], dismissValue: null,
     });
     if (!choice) return;
@@ -204,36 +206,36 @@ function overview(app) {
 
   const node = h('div', { class: 'view' },
     h('header', { class: 'page-header profile' }, back('#/instellingen'),
-      h('div', { class: 'profile-row' }, avatar(user.name, user.id), h('div', {}, h('h1', { tabindex: '-1' }, user.name), h('p', {}, user.email || 'Ingelogd met Facebook')))),
+      h('div', { class: 'profile-row' }, avatar(user.name, user.id), h('div', {}, h('h1', { tabindex: '-1' }, user.name), h('p', {}, user.email || t('account.viaFacebook'))))),
     s.el,
-    row('friends', 'Vrienden', 'Je vriendencode en je vrienden', '#/vrienden'),
+    row('friends', t('nav.friends'), t('account.friendsHint'), '#/vrienden'),
     renameDetails,
     user.hasPassword ? h('div', { class: 'list' },
-      row('settings', 'Wachtwoord wijzigen', 'Kies een nieuw wachtwoord', '#/account/wachtwoord'),
-      row('help', 'Nieuwe herstelcode', 'Als je de oude kwijt bent', '#/account/herstelcode')) : null,
+      row('settings', t('account.changePassword'), t('account.changePasswordHint'), '#/account/wachtwoord'),
+      row('help', t('account.newRecovery'), t('account.newRecoveryHint'), '#/account/herstelcode')) : null,
     h('div', { class: 'stack' },
-      h('button', { type: 'button', class: 'btn btn-block', onclick: logout }, 'Uitloggen'),
-      h('a', { class: 'btn btn-danger btn-block', href: '#/account/verwijderen' }, 'Account verwijderen')));
-  return page('Account', node, { cleanup: s.off });
+      h('button', { type: 'button', class: 'btn btn-block', onclick: logout }, t('account.logout')),
+      h('a', { class: 'btn btn-danger btn-block', href: '#/account/verwijderen' }, t('account.delete'))));
+  return page(t('account.title'), node, { cleanup: s.off });
 }
 
 function changePasswordView() {
-  const f = { oud: passwordField({ label: 'Je huidige wachtwoord', name: 'wachtwoord' }), nieuw: passwordField({ label: 'Je nieuwe wachtwoord', name: 'nieuw', autocomplete: 'new-password', suggest: true }) };
-  return page('Wachtwoord wijzigen', h('div', { class: 'view' }, header('Wachtwoord wijzigen', 'Op je andere apparaten moet je daarna opnieuw inloggen.', '#/account'),
-    form({ fields: [f.oud, f.nieuw], submitLabel: 'Wachtwoord wijzigen', onSubmit: async (v) => {
+  const f = { oud: passwordField({ label: t('account.currentPassword'), name: 'wachtwoord' }), nieuw: passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true }) };
+  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.text'), '#/account'),
+    form({ fields: [f.oud, f.nieuw], submitLabel: t('account.changePassword'), onSubmit: async (v) => {
       await auth.changePassword(v.wachtwoord, v.nieuw);
-      await choiceDialog({ title: 'Gelukt', text: 'Je wachtwoord is gewijzigd.', actions: [{ label: 'Prima', value: true, primary: true, autofocus: true }] });
+      await choiceDialog({ title: t('account.changed.title'), text: t('account.changed.text'), actions: [{ label: t('account.changed.ok'), value: true, primary: true, autofocus: true }] });
       location.hash = '#/account';
     } })));
 }
 
 function deleteView() {
   const heeftWachtwoord = auth.getUser().hasPassword;
-  const f = passwordField({ label: 'Je wachtwoord', name: 'wachtwoord', hint: 'Ter controle.' });
-  return page('Account verwijderen', h('div', { class: 'view' },
-    header('Account verwijderen', 'Je account, je vrienden en je opgeslagen voortgang op onze server worden gewist. Wat op je apparaten staat, blijft staan.', '#/account'),
-    form({ fields: heeftWachtwoord ? [f] : [], submitLabel: 'Ja, verwijder mijn account', onSubmit: async (v) => {
-      if (!(await confirmDialog({ title: 'Zeker weten?', text: 'Dit kan niet ongedaan worden gemaakt.', confirmLabel: 'Ja, verwijderen' }))) return;
+  const f = passwordField({ label: t('account.yourPassword'), name: 'wachtwoord', hint: t('account.delete.passwordHint') });
+  return page(t('account.delete'), h('div', { class: 'view' },
+    header(t('account.delete'), t('account.delete.text'), '#/account'),
+    form({ fields: heeftWachtwoord ? [f] : [], submitLabel: t('account.delete.submit'), onSubmit: async (v) => {
+      if (!(await confirmDialog({ title: t('account.delete.confirmTitle'), text: t('account.delete.confirmText'), confirmLabel: t('account.delete.confirmYes') }))) return;
       await auth.deleteAccount(v.wachtwoord);
       emails.forgetAll();
       location.hash = '#/';
@@ -242,14 +244,14 @@ function deleteView() {
 
 // Terug van Facebook: het ticket inwisselen. Mislukt dat (geannuleerd, verlopen), dan een rustige uitleg.
 function facebookView(ticket) {
-  const status = h('p', { class: 'muted', role: 'status' }, 'Even kijken…');
-  const mislukt = (text) => status.replaceChildren(text) || node.append(
-    h('div', { class: 'stack' }, h('a', { class: 'btn btn-primary btn-block', href: '#/account/inloggen' }, 'Opnieuw proberen'), h('a', { class: 'btn btn-block', href: '#/' }, 'Terug naar Start')));
-  const node = h('div', { class: 'view' }, h('header', { class: 'page-header' }, h('h1', { tabindex: '-1' }, 'Inloggen met Facebook')), status);
-  if (ticket === 'fout') mislukt('Het inloggen met Facebook is niet gelukt, of je hebt het geannuleerd. Je kunt het nog eens proberen, of inloggen met je e-mailadres.');
-  else auth.claimFacebook(ticket).then(({ user }) => { if (user.email) emails.remember(user.email); announce('Je bent ingelogd.'); afterLogin(); })
-    .catch((e) => mislukt(e.message || 'Het inloggen met Facebook is niet gelukt.'));
-  return page('Inloggen met Facebook', node);
+  const status = h('p', { class: 'muted', role: 'status' }, t('forms.busy'));
+  const mislukt = (text) => { status.textContent = text; node.append(
+    h('div', { class: 'stack' }, h('a', { class: 'btn btn-primary btn-block', href: '#/account/inloggen' }, t('common.retry')), h('a', { class: 'btn btn-block', href: '#/' }, t('common.backHome')))); };
+  const node = h('div', { class: 'view' }, h('header', { class: 'page-header' }, h('h1', { tabindex: '-1' }, t('account.facebook.title'))), status);
+  if (ticket === 'fout') mislukt(t('account.facebook.failed'));
+  else auth.claimFacebook(ticket).then(({ user }) => { if (user.email) emails.remember(user.email); announce(t('account.loggedIn')); afterLogin(); })
+    .catch((e) => mislukt(foutTekst(e) || t('account.facebook.failedShort')));
+  return page(t('account.facebook.title'), node);
 }
 
 export function accountView({ sub, arg }, app) {

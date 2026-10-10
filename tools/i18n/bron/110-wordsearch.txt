@@ -1,0 +1,37 @@
+# Woordzoeker (zoek de verborgen woorden). De woorden en thema's zelf staan per taal in js/games/woordzoeker/talen/.
+woordzoeker.gridAria | Word search, {n} by {n} letters | Woordzoeker, {n} bij {n} letters
+woordzoeker.start | Tap the first letter of a word and then the last. | Tik op de eerste letter van een woord en daarna op de laatste.
+woordzoeker.wordsAria | Words to find | Woorden om te vinden
+# {theme} is de naam van het thema van de puzzel (bijvoorbeeld "Bloemen"); hij komt vet gedrukt in de zin
+woordzoeker.theme | Theme: {theme} | Thema: {theme}
+# Schermlezertekst bij een vakje: {r} = rij, {c} = kolom, {letter}. Daarna eventueel een van de twee toevoegingen (beginnen met een komma).
+woordzoeker.cell | Row {r}, column {c}: {letter}{extra} | Rij {r}, kolom {c}: {letter}{extra}
+woordzoeker.cellFound | , part of a found word | , onderdeel van een gevonden woord
+woordzoeker.cellStart | , start of your choice | , begin van je keuze
+woordzoeker.foundCount | {n} of {total} found | {n} van {total} gevonden
+woordzoeker.foundValue | {n} of {total} words found | {n} van {total} woorden gevonden
+woordzoeker.chipFound | {word}, found | {word}, gevonden
+woordzoeker.chipTodo | {word}, not found yet. Tap for a hint. | {word}, nog niet gevonden. Tik voor een tip.
+woordzoeker.say.beginChosen | Start chosen. Now tap the last letter of the word. | Begin gekozen. Tik nu op de laatste letter van het woord.
+woordzoeker.say.cleared | Cleared. Choose a new first letter. | Gewist. Kies een nieuwe eerste letter.
+woordzoeker.say.notInList | That is not a word from the list. Try again, you cannot do anything wrong. | Dat is geen woord uit de lijst. Probeer het nog eens, je kunt niets verkeerd doen.
+woordzoeker.say.foundLeft_one | Found: {word}! {n} to go. | Gevonden: {word}! Nog {n} te gaan.
+woordzoeker.say.foundLeft_other | Found: {word}! {n} to go. | Gevonden: {word}! Nog {n} te gaan.
+woordzoeker.say.won | Done! You found all the words. | Gelukt! Je hebt alle woorden gevonden.
+woordzoeker.say.alreadyFound | You already found {word}. | {word} heb je al gevonden.
+woordzoeker.say.hint | Hint: {word} starts at the highlighted cell (row {r}, column {c}). | Tip: {word} begint bij het oplichtende vakje (rij {r}, kolom {c}).
+woordzoeker.say.escape | Cleared. | Gewist.
+
+# Woordzoeker in de lijst met spellen en op de pagina voor het spelen.
+woordzoeker.name | Word search | Woordzoeker
+woordzoeker.summary | Find the hidden words among the letters. | Zoek de verborgen woorden tussen de letters.
+woordzoeker.howTo.1 | Every puzzle has a theme, for example flowers. Next to or below the grid are the words you are looking for. | Elke puzzel heeft een thema, bijvoorbeeld bloemen. Rechts of onder het rooster staan de woorden die je zoekt.
+woordzoeker.howTo.2 | Tap the first letter of a word and then the last letter. The second tap does not have to be exact. | Tik op de eerste letter van een woord en daarna op de laatste letter. De tweede tik hoeft niet precies te zijn.
+woordzoeker.howTo.3 | With a mouse you can also drag. Words can run straight across, downwards and, at higher levels, also diagonally and backwards. | Met een muis kun je ook slepen. Woorden kunnen rechtdoor, naar beneden en bij hogere niveaus ook schuin en achterstevoren staan.
+woordzoeker.howTo.4 | If the word is on the list, it is highlighted and crossed out. A miss costs nothing. | Staat het woord in de lijst, dan wordt het gemarkeerd en doorgestreept. Een misser kost niets.
+woordzoeker.howTo.5 | Stuck for a moment? Tap a word in the list or tap "{hint}": the first cell of the word lights up. | Even vastgelopen? Tik op een woord in de lijst of op "{hint}": het eerste vakje van het woord licht op.
+# De hints bij de vier niveaus (afmeting van het rooster, aantal woorden)
+woordzoeker.level.makkelijk | 8 by 8 · 6 words | 8 bij 8 · 6 woorden
+woordzoeker.level.gemiddeld | 10 by 10 · also diagonal | 10 bij 10 · ook schuin
+woordzoeker.level.moeilijk | 12 by 12 · also backwards | 12 bij 12 · ook achterstevoren
+woordzoeker.level.extreem | 13 by 13 · 15 words | 13 bij 13 · 15 woorden

@@ -6,6 +6,7 @@ import { h, icon, choiceDialog, announce } from '../ui.js';
 import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { notFoundView } from './notFound.js';
+import { t, getTaal } from '../i18n/index.js';
 
 export async function playView({ id, mode }, app) {
   const game = getGameInfo(id);
@@ -20,11 +21,14 @@ export async function playView({ id, mode }, app) {
   // Het bewaarde spel van een andere dag telt niet meer mee.
   let slot = store.getSlot(id, slotName);
   if (daily && slot && slot.day !== today) slot = null;
+  // Een spel dat je nog niet bent begonnen volgt de taal van nu; een spel dat al loopt blijft in zijn eigen taal (oude spellen waren Nederlands)
+  if (slot && slot.state == null && slot.taal !== getTaal()) slot = null;
 
   // Nieuw slot aanmaken als dat nog niet bestaat.
   if (!slot) {
     slot = {
       seed: daily ? today : Math.random().toString(36).slice(2, 10),
+      taal: getTaal(),
       difficulty: daily ? 'gemiddeld' : record.difficulty,
       state: null,
       updatedAt: Date.now(),
@@ -35,27 +39,27 @@ export async function playView({ id, mode }, app) {
 
   const backHref = daily ? '#/' : `#/spel/${id}`;
   const level = game.difficulties.find((d) => d.id === slot.difficulty)?.label || '';
-  const stage = h('div', { class: 'stage' }, h('p', { class: 'muted', role: 'status' }, 'Het spel wordt geladen…'));
+  const stage = h('div', { class: 'stage' }, h('p', { class: 'muted', role: 'status' }, t('play.loading')));
 
-  const helpButton = h('button', { type: 'button', class: 'btn', onclick: showHelp }, icon('help'), 'Uitleg');
+  const helpButton = h('button', { type: 'button', class: 'btn', onclick: showHelp }, icon('help'), t('play.howTo'));
   function showHelp() {
     return choiceDialog({
-      title: `Zo werkt ${game.name}`,
+      title: t('play.howToTitle', { game: game.name }),
       body: h('ol', {}, game.howTo.map((s) => h('li', {}, s))),
-      actions: [{ label: 'Begrepen', value: true, primary: true, autofocus: true }],
+      actions: [{ label: t('play.understood'), value: true, primary: true, autofocus: true }],
     });
   }
 
   const node = h('div', { class: 'view' },
     // Compacte kop: terug, de naam en het niveau in het midden, uitleg rechts. Zo blijft er zoveel mogelijk ruimte voor het spel.
     h('div', { class: 'play-bar' },
-      h('a', { class: 'btn btn-quiet back', href: backHref }, icon('back'), 'Terug'),
+      h('a', { class: 'btn btn-quiet back', href: backHref }, icon('back'), t('common.back')),
       helpButton,
       h('header', { class: 'play-title' },
-        h('h1', { tabindex: '-1' }, daily ? `Dagpuzzel: ${game.name}` : game.name),
+        h('h1', { tabindex: '-1' }, daily ? t('play.dailyTitle', { game: game.name }) : game.name),
         h('p', { class: 'muted' }, level))),
     stage,
-    h('p', { class: 'save-note' }, 'Je voortgang wordt vanzelf bewaard.'),
+    h('p', { class: 'save-note' }, t('play.autosave')),
   );
 
   let cleanup = null;
@@ -67,6 +71,7 @@ export async function playView({ id, mode }, app) {
     daily,
     difficulty: slot.difficulty,
     seed: slot.seed,
+    taal: slot.taal || 'nl',
     saved: slot.state,
     settings: { ...store.getSettings() },
     announce,
@@ -97,15 +102,15 @@ export async function playView({ id, mode }, app) {
       });
       if (result.delay) await new Promise((resolve) => setTimeout(resolve, result.delay));
       if (gone) return;
-      announce(result.title ?? 'Goed gedaan! Het spel is uitgespeeld.');
+      announce(result.title ?? t('play.done.announce'));
       const choice = await choiceDialog({
-        title: result.title ?? 'Goed gedaan!',
-        text: result.text ?? `Je hebt ${daily ? 'de puzzel van de dag' : 'dit spel'} uitgespeeld.`,
+        title: result.title ?? t('play.done.title'),
+        text: result.text ?? t(daily ? 'play.done.text.daily' : 'play.done.text'),
         joy: result.joy ?? true,
         actions: [
-          { label: daily ? 'Terug naar Start' : 'Nog een keer', value: daily ? 'home' : 'again', primary: true, autofocus: true },
-          { label: 'Ander spel kiezen', value: 'games' },
-          ...(daily ? [] : [{ label: 'Naar Start', value: 'home' }]),
+          { label: daily ? t('play.done.backHome') : t('play.done.again'), value: daily ? 'home' : 'again', primary: true, autofocus: true },
+          { label: t('play.done.otherGame'), value: 'games' },
+          ...(daily ? [] : [{ label: t('play.done.toHome'), value: 'home' }]),
         ],
         dismissValue: daily ? 'home' : 'detail',
       });
@@ -125,8 +130,8 @@ export async function playView({ id, mode }, app) {
       console.error(err);
       stage.replaceChildren(
         h('div', { class: 'stack' },
-          h('p', {}, 'Het spel kon niet worden geladen. Controleer je verbinding en probeer het nog eens.'),
-          h('button', { type: 'button', class: 'btn btn-primary', onclick: () => app.refresh() }, 'Opnieuw proberen')));
+          h('p', {}, t('play.loadFailed')),
+          h('button', { type: 'button', class: 'btn btn-primary', onclick: () => app.refresh() }, t('common.retry'))));
     }
   };
 

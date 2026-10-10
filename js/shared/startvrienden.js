@@ -5,7 +5,7 @@
 export const MAX_VRIENDEN = 5;
 
 // Wat er voor elke vriend te zien is, in volgorde van belang. Eén rij per vriend, hooguit MAX_VRIENDEN.
-export function friendRows(me, data, partijen) {
+export function friendRows(me, data, partijen, locale = 'en') {
   const actief = partijen.filter((m) => m.status === 'active');
   const perVriend = new Map();
   for (const m of actief) {
@@ -26,7 +26,7 @@ export function friendRows(me, data, partijen) {
   }
   for (const p of data.incoming) rows.push({ kind: 'verzoek', friend: p, rang: 1, since: 0 });
   for (const f of data.friends) if (!perVriend.has(f.id)) rows.push({ kind: 'vrij', friend: f, rang: 3, since: 0 });
-  rows.sort((a, b) => a.rang - b.rang || (a.rang === 0 ? a.since - b.since : a.rang === 2 ? b.since - a.since : (b.friend.lastSeen || '').localeCompare(a.friend.lastSeen || '') || a.friend.name.localeCompare(b.friend.name, 'nl')));
+  rows.sort((a, b) => a.rang - b.rang || (a.rang === 0 ? a.since - b.since : a.rang === 2 ? b.since - a.since : (b.friend.lastSeen || '').localeCompare(a.friend.lastSeen || '') || a.friend.name.localeCompare(b.friend.name, locale)));
   return { rows: rows.slice(0, MAX_VRIENDEN), meer: Math.max(0, rows.length - MAX_VRIENDEN), totaal: data.friends.length };
 }
 
@@ -37,3 +37,10 @@ export const stand = (m, me) => {
   return hun == null || mijn + hun === 0 ? '' : `${mijn}–${hun}`;
 };
 
+
+// De taal van een partij als die niet de taal van de app is (dan zie je bij de partij erbij in welke taal er gespeeld wordt), anders ''.
+// Partijen van voor de meertaligheid hebben geen taal en zijn Nederlands.
+export const partijTaal = (m, uiTaal) => {
+  const taal = m.config?.lang ?? 'nl';
+  return taal === uiTaal ? '' : taal;
+};

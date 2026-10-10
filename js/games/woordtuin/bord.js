@@ -7,6 +7,7 @@
 //   - Toetsenbord: pijltjes om te bewegen, Enter of spatie om een letter te kiezen, Backspace om er een weg te halen.
 
 import { h } from '../../ui.js';
+import { t } from '../../i18n/index.js';
 import { neighbors, isProtected } from './engine.js';
 
 const svgNS = 'http://www.w3.org/2000/svg';
@@ -25,10 +26,10 @@ export function maakBord({ size = 6, onChange }) {
   svg.setAttribute('class', 'wt-pad'); svg.setAttribute('aria-hidden', 'true');
   svg.append(lijn);
 
-  const el = h('div', { class: 'wt-bord', role: 'grid', 'aria-label': `Het bord, ${N} bij ${N} letters`, style: `--n:${N}`, onkeydown: onKey });
+  const el = h('div', { class: 'wt-bord', role: 'grid', 'aria-label': t('woordtuin.boardAria', { n: N }), style: `--n:${N}`, onkeydown: onKey });
   for (let i = 0; i < N * N; i++) {
-    const t = h('div', { class: 'wt-tegel', role: 'gridcell', 'data-i': i, tabindex: '-1' }, h('span', { class: 'wt-l' }, ''));
-    tiles.push(t); el.append(t);
+    const tegel = h('div', { class: 'wt-tegel', role: 'gridcell', 'data-i': i, tabindex: '-1' }, h('span', { class: 'wt-l' }, ''));
+    tiles.push(tegel); el.append(tegel);
   }
   el.append(svg);
 
@@ -36,18 +37,18 @@ export function maakBord({ size = 6, onChange }) {
   const rij = (i) => Math.floor(i / N) + 1, kol = (i) => (i % N) + 1;
   function label(i) {
     const o = state.owner[i];
-    const wie = !o ? 'nog open' : o === me ? 'van jou' : 'van de ander';
-    const bescherming = o && isProtected(state.owner, i, N) ? ', beschermd' : '';
+    const wie = t(!o ? 'woordtuin.owner.open' : o === me ? 'woordtuin.owner.mine' : 'woordtuin.owner.theirs');
+    const bescherming = o && isProtected(state.owner, i, N) ? t('woordtuin.tileProtected') : '';
     const pos = path.indexOf(i);
-    return `Letter ${state.letters[i].toUpperCase()}, rij ${rij(i)}, kolom ${kol(i)}, ${wie}${bescherming}${pos >= 0 ? `, nummer ${pos + 1} van je woord` : ''}`;
+    return t('woordtuin.tileAria', { letter: state.letters[i].toUpperCase(), r: rij(i), c: kol(i), owner: wie, extra: bescherming + (pos >= 0 ? t('woordtuin.tileNumber', { n: pos + 1 }) : '') });
   }
 
   function teken() {
     if (!state) return;
     const sel = new Map(path.map((i, k) => [i, k + 1]));
-    tiles.forEach((t, i) => {
-      const o = state.owner[i], c = t.classList;
-      t.firstChild.textContent = state.letters[i];
+    tiles.forEach((tg, i) => {
+      const o = state.owner[i], c = tg.classList;
+      tg.firstChild.textContent = state.letters[i];
       c.toggle('mijn', o === me && o > 0);
       c.toggle('hun', o > 0 && o !== me);
       c.toggle('veilig', !!o && isProtected(state.owner, i, N));
@@ -55,14 +56,14 @@ export function maakBord({ size = 6, onChange }) {
       c.toggle('pak', sel.has(i) && !!preview?.take?.includes(i));
       c.toggle('blijft', sel.has(i) && !!preview?.kept?.includes(i));
       c.toggle('laatst', !!state.last?.path.includes(i));
-      let hek = t.querySelector('.wt-hek');
-      if (c.contains('veilig')) { if (!hek) { hek = h('span', { class: 'wt-hek', 'aria-hidden': 'true' }); hek.innerHTML = HEK; t.append(hek); } }
+      let hek = tg.querySelector('.wt-hek');
+      if (c.contains('veilig')) { if (!hek) { hek = h('span', { class: 'wt-hek', 'aria-hidden': 'true' }); hek.innerHTML = HEK; tg.append(hek); } }
       else hek?.remove();
-      let nr = t.querySelector('.wt-nr');
-      if (sel.has(i)) { if (!nr) { nr = h('span', { class: 'wt-nr', 'aria-hidden': 'true' }, ''); t.append(nr); } nr.textContent = String(sel.get(i)); }
+      let nr = tg.querySelector('.wt-nr');
+      if (sel.has(i)) { if (!nr) { nr = h('span', { class: 'wt-nr', 'aria-hidden': 'true' }, ''); tg.append(nr); } nr.textContent = String(sel.get(i)); }
       else nr?.remove();
-      t.tabIndex = i === cursor ? 0 : -1;
-      t.setAttribute('aria-label', label(i));
+      tg.tabIndex = i === cursor ? 0 : -1;
+      tg.setAttribute('aria-label', label(i));
     });
     el.classList.toggle('uit', !enabled);
     el.setAttribute('aria-disabled', String(!enabled));
@@ -99,11 +100,11 @@ export function maakBord({ size = 6, onChange }) {
 
   // Vegen: een letter telt pas mee als je dicht bij het midden bent, zodat je niet per ongeluk een buurletter raakt
   function tegelOp(x, y) {
-    const t = document.elementFromPoint(x, y)?.closest?.('.wt-tegel');
-    if (!t || !el.contains(t)) return -1;
-    const r = t.getBoundingClientRect();
+    const tg = document.elementFromPoint(x, y)?.closest?.('.wt-tegel');
+    if (!tg || !el.contains(tg)) return -1;
+    const r = tg.getBoundingClientRect();
     const d = Math.hypot(x - (r.left + r.width / 2), y - (r.top + r.height / 2));
-    return d <= r.width * 0.46 ? Number(t.dataset.i) : -1;
+    return d <= r.width * 0.46 ? Number(tg.dataset.i) : -1;
   }
   let veeg = null;
   el.addEventListener('pointerdown', (e) => {
@@ -135,7 +136,7 @@ export function maakBord({ size = 6, onChange }) {
   el.addEventListener('pointercancel', eind);
 
   // Een klik zonder aanraking of muis (schermlezer, spraakbesturing): gewoon als tik behandelen
-  el.addEventListener('click', (e) => { if (e.detail !== 0) return; const t = e.target.closest?.('.wt-tegel'); if (t) tik(Number(t.dataset.i)); });
+  el.addEventListener('click', (e) => { if (e.detail !== 0) return; const tg = e.target.closest?.('.wt-tegel'); if (tg) tik(Number(tg.dataset.i)); });
 
   // ----- Toetsenbord -----
   function onKey(e) {
@@ -159,7 +160,7 @@ export function maakBord({ size = 6, onChange }) {
     setEnabled(b) { enabled = b; teken(); },
     // Een tegel laten pulseren (tip), of de tegels van de laatste zet na elkaar laten opbloeien
     wijs(i, ms = 3200) { tiles[i].classList.remove('tip'); void tiles[i].offsetWidth; tiles[i].classList.add('tip'); cursor = i; setTimeout(() => tiles[i]?.classList.remove('tip'), ms); },
-    bloei(indices, { stap = 90 } = {}) { indices.forEach((i, k) => { const t = tiles[i]; t.style.setProperty('--vertraging', `${k * stap}ms`); t.classList.remove('bloeit'); void t.offsetWidth; t.classList.add('bloeit'); setTimeout(() => t.classList.remove('bloeit'), 1200 + k * stap); }); },
+    bloei(indices, { stap = 90 } = {}) { indices.forEach((i, k) => { const tg = tiles[i]; tg.style.setProperty('--vertraging', `${k * stap}ms`); tg.classList.remove('bloeit'); void tg.offsetWidth; tg.classList.add('bloeit'); setTimeout(() => tg.classList.remove('bloeit'), 1200 + k * stap); }); },
     tegel: (i) => tiles[i],
     midden(i) { const r = tiles[i].getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; },
     focus() { tiles[cursor].focus({ preventScroll: true }); },

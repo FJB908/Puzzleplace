@@ -1,0 +1,35 @@
+# Hulp: vragen en antwoorden. Links staan als [tekst](#/pad) en blijven in de vertaling staan, alleen de tekst tussen [ ] vertaal je.
+# Namen van knoppen en schermen komen als {plaatshouder} binnen, zodat ze altijd precies kloppen met wat de app laat zien.
+help.title | Help | Hulp
+help.subtitle | Tap a question to read the answer. | Tik op een vraag om het antwoord te lezen.
+help.q1 | How do I make the letters bigger? | Hoe maak ik de letters groter?
+# {textSize}, {large} en {xlarge} zijn de namen van de instelling en de twee grootste keuzes
+help.a1 | Go to [{settings}](#/instellingen) and choose "{large}" or "{xlarge}" under "{textSize}". | Ga naar [{settings}](#/instellingen) en kies bij "{textSize}" voor "{large}" of "{xlarge}".
+help.q2 | Will I lose my progress if I stop? | Gaat mijn voortgang verloren als ik stop?
+# {back} is de tekst van de knop Terug
+help.a2 | No. After every move your game is saved on this device automatically. You can always tap "{back}" and carry on later. | Nee. Na elke zet wordt je spel vanzelf bewaard op dit apparaat. Je kunt altijd op "{back}" tikken en later verdergaan.
+help.q3 | How do I continue a game? | Hoe ga ik verder met een spel?
+help.a3 | On the Home screen you will find the game you were playing. Tap it to carry on. You can also find it on the game's own page. | Op het startscherm staat het spel waar je mee bezig was. Tik erop om verder te gaan. Je vindt het ook bij het spel zelf.
+help.q4 | How do I start over? | Hoe begin ik opnieuw?
+# {games} is de naam van het menu Spellen, {newGame} de knop Nieuw spel
+help.a4 | Open the game under "{games}" and tap "{newGame}". You will be asked first, so you never erase anything by accident. | Open het spel bij "{games}" en tik op "{newGame}". Je krijgt eerst een vraag, zodat je niets per ongeluk wist.
+help.q5 | What is the puzzle of the day? | Wat is de puzzel van de dag?
+help.a5 | A new puzzle is ready every day. On the Home screen you can start it with one tap. | Elke dag staat er een nieuwe puzzel klaar. Op het startscherm kun je er met één tik aan beginnen.
+help.q6 | Can I put Puzzleplace on my home screen as an app? | Kan ik Puzzelplaats als app op mijn beginscherm zetten?
+# Gebruik de woorden die jouw browser zelf gebruikt voor deze menukeuzes
+help.a6 | Yes. Open your browser's menu and choose "Add to home screen" or "Install app". | Ja. Open het menu van je browser en kies "Toevoegen aan beginscherm" of "App installeren".
+help.q7 | Do I have to log in? | Moet ik inloggen?
+help.a7 | No. You can play straight away without an account. | Nee. Je kunt direct spelen zonder account.
+help.q8 | How do I change the language? | Hoe verander ik de taal?
+help.a8 | Go to [{settings}](#/instellingen) and tap "{language}". The puzzles and the word lists change along with it. | Ga naar [{settings}](#/instellingen) en tik op "{language}". De puzzels en de woordenlijsten veranderen mee.
+# {game} is de naam van het spel Woordtuin, {instructions} de knop Uitleg in het spel
+help.q9 | How does {game} work? | Hoe werkt {game}?
+help.a9 | Make a word of 3 to 7 letters by swiping across neighbouring letters or tapping them one after the other. The squares of your word become yours. If the other player later makes a word through your squares, they take them, except protected squares (all neighbours in the same colour). When every square is coloured, whoever has the most wins. Tap "{instructions}" in the game for the full explanation. | Maak een woord van 3 tot 7 letters door over aangrenzende letters te vegen of ze aan te tikken. De vakjes van je woord worden van jou. Maakt de ander later een woord door jouw vakjes, dan pakt die ze af, behalve beschermde vakjes (alle buren in dezelfde kleur). Zijn alle vakjes gekleurd, dan wint wie de meeste heeft. Tik bij het spel op "{instructions}" voor de hele uitleg.
+help.q10 | Why is my word not accepted in {game}? | Waarom wordt mijn woord in {game} niet geaccepteerd?
+# Noem in je vertaling een paar voorbeeldwoorden uit jouw taal als dat helpt (meervoud, werkwoordsvorm).
+help.a10 | All everyday words of the language count, including plurals and verb forms. Not: names, abbreviations, foreign words and very rare words. A word of fewer than 3 letters is not possible. Accents do not matter: an "é" is simply an "e". You always get a short explanation, and a miss costs you nothing. | Alle gewone Nederlandse woorden tellen, ook meervouden, werkwoordsvormen en verkleinwoorden. Niet: namen, afkortingen, Engelse woorden en heel zeldzame woorden. Een woord van minder dan 3 letters kan niet. Accenten doen er niet toe: een "é" is gewoon een "e". Je krijgt altijd een korte uitleg en een misser kost je niets.
+help.q11 | Where do the words in {game} come from? | Waar komen de woorden van {game} vandaan?
+# {source} is de naam van het woordenboek (al een link), {license} de licentie. Beschrijf in je vertaling in de taal: een open spellingswoordenboek van jouw taal.
+help.a11 | The word list is built from the open spelling dictionary {source} ({license}) and from word-frequency data. Names, foreign words and words nobody uses were left out. The computer only plays everyday words. | De woordenlijst is gemaakt met het open spellingswoordenboek {source} ({license}) en met gegevens over hoe vaak woorden voorkomen. Namen, vreemde woorden en woorden die niemand gebruikt zijn weggelaten. De computer speelt alleen alledaagse woorden.
+help.q12 | How do I play {game} with a friend? | Hoe speel ik {game} met een vriend?
+help.a12 | Create an account under [{account}](#/account), add your friend under [{friends}](#/vrienden) with their friend code, and tap "{newGame}" next to your friend. You take turns: you do not have to wait, the app shows you when it is your turn. | Maak een account bij [{account}](#/account), voeg bij [{friends}](#/vrienden) je vriend toe met zijn of haar vriendencode en tik op "{newGame}" bij je vriend. Jullie spelen om beurten: je hoeft niet te wachten, de app laat het zien als je aan de beurt bent.

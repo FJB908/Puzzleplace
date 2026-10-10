@@ -4,11 +4,14 @@
 // computer), stuurt je woord op en kijkt af en toe of de ander gespeeld heeft. Je hoeft er niet op te wachten: sluit de app
 // gerust, zodra de ander speelt zie je een cijfer bij Vrienden.
 
-import { h, icon, choiceDialog, confirmDialog, announce } from '../ui.js';
+import { h, icon, choiceDialog, confirmDialog, announce, persoonNaam } from '../ui.js';
+import { t, foutTekst, getTaal } from '../i18n/index.js';
 import { FEATURES } from '../config.js';
 import { getGameInfo } from '../games/registry.js';
 import { maakPaneel } from '../games/woordtuin/paneel.js';
-import { tip, makeRng } from '../games/woordtuin/engine.js';
+import { tip, makeRng, taalVan } from '../games/woordtuin/engine.js';
+import { laadWoordenboek } from '../games/woordtuin/woordenboek.js';
+import { TALEN } from '../shared/talen.js';
 import { burst, rain, motionOK } from '../effects.js';
 import * as auth from '../services/auth.js';
 import * as matches from '../services/matches.js';
@@ -24,17 +27,17 @@ const useTip = (id) => { try { localStorage.setItem(tipsKey(id), String(usedTips
 export function uitslagTekst(match, myId, oppName) {
   const r = match.result;
   if (!r) return '';
-  if (r.resigned) return r.resigned === myId ? 'Je bent gestopt met deze partij.' : `${oppName} is gestopt met deze partij.`;
+  if (r.resigned) return r.resigned === myId ? t('match.result.resignedMe') : t('match.result.resignedThem', { name: oppName });
   const mijn = r.scores?.[myId] ?? 0, hun = Object.entries(r.scores || {}).find(([id]) => id !== myId)?.[1] ?? 0;
-  if (!r.winner) return `Gelijkspel: jullie hebben allebei ${mijn} bloemen.`;
-  if (r.winner === myId) return `Jij hebt gewonnen met ${mijn} tegen ${hun}${r.tiebreak ? ' (bij gelijk aantal gaven de beschermde vakjes de doorslag)' : ''}.`;
-  return `${oppName} won met ${hun} tegen ${mijn}${r.tiebreak ? ' (bij gelijk aantal gaven de beschermde vakjes de doorslag)' : ''}.`;
+  if (!r.winner) return t('match.result.draw', { n: mijn });
+  if (r.winner === myId) return t(r.tiebreak ? 'match.result.wonTiebreak' : 'match.result.won', { mine: mijn, theirs: hun });
+  return t(r.tiebreak ? 'match.result.lostTiebreak' : 'match.result.lost', { name: oppName, mine: mijn, theirs: hun });
 }
 
 // Een nieuwe partij met een vriend: meteen beginnen, zonder tussenvenster. Elk krijgt 3 tips (een vriendelijke partij).
 export async function nieuwePartij(friend) {
-  try { const m = await matches.create(friend.id, 'woordtuin', { tips: 3 }); location.hash = `#/partij/${m.id}`; }
-  catch (e) { await choiceDialog({ title: 'Dat lukte niet', text: e.message, actions: [{ label: 'Sluiten', value: true, primary: true, autofocus: true }] }); }
+  try { const m = await matches.create(friend.id, 'woordtuin', { tips: 3, lang: getTaal() }); location.hash = `#/partij/${m.id}`; }
+  catch (e) { await choiceDialog({ title: t('common.didNotWork'), text: foutTekst(e), actions: [{ label: t('common.close'), value: true, primary: true, autofocus: true }] }); }
 }
 
 export function partijView({ id }, app) {
@@ -43,21 +46,21 @@ export function partijView({ id }, app) {
   if (!FEATURES.friends || !user) { location.replace('#/vrienden'); return null; }
   const info = getGameInfo('woordtuin');
 
-  const stage = h('div', { class: 'stage stage--bare' }, h('p', { class: 'muted', role: 'status' }, 'De partij wordt geladen…'));
+  const stage = h('div', { class: 'stage stage--bare' }, h('p', { class: 'muted', role: 'status' }, t('match.loading')));
   const subtitel = h('p', { class: 'muted' }, '');
   const help = h('button', { type: 'button', class: 'btn', onclick: () => choiceDialog({
-    title: `Zo werkt ${info.name}`, body: h('ol', {}, info.howTo.map((s) => h('li', {}, s))), actions: [{ label: 'Begrepen', value: true, primary: true, autofocus: true }],
-  }) }, icon('help'), 'Uitleg');
+    title: t('play.howToTitle', { game: info.name }), body: h('ol', {}, info.howTo.map((s) => h('li', {}, s))), actions: [{ label: t('play.understood'), value: true, primary: true, autofocus: true }],
+  }) }, icon('help'), t('play.howTo'));
   const node = h('div', { class: 'view' },
     h('div', { class: 'play-bar' },
-      h('a', { class: 'btn btn-quiet back', href: '#/vrienden' }, icon('back'), 'Terug'), help,
-      h('header', { class: 'play-title' }, h('h1', { tabindex: '-1' }, 'Woordtuin'), subtitel)),
+      h('a', { class: 'btn btn-quiet back', href: '#/vrienden' }, icon('back'), t('common.back')), help,
+      h('header', { class: 'play-title' }, h('h1', { tabindex: '-1' }, info.name), subtitel)),
     stage);
 
-  let match = null, paneel = null, slot = 1, opp = 'Je tegenstander', timer = null, dood = false, afgerond = false;
+  let match = null, paneel = null, slot = 1, opp = t('match.opponent'), timer = null, dood = false, afgerond = false;
   const banner = h('p', { class: 'wt-uitslag', role: 'status' });
   const wacht = h('p', { class: 'wt-wacht' });
-  const stop = h('button', { type: 'button', class: 'btn btn-quiet wt-stop', onclick: stoppen }, 'Partij stoppen');
+  const stop = h('button', { type: 'button', class: 'btn btn-quiet wt-stop', onclick: stoppen }, t('match.stop'));
 
   function toon(m, { animeer = false } = {}) {
     const eerder = match;
@@ -67,10 +70,10 @@ export function partijView({ id }, app) {
     banner.textContent = klaar ? uitslagTekst(m, user.id, opp) : '';
     banner.hidden = !klaar;
     wacht.hidden = klaar || m.yourTurn;
-    wacht.textContent = `Je hoeft niet te wachten: sluit de app gerust. Zodra ${opp} heeft gespeeld, zie je een cijfer bij Vrienden.`;
+    wacht.textContent = t('match.waitNote', { name: opp, friends: t('nav.friends') });
     stop.hidden = klaar;
     if (eerder && eerder.version !== m.version && m.pub.last && m.pub.last.player !== slot) {
-      announce(`${opp} speelde ${m.pub.last.word}. Je bent aan de beurt.`);
+      announce(t('match.played', { name: opp, word: m.pub.last.word }));
     }
     if (klaar && !afgerond && eerder) { afgerond = true; einde(); }
     if (klaar) afgerond = true;
@@ -84,12 +87,12 @@ export function partijView({ id }, app) {
       rain({ count: 36 });
     }
     const keuze = await choiceDialog({
-      title: r.resigned ? 'De partij is afgelopen' : gewonnen ? 'Gewonnen, gefeliciteerd!' : gelijk ? 'Gelijkspel!' : 'Mooi gespeeld!',
+      title: t(r.resigned ? 'match.over.resigned' : gewonnen ? 'match.over.won' : gelijk ? 'match.over.draw' : 'match.over.lost'),
       text: uitslagTekst(match, user.id, opp),
       joy: gewonnen || gelijk,
       actions: [
-        { label: `Nog een partij met ${opp}`, value: 'nog', primary: true, autofocus: true },
-        { label: 'Terug naar Vrienden', value: 'terug' },
+        { label: t('match.again', { name: opp }), value: 'nog', primary: true, autofocus: true },
+        { label: t('match.backToFriends'), value: 'terug' },
       ],
       dismissValue: 'terug',
     });
@@ -98,13 +101,13 @@ export function partijView({ id }, app) {
       const vriend = match.players.find((p) => p.id !== user.id);
       if (!vriend?.id) { location.hash = '#/vrienden'; return; }
       try { const m = await matches.create(vriend.id, 'woordtuin', match.config); location.hash = `#/partij/${m.id}`; }
-      catch (e) { await choiceDialog({ title: 'Dat lukte niet', text: e.message, actions: [{ label: 'Sluiten', value: true, primary: true, autofocus: true }] }); }
+      catch (e) { await choiceDialog({ title: t('common.didNotWork'), text: foutTekst(e), actions: [{ label: t('common.close'), value: true, primary: true, autofocus: true }] }); }
     } else location.hash = '#/vrienden';
   }
 
   async function stoppen() {
-    if (!(await confirmDialog({ title: 'Deze partij stoppen?', text: `De partij eindigt dan voor jullie allebei. Dat is helemaal niet erg: je kunt altijd een nieuwe beginnen met ${opp}.`, confirmLabel: 'Ja, stoppen' }))) return;
-    try { toon(await matches.resign(id)); } catch (e) { announce(e.message); }
+    if (!(await confirmDialog({ title: t('match.stop.title'), text: t('match.stop.text', { name: opp }), confirmLabel: t('match.stop.yes') }))) return;
+    try { toon(await matches.resign(id)); } catch (e) { announce(foutTekst(e)); }
   }
 
   async function ververs({ animeer = true } = {}) {
@@ -117,28 +120,32 @@ export function partijView({ id }, app) {
 
   async function start() {
     let m;
-    try { m = await matches.get(id); }
-    catch (e) {
-      stage.replaceChildren(h('div', { class: 'stack' }, h('p', {}, e.status === 404 ? 'Deze partij bestaat niet (meer).' : e.message),
-        h('a', { class: 'btn btn-primary btn-block', href: '#/vrienden' }, 'Terug naar Vrienden')));
+    try {
+      m = await matches.get(id);
+      await laadWoordenboek(taalVan(m.pub));                         // de woorden van de taal van deze partij
+    } catch (e) {
+      stage.replaceChildren(h('div', { class: 'stack' }, h('p', {}, e.status === 404 ? t('match.notFound') : e.status !== undefined ? foutTekst(e) : t('play.loadFailed')),
+        h('a', { class: 'btn btn-primary btn-block', href: '#/vrienden' }, t('match.backToFriends'))));
       return;
     }
     if (dood) return;
     slot = m.pub.players.indexOf(user.id) + 1;
     const tegen = m.players.find((p) => p.id !== user.id);
-    opp = tegen?.name || 'Je tegenstander';
-    subtitel.textContent = `met ${opp}`;
+    opp = tegen ? persoonNaam(tegen) : t('match.opponent');
+    // Speelt de ander in een andere taal dan de app van jou? Dan staat dat erbij, zodat je weet waarom de woorden anders zijn
+    const taal = taalVan(m.pub);
+    subtitel.textContent = taal === getTaal() ? t('match.with', { name: opp }) : `${t('match.with', { name: opp })} · ${TALEN[taal].native}`;
     const tips = m.config?.tips > 0 ? Math.max(0, m.config.tips - usedTips(id)) : null;
     paneel = maakPaneel({
-      me: slot, names: { [slot]: 'Jij', [3 - slot]: opp }, tips,
+      me: slot, names: { [slot]: t('match.you'), [3 - slot]: opp }, tips,
       onZet: async (path) => {
         try { toon(await matches.move(id, match.version, { path }), { animeer: true }); }
         catch (e) {
-          if (e.code === 'versie') { await ververs(); throw new Error(`De stand was net veranderd. Kijk even naar het bord en probeer je woord nog eens.`); }
+          if (e.code === 'versie') { await ververs(); throw new Error(t('match.versionChanged')); }
           throw e;
         }
       },
-      onTip: tips === null ? undefined : async () => { const t = tip(match.pub, slot, makeRng(`tip|${id}|${usedTips(id)}`)); if (t) useTip(id); return t; },
+      onTip: tips === null ? undefined : async () => { const hint = tip(match.pub, slot, makeRng(`tip|${id}|${usedTips(id)}`)); if (hint) useTip(id); return hint; },
     });
     stage.replaceChildren(h('div', {}, paneel.el, banner, wacht, h('div', { class: 'wt-onder' }, stop)));
     afgerond = m.status !== 'active';
@@ -150,7 +157,7 @@ export function partijView({ id }, app) {
   const onZichtbaar = () => { if (!document.hidden) ververs(); };
 
   return {
-    title: 'Woordtuin', nav: null, view: 'play', node, onShow: start,
+    title: info.name, nav: null, view: 'play', node, onShow: start,
     cleanup: () => { dood = true; clearInterval(timer); document.removeEventListener('visibilitychange', onZichtbaar); },
   };
 }

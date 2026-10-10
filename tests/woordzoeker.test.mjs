@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { generate, LEVELS, line, snap, matchWord, wordCells } from '../js/games/woordzoeker/engine.js';
-import { THEMES } from '../js/games/woordzoeker/woorden.js';
+import { laadThemas } from '../js/games/woordzoeker/themas.js';
+
+// Dit bestand test de puzzel met de Nederlandse thema's (de standaardtaal van de generator); de andere talen staan in talen-puzzels.test.mjs
+const { THEMES } = await laadThemas('nl');
 
 test('woordenlijsten: alleen A-Z, geen dubbele woorden, genoeg per thema', () => {
   for (const t of THEMES) {

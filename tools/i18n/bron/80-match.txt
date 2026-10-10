@@ -1,0 +1,29 @@
+# Een partij Woordtuin tegen een vriend (om beurten, via de server).
+# {name} is de naam van de tegenstander. "bloemen" zijn de punten in Woordtuin: elk gekleurd vakje is een bloem.
+match.loading | The game is loading… | De partij wordt geladen…
+match.with | with {name} | met {name}
+match.you | You | Jij
+match.opponent | Your opponent | Je tegenstander
+# {friends} is de naam van het menu Vrienden
+match.waitNote | You do not have to wait: feel free to close the app. As soon as {name} has played, you will see a number at {friends}. | Je hoeft niet te wachten: sluit de app gerust. Zodra {name} heeft gespeeld, zie je een cijfer bij {friends}.
+match.played | {name} played {word}. It is your turn. | {name} speelde {word}. Je bent aan de beurt.
+match.over.resigned | The game is over | De partij is afgelopen
+match.over.won | You won, congratulations! | Gewonnen, gefeliciteerd!
+match.over.draw | It's a draw! | Gelijkspel!
+match.over.lost | Well played! | Mooi gespeeld!
+match.again | Another game with {name} | Nog een partij met {name}
+match.backToFriends | Back to Friends | Terug naar Vrienden
+match.stop | Stop this game | Partij stoppen
+match.stop.title | Stop this game? | Deze partij stoppen?
+match.stop.text | The game then ends for both of you. That is not a problem at all: you can always start a new one with {name}. | De partij eindigt dan voor jullie allebei. Dat is helemaal niet erg: je kunt altijd een nieuwe beginnen met {name}.
+match.stop.yes | Yes, stop | Ja, stoppen
+match.notFound | This game does not exist (any more). | Deze partij bestaat niet (meer).
+match.versionChanged | The position had just changed. Take a look at the board and try your word again. | De stand was net veranderd. Kijk even naar het bord en probeer je woord nog eens.
+match.result.won | You won with {mine} against {theirs}. | Jij hebt gewonnen met {mine} tegen {theirs}.
+match.result.wonTiebreak | You won with {mine} against {theirs} (with an equal number, the protected squares decided). | Jij hebt gewonnen met {mine} tegen {theirs} (bij gelijk aantal gaven de beschermde vakjes de doorslag).
+match.result.lost | {name} won with {theirs} against {mine}. | {name} won met {theirs} tegen {mine}.
+match.result.lostTiebreak | {name} won with {theirs} against {mine} (with an equal number, the protected squares decided). | {name} won met {theirs} tegen {mine} (bij gelijk aantal gaven de beschermde vakjes de doorslag).
+match.result.draw_one | Draw: you both have {n} flower. | Gelijkspel: jullie hebben allebei {n} bloem.
+match.result.draw_other | Draw: you both have {n} flowers. | Gelijkspel: jullie hebben allebei {n} bloemen.
+match.result.resignedMe | You stopped this game. | Je bent gestopt met deze partij.
+match.result.resignedThem | {name} stopped this game. | {name} is gestopt met deze partij.

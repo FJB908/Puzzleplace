@@ -11,15 +11,24 @@
 import { h, icon } from '../../ui.js';
 import { generate, matchWord, snap, line, wordCells } from './engine.js';
 import { burst, rain, motionOK } from '../../effects.js';
+import { t } from '../../i18n/index.js';
+import { laadThemas } from './themas.js';
 
 const COLORS = 6;        // de markeerstift wisselt tussen zes zachte kleuren
+
+// "Thema: Bloemen" met het thema vet: de zin komt uit het taalpakket, het thema wordt op de plek van {theme} gezet
+function themaRegel(thema) {
+  const [voor, na] = t('woordzoeker.theme', { theme: '\u0000' }).split('\u0000');
+  return [voor, h('strong', {}, thema), na ?? ''];
+}
 
 function validState(s) {
   return s && s.puzzle && Array.isArray(s.puzzle.grid) && Array.isArray(s.puzzle.words) && Array.isArray(s.found);
 }
 
-export function mount(container, ctx) {
-  const state = validState(ctx.saved) ? ctx.saved : { puzzle: generate(ctx.seed, ctx.difficulty), found: [] };
+export async function mount(container, ctx) {
+  if (!validState(ctx.saved)) await laadThemas(ctx.taal);                       // de woorden van de taal waarin je speelt
+  const state = validState(ctx.saved) ? ctx.saved : { puzzle: generate(ctx.seed, ctx.difficulty, ctx.taal), found: [] };
   const { puzzle } = state;
   const N = puzzle.size;
   const total = puzzle.words.length;
@@ -42,7 +51,7 @@ export function mount(container, ctx) {
   pills.setAttribute('aria-hidden', 'true');
 
   const board = h('div', {
-    class: 'ws-board', role: 'grid', 'aria-label': `Woordzoeker, ${N} bij ${N} letters`,
+    class: 'ws-board', role: 'grid', 'aria-label': t('woordzoeker.gridAria', { n: N }),
     style: `--n:${N}`, onkeydown: onKey,
   }, pills);
   for (let r = 0; r < N; r++) {
@@ -54,7 +63,7 @@ export function mount(container, ctx) {
   }
 
   const message = h('p', { class: 'ws-message', role: 'status', 'aria-live': 'polite' },
-    'Tik op de eerste letter van een woord en daarna op de laatste.');
+    t('woordzoeker.start'));
 
   const barFill = h('i', {});
   const barText = h('span', { class: 'ws-count' });
@@ -62,18 +71,18 @@ export function mount(container, ctx) {
     h('div', { class: 'ws-bar', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': String(total) }, barFill), barText);
 
   const chips = new Map();
-  const list = h('ul', { class: 'ws-words', 'aria-label': 'Woorden om te vinden' },
+  const list = h('ul', { class: 'ws-words', 'aria-label': t('woordzoeker.wordsAria') },
     puzzle.words.map((w) => {
       const chip = h('button', { type: 'button', class: 'ws-chip', onclick: () => hint(w.word) }, h('span', { class: 'ws-dot' }), h('span', { class: 'ws-w' }, w.word));
       chips.set(w.word, chip);
       return h('li', {}, chip);
     }));
 
-  const tipButton = h('button', { type: 'button', class: 'btn action-btn', onclick: () => hint() }, icon('bulb'), h('span', { class: 'action-label' }, 'Tip'));
+  const tipButton = h('button', { type: 'button', class: 'btn action-btn', onclick: () => hint() }, icon('bulb'), h('span', { class: 'action-label' }, t('common.hint')));
 
   const root = h('div', { class: 'ws' },
     h('div', { class: 'ws-main' },
-      h('div', { class: 'ws-head' }, h('p', { class: 'ws-theme' }, 'Thema: ', h('strong', {}, puzzle.theme)), progress),
+      h('div', { class: 'ws-head' }, h('p', { class: 'ws-theme' }, ...themaRegel(puzzle.theme)), progress),
       board, message),
     h('div', { class: 'ws-side' }, list, h('div', { class: 'ws-actions' }, tipButton)));
 
@@ -81,7 +90,7 @@ export function mount(container, ctx) {
   container.append(root);
 
   // ----- Weergave -----
-  const say = (t) => { message.textContent = t; };
+  const say = (text) => { message.textContent = text; };
   const center = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
   const cellEl = (r, c) => cells[r * N + c];
 
@@ -114,17 +123,17 @@ export function mount(container, ctx) {
       cell.classList.toggle('found', inFound.has(i));
       cell.classList.toggle('start', !!start && start.r === r && start.c === c);
       cell.tabIndex = cursor.r === r && cursor.c === c ? 0 : -1;
-      cell.setAttribute('aria-label', `Rij ${r + 1}, kolom ${c + 1}: ${puzzle.grid[r][c]}${inFound.has(i) ? ', onderdeel van een gevonden woord' : ''}${start && start.r === r && start.c === c ? ', begin van je keuze' : ''}`);
+      cell.setAttribute('aria-label', t('woordzoeker.cell', { r: r + 1, c: c + 1, letter: puzzle.grid[r][c], extra: `${inFound.has(i) ? t('woordzoeker.cellFound') : ''}${start && start.r === r && start.c === c ? t('woordzoeker.cellStart') : ''}` }));
     });
     const n = found.size;
     barFill.style.width = `${(n / total) * 100}%`;
-    barText.textContent = `${n} van ${total} gevonden`;
+    barText.textContent = t('woordzoeker.foundCount', { n, total });
     barFill.parentElement.setAttribute('aria-valuenow', String(n));
-    barFill.parentElement.setAttribute('aria-valuetext', `${n} van ${total} woorden gevonden`);
+    barFill.parentElement.setAttribute('aria-valuetext', t('woordzoeker.foundValue', { n, total }));
     chips.forEach((chip, word) => {
       const done = found.has(word);
       chip.classList.toggle('found', done);
-      chip.setAttribute('aria-label', done ? `${word}, gevonden` : `${word}, nog niet gevonden. Tik voor een tip.`);
+      chip.setAttribute('aria-label', t(done ? 'woordzoeker.chipFound' : 'woordzoeker.chipTodo', { word }));
       const f = state.found.find((x) => x.word === word);
       if (f) chip.style.setProperty('--dot', `var(--pill-${(f.color ?? 0) % COLORS})`);
     });
@@ -145,12 +154,12 @@ export function mount(container, ctx) {
     if (!start) {
       start = { r, c };
       clearPreview(); pill([[r, c]], 'sel');
-      say('Begin gekozen. Tik nu op de laatste letter van het woord.');
+      say(t('woordzoeker.say.beginChosen'));
       render();
       return;
     }
     if (start.r === r && start.c === c) {      // nog eens op hetzelfde vakje: weer opnieuw kiezen
-      start = null; clearPreview(); say('Gewist. Kies een nieuwe eerste letter.'); render();
+      start = null; clearPreview(); say(t('woordzoeker.say.cleared')); render();
       return;
     }
     const s = start;
@@ -173,7 +182,7 @@ export function mount(container, ctx) {
       m.addEventListener('animationend', () => m.remove());
       setTimeout(() => m.remove(), 900);
     }
-    say('Dat is geen woord uit de lijst. Probeer het nog eens, je kunt niets verkeerd doen.');
+    say(t('woordzoeker.say.notInList'));
     render();
   }
 
@@ -199,10 +208,10 @@ export function mount(container, ctx) {
     render();
 
     if (left > 0) {
-      say(`Gevonden: ${word}! Nog ${left} te gaan.`);
+      say(t('woordzoeker.say.foundLeft', { word, n: left }));
       return;
     }
-    say('Gelukt! Je hebt alle woorden gevonden.');
+    say(t('woordzoeker.say.won'));
     finished = true;
     if (motionOK()) {
       root.classList.add('won');
@@ -218,7 +227,7 @@ export function mount(container, ctx) {
     if (finished) return;
     const w = word ? byWord.get(word) : puzzle.words.find((x) => !found.has(x.word));
     if (!w) return;
-    if (found.has(w.word)) { say(`${w.word} heb je al gevonden.`); return; }
+    if (found.has(w.word)) { say(t('woordzoeker.say.alreadyFound', { word: w.word })); return; }
     const cell = cellEl(w.r, w.c);
     cells.forEach((x) => x.classList.remove('hint'));
     void cell.offsetWidth;
@@ -226,7 +235,7 @@ export function mount(container, ctx) {
     clearTimeout(hintTimer);
     hintTimer = setTimeout(() => cell.classList.remove('hint'), 3200);
     cursor = { r: w.r, c: w.c };
-    say(`Tip: ${w.word} begint bij het oplichtende vakje (rij ${w.r + 1}, kolom ${w.c + 1}).`);
+    say(t('woordzoeker.say.hint', { word: w.word, r: w.r + 1, c: w.c + 1 }));
     render();
   }
 
@@ -281,7 +290,7 @@ export function mount(container, ctx) {
       cellEl(cursor.r, cursor.c).focus({ preventScroll: true });
       e.preventDefault();
     } else if (e.key === 'Escape' && start) {
-      start = null; clearPreview(); say('Gewist.'); render();
+      start = null; clearPreview(); say(t('woordzoeker.say.escape')); render();
     }
   }
 

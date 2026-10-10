@@ -8,6 +8,7 @@
 import { h, icon, choiceDialog } from '../../ui.js';
 import { generate, candidateMask, bitCount, PEERS } from './engine.js';
 import { burst, rain, motionOK } from '../../effects.js';
+import { t } from '../../i18n/index.js';
 
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const MAX_HISTORY = 300;
@@ -42,7 +43,7 @@ export function mount(container, ctx) {
 
   // ----- Opbouw -----
   const cells = [];
-  const board = h('div', { class: 'sudoku-board', role: 'grid', 'aria-label': 'Sudoku-rooster', onkeydown: onBoardKey });
+  const board = h('div', { class: 'sudoku-board', role: 'grid', 'aria-label': t('sudoku.gridAria'), onkeydown: onBoardKey });
   for (let r = 0; r < 9; r++) {
     const row = h('div', { role: 'row', class: 'sudoku-row' });
     for (let c = 0; c < 9; c++) {
@@ -62,20 +63,20 @@ export function mount(container, ctx) {
   const livesEl = h('div', { class: 'sudoku-lives', role: 'img' }, lifeEls);
   lifeEls.forEach((el) => el.addEventListener('animationend', () => el.classList.remove('losing')));
   const message = h('p', { class: 'sudoku-message', role: 'status', 'aria-live': 'polite' },
-    'Tik op een vakje en kies daarna een cijfer.');
+    t('sudoku.start'));
 
   const padButtons = DIGITS.map((d) => h('button', {
     type: 'button', class: 'btn pad-btn', 'data-digit': d, onclick: () => enter(d),
   }, String(d)));
-  const eraseButton = h('button', { type: 'button', class: 'btn pad-btn pad-erase', 'aria-label': 'Wis dit vakje', onclick: erase },
-    icon('eraser'), h('span', {}, 'Wis'));
-  const pad = h('div', { class: 'sudoku-pad', role: 'group', 'aria-label': 'Cijfers' }, padButtons, eraseButton);
+  const eraseButton = h('button', { type: 'button', class: 'btn pad-btn pad-erase', 'aria-label': t('sudoku.eraseAria'), onclick: erase },
+    icon('eraser'), h('span', {}, t('sudoku.erase')));
+  const pad = h('div', { class: 'sudoku-pad', role: 'group', 'aria-label': t('sudoku.digits') }, padButtons, eraseButton);
 
   const action = (iconName, label, onclick, attrs = {}) =>
     h('button', { type: 'button', class: 'btn action-btn', onclick, ...attrs }, icon(iconName), h('span', { class: 'action-label' }, label));
-  const undoButton = action('undo', 'Stap terug', undo);
-  const pencilButton = action('pencil', 'Potlood', togglePencil, { 'aria-pressed': 'false' });
-  const tipButton = action('bulb', 'Tip', tip);
+  const undoButton = action('undo', t('sudoku.undo'), undo);
+  const pencilButton = action('pencil', t('sudoku.pencil'), togglePencil, { 'aria-pressed': 'false' });
+  const tipButton = action('bulb', t('common.hint'), tip);
   const actions = h('div', { class: 'sudoku-actions' }, undoButton, pencilButton, tipButton);
 
   const root = h('div', { class: 'sudoku' },
@@ -125,17 +126,17 @@ export function mount(container, ctx) {
       const done = counts[k + 1] >= 9;
       b.disabled = done || finished;
       b.classList.toggle('done', done);
-      b.setAttribute('aria-label', done ? `Cijfer ${k + 1}, helemaal ingevuld` : `Cijfer ${k + 1}`);
+      b.setAttribute('aria-label', t(done ? 'sudoku.digitDone' : 'sudoku.digitAria', { n: k + 1 }));
     });
     eraseButton.disabled = finished;
     undoButton.disabled = finished || state.history.length === 0;
     tipButton.disabled = finished;
     pencilButton.disabled = finished;
     pencilButton.setAttribute('aria-pressed', String(pencil));
-    pencilButton.querySelector('.action-label').textContent = pencil ? 'Potlood aan' : 'Potlood';
+    pencilButton.querySelector('.action-label').textContent = pencil ? t('sudoku.pencilOn') : t('sudoku.pencil');
     root.dataset.pencil = String(pencil);
 
-    livesEl.setAttribute('aria-label', `Levens: ${state.lives} van ${maxLives}`);
+    livesEl.setAttribute('aria-label', t('sudoku.livesAria', { lives: state.lives, max: maxLives }));
     lifeEls.forEach((el, k) => el.classList.toggle('lost', k >= state.lives));
     lastPlaced = -1; lastNope = -1;                  // de beweging is nu gestart
   }
@@ -183,15 +184,10 @@ export function mount(container, ctx) {
 
   function label(i) {
     const r = Math.floor(i / 9) + 1, c = (i % 9) + 1;
-    let text = `Rij ${r}, kolom ${c}: `;
-    if (values[i]) text += `${values[i]}${puzzle[i] ? ', vast' : ''}`;
-    else if (notes[i]) text += `leeg, notities ${DIGITS.filter((d) => notes[i] & (1 << (d - 1))).join(' ')}`;
-    else text += 'leeg';
-    if (isWrong(i)) text += ', fout';
-    return text;
+    if (values[i]) return t(isWrong(i) ? 'sudoku.cell.wrong' : puzzle[i] ? 'sudoku.cell.given' : 'sudoku.cell.value', { r, c, n: values[i] });
+    if (notes[i]) return t('sudoku.cell.notes', { r, c, notes: DIGITS.filter((d) => notes[i] & (1 << (d - 1))).join(' ') });
+    return t('sudoku.cell.empty', { r, c });
   }
-
-  const levensText = (n) => (n === 1 ? 'nog 1 leven' : `nog ${n} levens`);
 
   // ----- Stappen vastleggen (voor ongedaan maken en bewaren) -----
   // Elke handeling is een lijst wijzigingen: [vakje, oud cijfer, oude notities].
@@ -223,7 +219,7 @@ export function mount(container, ctx) {
   async function win() {
     finished = true;
     render();
-    say('Gelukt! De puzzel is helemaal goed ingevuld.');
+    say(t('sudoku.say.won'));
     if (motionOK()) {                                    // eerst even genieten: golf over het hele rooster en een bui van blaadjes
       root.classList.add('won');
       sweep(values.map((_, i) => i), selected);
@@ -253,13 +249,13 @@ export function mount(container, ctx) {
   async function gameOver() {
     finished = true;
     render();
-    say('Je hebt geen levens meer.');
+    say(t('sudoku.say.noLives'));
     const choice = await choiceDialog({
-      title: 'Helaas, geen levens meer',
-      text: 'Wil je het nog eens proberen met dezelfde puzzel?',
+      title: t('sudoku.gameOver.title'),
+      text: t('sudoku.gameOver.text'),
       actions: [
-        { label: 'Opnieuw proberen', value: 'retry', primary: true, autofocus: true },
-        { label: ctx.daily ? 'Terug naar Start' : 'Andere puzzel', value: 'leave' },
+        { label: t('sudoku.gameOver.retry'), value: 'retry', primary: true, autofocus: true },
+        { label: ctx.daily ? t('sudoku.gameOver.leaveDaily') : t('sudoku.gameOver.leave'), value: 'leave' },
       ],
       dismissValue: 'retry',
     });
@@ -275,7 +271,7 @@ export function mount(container, ctx) {
     finished = false;
     selected = Math.max(0, firstEmptyOrWrong());
     ctx.save(state, { progress: progress() });
-    say('Nieuwe poging. Succes!');
+    say(t('sudoku.say.retry'));
     render();
     cells[selected].focus({ preventScroll: true });
   }
@@ -289,10 +285,10 @@ export function mount(container, ctx) {
 
   function enter(d) {
     if (finished) return;
-    if (puzzle[selected]) { say('Dit cijfer staat vast en kan niet veranderen. Kies een leeg vakje.'); return; }
+    if (puzzle[selected]) { say(t('sudoku.say.fixedChoose')); return; }
 
     if (pencil) {
-      if (values[selected]) { say('Wis eerst het cijfer in dit vakje om notities te maken.'); return; }
+      if (values[selected]) { say(t('sudoku.say.clearFirst')); return; }
       change([[selected, 0, notes[selected] ^ (1 << (d - 1))]]);
       say('');
       afterChange();
@@ -314,13 +310,13 @@ export function mount(container, ctx) {
     ctx.save(state, { progress: progress() });
     render();
     if (state.lives <= 0) { gameOver(); return; }
-    say(`Dat cijfer hoort hier niet. Je hebt ${levensText(state.lives)}. Wis het of probeer een ander cijfer.`);
+    say(t('sudoku.say.wrong', { n: state.lives }));
   }
 
   function erase() {
     if (finished) return;
-    if (puzzle[selected]) { say('Dit cijfer staat vast en kan niet veranderen.'); return; }
-    if (!values[selected] && !notes[selected]) { say('Dit vakje is al leeg.'); return; }
+    if (puzzle[selected]) { say(t('sudoku.say.fixed')); return; }
+    if (!values[selected] && !notes[selected]) { say(t('sudoku.say.alreadyEmpty')); return; }
     change([[selected, 0, 0]]);
     say('');
     afterChange();
@@ -328,10 +324,10 @@ export function mount(container, ctx) {
 
   function undo() {
     const record = state.history.pop();
-    if (!record) { say('Er is niets om terug te draaien.'); return; }
+    if (!record) { say(t('sudoku.say.nothingToUndo')); return; }
     for (const [i, v, n] of [...record].reverse()) { values[i] = v; notes[i] = n; }
     selected = record[0][0];
-    say('Je laatste stap is teruggedraaid.');
+    say(t('sudoku.say.undone'));
     ctx.save(state, { progress: progress() });
     render();
     cells[selected].focus({ preventScroll: true });
@@ -339,9 +335,7 @@ export function mount(container, ctx) {
 
   function togglePencil() {
     pencil = !pencil;
-    say(pencil
-      ? 'Potlood staat aan: de cijfers komen klein in het vakje, als notitie.'
-      : 'Potlood staat uit: de cijfers komen groot in het vakje.');
+    say(t(pencil ? 'sudoku.say.pencilOn' : 'sudoku.say.pencilOff'));
     render();
   }
 
@@ -359,13 +353,13 @@ export function mount(container, ctx) {
         if (n < best) { best = n; target = i; }
       });
     }
-    if (target < 0) { say('Er is niets meer in te vullen.'); return; }
+    if (target < 0) { say(t('sudoku.say.nothingLeft')); return; }
 
     const d = solution[target];
     selected = target;
     const before = completeUnits();
     change([[target, d, 0], ...PEERS[target].filter((j) => !values[j] && notes[j] & (1 << (d - 1))).map((j) => [j, 0, notes[j] & ~(1 << (d - 1))])]);
-    say(`Tip: in het gemarkeerde vakje hoort een ${d}.`);
+    say(t('sudoku.say.hint', { n: d }));
     celebrateRight(target, before);
     afterChange();
     if (!finished) cells[selected].focus({ preventScroll: true });

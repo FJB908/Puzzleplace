@@ -1,0 +1,17 @@
+# Het scherm voor het spelen van een spel: uitleg, niveau kiezen, starten.
+detail.solved_one | Already solved once | Al één keer opgelost
+detail.solved_other | Already solved {n} times | Al {n} keer opgelost
+detail.howTo | How it works | Zo werkt het
+detail.soon | This game is coming soon. | Dit spel komt binnenkort.
+detail.soonText | We are working on it. Try another game in the meantime. | We werken eraan. Probeer ondertussen een ander spel.
+detail.backToGames | Back to all games | Terug naar alle spellen
+detail.howHard | How hard? | Hoe moeilijk?
+# {newGame} is de tekst van de knop "Nieuw spel" hieronder (zet hem tussen aanhalingstekens zoals gebruikelijk in jouw taal)
+detail.levelLocked | You are already playing this game. Choose "{newGame}" to pick a different level. | Je speelt dit spel al. Kies "{newGame}" om een ander niveau te kiezen.
+detail.newGameConfirmTitle | Start a new game? | Nieuw spel beginnen?
+detail.newGameConfirmText | Your saved game will be replaced. | Je bewaarde spel wordt dan vervangen.
+detail.newGameConfirmYes | Yes, new game | Ja, nieuw spel
+detail.continue | Continue | Verder spelen
+detail.continuePct | Continue · {pct}% | Verder spelen · {pct}%
+detail.newGame | New game | Nieuw spel
+detail.start | Start game | Spel starten

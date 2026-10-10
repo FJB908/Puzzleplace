@@ -3,7 +3,7 @@
 // Een puzzel: { theme, size, grid (array van rijstrings), words: [{ word, r, c, dr, dc }] }
 // Zelfde seed + niveau = precies dezelfde puzzel.
 
-import { THEMES } from './woorden.js';
+import { themas } from './themas.js';
 
 const ALL = [[0, 1], [1, 0], [1, 1], [-1, 1], [0, -1], [-1, 0], [-1, -1], [1, -1]];
 
@@ -15,10 +15,6 @@ export const LEVELS = {
   moeilijk:  { size: 12, count: 11, minLen: 4, maxLen: 10, dirs: ALL },
   extreem:   { size: 13, count: 15, minLen: 5, maxLen: 11, dirs: ALL },
 };
-
-// Letterfrequentie van het Nederlands: de opvulletters lijken dan echt op Nederlandse tekst
-const FREQ = { E: 19, N: 10, A: 7.5, T: 6.8, I: 6.5, R: 6.4, O: 6, D: 5.9, S: 3.7, L: 3.6, G: 3.4, V: 2.9, H: 2.4, K: 2.3, M: 2.2, B: 2, U: 2, P: 1.6, W: 1.5, J: 1.5, Z: 1.4, C: 1.2, F: .8, X: .1, Y: .1 };
-const LETTERS = Object.keys(FREQ), TOTAL = Object.values(FREQ).reduce((a, b) => a + b, 0);
 
 export function makeRng(seed) {
   let h = 1779033703 ^ seed.length;
@@ -43,10 +39,12 @@ const reverse = (s) => [...s].reverse().join('');
 // Twee woorden mogen niet in elkaar zitten (ook niet achterstevoren), anders is "gevonden" dubbelzinnig.
 const clash = (a, b) => a.includes(b) || b.includes(a) || a.includes(reverse(b)) || b.includes(reverse(a));
 
-function randomLetter(rng) {
-  let x = rng() * TOTAL;
-  for (const l of LETTERS) { x -= FREQ[l]; if (x <= 0) return l; }
-  return 'E';
+// Opvulletters zoals in echte tekst van de taal (de letterfrequentie staat in frequentie.js)
+function randomLetter(rng, freq) {
+  const letters = Object.keys(freq);
+  let x = rng() * letters.reduce((som, l) => som + freq[l], 0);
+  for (const l of letters) { x -= freq[l]; if (x <= 0) return l; }
+  return letters[0];
 }
 
 // Past dit woord hier? Telt hoeveel letters al goed staan (overlap), of -1 als het niet kan.
@@ -62,7 +60,8 @@ function fit(cells, size, word, r, c, dr, dc) {
   return overlap === word.length ? -1 : overlap;        // niet helemaal over een ander woord heen
 }
 
-export function generate(seed, level = 'makkelijk') {
+export function generate(seed, level = 'makkelijk', taal = 'nl') {
+  const { THEMES, FREQ } = themas(taal);               // het woordenboek van de taal moet al geladen zijn (laadThemas)
   const spec = LEVELS[level] || LEVELS.makkelijk;
   const rng = makeRng(`${seed}|${level}`);
   const { size } = spec;
@@ -97,12 +96,12 @@ export function generate(seed, level = 'makkelijk') {
     }
     if (!ok) continue;
 
-    for (let i = 0; i < cells.length; i++) if (!cells[i]) cells[i] = randomLetter(rng);
+    for (let i = 0; i < cells.length; i++) if (!cells[i]) cells[i] = randomLetter(rng, FREQ);
     const grid = Array.from({ length: size }, (_, r) => cells.slice(r * size, (r + 1) * size).join(''));
-    placed.sort((a, b) => a.word.localeCompare(b.word, 'nl'));
+    placed.sort((a, b) => (a.word < b.word ? -1 : a.word > b.word ? 1 : 0));
     return { theme: theme.title, themeId: theme.id, size, grid, words: placed };
   }
-  throw new Error('Kon geen woordzoeker maken');
+  throw new Error(`Kon geen woordzoeker maken (${taal}, ${level})`);
 }
 
 // ----- Hulpfuncties voor het spel -----

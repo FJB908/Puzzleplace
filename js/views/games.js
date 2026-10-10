@@ -1,6 +1,7 @@
 // Spellen: elk spel als een kaart met een eigen illustratie, een korte uitleg en jouw voortgang.
 
 import { h, icon } from '../ui.js';
+import { t } from '../i18n/index.js';
 import { games, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { gameArt } from '../games/art.js';
@@ -15,11 +16,11 @@ function card(game) {
   art.innerHTML = gameArt(game.id);
 
   const chips = [];
-  if (!ready) chips.push(h('span', { class: 'chip' }, 'Komt binnenkort'));
+  if (!ready) chips.push(h('span', { class: 'chip' }, t('games.comingSoon')));
   else {
-    if (busy) chips.push(h('span', { class: 'chip chip-busy' }, pct != null ? `Bezig · ${pct}%` : 'Bezig'));
-    if (rec.completed) chips.push(h('span', { class: 'chip chip-done' }, icon('check'), rec.completed === 1 ? 'Eén keer opgelost' : `${rec.completed} keer opgelost`));
-    if (!busy && !rec.completed) chips.push(h('span', { class: 'chip' }, `${game.difficulties.length} niveaus`));
+    if (busy) chips.push(h('span', { class: 'chip chip-busy' }, pct != null ? t('games.inProgressPct', { pct }) : t('games.inProgress')));
+    if (rec.completed) chips.push(h('span', { class: 'chip chip-done' }, icon('check'), t('games.solved', { n: rec.completed })));
+    if (!busy && !rec.completed) chips.push(h('span', { class: 'chip' }, t('games.levels', { n: game.difficulties.length })));
   }
 
   return h('li', {}, h('a', { class: `game-card game--${game.id}`, href: `#/spel/${game.id}` },
@@ -35,10 +36,10 @@ export function gamesView() {
   const sorted = [...games].sort((a, b) => Number(isReady(b)) - Number(isReady(a)));
   const node = h('div', { class: 'view' },
     h('header', { class: 'page-header' },
-      h('h1', { tabindex: '-1' }, 'Spellen'),
-      h('p', {}, 'Kies een spel om te spelen.'),
+      h('h1', { tabindex: '-1' }, t('games.title')),
+      h('p', {}, t('games.subtitle')),
     ),
     h('ul', { class: 'game-grid' }, sorted.map(card)),
   );
-  return { title: 'Spellen', nav: 'games', decor: 'hang-rechts', node };
+  return { title: t('games.title'), nav: 'games', decor: 'hang-rechts', node };
 }

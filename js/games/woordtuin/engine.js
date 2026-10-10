@@ -12,16 +12,24 @@
 //   owner    per vakje 0 (open), 1 of 2 (speler 1 of 2)
 //   last     { player, word, path, took, fresh } de laatste zet, om te laten zien wat er gebeurde
 
-import { WOORDEN, ALLEDAAGS } from './woorden.js';
+import { woordenboek } from './woordenboek.js';
+import { TALEN } from '../../shared/talen.js';
+import { zoek, invullen } from '../../shared/opmaak.js';
+import EN from '../../i18n/talen/en.js';
+import { SCHAAL } from './schaal.js';
 
 export const SIZE = 6;
 export const MIN_LEN = 3;
 export const MAX_LEN = 7;
 
-// Foutmeldingen komen letterlijk bij de speler terecht: gewoon Nederlands, nooit een verwijt.
+// Een zet die niet mag. `code` zegt wat er mis is, `key` (+ `params`) verwijst naar de tekst in het taalpakket (err.<key>), zodat de app hem in
+// de taal van de speler laat zien; `message` is dezelfde tekst in het Engels. Nooit een verwijt.
 export class MoveError extends Error {
-  constructor(code, message) { super(message); this.code = code; }
+  constructor(code, key, params = {}) { super(invullen(zoek(EN, `err.${key}`, params, 'en') ?? key, params)); this.code = code; this.key = key; this.params = params; }
 }
+
+// In welke taal wordt deze partij gespeeld? Partijen van voor de meertaligheid zijn Nederlands.
+export const taalVan = (state) => state.lang || 'nl';
 
 // ---------- Willekeur (zelfde zaad = zelfde bord) ----------
 
@@ -38,25 +46,14 @@ export function makeRng(seed) {
 }
 
 // ---------- Woordenlijst ----------
+// (de woorden staan per taal in woordenboek.js)
 
-let trie = null;
-function buildTrie() {
-  trie = { kids: new Map(), end: false, com: false };
-  for (const w of WOORDEN) {
-    let node = trie;
-    for (const ch of w) { let next = node.kids.get(ch); if (!next) node.kids.set(ch, (next = { kids: new Map(), end: false, com: false })); node = next; }
-    node.end = true; node.com = ALLEDAAGS.has(w);
-  }
-}
-const root = () => { if (!trie) buildTrie(); return trie; };
-const WOORDSET = new Set(WOORDEN);
-export const isWord = (w) => WOORDSET.has(w);
+export const isWord = (w, taal = 'nl') => woordenboek(taal).set.has(w);
+const root = (taal) => woordenboek(taal).trie;
 
 // ---------- Bord ----------
 
-// Letterverdeling: veel klinkers en gewone medeklinkers, geen q, x of y, zodat er genoeg woorden in zitten.
-const VERDELING = { a: 7, b: 2, c: 1, d: 5, e: 17, f: 1, g: 3, h: 3, i: 4, j: 1, k: 3, l: 4, m: 3, n: 9, o: 6, p: 2, r: 5, s: 4, t: 5, u: 2, v: 2, w: 2, z: 2 };
-const ZAK = Object.entries(VERDELING).flatMap(([c, n]) => Array(n).fill(c));
+// De letters van het bord komen uit de zak van de taal: zo vaak als ze voorkomen in de alledaagse woorden, zonder zeldzame letters (q, x, ...).
 
 export function neighbors(i, size = SIZE) {
   const r = Math.floor(i / size), c = i % size, out = [];
@@ -71,7 +68,7 @@ const NEIGH = new Map();
 const nb = (i, size) => { const k = size * 100 + i; let v = NEIGH.get(k); if (!v) NEIGH.set(k, (v = neighbors(i, size))); return v; };
 
 // Alle woorden die op een bord te maken zijn, met de vakjes die ze gebruiken. alledaags: alleen gewone, alledaagse woorden.
-function scan(letters, size, alledaags = false) {
+function scan(letters, size, alledaags = false, taal = 'nl') {
   const found = [], used = new Array(letters.length).fill(false), path = [];
   const seen = new Set();
   function dfs(i, node) {
@@ -85,35 +82,38 @@ function scan(letters, size, alledaags = false) {
     if (path.length < MAX_LEN) for (const j of nb(i, size)) if (!used[j]) dfs(j, next);
     used[i] = false; path.pop();
   }
-  for (let i = 0; i < letters.length; i++) dfs(i, root());
+  for (let i = 0; i < letters.length; i++) dfs(i, root(taal));
   return found;
 }
 
 // Is het een goed bord? Genoeg woorden, bijna elk vakje komt in een woord voor en er zijn een paar mooie lange woorden.
-function boardQuality(letters, size) {
-  const words = scan(letters, size, true);          // een goed bord heeft genoeg ALLEDAAGSE woorden: die zoekt iedereen
+function boardQuality(letters, size, taal) {
+  const words = scan(letters, size, true, taal);          // een goed bord heeft genoeg ALLEDAAGSE woorden: die zoekt iedereen
   const covered = new Set(); for (const m of words) for (const i of m.path) covered.add(i);
   const long = new Set(words.filter((m) => m.word.length >= 6).map((m) => m.word)).size;
   return { count: words.length, coverage: covered.size / letters.length, long };
 }
 const GOED = (size) => ({ count: Math.round(size * size * 3), coverage: 0.92, long: 3 });
-// Een bord moet er ook natuurlijk uitzien: genoeg klinkers en niet te veel van dezelfde letter
-function ziet_er_goed_uit(letters) {
-  const n = letters.length, klinkers = [...letters].filter((c) => 'aeiou'.includes(c)).length;
-  if (klinkers < n * 0.3 || klinkers > n * 0.5) return false;
+// Een bord moet er ook natuurlijk uitzien: een gewoon aandeel klinkers (zoals de taal dat heeft) en niet te veel van dezelfde letter
+function zietErGoedUit(letters, taal, zak) {
+  const n = letters.length, klinkers = TALEN[taal].klinkers;
+  const aandeel = zak.filter((c) => klinkers.includes(c)).length / zak.length;
+  const aantal = [...letters].filter((c) => klinkers.includes(c)).length;
+  if (aantal < n * Math.max(0.2, aandeel - 0.1) || aantal > n * Math.min(0.65, aandeel + 0.1)) return false;
   const per = {}; for (const c of letters) per[c] = (per[c] || 0) + 1;
   return Math.max(...Object.values(per)) <= Math.ceil(n * 0.2);
 }
 
-export function makeBoard(seed, size = SIZE) {
+export function makeBoard(seed, size = SIZE, taal = 'nl') {
   const rng = makeRng(`bord|${seed}|${size}`);
   const need = GOED(size);
+  const ZAK = woordenboek(taal).zak;
   let best = null, bestScore = -1;
   for (let attempt = 0; attempt < 400; attempt++) {
     let letters = '';
     for (let i = 0; i < size * size; i++) letters += ZAK[Math.floor(rng() * ZAK.length)];
-    if (!ziet_er_goed_uit(letters)) continue;
-    const q = boardQuality(letters, size);
+    if (!zietErGoedUit(letters, taal, ZAK)) continue;
+    const q = boardQuality(letters, size, taal);
     if (q.count >= need.count && q.coverage >= need.coverage && q.long >= need.long) return letters;
     const score = Math.min(q.count / need.count, 1) + q.coverage + Math.min(q.long / need.long, 1);
     if (score > bestScore) { bestScore = score; best = letters; }
@@ -123,9 +123,9 @@ export function makeBoard(seed, size = SIZE) {
 
 // ---------- Spel ----------
 
-export function newGame(seed, { size = SIZE, first = 1 } = {}) {
-  const letters = makeBoard(seed, size);
-  return { size, letters, owner: new Array(size * size).fill(0), played: [], turn: first, over: false, passed: false, last: null };
+export function newGame(seed, { size = SIZE, first = 1, lang = 'nl' } = {}) {
+  const letters = makeBoard(seed, size, lang);
+  return { lang, size, letters, owner: new Array(size * size).fill(0), played: [], turn: first, over: false, passed: false, last: null };
 }
 
 export const other = (p) => 3 - p;
@@ -148,23 +148,21 @@ export function counts(state) {
   return n;
 }
 
-export const explainUnknown = () => 'Dit woord kennen we niet. Probeer een ander woord.';
-
 // Controleert een zet en vertelt wat er zou gebeuren. Gooit een MoveError met een gewone zin als het niet mag.
 export function checkMove(state, player, path) {
   const { size, letters, owner } = state;
-  if (state.over) throw new MoveError('klaar', 'Deze partij is afgelopen.');
-  if (state.turn !== player) throw new MoveError('beurt', 'Je bent nog niet aan de beurt.');
-  if (!Array.isArray(path) || path.some((i) => !Number.isInteger(i) || i < 0 || i >= size * size)) throw new MoveError('pad', 'Dit pad klopt niet.');
-  if (path.length < MIN_LEN) throw new MoveError('lengte', `Een woord heeft minstens ${MIN_LEN} letters.`);
-  if (path.length > MAX_LEN) throw new MoveError('lengte', `Een woord heeft hoogstens ${MAX_LEN} letters.`);
-  if (new Set(path).size !== path.length) throw new MoveError('pad', 'Je kunt een letter maar één keer gebruiken.');
-  for (let k = 1; k < path.length; k++) if (!nb(path[k - 1], size).includes(path[k])) throw new MoveError('pad', 'De letters van een woord moeten aan elkaar grenzen.');
+  if (state.over) throw new MoveError('klaar', 'move.over');
+  if (state.turn !== player) throw new MoveError('beurt', 'notYourTurn');
+  if (!Array.isArray(path) || path.some((i) => !Number.isInteger(i) || i < 0 || i >= size * size)) throw new MoveError('pad', 'move.path');
+  if (path.length < MIN_LEN) throw new MoveError('lengte', 'move.minLength', { n: MIN_LEN });
+  if (path.length > MAX_LEN) throw new MoveError('lengte', 'move.maxLength', { n: MAX_LEN });
+  if (new Set(path).size !== path.length) throw new MoveError('pad', 'move.reuse');
+  for (let k = 1; k < path.length; k++) if (!nb(path[k - 1], size).includes(path[k])) throw new MoveError('pad', 'move.adjacent');
   const word = path.map((i) => letters[i]).join('');
-  if (!isWord(word)) throw new MoveError('onbekend', explainUnknown());
-  if (state.played.includes(word)) throw new MoveError('gespeeld', `"${word}" is in deze partij al gespeeld. Kies een ander woord.`);
+  if (!isWord(word, taalVan(state))) throw new MoveError('onbekend', 'move.unknown');
+  if (state.played.includes(word)) throw new MoveError('gespeeld', 'move.played', { word });
   const fresh = path.filter((i) => owner[i] === 0);
-  if (!fresh.length) throw new MoveError('open', 'Elk woord moet minstens één open vakje kleuren. Zoek een woord met een wit vakje.');
+  if (!fresh.length) throw new MoveError('open', 'move.noFresh');
   const took = path.filter((i) => owner[i] === other(player) && !isProtected(owner, i, size));
   const kept = path.filter((i) => owner[i] === other(player) && isProtected(owner, i, size));
   return { word, fresh, took, kept };
@@ -176,6 +174,7 @@ export const hasMove = (state, player) => legalMoves(state, player, true).length
 // met 'alledaags' alleen gewone, niet-grove woorden: die kiest de computer en die gebruiken de tips).
 export function legalMoves(state, player, first = false, alledaags = false) {
   const { size, letters, owner } = state;
+  const taal = taalVan(state);
   const out = [];
   const played = new Set(state.played);
   let stop = false;
@@ -195,7 +194,7 @@ export function legalMoves(state, player, first = false, alledaags = false) {
     if (!stop && path.length < MAX_LEN) for (const j of nb(i, size)) if (!used[j]) dfs(j, next);
     used[i] = false; path.pop();
   }
-  for (let i = 0; i < letters.length && !stop; i++) dfs(i, root());
+  for (let i = 0; i < letters.length && !stop; i++) dfs(i, root(taal));
   return out;
 }
 
@@ -269,7 +268,9 @@ export function botMove(state, player, niveau = 'gemiddeld', rng = Math.random) 
   const cfg = NIVEAUS[niveau] || NIVEAUS.gemiddeld;
   const all = legalMoves(state, player, false, true);        // de computer speelt alleen alledaagse woorden
   if (!all.length) return null;
-  let pool = cfg.ziet < 1 ? all.filter(() => rng() < cfg.ziet) : all;
+  // Hoeveel woorden de computer ziet hangt af van het aantal woorden dat de taal heeft (SCHAAL): zo is Makkelijk in elke taal even makkelijk
+  const ziet = cfg.ziet < 1 ? Math.min(1, cfg.ziet * (SCHAAL[taalVan(state)] ?? 1)) : 1;
+  let pool = ziet < 1 ? all.filter(() => rng() < ziet) : all;
   if (!pool.length) pool = [all[Math.floor(rng() * all.length)]];
   if (cfg.slordig && rng() < cfg.slordig) return pool[Math.floor(rng() * pool.length)];
   const after = (m) => applyMove({ ...state, turn: player }, player, m.path);

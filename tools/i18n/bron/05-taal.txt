@@ -1,0 +1,7 @@
+# Het scherm waar je je taal kiest (de eerste keer als de app je taal niet herkent, en later bij Instellingen).
+# De taalnamen zelf (Deutsch, Français, ...) worden niet vertaald: elke taal staat in zijn eigen naam.
+language.title | Language | Taal
+language.choose | Choose your language | Kies je taal
+language.chooseLater | You can change this later in Settings. | Je kunt dit later veranderen bij Instellingen.
+language.current | Language | Taal
+language.chosen | selected | gekozen

@@ -1,0 +1,10 @@
+# Formulieren (inloggen, account, vrienden): knoppen en foutmeldingen die overal terugkomen.
+forms.show | Show | Toon
+forms.hide | Hide | Verberg
+forms.suggestPassword | Think of a password for me | Bedenk een wachtwoord voor mij
+forms.fieldEmpty | This field is empty. | Dit veld is nog leeg.
+forms.wrong | Something went wrong. Please try again. | Er ging iets mis. Probeer het nog eens.
+forms.busy | One moment… | Even wachten…
+# 24 gewone, makkelijke woorden uit jouw taal (zelfstandige naamwoorden van 4 tot 7 letters, liefst zonder accenten), gescheiden door een komma.
+# Een voorgesteld wachtwoord bestaat uit drie van deze woorden met streepjes ertussen, bijvoorbeeld rozen-molen-zomer. Elk woord moet uit het lijstje van alleen letters bestaan.
+forms.passwordWords | roses,mill,summer,tulips,bicycle,rain,moon,stars,coffee,cake,blossom,garden,butterfly,apple,boat,beach,bread,candle,spring,sunny,clover,bridge,clouds,honey | rozen,molen,zomer,tulpen,fiets,regen,maan,sterren,koffie,taart,bloesem,tuin,vlinder,appel,boot,strand,brood,kaars,lente,zonnig,klaver,brug,wolken,honing

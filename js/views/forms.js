@@ -2,14 +2,14 @@
 // Elke knop laat zien dat hij bezig is, zodat niemand twee keer tikt.
 
 import { h, icon } from '../ui.js';
+import { t, foutTekst } from '../i18n/index.js';
 
-const WORDS = ['rozen', 'molen', 'zomer', 'tulpen', 'fiets', 'regen', 'maan', 'sterren', 'koffie', 'taart', 'bloesem', 'tuin', 'vlinder', 'appel', 'boot', 'strand', 'brood', 'kaars', 'lente', 'zonnig', 'klaver', 'brug', 'wolken', 'honing'];
 export function suggestPassword() {
-  const pick = () => { const a = new Uint32Array(1); crypto.getRandomValues(a); return WORDS[a[0] % WORDS.length]; };
+  const woorden = t('forms.passwordWords').split(',').map((w) => w.trim()).filter(Boolean);
+  const pick = () => { const a = new Uint32Array(1); crypto.getRandomValues(a); return woorden[a[0] % woorden.length]; };
   return `${pick()}-${pick()}-${pick()}`;
 }
 
-// suggestions: een lijstje waaruit het veld kan voorstellen (bijv. je eerder gebruikte e-mailadres)
 export function field({ label, name, type = 'text', autocomplete, hint, value = '', inputmode, maxlength, required = true, enterkeyhint, autofocus = false, suggestions = [] }) {
   const id = `f-${name}`;
   const err = h('p', { class: 'field-error', id: `${id}-err`, role: 'alert', hidden: true });
@@ -27,27 +27,27 @@ export function field({ label, name, type = 'text', autocomplete, hint, value = 
 }
 
 // Wachtwoordveld: met "Toon" (zodat je kunt controleren wat je typt) en optioneel "Bedenk een wachtwoord"
-export function passwordField({ label = 'Wachtwoord', name = 'wachtwoord', autocomplete = 'current-password', hint, suggest = false }) {
+export function passwordField({ label = t('account.password'), name = 'wachtwoord', autocomplete = 'current-password', hint, suggest = false }) {
   const f = field({ label, name, type: 'password', autocomplete, hint });
   const toggle = h('button', { type: 'button', class: 'btn pw-toggle', 'aria-pressed': 'false', onclick: () => {
     const show = f.input.type === 'password';
     f.input.type = show ? 'text' : 'password';
     toggle.setAttribute('aria-pressed', String(show));
-    toggle.lastChild.textContent = show ? 'Verberg' : 'Toon';
-  } }, icon('eye'), h('span', {}, 'Toon'));
+    toggle.lastChild.textContent = show ? t('forms.hide') : t('forms.show');
+  } }, icon('eye'), h('span', {}, t('forms.show')));
   const wrap = h('div', { class: 'pw-wrap' }, f.input, toggle);
   f.el.insertBefore(wrap, f.el.querySelector('.field-error'));
   if (suggest) {
     f.el.insertBefore(h('button', { type: 'button', class: 'btn btn-quiet pw-suggest', onclick: () => {
-      f.input.value = suggestPassword(); f.input.type = 'text'; toggle.setAttribute('aria-pressed', 'true'); toggle.lastChild.textContent = 'Verberg';
+      f.input.value = suggestPassword(); f.input.type = 'text'; toggle.setAttribute('aria-pressed', 'true'); toggle.lastChild.textContent = t('forms.hide');
       f.error(''); f.input.focus();
-    } }, icon('bulb'), 'Bedenk een wachtwoord voor mij'), f.el.querySelector('.field-error'));
+    } }, icon('bulb'), t('forms.suggestPassword')), f.el.querySelector('.field-error'));
   }
   return f;
 }
 
 // Een formulier met een knop. onSubmit(waarden) mag een ApiFail gooien: de melding komt bij het juiste veld te staan.
-export function form({ fields, submitLabel, busyLabel = 'Even wachten…', onSubmit, extra = null }) {
+export function form({ fields, submitLabel, busyLabel = t('forms.busy'), onSubmit, extra = null }) {
   const message = h('p', { class: 'form-error', role: 'alert', hidden: true });
   const button = h('button', { type: 'submit', class: 'btn btn-primary btn-block' }, submitLabel);
   const el = h('form', { class: 'form stack', novalidate: true,
@@ -57,13 +57,13 @@ export function form({ fields, submitLabel, busyLabel = 'Even wachten…', onSub
       message.hidden = true;
       const values = Object.fromEntries(fields.map((f) => [f.name, f.input.value]));
       const empty = fields.find((f) => !f.input.value.trim());
-      if (empty) { empty.error('Dit veld is nog leeg.'); empty.input.focus(); return; }
+      if (empty) { empty.error(t('forms.fieldEmpty')); empty.input.focus(); return; }
       button.disabled = true; button.textContent = busyLabel;
       try { await onSubmit(values); }
       catch (err) {
         const target = fields.find((f) => f.name === err.code);
-        if (target) { target.error(err.message); target.input.focus(); }
-        else { message.textContent = err.message || 'Er ging iets mis. Probeer het nog eens.'; message.hidden = false; }
+        if (target) { target.error(foutTekst(err)); target.input.focus(); }
+        else { message.textContent = foutTekst(err) || t('forms.wrong'); message.hidden = false; }
       } finally { button.disabled = false; button.textContent = submitLabel; }
     } },
   fields.map((f) => f.el), message, button, extra);

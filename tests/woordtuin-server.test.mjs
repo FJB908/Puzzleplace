@@ -29,11 +29,14 @@ test('Woordtuin tegen een vriend: een hele partij via de server', async () => {
   const made = await s.call('POST', '/api/matches', { with: b.id, game: 'woordtuin', config: { tips: 7, onzin: true } }, a.token);
   assert.equal(made.status, 201, JSON.stringify(made.json));
   const m0 = made.json.match;
-  assert.deepEqual(m0.config, { tips: 0 }, 'alleen toegestane instellingen blijven over');
+  assert.deepEqual(m0.config, { tips: 0, lang: 'nl' }, 'alleen toegestane instellingen blijven over; een partij zonder taal is Nederlands');
+  assert.equal(m0.pub.lang, 'nl');
   assert.equal(m0.pub.letters.length, 36);
   assert.equal(m0.pub.over, false);
   assert.ok([a.id, b.id].includes(m0.turn));
   assert.equal(m0.pub.secret, undefined);
+  const onbekend = await s.call('POST', '/api/matches', { with: b.id, game: 'woordtuin', config: { lang: 'xx' } }, a.token);
+  assert.equal(onbekend.status, 400); assert.equal(onbekend.json.error.key, 'lang.unknown');
   const vriendelijk = (await s.call('POST', '/api/matches', { with: b.id, game: 'woordtuin', config: { tips: 3 } }, a.token)).json.match;
   assert.equal(vriendelijk.config.tips, 3);
 

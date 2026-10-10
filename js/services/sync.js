@@ -3,6 +3,7 @@
 // Er gaat nooit voortgang verloren: bij twijfel blijft het spel dat het laatst is gespeeld.
 
 import { api, ApiFail } from './backend.js';
+import { t, foutTekst } from '../i18n/index.js';
 import * as store from '../store.js';
 import * as auth from './auth.js';
 import { mergeSnapshots, sameSnapshot } from '../shared/merge.js';
@@ -28,9 +29,9 @@ export async function syncNow() {
       try { await api('PUT', '/api/sync', { baseVersion: remote.version, data: merged }); setStatus({ state: 'ok', at: Date.now(), error: '' }); return; }
       catch (e) { if (!(e instanceof ApiFail) || e.status !== 409) throw e; }      // intussen veranderd op een ander apparaat: opnieuw samenvoegen
     }
-    throw new ApiFail(409, 'versie', 'Het synchroniseren lukte niet. Probeer het straks nog eens.');
+    throw new ApiFail(409, 'versie', t('err.syncFailed'), 'syncFailed');
   } catch (e) {
-    setStatus({ state: 'fout', at: status.at, error: e.message });
+    setStatus({ state: 'fout', at: status.at, error: foutTekst(e) });
   } finally {
     busy = false;
     if (again) { again = false; schedule(500); }

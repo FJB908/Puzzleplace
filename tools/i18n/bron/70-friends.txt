@@ -1,0 +1,64 @@
+# Vrienden: je vriendencode, verzoeken, je vrienden en jullie partijen.
+common.yes | Yes | Ja
+common.no | No | Nee
+common.fine | Fine | Prima
+common.didNotWork | That did not work | Dat lukte niet
+friends.subtitle | Play together with people you know. | Speel samen met mensen die je kent.
+friends.loggedOut.link | Someone wants to add you as a friend. First create an account or log in; then you continue straight away. | Iemand wil je als vriend toevoegen. Maak eerst een account of log in; daarna ga je meteen verder.
+friends.loggedOut.text | Play together with people you know. You need an account for that. | Speel samen met mensen die je kent. Daarvoor heb je een account nodig.
+friends.shareLinkCopied | Link copied | Link gekopieerd
+friends.renewCode | Make a new code | Nieuwe code maken
+friends.renew.title | Make a new code? | Nieuwe code maken?
+friends.renew.text | Your old code will stop working. Your existing friends stay your friends. | Je oude code werkt dan niet meer. Je bestaande vrienden blijven gewoon je vrienden.
+friends.renew.yes | Yes, new code | Ja, nieuwe code
+friends.renewed | New code made | Nieuwe code gemaakt
+friends.yourCode | Your friend code | Jouw vriendencode
+friends.yourCodeHint | Give this code to someone you know. They can then add you as a friend. | Geef deze code aan iemand die je kent. Die kan jou dan als vriend toevoegen.
+# {me} en {them} zijn aantallen gewonnen partijen, bijvoorbeeld "jullie staan 2–1"
+friends.score | you are {me}–{them} | jullie staan {me}–{them}
+friends.deletedAccount | Deleted account | Verwijderd account
+friends.addTitle | Add a friend | Vriend toevoegen
+friends.haveCode | Did you get a code? | Heb je een code gekregen?
+friends.haveCodeHint | Type someone else's friend code. Capitals and dashes do not matter. | Typ de vriendencode van iemand anders. Hoofdletters en streepjes maakt niet uit.
+friends.sendRequest | Send request | Verzoek sturen
+friends.nowFriends | You and {name} are now friends! | Jij en {name} zijn nu vrienden!
+friends.nowFriendsAnnounce | You and {name} are now friends. | Jij en {name} zijn nu vrienden.
+friends.requestSentAnnounce | Request sent to {name}. | Verzoek verstuurd naar {name}.
+friends.requestSent | Request sent to {name}. As soon as {name} accepts, you will see it here. | Verzoek verstuurd naar {name}. Zodra {name} accepteert, zie je het hier.
+friends.wantsToBe | Do you want to be friends? | Wil je vrienden worden?
+friends.wantsToBeRow | wants to be your friend | wil je als vriend
+friends.waiting | Waiting for an answer | Wacht op antwoord
+# {when} is bijvoorbeeld "yesterday" of "3 days ago"
+friends.asked | asked {when} | gevraagd {when}
+friends.withdraw | Withdraw | Intrekken
+friends.withdrawn | Request withdrawn. | Verzoek ingetrokken.
+friends.games | Your games | Partijen
+# {game} is de naam van het spel, {name} de naam van de vriend
+friends.gameWith | {game} with {name} | {game} met {name}
+friends.statusTurn | It is your turn | Jij bent aan de beurt
+friends.statusTheirTurn | {name} is to move | {name} is aan de beurt
+friends.scoreLine | You {mine} · {name} {theirs} · {open} open | Jij {mine} · {name} {theirs} · nog {open} open
+friends.play | Play | Spelen
+friends.view | View | Bekijken
+friends.open | Open | Openen
+friends.ariaPlay | Play the game with {name} | Speel de partij met {name}
+friends.ariaView | View the game with {name} | Bekijk de partij met {name}
+friends.ariaOpen | Open the game with {name} | Open de partij met {name}
+friends.yourFriends | Your friends | Jouw vrienden
+friends.yourFriendsN | Your friends ({n}) | Jouw vrienden ({n})
+friends.lastSeen | last seen {when} | laatst gezien {when}
+friends.playWith | Play {game} with {name} | {game} spelen met {name}
+friends.remove | Remove | Verwijderen
+friends.removeAria | Remove {name} | {name} verwijderen
+friends.removeTitle | Remove {name}? | {name} verwijderen?
+friends.removeText | You will no longer be friends. You can always send a new request later. | Jullie zijn dan geen vrienden meer. Je kunt later altijd weer een verzoek sturen.
+friends.removeYes | Yes, remove | Ja, verwijderen
+friends.removed | {name} has been removed. | {name} is verwijderd.
+friends.none.title | No friends yet | Nog geen vrienden
+friends.none.text | Share your code with someone you know, or enter someone else's code above. As soon as you are friends, you can play together. | Deel je code met iemand die je kent, of vul hierboven de code van iemand anders in. Zodra jullie vrienden zijn, kun je samen spelen.
+friends.link.brokenTitle | This link does not work | Deze link werkt niet
+friends.link.ownTitle | This is your own code | Dit is je eigen code
+friends.link.ownText | Send this link to someone else, then they can add you. | Stuur deze link aan iemand anders, dan kan die jou toevoegen.
+friends.link.addTitle | Add {name} as a friend? | {name} als vriend toevoegen?
+friends.link.addText | We will send {name} a request. As soon as {name} accepts, you are friends. | We sturen {name} een verzoek. Zodra {name} accepteert, zijn jullie vrienden.
+friends.link.yes | Yes, send request | Ja, verstuur verzoek

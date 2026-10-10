@@ -1,0 +1,87 @@
+# Woordtuin (woorden maken op een bord van 6 bij 6 letters en vakjes veroveren). Elk gekleurd vakje is een "bloem".
+# De computer heet in zinnen "de computer"; de ander (een vriend) heeft een eigen naam.
+woordtuin.you | You | Jij
+woordtuin.computer | Computer | Computer
+woordtuin.boardAria | The board, {n} by {n} letters | Het bord, {n} bij {n} letters
+# Schermlezertekst bij een letter: {letter}, {r} = rij, {c} = kolom, {owner} = van wie het vakje is, {extra} = eventuele toevoegingen (beginnen met een komma)
+woordtuin.tileAria | Letter {letter}, row {r}, column {c}, {owner}{extra} | Letter {letter}, rij {r}, kolom {c}, {owner}{extra}
+woordtuin.owner.open | still open | nog open
+woordtuin.owner.mine | yours | van jou
+woordtuin.owner.theirs | the other player's | van de ander
+woordtuin.tileProtected | , protected | , beschermd
+woordtuin.tileNumber | , number {n} of your word | , nummer {n} van je woord
+# Stand boven het bord: {me} en {them} zijn namen, {mine} en {theirs} aantallen vakjes, {open} het aantal vakjes dat nog wit is
+woordtuin.standAria | Score: {me} {mine}, {them} {theirs}, {open} still open | Stand: {me} {mine}, {them} {theirs}, nog {open} open
+woordtuin.openLeft_one | {n} square still open. | Nog {n} vakje open.
+woordtuin.openLeft_other | {n} squares still open. | Nog {n} vakjes open.
+woordtuin.gameOver | The game is over. | Het spel is afgelopen.
+woordtuin.yourTurn | It is your turn. | Jij bent aan de beurt.
+woordtuin.theirTurnPc | The computer is to move. | De computer is aan de beurt.
+woordtuin.theirTurn | {name} is to move. | {name} is aan de beurt.
+# Wat er net gebeurde. {word} is het gespeelde woord (hoofdletters), {n} het aantal afgepakte vakjes.
+woordtuin.last.me | You played {word}. | Jij speelde {word}.
+woordtuin.last.me.took_one | You played {word} and took {n} square. | Jij speelde {word} en pakte {n} vakje af.
+woordtuin.last.me.took_other | You played {word} and took {n} squares. | Jij speelde {word} en pakte {n} vakjes af.
+woordtuin.last.pc | The computer played {word}. | De computer speelde {word}.
+woordtuin.last.pc.took_one | The computer played {word} and took {n} square. | De computer speelde {word} en pakte {n} vakje af.
+woordtuin.last.pc.took_other | The computer played {word} and took {n} squares. | De computer speelde {word} en pakte {n} vakjes af.
+woordtuin.last.other | {name} played {word}. | {name} speelde {word}.
+woordtuin.last.other.took_one | {name} played {word} and took {n} square. | {name} speelde {word} en pakte {n} vakje af.
+woordtuin.last.other.took_other | {name} played {word} and took {n} squares. | {name} speelde {word} en pakte {n} vakjes af.
+woordtuin.passed.me | You cannot make a word any more and pass. | Jij kunt geen woord meer maken en slaat over.
+woordtuin.passed.pc | The computer cannot make a word any more and passes. | De computer kan geen woord meer maken en slaat over.
+woordtuin.passed.other | {name} cannot make a word any more and passes. | {name} kan geen woord meer maken en slaat over.
+woordtuin.hint.swipe | Swipe or tap the letters to make a word. | Veeg of tik op de letters om een woord te maken.
+woordtuin.hint.more_one | Choose at least {n} more letter. | Kies nog minstens {n} letter.
+woordtuin.hint.more_other | Choose at least {n} more letters. | Kies nog minstens {n} letters.
+# Voorbeeld van wat een woord oplevert, in losse zinnen: eerst "Mooi woord." en dan een of meer van de andere. {n} is een aantal vakjes.
+woordtuin.preview.nice | Nice word. | Mooi woord.
+woordtuin.preview.take_one | You take {n} square from your opponent. | Je pakt {n} vakje af van je tegenstander.
+woordtuin.preview.take_other | You take {n} squares from your opponent. | Je pakt {n} vakjes af van je tegenstander.
+woordtuin.preview.fresh_one | You colour {n} new square. | Je kleurt {n} nieuw vakje.
+woordtuin.preview.fresh_other | You colour {n} new squares. | Je kleurt {n} nieuwe vakjes.
+woordtuin.preview.kept_one | {n} square is protected and stays with your opponent. | {n} vakje is beschermd en blijft van je tegenstander.
+woordtuin.preview.kept_other | {n} squares are protected and stay with your opponent. | {n} vakjes zijn beschermd en blijven van je tegenstander.
+# Onder het bord, naast een klein hekje-icoon: wat het hekje betekent
+woordtuin.legend | Fence: cannot be taken | Hekje: niet af te pakken
+woordtuin.notOnBoard | This word is not on the board, or it does not colour anything new. | Dit woord ligt niet op het bord, of het kleurt niets nieuws.
+woordtuin.waiting | One moment… | Even wachten…
+woordtuin.pcThinking | The computer is thinking… | De computer denkt na…
+woordtuin.otherPlace | Other place | Andere plek
+woordtuin.type | Type | Typen
+woordtuin.clear | Clear | Wis
+# De knop waarmee je het woord dat je hebt gemaakt bevestigt
+woordtuin.done | Done | Klaar
+woordtuin.undo | Take back move | Zet terug
+woordtuin.hintLeft_one | Hint ({n} left) | Tip ({n} over)
+woordtuin.hintLeft_other | Hint ({n} left) | Tip ({n} over)
+woordtuin.typeAria | Type a word that is on the board | Typ een woord dat op het bord ligt
+# Een gewoon woord uit jouw taal, van 4 tot 6 letters
+woordtuin.typePlaceholder | for example: garden | bijvoorbeeld: tuin
+woordtuin.noHintsLeft | You have no hints left in this game. | Je hebt geen tips meer in deze partij.
+woordtuin.noWordLeft | There is no word left to find. | Er is geen woord meer te vinden.
+woordtuin.hintText_one | Hint: look for a word of {n} letter that starts at the highlighted square. | Tip: zoek een woord van {n} letter dat begint bij het oplichtende vakje.
+woordtuin.hintText_other | Hint: look for a word of {n} letters that starts at the highlighted square. | Tip: zoek een woord van {n} letters dat begint bij het oplichtende vakje.
+woordtuin.nothingToUndo | There is nothing to take back. | Er is niets om terug te zetten.
+woordtuin.pc.won | You won, congratulations! | Gewonnen, gefeliciteerd!
+woordtuin.pc.draw | It's a draw! | Gelijkspel!
+woordtuin.pc.lost | Well played! | Mooi gespeeld!
+woordtuin.pc.score | Final score: you {mine}, the computer {theirs}. | Eindstand: jij {mine}, de computer {theirs}.
+woordtuin.pc.drawText_one | You both have {n} flower. | Jullie hebben allebei {n} bloem.
+woordtuin.pc.drawText_other | You both have {n} flowers. | Jullie hebben allebei {n} bloemen.
+woordtuin.pc.lostText | The computer won with {theirs} against {mine}. You will surely manage next time, feel free to try again. | De computer won met {theirs} tegen {mine}. Een volgende keer lukt het vast, probeer gerust nog eens.
+
+# Woordtuin in de lijst met spellen en op de pagina voor het spelen. De uitleg staat in 5 korte stappen.
+woordtuin.name | Word Garden | Woordtuin
+woordtuin.summary | Make words and let your flowers grow, against the computer or a friend. | Maak woorden en laat jouw bloemen groeien, tegen de computer of een vriend.
+woordtuin.howTo.1 | The board has 6 by 6 letters. Make a word of 3 to 7 letters by swiping over the letters, or tap them one after another. The letters must touch each other, diagonally too. | Het bord heeft 6 bij 6 letters. Maak een woord van 3 tot 7 letters door er met je vinger over te vegen, of tik de letters na elkaar aan. De letters moeten aan elkaar grenzen, ook schuin.
+woordtuin.howTo.2 | The squares of your word become yours: they bloom in your colour. If the other player later makes a word through your squares, they take them from you. | De vakjes van je woord worden van jou: ze bloeien open in jouw kleur. Maakt de ander later een woord door jouw vakjes, dan pakt die ze af.
+woordtuin.howTo.3 | Except protected squares: a square whose neighbours (left, right, above and below) all have the same colour cannot be taken. You can see this by the little fence in the corner. | Behalve beschermde vakjes: een vakje met alleen buren in dezelfde kleur (links, rechts, boven en onder) kan niet worden afgepakt. Dat zie je aan het hekje in de hoek.
+# Spelregel over woorden: gewone woorden van de taal van het spel tellen; namen, afkortingen en woorden uit een andere taal niet. Geef in elke taal twee of drie echte voorbeelden (enkelvoud, meervoud, een werkwoordsvorm).
+woordtuin.howTo.4 | Every word must colour at least one open square and can only be played once. All ordinary words count, including plurals and verb forms ("rose", "roses", "says"). Names, abbreviations and words from other languages do not. Accents are ignored: "é" is simply "e". | Elk woord moet minstens één open vakje kleuren en kan maar één keer gespeeld worden. Alle gewone woorden tellen, ook meervouden en werkwoordsvormen ("roos", "rozen", "zegt"). Namen, afkortingen en woorden uit een andere taal niet. Accenten tellen niet mee: "é" is gewoon "e".
+woordtuin.howTo.5 | When all squares are coloured, whoever has the most flowers wins. You see in advance what a word earns, and with "{hint}" a square lights up. A word that does not exist costs nothing. | Zijn alle vakjes gekleurd? Dan wint wie de meeste bloemen heeft. Je ziet vooraf wat een woord oplevert, en met "{hint}" licht een vakje op. Een woord dat niet bestaat kost niets.
+# De hints bij de vier niveaus: hoeveel woorden de computer ziet en hoe slim hij kiest
+woordtuin.level.makkelijk | Sees few words and does not always pay attention | Ziet weinig woorden en let niet altijd op
+woordtuin.level.gemiddeld | Only sees part of the words | Ziet maar een deel van de woorden
+woordtuin.level.moeilijk | Sees many words and chooses cleverly | Ziet veel woorden en kiest slim
+woordtuin.level.extreem | Sees everything and thinks ahead | Ziet alles en denkt vooruit

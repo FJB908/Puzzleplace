@@ -1,0 +1,34 @@
+# Instellingen.
+settings.title | Settings | Instellingen
+settings.subtitle | Make Puzzleplace comfortable for your eyes. | Maak Puzzelplaats prettig voor jouw ogen.
+settings.sectionReading | Reading | Lezen
+settings.textSize | Text size | Tekstgrootte
+settings.preview | This is what the text looks like. Does it suit you? | Zo ziet de tekst eruit. Past dit bij je?
+settings.sectionLook | Appearance | Uiterlijk
+settings.colours | Colours | Kleuren
+settings.coloursHint | Automatic follows the setting of your phone or computer. | Automatisch volgt de instelling van je telefoon of computer.
+settings.theme.auto | Automatic | Automatisch
+settings.theme.light | Light | Licht
+settings.theme.dark | Dark | Donker
+settings.contrast | Extra clear | Extra duidelijk
+settings.contrastHint | Stronger contrast and thicker borders | Sterker contrast en dikkere randen
+settings.decor | Blossom branches | Bloesemtakken
+settings.decorHint | Cherry blossom decoration | Versiering met kersenbloesem
+settings.calm | Calm display | Rustige weergave
+settings.calmHint | No moving parts | Geen bewegende onderdelen
+settings.sectionAbout | About you | Over jou
+settings.firstName | Your first name | Je voornaam
+settings.firstNameHint | Optional. We only use it to greet you. | Vrijblijvend. We gebruiken die alleen om je te begroeten.
+settings.account | Account | Account
+settings.accountLoggedIn | Logged in as {name} | Ingelogd als {name}
+settings.accountLogIn | Log in or create an account | Inloggen of een account maken
+settings.helpTitle | Help | Hulp
+settings.helpHint | Questions and answers | Vragen en antwoorden
+settings.sectionReset | Start over | Opnieuw beginnen
+settings.reset | Erase everything | Alles wissen
+settings.resetHint | Erases your progress and settings on this device. | Wist je voortgang en instellingen op dit apparaat.
+settings.resetConfirmTitle | Erase everything? | Alles wissen?
+settings.resetConfirmText | Your saved games and settings will be erased. This cannot be undone. | Je bewaarde spellen en instellingen worden gewist. Dit kan niet ongedaan worden gemaakt.
+settings.resetConfirmYes | Yes, erase everything | Ja, alles wissen
+settings.saved | Setting saved | Instelling bewaard
+settings.nameSaved | Name saved | Naam bewaard

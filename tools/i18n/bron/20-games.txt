@@ -1,0 +1,19 @@
+# Het scherm met alle spellen.
+games.title | Games | Spellen
+games.subtitle | Choose a game to play. | Kies een spel om te spelen.
+games.comingSoon | Coming soon | Komt binnenkort
+games.inProgress | In progress | Bezig
+games.inProgressPct | In progress · {pct}% | Bezig · {pct}%
+games.solved_one | Solved once | Eén keer opgelost
+games.solved_other | Solved {n} times | {n} keer opgelost
+games.levels_one | {n} level | {n} niveau
+games.levels_other | {n} levels | {n} niveaus
+
+# Niveaus (voor alle spellen hetzelfde)
+level.makkelijk | Easy | Makkelijk
+level.gemiddeld | Medium | Gemiddeld
+level.moeilijk | Hard | Moeilijk
+level.extreem | Extreme | Extreem
+level.default.makkelijk | A calm start | Rustig beginnen
+level.default.gemiddeld | A nice challenge | Een leuke uitdaging
+level.default.moeilijk | For experienced puzzlers | Voor ervaren puzzelaars

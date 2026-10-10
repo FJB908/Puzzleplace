@@ -1,0 +1,55 @@
+# Sudoku. "Leven" = een bloesem; een fout cijfer kost een leven (alleen bij Sudoku).
+common.hint | Hint | Tip
+sudoku.gridAria | Sudoku grid | Sudoku-rooster
+sudoku.start | Tap a cell and then choose a digit. | Tik op een vakje en kies daarna een cijfer.
+sudoku.erase | Clear | Wis
+sudoku.eraseAria | Clear this cell | Wis dit vakje
+sudoku.digits | Digits | Cijfers
+sudoku.undo | Undo | Stap terug
+sudoku.pencil | Pencil | Potlood
+sudoku.pencilOn | Pencil on | Potlood aan
+sudoku.digitAria | Digit {n} | Cijfer {n}
+sudoku.digitDone | Digit {n}, all placed | Cijfer {n}, helemaal ingevuld
+# {lives} = aantal levens over, {max} = aantal levens aan het begin
+sudoku.livesAria | Lives: {lives} of {max} | Levens: {lives} van {max}
+# Schermlezertekst bij een vakje. {r} = rij, {c} = kolom, {n} = het cijfer, {notes} = de notities (cijfers)
+sudoku.cell.value | Row {r}, column {c}: {n} | Rij {r}, kolom {c}: {n}
+sudoku.cell.given | Row {r}, column {c}: {n}, fixed | Rij {r}, kolom {c}: {n}, vast
+sudoku.cell.wrong | Row {r}, column {c}: {n}, wrong | Rij {r}, kolom {c}: {n}, fout
+sudoku.cell.notes | Row {r}, column {c}: empty, notes {notes} | Rij {r}, kolom {c}: leeg, notities {notes}
+sudoku.cell.empty | Row {r}, column {c}: empty | Rij {r}, kolom {c}: leeg
+sudoku.say.fixedChoose | This digit is fixed and cannot change. Choose an empty cell. | Dit cijfer staat vast en kan niet veranderen. Kies een leeg vakje.
+sudoku.say.fixed | This digit is fixed and cannot change. | Dit cijfer staat vast en kan niet veranderen.
+sudoku.say.clearFirst | Clear the digit in this cell first to make notes. | Wis eerst het cijfer in dit vakje om notities te maken.
+sudoku.say.alreadyEmpty | This cell is already empty. | Dit vakje is al leeg.
+# Fout cijfer: {n} = aantal levens dat nog over is
+sudoku.say.wrong_one | That digit does not belong here. You have {n} life left. Clear it or try another digit. | Dat cijfer hoort hier niet. Je hebt nog {n} leven. Wis het of probeer een ander cijfer.
+sudoku.say.wrong_other | That digit does not belong here. You have {n} lives left. Clear it or try another digit. | Dat cijfer hoort hier niet. Je hebt nog {n} levens. Wis het of probeer een ander cijfer.
+sudoku.say.nothingToUndo | There is nothing to undo. | Er is niets om terug te draaien.
+sudoku.say.undone | Your last step has been undone. | Je laatste stap is teruggedraaid.
+sudoku.say.pencilOn | Pencil is on: digits go into the cell small, as a note. | Potlood staat aan: de cijfers komen klein in het vakje, als notitie.
+sudoku.say.pencilOff | Pencil is off: digits go into the cell large. | Potlood staat uit: de cijfers komen groot in het vakje.
+sudoku.say.hint | Hint: the highlighted cell should contain a {n}. | Tip: in het gemarkeerde vakje hoort een {n}.
+sudoku.say.nothingLeft | There is nothing left to fill in. | Er is niets meer in te vullen.
+sudoku.say.won | Done! The puzzle is completely filled in correctly. | Gelukt! De puzzel is helemaal goed ingevuld.
+sudoku.say.noLives | You have no lives left. | Je hebt geen levens meer.
+sudoku.say.retry | New attempt. Good luck! | Nieuwe poging. Succes!
+sudoku.gameOver.title | No lives left | Helaas, geen levens meer
+sudoku.gameOver.text | Do you want to try again with the same puzzle? | Wil je het nog eens proberen met dezelfde puzzel?
+sudoku.gameOver.retry | Try again | Opnieuw proberen
+sudoku.gameOver.leaveDaily | Back to Home | Terug naar Start
+sudoku.gameOver.leave | Another puzzle | Andere puzzel
+
+# Sudoku in de lijst met spellen en op de pagina voor het spelen. "Zo werkt het": 5 korte stappen. Een "leven" is een bloesem.
+sudoku.name | Sudoku | Sudoku
+sudoku.summary | Fill in the digits 1 to 9 in the grid. | Vul de cijfers 1 tot en met 9 in het rooster in.
+sudoku.howTo.1 | In every row, every column and every 3 by 3 box, each digit from 1 to 9 appears exactly once. | In elke rij, elke kolom en elk blokje van 3 bij 3 komt elk cijfer van 1 tot en met 9 precies één keer voor.
+sudoku.howTo.2 | Tap an empty cell and then choose a digit below. | Tik op een leeg vakje en kies daarna een cijfer onderaan.
+sudoku.howTo.3 | If a digit is wrong you see it straight away and a blossom (life) is lost. When they are gone, you start again. | Staat een cijfer fout, dan zie je dat meteen en gaat er een bloesem (leven) af. Zijn ze op, dan begin je opnieuw.
+sudoku.howTo.4 | With "{pencil}" you write a digit small in the cell, as a note. Notes never cost a life. | Met "{pencil}" zet je een cijfer klein in het vakje, als notitie. Notities kosten nooit een leven.
+sudoku.howTo.5 | With "{undo}" you take back your last step. With "{hint}" the app fills in one cell for you, without losing a life. | Met "{undo}" maak je je laatste handeling ongedaan. Met "{hint}" vul je één vakje voor je in, zonder leven te verliezen.
+# De hints bij de vier niveaus van Sudoku (het getal is het aantal levens)
+sudoku.level.makkelijk | A calm start · 5 lives | Rustig beginnen · 5 levens
+sudoku.level.gemiddeld | A nice challenge · 4 lives | Een leuke uitdaging · 4 levens
+sudoku.level.moeilijk | For experienced puzzlers · 3 lives | Voor ervaren puzzelaars · 3 levens
+sudoku.level.extreem | For real experts · 3 lives | Voor echte experts · 3 levens

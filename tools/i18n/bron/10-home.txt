@@ -1,0 +1,58 @@
+# Startscherm (Home).
+home.greeting.morning | Good morning | Goedemorgen
+home.greeting.afternoon | Good afternoon | Goedemiddag
+home.greeting.evening | Good evening | Goedenavond
+# {greeting} is een van de drie begroetingen hierboven, {name} de naam van de speler. Zet de leestekens zoals in jouw taal gebruikelijk is.
+home.greetingName | {greeting}, {name} | {greeting}, {name}
+
+# Eerste keer: is de tekst goed te lezen?
+home.welcome.title | Is the text easy to read? | Is de tekst goed te lezen?
+home.welcome.sizeGroup | Text size | Tekstgrootte
+size.normal | Normal | Normaal
+size.large | Large | Groot
+size.xlarge | Extra large | Extra groot
+home.welcome.ok | This is fine | Zo is het goed
+
+# Vrienden op Start: één rij per vriend. De knoppen en tekstjes zijn klein, dus houd ze kort.
+home.friends | Friends | Vrienden
+home.friends.request | Friend request | Vriendverzoek
+home.friends.accept | Yes | Ja
+home.friends.acceptAria | Add {name} as a friend | {name} als vriend toevoegen
+home.friends.decline | No | Nee
+home.friends.declineAria | Decline the request from {name} | Verzoek van {name} weigeren
+home.friends.nowFriends | {name} is now your friend. | {name} is nu je vriend.
+home.friends.declined | Request declined. | Verzoek geweigerd.
+home.friends.newGame | New game | Nieuwe partij
+home.friends.newGameAria | New game with {name} | Nieuwe partij met {name}
+# Korte status in een rij: "Jouw beurt" (jij moet spelen) of "Wacht op Bram". {score} is bijvoorbeeld 12–10.
+home.friends.yourTurn | Your turn | Jouw beurt
+home.friends.waitingFor | Waiting for {name} | Wacht op {name}
+home.friends.gamesCount_one | {n} game | {n} partij
+home.friends.gamesCount_other | {n} games | {n} partijen
+home.friends.play | Play | Spelen
+# Schermlezertekst bij een rij. {game} is de naam van het spel.
+home.friends.rowAriaTurn | Play: {game} with {name}. It is your turn. | Spelen: {game} met {name}. Jij bent aan de beurt.
+home.friends.rowAriaWait | View: {game} with {name}. {name} is to move. | Bekijken: {game} met {name}. {name} is aan de beurt.
+home.friends.signedOutTitle | Play with friends | Speel met vrienden
+home.friends.signedOutText | With an account you can also continue on your other devices. | Met een account kan het ook op je andere apparaten.
+home.friends.createAccount | Create account | Account maken
+home.friends.logIn | Log in | Inloggen
+home.friends.none | No friends yet. | Nog geen vrienden.
+home.friends.noneHint | Share your code, then you can play together. | Deel je code, dan kunnen jullie samen spelen.
+home.friends.shareCode | Share my code | Deel mijn code
+home.friends.haveCode | I have a code | Ik heb een code
+home.friends.all | All friends ({n}) | Alle vrienden ({n})
+# Bericht dat iemand ontvangt als je je vriendencode deelt. {code} is de code, bijvoorbeeld K7P4-QM2X.
+home.friends.shareText | Play with me on Puzzleplace! My friend code is {code}. | Speel met mij op Puzzelplaats! Mijn vriendencode is {code}.
+home.friends.linkCopied | Link copied. Paste it into a message. | Link gekopieerd. Plak hem in een bericht.
+
+# Verder spelen of een spel kiezen
+home.chooseGame | Choose a game | Kies een spel
+home.chooseGameHint | Sudoku, word search and more | Sudoku, woordzoeker en meer
+home.continue | Continue | Verder
+home.continueAria | Continue {game}, {pct} percent done | Verder met {game}, {pct} procent klaar
+home.continueAriaNoPct | Continue {game} | Verder met {game}
+
+# Puzzel van de dag
+home.daily | Puzzle of the day | Puzzel van de dag
+home.dailyDone | Done today | Vandaag gedaan

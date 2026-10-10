@@ -1,8 +1,8 @@
 {
-  "name": "Puzzelplaats",
-  "short_name": "Puzzelplaats",
-  "description": "Rustig puzzelen met grote letters en een duidelijke opzet.",
-  "lang": "nl",
+  "name": "Puzzleplace",
+  "short_name": "Puzzleplace",
+  "description": "Calm puzzling with big letters and a clear layout.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

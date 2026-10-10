@@ -15,7 +15,7 @@ const KEY = 'puzzelplaats:v1';
 const defaults = () => ({
   v: 1,
   profile: { name: '' },
-  settings: { textSize: 'normal', theme: 'auto', contrast: 'normal', calm: false, decor: true, welcomeDone: false },
+  settings: { textSize: 'normal', theme: 'auto', contrast: 'normal', calm: false, decor: true, welcomeDone: false, taal: null },
   games: {},
   lastGame: null,
 });
@@ -94,7 +94,9 @@ export function importSync(snapshot) {
 }
 
 export function resetAll() {
+  const taal = data.settings.taal ?? null;                // de gekozen taal blijft: anders moet je haar opnieuw kiezen
   data = defaults();
+  data.settings.taal = taal;
   persist();
 }
 
