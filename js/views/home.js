@@ -98,5 +98,5 @@ export function homeView(_params, app) {
       : null,
     h('p', { class: 'muted' }, 'Even vastgelopen? ', h('a', { href: '#/hulp' }, 'Bekijk de hulp')),
   );
-  return { title: 'Start', nav: 'home', node };
+  return { title: 'Start', nav: 'home', view: 'home', node };
 }

@@ -124,33 +124,50 @@ export function solvableBySingles(cells) {
 
 // ----- Puzzels maken -----
 export const LEVELS = {
-  makkelijk: { clues: 38, singles: true },
-  gemiddeld: { clues: 31, singles: true },
-  moeilijk: { clues: 26, singles: false },
+  makkelijk: { clues: 38, singles: true,  symmetric: true },
+  gemiddeld: { clues: 31, singles: true,  symmetric: true },
+  moeilijk:  { clues: 26, singles: false, symmetric: true, maxClues: 28, attempts: 12 },
+  // Extreem: zo min mogelijk cijfers vooraf, niet symmetrisch, en nooit met alleen
+  // "enige mogelijkheid"-logica op te lossen (je hebt echt slimmere trucs nodig).
+  extreem:   { clues: 22, singles: false, symmetric: false, needsHarder: true, maxClues: 24, attempts: 60 },
 };
 
-export function generate(seed, level = 'makkelijk') {
-  const spec = LEVELS[level] || LEVELS.makkelijk;
-  const rng = makeRng(`${seed}|${level}`);
-
-  const out = {};
-  search(new Array(81).fill(0), 1, rng, out);
-  const solution = out.solution;
-
-  // Haal vakjes weg, steeds twee tegenover elkaar (puzzel ziet er daardoor netjes uit).
+// Haal vakjes weg tot `target` cijfers over zijn (of niets meer weg kan) en blijf uniek.
+function carve(solution, spec, rng) {
   const puzzle = Array.from(solution);
   let clues = 81;
   for (const i of shuffle(Array.from({ length: 81 }, (_, k) => k), rng)) {
     if (clues <= spec.clues) break;
-    const j = 80 - i;
     if (!puzzle[i]) continue;
+    const j = spec.symmetric ? 80 - i : i;          // symmetrisch: ook het vakje tegenover
     const saved = [puzzle[i], puzzle[j]];
     puzzle[i] = 0; puzzle[j] = 0;
     const ok = countSolutions(puzzle) === 1 && (!spec.singles || solvableBySingles(puzzle));
     if (ok) clues -= i === j ? 1 : 2;
     else { puzzle[i] = saved[0]; puzzle[j] = saved[1]; }
   }
-  return { puzzle, solution };
+  return puzzle;
+}
+
+export function generate(seed, level = 'makkelijk') {
+  const spec = LEVELS[level] || LEVELS.makkelijk;
+  const attempts = spec.attempts || 1;
+  let best = null;
+
+  for (let k = 0; k < attempts; k++) {
+    const rng = makeRng(`${seed}|${level}|${k}`);
+    const out = {};
+    search(new Array(81).fill(0), 1, rng, out);
+    const solution = out.solution;
+    const puzzle = carve(solution, spec, rng);
+    const count = puzzle.filter(Boolean).length;
+    const candidate = { puzzle, solution, count };
+
+    if (!best || count < best.count) best = candidate;
+    const hardEnough = !spec.needsHarder || !solvableBySingles(puzzle);
+    if (hardEnough && count <= (spec.maxClues ?? 99)) { best = candidate; break; }
+  }
+  return { puzzle: best.puzzle, solution: best.solution };
 }
 
 // ----- Hulpfuncties voor het spel -----

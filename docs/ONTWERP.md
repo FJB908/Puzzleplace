@@ -17,7 +17,7 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 
 ## Toegankelijkheid
 
-- Tekst begint op 20px en kan naar 24px en 28px; alles is in `rem`, dus ook de instelling van de browser telt mee. Gecontroleerd dat er geen horizontaal scrollen ontstaat op 320 en 390px breed, bij elke tekstgrootte.
+- Tekst begint op 20px en kan naar 24px en 28px; alles is in `rem`, dus ook de instelling van de browser telt mee. Gecontroleerd dat er geen horizontaal scrollen ontstaat op 320, 390 en 768px breed, bij elke tekstgrootte.
 - Tikvlakken minimaal 3,5rem hoog. Geen gebaren nodig (swipen, lang indrukken, slepen).
 - Kleur is nooit het enige signaal: gekozen opties hebben een vinkje, het actieve menu-item een balk en vetgedrukte tekst, "aan/uit" staat in woorden.
 - Thema's: licht, donker, automatisch, plus een hoog-contrastmodus. "Rustige weergave" zet alle animaties uit (en `prefers-reduced-motion` wordt gevolgd).
@@ -25,14 +25,21 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 - Taal van de interface: gewoon Nederlands, korte zinnen, geen jargon of Engelse termen.
 - Geen tijdsdruk, geen verplichte timers, geen flitsende elementen.
 
+## Uiterlijk
+
+- **Minimalistisch:** knoppen hebben meestal geen kader. Alleen de hoofdactie op een scherm (bijv. "Spel starten") is een gevulde knop; al het andere is tekst met een pictogram. Keuzelijsten zijn rijen met dunne lijnen en een rondje met vinkje rechts. Alleen in "Extra duidelijk" komen de kaders terug.
+- **Kersenbloesem:** een tak hangt vanuit de rechterbovenhoek in een eigen strook boven de kop (dus nooit achter tekst), een takje siert de hoofdkaart en het felicitatiescherm, losse blaadjes liggen linksonder, en een kleine bloesem markeert de gekozen pagina in het menu. De levens in sudoku zijn bloesems. Alles is vectorgraphics, getekend door `tools/make-blossoms.mjs` met een vaste seed, en kan in Instellingen worden uitgezet ("Bloesemtakken") en verdwijnt bij "Extra duidelijk".
+- **Kleuren:** gebroken wit, donkerblauwgroen voor acties, roze/roos als accent. Licht, donker en hoog contrast.
+
 ## Sudoku: keuzes
 
-- **Niets wordt afgestraft.** Geen foutenteller, geen tijd, geen "game over". Fouten zie je alleen als je op *Controle* tikt (of als een cijfer botst met een ander in dezelfde rij, kolom of blokje). *Stap terug* kan zo vaak als je wilt.
-- **Eerlijke moeilijkheid.** Elke puzzel heeft precies één oplossing. Makkelijk en gemiddeld zijn altijd op te lossen met alleen "dit vakje kan maar één cijfer zijn"-logica, dus nooit gokken. Moeilijk heeft minder cijfers vooraf.
-- **Zelfde puzzel voor iedereen op een dag.** De puzzel van de dag komt uit de datum; elke puzzel is later opnieuw te maken uit zijn seed.
-- **Duidelijk rooster.** Rij, kolom en blokje van het gekozen vakje zijn gemarkeerd, evenals alle gelijke cijfers. Vaste cijfers zijn vetgedrukt, eigen cijfers dun en gekleurd. Fouten krijgen een hoekje en een golflijn, niet alleen een kleur.
-- **Grote bediening.** Cijfertoetsen van ruim 3,5rem; cijfers die al 9 keer staan worden gedimd. Potlood staat zichtbaar aan (gestreepte randen, knop ingekleurd, uitleg onder het rooster).
-- **Geen tikfouten door klein scherm:** het rooster is zo breed als het scherm; op een breed scherm staat de bediening naast het rooster.
+- **Fout zie je meteen.** Zodra je een verkeerd cijfer invult, kleurt het vakje rood (met een rood hoekje en een golflijntje, dus niet alleen kleur), schudt het rooster even en gaat er een leven af. Er is geen "Controle"-knop.
+- **Levens zijn bloesems:** Makkelijk 5, Gemiddeld 4, Moeilijk en Extreem 3. Een lege bloesem is een verloren leven. Zijn ze op, dan kies je: opnieuw proberen met dezelfde puzzel, of een andere puzzel.
+- **Wat kost geen leven:** notities (potlood), wissen, een tip, en een fout cijfer weghalen. "Stap terug" geeft een verloren leven *niet* terug.
+- **Vier niveaus.** Elke puzzel heeft precies één oplossing. Makkelijk en gemiddeld zijn op te lossen met alleen "dit vakje kan maar één cijfer zijn"-logica. Moeilijk heeft 26 tot 28 cijfers vooraf. Extreem heeft 22 tot 24 cijfers en is nooit met alleen die logica op te lossen.
+- **Zelfde puzzel voor iedereen op een dag.** De puzzel van de dag komt uit de datum; elke puzzel is opnieuw te maken uit zijn seed.
+- **Duidelijk rooster.** Rij, kolom en blokje van het gekozen vakje zijn gemarkeerd, evenals alle gelijke cijfers. Vaste cijfers zijn vetgedrukt, eigen cijfers dun en gekleurd.
+- **Grote bediening zonder kaders:** cijfertoetsen van ruim 3,5rem hoog; cijfers die al 9 keer goed staan worden gedimd. Potlood staat zichtbaar aan (roze cijfers, knop ingekleurd, uitleg onder het rooster).
 - **Toetsenbord:** pijltjes, 1-9, Backspace, N (potlood), Ctrl+Z.
 
 ## Waarom geen framework

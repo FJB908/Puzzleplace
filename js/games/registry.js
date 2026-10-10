@@ -22,9 +22,15 @@ const GAMES = [
     howTo: [
       'In elke rij, elke kolom en elk blokje van 3 bij 3 komt elk cijfer van 1 tot en met 9 precies één keer voor.',
       'Tik op een leeg vakje en kies daarna een cijfer onderaan.',
-      'Met "Potlood" zet je een cijfer klein in het vakje, als notitie.',
-      'Met "Stap terug" maak je je laatste handeling ongedaan, zo vaak als je wilt.',
-      'Met "Controle" zie je of er fouten staan en met "Tip" vul je één vakje voor je in.',
+      'Staat een cijfer fout, dan zie je dat meteen en gaat er een bloesem (leven) af. Zijn ze op, dan begin je opnieuw.',
+      'Met "Potlood" zet je een cijfer klein in het vakje, als notitie. Notities kosten nooit een leven.',
+      'Met "Stap terug" maak je je laatste handeling ongedaan. Met "Tip" vul je één vakje voor je in, zonder leven te verliezen.',
+    ],
+    difficulties: [
+      { id: 'makkelijk', label: 'Makkelijk', hint: 'Rustig beginnen · 5 levens' },
+      { id: 'gemiddeld', label: 'Gemiddeld', hint: 'Een leuke uitdaging · 4 levens' },
+      { id: 'moeilijk', label: 'Moeilijk', hint: 'Voor ervaren puzzelaars · 3 levens' },
+      { id: 'extreem', label: 'Extreem', hint: 'Voor echte experts · 3 levens' },
     ],
     status: 'ready',
     wide: true,
@@ -46,7 +52,7 @@ const GAMES = [
   },
   {
     id: 'kruiswoord',
-    name: 'Kruiswoordpuzzel',
+    name: 'Kruiswoord­puzzel',
     icon: 'kruiswoord',
     summary: 'Los de omschrijvingen op en vul de woorden in.',
     howTo: [

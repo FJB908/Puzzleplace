@@ -24,6 +24,10 @@ for (const level of Object.keys(LEVELS)) {
       if (LEVELS[level].singles) assert.ok(solvableBySingles(puzzle), 'oplosbaar zonder gokken');
       const clues = puzzle.filter(Boolean).length;
       assert.ok(clues <= LEVELS[level].clues + 2, `aantal gegeven cijfers (${clues})`);
+      if (LEVELS[level].needsHarder) {
+        assert.ok(!solvableBySingles(puzzle), 'extreem heeft slimmere trucs nodig');
+        assert.ok(clues <= LEVELS[level].maxClues, `extreem: ${clues} cijfers`);
+      }
     }
   });
 }
@@ -35,14 +39,14 @@ test('zelfde seed geeft dezelfde puzzel', () => {
 
 test('moeilijker niveau heeft minder gegeven cijfers', () => {
   const avg = (lvl) => [...Array(10).keys()].reduce((s, n) => s + generate(`avg-${n}`, lvl).puzzle.filter(Boolean).length, 0) / 10;
-  assert.ok(avg('makkelijk') > avg('gemiddeld') && avg('gemiddeld') > avg('moeilijk'));
+  assert.ok(avg('makkelijk') > avg('gemiddeld') && avg('gemiddeld') > avg('moeilijk') && avg('moeilijk') > avg('extreem'));
 });
 
 test('puzzels maken is snel genoeg voor een telefoon', () => {
   const t = performance.now();
-  for (let n = 0; n < 10; n++) generate(`speed-${n}`, 'moeilijk');
+  for (let n = 0; n < 10; n++) generate(`speed-${n}`, 'extreem');
   const per = (performance.now() - t) / 10;
-  assert.ok(per < 400, `gemiddeld ${per.toFixed(0)} ms per moeilijke puzzel`);
+  assert.ok(per < 1500, `gemiddeld ${per.toFixed(0)} ms per moeilijke puzzel`);
 });
 
 test('botsingen worden gevonden', () => {

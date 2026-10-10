@@ -50,6 +50,7 @@ function applySettings() {
   root.dataset.textsize = s.textSize;
   root.dataset.contrast = s.contrast;
   root.dataset.calm = String(!!s.calm);
+  root.dataset.decor = String(s.decor !== false);
   root.dataset.theme = s.theme === 'auto' ? (darkQuery.matches ? 'dark' : 'light') : s.theme;
 }
 darkQuery.addEventListener?.('change', applySettings);
@@ -91,6 +92,7 @@ async function render(moveFocus = true) {
 
   document.title = `${result.title} · ${APP.name}`;
   main.dataset.wide = String(!!result.wide);
+  document.body.dataset.view = result.view || 'page';
   main.replaceChildren(result.node);
   updateNav(result.nav);
 

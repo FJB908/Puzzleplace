@@ -3,7 +3,7 @@
 //
 // Vorm van de data (versie 1):
 //   profile:  { name }
-//   settings: { textSize, theme, contrast, calm, welcomeDone }
+//   settings: { textSize, theme, contrast, calm, decor, welcomeDone }
 //   games:    { [gameId]: { difficulty, completed, dailyDone, slots: { normal, daily } } }
 //   lastGame: { id, slot } | null
 //
@@ -15,7 +15,7 @@ const KEY = 'puzzelplaats:v1';
 const defaults = () => ({
   v: 1,
   profile: { name: '' },
-  settings: { textSize: 'normal', theme: 'auto', contrast: 'normal', calm: false, welcomeDone: false },
+  settings: { textSize: 'normal', theme: 'auto', contrast: 'normal', calm: false, decor: true, welcomeDone: false },
   games: {},
   lastGame: null,
 });

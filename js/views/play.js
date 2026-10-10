@@ -62,6 +62,7 @@ export async function playView({ id, mode }, app) {
 
   const ctx = {
     gameId: id,
+    daily,
     difficulty: slot.difficulty,
     seed: slot.seed,
     saved: slot.state,
@@ -73,6 +74,11 @@ export async function playView({ id, mode }, app) {
         r.slots[slotName] = { ...r.slots[slotName], state, updatedAt: Date.now() };
       });
       store.setLastGame(id, slotName);
+    },
+    // Spel weggooien (bijv. na "game over"): de bewaarde stand verdwijnt.
+    discard() {
+      finished = true;
+      store.updateGame(id, (r) => { r.slots[slotName] = null; });
     },
     async complete(result) {
       if (finished) return;
@@ -86,6 +92,7 @@ export async function playView({ id, mode }, app) {
       const choice = await choiceDialog({
         title: 'Goed gedaan!',
         text: `Je hebt ${daily ? 'de puzzel van de dag' : 'dit spel'} uitgespeeld.`,
+        joy: true,
         actions: [
           { label: daily ? 'Terug naar Start' : 'Nog een keer', value: daily ? 'home' : 'again', primary: true, autofocus: true },
           { label: 'Ander spel kiezen', value: 'games' },
@@ -114,5 +121,5 @@ export async function playView({ id, mode }, app) {
     }
   };
 
-  return { title: game.name, nav: null, wide: !!game.wide, node, onShow: start, cleanup: () => cleanup && cleanup() };
+  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => cleanup && cleanup() };
 }

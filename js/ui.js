@@ -54,16 +54,16 @@ export function icon(name) {
 
 // ----- Dialogen (met <dialog>: toetsenbord, focus en Escape werken vanzelf) -----
 // actions: [{ label, value, primary?, autofocus? }]. Geeft de gekozen value terug.
-export function choiceDialog({ title, text, body, actions, dismissValue = null }) {
+export function choiceDialog({ title, text, body, actions, dismissValue = null, joy = false }) {
   return new Promise((resolve) => {
     const titleId = `dlg-${Math.random().toString(36).slice(2)}`;
-    const dlg = h('dialog', { class: 'dialog', 'aria-labelledby': titleId },
+    const dlg = h('dialog', { class: `dialog${joy ? ' dialog--joy' : ''}`, 'aria-labelledby': titleId },
       h('h2', { id: titleId }, title),
       text && h('p', {}, text),
       body && h('div', { class: 'dialog-body' }, body),
       h('div', { class: 'dialog-actions' },
         actions.map((a, i) => h('button', {
-          type: 'button', class: `btn ${a.primary ? 'btn-primary' : ''}`, autofocus: a.autofocus,
+          type: 'button', class: `btn ${a.primary ? 'btn-primary' : ''}${a.danger ? ' btn-danger' : ''}`, autofocus: a.autofocus,
           onclick: () => dlg.close(String(i)),
         }, a.label))),
     );

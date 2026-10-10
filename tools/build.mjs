@@ -16,7 +16,7 @@ let html = await read('index.html');
 // Stijl: alle <link rel="stylesheet"> in de volgorde van de pagina
 const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)">/g)].map((m) => m[1]);
 const css = (await Promise.all(sheets.map(async (href) => {
-  const r = await build({ entryPoints: [new URL(href, root).pathname], bundle: true, minify: true, write: false, loader: { '.css': 'css' } });
+  const r = await build({ entryPoints: [new URL(href, root).pathname], bundle: true, minify: true, write: false, loader: { '.css': 'css', '.svg': 'dataurl' } });
   return r.outputFiles[0].text;
 }))).join('\n');
 

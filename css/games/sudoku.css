@@ -1,18 +1,28 @@
 /* Sudoku. Het rooster schaalt mee met de breedte van het scherm (niet met de
    tekstgrootte-instelling), zodat het altijd past. De cijfers in de vakjes
-   schalen mee met het vakje zelf (container-eenheden: cqh). */
+   schalen mee met het vakje zelf (container-eenheden: cqh).
+   Knoppen zijn minimalistisch: grote cijfers en pictogrammen zonder kader. */
 
-.stage--bare { background: none; border: 0; padding: 0; min-height: 0; }
-
-.sudoku { display: flex; flex-direction: column; align-items: center; gap: 1rem; --grid-thin: var(--control-border); }
+.sudoku { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; --grid-thin: color-mix(in srgb, var(--text) 28%, transparent); }
 .sudoku-main, .sudoku-controls { width: min(100%, 34rem); display: flex; flex-direction: column; gap: 1rem; }
+
+/* ----- Levens: vijf bloesems, een lege bloesem is een verloren leven ----- */
+.sudoku-lives { display: flex; justify-content: center; gap: .5rem; min-height: 2rem; }
+.life { width: 2rem; height: 2rem; background: url("../../assets/blossom.svg") center / contain no-repeat; }
+.life.lost { filter: grayscale(1) opacity(.22); }
+html[data-theme="dark"] .life.lost { filter: grayscale(1) opacity(.3); }
+html[data-contrast="high"] .life { filter: none; }
+html[data-contrast="high"] .life.lost { filter: grayscale(1) opacity(.2); }
+
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
+.sudoku.hit .sudoku-board { animation: shake .4s; }
 
 /* ----- Rooster ----- */
 .sudoku-board {
   display: grid; grid-template-rows: repeat(9, 1fr);
   width: 100%; aspect-ratio: 1;
   background: var(--surface);
-  border: 3px solid var(--text); border-radius: .6rem; overflow: hidden;
+  border: 3px solid var(--text); border-radius: .75rem; overflow: hidden;
   box-shadow: var(--shadow);
 }
 .sudoku-row { display: grid; grid-template-columns: repeat(9, 1fr); }
@@ -39,55 +49,58 @@
 .cell .notes span { display: grid; place-items: center; font-size: .6rem; font-size: 31cqh; line-height: 1; color: var(--text-muted); font-weight: 700; }
 
 /* Markeren: rij/kolom/blokje, zelfde cijfer, gekozen vakje */
-.cell.peer { background: var(--primary-soft); }
-.cell.given.peer { background: var(--primary-soft); }
-.cell.same { background: var(--primary-soft); box-shadow: inset 0 0 0 3px var(--primary); }
+.cell.peer, .cell.given.peer { background: var(--primary-soft); }
+.cell.same { background: var(--blush); box-shadow: inset 0 0 0 3px var(--accent); }
 .cell.same .digit { font-weight: 800; }
 .cell.sel { background: var(--primary); color: var(--on-primary); }
 .cell.sel .digit, .cell.sel.given .digit { color: var(--on-primary); }
 .cell.sel .notes span { color: var(--on-primary); }
 
-/* Fout: kleur én een hoekje, zodat het niet alleen aan kleur hangt */
-.cell.bad .digit { color: var(--danger); text-decoration: underline wavy; text-underline-offset: .12em; }
+/* Fout: meteen zichtbaar. Kleur, een hoekje én een golflijn, dus niet alleen kleur. */
+.cell.bad { background: var(--danger-soft); }
+.cell.bad .digit { color: var(--danger); font-weight: 800; text-decoration: underline wavy; text-underline-offset: .12em; }
 .cell.bad::after {
-  content: ""; position: absolute; top: 0; right: 0; width: 28%; height: 28%;
+  content: ""; position: absolute; top: 0; right: 0; width: 30%; height: 30%;
   background: var(--danger); clip-path: polygon(0 0, 100% 0, 100% 100%);
 }
-.cell.sel.bad .digit { color: var(--on-primary); }
+.cell.sel.bad { background: var(--danger); }
+.cell.sel.bad .digit { color: #fff; }
+.cell.sel.bad::after { background: #fff; }
 
 .cell:focus-visible { outline: .25rem solid var(--focus); outline-offset: -.25rem; z-index: 1; }
-html[data-contrast="high"] .cell.peer { background: var(--surface); }
-html[data-contrast="high"] .cell.given { background: var(--surface); }
+html[data-contrast="high"] .cell.peer, html[data-contrast="high"] .cell.given { background: var(--surface); }
+html[data-contrast="high"] .cell.sel.bad { background: var(--danger); }
 
-.sudoku-message {
-  min-height: 3.2em; text-align: center; color: var(--text); font-size: 1.05rem; padding: 0 .25rem;
-}
+.sudoku-message { min-height: 3.2em; text-align: center; color: var(--text); font-size: 1.05rem; padding: 0 .25rem; }
 
-/* ----- Cijfertoetsen ----- */
-.sudoku-pad { display: grid; grid-template-columns: repeat(5, 1fr); gap: .5rem; }
+/* ----- Cijfertoetsen: grote cijfers, geen kaders ----- */
+.sudoku-pad { display: grid; grid-template-columns: repeat(5, 1fr); gap: .25rem; }
 .pad-btn {
-  flex-direction: column; gap: .1rem; min-height: 3.75rem; padding: .25rem; min-width: 0;
-  font-size: 1.7rem; line-height: 1;
+  flex-direction: column; gap: .1rem; min-height: 3.75rem; padding: .25rem; min-width: 0; border-radius: 1rem;
+  font-size: 2rem; font-weight: 600; line-height: 1; color: var(--primary);
 }
-.pad-btn.pad-erase { font-size: .9rem; }
+.pad-btn.pad-erase { font-size: .9rem; font-weight: 700; color: var(--text-muted); }
 .pad-btn.pad-erase .icon { width: 1.6rem; height: 1.6rem; }
-.pad-btn.done { opacity: .35; }
-.sudoku[data-pencil="true"] .pad-btn:not(.pad-erase) { border-style: dashed; }
+.pad-btn.done { opacity: .25; }
+.sudoku[data-pencil="true"] .pad-btn:not(.pad-erase) { color: var(--accent); font-size: 1.6rem; font-weight: 500; }
+html[data-textsize="xlarge"] .pad-btn { font-size: 1.6rem; }
 
-/* ----- Acties: op de telefoon 2 x 2 met grote knoppen, op breder scherm 4 naast elkaar ----- */
-.sudoku-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; }
-.action-btn { min-height: 3.5rem; padding: .4rem .6rem; min-width: 0; font-size: 1rem; gap: .5rem; }
-.action-btn .icon { width: 1.5rem; height: 1.5rem; }
-.action-btn[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
-html[data-textsize="xlarge"] .pad-btn { font-size: 1.4rem; }
-@media (min-width: 34rem) {
-  .sudoku-actions { grid-template-columns: repeat(4, 1fr); }
-  .action-btn { flex-direction: column; gap: .2rem; min-height: 4.25rem; padding: .4rem .2rem; font-size: .85rem; line-height: 1.2; }
+/* ----- Acties: pictogram met een woord eronder, geen kaders ----- */
+.sudoku-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25rem; border-top: 1px solid var(--border); padding-top: .5rem; }
+.action-btn {
+  flex-direction: column; gap: .2rem; min-height: 4rem; padding: .4rem .2rem; min-width: 0;
+  font-size: .85rem; line-height: 1.2; color: var(--text-muted); border-radius: 1rem;
 }
+.action-btn .icon { width: 1.6rem; height: 1.6rem; color: var(--primary); }
+.action-label { overflow-wrap: anywhere; }
+.action-btn[aria-pressed="true"] { background: var(--blush); color: var(--accent); }
+.action-btn[aria-pressed="true"] .icon { color: var(--accent); }
+html[data-textsize="large"] .action-btn { font-size: .75rem; }
+html[data-textsize="xlarge"] .action-btn { font-size: .65rem; }
 
 /* ----- Breed scherm: rooster links, bediening rechts ----- */
 @media (min-width: 62rem) {
-  .sudoku { flex-direction: row; align-items: flex-start; justify-content: center; gap: 2.5rem; }
-  .sudoku-main { flex: 1 1 0; max-width: min(36rem, max(22rem, calc(100dvh - 14rem))); }
-  .sudoku-controls { flex: none; width: 22rem; padding-top: .25rem; }
+  .sudoku { flex-direction: row; align-items: flex-start; justify-content: center; gap: 3rem; }
+  .sudoku-main { flex: 1 1 0; max-width: min(36rem, max(22rem, calc(100dvh - 17rem))); }
+  .sudoku-controls { flex: none; width: 22rem; padding-top: 3.25rem; }
 }

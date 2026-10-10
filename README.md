@@ -3,7 +3,7 @@
 Een rustig platform om puzzelspellen te spelen (sudoku, woordzoeker, kruiswoordpuzzels, ...),
 ontworpen voor ouderen: grote letters, duidelijke knoppen en een zo simpel mogelijke opzet.
 
-**Status:** het platform staat en **Sudoku** is speelbaar (3 niveaus, notities, tip, controle, ongedaan maken, puzzel van de dag). Woordzoeker en kruiswoordpuzzel volgen.
+**Status:** het platform staat en **Sudoku** is speelbaar (4 niveaus tot en met Extreem, levens, meteen zien als iets fout is, notities, tip, ongedaan maken, puzzel van de dag). Woordzoeker en kruiswoordpuzzel volgen.
 
 ## Uitproberen
 
@@ -25,6 +25,7 @@ losse bestand hierboven of de webserver.)
 npm install        # eenmalig, alleen nodig voor de build
 npm test           # test de sudoku-engine (unieke oplossing, moeilijkheid, snelheid)
 npm run build      # maakt dist/puzzelplaats.html opnieuw (doe dit na elke wijziging)
+node tools/make-blossoms.mjs   # tekent de bloesemtakken opnieuw (andere seed: branch=6 sprig=1)
 ```
 
 ## Wat zit erin
@@ -36,6 +37,7 @@ npm run build      # maakt dist/puzzelplaats.html opnieuw (doe dit na elke wijzi
 | Sudoku (engine + scherm + stijl) | `js/games/sudoku/`, `css/games/sudoku.css` |
 | Opslag op het apparaat (voortgang, instellingen) | `js/store.js` |
 | Stijl, thema's, tekstgroottes | `css/styles.css` |
+| Kersenbloesem-versiering (SVG, gegenereerd) | `assets/`, `tools/make-blossoms.mjs` |
 | Toekomstige functies (accounts, vrienden, Facebook) | `js/config.js` + `js/services/` |
 | Installeerbaar op het beginscherm + offline | `manifest.webmanifest`, `sw.js` |
 
