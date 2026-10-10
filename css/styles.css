@@ -552,7 +552,6 @@ html[data-contrast="high"] .ws-bar { border: 2px solid var(--border); }
 
 /* Hoofdkaart: terug naar je spel, met voortgang */
 .hero h2 { font-size: 1.4rem; }
-html[data-textsize="xlarge"] 
 /* Puzzel van de dag */
 .daily {
   position: relative; overflow: hidden; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 1rem;
@@ -574,7 +573,6 @@ html[data-theme="dark"] .cal small { color: #2a0f1a; }
 .daily-text .muted { font-size: .95rem; }
 .daily.is-done .cal b { color: var(--text-muted); }
 
-html[data-contrast="high"] 
 /* Spellenoverzicht: grote kaarten */
 .game-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
 .game-card {

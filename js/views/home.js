@@ -61,7 +61,7 @@ function friendRow(r, me, act) {
   const s = stand(r.match, me);
   const meer = r.aantal > 1 ? ` · ${r.aantal} partijen` : '';
   const beurt = r.kind === 'beurt';
-  wie.append(h('span', { class: beurt ? 'beurt-tekst' : 'muted' }, beurt ? `Jij bent aan de beurt${s ? ` · ${s}` : ''}${meer}` : `Wacht op ${f.name}${s ? ` · ${s}` : ''}${meer}`));
+  wie.append(h('span', { class: beurt ? 'beurt-tekst' : 'muted' }, beurt ? `Jouw beurt${s ? ` · ${s}` : ''}${meer}` : `Wacht op ${f.name}${s ? ` · ${s}` : ''}${meer}`));
   // De hele rij is een link naar de partij; de knop is er alleen om te laten zien dat jij moet spelen
   const a = h('a', { class: `fr ${beurt ? 'is-beurt' : 'is-wacht'}`, href: `#/partij/${r.match.id}`, 'aria-label': `${beurt ? 'Spelen' : 'Bekijken'}: Woordtuin met ${f.name}. ${beurt ? 'Jij bent aan de beurt.' : `${f.name} is aan de beurt.`}` },
     avatar(f.name, f.id), wie, beurt ? h('span', { class: 'btn btn-primary', 'aria-hidden': 'true' }, 'Spelen') : icon('chevron'));

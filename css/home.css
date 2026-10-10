@@ -10,24 +10,25 @@
 .seg .btn[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
 
 /* Vrienden */
-.fr-sectie { display: flex; flex-direction: column; gap: .45rem; }
-.fr-sectie h2 { font-size: 1.1rem; }
+.fr-sectie { display: flex; flex-direction: column; gap: .35rem; }
+.fr-sectie h2 { font-size: 1rem; }
 .fr-lijst { list-style: none; margin: 0; padding: 0; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
 .fr-lijst:empty { display: none; }
 .fr-lijst > li + li { border-top: 1px solid var(--border); }
 html[data-theme="dark"] .fr-lijst { border: 1px solid var(--border); }
 html[data-contrast="high"] .fr-lijst { border: 3px solid var(--border); }
-.fr { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; padding: .65rem .75rem; min-height: 4rem; color: var(--text); text-decoration: none; }
-.fr .avatar { width: 2.4rem; height: 2.4rem; font-size: 1.1rem; }
+.fr { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; padding: .4rem .65rem; min-height: 3.1rem; color: var(--text); text-decoration: none; }
+.fr .avatar { width: 2rem; height: 2rem; font-size: .95rem; }
 .fr .who { flex: 1 1 5rem; min-width: 0; display: flex; flex-direction: column; }
-.fr .who strong { font-size: 1.1rem; overflow-wrap: anywhere; }
-.fr .who .muted, .fr .who .beurt-tekst { font-size: .95rem; overflow-wrap: anywhere; }
-.fr .btn { min-height: 2.6rem; padding-inline: .8rem; font-size: 1rem; flex: none; white-space: nowrap; }
-.fr > .icon { flex: none; color: var(--text-muted); }
+.fr .who { line-height: 1.2; }
+.fr .who strong { font-size: 1rem; overflow-wrap: anywhere; }
+.fr .who .muted, .fr .who .beurt-tekst { font-size: .85rem; overflow-wrap: anywhere; }
+.fr .btn { min-height: 2.2rem; padding: 0 .75rem; font-size: .9rem; flex: none; white-space: nowrap; }
+.fr > .icon { flex: none; color: var(--text-muted); width: 1.2rem; height: 1.2rem; }
 .fr-acties { display: flex; gap: .25rem; flex: none; }
 a.fr:hover { background: var(--primary-soft); }
 a.fr:active { background: var(--primary-soft); }
-.fr.is-beurt { background: var(--blush); box-shadow: inset .3rem 0 0 var(--accent); }
+.fr.is-beurt { background: var(--blush); box-shadow: inset .25rem 0 0 var(--accent); }
 .fr.is-beurt:hover { background: var(--blush); filter: brightness(.97); }
 html[data-contrast="high"] .fr.is-beurt { background: var(--surface); }
 .fr-voet:empty { display: none; }

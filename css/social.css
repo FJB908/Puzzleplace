@@ -54,14 +54,15 @@ html[data-textsize="xlarge"] .code { font-size: 1.5rem; }
 
 /* ----- Vriendenlijst ----- */
 .friends { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-direction: column; }
-.friend { display: flex; align-items: center; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.friend { display: flex; align-items: center; gap: .7rem; padding: .5rem 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
 .friends > li:last-child { border-bottom: 0; }
 .friend .who { display: flex; flex-direction: column; min-width: 0; flex: 1 1 8rem; }
-.friend .who strong { font-size: 1.2rem; overflow-wrap: anywhere; }
-.friend .who .muted { font-size: .95rem; }
+.friend .who strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.friend .who .muted, .friend .who .beurt-tekst { font-size: .88rem; }
+.friend .avatar { width: 2.4rem; height: 2.4rem; font-size: 1.1rem; }
 .friend-actions { display: flex; gap: .25rem; flex-wrap: wrap; }
-.friend-actions .btn { min-height: 3rem; padding-inline: 1rem; }
-.friend.partij.jouw-beurt { background: var(--blush); border-radius: var(--radius); padding-inline: 1rem; margin-block: .2rem; border-bottom-color: transparent; }
+.friend-actions .btn { min-height: 2.5rem; padding-inline: .85rem; font-size: .95rem; }
+.friend.partij.jouw-beurt { background: var(--blush); border-radius: var(--radius); padding-inline: .8rem; margin-block: .15rem; border-bottom-color: transparent; }
 .beurt-tekst { font-weight: 700; color: var(--accent); }
 
 /* ----- Meldingsbolletje in het menu ----- */
