@@ -25,7 +25,6 @@ export function mount(container, ctx) {
   const total = puzzle.words.length;
   const found = new Set(state.found.map((f) => f.word));
   const byWord = new Map(puzzle.words.map((w) => [w.word, w]));
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
   let start = null;                 // eerste gekozen vakje { r, c }
   let cursor = { r: 0, c: 0 };      // voor het toetsenbord
@@ -210,9 +209,8 @@ export function mount(container, ctx) {
       const [bx, by] = center(board);
       burst({ x: bx, y: by, count: 26, power: 420, cone: [-170, -10], size: [14, 26], life: [1500, 2300] });
       rain({ count: 40 });
-      await wait(1500);
     }
-    ctx.complete({ difficulty: ctx.difficulty });
+    ctx.complete({ difficulty: ctx.difficulty, delay: motionOK() ? 1500 : 0 });
   }
 
   // ----- Tip: het eerste vakje van een woord licht even op -----

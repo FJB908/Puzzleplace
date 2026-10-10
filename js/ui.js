@@ -41,6 +41,7 @@ const ICONS = {
   pencil: '<path d="M4 20l1-5L16 4l4 4L9 19zM14 6l4 4"/>',
   bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.500c.7.7 1 1.500 1 2.500h6c0-1 .3-1.800 1-2.500A6 6 0 0 0 12 3z"/>',
   verify: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+  backspace: '<path d="M20 12H5M11 6l-6 6 6 6"/>',
   eraser: '<path d="M4 16l9-9a2 2 0 0 1 3 0l3 3a2 2 0 0 1 0 3l-6 6H8zM9 11l5 5M12 20h8"/>',
   eye: '<path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   // spelpictogrammen

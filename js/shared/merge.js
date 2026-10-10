@@ -3,17 +3,22 @@
 // Regels, bedoeld om nooit voortgang kwijt te raken:
 //   - hoe vaak je een spel hebt opgelost: het hoogste getal wint
 //   - dagpuzzel gedaan: de nieuwste datum wint
-//   - een lopend spel: dat wat het laatst is gespeeld wint (per spel, per plek: gewoon of dagpuzzel)
+//   - een lopend spel: dat wat het laatst is gespeeld wint (per spel, per plek: gewoon of dagpuzzel);
+//     een afgerond of weggegooid spel laat een wismarkering achter die op dezelfde manier meetelt
 //   - je naam: die van het apparaat dat het laatst iets deed
 // Instellingen zoals tekstgrootte horen bij het apparaat en worden niet samengevoegd.
 
 const later = (a, b) => ((a?.updatedAt ?? 0) >= (b?.updatedAt ?? 0) ? a : b);
 
+// Een plek is leeg, een wismarkering ({ cleared }, na afronden of weggooien) of een spel. De nieuwste wint, ook als dat
+// een wismarkering is: zo komt een afgerond spel niet terug vanaf een apparaat dat het nog als lopend spel kent.
+const mergeSlot = (a, b) => (!a || !b ? a || b : later(a, b));
+
 function mergeGame(a = {}, b = {}) {
   const slots = {};
   for (const name of new Set([...Object.keys(a.slots || {}), ...Object.keys(b.slots || {})])) {
     const sa = a.slots?.[name] ?? null, sb = b.slots?.[name] ?? null;
-    slots[name] = sa && sb ? later(sa, sb) : sa || sb;
+    slots[name] = mergeSlot(sa, sb);
   }
   const newest = later(Object.values(a.slots || {}).filter(Boolean).reduce((x, y) => later(x, y), null), Object.values(b.slots || {}).filter(Boolean).reduce((x, y) => later(x, y), null));
   const fromNewest = newest && (a.slots && Object.values(a.slots).includes(newest) ? a : b);

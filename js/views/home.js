@@ -59,7 +59,7 @@ function heroArt() {
 function mainCard() {
   const last = store.getLastGame();
   const info = last && getGameInfo(last.id);
-  const slot = info && store.getGame(info.id).slots[last.slot];
+  const slot = info && store.getSlot(info.id, last.slot);
 
   if (info && slot && slot.state != null) {
     const href = `#/spel/${info.id}/speel${last.slot === 'daily' ? '/dagelijks' : ''}`;
@@ -128,8 +128,7 @@ function beurtNotice() {
 
 function tile(game) {
   const ready = isReady(game);
-  const rec = store.getGame(game.id);
-  const busy = ready && rec.slots.normal?.state != null;
+  const busy = ready && store.hasProgress(game.id, 'normal');
   return h('li', {}, h('a', { class: `tile-game game--${game.id}`, href: `#/spel/${game.id}` },
     h('span', { class: 'tg-art' }, art(game.id)),
     h('span', { class: 'tg-name' }, game.name),

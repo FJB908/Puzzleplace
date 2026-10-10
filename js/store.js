@@ -7,7 +7,7 @@
 //   games:    { [gameId]: { difficulty, completed, dailyDone, slots: { normal, daily } } }
 //   lastGame: { id, slot } | null
 //
-// Een "slot" is een bewaard spel: { seed, difficulty, state, updatedAt, day? }.
+// Een "slot" is een bewaard spel: { seed, difficulty, state, updatedAt, progress?, day? }, of een wismarkering { cleared: true, updatedAt }.
 // Later kan een account deze hele structuur synchroniseren (services/sync.js).
 
 const KEY = 'puzzelplaats:v1';
@@ -69,8 +69,19 @@ export function updateGame(id, fn) {
 export const getLastGame = () => data.lastGame;
 export const setLastGame = (id, slot) => { data.lastGame = { id, slot }; persist(); };
 
+// Het bewaarde spel op een plek (gewoon of dagpuzzel), of null. Een weggegooid of afgerond spel laat een "wismarkering"
+// achter ({ cleared, updatedAt }) in plaats van niets: anders zou synchroniseren het oude spel van een ander apparaat
+// terugzetten. Lees een plek dus altijd hiermee en nooit rechtstreeks uit `slots`.
+export function getSlot(id, slot = 'normal') {
+  const s = getGame(id).slots[slot];
+  if (!s || s.cleared) return null;
+  if (slot === 'daily' && s.day !== todayKey()) return null;     // de dagpuzzel van gisteren telt niet meer mee
+  return s;
+}
+export const clearedSlot = () => ({ cleared: true, updatedAt: Date.now() });
+
 // Een bewaard spel dat echt is begonnen (er is voortgang).
-export const hasProgress = (id, slot = 'normal') => getGame(id).slots[slot]?.state != null;
+export const hasProgress = (id, slot = 'normal') => getSlot(id, slot)?.state != null;
 
 // Voor synchronisatie met andere apparaten: alleen je voortgang en naam, nooit instellingen
 export const exportSync = () => JSON.parse(JSON.stringify({ profile: { name: data.profile.name }, games: data.games, lastGame: data.lastGame }));

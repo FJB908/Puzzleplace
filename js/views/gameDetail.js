@@ -19,7 +19,7 @@ export function gameDetailView({ id }, app) {
 
   const record = store.getGame(id);
   const ready = isReady(game);
-  const saved = record.slots.normal;
+  const saved = store.getSlot(id, 'normal');
   const resumable = ready && saved && saved.state != null;
   let level = resumable ? saved.difficulty : record.difficulty;
   if (!game.difficulties.some((d) => d.id === level)) level = game.difficulties[0].id;
@@ -78,7 +78,7 @@ export function gameDetailView({ id }, app) {
       });
       if (!ok) return;
     }
-    store.updateGame(id, (r) => { r.slots.normal = null; r.difficulty = level; });
+    store.updateGame(id, (r) => { r.slots.normal = store.clearedSlot(); r.difficulty = level; });
     location.hash = `#/spel/${id}/speel`;
   }
 

@@ -18,7 +18,7 @@ export async function playView({ id, mode }, app) {
   const record = store.getGame(id);
 
   // Het bewaarde spel van een andere dag telt niet meer mee.
-  let slot = record.slots[slotName];
+  let slot = store.getSlot(id, slotName);
   if (daily && slot && slot.day !== today) slot = null;
 
   // Nieuw slot aanmaken als dat nog niet bestaat.
@@ -59,7 +59,8 @@ export async function playView({ id, mode }, app) {
   );
 
   let cleanup = null;
-  let finished = false;
+  let finished = false;      // het spel is afgelopen of weggegooid: er wordt niets meer bewaard
+  let gone = false;          // je hebt het scherm verlaten: dan geen slotbericht meer
 
   const ctx = {
     gameId: id,
@@ -69,28 +70,33 @@ export async function playView({ id, mode }, app) {
     saved: slot.state,
     settings: { ...store.getSettings() },
     announce,
-    // meta.progress (0 tot 1) laat op de kaarten zien hoe ver je bent
+    // meta.progress (0 tot 1) laat op de kaarten zien hoe ver je bent. Zonder progress verdwijnt een oude waarde,
+    // zodat er nooit een stand getoond wordt die bij een eerder moment hoort.
     save(state, meta = {}) {
       if (finished) return;
       store.updateGame(id, (r) => {
-        r.slots[slotName] = { ...r.slots[slotName], state, updatedAt: Date.now(), ...(meta.progress != null ? { progress: meta.progress } : {}) };
+        r.slots[slotName] = { ...r.slots[slotName], state, updatedAt: Date.now(), progress: meta.progress ?? null };
       });
       store.setLastGame(id, slotName);
     },
     // Spel weggooien (bijv. na "game over"): de bewaarde stand verdwijnt.
     discard() {
       finished = true;
-      store.updateGame(id, (r) => { r.slots[slotName] = null; });
+      store.updateGame(id, (r) => { r.slots[slotName] = store.clearedSlot(); });
     },
-    // result mag { title, text, joy } meegeven voor een eigen slotbericht (bijv. "Gewonnen!" of "Mooi gespeeld!")
+    // Het spel is uitgespeeld. Dat wordt meteen vastgelegd, ook als het spel nog een winst-animatie laat zien (result.delay,
+    // in ms): verlaat je het scherm tijdens die animatie, dan staat er geen half spel meer bij "Verder spelen".
+    // result mag ook { title, text, joy } meegeven voor een eigen slotbericht (bijv. "Gewonnen!" of "Mooi gespeeld!")
     async complete(result = {}) {
       if (finished) return;
       finished = true;
       store.updateGame(id, (r) => {
         r.completed = (r.completed || 0) + 1;
-        r.slots[slotName] = null;
+        r.slots[slotName] = store.clearedSlot();
         if (daily) r.dailyDone = today;
       });
+      if (result.delay) await new Promise((resolve) => setTimeout(resolve, result.delay));
+      if (gone) return;
       announce(result.title ?? 'Goed gedaan! Het spel is uitgespeeld.');
       const choice = await choiceDialog({
         title: result.title ?? 'Goed gedaan!',
@@ -124,5 +130,5 @@ export async function playView({ id, mode }, app) {
     }
   };
 
-  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => cleanup && cleanup() };
+  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => { gone = true; if (cleanup) cleanup(); } };
 }

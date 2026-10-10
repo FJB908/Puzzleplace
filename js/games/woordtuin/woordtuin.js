@@ -69,9 +69,9 @@ export function mount(container, ctx) {
       const [x, y] = [innerWidth / 2, innerHeight / 2];
       burst({ x, y, count: 26, power: 420, cone: [-170, -10], size: [14, 26], life: [1500, 2300] });
       rain({ count: 40 });
-      await wacht(1200);
     }
     ctx.complete({
+      delay: gewonnen && motionOK() ? 1200 : 0,
       title: gewonnen ? 'Gewonnen, gefeliciteerd!' : gelijk ? 'Gelijkspel!' : 'Mooi gespeeld!',
       text: gewonnen ? `Jij hebt ${wij} bloemen en de computer ${zij}.` : gelijk ? `Jullie hebben allebei ${wij} bloemen.` : `De computer won met ${zij} tegen ${wij}. Een volgende keer lukt het vast, probeer gerust nog eens.`,
       joy: gewonnen || gelijk,

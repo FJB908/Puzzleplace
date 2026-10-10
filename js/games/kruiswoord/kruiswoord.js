@@ -29,7 +29,6 @@ export function mount(container, ctx) {
   const isCell = (r, c) => r >= 0 && c >= 0 && r < R && c < C && puzzle.grid[r][c] !== '.';
   const answerAt = (r, c) => puzzle.grid[r][c];
   const locked = new Set(state.locked);
-  const wait = (ms) => new Promise((res) => setTimeout(res, ms));
   const total = puzzle.grid.join('').replace(/\./g, '').length;
 
   // welk woord hoort bij welk vakje, in beide richtingen
@@ -74,7 +73,7 @@ export function mount(container, ctx) {
   const message = h('p', { class: 'kw-message', role: 'status', 'aria-live': 'polite' }, 'Tik op een vakje om te beginnen.');
 
   const keyBtn = (ch) => h('button', { type: 'button', class: 'kw-key', 'aria-label': ch, onclick: () => typeLetter(ch) }, ch);
-  const back = h('button', { type: 'button', class: 'kw-key kw-back', 'aria-label': 'Wis', onclick: backspace }, icon('eraser'));
+  const back = h('button', { type: 'button', class: 'kw-key kw-back', 'aria-label': 'Terug en wis de letter', onclick: backspace }, icon('backspace'));
   const keys = h('div', { class: 'kw-keys', role: 'group', 'aria-label': 'Toetsenbord' },
     ROWS.map((row, i) => h('div', { class: `kw-row r${i}` }, [...row].map(keyBtn), i === 2 ? back : null)));
 
@@ -194,17 +193,6 @@ export function mount(container, ctx) {
     }
   }
 
-  function moveWithinWord(delta) {
-    const e = entryOf();
-    if (!e) return false;
-    const cl = cellsOf(e);
-    const at = cl.findIndex(([r, c]) => r === sel.r && c === sel.c) + delta;
-    if (at < 0 || at >= cl.length) return false;
-    sel = { ...sel, r: cl[at][0], c: cl[at][1] };
-    state.sel = sel;
-    return true;
-  }
-
   function arrow(dr, dc) {
     if (!sel) { const first = puzzle.entries[0]; selectEntry(0); return first; }
     let r = sel.r + dr, c = sel.c + dc;
@@ -221,15 +209,45 @@ export function mount(container, ctx) {
     const i = idx(sel.r, sel.c);
     if (!locked.has(i)) letters[i] = ch;
     const typed = { r: sel.r, c: sel.c };
-    moveWithinWord(1);
+    advance();
     afterEdit(typed);
   }
 
+  // Naar het volgende vakje van het woord dat nog leeg is: ingevulde letters sla je over. Is er daarna niets leeg, dan
+  // het eerste lege vakje eerder in het woord; is het woord vol, dan gewoon een vakje verder (zonder vaste letters).
+  function advance() {
+    const e = entryOf();
+    if (!e) return;
+    const cl = cellsOf(e);
+    const at = cl.findIndex(([r, c]) => r === sel.r && c === sel.c);
+    const empty = (k) => !letters[idx(...cl[k])];
+    const free = (k) => !locked.has(idx(...cl[k]));
+    let to = -1;
+    for (let k = at + 1; k < cl.length && to < 0; k++) if (empty(k)) to = k;
+    for (let k = 0; k < at && to < 0; k++) if (empty(k)) to = k;
+    for (let k = at + 1; k < cl.length && to < 0; k++) if (free(k)) to = k;
+    if (to < 0) return;
+    sel = { ...sel, r: cl[to][0], c: cl[to][1] };
+    state.sel = sel;
+  }
+
+  // Terug: eerst de letter in dit vakje wissen, en is die al leeg (of vast), dan naar het vorige vakje dat je kunt wissen.
   function backspace() {
     if (finished || !sel) return;
     const i = idx(sel.r, sel.c);
-    if (letters[i] && !locked.has(i)) { letters[i] = ''; }
-    else if (moveWithinWord(-1)) { const j = idx(sel.r, sel.c); if (!locked.has(j)) letters[j] = ''; }
+    if (letters[i] && !locked.has(i)) letters[i] = '';
+    else {
+      const e = entryOf();
+      const cl = e ? cellsOf(e) : [];
+      const at = cl.findIndex(([r, c]) => r === sel.r && c === sel.c);
+      for (let k = at - 1; k >= 0; k--) {
+        const j = idx(...cl[k]);
+        if (locked.has(j)) continue;
+        sel = { ...sel, r: cl[k][0], c: cl[k][1] }; state.sel = sel;
+        letters[j] = '';
+        break;
+      }
+    }
     afterEdit(null);
   }
 
@@ -295,7 +313,7 @@ export function mount(container, ctx) {
     reveal(sel.r, sel.c);
     say(`Tip: in dit vakje staat een ${answerAt(sel.r, sel.c)}.`);
     const at = { r: sel.r, c: sel.c };
-    moveWithinWord(1);
+    advance();
     afterEdit(at);
   }
 
@@ -320,9 +338,8 @@ export function mount(container, ctx) {
       const [x, y] = center(board);
       burst({ x, y, count: 26, power: 420, cone: [-170, -10], size: [14, 26], life: [1500, 2300] });
       rain({ count: 40 });
-      await wait(1500);
     }
-    ctx.complete({ difficulty: ctx.difficulty });
+    ctx.complete({ difficulty: ctx.difficulty, delay: motionOK() ? 1500 : 0 });
   }
 
   // ----- Toetsenbord van de gebruiker -----

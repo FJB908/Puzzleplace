@@ -23,13 +23,28 @@ test('een lopend spel: het laatst gespeelde wint, per spel en per plek', () => {
   assert.deepEqual(m.lastGame, { id: 'kruiswoord', slot: 'normal' }, 'het nieuwste spel is het laatst gespeelde');
 });
 
-test('een afgerond spel (geen slot meer) wist het lopende spel van het andere apparaat niet zomaar', () => {
-  // lokaal is net uitgespeeld (slot weg, completed omhoog), op de server staat nog de oude stand
-  const local = { profile: {}, games: { sudoku: { completed: 1, slots: { normal: null } } }, lastGame: null };
+test('een afgerond spel komt niet terug vanaf een apparaat met de oude stand', () => {
+  // lokaal is net uitgespeeld (wismarkering, completed omhoog), op de server staat nog de oude stand
+  const local = { profile: {}, games: { sudoku: { completed: 1, slots: { normal: { cleared: true, updatedAt: 200 } } } }, lastGame: null };
   const remote = { profile: {}, games: { sudoku: { completed: 0, slots: { normal: slot(100) } } }, lastGame: null };
-  const m = mergeSnapshots(local, remote);
-  assert.equal(m.games.sudoku.completed, 1);
-  assert.equal(m.games.sudoku.slots.normal.updatedAt, 100, 'liever een oud spel te veel dan voortgang kwijt');
+  for (const m of [mergeSnapshots(local, remote), mergeSnapshots(remote, local)]) {
+    assert.equal(m.games.sudoku.completed, 1);
+    assert.equal(m.games.sudoku.slots.normal.cleared, true, 'het afgeronde spel blijft weg');
+  }
+});
+
+test('een nieuwer spel wint van een oude wismarkering, en een wismarkering van een ouder spel', () => {
+  const wis = { cleared: true, updatedAt: 200 };
+  const a = { profile: {}, games: { sudoku: { slots: { normal: wis } } }, lastGame: null };
+  const nieuwer = { profile: {}, games: { sudoku: { slots: { normal: slot(300) } } }, lastGame: null };
+  assert.equal(mergeSnapshots(a, nieuwer).games.sudoku.slots.normal.updatedAt, 300);
+  assert.ok(sameSnapshot(mergeSnapshots(a, nieuwer), mergeSnapshots(nieuwer, a)));
+});
+
+test('een oud spel zonder wismarkering (null) verliest nog steeds niet', () => {
+  const a = { profile: {}, games: { sudoku: { slots: { normal: null } } }, lastGame: null };
+  const b = { profile: {}, games: { sudoku: { slots: { normal: slot(100) } } }, lastGame: null };
+  assert.equal(mergeSnapshots(a, b).games.sudoku.slots.normal.updatedAt, 100);
 });
 
 test('merge verandert niets aan de invoer, en is stabiel', () => {

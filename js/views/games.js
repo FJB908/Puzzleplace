@@ -8,7 +8,7 @@ import { gameArt } from '../games/art.js';
 function card(game) {
   const ready = isReady(game);
   const rec = store.getGame(game.id);
-  const slot = rec.slots.normal;
+  const slot = store.getSlot(game.id, 'normal');
   const busy = ready && slot?.state != null;
   const pct = busy && slot.progress != null ? Math.round(slot.progress * 100) : null;
   const art = h('div', { class: 'art-box', 'aria-hidden': 'true' });

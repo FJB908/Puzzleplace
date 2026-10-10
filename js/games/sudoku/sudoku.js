@@ -39,7 +39,6 @@ export function mount(container, ctx) {
   let finished = false;
   let lastPlaced = -1, lastNope = -1;      // voor het knallen/schudden van het laatste vakje
   const waves = new Map();                  // vakje -> vertraging van de golf (ms)
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
   // ----- Opbouw -----
   const cells = [];
@@ -231,9 +230,8 @@ export function mount(container, ctx) {
       const [x, y] = center(board);
       burst({ x, y, count: 26, power: 420, cone: [-170, -10], size: [14, 26], life: [1500, 2300] });
       rain({ count: 40 });
-      await wait(1400);
     }
-    ctx.complete({ difficulty: ctx.difficulty, livesLeft: state.lives });
+    ctx.complete({ difficulty: ctx.difficulty, livesLeft: state.lives, delay: motionOK() ? 1400 : 0 });   // meteen vastleggen, het slotbericht komt na de animatie
   }
 
   // ----- Fout gemaakt: een leven eraf -----
@@ -276,7 +274,7 @@ export function mount(container, ctx) {
     state.lives = maxLives;
     finished = false;
     selected = Math.max(0, firstEmptyOrWrong());
-    ctx.save(state);
+    ctx.save(state, { progress: progress() });
     say('Nieuwe poging. Succes!');
     render();
     cells[selected].focus({ preventScroll: true });
@@ -313,7 +311,7 @@ export function mount(container, ctx) {
     if (right) { say(''); celebrateRight(selected, before); afterChange(); return; }
 
     loseLife();
-    ctx.save(state);
+    ctx.save(state, { progress: progress() });
     render();
     if (state.lives <= 0) { gameOver(); return; }
     say(`Dat cijfer hoort hier niet. Je hebt ${levensText(state.lives)}. Wis het of probeer een ander cijfer.`);
