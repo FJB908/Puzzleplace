@@ -15,7 +15,8 @@ friends.renewed | New code made | Nieuwe code gemaakt
 friends.yourCode | Your friend code | Jouw vriendencode
 friends.yourCodeHint | Give this code to someone you know. They can then add you as a friend. | Geef deze code aan iemand die je kent. Die kan jou dan als vriend toevoegen.
 # {me} en {them} zijn aantallen gewonnen partijen, bijvoorbeeld "jullie staan 2–1"
-friends.score | you are {me}–{them} | jullie staan {me}–{them}
+# Small line under a friend: how many finished games each of you has won. {me} and {them} are numbers, {name} is the friend's first name.
+friends.score | Games won: you {me}, {name} {them} | Gewonnen partijen: jij {me}, {name} {them}
 friends.deletedAccount | Deleted account | Verwijderd account
 friends.addTitle | Add a friend | Vriend toevoegen
 friends.haveCode | Did you get a code? | Heb je een code gekregen?
@@ -36,7 +37,7 @@ friends.games | Your games | Partijen
 # {game} is de naam van het spel, {name} de naam van de vriend
 friends.gameWith | {game} with {name} | {game} met {name}
 friends.statusTurn | It is your turn | Jij bent aan de beurt
-friends.statusTheirTurn | {name} is to move | {name} is aan de beurt
+friends.statusTheirTurn | It is {name}'s turn | {name} is aan de beurt
 friends.scoreLine | You {mine} · {name} {theirs} · {open} open | Jij {mine} · {name} {theirs} · nog {open} open
 friends.play | Play | Spelen
 friends.view | View | Bekijken

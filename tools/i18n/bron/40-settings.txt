@@ -10,6 +10,7 @@ settings.coloursHint | Automatic follows the setting of your phone or computer. 
 settings.theme.auto | Automatic | Automatisch
 settings.theme.light | Light | Licht
 settings.theme.dark | Dark | Donker
+# Setting (switch): stronger contrast and thicker borders, for people who see less well. Short.
 settings.contrast | Extra clear | Extra duidelijk
 settings.contrastHint | Stronger contrast and thicker borders | Sterker contrast en dikkere randen
 settings.decor | Blossom branches | Bloesemtakken

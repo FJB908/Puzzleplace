@@ -56,7 +56,7 @@ account.forgot.text | With your recovery code you choose a new password. | Met j
 account.recoveryLabel | Your recovery code | Je herstelcode
 account.recoveryHint | This is the 12-character code you received when you signed up, like K7P4-QM2X-9TBR. | Dat is de code van 12 tekens die je bij het aanmelden kreeg, zoals K7P4-QM2X-9TBR.
 account.setPassword | Set new password | Nieuw wachtwoord instellen
-account.lostBoth | Lost your recovery code too? Then we unfortunately cannot get into your account. You can create a new account; the progress on your devices stays. | Ook de herstelcode kwijt? Dan kunnen we helaas niet bij je account. Je kunt een nieuw account maken; de voortgang op je apparaten blijft bestaan.
+account.lostBoth | Lost your recovery code as well? Then unfortunately we cannot give you access to your account. You can create a new account; the progress on your devices stays. | Ook de herstelcode kwijt? Dan kunnen we helaas niet bij je account. Je kunt een nieuw account maken; de voortgang op je apparaten blijft bestaan.
 account.sync.title | Your progress on all your devices | Je voortgang op al je apparaten
 account.sync.now | Sync now | Nu synchroniseren
 account.sync.busy | Updating… | Even bijwerken…

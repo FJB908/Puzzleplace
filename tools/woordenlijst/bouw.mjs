@@ -9,6 +9,7 @@
 //   3. geen woorden die vooral Engels zijn (tools/woordtuin/<taal>/engels-maar-lokaal.txt zijn de uitzonderingen);
 //   4. blokkeerlijst.txt valt af (namen, afkortingen, vreemde woorden, beledigingen die groepen kwetsen; met de hand beoordeeld);
 //   5. toegestaan.txt komt er altijd bij.
+//   (rar.txt: geldige woorden die niet alledaags zijn, ook al zijn ze frequent: de computer speelt ze niet, een speler wel.)
 //   "alledaags" (de computer speelt alleen die, en tips komen daaruit): vaak voorkomend, niet grof (ruw.txt) en niet vooral Engels.
 //
 // Uitvoer: js/games/woordtuin/talen/<taal>.js
@@ -42,6 +43,7 @@ const zFW = (n) => Math.log10(n / totaal) + 9;                  // zoals wordfre
 
 const blok = new Set(lijstTokens(join(map, 'blokkeerlijst.txt')));
 const ruw = new Set(lijstTokens(join(map, 'ruw.txt')));
+const rar = new Set(lijstTokens(join(map, 'rar.txt')));
 const toegestaan = new Set(lijstTokens(join(map, 'toegestaan.txt')));
 const engelsMaarLokaal = new Set(lijstTokens(join(map, 'engels-maar-lokaal.txt')));
 
@@ -80,7 +82,7 @@ for (const [w, r] of perWoord) {
 }
 woorden.sort();
 const alledaags = (w) => {
-  if (ruw.has(w)) return false;
+  if (ruw.has(w) || rar.has(w)) return false;
   if (toegestaan.has(w)) return true;
   const r = perWoord.get(w), zlw = ZL(r);
   return r.aantal >= ALLEDAAGS_AANTAL && zlw >= (wfSoort === 'geen' ? 3.0 : ALLEDAAGS_ZIPF) && r.ze - zlw < 0.5;

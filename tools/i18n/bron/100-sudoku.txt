@@ -1,11 +1,15 @@
 # Sudoku. "Leven" = een bloesem; een fout cijfer kost een leven (alleen bij Sudoku).
+# Button that gives a small help (a hint), in Sudoku, word search, crossword and Word Garden. One short word.
 common.hint | Hint | Tip
 sudoku.gridAria | Sudoku grid | Sudoku-rooster
 sudoku.start | Tap a cell and then choose a digit. | Tik op een vakje en kies daarna een cijfer.
+# Button: clears the selected cell (removes the digit or the notes).
 sudoku.erase | Clear | Wis
 sudoku.eraseAria | Clear this cell | Wis dit vakje
 sudoku.digits | Digits | Cijfers
+# Button: takes back your last step.
 sudoku.undo | Undo | Stap terug
+# Button (switch) for notes mode: with it on, digits go into a cell small, as a note. Short word.
 sudoku.pencil | Pencil | Potlood
 sudoku.pencilOn | Pencil on | Potlood aan
 sudoku.digitAria | Digit {n} | Cijfer {n}
@@ -29,7 +33,7 @@ sudoku.say.nothingToUndo | There is nothing to undo. | Er is niets om terug te d
 sudoku.say.undone | Your last step has been undone. | Je laatste stap is teruggedraaid.
 sudoku.say.pencilOn | Pencil is on: digits go into the cell small, as a note. | Potlood staat aan: de cijfers komen klein in het vakje, als notitie.
 sudoku.say.pencilOff | Pencil is off: digits go into the cell large. | Potlood staat uit: de cijfers komen groot in het vakje.
-sudoku.say.hint | Hint: the highlighted cell should contain a {n}. | Tip: in het gemarkeerde vakje hoort een {n}.
+sudoku.say.hint | Hint: the digit {n} goes in the highlighted cell. | Tip: in het gemarkeerde vakje hoort een {n}.
 sudoku.say.nothingLeft | There is nothing left to fill in. | Er is niets meer in te vullen.
 sudoku.say.won | Done! The puzzle is completely filled in correctly. | Gelukt! De puzzel is helemaal goed ingevuld.
 sudoku.say.noLives | You have no lives left. | Je hebt geen levens meer.

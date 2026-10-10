@@ -1,6 +1,8 @@
 # Woordtuin (woorden maken op een bord van 6 bij 6 letters en vakjes veroveren). Elk gekleurd vakje is een "bloem".
 # De computer heet in zinnen "de computer"; de ander (een vriend) heeft een eigen naam.
+# Small label under your score.
 woordtuin.you | You | Jij
+# Small label under the computer's score. Short.
 woordtuin.computer | Computer | Computer
 woordtuin.boardAria | The board, {n} by {n} letters | Het bord, {n} bij {n} letters
 # Schermlezertekst bij een letter: {letter}, {r} = rij, {c} = kolom, {owner} = van wie het vakje is, {extra} = eventuele toevoegingen (beginnen met een komma)
@@ -16,8 +18,8 @@ woordtuin.openLeft_one | {n} square still open. | Nog {n} vakje open.
 woordtuin.openLeft_other | {n} squares still open. | Nog {n} vakjes open.
 woordtuin.gameOver | The game is over. | Het spel is afgelopen.
 woordtuin.yourTurn | It is your turn. | Jij bent aan de beurt.
-woordtuin.theirTurnPc | The computer is to move. | De computer is aan de beurt.
-woordtuin.theirTurn | {name} is to move. | {name} is aan de beurt.
+woordtuin.theirTurnPc | It is the computer's turn. | De computer is aan de beurt.
+woordtuin.theirTurn | It is {name}'s turn. | {name} is aan de beurt.
 # Wat er net gebeurde. {word} is het gespeelde woord (hoofdletters), {n} het aantal afgepakte vakjes.
 woordtuin.last.me | You played {word}. | Jij speelde {word}.
 woordtuin.last.me.took_one | You played {word} and took {n} square. | Jij speelde {word} en pakte {n} vakje af.
@@ -28,9 +30,9 @@ woordtuin.last.pc.took_other | The computer played {word} and took {n} squares. 
 woordtuin.last.other | {name} played {word}. | {name} speelde {word}.
 woordtuin.last.other.took_one | {name} played {word} and took {n} square. | {name} speelde {word} en pakte {n} vakje af.
 woordtuin.last.other.took_other | {name} played {word} and took {n} squares. | {name} speelde {word} en pakte {n} vakjes af.
-woordtuin.passed.me | You cannot make a word any more and pass. | Jij kunt geen woord meer maken en slaat over.
-woordtuin.passed.pc | The computer cannot make a word any more and passes. | De computer kan geen woord meer maken en slaat over.
-woordtuin.passed.other | {name} cannot make a word any more and passes. | {name} kan geen woord meer maken en slaat over.
+woordtuin.passed.me | You cannot make another word, so you skip a turn. | Jij kunt geen woord meer maken en slaat over.
+woordtuin.passed.pc | The computer cannot make another word and skips a turn. | De computer kan geen woord meer maken en slaat over.
+woordtuin.passed.other | {name} cannot make another word and skips a turn. | {name} kan geen woord meer maken en slaat over.
 woordtuin.hint.swipe | Swipe or tap the letters to make a word. | Veeg of tik op de letters om een woord te maken.
 woordtuin.hint.more_one | Choose at least {n} more letter. | Kies nog minstens {n} letter.
 woordtuin.hint.more_other | Choose at least {n} more letters. | Kies nog minstens {n} letters.
@@ -47,12 +49,17 @@ woordtuin.legend | Fence: cannot be taken | Hekje: niet af te pakken
 woordtuin.notOnBoard | This word is not on the board, or it does not colour anything new. | Dit woord ligt niet op het bord, of het kleurt niets nieuws.
 woordtuin.waiting | One moment… | Even wachten…
 woordtuin.pcThinking | The computer is thinking… | De computer denkt na…
+# Button, shown when the word you typed can be laid on the board in more than one place: shows the next place.
 woordtuin.otherPlace | Other place | Andere plek
+# Button that opens a text field where you can type a word instead of swiping over the letters. Short.
 woordtuin.type | Type | Typen
+# Button: clears the letters you have chosen so far.
 woordtuin.clear | Clear | Wis
 # De knop waarmee je het woord dat je hebt gemaakt bevestigt
 woordtuin.done | Done | Klaar
+# Button: takes back your last move against the computer.
 woordtuin.undo | Take back move | Zet terug
+# Hint button label while hints are limited: {n} hints left.
 woordtuin.hintLeft_one | Hint ({n} left) | Tip ({n} over)
 woordtuin.hintLeft_other | Hint ({n} left) | Tip ({n} over)
 woordtuin.typeAria | Type a word that is on the board | Typ een woord dat op het bord ligt
@@ -69,7 +76,7 @@ woordtuin.pc.lost | Well played! | Mooi gespeeld!
 woordtuin.pc.score | Final score: you {mine}, the computer {theirs}. | Eindstand: jij {mine}, de computer {theirs}.
 woordtuin.pc.drawText_one | You both have {n} flower. | Jullie hebben allebei {n} bloem.
 woordtuin.pc.drawText_other | You both have {n} flowers. | Jullie hebben allebei {n} bloemen.
-woordtuin.pc.lostText | The computer won with {theirs} against {mine}. You will surely manage next time, feel free to try again. | De computer won met {theirs} tegen {mine}. Een volgende keer lukt het vast, probeer gerust nog eens.
+woordtuin.pc.lostText | The computer won, {theirs} to {mine}. Next time will surely go better: feel free to try again. | De computer won met {theirs} tegen {mine}. Een volgende keer lukt het vast, probeer gerust nog eens.
 
 # Woordtuin in de lijst met spellen en op de pagina voor het spelen. De uitleg staat in 5 korte stappen.
 woordtuin.name | Word Garden | Woordtuin

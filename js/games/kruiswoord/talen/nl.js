@@ -1,369 +1,357 @@
-// Woorden en omschrijvingen voor de kruiswoordpuzzel in het Nederlands.
-// Per regel:  ANTWOORD | omschrijving | niveau   (1 = bekend, 2 = iets minder bekend, 3 = uitdagend)
-//
-// Afspraken, zodat de puzzel eerlijk blijft:
-//   - alleen hoofdletters A-Z, en geen "IJ" (die zou twee vakjes beslaan);
-//   - de omschrijving noemt het antwoord zelf niet;
-//   - de omschrijving past maar bij één gewoon woord.
+// Woorden en omschrijvingen voor de kruiswoordpuzzel in het Dutch. level: 1 = bekend, 2 = iets minder bekend, 3 = uitdagend.
+// GEGENEREERD door tools/inhoud/maak.mjs uit tools/inhoud/nl/kruiswoord.txt: niet met de hand aanpassen.
 
-const RAW = `
-AMSTERDAM | Hoofdstad van Nederland | 1
-ROTTERDAM | Nederlandse havenstad met de Erasmusbrug | 1
-UTRECHT | Stad met de Domtoren | 1
-GRONINGEN | Noordelijke stad met de Martinitoren | 2
-TEXEL | Het grootste Nederlandse Waddeneiland | 2
-SCHIPHOL | Grote luchthaven bij Amsterdam | 1
-EFTELING | Sprookjespretpark in Kaatsheuvel | 2
-WADDENZEE | Ondiepe zee tussen het vasteland en de eilanden | 2
-DELTAWERKEN | Bouwwerken die Zeeland beschermen tegen de zee | 3
-LIMBURG | Zuidelijkste provincie van Nederland | 2
-ZEELAND | Provincie met veel water en de Oosterschelde | 2
-FRIESLAND | Provincie van de Elfstedentocht | 2
-DRENTHE | Provincie met hunebedden | 2
-BRABANT | Provincie met Den Bosch als hoofdstad | 2
-VELUWE | Groot natuurgebied in Gelderland | 3
-MAAS | Rivier die door Limburg en Brabant stroomt | 2
-POLDER | Drooggelegd stuk land | 1
-MOLEN | Maalt graan met de kracht van de wind | 1
-KLOMPEN | Houten schoenen | 1
-TULP | Nederlandse bloem die uit een bol groeit | 1
-FIETS | Tweewieler zonder motor | 1
-KAAS | Gouda en Edam zijn er beroemd om | 1
-ROME | Hoofdstad van Italië | 1
-MADRID | Hoofdstad van Spanje | 1
-BERN | Hoofdstad van Zwitserland | 3
-HELSINKI | Hoofdstad van Finland | 3
-BOEDAPEST | Hoofdstad van Hongarije | 3
-WENEN | Hoofdstad van Oostenrijk | 2
-LISSABON | Hoofdstad van Portugal | 2
-BRUSSEL | Hoofdstad van België | 1
-LONDEN | Hoofdstad van het Verenigd Koninkrijk | 1
-ATHENE | Hoofdstad van Griekenland | 2
-OSLO | Hoofdstad van Noorwegen | 2
-DUBLIN | Hoofdstad van Ierland | 2
-PRAAG | Hoofdstad van Tsjechië | 2
-WARSCHAU | Hoofdstad van Polen | 2
-STOCKHOLM | Hoofdstad van Zweden | 2
-AMAZONE | Waterrijkste rivier ter wereld | 3
-EVEREST | Hoogste berg ter wereld | 2
-SAHARA | Grootste hete woestijn ter wereld | 2
-ALPEN | Gebergte met de Mont Blanc | 2
-EZEL | Grijs dier dat IA roept | 1
-KOE | Dier dat melk geeft en loeit | 1
-PAARD | Dier waarop je kunt rijden | 1
-SCHAAP | Dier dat wol geeft | 1
-GEIT | Klimmend dier dat melk geeft en mekkert | 1
-VARKEN | Roze boerderijdier met een krulstaartje | 1
-KIP | Boerderijdier dat eieren legt | 1
-HAAS | Snel langoor | 1
-EGEL | Stekelig dier dat een winterslaap houdt | 1
-EEKHOORN | Rood klimdier dat noten verzamelt | 2
-OOIEVAAR | Zwart-witte vogel met een lange rode snavel | 2
-ZWAAN | Witte watervogel met een lange hals | 1
-UIL | Nachtvogel die oehoe roept | 1
-MEREL | Zwarte zangvogel met een oranje snavel | 2
-MUS | Kleine bruine vogel in de tuin | 1
-VLINDER | Insect met kleurrijke vleugels | 1
-LIBELLE | Insect met lange doorzichtige vleugels bij het water | 2
-MIER | Klein hardwerkend insect | 1
-SPIN | Maakt een web | 1
-SLAK | Draagt zijn huisje op zijn rug | 1
-KIKKER | Groene springer bij de vijver | 1
-WALVIS | Grootste zoogdier ter wereld | 1
-ZEEHOND | Dier met snorharen dat op de zandbank ligt | 2
-OLIFANT | Groot dier met een slurf | 1
-GIRAF | Dier met de langste nek | 1
-LEEUW | Koning der dieren | 1
-PINGUIN | Vogel die niet kan vliegen en op de Zuidpool leeft | 2
-KAMEEL | Dier met bulten in de woestijn | 2
-KROKODIL | Reptiel met een enorme bek en een sterke staart | 2
-BEVER | Knaagdier dat dammen bouwt | 2
-DAS | Zwart-wit holendier | 2
-VOS | Sluw roodbruin roofdier | 1
-EIK | Sterke boom die in het najaar nootjes met een dopje laat vallen | 1
-BEUK | Boom met gladde grijze stam | 2
-LINDE | Boom met hartvormige bladeren | 3
-BERK | Boom met een witte bast | 2
-DEN | Naaldboom | 1
-ROOS | Bloem met doorns | 1
-LELIE | Witte bloem, symbool van onschuld | 2
-MADELIEF | Wit bloempje met een geel hartje in het gras | 2
-KLAVER | Plantje met drie blaadjes, vier brengt geluk | 2
-PADDESTOEL | Rood met witte stippen als het een vliegenzwam is | 2
-MOS | Zachte groene laag op stenen | 2
-GRAS | Groen op het veld | 1
-BLAD | Zit aan een tak en valt in de herfst | 1
-BROOD | Dit haal je bij de bakker | 1
-BOTER | Gele smeersel dat van room komt | 1
-APPEL | Rond fruit dat rood of groen kan zijn | 1
-PEER | Fruit met een dikke onderkant | 2
-BANAAN | Gele kromme vrucht | 1
-SINAASAPPEL | Oranje citrusvrucht | 2
-AARDBEI | Rode zomervrucht met pitjes aan de buitenkant | 1
-KERS | Rood steenvruchtje aan een steeltje | 1
-DRUIF | Groeit aan een tros en wordt wijn | 2
-WORTEL | Oranje groente waar konijnen dol op zijn | 1
-SPRUITJE | Kleine groene kool | 2
-ERWT | Kleine groene bol in een peul | 2
-SOEP | Dit eet je met een lepel uit een kom | 1
-PASTA | Spaghetti en macaroni | 1
-HONING | Zoete stroop gemaakt door bijen | 1
-JAM | Zoet fruitbeleg | 1
-TAART | Dit hoort bij een verjaardag | 1
-KOEK | Zoete lekkernij bij de thee | 1
-STROOPWAFEL | Twee dunne wafels met stroop ertussen | 2
-PANNENKOEK | Platte lekkernij uit de koekenpan | 1
-STAMPPOT | Aardappelen gemengd met groente | 2
-HAGELSLAG | Chocoladestrooisels op brood | 2
-POFFERTJES | Kleine pannenkoekjes met poedersuiker | 2
-THEE | Warme drank van gedroogde bladeren | 1
-KOFFIE | Warme drank van gebrande bonen | 1
-MELK | Witte drank van de koe | 1
-BIER | Gebrouwen drank met een schuimkraag | 1
-AARDAPPEL | Knol die je kookt, bakt of frituurt | 1
-DEUR | Door deze open je naar binnen | 1
-RAAM | Hierdoor kijk je naar buiten | 1
-DAK | Zit bovenop het huis | 1
-TRAP | Hiermee ga je naar boven | 1
-VLOER | Hier loop je op in huis | 1
-STOEL | Meubel om op te zitten | 1
-TAFEL | Meubel waaraan je eet | 1
-BED | Hierin slaap je | 1
-KAST | Hierin hang je je kleren | 1
-LAMP | Geeft licht | 1
-SPIEGEL | Hierin zie je jezelf | 1
-DEKEN | Warm laken over je heen in bed | 1
-KLOK | Wijst de tijd aan | 1
-VAAS | Hierin zet je bloemen | 1
-KELDER | Ruimte onder het huis | 2
-ZOLDER | Ruimte onder het dak | 2
-SCHOORSTEEN | Hier gaat de rook door het dak | 2
-KEUKEN | Hier wordt gekookt | 1
-OVEN | Hierin bak je een taart | 1
-PAN | Hierin bak je een ei | 1
-LEPEL | Hiermee eet je soep | 1
-VORK | Prikt het eten aan de tanden | 1
-MES | Snijdt het brood | 1
-BORD | Hierop ligt je eten | 1
-BEKER | Drinkgerei zonder oor | 2
-KOELKAST | Houdt het eten koud | 2
-THEEPOT | Hieruit schenk je thee | 2
-BEZEM | Hiermee veeg je de vloer | 2
-EMMER | Hierin zit het water om te dweilen | 2
-STOFZUIGER | Zuigt het vuil van de vloer | 2
-NAALD | Hiermee naai je met draad | 2
-SCHAAR | Hiermee knip je papier | 1
-JAS | Draag je buiten als het koud is | 1
-BROEK | Kledingstuk met twee pijpen | 1
-ROK | Kledingstuk zonder pijpen om je middel | 1
-JURK | Lang kledingstuk voor dames | 1
-SJAAL | Warm om je nek | 1
-MUTS | Warm voor je hoofd | 1
-HANDSCHOEN | Warm voor je hand | 1
-SOK | Draag je in je schoen | 1
-SCHOEN | Draag je aan je voet | 1
-LAARS | Hoge schoen tegen de regen | 2
-TRUI | Gebreid warm bovenstuk | 1
-HOED | Hoofddeksel met een rand | 1
-RIEM | Houdt je broek omhoog | 2
-PYJAMA | Kleding voor in bed | 2
-PANTOFFEL | Zachte schoen voor in huis | 2
-ZON | Schijnt overdag | 1
-REGEN | Valt uit de wolken | 1
-WIND | Waait door de bomen | 1
-STORM | Zeer harde wind | 1
-MIST | Dik wit vocht boven het land | 1
-SNEEUW | Witte vlokken in de winter | 1
-HAGEL | Harde korrels die uit de lucht vallen | 2
-BLIKSEM | Felle flits bij onweer | 2
-DONDER | Het geluid dat op de bliksem volgt | 2
-REGENBOOG | Gekleurde boog na een bui | 1
-LENTE | Seizoen waarin alles gaat bloeien | 1
-ZOMER | Het warmste seizoen | 1
-HERFST | Seizoen waarin de bladeren vallen | 1
-WINTER | Het koudste seizoen | 1
-JANUARI | Eerste maand van het jaar | 1
-APRIL | Maand na maart | 2
-DECEMBER | Laatste maand van het jaar | 1
-MAANDAG | Eerste werkdag van de week | 1
-ZONDAG | Rustdag van de week | 1
-UUR | Zestig minuten | 1
-MINUUT | Zestig seconden | 1
-EEUW | Honderd jaar | 2
-PIANO | Instrument met zwarte en witte toetsen | 1
-GITAAR | Snaarinstrument dat je met je vingers bespeelt | 1
-VIOOL | Klein snaarinstrument met een strijkstok | 2
-FLUIT | Blaasinstrument van hout of metaal | 1
-TROMPET | Koperen blaasinstrument | 2
-DRUM | Hierop sla je met stokken | 1
-HARP | Hierop spelen engelen in tekeningen | 2
-ORGEL | Groot instrument in de kerk | 2
-LIED | Dit zing je | 1
-KOOR | Groep zangers | 2
-NOOT | Een toon op papier | 2
-ORKEST | Grote groep musici | 2
-DIRIGENT | Leidt het orkest | 2
-REMBRANDT | Schilder van de Nachtwacht | 2
-VERMEER | Schilder van het Meisje met de parel | 3
-NACHTWACHT | Beroemd schilderij van Rembrandt | 3
-MUSEUM | Hier kijk je naar kunst of oude voorwerpen | 1
-THEATER | Hier zie je een voorstelling op het toneel | 1
-FILM | Dit zie je in de bioscoop | 1
-BOEK | Heeft bladzijden en een kaft | 1
-BRIEF | Dit stuur je met een postzegel | 1
-POSTZEGEL | Plak je op een envelop | 2
-KRANT | Dagelijks nieuws op papier | 1
-HART | Pompt het bloed rond | 1
-HOOFD | Hierop draag je een hoed | 1
-NEUS | Hiermee ruik je | 1
-OOR | Hiermee luister je | 1
-OOG | Hiermee zie je | 1
-MOND | Hiermee eet en praat je | 1
-HAND | Heeft vijf vingers | 1
-VOET | Hierop sta je | 1
-KNIE | Gewricht in je been | 1
-ELLEBOOG | Gewricht in je arm | 2
-RUG | Achterkant van je lichaam | 1
-TAND | Zit in je mond en kan bijten | 1
-HAAR | Groeit op je hoofd | 1
-HUID | Bedekt je hele lichaam | 2
-DOKTER | Zorgt voor zieke mensen | 1
-ZIEKENHUIS | Hier word je opgenomen als je erg ziek bent | 2
-APOTHEEK | Hier haal je medicijnen | 2
-BRIL | Helpt je beter zien | 1
-PIL | Medicijn om door te slikken | 1
-TREIN | Rijdt over rails | 1
-BUS | Openbaar vervoer op de weg | 1
-TRAM | Rijdt over rails door de stad | 1
-AUTO | Vierwieler met een motor | 1
-BOOT | Vaart over het water | 1
-VLIEGTUIG | Vliegt door de lucht | 1
-STATION | Hier stap je op de trein | 1
-HAVEN | Hier leggen schepen aan | 2
-BRUG | Gaat over een rivier | 1
-TUNNEL | Weg onder een berg of onder het water | 2
-KOFFER | Hierin pak je je kleren voor een reis | 1
-PASPOORT | Reisdocument met een foto | 2
-HOTEL | Hier slaap je op vakantie | 1
-STRAND | Zand langs de zee | 1
-TENT | Slaapplek van doek | 1
-KAART | Hierop zoek je de weg | 1
-KOMPAS | Wijst naar het noorden | 2
-SLEUTEL | Hiermee open je een slot | 1
-SLOT | Hiermee sluit je een deur af | 1
-KLEUR | Rood, geel of blauw | 1
-GELD | Hiermee betaal je | 1
-MUNT | Rond stukje geld | 2
-PORTEMONNEE | Hierin zit je geld | 3
-VRIEND | Iemand met wie je het goed kunt vinden | 1
-BUREN | Zij wonen naast je | 1
-FAMILIE | Je ouders, kinderen en ooms bij elkaar | 2
-OMA | Moeder van je moeder | 1
-OPA | Vader van je vader | 1
-OOM | Broer van je vader | 1
-TANTE | Zus van je moeder | 1
-KLEINKIND | Kind van je zoon of dochter | 2
-VERJAARDAG | Dag waarop je een jaar ouder wordt | 1
-CADEAU | Dit krijg je ingepakt | 1
-FEEST | Gezellig samenzijn met muziek | 1
-KERST | Feest met een boom en kaarsjes in december | 1
-SINTERKLAAS | Brengt cadeautjes op vijf december | 1
-PASEN | Feest met eieren in het voorjaar | 1
-NIEUWJAAR | Feest op een januari | 2
-KONINGSDAG | Oranjefeest op zevenentwintig april | 2
-OLIEBOLLEN | Eten we op oudejaarsavond | 2
-WANDELEN | Een flinke tocht te voet | 1
-ZWEMMEN | Je beweegt door het water | 1
-BREIEN | Met twee naalden en wol bezig zijn | 2
-LEZEN | Een boek doorwerken | 1
-KOKEN | Een maaltijd klaarmaken | 1
-SCHAKEN | Bordspel met koning en dame | 2
-BRIDGE | Kaartspel voor vier spelers | 3
-PUZZEL | Hiermee houd je je hoofd bezig | 1
-SUDOKU | Cijferpuzzel met negen bij negen vakjes | 1
-KRUISWOORD | Puzzel met omschrijvingen die je zelf invult | 2
-MAAN | Draait om de aarde | 1
-STER | Fonkelt in de nacht | 1
-AARDE | Onze planeet | 1
-MARS | De rode planeet | 2
-JUPITER | De grootste planeet | 2
-SATURNUS | Planeet met ringen | 2
-KOMEET | Hemellichaam met een lange staart | 3
-WATER | Dit drink je als je dorst hebt | 1
-VUUR | Brandt en geeft warmte | 1
-LUCHT | Dit adem je in | 1
-GOUD | Geel en kostbaar metaal | 1
-ZILVER | Wit edelmetaal | 1
-GLAS | Hier worden ramen van gemaakt | 1
-HOUT | Komt van bomen | 1
-STEEN | Hiermee bouw je een huis | 1
-ZAND | Hier bouw je kastelen van | 1
-KLEI | Vette grond waar je aardewerk van maakt | 2
-PAPIER | Hierop schrijf je | 1
-POTLOOD | Je kunt het uitgummen | 1
-PEN | Schrijft met inkt | 1
-GUM | Haalt potloodstreepjes weg | 1
-LINIAAL | Hiermee trek je rechte lijnen | 2
-REKENMACHINE | Telt voor je op en trekt af | 3
-BAKKER | Hij maakt het brood | 1
-SLAGER | Hij verkoopt vlees | 1
-SCHILDER | Hij verft muren | 2
-TIMMERMAN | Hij werkt met hout | 2
-KAPPER | Hij knipt je haar | 1
-BOER | Hij verzorgt koeien en akkers | 1
-VISSER | Hij vangt vis op zee | 2
-LERAAR | Hij geeft les op school | 1
-BRANDWEER | Zij blussen branden | 1
-POLITIE | Zij houden de orde op straat | 1
-VOETBAL | Sport met een bal en twee doelen | 1
-TENNIS | Sport met een racket en een net | 1
-GOLF | Sport met een kleine bal en gaatjes in het gras | 2
-ZEILEN | Met de wind over het water | 2
-SCHAATSEN | Glijden over het ijs | 1
-SKIEN | Van een besneeuwde berg afglijden | 2
-DANSEN | Op muziek bewegen | 1
-ZANG | Muziek met je stem | 2
-VISSEN | Met een hengel bij het water zitten | 1
-KAMPEREN | Slapen in een tent | 2
-TUIN | Hier groeien bloemen en planten bij het huis | 1
-SCHOP | Hiermee graaf je een gat | 1
-HARK | Hiermee veeg je bladeren bijeen | 2
-GIETER | Hiermee geef je planten water | 2
-KAS | Glazen huis voor planten | 2
-BOS | Veel bomen bij elkaar | 1
-DUIN | Zandheuvel bij de zee | 2
-MEER | Groot water midden in het land | 1
-BEEK | Klein stromend water | 2
-HEIDE | Paarse vlakte in de nazomer | 2
-WEIDE | Grasland voor koeien | 2
-AKKER | Bewerkt stuk land | 2
-HEUVEL | Kleine verhoging in het landschap | 1
-NACHT | Als het donker is | 1
-DAG | Als het licht is | 1
-OCHTEND | Begin van de dag | 1
-MIDDAG | Tussen ochtend en avond | 1
-AVOND | Einde van de dag | 1
-KAARS | Brandt met een vlammetje van was | 1
-BALLON | Opblaasbaar feestartikel | 1
-SLINGER | Versiering die je ophangt | 2
-VUURWERK | Knallen en lichtjes aan de hemel | 2
-SNEEUWMAN | Wordt gemaakt van witte bollen | 2
-MUZIEK | Klanken die je kunt fluiten of zingen | 1
-TELEFOON | Hiermee kun je bellen | 1
-RADIO | Hiermee luister je naar muziek en nieuws | 1
-TELEVISIE | Hierop kijk je programma's | 1
-COMPUTER | Elektronisch apparaat met een scherm en toetsenbord | 1
-BRUID | Zij trouwt | 2
-KONING | Staatshoofd van een koninkrijk | 1
-KASTEEL | Grote burcht met torens | 1
-RIDDER | Man in een harnas | 2
-DRAAK | Vuurspuwend fabeldier | 2
-SPROOKJE | Verhaal met een heks en een prins | 2
-`;
-
-const lines = RAW.trim().split('\n').map((l) => l.trim()).filter(Boolean);
-
-export const ENTRIES = lines.map((l) => {
-  const [answer, clue, level] = l.split('|').map((x) => x.trim());
-  return { answer, clue, level: Number(level) };
-});
+export const ENTRIES = [
+  { answer: "AMSTERDAM", clue: "Hoofdstad van Nederland", level: 1 },
+  { answer: "ROTTERDAM", clue: "Nederlandse havenstad met de Erasmusbrug", level: 1 },
+  { answer: "UTRECHT", clue: "Stad met de Domtoren", level: 1 },
+  { answer: "GRONINGEN", clue: "Noordelijke stad met de Martinitoren", level: 2 },
+  { answer: "TEXEL", clue: "Het grootste Nederlandse Waddeneiland", level: 2 },
+  { answer: "SCHIPHOL", clue: "Grote luchthaven bij Amsterdam", level: 1 },
+  { answer: "EFTELING", clue: "Sprookjespretpark in Kaatsheuvel", level: 2 },
+  { answer: "WADDENZEE", clue: "Ondiepe zee tussen het vasteland en de eilanden", level: 2 },
+  { answer: "DELTAWERKEN", clue: "Bouwwerken die Zeeland beschermen tegen de zee", level: 3 },
+  { answer: "LIMBURG", clue: "Zuidelijkste provincie van Nederland", level: 2 },
+  { answer: "ZEELAND", clue: "Provincie met veel water en de Oosterschelde", level: 2 },
+  { answer: "FRIESLAND", clue: "Provincie van de Elfstedentocht", level: 2 },
+  { answer: "DRENTHE", clue: "Provincie met hunebedden", level: 2 },
+  { answer: "BRABANT", clue: "Provincie met Den Bosch als hoofdstad", level: 2 },
+  { answer: "VELUWE", clue: "Groot natuurgebied in Gelderland", level: 3 },
+  { answer: "MAAS", clue: "Rivier die door Limburg en Brabant stroomt", level: 2 },
+  { answer: "POLDER", clue: "Drooggelegd stuk land", level: 1 },
+  { answer: "MOLEN", clue: "Maalt graan met de kracht van de wind", level: 1 },
+  { answer: "KLOMPEN", clue: "Houten schoenen", level: 1 },
+  { answer: "TULP", clue: "Nederlandse bloem die uit een bol groeit", level: 1 },
+  { answer: "FIETS", clue: "Tweewieler zonder motor", level: 1 },
+  { answer: "KAAS", clue: "Gouda en Edam zijn er beroemd om", level: 1 },
+  { answer: "ROME", clue: "Hoofdstad van Italië", level: 1 },
+  { answer: "MADRID", clue: "Hoofdstad van Spanje", level: 1 },
+  { answer: "BERN", clue: "Hoofdstad van Zwitserland", level: 3 },
+  { answer: "HELSINKI", clue: "Hoofdstad van Finland", level: 3 },
+  { answer: "BOEDAPEST", clue: "Hoofdstad van Hongarije", level: 3 },
+  { answer: "WENEN", clue: "Hoofdstad van Oostenrijk", level: 2 },
+  { answer: "LISSABON", clue: "Hoofdstad van Portugal", level: 2 },
+  { answer: "BRUSSEL", clue: "Hoofdstad van België", level: 1 },
+  { answer: "LONDEN", clue: "Hoofdstad van het Verenigd Koninkrijk", level: 1 },
+  { answer: "ATHENE", clue: "Hoofdstad van Griekenland", level: 2 },
+  { answer: "OSLO", clue: "Hoofdstad van Noorwegen", level: 2 },
+  { answer: "DUBLIN", clue: "Hoofdstad van Ierland", level: 2 },
+  { answer: "PRAAG", clue: "Hoofdstad van Tsjechië", level: 2 },
+  { answer: "WARSCHAU", clue: "Hoofdstad van Polen", level: 2 },
+  { answer: "STOCKHOLM", clue: "Hoofdstad van Zweden", level: 2 },
+  { answer: "AMAZONE", clue: "Waterrijkste rivier ter wereld", level: 3 },
+  { answer: "EVEREST", clue: "Hoogste berg ter wereld", level: 2 },
+  { answer: "SAHARA", clue: "Grootste hete woestijn ter wereld", level: 2 },
+  { answer: "ALPEN", clue: "Gebergte met de Mont Blanc", level: 2 },
+  { answer: "EZEL", clue: "Grijs dier dat IA roept", level: 1 },
+  { answer: "KOE", clue: "Dier dat melk geeft en loeit", level: 1 },
+  { answer: "PAARD", clue: "Dier waarop je kunt rijden", level: 1 },
+  { answer: "SCHAAP", clue: "Dier dat wol geeft", level: 1 },
+  { answer: "GEIT", clue: "Klimmend dier dat melk geeft en mekkert", level: 1 },
+  { answer: "VARKEN", clue: "Roze boerderijdier met een krulstaartje", level: 1 },
+  { answer: "KIP", clue: "Boerderijdier dat eieren legt", level: 1 },
+  { answer: "HAAS", clue: "Snel langoor", level: 1 },
+  { answer: "EGEL", clue: "Stekelig dier dat een winterslaap houdt", level: 1 },
+  { answer: "EEKHOORN", clue: "Rood klimdier dat noten verzamelt", level: 2 },
+  { answer: "OOIEVAAR", clue: "Zwart-witte vogel met een lange rode snavel", level: 2 },
+  { answer: "ZWAAN", clue: "Witte watervogel met een lange hals", level: 1 },
+  { answer: "UIL", clue: "Nachtvogel die oehoe roept", level: 1 },
+  { answer: "MEREL", clue: "Zwarte zangvogel met een oranje snavel", level: 2 },
+  { answer: "MUS", clue: "Kleine bruine vogel in de tuin", level: 1 },
+  { answer: "VLINDER", clue: "Insect met kleurrijke vleugels", level: 1 },
+  { answer: "LIBELLE", clue: "Insect met lange doorzichtige vleugels bij het water", level: 2 },
+  { answer: "MIER", clue: "Klein hardwerkend insect", level: 1 },
+  { answer: "SPIN", clue: "Maakt een web", level: 1 },
+  { answer: "SLAK", clue: "Draagt zijn huisje op zijn rug", level: 1 },
+  { answer: "KIKKER", clue: "Groene springer bij de vijver", level: 1 },
+  { answer: "WALVIS", clue: "Grootste zoogdier ter wereld", level: 1 },
+  { answer: "ZEEHOND", clue: "Dier met snorharen dat op de zandbank ligt", level: 2 },
+  { answer: "OLIFANT", clue: "Groot dier met een slurf", level: 1 },
+  { answer: "GIRAF", clue: "Dier met de langste nek", level: 1 },
+  { answer: "LEEUW", clue: "Koning der dieren", level: 1 },
+  { answer: "PINGUIN", clue: "Vogel die niet kan vliegen en op de Zuidpool leeft", level: 2 },
+  { answer: "KAMEEL", clue: "Dier met bulten in de woestijn", level: 2 },
+  { answer: "KROKODIL", clue: "Reptiel met een enorme bek en een sterke staart", level: 2 },
+  { answer: "BEVER", clue: "Knaagdier dat dammen bouwt", level: 2 },
+  { answer: "DAS", clue: "Zwart-wit holendier", level: 2 },
+  { answer: "VOS", clue: "Sluw roodbruin roofdier", level: 1 },
+  { answer: "EIK", clue: "Sterke boom die in het najaar nootjes met een dopje laat vallen", level: 1 },
+  { answer: "BEUK", clue: "Boom met gladde grijze stam", level: 2 },
+  { answer: "LINDE", clue: "Boom met hartvormige bladeren", level: 3 },
+  { answer: "BERK", clue: "Boom met een witte bast", level: 2 },
+  { answer: "DEN", clue: "Naaldboom", level: 1 },
+  { answer: "ROOS", clue: "Bloem met doorns", level: 1 },
+  { answer: "LELIE", clue: "Witte bloem, symbool van onschuld", level: 2 },
+  { answer: "MADELIEF", clue: "Wit bloempje met een geel hartje in het gras", level: 2 },
+  { answer: "KLAVER", clue: "Plantje met drie blaadjes, vier brengt geluk", level: 2 },
+  { answer: "PADDENSTOEL", clue: "Rood met witte stippen als het een vliegenzwam is", level: 2 },
+  { answer: "MOS", clue: "Zachte groene laag op stenen", level: 2 },
+  { answer: "GRAS", clue: "Groen op het veld", level: 1 },
+  { answer: "BLAD", clue: "Zit aan een tak en valt in de herfst", level: 1 },
+  { answer: "BROOD", clue: "Dit haal je bij de bakker", level: 1 },
+  { answer: "BOTER", clue: "Gele smeersel dat van room komt", level: 1 },
+  { answer: "APPEL", clue: "Rond fruit dat rood of groen kan zijn", level: 1 },
+  { answer: "PEER", clue: "Fruit met een dikke onderkant", level: 2 },
+  { answer: "BANAAN", clue: "Gele kromme vrucht", level: 1 },
+  { answer: "SINAASAPPEL", clue: "Oranje citrusvrucht", level: 2 },
+  { answer: "AARDBEI", clue: "Rode zomervrucht met pitjes aan de buitenkant", level: 1 },
+  { answer: "KERS", clue: "Rood steenvruchtje aan een steeltje", level: 1 },
+  { answer: "DRUIF", clue: "Groeit aan een tros en wordt wijn", level: 2 },
+  { answer: "WORTEL", clue: "Oranje groente waar konijnen dol op zijn", level: 1 },
+  { answer: "SPRUITJE", clue: "Kleine groene kool", level: 2 },
+  { answer: "ERWT", clue: "Kleine groene bol in een peul", level: 2 },
+  { answer: "SOEP", clue: "Dit eet je met een lepel uit een kom", level: 1 },
+  { answer: "PASTA", clue: "Spaghetti en macaroni", level: 1 },
+  { answer: "HONING", clue: "Zoete stroop gemaakt door bijen", level: 1 },
+  { answer: "JAM", clue: "Zoet fruitbeleg", level: 1 },
+  { answer: "TAART", clue: "Dit hoort bij een verjaardag", level: 1 },
+  { answer: "KOEK", clue: "Zoete lekkernij bij de thee", level: 1 },
+  { answer: "STROOPWAFEL", clue: "Twee dunne wafels met stroop ertussen", level: 2 },
+  { answer: "PANNENKOEK", clue: "Platte lekkernij uit de koekenpan", level: 1 },
+  { answer: "STAMPPOT", clue: "Aardappelen gemengd met groente", level: 2 },
+  { answer: "HAGELSLAG", clue: "Chocoladestrooisels op brood", level: 2 },
+  { answer: "POFFERTJES", clue: "Kleine pannenkoekjes met poedersuiker", level: 2 },
+  { answer: "THEE", clue: "Warme drank van gedroogde bladeren", level: 1 },
+  { answer: "KOFFIE", clue: "Warme drank van gebrande bonen", level: 1 },
+  { answer: "MELK", clue: "Witte drank van de koe", level: 1 },
+  { answer: "BIER", clue: "Gebrouwen drank met een schuimkraag", level: 1 },
+  { answer: "AARDAPPEL", clue: "Knol die je kookt, bakt of frituurt", level: 1 },
+  { answer: "DEUR", clue: "Door deze open je naar binnen", level: 1 },
+  { answer: "RAAM", clue: "Hierdoor kijk je naar buiten", level: 1 },
+  { answer: "DAK", clue: "Zit bovenop het huis", level: 1 },
+  { answer: "TRAP", clue: "Hiermee ga je naar boven", level: 1 },
+  { answer: "VLOER", clue: "Hier loop je op in huis", level: 1 },
+  { answer: "STOEL", clue: "Meubel om op te zitten", level: 1 },
+  { answer: "TAFEL", clue: "Meubel waaraan je eet", level: 1 },
+  { answer: "BED", clue: "Hierin slaap je", level: 1 },
+  { answer: "KAST", clue: "Hierin hang je je kleren", level: 1 },
+  { answer: "LAMP", clue: "Geeft licht", level: 1 },
+  { answer: "SPIEGEL", clue: "Hierin zie je jezelf", level: 1 },
+  { answer: "DEKEN", clue: "Warm laken over je heen in bed", level: 1 },
+  { answer: "KLOK", clue: "Wijst de tijd aan", level: 1 },
+  { answer: "VAAS", clue: "Hierin zet je bloemen", level: 1 },
+  { answer: "KELDER", clue: "Ruimte onder het huis", level: 2 },
+  { answer: "ZOLDER", clue: "Ruimte onder het dak", level: 2 },
+  { answer: "SCHOORSTEEN", clue: "Hier gaat de rook door het dak", level: 2 },
+  { answer: "KEUKEN", clue: "Hier wordt gekookt", level: 1 },
+  { answer: "OVEN", clue: "Hierin bak je een taart", level: 1 },
+  { answer: "PAN", clue: "Hierin bak je een ei", level: 1 },
+  { answer: "LEPEL", clue: "Hiermee eet je soep", level: 1 },
+  { answer: "VORK", clue: "Prikt het eten aan de tanden", level: 1 },
+  { answer: "MES", clue: "Snijdt het brood", level: 1 },
+  { answer: "BORD", clue: "Hierop ligt je eten", level: 1 },
+  { answer: "BEKER", clue: "Drinkgerei zonder oor", level: 2 },
+  { answer: "KOELKAST", clue: "Houdt het eten koud", level: 2 },
+  { answer: "THEEPOT", clue: "Hieruit schenk je thee", level: 2 },
+  { answer: "BEZEM", clue: "Hiermee veeg je de vloer", level: 2 },
+  { answer: "EMMER", clue: "Hierin zit het water om te dweilen", level: 2 },
+  { answer: "STOFZUIGER", clue: "Zuigt het vuil van de vloer", level: 2 },
+  { answer: "NAALD", clue: "Hiermee naai je met draad", level: 2 },
+  { answer: "SCHAAR", clue: "Hiermee knip je papier", level: 1 },
+  { answer: "JAS", clue: "Draag je buiten als het koud is", level: 1 },
+  { answer: "BROEK", clue: "Kledingstuk met twee pijpen", level: 1 },
+  { answer: "ROK", clue: "Kledingstuk zonder pijpen om je middel", level: 1 },
+  { answer: "JURK", clue: "Lang kledingstuk voor dames", level: 1 },
+  { answer: "SJAAL", clue: "Warm om je nek", level: 1 },
+  { answer: "MUTS", clue: "Warm voor je hoofd", level: 1 },
+  { answer: "HANDSCHOEN", clue: "Warm voor je hand", level: 1 },
+  { answer: "SOK", clue: "Draag je in je schoen", level: 1 },
+  { answer: "SCHOEN", clue: "Draag je aan je voet", level: 1 },
+  { answer: "LAARS", clue: "Hoge schoen tegen de regen", level: 2 },
+  { answer: "TRUI", clue: "Gebreid warm bovenstuk", level: 1 },
+  { answer: "HOED", clue: "Hoofddeksel met een rand", level: 1 },
+  { answer: "RIEM", clue: "Houdt je broek omhoog", level: 2 },
+  { answer: "PYJAMA", clue: "Kleding voor in bed", level: 2 },
+  { answer: "PANTOFFEL", clue: "Zachte schoen voor in huis", level: 2 },
+  { answer: "ZON", clue: "Schijnt overdag", level: 1 },
+  { answer: "REGEN", clue: "Valt uit de wolken", level: 1 },
+  { answer: "WIND", clue: "Waait door de bomen", level: 1 },
+  { answer: "STORM", clue: "Zeer harde wind", level: 1 },
+  { answer: "MIST", clue: "Dik wit vocht boven het land", level: 1 },
+  { answer: "SNEEUW", clue: "Witte vlokken in de winter", level: 1 },
+  { answer: "HAGEL", clue: "Harde korrels die uit de lucht vallen", level: 2 },
+  { answer: "BLIKSEM", clue: "Felle flits bij onweer", level: 2 },
+  { answer: "DONDER", clue: "Het geluid dat op de bliksem volgt", level: 2 },
+  { answer: "REGENBOOG", clue: "Gekleurde boog na een bui", level: 1 },
+  { answer: "LENTE", clue: "Seizoen waarin alles gaat bloeien", level: 1 },
+  { answer: "ZOMER", clue: "Het warmste seizoen", level: 1 },
+  { answer: "HERFST", clue: "Seizoen waarin de bladeren vallen", level: 1 },
+  { answer: "WINTER", clue: "Het koudste seizoen", level: 1 },
+  { answer: "JANUARI", clue: "Eerste maand van het jaar", level: 1 },
+  { answer: "APRIL", clue: "Maand na maart", level: 2 },
+  { answer: "DECEMBER", clue: "Laatste maand van het jaar", level: 1 },
+  { answer: "MAANDAG", clue: "Eerste werkdag van de week", level: 1 },
+  { answer: "ZONDAG", clue: "Rustdag van de week", level: 1 },
+  { answer: "UUR", clue: "Zestig minuten", level: 1 },
+  { answer: "MINUUT", clue: "Zestig seconden", level: 1 },
+  { answer: "EEUW", clue: "Honderd jaar", level: 2 },
+  { answer: "PIANO", clue: "Instrument met zwarte en witte toetsen", level: 1 },
+  { answer: "GITAAR", clue: "Snaarinstrument dat je met je vingers bespeelt", level: 1 },
+  { answer: "VIOOL", clue: "Klein snaarinstrument met een strijkstok", level: 2 },
+  { answer: "FLUIT", clue: "Blaasinstrument van hout of metaal", level: 1 },
+  { answer: "TROMPET", clue: "Koperen blaasinstrument", level: 2 },
+  { answer: "DRUM", clue: "Hierop sla je met stokken", level: 1 },
+  { answer: "HARP", clue: "Hierop spelen engelen in tekeningen", level: 2 },
+  { answer: "ORGEL", clue: "Groot instrument in de kerk", level: 2 },
+  { answer: "LIED", clue: "Dit zing je", level: 1 },
+  { answer: "KOOR", clue: "Groep zangers", level: 2 },
+  { answer: "NOOT", clue: "Een toon op papier", level: 2 },
+  { answer: "ORKEST", clue: "Grote groep musici", level: 2 },
+  { answer: "DIRIGENT", clue: "Leidt het orkest", level: 2 },
+  { answer: "REMBRANDT", clue: "Schilder van de Nachtwacht", level: 2 },
+  { answer: "VERMEER", clue: "Schilder van het Meisje met de parel", level: 3 },
+  { answer: "NACHTWACHT", clue: "Beroemd schilderij van Rembrandt", level: 3 },
+  { answer: "MUSEUM", clue: "Hier kijk je naar kunst of oude voorwerpen", level: 1 },
+  { answer: "THEATER", clue: "Hier zie je een voorstelling op het toneel", level: 1 },
+  { answer: "FILM", clue: "Dit zie je in de bioscoop", level: 1 },
+  { answer: "BOEK", clue: "Heeft bladzijden en een kaft", level: 1 },
+  { answer: "BRIEF", clue: "Dit stuur je met een postzegel", level: 1 },
+  { answer: "POSTZEGEL", clue: "Plak je op een envelop", level: 2 },
+  { answer: "KRANT", clue: "Dagelijks nieuws op papier", level: 1 },
+  { answer: "HART", clue: "Pompt het bloed rond", level: 1 },
+  { answer: "HOOFD", clue: "Hierop draag je een hoed", level: 1 },
+  { answer: "NEUS", clue: "Hiermee ruik je", level: 1 },
+  { answer: "OOR", clue: "Hiermee luister je", level: 1 },
+  { answer: "OOG", clue: "Hiermee zie je", level: 1 },
+  { answer: "MOND", clue: "Hiermee eet en praat je", level: 1 },
+  { answer: "HAND", clue: "Heeft vijf vingers", level: 1 },
+  { answer: "VOET", clue: "Hierop sta je", level: 1 },
+  { answer: "KNIE", clue: "Gewricht in je been", level: 1 },
+  { answer: "ELLEBOOG", clue: "Gewricht in je arm", level: 2 },
+  { answer: "RUG", clue: "Achterkant van je lichaam", level: 1 },
+  { answer: "TAND", clue: "Zit in je mond en kan bijten", level: 1 },
+  { answer: "HAAR", clue: "Groeit op je hoofd", level: 1 },
+  { answer: "HUID", clue: "Bedekt je hele lichaam", level: 2 },
+  { answer: "DOKTER", clue: "Zorgt voor zieke mensen", level: 1 },
+  { answer: "ZIEKENHUIS", clue: "Hier word je opgenomen als je erg ziek bent", level: 2 },
+  { answer: "APOTHEEK", clue: "Hier haal je medicijnen", level: 2 },
+  { answer: "BRIL", clue: "Helpt je beter zien", level: 1 },
+  { answer: "PIL", clue: "Medicijn om door te slikken", level: 1 },
+  { answer: "TREIN", clue: "Rijdt over rails", level: 1 },
+  { answer: "BUS", clue: "Openbaar vervoer op de weg", level: 1 },
+  { answer: "TRAM", clue: "Rijdt over rails door de stad", level: 1 },
+  { answer: "AUTO", clue: "Vierwieler met een motor", level: 1 },
+  { answer: "BOOT", clue: "Vaart over het water", level: 1 },
+  { answer: "VLIEGTUIG", clue: "Vliegt door de lucht", level: 1 },
+  { answer: "STATION", clue: "Hier stap je op de trein", level: 1 },
+  { answer: "HAVEN", clue: "Hier leggen schepen aan", level: 2 },
+  { answer: "BRUG", clue: "Gaat over een rivier", level: 1 },
+  { answer: "TUNNEL", clue: "Weg onder een berg of onder het water", level: 2 },
+  { answer: "KOFFER", clue: "Hierin pak je je kleren voor een reis", level: 1 },
+  { answer: "PASPOORT", clue: "Reisdocument met een foto", level: 2 },
+  { answer: "HOTEL", clue: "Hier slaap je op vakantie", level: 1 },
+  { answer: "STRAND", clue: "Zand langs de zee", level: 1 },
+  { answer: "TENT", clue: "Slaapplek van doek", level: 1 },
+  { answer: "KAART", clue: "Hierop zoek je de weg", level: 1 },
+  { answer: "KOMPAS", clue: "Wijst naar het noorden", level: 2 },
+  { answer: "SLEUTEL", clue: "Hiermee open je een slot", level: 1 },
+  { answer: "SLOT", clue: "Hiermee sluit je een deur af", level: 1 },
+  { answer: "KLEUR", clue: "Rood, geel of blauw", level: 1 },
+  { answer: "GELD", clue: "Hiermee betaal je", level: 1 },
+  { answer: "MUNT", clue: "Rond stukje geld", level: 2 },
+  { answer: "PORTEMONNEE", clue: "Hierin zit je geld", level: 3 },
+  { answer: "VRIEND", clue: "Iemand met wie je het goed kunt vinden", level: 1 },
+  { answer: "BUREN", clue: "Zij wonen naast je", level: 1 },
+  { answer: "FAMILIE", clue: "Je ouders, kinderen en ooms bij elkaar", level: 2 },
+  { answer: "OMA", clue: "Moeder van je moeder", level: 1 },
+  { answer: "OPA", clue: "Vader van je vader", level: 1 },
+  { answer: "OOM", clue: "Broer van je vader", level: 1 },
+  { answer: "TANTE", clue: "Zus van je moeder", level: 1 },
+  { answer: "KLEINKIND", clue: "Kind van je zoon of dochter", level: 2 },
+  { answer: "VERJAARDAG", clue: "Dag waarop je een jaar ouder wordt", level: 1 },
+  { answer: "CADEAU", clue: "Dit krijg je ingepakt", level: 1 },
+  { answer: "FEEST", clue: "Gezellig samenzijn met muziek", level: 1 },
+  { answer: "KERST", clue: "Feest met een boom en kaarsjes in december", level: 1 },
+  { answer: "SINTERKLAAS", clue: "Brengt cadeautjes op vijf december", level: 1 },
+  { answer: "PASEN", clue: "Feest met eieren in het voorjaar", level: 1 },
+  { answer: "NIEUWJAAR", clue: "Feest op een januari", level: 2 },
+  { answer: "KONINGSDAG", clue: "Oranjefeest op zevenentwintig april", level: 2 },
+  { answer: "OLIEBOLLEN", clue: "Eten we op oudejaarsavond", level: 2 },
+  { answer: "WANDELEN", clue: "Een flinke tocht te voet", level: 1 },
+  { answer: "ZWEMMEN", clue: "Je beweegt door het water", level: 1 },
+  { answer: "BREIEN", clue: "Met twee naalden en wol bezig zijn", level: 2 },
+  { answer: "LEZEN", clue: "Een boek doorwerken", level: 1 },
+  { answer: "KOKEN", clue: "Een maaltijd klaarmaken", level: 1 },
+  { answer: "SCHAKEN", clue: "Bordspel met koning en dame", level: 2 },
+  { answer: "BRIDGE", clue: "Kaartspel voor vier spelers", level: 3 },
+  { answer: "PUZZEL", clue: "Hiermee houd je je hoofd bezig", level: 1 },
+  { answer: "SUDOKU", clue: "Cijferpuzzel met negen bij negen vakjes", level: 1 },
+  { answer: "KRUISWOORD", clue: "Puzzel met omschrijvingen die je zelf invult", level: 2 },
+  { answer: "MAAN", clue: "Draait om de aarde", level: 1 },
+  { answer: "STER", clue: "Fonkelt in de nacht", level: 1 },
+  { answer: "AARDE", clue: "Onze planeet", level: 1 },
+  { answer: "MARS", clue: "De rode planeet", level: 2 },
+  { answer: "JUPITER", clue: "De grootste planeet", level: 2 },
+  { answer: "SATURNUS", clue: "Planeet met ringen", level: 2 },
+  { answer: "KOMEET", clue: "Hemellichaam met een lange staart", level: 3 },
+  { answer: "WATER", clue: "Dit drink je als je dorst hebt", level: 1 },
+  { answer: "VUUR", clue: "Brandt en geeft warmte", level: 1 },
+  { answer: "LUCHT", clue: "Dit adem je in", level: 1 },
+  { answer: "GOUD", clue: "Geel en kostbaar metaal", level: 1 },
+  { answer: "ZILVER", clue: "Wit edelmetaal", level: 1 },
+  { answer: "GLAS", clue: "Hier worden ramen van gemaakt", level: 1 },
+  { answer: "HOUT", clue: "Komt van bomen", level: 1 },
+  { answer: "STEEN", clue: "Hiermee bouw je een huis", level: 1 },
+  { answer: "ZAND", clue: "Hier bouw je kastelen van", level: 1 },
+  { answer: "KLEI", clue: "Vette grond waar je aardewerk van maakt", level: 2 },
+  { answer: "PAPIER", clue: "Hierop schrijf je", level: 1 },
+  { answer: "POTLOOD", clue: "Je kunt het uitgummen", level: 1 },
+  { answer: "PEN", clue: "Schrijft met inkt", level: 1 },
+  { answer: "GUM", clue: "Haalt potloodstreepjes weg", level: 1 },
+  { answer: "LINIAAL", clue: "Hiermee trek je rechte lijnen", level: 2 },
+  { answer: "REKENMACHINE", clue: "Telt voor je op en trekt af", level: 3 },
+  { answer: "BAKKER", clue: "Hij maakt het brood", level: 1 },
+  { answer: "SLAGER", clue: "Hij verkoopt vlees", level: 1 },
+  { answer: "SCHILDER", clue: "Hij verft muren", level: 2 },
+  { answer: "TIMMERMAN", clue: "Hij werkt met hout", level: 2 },
+  { answer: "KAPPER", clue: "Hij knipt je haar", level: 1 },
+  { answer: "BOER", clue: "Hij verzorgt koeien en akkers", level: 1 },
+  { answer: "VISSER", clue: "Hij vangt vis op zee", level: 2 },
+  { answer: "LERAAR", clue: "Hij geeft les op school", level: 1 },
+  { answer: "BRANDWEER", clue: "Zij blussen branden", level: 1 },
+  { answer: "POLITIE", clue: "Zij houden de orde op straat", level: 1 },
+  { answer: "VOETBAL", clue: "Sport met een bal en twee doelen", level: 1 },
+  { answer: "TENNIS", clue: "Sport met een racket en een net", level: 1 },
+  { answer: "GOLF", clue: "Sport met een kleine bal en gaatjes in het gras", level: 2 },
+  { answer: "ZEILEN", clue: "Met de wind over het water", level: 2 },
+  { answer: "SCHAATSEN", clue: "Glijden over het ijs", level: 1 },
+  { answer: "SKIEN", clue: "Van een besneeuwde berg afglijden", level: 2 },
+  { answer: "DANSEN", clue: "Op muziek bewegen", level: 1 },
+  { answer: "ZANG", clue: "Muziek met je stem", level: 2 },
+  { answer: "VISSEN", clue: "Met een hengel bij het water zitten", level: 1 },
+  { answer: "KAMPEREN", clue: "Slapen in een tent", level: 2 },
+  { answer: "TUIN", clue: "Hier groeien bloemen en planten bij het huis", level: 1 },
+  { answer: "SCHOP", clue: "Hiermee graaf je een gat", level: 1 },
+  { answer: "HARK", clue: "Hiermee veeg je bladeren bijeen", level: 2 },
+  { answer: "GIETER", clue: "Hiermee geef je planten water", level: 2 },
+  { answer: "KAS", clue: "Glazen huis voor planten", level: 2 },
+  { answer: "BOS", clue: "Veel bomen bij elkaar", level: 1 },
+  { answer: "DUIN", clue: "Zandheuvel bij de zee", level: 2 },
+  { answer: "MEER", clue: "Groot water midden in het land", level: 1 },
+  { answer: "BEEK", clue: "Klein stromend water", level: 2 },
+  { answer: "HEIDE", clue: "Paarse vlakte in de nazomer", level: 2 },
+  { answer: "WEIDE", clue: "Grasland voor koeien", level: 2 },
+  { answer: "AKKER", clue: "Bewerkt stuk land", level: 2 },
+  { answer: "HEUVEL", clue: "Kleine verhoging in het landschap", level: 1 },
+  { answer: "NACHT", clue: "Als het donker is", level: 1 },
+  { answer: "DAG", clue: "Als het licht is", level: 1 },
+  { answer: "OCHTEND", clue: "Begin van de dag", level: 1 },
+  { answer: "MIDDAG", clue: "Tussen ochtend en avond", level: 1 },
+  { answer: "AVOND", clue: "Einde van de dag", level: 1 },
+  { answer: "KAARS", clue: "Brandt met een vlammetje van was", level: 1 },
+  { answer: "BALLON", clue: "Opblaasbaar feestartikel", level: 1 },
+  { answer: "SLINGER", clue: "Versiering die je ophangt", level: 2 },
+  { answer: "VUURWERK", clue: "Knallen en lichtjes aan de hemel", level: 2 },
+  { answer: "SNEEUWMAN", clue: "Wordt gemaakt van witte bollen", level: 2 },
+  { answer: "MUZIEK", clue: "Klanken die je kunt fluiten of zingen", level: 1 },
+  { answer: "TELEFOON", clue: "Hiermee kun je bellen", level: 1 },
+  { answer: "RADIO", clue: "Hiermee luister je naar muziek en nieuws", level: 1 },
+  { answer: "TELEVISIE", clue: "Hierop kijk je programma's", level: 1 },
+  { answer: "COMPUTER", clue: "Elektronisch apparaat met een scherm en toetsenbord", level: 1 },
+  { answer: "BRUID", clue: "Zij trouwt", level: 2 },
+  { answer: "KONING", clue: "Staatshoofd van een koninkrijk", level: 1 },
+  { answer: "KASTEEL", clue: "Grote burcht met torens", level: 1 },
+  { answer: "RIDDER", clue: "Man in een harnas", level: 2 },
+  { answer: "DRAAK", clue: "Vuurspuwend fabeldier", level: 2 },
+  { answer: "SPROOKJE", clue: "Verhaal met een heks en een prins", level: 2 },
+];

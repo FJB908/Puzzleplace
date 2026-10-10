@@ -1,0 +1,353 @@
+# Kruiswoordpuzzel in het Nederlands. Per regel:  antwoord | omschrijving | niveau   (1 = bekend, 2 = iets minder bekend, 3 = uitdagend). Zie tools/inhoud/maak.mjs.
+Amsterdam | Hoofdstad van Nederland | 1
+Rotterdam | Nederlandse havenstad met de Erasmusbrug | 1
+Utrecht | Stad met de Domtoren | 1
+Groningen | Noordelijke stad met de Martinitoren | 2
+Texel | Het grootste Nederlandse Waddeneiland | 2
+schiphol | Grote luchthaven bij Amsterdam | 1
+efteling | Sprookjespretpark in Kaatsheuvel | 2
+waddenzee | Ondiepe zee tussen het vasteland en de eilanden | 2
+deltawerken | Bouwwerken die Zeeland beschermen tegen de zee | 3
+Limburg | Zuidelijkste provincie van Nederland | 2
+Zeeland | Provincie met veel water en de Oosterschelde | 2
+Friesland | Provincie van de Elfstedentocht | 2
+Drenthe | Provincie met hunebedden | 2
+Brabant | Provincie met Den Bosch als hoofdstad | 2
+veluwe | Groot natuurgebied in Gelderland | 3
+maas | Rivier die door Limburg en Brabant stroomt | 2
+polder | Drooggelegd stuk land | 1
+molen | Maalt graan met de kracht van de wind | 1
+klompen | Houten schoenen | 1
+tulp | Nederlandse bloem die uit een bol groeit | 1
+fiets | Tweewieler zonder motor | 1
+kaas | Gouda en Edam zijn er beroemd om | 1
+rome | Hoofdstad van Italië | 1
+madrid | Hoofdstad van Spanje | 1
+bern | Hoofdstad van Zwitserland | 3
+helsinki | Hoofdstad van Finland | 3
+boedapest | Hoofdstad van Hongarije | 3
+wenen | Hoofdstad van Oostenrijk | 2
+lissabon | Hoofdstad van Portugal | 2
+brussel | Hoofdstad van België | 1
+londen | Hoofdstad van het Verenigd Koninkrijk | 1
+athene | Hoofdstad van Griekenland | 2
+oslo | Hoofdstad van Noorwegen | 2
+dublin | Hoofdstad van Ierland | 2
+praag | Hoofdstad van Tsjechië | 2
+warschau | Hoofdstad van Polen | 2
+stockholm | Hoofdstad van Zweden | 2
+amazone | Waterrijkste rivier ter wereld | 3
+everest | Hoogste berg ter wereld | 2
+sahara | Grootste hete woestijn ter wereld | 2
+alpen | Gebergte met de Mont Blanc | 2
+ezel | Grijs dier dat IA roept | 1
+koe | Dier dat melk geeft en loeit | 1
+paard | Dier waarop je kunt rijden | 1
+schaap | Dier dat wol geeft | 1
+geit | Klimmend dier dat melk geeft en mekkert | 1
+varken | Roze boerderijdier met een krulstaartje | 1
+kip | Boerderijdier dat eieren legt | 1
+haas | Snel langoor | 1
+egel | Stekelig dier dat een winterslaap houdt | 1
+eekhoorn | Rood klimdier dat noten verzamelt | 2
+ooievaar | Zwart-witte vogel met een lange rode snavel | 2
+zwaan | Witte watervogel met een lange hals | 1
+uil | Nachtvogel die oehoe roept | 1
+merel | Zwarte zangvogel met een oranje snavel | 2
+mus | Kleine bruine vogel in de tuin | 1
+vlinder | Insect met kleurrijke vleugels | 1
+libelle | Insect met lange doorzichtige vleugels bij het water | 2
+mier | Klein hardwerkend insect | 1
+spin | Maakt een web | 1
+slak | Draagt zijn huisje op zijn rug | 1
+kikker | Groene springer bij de vijver | 1
+walvis | Grootste zoogdier ter wereld | 1
+zeehond | Dier met snorharen dat op de zandbank ligt | 2
+olifant | Groot dier met een slurf | 1
+giraf | Dier met de langste nek | 1
+leeuw | Koning der dieren | 1
+pinguïn | Vogel die niet kan vliegen en op de Zuidpool leeft | 2
+kameel | Dier met bulten in de woestijn | 2
+krokodil | Reptiel met een enorme bek en een sterke staart | 2
+bever | Knaagdier dat dammen bouwt | 2
+das | Zwart-wit holendier | 2
+vos | Sluw roodbruin roofdier | 1
+eik | Sterke boom die in het najaar nootjes met een dopje laat vallen | 1
+beuk | Boom met gladde grijze stam | 2
+linde | Boom met hartvormige bladeren | 3
+berk | Boom met een witte bast | 2
+den | Naaldboom | 1
+roos | Bloem met doorns | 1
+lelie | Witte bloem, symbool van onschuld | 2
+madelief | Wit bloempje met een geel hartje in het gras | 2
+klaver | Plantje met drie blaadjes, vier brengt geluk | 2
+paddenstoel | Rood met witte stippen als het een vliegenzwam is | 2
+mos | Zachte groene laag op stenen | 2
+gras | Groen op het veld | 1
+blad | Zit aan een tak en valt in de herfst | 1
+brood | Dit haal je bij de bakker | 1
+boter | Gele smeersel dat van room komt | 1
+appel | Rond fruit dat rood of groen kan zijn | 1
+peer | Fruit met een dikke onderkant | 2
+banaan | Gele kromme vrucht | 1
+sinaasappel | Oranje citrusvrucht | 2
+aardbei | Rode zomervrucht met pitjes aan de buitenkant | 1
+kers | Rood steenvruchtje aan een steeltje | 1
+druif | Groeit aan een tros en wordt wijn | 2
+wortel | Oranje groente waar konijnen dol op zijn | 1
+spruitje | Kleine groene kool | 2
+erwt | Kleine groene bol in een peul | 2
+soep | Dit eet je met een lepel uit een kom | 1
+pasta | Spaghetti en macaroni | 1
+honing | Zoete stroop gemaakt door bijen | 1
+jam | Zoet fruitbeleg | 1
+taart | Dit hoort bij een verjaardag | 1
+koek | Zoete lekkernij bij de thee | 1
+stroopwafel | Twee dunne wafels met stroop ertussen | 2
+pannenkoek | Platte lekkernij uit de koekenpan | 1
+stamppot | Aardappelen gemengd met groente | 2
+hagelslag | Chocoladestrooisels op brood | 2
+poffertjes | Kleine pannenkoekjes met poedersuiker | 2
+thee | Warme drank van gedroogde bladeren | 1
+koffie | Warme drank van gebrande bonen | 1
+melk | Witte drank van de koe | 1
+bier | Gebrouwen drank met een schuimkraag | 1
+aardappel | Knol die je kookt, bakt of frituurt | 1
+deur | Door deze open je naar binnen | 1
+raam | Hierdoor kijk je naar buiten | 1
+dak | Zit bovenop het huis | 1
+trap | Hiermee ga je naar boven | 1
+vloer | Hier loop je op in huis | 1
+stoel | Meubel om op te zitten | 1
+tafel | Meubel waaraan je eet | 1
+bed | Hierin slaap je | 1
+kast | Hierin hang je je kleren | 1
+lamp | Geeft licht | 1
+spiegel | Hierin zie je jezelf | 1
+deken | Warm laken over je heen in bed | 1
+klok | Wijst de tijd aan | 1
+vaas | Hierin zet je bloemen | 1
+kelder | Ruimte onder het huis | 2
+zolder | Ruimte onder het dak | 2
+schoorsteen | Hier gaat de rook door het dak | 2
+keuken | Hier wordt gekookt | 1
+oven | Hierin bak je een taart | 1
+pan | Hierin bak je een ei | 1
+lepel | Hiermee eet je soep | 1
+vork | Prikt het eten aan de tanden | 1
+mes | Snijdt het brood | 1
+bord | Hierop ligt je eten | 1
+beker | Drinkgerei zonder oor | 2
+koelkast | Houdt het eten koud | 2
+theepot | Hieruit schenk je thee | 2
+bezem | Hiermee veeg je de vloer | 2
+emmer | Hierin zit het water om te dweilen | 2
+stofzuiger | Zuigt het vuil van de vloer | 2
+naald | Hiermee naai je met draad | 2
+schaar | Hiermee knip je papier | 1
+jas | Draag je buiten als het koud is | 1
+broek | Kledingstuk met twee pijpen | 1
+rok | Kledingstuk zonder pijpen om je middel | 1
+jurk | Lang kledingstuk voor dames | 1
+sjaal | Warm om je nek | 1
+muts | Warm voor je hoofd | 1
+handschoen | Warm voor je hand | 1
+sok | Draag je in je schoen | 1
+schoen | Draag je aan je voet | 1
+laars | Hoge schoen tegen de regen | 2
+trui | Gebreid warm bovenstuk | 1
+hoed | Hoofddeksel met een rand | 1
+riem | Houdt je broek omhoog | 2
+pyjama | Kleding voor in bed | 2
+pantoffel | Zachte schoen voor in huis | 2
+zon | Schijnt overdag | 1
+regen | Valt uit de wolken | 1
+wind | Waait door de bomen | 1
+storm | Zeer harde wind | 1
+mist | Dik wit vocht boven het land | 1
+sneeuw | Witte vlokken in de winter | 1
+hagel | Harde korrels die uit de lucht vallen | 2
+bliksem | Felle flits bij onweer | 2
+donder | Het geluid dat op de bliksem volgt | 2
+regenboog | Gekleurde boog na een bui | 1
+lente | Seizoen waarin alles gaat bloeien | 1
+zomer | Het warmste seizoen | 1
+herfst | Seizoen waarin de bladeren vallen | 1
+winter | Het koudste seizoen | 1
+januari | Eerste maand van het jaar | 1
+april | Maand na maart | 2
+december | Laatste maand van het jaar | 1
+maandag | Eerste werkdag van de week | 1
+zondag | Rustdag van de week | 1
+uur | Zestig minuten | 1
+minuut | Zestig seconden | 1
+eeuw | Honderd jaar | 2
+piano | Instrument met zwarte en witte toetsen | 1
+gitaar | Snaarinstrument dat je met je vingers bespeelt | 1
+viool | Klein snaarinstrument met een strijkstok | 2
+fluit | Blaasinstrument van hout of metaal | 1
+trompet | Koperen blaasinstrument | 2
+drum | Hierop sla je met stokken | 1
+harp | Hierop spelen engelen in tekeningen | 2
+orgel | Groot instrument in de kerk | 2
+lied | Dit zing je | 1
+koor | Groep zangers | 2
+noot | Een toon op papier | 2
+orkest | Grote groep musici | 2
+dirigent | Leidt het orkest | 2
+rembrandt | Schilder van de Nachtwacht | 2
+vermeer | Schilder van het Meisje met de parel | 3
+nachtwacht | Beroemd schilderij van Rembrandt | 3
+museum | Hier kijk je naar kunst of oude voorwerpen | 1
+theater | Hier zie je een voorstelling op het toneel | 1
+film | Dit zie je in de bioscoop | 1
+boek | Heeft bladzijden en een kaft | 1
+brief | Dit stuur je met een postzegel | 1
+postzegel | Plak je op een envelop | 2
+krant | Dagelijks nieuws op papier | 1
+hart | Pompt het bloed rond | 1
+hoofd | Hierop draag je een hoed | 1
+neus | Hiermee ruik je | 1
+oor | Hiermee luister je | 1
+oog | Hiermee zie je | 1
+mond | Hiermee eet en praat je | 1
+hand | Heeft vijf vingers | 1
+voet | Hierop sta je | 1
+knie | Gewricht in je been | 1
+elleboog | Gewricht in je arm | 2
+rug | Achterkant van je lichaam | 1
+tand | Zit in je mond en kan bijten | 1
+haar | Groeit op je hoofd | 1
+huid | Bedekt je hele lichaam | 2
+dokter | Zorgt voor zieke mensen | 1
+ziekenhuis | Hier word je opgenomen als je erg ziek bent | 2
+apotheek | Hier haal je medicijnen | 2
+bril | Helpt je beter zien | 1
+pil | Medicijn om door te slikken | 1
+trein | Rijdt over rails | 1
+bus | Openbaar vervoer op de weg | 1
+tram | Rijdt over rails door de stad | 1
+auto | Vierwieler met een motor | 1
+boot | Vaart over het water | 1
+vliegtuig | Vliegt door de lucht | 1
+station | Hier stap je op de trein | 1
+haven | Hier leggen schepen aan | 2
+brug | Gaat over een rivier | 1
+tunnel | Weg onder een berg of onder het water | 2
+koffer | Hierin pak je je kleren voor een reis | 1
+paspoort | Reisdocument met een foto | 2
+hotel | Hier slaap je op vakantie | 1
+strand | Zand langs de zee | 1
+tent | Slaapplek van doek | 1
+kaart | Hierop zoek je de weg | 1
+kompas | Wijst naar het noorden | 2
+sleutel | Hiermee open je een slot | 1
+slot | Hiermee sluit je een deur af | 1
+kleur | Rood, geel of blauw | 1
+geld | Hiermee betaal je | 1
+munt | Rond stukje geld | 2
+portemonnee | Hierin zit je geld | 3
+vriend | Iemand met wie je het goed kunt vinden | 1
+buren | Zij wonen naast je | 1
+familie | Je ouders, kinderen en ooms bij elkaar | 2
+oma | Moeder van je moeder | 1
+opa | Vader van je vader | 1
+oom | Broer van je vader | 1
+tante | Zus van je moeder | 1
+kleinkind | Kind van je zoon of dochter | 2
+verjaardag | Dag waarop je een jaar ouder wordt | 1
+cadeau | Dit krijg je ingepakt | 1
+feest | Gezellig samenzijn met muziek | 1
+kerst | Feest met een boom en kaarsjes in december | 1
+sinterklaas | Brengt cadeautjes op vijf december | 1
+pasen | Feest met eieren in het voorjaar | 1
+nieuwjaar | Feest op een januari | 2
+koningsdag | Oranjefeest op zevenentwintig april | 2
+oliebollen | Eten we op oudejaarsavond | 2
+wandelen | Een flinke tocht te voet | 1
+zwemmen | Je beweegt door het water | 1
+breien | Met twee naalden en wol bezig zijn | 2
+lezen | Een boek doorwerken | 1
+koken | Een maaltijd klaarmaken | 1
+schaken | Bordspel met koning en dame | 2
+bridge | Kaartspel voor vier spelers | 3
+puzzel | Hiermee houd je je hoofd bezig | 1
+sudoku | Cijferpuzzel met negen bij negen vakjes | 1
+kruiswoord | Puzzel met omschrijvingen die je zelf invult | 2
+maan | Draait om de aarde | 1
+ster | Fonkelt in de nacht | 1
+aarde | Onze planeet | 1
+mars | De rode planeet | 2
+jupiter | De grootste planeet | 2
+saturnus | Planeet met ringen | 2
+komeet | Hemellichaam met een lange staart | 3
+water | Dit drink je als je dorst hebt | 1
+vuur | Brandt en geeft warmte | 1
+lucht | Dit adem je in | 1
+goud | Geel en kostbaar metaal | 1
+zilver | Wit edelmetaal | 1
+glas | Hier worden ramen van gemaakt | 1
+hout | Komt van bomen | 1
+steen | Hiermee bouw je een huis | 1
+zand | Hier bouw je kastelen van | 1
+klei | Vette grond waar je aardewerk van maakt | 2
+papier | Hierop schrijf je | 1
+potlood | Je kunt het uitgummen | 1
+pen | Schrijft met inkt | 1
+gum | Haalt potloodstreepjes weg | 1
+liniaal | Hiermee trek je rechte lijnen | 2
+rekenmachine | Telt voor je op en trekt af | 3
+bakker | Hij maakt het brood | 1
+slager | Hij verkoopt vlees | 1
+schilder | Hij verft muren | 2
+timmerman | Hij werkt met hout | 2
+kapper | Hij knipt je haar | 1
+boer | Hij verzorgt koeien en akkers | 1
+visser | Hij vangt vis op zee | 2
+leraar | Hij geeft les op school | 1
+brandweer | Zij blussen branden | 1
+politie | Zij houden de orde op straat | 1
+voetbal | Sport met een bal en twee doelen | 1
+tennis | Sport met een racket en een net | 1
+golf | Sport met een kleine bal en gaatjes in het gras | 2
+zeilen | Met de wind over het water | 2
+schaatsen | Glijden over het ijs | 1
+skiën | Van een besneeuwde berg afglijden | 2
+dansen | Op muziek bewegen | 1
+zang | Muziek met je stem | 2
+vissen | Met een hengel bij het water zitten | 1
+kamperen | Slapen in een tent | 2
+tuin | Hier groeien bloemen en planten bij het huis | 1
+schop | Hiermee graaf je een gat | 1
+hark | Hiermee veeg je bladeren bijeen | 2
+gieter | Hiermee geef je planten water | 2
+kas | Glazen huis voor planten | 2
+bos | Veel bomen bij elkaar | 1
+duin | Zandheuvel bij de zee | 2
+meer | Groot water midden in het land | 1
+beek | Klein stromend water | 2
+heide | Paarse vlakte in de nazomer | 2
+weide | Grasland voor koeien | 2
+akker | Bewerkt stuk land | 2
+heuvel | Kleine verhoging in het landschap | 1
+nacht | Als het donker is | 1
+dag | Als het licht is | 1
+ochtend | Begin van de dag | 1
+middag | Tussen ochtend en avond | 1
+avond | Einde van de dag | 1
+kaars | Brandt met een vlammetje van was | 1
+ballon | Opblaasbaar feestartikel | 1
+slinger | Versiering die je ophangt | 2
+vuurwerk | Knallen en lichtjes aan de hemel | 2
+sneeuwman | Wordt gemaakt van witte bollen | 2
+muziek | Klanken die je kunt fluiten of zingen | 1
+telefoon | Hiermee kun je bellen | 1
+radio | Hiermee luister je naar muziek en nieuws | 1
+televisie | Hierop kijk je programma's | 1
+computer | Elektronisch apparaat met een scherm en toetsenbord | 1
+bruid | Zij trouwt | 2
+koning | Staatshoofd van een koninkrijk | 1
+kasteel | Grote burcht met torens | 1
+ridder | Man in een harnas | 2
+draak | Vuurspuwend fabeldier | 2
+sprookje | Verhaal met een heks en een prins | 2

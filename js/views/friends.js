@@ -60,13 +60,13 @@ function row(person, buttons, sub) {
 }
 
 // Hoe staan jullie ervoor? Alleen partijen die uitgespeeld zijn (niet gestopt) tellen mee.
-function stand(friendId, myId) {
+function stand(friendId, myId, name) {
   let ik = 0, zij = 0;
   for (const m of matches.cached()) {
     if (m.status !== 'done' || !m.result?.scores || !m.players.some((p) => p.id === friendId)) continue;
     if (m.result.winner === myId) ik++; else if (m.result.winner === friendId) zij++;
   }
-  return ik + zij ? t('friends.score', { me: ik, them: zij }) : '';
+  return ik + zij ? t('friends.score', { me: ik, them: zij, name }) : '';
 }
 
 function partijRij(m, myId) {
@@ -134,7 +134,7 @@ export function friendsView({ code }, app) {
       h('button', { type: 'button', class: 'btn btn-primary', 'aria-label': t('friends.playWith', { game: getGameInfo('woordtuin').name, name: p.name }), onclick: () => nieuwePartij(p) }, icon('woordtuin'), getGameInfo('woordtuin').name),
       h('button', { type: 'button', class: 'btn btn-quiet btn-danger', 'aria-label': t('friends.removeAria', { name: p.name }), onclick: async () => {
         if (await confirmDialog({ title: t('friends.removeTitle', { name: p.name }), text: t('friends.removeText'), confirmLabel: t('friends.removeYes') })) act(() => social.remove(p.id), t('friends.removed', { name: p.name }));
-      } }, t('friends.remove'))], [t('friends.lastSeen', { when: dayText(p.lastSeen) }), stand(p.id, u.id)].filter(Boolean).join(' · '))))
+      } }, t('friends.remove'))], [t('friends.lastSeen', { when: dayText(p.lastSeen) }), stand(p.id, u.id, persoonNaam(p))].filter(Boolean).join(' · '))))
       : h('div', { class: 'notice' }, h('strong', {}, t('friends.none.title')), h('p', {}, t('friends.none.text')));
 
     body.replaceChildren(...[incoming, partijen,

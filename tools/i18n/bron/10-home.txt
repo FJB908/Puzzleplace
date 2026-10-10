@@ -32,7 +32,7 @@ home.friends.gamesCount_other | {n} games | {n} partijen
 home.friends.play | Play | Spelen
 # Schermlezertekst bij een rij. {game} is de naam van het spel.
 home.friends.rowAriaTurn | Play: {game} with {name}. It is your turn. | Spelen: {game} met {name}. Jij bent aan de beurt.
-home.friends.rowAriaWait | View: {game} with {name}. {name} is to move. | Bekijken: {game} met {name}. {name} is aan de beurt.
+home.friends.rowAriaWait | View: {game} with {name}. It is {name}'s turn. | Bekijken: {game} met {name}. {name} is aan de beurt.
 home.friends.signedOutTitle | Play with friends | Speel met vrienden
 home.friends.signedOutText | With an account you can also continue on your other devices. | Met een account kan het ook op je andere apparaten.
 home.friends.createAccount | Create account | Account maken

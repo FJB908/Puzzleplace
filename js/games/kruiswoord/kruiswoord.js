@@ -208,7 +208,7 @@ export async function mount(container, ctx) {
   function save() { state.locked = [...locked]; ctx.save(state, { progress: letters.filter((l, i) => l && l === answerAt(Math.floor(i / C), i % C)).length / total }); }
 
   function typeLetter(ch) {
-    if (finished || !sel) { if (!sel && !finished) say('Tik eerst op een vakje.'); return; }
+    if (finished || !sel) { if (!sel && !finished) say(t('kruiswoord.say.tapFirst')); return; }
     const i = idx(sel.r, sel.c);
     if (!locked.has(i)) letters[i] = ch;
     const typed = { r: sel.r, c: sel.c };

@@ -19,10 +19,10 @@ export function mount(container, ctx) {
   const state = ctx.saved || { count: 0 };
 
   const status = h('p', { class: 'muted', 'aria-live': 'polite' });
-  const button = h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: tap }, 'Tik hier');
+  const button = h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: tap }, 'Tap here');
 
   function render() {
-    status.textContent = `Je hebt ${state.count} van de ${TARGET} keer getikt.`;
+    status.textContent = `You tapped ${state.count} of ${TARGET} times.`;
   }
 
   function tap() {

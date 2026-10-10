@@ -4,8 +4,11 @@ kruiswoord.prevClue | Previous clue | Vorige omschrijving
 kruiswoord.nextClue | Next clue | Volgende omschrijving
 kruiswoord.clueGroup | Clue | Omschrijving
 kruiswoord.start | Tap a cell to begin. | Tik op een vakje om te beginnen.
+# Screen-reader label of the backspace key of the on-screen keyboard.
 kruiswoord.backspace | Back and clear the letter | Terug en wis de letter
+# Screen-reader label of the group of letter keys below the grid.
 kruiswoord.keyboard | Keyboard | Toetsenbord
+# Button: reveals the whole word (next to the "Hint" button, which reveals one letter).
 kruiswoord.word | Word | Woord
 kruiswoord.allClues | All clues | Alle omschrijvingen
 kruiswoord.acrossTitle | Across | Horizontaal
@@ -26,13 +29,14 @@ kruiswoord.cellAria | Row {r}, column {c}: {state}. {numbers} | Rij {r}, kolom {
 kruiswoord.cellLetter | letter {letter} | letter {letter}
 kruiswoord.cellEmpty | empty | leeg
 # {entry} is bijvoorbeeld "3 across", {clue} de omschrijving, {letters} bijvoorbeeld "5 letters"
+kruiswoord.say.tapFirst | Tap a cell first. | Tik eerst op een vakje.
 kruiswoord.say.entry | {entry}: {clue} ({letters}). | {entry}: {clue} ({letters}).
 # {word} is het woord, {n} het aantal woorden dat nog moet
 kruiswoord.say.good_one | Good! {word} is right. {n} to go. | Goed! {word} klopt. Nog {n} te gaan.
 kruiswoord.say.good_other | Good! {word} is right. {n} to go. | Goed! {word} klopt. Nog {n} te gaan.
 kruiswoord.say.notYet | This word is not right yet. Read the clue again, you cannot do anything wrong. | Dit woord klopt nog niet. Lees de omschrijving nog eens, je kunt niets verkeerd doen.
 kruiswoord.say.alreadyRevealed | This cell has already been revealed. | Dit vakje is al onthuld.
-kruiswoord.say.tip | Hint: this cell contains a {letter}. | Tip: in dit vakje staat een {letter}.
+kruiswoord.say.tip | Hint: the letter in this cell is {letter}. | Tip: in dit vakje staat een {letter}.
 kruiswoord.say.theWord | The word was {word}. | Het woord was {word}.
 kruiswoord.say.won | Done! You solved the whole puzzle. | Gelukt! Je hebt de hele puzzel opgelost.
 

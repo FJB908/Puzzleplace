@@ -4,6 +4,7 @@ games.subtitle | Choose a game to play. | Kies een spel om te spelen.
 games.comingSoon | Coming soon | Komt binnenkort
 games.inProgress | In progress | Bezig
 games.inProgressPct | In progress · {pct}% | Bezig · {pct}%
+# Plural forms: in languages where this form is also used for 21, 31, ... write it with {n} instead of "once".
 games.solved_one | Solved once | Eén keer opgelost
 games.solved_other | Solved {n} times | {n} keer opgelost
 games.levels_one | {n} level | {n} niveau

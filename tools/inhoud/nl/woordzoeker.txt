@@ -1,0 +1,76 @@
+# Woordzoeker in het Nederlands. Per thema: de woorden in de gewone schrijfwijze, gescheiden door spaties. Zie tools/inhoud/maak.mjs.
+
+## bloemen | Bloemen
+roos tulp lelie anjer narcis dahlia klaver papaver hyacint madelief
+zonnebloem orchidee sering jasmijn begonia viool iris krokus lavendel magnolia
+pioen gerbera
+
+## tuin | In de tuin
+schop hark gieter heg schuur bank vijver bloembed grasmaaier tuinslang
+kas pad boom struik onkruid compost kikker egel merel kruiwagen
+tuinhuis vlinder
+
+## dieren | Dieren
+konijn paard koe schaap geit varken kip eend gans hond
+kat muis eekhoorn hert vos das zwaan ooievaar libelle slak
+uil haas bever otter zeehond walvis dolfijn ezel krokodil neushoorn
+
+## keuken | In de keuken
+pan pot lepel vork mes bord kom beker fornuis oven
+koelkast theepot schaal zeef rasp kookwekker theedoek bakplaat koffiepot pepermolen
+snijplank vriezer schepper kookplaat blender
+
+## eten | Lekker eten
+brood kaas boter soep appel peer banaan wortel aardappel spinazie
+bloemkool erwten bonen rijst pasta vlees vis honing jam taart
+koek pannenkoek stamppot hagelslag speculaas stroopwafel
+
+## weer | Het weer
+zon regen wind storm mist sneeuw hagel onweer bliksem donder
+regenboog wolk vorst droogte hitte lente zomer herfst winter bries
+dooi ijzel
+
+## reizen | Op reis
+koffer paspoort trein vliegtuig strand hotel kaart kompas tent camping
+vakantie zee berg eiland haven brug tunnel station bus tram
+fiets boot rugzak zonnebril
+
+## land | Nederland
+Amsterdam Rotterdam Utrecht Groningen Eindhoven Arnhem Zwolle Breda Delft Leiden
+Haarlem Maastricht Texel Vlieland Friesland Zeeland Drenthe Limburg Brabant Gelderland
+molen dijk polder kanaal
+
+## familie | Familie
+moeder vader oma opa zus broer nicht neef tante oom
+kind baby kleinkind zoon dochter gezin familie buren vriend vriendin
+grootouders schoonzus grootmoeder grootvader
+
+## huis | In huis
+deur raam dak trap vloer plafond stoel tafel kast lamp
+spiegel gordijn tapijt kussen deken bed schilderij klok vaas badkamer
+zolder kelder gang balkon schoorsteen
+
+## natuur | Natuur
+eik beuk dennen berk esp blad tak stam schors mos
+paddenstoel varens braambes eikel kastanje heuvel beek rivier meer duin
+weide akker heide bos veld waterval landschap moeras weiland
+
+## muziek | Muziek
+piano gitaar viool fluit trompet drum harp orgel cello zang
+lied koor noot toon melodie orkest concert dirigent accordeon klarinet
+saxofoon musicus tamboerijn
+
+## hobby | Hobby's
+fietsen zwemmen wandelen breien schilderen lezen koken tuinieren vissen dansen
+yoga golf tennis schaken bridge kaarten puzzelen bordspel knutselen fotografie
+haken biljart
+
+## kleding | Kleding
+jas broek rok jurk sjaal muts handschoen sokken schoenen laarzen
+blouse trui vest hoed riem stropdas pyjama regenjas pantoffels zakdoek
+slippers sandalen onderbroek kousen
+
+## feest | Feest
+kerst pasen sinterklaas nieuwjaar koningsdag verjaardag cadeau taart slinger ballon
+feest kaars kerstboom eieren oliebollen vuurwerk gasten toast
+confetti uitnodiging dansen
