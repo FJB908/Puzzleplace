@@ -102,6 +102,19 @@ Opnieuw gemeten met deze lijst (6×6, 60 partijen, bots): ±9,6 zetten per spele
 partij, de sterkste computer wint 56–4 van de gemiddelde, en de beginner wint ongeveer de helft van de beslissende partijen. Het spel blijft dus
 diep en eerlijk. Een kleine versie van deze meting staat als test in `tests/woordtuin.test.mjs`.
 
+## De computer: zo sterk is elk niveau
+
+De eerste versie was voor de meeste spelers te sterk (ook op Makkelijk: hij ziet dan nog altijd het beste van een flink aantal woorden). Nu bepalen drie dingen de sterkte (`NIVEAUS` in `engine.js`): hoeveel van de mogelijke woorden hij ziet, hoe vaak hij gewoon een woord pakt in plaats van het beste ("slordig"), en of hij vooruitkijkt.
+
+| Niveau | Ziet | Slordig | Vooruit |
+|---|---|---|---|
+| Makkelijk | 3% | 60% | nee |
+| Gemiddeld | 8% | 30% | nee |
+| Moeilijk | 30% | nee | nee |
+| Extreem | alles | nee | 10 zetten |
+
+Gemeten met 40 partijen per rij (computer tegen computer, beginner wisselt): Makkelijk verliest met 8–28 van Gemiddeld, Gemiddeld met 3–36 van Moeilijk, Moeilijk met 4–35 van Extreem. Makkelijk wint nog wel van een computer die volkomen willekeurig speelt (26–12), zodat hij niet zinloos is.
+
 ## Zo is het gebouwd
 
 | Onderdeel | Waar |

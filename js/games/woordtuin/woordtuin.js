@@ -2,7 +2,7 @@
 // Spelen tegen een vriend gaat via js/views/partij.js; het paneel met bord en knoppen is voor beide hetzelfde.
 //
 // De computer speelt als speler 2 en begint nooit: jij mag altijd eerst. Hoe sterk hij is, zit in het niveau
-// (hoeveel woorden hij ziet en of hij vooruitkijkt, zie NIVEAUS in engine.js).
+// (hoeveel woorden hij ziet, hoe slordig hij kiest en of hij vooruitkijkt, zie NIVEAUS in engine.js).
 
 import { maakPaneel } from './paneel.js';
 import { newGame, applyMove, botMove, geefDoor, tip, result, counts, makeRng } from './engine.js';

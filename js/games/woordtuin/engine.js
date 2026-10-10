@@ -256,12 +256,13 @@ export function pathsFor(state, player, word) {
 
 const verschil = (state, p) => { const n = counts(state); return n[p] - n[other(p)]; };
 
-// De computer. De sterkte zit in hoeveel woorden hij ziet en of hij vooruitkijkt (zo gemeten in tools/proto/).
+// De computer. De sterkte zit in hoeveel woorden hij ziet, hoe vaak hij gewoon een woord pakt in plaats van het beste
+// ("slordig") en of hij vooruitkijkt (zo gemeten, zie docs/NIEUW-SPEL-VOOR-TWEE.md).
 export const NIVEAUS = {
-  makkelijk: { ziet: 0.12, vooruit: 0 },
-  gemiddeld: { ziet: 0.3, vooruit: 0 },
-  moeilijk: { ziet: 0.6, vooruit: 6 },
-  extreem: { ziet: 1, vooruit: 10 },
+  makkelijk: { ziet: 0.03, slordig: 0.6, vooruit: 0 },
+  gemiddeld: { ziet: 0.08, slordig: 0.3, vooruit: 0 },
+  moeilijk: { ziet: 0.3, slordig: 0, vooruit: 0 },
+  extreem: { ziet: 1, slordig: 0, vooruit: 10 },
 };
 
 export function botMove(state, player, niveau = 'gemiddeld', rng = Math.random) {
@@ -270,6 +271,7 @@ export function botMove(state, player, niveau = 'gemiddeld', rng = Math.random) 
   if (!all.length) return null;
   let pool = cfg.ziet < 1 ? all.filter(() => rng() < cfg.ziet) : all;
   if (!pool.length) pool = [all[Math.floor(rng() * all.length)]];
+  if (cfg.slordig && rng() < cfg.slordig) return pool[Math.floor(rng() * pool.length)];
   const after = (m) => applyMove({ ...state, turn: player }, player, m.path);
   const scored = pool.map((m) => ({ m, s: after(m) })).map((x) => ({ ...x, v: verschil(x.s, player) }));
   scored.sort((a, b) => b.v - a.v);

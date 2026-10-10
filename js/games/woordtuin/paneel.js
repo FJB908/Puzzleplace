@@ -3,7 +3,7 @@
 // een zet gebeurt. Zo is het scherm voor beide precies hetzelfde.
 
 import { h, icon } from '../../ui.js';
-import { maakBord } from './bord.js';
+import { maakBord, HEK } from './bord.js';
 import { checkMove, MoveError, counts, pathsFor, MIN_LEN, other } from './engine.js';
 
 const meervoud = (n, een, veel) => `${n} ${n === 1 ? een : veel}`;
@@ -51,7 +51,9 @@ export function maakPaneel({ me = 1, names = { 1: 'Jij', 2: 'De ander' }, zinnen
   const knoppen = h('div', { class: 'wt-knoppen' }, wis, klaarKnop);
   const extra = h('div', { class: 'wt-extra' }, tipKnop, terugKnop, typKnop);
 
-  const el = h('div', { class: 'wt' }, stand, h('div', { class: 'wt-info' }, beurt, laatste), bord.el, woordBlok, typBlok, extra, knoppen);
+  const hekje = h('span', {}); hekje.innerHTML = `${HEK} Hekje: niet af te pakken`;
+  const legenda = h('p', { class: 'wt-legenda' }, hekje);
+  const el = h('div', { class: 'wt' }, stand, h('div', { class: 'wt-info' }, beurt, laatste), bord.el, legenda, woordBlok, typBlok, extra, knoppen);
 
   // ----- Weergave -----
   // In een zin: "van de computer", "Anna speelde" (names is voor de stand, zinnen voor de zinnen)

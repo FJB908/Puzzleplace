@@ -11,6 +11,9 @@ import { neighbors, isProtected } from './engine.js';
 
 const svgNS = 'http://www.w3.org/2000/svg';
 
+// Een beschermd vakje staat achter een tuinhekje: drie spijlen met een dwarslat, in de kleur van de eigenaar
+export const HEK = '<svg viewBox="0 0 24 18" aria-hidden="true" focusable="false"><path d="M2 17V6l2-3 2 3v11M10 17V6l2-3 2 3v11M18 17V6l2-3 2 3v11M1 10h22M1 14.500h22" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 export function maakBord({ size = 6, onChange }) {
   const N = size;
   let state = null, me = 1, path = [], enabled = true, cursor = 0, preview = null;
@@ -52,6 +55,9 @@ export function maakBord({ size = 6, onChange }) {
       c.toggle('pak', sel.has(i) && !!preview?.take?.includes(i));
       c.toggle('blijft', sel.has(i) && !!preview?.kept?.includes(i));
       c.toggle('laatst', !!state.last?.path.includes(i));
+      let hek = t.querySelector('.wt-hek');
+      if (c.contains('veilig')) { if (!hek) { hek = h('span', { class: 'wt-hek', 'aria-hidden': 'true' }); hek.innerHTML = HEK; t.append(hek); } }
+      else hek?.remove();
       let nr = t.querySelector('.wt-nr');
       if (sel.has(i)) { if (!nr) { nr = h('span', { class: 'wt-nr', 'aria-hidden': 'true' }, ''); t.append(nr); } nr.textContent = String(sel.get(i)); }
       else nr?.remove();
