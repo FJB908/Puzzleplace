@@ -3,7 +3,7 @@
 Een rustig platform om puzzelspellen te spelen (sudoku, woordzoeker, kruiswoordpuzzels, ...),
 ontworpen voor ouderen: grote letters, duidelijke knoppen en een zo simpel mogelijke opzet.
 
-**Status:** het platform staat met drie spellen, elk in vier niveaus (tot en met Extreem): **Sudoku** (levens, meteen zien als iets fout is, notities, tip), **Woordzoeker** (thema's, tikken of slepen, markeerstift) en **Kruiswoordpuzzel** (vrije puzzel met omschrijvingen en een groot toetsenbord). Elk spel heeft een puzzel van de dag.
+**Status:** het platform staat met vier spellen, elk in vier niveaus (tot en met Extreem): **Sudoku** (levens, meteen zien als iets fout is, notities, tip), **Woordzoeker** (thema's, tikken of slepen, markeerstift), **Kruiswoordpuzzel** (vrije puzzel met omschrijvingen en een groot toetsenbord) en **Woordtuin** (maak woorden en laat jouw bloemen groeien, tegen de computer of om beurten tegen een vriend). Elk spel heeft een puzzel van de dag. Met een account kun je je voortgang op meer apparaten hebben en met vrienden spelen.
 
 ## Uitproberen
 
@@ -47,6 +47,7 @@ Zonder server werkt alles als eerst, op het apparaat zelf. Uitleg, instellingen 
 | Sudoku (engine + scherm + stijl) | `js/games/sudoku/`, `css/games/sudoku.css` |
 | Woordzoeker (woordenlijsten, engine, scherm, stijl) | `js/games/woordzoeker/`, `css/games/woordzoeker.css` |
 | Kruiswoordpuzzel (350 woorden met omschrijving, engine, scherm, stijl) | `js/games/kruiswoord/`, `css/games/kruiswoord.css` |
+| Woordtuin (regels, woordenlijst, bord, scherm; tegen de computer en een vriend) | `js/games/woordtuin/`, `server/games/woordtuin.mjs`, `js/views/partij.js`, `tools/make-woordtuin-lijst.mjs` |
 | Illustraties per spel (voor kaarten en startschermen) | `js/games/art.js` |
 | Opslag op het apparaat (voortgang, instellingen) | `js/store.js` |
 | Stijl, thema's, tekstgroottes | `css/styles.css` |

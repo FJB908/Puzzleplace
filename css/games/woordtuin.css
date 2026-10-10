@@ -1,0 +1,114 @@
+/* Woordtuin. Het bord schaalt mee met de breedte van het scherm; de letters schalen mee met het vakje
+   (container-eenheden: cqh). Jouw bloemen zijn roze (✿), die van de ander zijn blauwgroen (❧): kleur én symbool,
+   zodat het ook zonder kleuren te zien is. */
+
+.wt {
+  --mijn: #f6d3df; --mijn-tekst: #5b1530; --mijn-rand: #c9577f;
+  --hun: #cfe6ea; --hun-tekst: #0f3a42; --hun-rand: #3f8e98;
+  width: min(100%, 30rem); margin-inline: auto; display: flex; flex-direction: column; gap: 1rem;
+}
+html[data-theme="dark"] .wt {
+  --mijn: #55283a; --mijn-tekst: #fbdbe6; --mijn-rand: #e08aa8;
+  --hun: #1f4a52; --hun-tekst: #d3eef2; --hun-rand: #6cc0cc;
+}
+html[data-contrast="high"] .wt { --mijn: #fff; --mijn-tekst: #000; --mijn-rand: #8a0f3c; --hun: #fff; --hun-tekst: #000; --hun-rand: #004d57; }
+
+/* ----- Stand ----- */
+.wt-stand { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: .6rem; padding: .5rem .8rem; border-radius: 1.2rem; background: var(--surface); box-shadow: var(--shadow); }
+html[data-theme="dark"] .wt-stand { border: 1px solid var(--border); }
+html[data-contrast="high"] .wt-stand { border: 3px solid var(--border); }
+.wt-stand { container-type: inline-size; }
+@container (max-width: 15rem) { .wt-stand .wt-bol { display: none; } }
+.wt-kant { display: flex; align-items: center; gap: .6rem; font-weight: 700; min-width: 0; }
+.wt-kant.hun { justify-content: flex-end; text-align: right; }
+.wt-kant > div { min-width: 0; }
+.wt-kant b { display: block; font-size: 1.6rem; line-height: 1; }
+.wt-kant small { display: block; font-weight: 500; color: var(--text-muted); font-size: .85rem; overflow-wrap: break-word; }
+.wt-bol { flex: none; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-size: 1.1rem; }
+.wt-kant.mijn .wt-bol { background: var(--mijn); color: var(--mijn-tekst); box-shadow: inset 0 0 0 2px var(--mijn-rand); }
+.wt-kant.hun .wt-bol { background: var(--hun); color: var(--hun-tekst); box-shadow: inset 0 0 0 2px var(--hun-rand); }
+
+.wt { gap: .8rem; }
+.wt-info { display: grid; gap: .1rem; margin: -.2rem 0; }
+.wt-beurt { margin: 0; text-align: center; font-weight: 700; color: var(--text-muted); }
+.wt-beurt.jij { color: var(--primary); }
+.wt-laatste { margin: 0; text-align: center; color: var(--text-muted); font-size: .95rem; min-height: 1.3em; }
+
+/* ----- Bord ----- */
+.wt-bord {
+  position: relative; display: grid; grid-template-columns: repeat(var(--n), 1fr); grid-auto-rows: 1fr; gap: 2.2%;
+  width: 100%; aspect-ratio: 1; padding: 2.5%; border-radius: 1.3rem;
+  background: var(--surface-2); box-shadow: var(--shadow);
+  touch-action: none; user-select: none; -webkit-user-select: none;
+}
+html[data-contrast="high"] .wt-bord { border: 3px solid var(--border); background: var(--surface); }
+.wt-bord.uit .wt-tegel { cursor: default; }
+
+.wt-tegel {
+  container-type: size; position: relative; display: grid; place-items: center; min-width: 0;
+  border-radius: 24%; background: var(--surface); color: var(--text);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .07); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .14s ease, background-color .25s ease, color .25s ease;
+}
+html[data-theme="dark"] .wt-tegel { box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .35); }
+.wt-l { font-size: 1.4rem; font-size: 52cqh; font-weight: 800; line-height: 1; text-transform: uppercase; }
+.wt-tegel:focus-visible { outline: .22rem solid var(--focus); outline-offset: .12rem; z-index: 3; }
+
+/* Wie is de eigenaar: kleur en een klein symbool in de hoek */
+.wt-tegel.mijn { background: var(--mijn); color: var(--mijn-tekst); }
+.wt-tegel.hun { background: var(--hun); color: var(--hun-tekst); }
+.wt-tegel.mijn::before, .wt-tegel.hun::before { position: absolute; left: 11%; top: 5%; font-size: 24cqh; font-weight: 400; line-height: 1.2; }
+.wt-tegel.mijn::before { content: "✿"; }
+.wt-tegel.hun::before { content: "❧"; }
+/* Beschermd: een rand in de kleur van de eigenaar */
+.wt-tegel.veilig { box-shadow: inset 0 0 0 .2rem currentColor; }
+html[data-contrast="high"] .wt-tegel { border: 2px solid var(--border); }
+html[data-contrast="high"] .wt-tegel.mijn { background: #ffe3ec; }
+html[data-contrast="high"] .wt-tegel.hun { background: #d8f0f3; }
+
+/* De laatste zet: een lichte rand zodat je ziet wat er gebeurde */
+.wt-tegel.laatst::after { content: ""; position: absolute; inset: -2%; border-radius: 28%; border: .14rem dashed color-mix(in srgb, currentColor 55%, transparent); pointer-events: none; }
+
+/* Gekozen letters */
+.wt-tegel.gekozen { background: var(--primary); color: var(--on-primary); transform: scale(1.05); z-index: 2; box-shadow: 0 .2rem .6rem rgba(0, 0, 0, .25); }
+.wt-tegel.gekozen.pak { background: var(--accent); }
+.wt-tegel.gekozen.blijft { background: var(--primary); box-shadow: inset 0 0 0 .22rem var(--on-primary), 0 .2rem .6rem rgba(0, 0, 0, .25); }
+.wt-tegel.gekozen::before, .wt-tegel.gekozen::after { display: none; }
+.wt-nr { position: absolute; left: 10%; top: 6%; font-size: 22cqh; font-weight: 700; opacity: .85; line-height: 1.2; }
+.wt-pad { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: visible; }
+.wt-lijn { fill: none; stroke: rgba(255, 255, 255, .38); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }   /* zacht, zodat de letters leesbaar blijven */
+
+/* Tip: het vakje pulseert */
+.wt-tegel.tip::after { content: ""; position: absolute; inset: -6%; border-radius: 30%; border: .22rem solid var(--accent); animation: wt-tip 1s ease-out 3; pointer-events: none; }
+@keyframes wt-tip { 0% { transform: scale(.8); opacity: 1; } 100% { transform: scale(1.35); opacity: 0; } }
+
+/* Een vakje dat net van kleur veranderde bloeit even open */
+.wt-tegel.bloeit { animation: wt-bloei .7s cubic-bezier(.3, 1.5, .5, 1) both; animation-delay: var(--vertraging, 0ms); }
+@keyframes wt-bloei { 0% { transform: scale(.7); } 60% { transform: scale(1.14); } 100% { transform: none; } }
+
+/* ----- Het woord dat je maakt ----- */
+.wt-woord { text-align: center; min-height: 4.6rem; }
+.wt-woord-tekst { display: block; min-height: 2rem; font-size: 1.8rem; letter-spacing: .2em; margin-right: -.2em; text-transform: uppercase; line-height: 1.2; overflow-wrap: anywhere; }
+.wt-uitleg { margin: .1rem 0 0; color: var(--text-muted); min-height: 2.6em; }
+.klaar-om .wt-uitleg { color: var(--text); }
+
+/* ----- Typen ----- */
+.wt-typ-body[hidden] { display: none; }
+.wt-typ-body { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; padding: .25rem 0 .5rem; }
+.wt-invoer { flex: 1 1 10rem; min-height: 3.2rem; padding: .5rem .9rem; border-radius: 1rem; border: 2px solid var(--control-border); background: var(--surface); color: var(--text); font: inherit; font-size: 1.2rem; letter-spacing: .1em; text-transform: lowercase; }
+.wt-invoer:focus-visible { outline: .22rem solid var(--focus); outline-offset: .1rem; }
+.wt-invoer:disabled { opacity: .55; }
+
+/* ----- Knoppen ----- */
+.wt-knoppen { display: grid; grid-template-columns: 1fr 2fr; gap: .7rem; position: sticky; bottom: 0; z-index: 5; padding: 1.2rem 0 .6rem; margin-top: -.6rem; background: linear-gradient(to bottom, transparent, var(--bg) 28%); }
+.wt-extra { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .5rem; }
+.wt-extra .btn { flex-direction: column; gap: .1rem; padding: .35rem .3rem; min-height: 3.6rem; font-size: .92rem; line-height: 1.15; }
+.wt-extra[hidden] { display: none; }
+.wt-knoppen .btn { min-height: 3.5rem; }
+
+/* ----- Tegen een vriend ----- */
+.wt-uitslag { margin: .8rem 0 0; padding: .9rem 1rem; border-radius: 1rem; background: var(--blush); color: var(--text); font-weight: 700; text-align: center; }
+.wt-uitslag[hidden], .wt-wacht[hidden] { display: none; }
+.wt-wacht { margin: .6rem 0 0; text-align: center; color: var(--text-muted); font-size: .95rem; }
+.wt-onder { display: flex; justify-content: center; padding-top: .4rem; }
+.wt-stop[hidden] { display: none; }

@@ -17,7 +17,8 @@ import * as auth from '../services/auth.js';
 import * as sync from '../services/sync.js';
 import * as store from '../store.js';
 import { field, passwordField, form } from './forms.js';
-import { notFoundView } from './notFound.js';
+import { notFoundView, loadingView } from './notFound.js';
+import { backendKnown } from '../services/backend.js';
 
 const PENDING_RECOVERY = 'pp-herstelcode';
 const PENDING_FRIEND = 'pp-vriendcode';
@@ -39,7 +40,7 @@ function intro() {
     h('ul', { class: 'points' },
       point('games', 'Je voortgang op al je apparaten', 'Begin op je telefoon, ga verder op je tablet.'),
       point('friends', 'Vrienden en familie', 'Voeg iemand toe met een code. Geen vreemden, geen zoekopdrachten.'),
-      point('daily', 'Straks samen spelen', 'Puzzels met beurten, ook als je niet tegelijk online bent.')),
+      point('woordtuin', 'Samen Woordtuin spelen', 'Woorden maken om beurten, ook als je niet tegelijk online bent.')),
     h('div', { class: 'stack' },
       h('a', { class: 'btn btn-primary btn-block', href: '#/account/nieuw' }, 'Account maken'),
       h('a', { class: 'btn btn-block', href: '#/account/inloggen' }, 'Ik heb al een account')),
@@ -218,6 +219,7 @@ function deleteView() {
 }
 
 export function accountView({ sub }, app) {
+  if (!backendKnown()) return loadingView();
   if (!FEATURES.accounts) return notFoundView();
   const user = auth.getUser();
   if (sub === 'nieuw') return user ? overview(app) : signupView();

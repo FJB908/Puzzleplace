@@ -1,0 +1,1 @@
+# Woorden die altijd mogen, ook als de lijst of een filter ze weghaalt (een woord per token).

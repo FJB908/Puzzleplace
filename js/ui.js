@@ -47,6 +47,7 @@ const ICONS = {
   sudoku: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>',
   woordzoeker: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M16 16l5 5"/>',
   kruiswoord: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h8M13 15h8M9 3v6M13 9v12M9 15v6"/>',
+  woordtuin: '<path d="M12 21v-8M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 13c3 0 5-2 5-5-3 0-5 2-5 5zM12 9c-2-1-2-4 0-6 2 2 2 5 0 6z"/>',
   puzzle: '<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>',
 };
 

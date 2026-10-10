@@ -11,6 +11,7 @@ import { games, getGameInfo, dailyGame, isReady } from '../games/registry.js';
 import { gameArt } from '../games/art.js';
 import * as auth from '../services/auth.js';
 import * as social from '../services/social.js';
+import * as matches from '../services/matches.js';
 import { avatar } from '../ui.js';
 
 function greeting() {
@@ -113,6 +114,18 @@ function friendNotice() {
     h('span', {}, h('strong', {}, n === 1 ? (first ? `${first.name} wil je vriend worden` : 'Iemand wil je vriend worden') : `${n} mensen willen je vriend worden`), h('span', { class: 'muted' }, 'Tik om te antwoorden')));
 }
 
+// Een vriend wacht op jouw zet: dat zie je meteen op Start
+function beurtNotice() {
+  const user = auth.getUser();
+  if (!user) return null;
+  const mijn = matches.cached().filter((m) => m.status === 'active' && m.yourTurn);
+  if (!mijn.length) return null;
+  const een = mijn.length === 1, tegen = mijn[0].players.find((p) => p.id !== user.id) || { name: 'Een vriend' };
+  return h('a', { class: 'notice-link', href: een ? `#/partij/${mijn[0].id}` : '#/vrienden' },
+    een ? avatar(tegen.name, tegen.id) : h('span', { class: 'bubble' }, icon('friends')),
+    h('span', {}, h('strong', {}, een ? `${tegen.name} wacht op jou` : `${mijn.length} vrienden wachten op jou`), h('span', { class: 'muted' }, een ? 'Jij bent aan de beurt in Woordtuin' : 'Tik om te kiezen')));
+}
+
 function tile(game) {
   const ready = isReady(game);
   const rec = store.getGame(game.id);
@@ -133,6 +146,7 @@ export function homeView(_params, app) {
       h('p', {}, 'Wat wil je vandaag doen?'),
     ),
     store.getSettings().welcomeDone ? null : welcomeCard(app),
+    beurtNotice(),
     friendNotice(),
     mainCard(),
     dailyCard(),

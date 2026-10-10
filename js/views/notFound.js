@@ -10,3 +10,8 @@ export function notFoundView() {
       h('a', { class: 'btn btn-primary btn-block', href: '#/' }, 'Naar Start')),
   };
 }
+
+// Even wachten tot de app weet of er een server is (alleen als je rechtstreeks op zo'n scherm binnenkomt)
+export function loadingView() {
+  return { title: 'Even laden', nav: 'friends', node: h('div', { class: 'view' }, h('p', { class: 'muted', role: 'status' }, 'Even laden…')) };
+}

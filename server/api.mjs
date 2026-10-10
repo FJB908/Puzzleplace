@@ -287,7 +287,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const active = Object.values(D.matches).filter((m) => m.status === 'active' && m.players.includes(user.id)).length;
     if (active >= MAX_MATCHES) fail(429, 'te-veel', 'Je hebt veel partijen lopen. Maak er eerst een paar af.');
     const players = [user.id, other.id];
-    const config = isObject(req.body.config) ? req.body.config : {};
+    let config = isObject(req.body.config) ? req.body.config : {};
+    if (rules.config) config = rules.config(config);
     let made;
     try { made = rules.create({ players, config }); } catch (e) { if (e instanceof RuleError) fail(400, 'regel', e.message); throw e; }
     const id = newId();
@@ -300,7 +301,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const { user } = auth(req);
     const list = Object.values(D.matches).filter((m) => m.players.includes(user.id))
       .sort((a, b) => b.updatedAt - a.updatedAt).slice(0, 100)
-      .map((m) => { const v = matchView(m, user.id); delete v.pub; return v; });
+      .map((m) => { const v = matchView(m, user.id); v.summary = games[m.game]?.summary?.({ pub: m.pub }) ?? null; delete v.pub; return v; });
     return { body: { matches: list } };
   }
 

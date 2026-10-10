@@ -56,7 +56,22 @@ function kruiswoord() {
   return wrap(`<g transform="translate(26 6)">${out}</g>`);
 }
 
-const ART = { sudoku, woordzoeker, kruiswoord };
+// Woordtuin: een bordje met roze en blauwgroene vakjes en een woord dat net gekozen wordt
+function woordtuin() {
+  const rows = ['ROZEN', 'TUINA', 'BLOEM', 'KERST', 'ZONDE'];
+  const own = ['mmmm.', 'tttt.', 'm.mmm', '..ttt', '.....'];
+  const pick = new Set(['2,0', '2,1', '2,2', '2,3', '2,4']);
+  const S = 21;
+  let out = '';
+  rows.forEach((row, r) => [...row].forEach((ch, c) => {
+    const k = pick.has(`${r},${c}`) ? ' ga-sel' : own[r][c] === 'm' ? ' ga-mine' : own[r][c] === 't' ? ' ga-theirs' : '';
+    out += `<rect class="ga-tile${k}" x="${c * S + 1.5}" y="${r * S + 1.5}" width="${S - 3}" height="${S - 3}" rx="5"/>`;
+    out += `<text class="${k.includes('sel') ? 'ga-on' : 'ga-g'}" x="${c * S + S / 2}" y="${r * S + S / 2 + 4.5}" text-anchor="middle" font-weight="800">${ch}</text>`;
+  }));
+  return wrap(`<g transform="translate(27 7)">${out}</g>`, 10);
+}
+
+const ART = { sudoku, woordzoeker, kruiswoord, woordtuin };
 
 export function gameArt(id) {
   const make = ART[id];

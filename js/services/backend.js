@@ -21,6 +21,7 @@ export const getToken = get;
 export function setToken(t) { try { if (t) localStorage.setItem(TOKEN_KEY, t); else localStorage.removeItem(TOKEN_KEY); } catch { /* geheugen volstaat niet: dan blijf je alleen deze keer ingelogd */ memory = t; } }
 let memory = '';
 export const hasBackend = () => available === true;
+export const backendKnown = () => available !== null;       // is er al gekeken of er een server is?
 
 export const on = (fn) => { listeners.add(fn); return () => listeners.delete(fn); };
 const emit = (event) => listeners.forEach((fn) => fn(event));

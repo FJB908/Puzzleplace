@@ -14,3 +14,5 @@ node tools/proto/kruisduel-run.mjs
 
 Wat gemeten wordt: zetten per speler, wie beginnend wint, hoe vaak de leider wisselt, en vooral: **wint een slimmere speler?**
 (vooruitkijken tegen gretig, en een speler die meer woorden ziet tegen een die er minder ziet).
+
+De woordenlijst van het gebouwde spel zit in `js/games/woordtuin/woorden.js` (zie `tools/make-woordtuin-lijst.mjs`); geef die als `WORDLIST` mee om de meting met de echte lijst te herhalen (één woord per regel; maak er met `node -e "import('./js/games/woordtuin/woorden.js').then(m=>console.log(m.WOORDEN.join('\\n')))" > lijst.txt` een bestand van).

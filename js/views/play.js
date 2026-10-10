@@ -82,7 +82,8 @@ export async function playView({ id, mode }, app) {
       finished = true;
       store.updateGame(id, (r) => { r.slots[slotName] = null; });
     },
-    async complete(result) {
+    // result mag { title, text, joy } meegeven voor een eigen slotbericht (bijv. "Gewonnen!" of "Mooi gespeeld!")
+    async complete(result = {}) {
       if (finished) return;
       finished = true;
       store.updateGame(id, (r) => {
@@ -90,11 +91,11 @@ export async function playView({ id, mode }, app) {
         r.slots[slotName] = null;
         if (daily) r.dailyDone = today;
       });
-      announce('Goed gedaan! Het spel is uitgespeeld.');
+      announce(result.title ?? 'Goed gedaan! Het spel is uitgespeeld.');
       const choice = await choiceDialog({
-        title: 'Goed gedaan!',
-        text: `Je hebt ${daily ? 'de puzzel van de dag' : 'dit spel'} uitgespeeld.`,
-        joy: true,
+        title: result.title ?? 'Goed gedaan!',
+        text: result.text ?? `Je hebt ${daily ? 'de puzzel van de dag' : 'dit spel'} uitgespeeld.`,
+        joy: result.joy ?? true,
         actions: [
           { label: daily ? 'Terug naar Start' : 'Nog een keer', value: daily ? 'home' : 'again', primary: true, autofocus: true },
           { label: 'Ander spel kiezen', value: 'games' },

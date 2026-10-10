@@ -75,6 +75,20 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 - **Grote bediening zonder kaders:** cijfertoetsen van ruim 3,5rem hoog; cijfers die al 9 keer goed staan worden gedimd. Potlood staat zichtbaar aan (roze cijfers, knop ingekleurd, uitleg onder het rooster).
 - **Toetsenbord:** pijltjes, 1-9, Backspace, N (potlood), Ctrl+Z.
 
+## Woordtuin: keuzes
+
+Het volledige verhaal (waarom dit spel, de metingen, de woordenlijst) staat in [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md). De kern:
+
+| Keuze | Waarom |
+|---|---|
+| Woorden maak je door aangrenzende letters aan te raken (zoals Woordzoeker), niet met een rek letters | Je ziet de woorden die er zijn in plaats van letters te moeten schuiven; geen geluk met een slechte trekking |
+| Vakjes veroveren en beschermen in plaats van punten tellen | Alles wat jij doet verandert wat de ander kan (schaarste en gevolgen); je ziet in één blik wie er voor staat |
+| Elk woord moet een open vakje kleuren, en elk woord kan maar één keer | Zo eindigt het spel (±10 zetten per speler) en is een lang woord ook een zet die je de ander afneemt |
+| Alleen gewone stamwoorden, met de hand beoordeeld | Geen rare woorden; wat je niet kent, hoef je niet te leren. Bij een poging met een meervoud of verleden tijd krijg je een vriendelijke uitleg |
+| Je ziet vooraf wat een woord oplevert, en pas dan "Klaar" | Geen misklikken, geen spijt |
+| Kleur én symbool (✿ en ❧), typen als alternatief voor vegen, geen tijdsdruk, tips in een vriendelijke partij | Voor iedereen bruikbaar, ook voor kleurenblinden en wie niet goed kan vegen |
+| Dezelfde regels in de app en op de server | De computertegenstander, de tip en de server gebruiken één bron; valsspelen met een aangepaste app kan niet |
+
 ## Waarom geen framework
 
 Gewoon HTML, CSS en JavaScript-modules. Geen build, geen afhankelijkheden: makkelijk te begrijpen, snel op oude telefoons en later zo in een Android-app (Capacitor) te verpakken.

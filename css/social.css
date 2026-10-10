@@ -23,6 +23,7 @@ html[data-contrast="high"] .form-error { border: 3px solid var(--danger); }
 .center.link-quiet { display: block; }
 
 /* ----- Uitleg met pictogrammen ----- */
+.point > span:last-child { min-width: 0; overflow-wrap: anywhere; }
 .points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
 .point { display: flex; align-items: center; gap: 1rem; }
 .point .tile { --tile: 3.3rem; flex: none; }
@@ -60,6 +61,8 @@ html[data-textsize="xlarge"] .code { font-size: 1.5rem; }
 .friend .who .muted { font-size: .95rem; }
 .friend-actions { display: flex; gap: .25rem; flex-wrap: wrap; }
 .friend-actions .btn { min-height: 3rem; padding-inline: 1rem; }
+.friend.partij.jouw-beurt { background: var(--blush); border-radius: var(--radius); padding-inline: 1rem; margin-block: .2rem; border-bottom-color: transparent; }
+.beurt-tekst { font-weight: 700; color: var(--accent); }
 
 /* ----- Meldingsbolletje in het menu ----- */
 .nav a[data-badge]::after {

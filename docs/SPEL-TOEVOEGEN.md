@@ -15,7 +15,7 @@ Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren va
 - Teken alleen in `container`; de rest van de pagina is van het platform.
 - Roep `ctx.save(state)` aan na **elke** zet. Zo is "Terug" altijd veilig.
 - Maak de puzzel uit `ctx.seed` en `ctx.difficulty`: zelfde seed = zelfde puzzel. Voor de puzzel van de dag is de seed de datum, dus iedereen krijgt dezelfde.
-- Roep `ctx.complete(result)` aan als het spel klaar is.
+- Roep `ctx.complete(result)` aan als het spel klaar is. Met `{ title, text, joy }` kun je een eigen slotbericht meegeven (Woordtuin zegt "Gewonnen!" of "Mooi gespeeld!"); zonder zegt het platform "Goed gedaan!".
 - Geef elk spel een **Ongedaan maken**-knop, zodat niets onherstelbaar is.
 - Gebruik de bestaande knopstijlen (`btn`, `btn-primary`) en `rem`-eenheden; tikvlakken minimaal 3rem. Raster-vakjes mogen compacter, maar liefst niet kleiner dan 2,5rem.
 - Geen tijdsdruk, geen geluid dat vanzelf start, geen flitsende animaties.
@@ -23,3 +23,7 @@ Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren va
 
 
 De drie spellen in `js/games/` zijn de voorbeelden: `engine.js` bevat alleen logica (met tests in `tests/`), het andere bestand het scherm. Een spel mag een functie teruggeven uit `mount` om op te ruimen (de kruiswoordpuzzel doet dat voor zijn toetsenbord).
+
+## Een spel voor twee spelers
+
+Woordtuin is ook het voorbeeld voor spelen **tegen een vriend**: de regels staan in een gewone module (`js/games/woordtuin/engine.js`) die zowel de app als de server gebruikt; de server heeft er een dun bestand voor (`server/games/woordtuin.mjs`) en het scherm (`paneel.js`) is hetzelfde voor spelen tegen de computer en tegen een vriend. Zie [`ACCOUNTS.md`](ACCOUNTS.md) voor het contract en [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor de keuzes.

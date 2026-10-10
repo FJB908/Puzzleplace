@@ -10,8 +10,11 @@ import { h, icon, avatar, copyText, shareText, dayText, choiceDialog, confirmDia
 import { FEATURES } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as social from '../services/social.js';
+import * as matches from '../services/matches.js';
+import { uitslagTekst } from './partij.js';
 import { field, form } from './forms.js';
-import { notFoundView } from './notFound.js';
+import { notFoundView, loadingView } from './notFound.js';
+import { backendKnown } from '../services/backend.js';
 import { rememberFriendCode } from './account.js';
 
 const page = (node, extra = {}) => ({ title: 'Vrienden', nav: 'friends', decor: 'spray', node, ...extra });
@@ -52,7 +55,46 @@ function row(person, buttons, sub) {
     h('div', { class: 'friend-actions' }, buttons));
 }
 
+// Hoe staan jullie ervoor? Alleen partijen die uitgespeeld zijn (niet gestopt) tellen mee.
+function stand(friendId, myId) {
+  let ik = 0, zij = 0;
+  for (const m of matches.cached()) {
+    if (m.status !== 'done' || !m.result?.scores || !m.players.some((p) => p.id === friendId)) continue;
+    if (m.result.winner === myId) ik++; else if (m.result.winner === friendId) zij++;
+  }
+  return ik + zij ? `jullie staan ${ik}–${zij}` : '';
+}
+
+async function nieuwePartij(friend) {
+  const keuze = await choiceDialog({
+    title: `Woordtuin met ${friend.name}`, text: 'Hoe willen jullie spelen?',
+    actions: [
+      { label: 'Gewone partij', value: 0, primary: true, autofocus: true },
+      { label: 'Vriendelijke partij: 3 tips voor ieder', value: 3 },
+      { label: 'Annuleren', value: null },
+    ],
+    dismissValue: null,
+  });
+  if (keuze === null) return;
+  try { const m = await matches.create(friend.id, 'woordtuin', { tips: keuze }); location.hash = `#/partij/${m.id}`; }
+  catch (e) { await choiceDialog({ title: 'Dat lukte niet', text: e.message, actions: [{ label: 'Sluiten', value: true, primary: true, autofocus: true }] }); }
+}
+
+function partijRij(m, myId) {
+  const tegen = m.players.find((p) => p.id !== myId) || { name: 'Verwijderd account' };
+  const klaar = m.status !== 'active';
+  const s = m.summary?.scores;
+  const mijn = s?.[myId], hun = s && Object.entries(s).find(([id]) => id !== myId)?.[1];
+  const status = klaar ? uitslagTekst(m, myId, tegen.name) : m.yourTurn ? 'Jij bent aan de beurt' : `${tegen.name} is aan de beurt`;
+  return h('li', { class: `friend partij${m.yourTurn ? ' jouw-beurt' : ''}` }, avatar(tegen.name, tegen.id),
+    h('div', { class: 'who' }, h('strong', {}, `Woordtuin met ${tegen.name}`),
+      h('span', { class: m.yourTurn ? 'beurt-tekst' : 'muted' }, status),
+      !klaar && s ? h('span', { class: 'muted' }, `Jij ${mijn} · ${tegen.name} ${hun} · nog ${m.summary.open} open`) : null),
+    h('div', { class: 'friend-actions' }, h('a', { class: `btn ${m.yourTurn ? 'btn-primary' : ''}`, href: `#/partij/${m.id}`, 'aria-label': `${klaar ? 'Bekijk' : m.yourTurn ? 'Speel' : 'Open'} de partij met ${tegen.name}` }, klaar ? 'Bekijken' : m.yourTurn ? 'Spelen' : 'Openen')));
+}
+
 export function friendsView({ code }, app) {
+  if (!backendKnown()) return loadingView();
   if (!FEATURES.friends) return notFoundView();
   const user = auth.getUser();
   if (!user) return loggedOut(code);
@@ -90,14 +132,22 @@ export function friendsView({ code }, app) {
       h('ul', { class: 'friends' }, data.outgoing.map((p) => row(p, [
         h('button', { type: 'button', class: 'btn btn-quiet', onclick: () => act(() => social.remove(p.id), 'Verzoek ingetrokken.') }, 'Intrekken')], `gevraagd ${dayText(p.requested)}`)))) : null;
 
+    const alle = [...matches.cached()];
+    const actief = alle.filter((m) => m.status === 'active').sort((a, b) => (b.yourTurn - a.yourTurn) || (b.updatedAt - a.updatedAt));
+    const afgelopen = alle.filter((m) => m.status !== 'active').sort((a, b) => b.updatedAt - a.updatedAt).slice(0, 3);
+    const partijen = actief.length || afgelopen.length ? h('section', { 'aria-labelledby': 'partijen' }, h('h2', { id: 'partijen' }, 'Partijen'),
+      h('ul', { class: 'friends' }, [...actief, ...afgelopen].map((m) => partijRij(m, u.id)))) : null;
+
     const friends = data.friends.length ? h('ul', { class: 'friends' }, data.friends.map((p) => row(p, [
+      h('button', { type: 'button', class: 'btn btn-primary', 'aria-label': `Woordtuin spelen met ${p.name}`, onclick: () => nieuwePartij(p) }, icon('woordtuin'), 'Woordtuin'),
       h('button', { type: 'button', class: 'btn btn-quiet btn-danger', 'aria-label': `${p.name} verwijderen`, onclick: async () => {
         if (await confirmDialog({ title: `${p.name} verwijderen?`, text: `Jullie zijn dan geen vrienden meer. Je kunt later altijd weer een verzoek sturen.`, confirmLabel: 'Ja, verwijderen' })) act(() => social.remove(p.id), `${p.name} is verwijderd.`);
-      } }, 'Verwijderen')], `laatst gezien ${dayText(p.lastSeen)}`)))
+      } }, 'Verwijderen')], [`laatst gezien ${dayText(p.lastSeen)}`, stand(p.id, u.id)].filter(Boolean).join(' · '))))
       : h('div', { class: 'notice' }, h('strong', {}, 'Nog geen vrienden'), h('p', {}, 'Deel je code met iemand die je kent, of vul hierboven de code van iemand anders in. Zodra jullie vrienden zijn, kun je straks samen spelen.'));
 
-    body.replaceChildren(...[myCode(u, () => render(social.cached())), incoming, outgoing,
+    body.replaceChildren(...[incoming, partijen,
       h('section', { 'aria-labelledby': 'jouw-vrienden' }, h('h2', { id: 'jouw-vrienden' }, data.friends.length ? `Jouw vrienden (${data.friends.length})` : 'Jouw vrienden'), friends),
+      outgoing, myCode(u, () => render(social.cached())),
       h('section', { class: 'card stack', 'aria-labelledby': 'toevoegen' }, h('h2', { id: 'toevoegen' }, 'Vriend toevoegen'), add, message)].filter(Boolean));
   }
 
@@ -107,6 +157,8 @@ export function friendsView({ code }, app) {
   body.append(h('p', { class: 'muted' }, 'Even laden…'));
 
   const off = social.subscribe(render);
+  const off2 = matches.subscribe(() => render(social.cached()));
+  matches.list().catch(() => {});
   social.list().then(async (d) => {
     render(d);
     if (code) {                                              // iemand stuurde je een link: laat zien wie het is, en vraag of je het wilt
@@ -120,5 +172,5 @@ export function friendsView({ code }, app) {
     }
   }).catch((e) => { body.replaceChildren(h('div', { class: 'notice' }, h('p', {}, e.message))); });
 
-  return page(node, { cleanup: () => { alive = false; off(); } });
+  return page(node, { cleanup: () => { alive = false; off(); off2(); } });
 }

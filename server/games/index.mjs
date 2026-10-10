@@ -1,6 +1,12 @@
-// De spelregels voor spelen met beurten. Nu nog leeg: zodra er een spel voor twee spelers is,
-// komt het hier bij. Zie docs/ACCOUNTS.md voor het contract (create en apply).
+// De spelregels voor spelen met beurten, per spel. Elk spel levert:
 //
-//   export const GAMES = { woordtuin: woordtuinRules };
+//   config(config)            (optioneel) maakt van de gekozen instellingen een nette versie
+//   create({ players, config }) -> { pub, secret, turn }
+//   apply({ pub, secret, move, player, config }) -> { pub, secret, turn | null, result }
+//   summary({ pub })          (optioneel) een korte samenvatting voor in de lijst met partijen
+//
+// Zie docs/ACCOUNTS.md voor de uitleg.
 
-export const GAMES = {};
+import { woordtuinRules } from './woordtuin.mjs';
+
+export const GAMES = { woordtuin: woordtuinRules };

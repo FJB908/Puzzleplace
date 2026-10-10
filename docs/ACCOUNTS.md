@@ -61,11 +61,13 @@ De logica staat los van HTTP in `server/api.mjs` (`createApi(...).handle(...)`),
 
 ## Een spel voor twee spelers toevoegen
 
-De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **wie aan de beurt is** en **de versie** (geen dubbele zetten). De regels zijn één module per spel in `server/games/`, aangemeld in `server/games/index.mjs`:
+De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **wie aan de beurt is** en **de versie** (geen dubbele zetten). De regels zijn één module per spel in `server/games/`, aangemeld in `server/games/index.mjs`. Het voorbeeld is `server/games/woordtuin.mjs`.
 
 ```js
 export const spelRegels = {
-  // Nieuwe partij. config komt van de speler (bijv. { level: 'gemiddeld' }).
+  // (optioneel) maakt van de gekozen instellingen een nette versie; wat hier niet in zit, wordt weggegooid
+  config(config) { return { tips: [0, 3].includes(config?.tips) ? config.tips : 0 }; },
+  // Nieuwe partij. players = [id, id].
   create({ players, config }) {
     return { pub: { /* wat beide spelers zien */ }, secret: { /* alleen op de server, bijv. de oplossing */ }, turn: players[0] };
   },
@@ -73,15 +75,18 @@ export const spelRegels = {
   apply({ pub, secret, move, player, config }) {
     return { pub: nieuweStand, secret, turn: andereSpeler /* of null = afgelopen */, result: { winner, scores } };
   },
+  // (optioneel) een korte samenvatting voor in de lijst met partijen (de lijst bevat niet de hele stand)
+  summary({ pub }) { return { scores: { /* id: aantal */ } }; },
 };
 ```
 
-- `secret` wordt **nooit** naar clients gestuurd. Oplossingen, geheime letters en kaartstapels horen daar.
-- De regels moeten een pure functie zijn (zelfde invoer, zelfde uitkomst); willekeur komt uit een zaad dat in `secret` staat. Dan zijn ze eenvoudig te testen.
-- Engines die al in `js/games/*/engine.js` staan kunnen ook op de server worden gebruikt: het zijn gewone modules.
-- Client: een scherm onder `js/views/` dat `GET /matches/:id?since=<versie>` pollt (antwoordt `unchanged` als er niets is) en zetten stuurt met `POST .../move` (`{ version, move }`). Het badgetje bij Vrienden telt al partijen waarin je aan de beurt bent.
+- `secret` wordt **nooit** naar clients gestuurd. Oplossingen, geheime letters en kaartstapels horen daar. (Woordtuin heeft er geen: beide spelers zien alles.)
+- De beurt gaat naar de speler die `turn` aangeeft; dat mag dezelfde speler zijn (Woordtuin: kan de ander niets meer, dan slaat die over).
+- De regels moeten een pure functie zijn (zelfde invoer, zelfde uitkomst); willekeur komt uit een zaad dat in `pub` of `secret` staat. Dan zijn ze eenvoudig te testen.
+- Engines die in `js/games/*/engine.js` staan kunnen ook op de server worden gebruikt: het zijn gewone modules zonder scherm. Zo draait Woordtuin in de app en op de server dezelfde code, en kan niemand valsspelen met een aangepaste app.
+- Client: een scherm dat `GET /matches/:id?since=<versie>` pollt (antwoordt `unchanged` als er niets is) en zetten stuurt met `POST .../move` (`{ version, move }`): zie `js/services/matches.js` en `js/views/partij.js`. Het getal bij Vrienden telt al partijen waarin je aan de beurt bent.
 
-Zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor het voorstel wat we hiermee gaan bouwen (Woordtuin).
+Zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor Woordtuin en de keuzes erachter.
 
 ## Later: inloggen met Facebook of Google
 

@@ -3,13 +3,14 @@
 **Opdracht:** een écht goed spel om met een vriend(in) te spelen, om beurten en ook als jullie niet tegelijk online zijn, in de
 klasse van Wordfeud, maar niet hetzelfde. Zo'n spel moet je na een jaar nog steeds willen openen om te zien of de ander een zet heeft gedaan.
 
-**Voorstel: Woordtuin.** Een bord met 6×6 letters. Om beurten maak je een woord door aangrenzende letters aan te tikken (net als bij
-de Woordzoeker). De letters van je woord worden **jouw bloemen**. Maakt de ander later een woord dat door jouw letters loopt, dan pakt
-die ze af, tenzij ze beschermd zijn. Als alle vakjes gekleurd zijn, wint wie de meeste bloemen heeft.
+**Woordtuin** is dit spel, en het is gebouwd. Een bord met 6×6 letters. Om beurten maak je een woord door aangrenzende letters aan
+te tikken of eroverheen te vegen (net als bij de Woordzoeker). De letters van je woord worden **jouw bloemen**. Maakt de ander later een woord
+dat door jouw letters loopt, dan pakt die ze af, tenzij ze beschermd zijn. Als alle vakjes gekleurd zijn, wint wie de meeste bloemen heeft.
 
-![Schets van het scherm](woordtuin-schets.png)
+![Woordtuin tegen de computer](woordtuin-scherm.png)
 
-([`woordtuin-schets.html`](woordtuin-schets.html) is dezelfde schets als pagina.)
+**Status:** speelbaar tegen de computer (vier niveaus, ook zonder account) en tegen een vriend via de server (om beurten, ook als jullie
+niet tegelijk online zijn). Zie onderaan wat er nog moet.
 
 ## Hoe ik hier gekomen ben (en waarom niet het eerste idee)
 
@@ -42,7 +43,7 @@ Bij Wordfeud zijn dat de bonusvakjes en je rek; bij Woordtuin zijn dat de vakjes
 
 Eén regel erbij die strategie geeft: **elk woord kan maar één keer worden gespeeld.** Een mooi lang woord pakken is dus ook je tegenstander een woord afnemen.
 
-## Waarom dit werkt (gemeten, 6×6, 300 partijen per rij)
+## Waarom dit werkt (eerste meting, 6×6, 300 partijen per rij, met de volledige woordenlijst)
 
 | Vraag | Uitkomst |
 |---|---|
@@ -56,9 +57,8 @@ Eén regel erbij die strategie geeft: **elk woord kan maar één keer worden ges
 Dus: vaardigheid telt zwaar mee, maar één slechte zet beslist niet, en tot de laatste zet kan het omslaan. Dat is precies wat je
 van een spel wilt dat je blijft spelen.
 
-**Kanttekeningen, eerlijk:** bots zijn geen mensen. Echte spelers kijken minder ver vooruit en kennen andere woorden, dus *deze getallen zijn een
-richting, geen garantie*. De drie dingen die ik met echte spelers wil testen voordat ik ze vastleg: **5×5 of 6×6**, of **"minstens één open vakje"** prettig voelt, en de
-**gelijkspelregel** (10 % gelijk is veel; de beschermde vakjes lossen het meestal op).
+**Kanttekening, eerlijk:** bots zijn geen mensen. Echte spelers kijken minder ver vooruit en kennen andere woorden, dus *deze getallen zijn een
+richting, geen garantie* (wat er nog met echte spelers getest moet worden staat onderaan).
 
 ## Hoe het spelen voelt
 
@@ -67,23 +67,60 @@ richting, geen garantie*. De drie dingen die ik met echte spelers wil testen voo
 - **Je ziet wat je doet.** Terwijl je een woord maakt, lichten de vakjes op die je zou pakken, en staat er "Dit pakt 2 vakjes van Anna en kleurt 3 nieuwe." Pas daarna druk je op **Klaar**. Geen misklikken, geen spijt.
 - **Gewoon mooi.** Een gepakt vakje bloeit open in jouw kleur (we hebben de bloesemanimatie al). Beschermde vakjes krijgen een rand.
 - **Voor iedereen.** Kleur én symbool (✿ jij, ❧ de ander), grote vakjes, hardop voorgelezen door schermlezers. Wie niet kan vegen, **typt het woord** en de app laat zien waar het ligt. Geen timer.
-- **Samen op een eerlijke manier.** In een *vriendelijke partij* krijgt de zwakkere speler **tips** ("er zit een woord met een Z in de rechterhoek"). Opa kan zo toch van zijn kleinkind winnen, of omgekeerd.
-- **Nooit wachten op een vriend.** Er komt een **computertegenstander** in drie sterktes (dezelfde bot als in de metingen), zodat je altijd kunt spelen en de regels kunt leren.
+- **Samen op een eerlijke manier.** In een *vriendelijke partij* heeft ieder **3 tips**: het beginvakje van een woord licht op, met het aantal letters. Opa kan zo toch van zijn kleinkind winnen, of omgekeerd.
+- **Nooit wachten op een vriend.** Er is een **computertegenstander** in vier sterktes (dezelfde bot als in de metingen), zodat je altijd kunt spelen en de regels kunt leren.
 - **Een eigen stand.** Onder elke vriend: "Jullie staan 3–2." Geen ranglijst met vreemden.
 
-## Wat het kost om te bouwen
+## De woordenlijst: alleen gewone stamwoorden
 
-| Stap | Wat |
+Een woordspel staat of valt met zijn woordenlijst. Mijn eerste lijst (de hele OpenTaal-lijst) liet het bord vol rare woorden toe ("naoogde",
+"vimmen", "ropij"), dus het is nu veel strenger:
+
+- **Alleen stamwoorden**: de gewone woordenboekvorm. "roos" mag, "rozen" (meervoud), "liep" (verleden tijd), "gebouwd" (deelwoord),
+  "bokje" (verkleinwoord) en "sterke" (buiging) niet. Bij een poging krijg je een vriendelijke uitleg ("rozen is een andere vorm van roos").
+- **Alleen woorden die bijna iedereen kent**: uit de OpenTaal-basislijst (Stichting OpenTaal, BSD / CC BY 3.0) vielen eerst alle zeldzame woorden af
+  (frequentie in ondertitels), daarna heb ik de ±5.500 overgebleven woorden **één voor één beoordeeld**. Eruit: meervouden, verleden tijd, deelwoorden,
+  namen, scheldwoorden, afkortingen, Engelse en andere vreemde woorden en alles wat een gemiddelde volwassene niet kent. Over: **±3.600 woorden**
+  van 3 tot 7 letters.
+- De beoordeling staat in `tools/woordtuin/blokkeerlijst.txt` (met grondwoord erbij, zo komt de uitleg tot stand) en kun je met de hand aanpassen:
+  zet een woord op de blokkeerlijst of op `toegestaan.txt` en draai `node tools/make-woordtuin-lijst.mjs <map met bronbestanden>`
+  (zie het begin van dat bestand voor de bronnen). Dat maakt `js/games/woordtuin/woorden.js` (±30 kB).
+
+Dat maakt het bord wel *overzichtelijker*: een bord heeft nu gemiddeld ±180 mogelijke woorden (de goede borden), tegen 570 met de volledige lijst.
+Opnieuw gemeten met deze lijst (6×6, 200 partijen per rij, bots):
+
+| Vraag | Uitkomst |
 |---|---|
-| 1. Woordenlijst | OpenTaal (Stichting OpenTaal, Keurmerk Spelling), **BSD of CC BY 3.0, dus vrij te gebruiken met vermelding** (komt in *Hulp*). Gefilterd op a–z, 3–7 letters: **±39.000 woorden, ±100 kB ingepakt**. Het is dus ook geschikt voor op de telefoon (voor de computertegenstander en tips). |
-| 2. Regels (`js/games/woordtuin/engine.js`) | Eén module voor client én server: bord maken, woord controleren, kleuren, beschermen, einde. Met tests, onder andere een balanstest die de metingen hierboven herhaalt zodat een regelwijziging nooit ongemerkt het spel kapotmaakt. |
-| 3. Server (`server/games/woordtuin.mjs`) | Past in het bestaande beurtsysteem (`docs/ACCOUNTS.md`): `create` en `apply`. Er is geen geheim (iedereen ziet alles), dus eenvoudiger dan een spel met een verborgen rek. |
-| 4. Computertegenstander en tips | Zoeken van alle woorden op het bord (boom met voorvoegsels), kiezen volgens de sterkte. Het prototype doet dit al. |
-| 5. Scherm (`js/views/woordtuin.js`) | Bord, woord maken (vegen, tikken of typen), voorvertoning, stand, partijenlijst onder *Vrienden*, uitslagscherm met bloesem. |
-| 6. Afronden | Uitleg in *Hulp*, proefpartij tegen de computer, speltest met echte mensen, bijstellen. |
+| Hoe lang duurt een partij? | ±9,5 zetten per speler |
+| Loont slimmer spelen? | een bot die één zet vooruitkijkt wint 67 % van een gretige bot (23 % verlies) |
+| Loont meer woorden zien? | wie 30 % van de woorden ziet wint 62 % van wie er 15 % ziet |
+| Heeft de beginner voordeel? | 53–58 % van de beslissende partijen |
+| Is een achterstand te winnen? | de leider wisselt 5 à 7 keer per partij; wie na twee derde voorstaat, wint 62–66 % |
 
-**Risico's:** (1) de woordenlijst bevat ook rare vormen en namen (mijn bots speelden "naoogde"); voor tips en de computer neem ik alleen gangbare woorden, voor spelers accepteer ik veel, en er komt een lijst met woorden die we weigeren. (2) Zonder woordfrequenties kunnen we niet
-nauwkeurig bepalen wat "gangbaar" is; dat is een opzoekklus. (3) Spelers vinden soms een woord dat niet in de lijst staat: er komt een knop "Dit woord zou moeten kunnen" die het naar ons stuurt, en we bepalen de uitkomst.
+Dus ook met de strenge lijst blijft het spel diep, eerlijk en spannend. Een kleine versie van deze meting staat als test in
+`tests/woordtuin.test.mjs`, zodat een regelwijziging het spel nooit ongemerkt kapot maakt.
+
+## Zo is het gebouwd
+
+| Onderdeel | Waar |
+|---|---|
+| Spelregels (één module voor de app én de server) | `js/games/woordtuin/engine.js` |
+| Woordenlijst (gegenereerd) en het script dat hem maakt | `js/games/woordtuin/woorden.js`, `tools/make-woordtuin-lijst.mjs`, `tools/woordtuin/` |
+| Bord (vegen, tikken, toetsenbord) en scherm (stand, woord, knoppen, typen, tip) | `js/games/woordtuin/bord.js`, `paneel.js`, `css/games/woordtuin.css` |
+| Tegen de computer (niveaus makkelijk tot extreem, "Zet terug", tips) | `js/games/woordtuin/woordtuin.js` |
+| Tegen een vriend: de server | `server/games/woordtuin.mjs` (past in het beurtsysteem van `docs/ACCOUNTS.md`) |
+| Tegen een vriend: de schermen | `js/views/partij.js`, partijenlijst onder *Vrienden*, melding "… wacht op jou" op Start |
+| Tests | `tests/woordtuin.test.mjs` (regels, woordenlijst, computer, balans), `tests/woordtuin-server.test.mjs` (een hele partij via de server) |
+
+Hoe het voelt, zoals bedoeld: je ziet vooraf wat je woord oplevert ("Dit pakt 2 vakjes van Anna en kleurt 3 nieuwe") en pas daarna druk je op
+**Klaar**; een woord dat niet bestaat kost niets en krijgt een uitleg; jouw bloemen zijn roze met een ✿ en die van de ander blauwgroen met een ❧
+(kleur én symbool); wie niet kan vegen, typt het woord en de app laat zien waar het ligt; in een *vriendelijke partij* heeft ieder 3 tips.
+
+**Wat er nog moet:**
+- Meldingen als de app dicht is (web push). Nu zie je alleen in de app een cijfer bij *Vrienden*.
+- Speltesten met echte mensen: **5×5 of 6×6**, of "minstens één open vakje" prettig voelt, en de gelijkspelregel (bij gelijk aantal gaven de beschermde vakjes de doorslag).
+- Een knop "Dit woord zou moeten kunnen" om woorden te melden die we missen; de lijst groeit dan met wat spelers echt tegenkomen.
+- Meer woorden: de lijst is bewust streng. Komt er te vaak een woord niet door, zet het dan op `toegestaan.txt`.
 
 ## Ander spelideeën (kort, voor later)
 
