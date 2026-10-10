@@ -95,10 +95,29 @@ Maak je het vierde streepje van een bed, dan bloeit het in jouw kleur en mag je 
 - Echte strategie (hoe je de ander dwingt je een bed te gunnen), maar altijd vriendelijk van toon.
 - Bouw: eigen, kleine regels (≈100 regels) en een eigen bord. Geen bestaande engine om te hergebruiken, wel het eenvoudigst te testen.
 
+## Meer ideeën
+
+| Spel | Idee in één zin | Taal / typen | Geluk ↔ vaardigheid | Bouwen |
+|---|---|---|---|---|
+| **Samen puzzelen** | Jullie lossen één Sudoku, woordzoeker of kruiswoord *samen* op, om beurten (geen winnaar) | Als het spel zelf | geen strijd | Klein: bestaande engines + beurtsysteem |
+| **Geheugenduel** | Open om beurten twee kaartjes met bloemen en dieren; een paar mag je houden en je mag nog eens | Geen | Geheugen, beetje geluk | Klein |
+| **Domino** | Het bekende spel met stenen, eigen stenen verborgen voor de ander | Geen | Beide | Middel (verborgen stenen zitten al in `secret`) |
+| **Raadduel** | Eén verborgen woord van 5 letters; om beurten een gok, de letterkleuren zien beiden | Typen, kort | Vaardigheid | Klein (woordenlijst + engine van de zoeker) |
+| **Sudokuduel** | Eén sudoku; per beurt zet je één cijfer, een goed cijfer is een punt | Geen | Vaardigheid | Klein (engine bestaat) |
+| **Vier op een rij** | Laat om beurten een bloem vallen; vier op een rij wint | Geen | Vaardigheid | Klein |
+| **Kleurencode** | Jullie raden elk elkaars geheime rij kleuren (Mastermind); wie het eerst raadt wint | Geen | Vaardigheid | Klein |
+
+**Samen puzzelen** springt eruit. Het is geen nieuw spel maar een *manier van spelen* die bij alle bestaande spellen past, en het
+beantwoordt aan iets wat ouderen vaak willen: dingen doen met kleinkinderen en vrienden zónder wedstrijd. Elk om beurten maximaal drie
+cijfers of woorden, en een paar vaste vriendelijke berichtjes ("Mooi!", "Zullen we samen kijken?"), geen vrij typen of chatten.
+
+**Geheugenduel en Domino** zijn de beste spellen zonder taal, bekend bij iedereen en in een halve minuut uit te leggen.
+**Raadduel** is hetzelfde idee als Kruisduel in klein: elke gok helpt ook de ander.
+
 ## Wat ik zou doen
 
 1. **Kruisduel** als eerste: sluit het best aan op wat we al hebben en op wie we bedienen (puzzelaars), en laat zien dat "samen" meer is dan een scorebord.
-2. **Zoekduel** daarna: kost weinig en bedient wie niet van typen houdt.
-3. **Bloeihokjes** als derde, wanneer we een spel zonder taal willen.
+2. **Samen puzzelen** daarna: kost weinig en geldt meteen voor alle bestaande spellen.
+3. **Geheugenduel** of **Domino** als spel zonder taal, **Zoekduel** voor wie niet van typen houdt.
 
 Alle drie draaien op hetzelfde `matches`-systeem, dus elk volgend spel is vooral regels en een scherm.
