@@ -1,0 +1,21 @@
+# Woorden die in het Engels vaker voorkomen dan in het Nederlands, maar ook gewoon Nederlands zijn of geworden zijn.
+# Alles wat in het Engels veel vaker voorkomt (zie MIN_VERSCHIL in tools/make-woordtuin-lijst.mjs) wordt anders geweigerd.
+# Met de hand gekozen. Mist er een Nederlands woord dat ten onrechte als Engels wordt geweigerd? Zet het hier.
+abdomen absent acne algebra alkali alumni ammonia apex assist assists audit bacon bad baptist bark bars base bases baton been bet big bind
+binder biscuit bit bitten bloc boiler boost border bouquet bout bowler bowling box bra broker bug bulk bust buzzer cakes calorie camel camp cant
+cap caps carbon cargo carrier cash casting casual census cents charade charger charm chart charter check checks cheddar chiffon chill chorus
+claim claims coating cohort colon comic contour cookies cooler corner corners cottage coupon coupons coyotes crack crawl cricket cuisine cult
+curling data deal deals deck decks design designs desk diagram diffuse dioxide disc disk disks display docking dollars donors doses drab drive
+driver drivers drives drop drops dummy dump dumping ecstasy edict eminent episode era essays event events evident exit extract fake fascist fee
+finish fit fitting fix floppy flops folk form format front fusion gag gallen gallon gallons game games gaming gap gave genus gift gig gigs
+gimmick glycol goal goals gospel goth gourmet grim gum gym habitat hacking hacks handy hazard hit holding home host house icon idiot image
+inhaler input instant ion items jaguars jets jive job jobs jockeys jogging joint joints jumper jumpers jungles kanji level levels liaison
+marines marker markers marxist masala match matches meeting mentors methyl militia minimum modern modi monarch museums neuron neutron niche non
+novice occult output overall overlap oxide panel panels parades parking party patch penalty peptide pilot pilots piston pistons plaque plot
+pointer pool pose poses potent power prelude premium present pretzel print prints proton pub pueblo punch putting pythons quakers quilt ranches
+rating ratings ratio recent record records retina riff rite rites robe roller romance rotors routing rugby safe saline sample samples sang
+scores scuba sedans sensors septic series serpent service set sets setting shawl shift shop shops shorts show shows sikh silica single sitcom
+sketch skipper slip slips smart smash smoking soda soft speaker spikes split splits spot spots stage stages steak steaks stick sticks stimuli
+stock stocks stopper stream stretch strike strikes string strings style support surplus suspect swap swaps swing switch tab tabs tackle tackles
+tap taps tarmac temp tests thesis thinner tissue tissues toast toaster tops trainee tramp transit tremor tribal trick trigger trim trip trips
+truck tube tubes tune tutor unit units upgrade urban vector viral vocal voltage volts western wicket zip

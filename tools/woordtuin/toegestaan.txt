@@ -1,1 +1,2 @@
-# Woorden die altijd mogen, ook als de lijst of een filter ze weghaalt (een woord per token).
+# Gewone Nederlandse woorden die OpenTaal mist of die we te streng vinden (een woord per token).
+smit

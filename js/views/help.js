@@ -21,9 +21,9 @@ const QA = [
   ['Hoe werkt Woordtuin?',
     'Maak een woord van 3 tot 7 letters door over aangrenzende letters te vegen of ze aan te tikken. De vakjes van je woord worden van jou. Maakt de ander later een woord door jouw vakjes, dan pakt die ze af, behalve beschermde vakjes (alle buren in dezelfde kleur). Zijn alle vakjes gekleurd, dan wint wie de meeste heeft. Tik bij het spel op "Uitleg" voor de hele uitleg.'],
   ['Waarom wordt mijn woord in Woordtuin niet geaccepteerd?',
-    'In Woordtuin tellen alleen gewone woorden in hun gewone vorm: "roos" mag, maar "rozen" (meervoud), "liep" (verleden tijd) en "bokje" (verkleinwoord) niet. Ook namen en zeldzame woorden tellen niet. Je krijgt altijd een korte uitleg en het kost je niets.'],
+    'Alle gewone Nederlandse woorden tellen, ook meervouden, werkwoordsvormen en verkleinwoorden. Niet: namen, afkortingen, Engelse woorden en heel zeldzame woorden. Een woord van minder dan 3 letters kan niet. Je krijgt altijd een korte uitleg en een misser kost je niets.'],
   ['Waar komen de woorden van Woordtuin vandaan?',
-    ['De woordenlijst is gemaakt met de woordenlijst van ', h('a', { href: 'https://www.opentaal.org', target: '_blank', rel: 'noopener' }, 'Stichting OpenTaal'), ' (onder de BSD- en CC BY 3.0-licentie), aangevuld met de hand: gewone stamwoorden die bijna iedereen kent.']],
+    ['De woordenlijst is gemaakt met de woordenlijst van ', h('a', { href: 'https://www.opentaal.org', target: '_blank', rel: 'noopener' }, 'Stichting OpenTaal'), ' (onder de BSD- en CC BY 3.0-licentie): de officiële Nederlandse spelling. Daaruit zijn namen, Engelse woorden en woorden die niemand gebruikt weggelaten. De computer speelt alleen alledaagse woorden.']],
 ];
 
 const MET_VRIENDEN = ['Hoe speel ik Woordtuin met een vriend?',

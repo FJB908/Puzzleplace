@@ -1,7 +1,7 @@
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createApp } from '../server/index.mjs';
-import { makeRng, botMove, legalMoves, result as uitslag } from '../js/games/woordtuin/engine.js';
+import { makeRng, botMove, legalMoves, isWord, neighbors, result as uitslag } from '../js/games/woordtuin/engine.js';
 
 // Een hele partij Woordtuin tussen twee echte accounts, via de echte server en de echte spelregels.
 
@@ -43,7 +43,11 @@ test('Woordtuin tegen een vriend: een hele partij via de server', async () => {
 
   // Fouten: verkeerde speler, geen woord, niet aaneengesloten, oude versie
   assert.equal((await s.call('POST', `/api/matches/${id}/move`, { version: 1, move: { path: [0, 1, 2] } }, token[tweede])).status, 409);
-  const slecht = await s.call('POST', `/api/matches/${id}/move`, { version: 1, move: { path: [0, 1, 2] } }, token[eerste]);
+  // Een pad dat aansluit maar geen woord is
+  const letters = m0.pub.letters;
+  let geenWoord = null;
+  for (let i = 0; i < 36 && !geenWoord; i++) for (const j of neighbors(i)) for (const k of neighbors(j)) if (k !== i && !isWord(letters[i] + letters[j] + letters[k])) { geenWoord = [i, j, k]; break; }
+  const slecht = await s.call('POST', `/api/matches/${id}/move`, { version: 1, move: { path: geenWoord } }, token[eerste]);
   assert.ok([400].includes(slecht.status) && slecht.json.error.message.length > 10, JSON.stringify(slecht.json));
   assert.equal((await s.call('POST', `/api/matches/${id}/move`, { version: 1, move: { path: [0, 20, 35] } }, token[eerste])).status, 400);
   assert.equal((await s.call('POST', `/api/matches/${id}/move`, { version: 1, move: {} }, token[eerste])).status, 400);
@@ -54,7 +58,8 @@ test('Woordtuin tegen een vriend: een hele partij via de server', async () => {
     assert.ok(n++ < 80);
     const speler = match.turn;
     const state = { ...match.pub, turn: match.pub.players.indexOf(speler) + 1 };
-    const zet = botMove(state, state.turn, n % 2 ? 'extreem' : 'gemiddeld', rng);
+    // De computer speelt alleen alledaagse woorden; een mens kan ook zeldzame woorden spelen: hier nemen we dan het eerste woord dat mag
+    const zet = botMove(state, state.turn, n % 2 ? 'extreem' : 'gemiddeld', rng) || legalMoves(state, state.turn)[0];
     assert.ok(zet, 'wie aan de beurt is kan altijd iets');
     const r = await s.call('POST', `/api/matches/${id}/move`, { version: match.version, move: { path: zet.path } }, token[speler]);
     assert.equal(r.status, 200, JSON.stringify(r.json));

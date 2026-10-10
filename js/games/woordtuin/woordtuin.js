@@ -5,7 +5,7 @@
 // (hoeveel woorden hij ziet en of hij vooruitkijkt, zie NIVEAUS in engine.js).
 
 import { maakPaneel } from './paneel.js';
-import { newGame, applyMove, botMove, tip, result, counts, makeRng } from './engine.js';
+import { newGame, applyMove, botMove, geefDoor, tip, result, counts, makeRng } from './engine.js';
 import { burst, rain, motionOK } from '../../effects.js';
 
 const ME = 1, PC = 2;
@@ -53,8 +53,7 @@ export function mount(container, ctx) {
       await wacht(motionOK() ? 1100 : 400);
       if (dood) return;
       const zet = botMove(state.game, PC, niveau, makeRng(`pc|${ctx.seed}|${state.game.played.length}`));
-      if (!zet) break;
-      state.game = applyMove(state.game, PC, zet.path);
+      state.game = zet ? applyMove(state.game, PC, zet.path) : geefDoor(state.game, PC);
       bewaar(); toon(true);
     }
     if (!dood && state.game.over) await einde();

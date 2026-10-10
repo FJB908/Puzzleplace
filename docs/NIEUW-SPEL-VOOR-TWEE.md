@@ -71,41 +71,43 @@ richting, geen garantie* (wat er nog met echte spelers getest moet worden staat 
 - **Nooit wachten op een vriend.** Er is een **computertegenstander** in vier sterktes (dezelfde bot als in de metingen), zodat je altijd kunt spelen en de regels kunt leren.
 - **Een eigen stand.** Onder elke vriend: "Jullie staan 3–2." Geen ranglijst met vreemden.
 
-## De woordenlijst: alleen gewone stamwoorden
+## De woordenlijst: gewoon Nederlands, zo compleet mogelijk
 
-Een woordspel staat of valt met zijn woordenlijst. Mijn eerste lijst (de hele OpenTaal-lijst) liet het bord vol rare woorden toe ("naoogde",
-"vimmen", "ropij"), dus het is nu veel strenger:
+Een woordspel staat of valt met zijn woordenlijst, en die heb ik twee keer moeten bouwen:
 
-- **Alleen stamwoorden**: de gewone woordenboekvorm. "roos" mag, "rozen" (meervoud), "liep" (verleden tijd), "gebouwd" (deelwoord),
-  "bokje" (verkleinwoord) en "sterke" (buiging) niet. Bij een poging krijg je een vriendelijke uitleg ("rozen is een andere vorm van roos").
-- **Alleen woorden die bijna iedereen kent**: uit de OpenTaal-basislijst (Stichting OpenTaal, BSD / CC BY 3.0) vielen eerst alle zeldzame woorden af
-  (frequentie in ondertitels), daarna heb ik de ±5.500 overgebleven woorden **één voor één beoordeeld**. Eruit: meervouden, verleden tijd, deelwoorden,
-  namen, scheldwoorden, afkortingen, Engelse en andere vreemde woorden en alles wat een gemiddelde volwassene niet kent. Over: **±3.600 woorden**
-  van 3 tot 7 letters.
-- De beoordeling staat in `tools/woordtuin/blokkeerlijst.txt` (met grondwoord erbij, zo komt de uitleg tot stand) en kun je met de hand aanpassen:
-  zet een woord op de blokkeerlijst of op `toegestaan.txt` en draai `node tools/make-woordtuin-lijst.mjs <map met bronbestanden>`
-  (zie het begin van dat bestand voor de bronnen). Dat maakt `js/games/woordtuin/woorden.js` (±30 kB).
+1. **Eerste versie: te streng.** Alleen stamwoorden, met de hand uitgezocht (±3.600 woorden). Daardoor werden echte woorden geweigerd:
+   "zeg", "zegt", "hoor", "hoes", "moed", "doorn", "smit". Dat was fout: wie een gewoon Nederlands woord speelt, moet dat woord altijd kunnen spelen.
+2. **Nu: de officiële spelling, met de rommel eruit.** De lijst is gebaseerd op de OpenTaal-woordenlijst (Stichting OpenTaal, BSD / CC BY 3.0, de
+   spellingslijst met Keurmerk), met alle vormen: meervouden, verleden tijd, deelwoorden, verkleinwoorden, buigingen. Er zijn **±15.700 woorden** van
+   3 tot 7 letters.
 
-Dat maakt het bord wel *overzichtelijker*: een bord heeft nu gemiddeld ±180 mogelijke woorden (de goede borden), tegen 570 met de volledige lijst.
-Opnieuw gemeten met deze lijst (6×6, 200 partijen per rij, bots):
+Wat er wél uit gaat, en hoe:
 
-| Vraag | Uitkomst |
-|---|---|
-| Hoe lang duurt een partij? | ±9,5 zetten per speler |
-| Loont slimmer spelen? | een bot die één zet vooruitkijkt wint 67 % van een gretige bot (23 % verlies) |
-| Loont meer woorden zien? | wie 30 % van de woorden ziet wint 62 % van wie er 15 % ziet |
-| Heeft de beginner voordeel? | 53–58 % van de beslissende partijen |
-| Is een achterstand te winnen? | de leider wisselt 5 à 7 keer per partij; wie na twee derde voorstaat, wint 62–66 % |
+- **Woorden die niemand gebruikt** ("naoogde", "vimmen"): ze moeten in ondertitels en in het wordfreq-bestand (een mix van boeken, nieuws,
+  Wikipedia en web) voorkomen.
+- **Engelse woorden** (ondertitels zitten er vol mee: "airport", "choice", "device"): de computer vergelijkt hoe gewoon een woord in het Engels en in het Nederlands is
+  (`tools/make-woordtuin-zipf.py`). Echt Nederlandse woorden die vaak Engels voorkomen ("game", "bad", "box") staan op `tools/woordtuin/engels-maar-nederlands.txt`.
+- **Namen, afkortingen en beledigingen die groepen kwetsen** (`tools/woordtuin/blokkeerlijst.txt`, met de hand beoordeeld, ±760 woorden).
+- **Grove woorden** ("hoer", "kut", "kloot") zijn gewoon Nederlands, dus als een speler ze speelt tellen ze mee. Maar de computer speelt ze **nooit** en ze komen niet
+  in een tip (`tools/woordtuin/ruw.txt`). Zo zie je ze alleen als je ze zelf speelt.
 
-Dus ook met de strenge lijst blijft het spel diep, eerlijk en spannend. Een kleine versie van deze meting staat als test in
-`tests/woordtuin.test.mjs`, zodat een regelwijziging het spel nooit ongemerkt kapot maakt.
+Twee soorten woorden dus: *alles wat meetelt* (ruim, zodat een gewoon woord nooit wordt geweigerd) en *alledaags* (±5.900: vaak voorkomend en netjes;
+alleen die speelt de computer en alleen die tellen mee om te bepalen of een bord een goed bord is). Heeft de computer geen alledaags woord meer, dan slaat hij over.
+
+Wil je een woord toevoegen of weigeren? Zet het op `toegestaan.txt`, `blokkeerlijst.txt` of `ruw.txt` en draai
+`node tools/make-woordtuin-lijst.mjs <map met bronbestanden>` (de bronbestanden en hoe je ze maakt staan boven in dat bestand). Dat maakt
+`js/games/woordtuin/woorden.js` (±115 kB).
+
+Opnieuw gemeten met deze lijst (6×6, 60 partijen, bots): ±9,6 zetten per speler, ±230 alledaagse woorden (±440 in totaal) aan het begin van een
+partij, de sterkste computer wint 56–4 van de gemiddelde, en de beginner wint ongeveer de helft van de beslissende partijen. Het spel blijft dus
+diep en eerlijk. Een kleine versie van deze meting staat als test in `tests/woordtuin.test.mjs`.
 
 ## Zo is het gebouwd
 
 | Onderdeel | Waar |
 |---|---|
 | Spelregels (één module voor de app én de server) | `js/games/woordtuin/engine.js` |
-| Woordenlijst (gegenereerd) en het script dat hem maakt | `js/games/woordtuin/woorden.js`, `tools/make-woordtuin-lijst.mjs`, `tools/woordtuin/` |
+| Woordenlijst (gegenereerd) en de scripts die hem maken | `js/games/woordtuin/woorden.js`, `tools/make-woordtuin-lijst.mjs`, `tools/make-woordtuin-zipf.py`, `tools/woordtuin/` |
 | Bord (vegen, tikken, toetsenbord) en scherm (stand, woord, knoppen, typen, tip) | `js/games/woordtuin/bord.js`, `paneel.js`, `css/games/woordtuin.css` |
 | Tegen de computer (niveaus makkelijk tot extreem, "Zet terug", tips) | `js/games/woordtuin/woordtuin.js` |
 | Tegen een vriend: de server | `server/games/woordtuin.mjs` (past in het beurtsysteem van `docs/ACCOUNTS.md`) |
@@ -119,8 +121,7 @@ Hoe het voelt, zoals bedoeld: je ziet vooraf wat je woord oplevert ("Dit pakt 2 
 **Wat er nog moet:**
 - Meldingen als de app dicht is (web push). Nu zie je alleen in de app een cijfer bij *Vrienden*.
 - Speltesten met echte mensen: **5×5 of 6×6**, of "minstens één open vakje" prettig voelt, en de gelijkspelregel (bij gelijk aantal gaven de beschermde vakjes de doorslag).
-- Een knop "Dit woord zou moeten kunnen" om woorden te melden die we missen; de lijst groeit dan met wat spelers echt tegenkomen.
-- Meer woorden: de lijst is bewust streng. Komt er te vaak een woord niet door, zet het dan op `toegestaan.txt`.
+- Woorden die toch ontbreken of ten onrechte worden geweigerd: zet ze op `toegestaan.txt` of `blokkeerlijst.txt`. Een knop "Dit woord zou moeten kunnen" in het spel zou dit makkelijker maken.
 
 ## Ander spelideeën (kort, voor later)
 

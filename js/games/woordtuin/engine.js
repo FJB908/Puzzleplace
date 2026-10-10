@@ -12,7 +12,7 @@
 //   owner    per vakje 0 (open), 1 of 2 (speler 1 of 2)
 //   last     { player, word, path, took, fresh } de laatste zet, om te laten zien wat er gebeurde
 
-import { WOORDEN, AFGELEID } from './woorden.js';
+import { WOORDEN, ALLEDAAGS } from './woorden.js';
 
 export const SIZE = 6;
 export const MIN_LEN = 3;
@@ -41,11 +41,11 @@ export function makeRng(seed) {
 
 let trie = null;
 function buildTrie() {
-  trie = { kids: new Map(), end: false };
+  trie = { kids: new Map(), end: false, com: false };
   for (const w of WOORDEN) {
     let node = trie;
-    for (const ch of w) { let next = node.kids.get(ch); if (!next) node.kids.set(ch, (next = { kids: new Map(), end: false })); node = next; }
-    node.end = true;
+    for (const ch of w) { let next = node.kids.get(ch); if (!next) node.kids.set(ch, (next = { kids: new Map(), end: false, com: false })); node = next; }
+    node.end = true; node.com = ALLEDAAGS.has(w);
   }
 }
 const root = () => { if (!trie) buildTrie(); return trie; };
@@ -70,17 +70,17 @@ export function neighbors(i, size = SIZE) {
 const NEIGH = new Map();
 const nb = (i, size) => { const k = size * 100 + i; let v = NEIGH.get(k); if (!v) NEIGH.set(k, (v = neighbors(i, size))); return v; };
 
-// Alle woorden die op een bord te maken zijn, met de vakjes die ze gebruiken. onlyOpen: alleen woorden met een open vakje.
-function scan(letters, size, accept) {
+// Alle woorden die op een bord te maken zijn, met de vakjes die ze gebruiken. alledaags: alleen gewone, alledaagse woorden.
+function scan(letters, size, alledaags = false) {
   const found = [], used = new Array(letters.length).fill(false), path = [];
   const seen = new Set();
   function dfs(i, node) {
     const next = node.kids.get(letters[i]); if (!next) return;
     used[i] = true; path.push(i);
-    if (next.end && path.length >= MIN_LEN) {
+    if (next.end && (!alledaags || next.com) && path.length >= MIN_LEN) {
       const word = path.map((k) => letters[k]).join('');
       const key = word + ':' + [...path].sort((a, b) => a - b).join(',');
-      if (!seen.has(key) && (!accept || accept(word, path))) { seen.add(key); found.push({ word, path: [...path] }); }
+      if (!seen.has(key)) { seen.add(key); found.push({ word, path: [...path] }); }
     }
     if (path.length < MAX_LEN) for (const j of nb(i, size)) if (!used[j]) dfs(j, next);
     used[i] = false; path.pop();
@@ -91,7 +91,7 @@ function scan(letters, size, accept) {
 
 // Is het een goed bord? Genoeg woorden, bijna elk vakje komt in een woord voor en er zijn een paar mooie lange woorden.
 function boardQuality(letters, size) {
-  const words = scan(letters, size);
+  const words = scan(letters, size, true);          // een goed bord heeft genoeg ALLEDAAGSE woorden: die zoekt iedereen
   const covered = new Set(); for (const m of words) for (const i of m.path) covered.add(i);
   const long = new Set(words.filter((m) => m.word.length >= 6).map((m) => m.word)).size;
   return { count: words.length, coverage: covered.size / letters.length, long };
@@ -148,13 +148,7 @@ export function counts(state) {
   return n;
 }
 
-const GEEN_MEERVOUD = 'In Woordtuin telt alleen de gewone vorm van een woord, dus geen meervoud, verleden tijd of verkleinwoord.';
-export function explainUnknown(word) {
-  const stam = AFGELEID[word];
-  if (stam) return `"${word}" is een andere vorm van "${stam}". In Woordtuin telt alleen de gewone vorm: probeer "${stam}".`;
-  if (/(en|s|te|de|t|je)$/.test(word)) return `Dit woord kennen we niet. ${GEEN_MEERVOUD}`;
-  return 'Dit woord kennen we niet. Probeer een ander woord.';
-}
+export const explainUnknown = () => 'Dit woord kennen we niet. Probeer een ander woord.';
 
 // Controleert een zet en vertelt wat er zou gebeuren. Gooit een MoveError met een gewone zin als het niet mag.
 export function checkMove(state, player, path) {
@@ -167,7 +161,7 @@ export function checkMove(state, player, path) {
   if (new Set(path).size !== path.length) throw new MoveError('pad', 'Je kunt een letter maar één keer gebruiken.');
   for (let k = 1; k < path.length; k++) if (!nb(path[k - 1], size).includes(path[k])) throw new MoveError('pad', 'De letters van een woord moeten aan elkaar grenzen.');
   const word = path.map((i) => letters[i]).join('');
-  if (!isWord(word)) throw new MoveError('onbekend', explainUnknown(word));
+  if (!isWord(word)) throw new MoveError('onbekend', explainUnknown());
   if (state.played.includes(word)) throw new MoveError('gespeeld', `"${word}" is in deze partij al gespeeld. Kies een ander woord.`);
   const fresh = path.filter((i) => owner[i] === 0);
   if (!fresh.length) throw new MoveError('open', 'Elk woord moet minstens één open vakje kleuren. Zoek een woord met een wit vakje.');
@@ -178,8 +172,9 @@ export function checkMove(state, player, path) {
 
 export const hasMove = (state, player) => legalMoves(state, player, true).length > 0;
 
-// Alle toegestane zetten van een speler (met 'first' stopt het bij de eerste: handig om te weten of er nog iets kan).
-export function legalMoves(state, player, first = false) {
+// Alle toegestane zetten van een speler (met 'first' stopt het bij de eerste: handig om te weten of er nog iets kan;
+// met 'alledaags' alleen gewone, niet-grove woorden: die kiest de computer en die gebruiken de tips).
+export function legalMoves(state, player, first = false, alledaags = false) {
   const { size, letters, owner } = state;
   const out = [];
   const played = new Set(state.played);
@@ -190,7 +185,7 @@ export function legalMoves(state, player, first = false) {
     if (stop) return;
     const next = node.kids.get(letters[i]); if (!next) return;
     used[i] = true; path.push(i);
-    if (next.end && path.length >= MIN_LEN) {
+    if (next.end && (!alledaags || next.com) && path.length >= MIN_LEN) {
       const word = path.map((k) => letters[k]).join('');
       if (!played.has(word) && path.some((k) => owner[k] === 0)) {
         const key = word + ':' + [...path].sort((a, b) => a - b).join(',');
@@ -271,7 +266,7 @@ export const NIVEAUS = {
 
 export function botMove(state, player, niveau = 'gemiddeld', rng = Math.random) {
   const cfg = NIVEAUS[niveau] || NIVEAUS.gemiddeld;
-  const all = legalMoves(state, player);
+  const all = legalMoves(state, player, false, true);        // de computer speelt alleen alledaagse woorden
   if (!all.length) return null;
   let pool = cfg.ziet < 1 ? all.filter(() => rng() < cfg.ziet) : all;
   if (!pool.length) pool = [all[Math.floor(rng() * all.length)]];
@@ -294,10 +289,18 @@ export function botMove(state, player, niveau = 'gemiddeld', rng = Math.random) 
 
 // Een tip: een woord dat kan, met het beginvakje en het aantal letters ("zoek een woord van 5 letters vanaf hier").
 export function tip(state, player, rng = Math.random) {
-  const all = legalMoves(state, player);
+  const all = legalMoves(state, player, false, true);
   if (!all.length) return null;
   // Liefst een woord dat echt iets oplevert, maar niet het allerbeste: het blijft aan de speler
   const rated = all.map((m) => { const s = applyMove({ ...state, turn: player }, player, m.path); return { m, v: verschil(s, player) }; }).sort((a, b) => b.v - a.v);
   const pick = rated[Math.min(Math.floor(rated.length * 0.15), rated.length - 1) + Math.floor(rng() * Math.min(3, rated.length))] || rated[0];
   return { start: pick.m.path[0], length: pick.m.path.length };
+}
+
+// De computer heeft geen alledaags woord meer maar het spel is nog niet afgelopen (alleen hij zit vast): hij slaat over.
+export function geefDoor(state, player) {
+  const next = { ...state, passed: true, last: state.last };
+  const them = other(player);
+  if (hasMove(next, them)) next.turn = them; else { next.over = true; next.turn = null; }
+  return next;
 }

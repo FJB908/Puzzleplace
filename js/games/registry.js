@@ -89,7 +89,7 @@ const GAMES = [
       'Het bord heeft 6 bij 6 letters. Maak een woord van 3 tot 7 letters door er met je vinger over te vegen, of tik de letters na elkaar aan. De letters moeten aan elkaar grenzen, ook schuin.',
       'De vakjes van je woord worden van jou: ze bloeien open in jouw kleur. Maakt de ander later een woord door jouw vakjes, dan pakt die ze af.',
       'Behalve beschermde vakjes: een vakje met alleen buren in dezelfde kleur (links, rechts, boven en onder) kan niet worden afgepakt. Dat zie je aan de rand.',
-      'Elk woord moet minstens één open vakje kleuren en kan maar één keer gespeeld worden. Alleen gewone woorden tellen, in de gewone vorm: "roos" mag, "rozen" niet.',
+      'Elk woord moet minstens één open vakje kleuren en kan maar één keer gespeeld worden. Alle gewone Nederlandse woorden tellen, ook meervouden en werkwoordsvormen ("roos", "rozen", "zegt"). Namen, afkortingen en Engelse woorden niet.',
       'Zijn alle vakjes gekleurd? Dan wint wie de meeste bloemen heeft. Je ziet vooraf wat een woord oplevert, en met "Tip" licht een vakje op. Een woord dat niet bestaat kost niets.',
     ],
     difficulties: [

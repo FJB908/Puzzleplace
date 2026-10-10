@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { WOORDEN, AFGELEID } from '../js/games/woordtuin/woorden.js';
+import { WOORDEN, ALLEDAAGS } from '../js/games/woordtuin/woorden.js';
 import {
   SIZE, newGame, makeBoard, checkMove, applyMove, legalMoves, hasMove, isProtected, counts, result, pathsFor, botMove, tip,
-  explainUnknown, isWord, MoveError, makeRng, NIVEAUS,
+  geefDoor, isWord, MoveError, makeRng, NIVEAUS,
 } from '../js/games/woordtuin/engine.js';
 
 // Een klein bord waar we de woorden van kennen:  roos / kat / hond liggen op rij 0, 1 en 2
@@ -11,22 +11,30 @@ const LETTERS = 'roosbq' + 'katzzz' + 'hondxx' + 'zzzzzz'.repeat(3);
 const bord = (owner = new Array(36).fill(0), extra = {}) => ({ size: 6, letters: LETTERS, owner, played: [], turn: 1, over: false, passed: false, last: null, ...extra });
 const code = (fn) => { try { fn(); } catch (e) { return e instanceof MoveError ? e.code : `fout:${e.message}`; } return null; };
 
-test('woordenlijst: alleen gewone stamwoorden', () => {
-  assert.ok(WOORDEN.length > 3000 && WOORDEN.length < 6000, `aantal: ${WOORDEN.length}`);
+test('woordenlijst: gewoon Nederlands, ruim genoeg, en geen rommel', () => {
+  assert.ok(WOORDEN.length > 12000 && WOORDEN.length < 25000, `aantal: ${WOORDEN.length}`);
   assert.equal(new Set(WOORDEN).size, WOORDEN.length, 'geen dubbele woorden');
   for (const w of WOORDEN) assert.match(w, /^[a-z]{3,7}$/, w);
-  for (const w of ['roos', 'kat', 'huis', 'boom', 'tuin', 'lopen', 'werken', 'spelen', 'fiets', 'koffie', 'vriend', 'familie', 'zomer', 'water']) assert.ok(isWord(w), `${w} hoort erin`);
-  // Geen meervoud, verleden tijd, deelwoord, naam, scheldwoord, afkorting of vreemd woord
-  const weg = ['katten', 'rozen', 'huizen', 'liep', 'dacht', 'schudde', 'gebouwd', 'naoogde', 'sterke', 'bokje', 'amanda', 'rachel', 'kloten', 'aids', 'ecg', 'house', 'small', 'ready', 'battle', 'hup', 'eva', 'joe', 'baker', 'vimmen', 'ropij', 'tuftuf'];
+  // Gewone woorden in alle vormen: stam, werkwoordsvorm, verleden tijd, deelwoord, meervoud, verkleinwoord, buiging
+  const moet = ['hoer', 'zeg', 'zegt', 'zeggen', 'zei', 'doorn', 'hoes', 'moed', 'hoor', 'hoort', 'smit', 'smid', 'zegen', 'liep', 'lopen', 'gelopen', 'dacht',
+    'gebouwd', 'rozen', 'roos', 'katten', 'kat', 'koeien', 'huizen', 'huisje', 'bokje', 'sterke', 'sterk', 'mooie', 'mooi', 'goed', 'beter', 'best', 'stoel', 'tafel',
+    'fiets', 'koffie', 'vriend', 'familie', 'zomer', 'water', 'jas', 'dak', 'ijs', 'tuin', 'tuinen', 'bloemen', 'mensen', 'vrouwen', 'mannen', 'geloof', 'hoeden', 'woon',
+    'weet', 'zit', 'zat', 'ben', 'bent', 'heb', 'hebt', 'wonen', 'werkt', 'loopt', 'blijft', 'vraagt', 'schudde', 'game', 'box', 'data', 'bad', 'bij', 'ook', 'nee', 'ja'];
+  for (const w of moet.filter((x) => x.length >= 3)) assert.ok(isWord(w), `${w} hoort erin`);
+  // Geen namen, Engelse woorden, onzin of beledigingen
+  const weg = ['neger', 'nikker', 'mongool', 'amanda', 'rachel', 'choice', 'airport', 'device', 'mayor', 'naoogde', 'vimmen', 'ropij', 'tuftuf', 'joe', 'jan', 'kees',
+    'small', 'battle', 'ecg', 'tbc', 'aids', 'wow', 'brr', 'the', 'with', 'love'];
   for (const w of weg) assert.ok(!isWord(w), `${w} hoort er niet in`);
 });
 
-test('woordenlijst: elke "alleen de gewone vorm"-hint verwijst naar een woord dat wel meetelt', () => {
-  const hints = Object.entries(AFGELEID);
-  assert.ok(hints.length > 300);
-  for (const [vorm, stam] of hints) { assert.ok(isWord(stam), `${vorm} > ${stam}`); assert.ok(!isWord(vorm), `${vorm} staat zelf in de lijst`); }
-  assert.match(explainUnknown('katten'), /kat/);
-  assert.match(explainUnknown('zzzzz'), /kennen we niet/);
+test('woordenlijst: de computer speelt alleen alledaagse, nette woorden', () => {
+  assert.ok(ALLEDAAGS.size > 4000, `alledaags: ${ALLEDAAGS.size}`);
+  for (const w of ALLEDAAGS) assert.ok(isWord(w), `${w} is alledaags maar telt niet mee`);
+  for (const w of ['zeg', 'zegt', 'hoor', 'moed', 'doorn', 'tuin', 'bloemen', 'lopen', 'liep', 'water', 'kat', 'katten', 'huis']) assert.ok(ALLEDAAGS.has(w), `${w} is alledaags`);
+  // Grove woorden tellen mee als een speler ze speelt, maar de computer speelt ze nooit en ze komen niet in een tip
+  for (const w of ['hoer', 'kut', 'lul', 'kloot', 'neuken', 'pik', 'penis', 'poep', 'slet']) { assert.ok(isWord(w), `${w} telt mee`); assert.ok(!ALLEDAAGS.has(w), `${w} is niet alledaags`); }
+  // Zeldzame woorden evenmin
+  for (const w of ['hoes', 'smit']) assert.ok(isWord(w));
 });
 
 test('bord: zelfde zaad is zelfde bord, en het is speelbaar', () => {
@@ -36,7 +44,8 @@ test('bord: zelfde zaad is zelfde bord, en het is speelbaar', () => {
     const g = newGame('q' + i);
     assert.equal(g.letters.length, SIZE * SIZE);
     assert.match(g.letters, /^[a-z]+$/);
-    assert.ok(legalMoves(g, 1).length >= 100, 'genoeg woorden op het bord');
+    assert.ok(legalMoves(g, 1, false, true).length >= 100, 'genoeg alledaagse woorden op het bord');
+    assert.ok(legalMoves(g, 1).length >= legalMoves(g, 1, false, true).length, 'alles wat de computer speelt telt ook mee');
     const klinkers = [...g.letters].filter((c) => 'aeiou'.includes(c)).length;
     assert.ok(klinkers >= 10 && klinkers <= 18, `klinkers ${klinkers}`);
   }
@@ -113,8 +122,11 @@ test('een hele partij: bots spelen tot het einde, de beurt wisselt, niets gaat m
     while (!s.over) {
       assert.ok(n++ < 80, 'partij duurt te lang');
       const m = botMove(s, s.turn, s.turn === 1 ? a : b, rng);
-      assert.ok(m, 'wie aan de beurt is, heeft een zet (anders is het afgelopen)');
-      const was = s.turn; s = applyMove(s, was, m.path);
+      const was = s.turn;
+      // Heeft de computer alleen nog zeldzame woorden (die hij niet speelt), dan neemt een mens het over: hier het eerste woord dat mag
+      const zet = m || legalMoves(s, was)[0];
+      assert.ok(zet, 'wie aan de beurt is, heeft een zet (anders is het afgelopen)');
+      s = applyMove(s, was, zet.path);
       if (!s.over && !s.passed) assert.notEqual(s.turn, was, 'beurt wisselt');
       last = was;
     }
@@ -130,7 +142,7 @@ test('een hele partij: bots spelen tot het einde, de beurt wisselt, niets gaat m
 test('de computer wordt sterker per niveau', () => {
   const speel = (seed, a, b) => {
     let s = newGame(seed, { first: 1 }); const rng = makeRng('t' + seed);
-    while (!s.over) { const m = botMove(s, s.turn, s.turn === 1 ? a : b, rng); if (!m) break; s = applyMove(s, s.turn, m.path); }
+    while (!s.over) { const m = botMove(s, s.turn, s.turn === 1 ? a : b, rng) || legalMoves(s, s.turn)[0]; s = applyMove(s, s.turn, m.path); }
     return result(s).winner;
   };
   const tegen = (sterk, zwak, n = 10) => { let w = 0; for (let i = 0; i < n; i++) { const flip = i % 2; const win = speel('s' + i, flip ? zwak : sterk, flip ? sterk : zwak); if (win === (flip ? 2 : 1)) w++; } return w; };
@@ -156,7 +168,7 @@ test('balans: vooruitkijken wint van gretig spelen, en de beginner heeft geen gr
     let s = newGame('bal' + i, { first: 1 });
     while (!s.over) {
       const slimSlot = flip ? 2 : 1;
-      const m = botMove(s, s.turn, s.turn === slimSlot ? 'extreem' : 'gemiddeld', rng); if (!m) break;
+      const m = botMove(s, s.turn, s.turn === slimSlot ? 'extreem' : 'gemiddeld', rng) || legalMoves(s, s.turn)[0];
       s = applyMove(s, s.turn, m.path);
     }
     const r = result(s);
@@ -165,4 +177,20 @@ test('balans: vooruitkijken wint van gretig spelen, en de beginner heeft geen gr
   }
   assert.ok(slim > gretig * 2, `slim ${slim} gretig ${gretig}`);
   assert.ok(begon / beslist > 0.25 && begon / beslist < 0.75, `beginner won ${begon} van ${beslist}`);
+});
+
+test('de computer slaat over als hij alleen nog woorden heeft die hij niet speelt', () => {
+  // Bijna alles gekleurd; de open vakjes vormen alleen een zeldzaam woord: de computer heeft dan geen alledaags woord
+  let gevonden = 0;
+  for (const w of WOORDEN.filter((x) => !ALLEDAAGS.has(x) && x.length >= 4 && x.length <= 6).slice(0, 400)) {
+    const owner = new Array(36).fill(1).map((x, i) => (i < w.length ? 0 : x));
+    const g = { size: 6, letters: w + 'q'.repeat(36 - w.length), owner, played: [], turn: 2, over: false, passed: false, last: null };
+    if (botMove(g, 2, 'extreem', makeRng('x'))) continue;               // er zit toch een alledaags woord in
+    gevonden++;
+    assert.ok(legalMoves(g, 2).length > 0, 'een mens kan het zeldzame woord wel spelen');
+    const door = geefDoor(g, 2);
+    assert.ok(door.turn === 1 || door.over);
+    if (gevonden >= 3) break;
+  }
+  assert.ok(gevonden >= 3);
 });
