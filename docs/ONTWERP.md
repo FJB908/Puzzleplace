@@ -25,6 +25,16 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 - Taal van de interface: gewoon Nederlands, korte zinnen, geen jargon of Engelse termen.
 - Geen tijdsdruk, geen verplichte timers, geen flitsende elementen.
 
+## Sudoku: keuzes
+
+- **Niets wordt afgestraft.** Geen foutenteller, geen tijd, geen "game over". Fouten zie je alleen als je op *Controle* tikt (of als een cijfer botst met een ander in dezelfde rij, kolom of blokje). *Stap terug* kan zo vaak als je wilt.
+- **Eerlijke moeilijkheid.** Elke puzzel heeft precies één oplossing. Makkelijk en gemiddeld zijn altijd op te lossen met alleen "dit vakje kan maar één cijfer zijn"-logica, dus nooit gokken. Moeilijk heeft minder cijfers vooraf.
+- **Zelfde puzzel voor iedereen op een dag.** De puzzel van de dag komt uit de datum; elke puzzel is later opnieuw te maken uit zijn seed.
+- **Duidelijk rooster.** Rij, kolom en blokje van het gekozen vakje zijn gemarkeerd, evenals alle gelijke cijfers. Vaste cijfers zijn vetgedrukt, eigen cijfers dun en gekleurd. Fouten krijgen een hoekje en een golflijn, niet alleen een kleur.
+- **Grote bediening.** Cijfertoetsen van ruim 3,5rem; cijfers die al 9 keer staan worden gedimd. Potlood staat zichtbaar aan (gestreepte randen, knop ingekleurd, uitleg onder het rooster).
+- **Geen tikfouten door klein scherm:** het rooster is zo breed als het scherm; op een breed scherm staat de bediening naast het rooster.
+- **Toetsenbord:** pijltjes, 1-9, Backspace, N (potlood), Ctrl+Z.
+
 ## Waarom geen framework
 
 Gewoon HTML, CSS en JavaScript-modules. Geen build, geen afhankelijkheden: makkelijk te begrijpen, snel op oude telefoons en later zo in een Android-app (Capacitor) te verpakken.

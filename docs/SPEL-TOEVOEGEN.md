@@ -1,7 +1,9 @@
 # Een spel toevoegen
 
 1. Maak `js/games/mijnspel.js` en exporteer `mount(container, ctx)`. Begin met een kopie van `js/games/demo.js`; daar staat uitgelegd wat `ctx` bevat.
-2. Zet in `js/games/registry.js` bij het spel `status: 'ready'` en `load: () => import('./mijnspel.js')`.
+2. Zet in `js/games/registry.js` bij het spel `status: 'ready'` en `load: () => import('./mijnspel.js')`. Heeft het spel veel ruimte nodig (zoals een groot rooster), zet dan ook `wide: true`.
+3. Eigen stijl? Maak `css/games/mijnspel.css` en link die in `index.html` **onder** `css/styles.css` (anders winnen de basisknoppen). Gebruik de kleurvariabelen (`var(--primary)`, `var(--text)`, ...), dan werken donker en hoog contrast vanzelf.
+4. Draai `npm run build` om `dist/puzzelplaats.html` te verversen.
 
 Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren van voortgang, "Verder spelen", het felicitatiescherm en de puzzel van de dag werken vanzelf.
 
@@ -15,3 +17,6 @@ Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren va
 - Gebruik de bestaande knopstijlen (`btn`, `btn-primary`) en `rem`-eenheden; tikvlakken minimaal 3rem. Raster-vakjes mogen compacter, maar liefst niet kleiner dan 2,5rem.
 - Geen tijdsdruk, geen geluid dat vanzelf start, geen flitsende animaties.
 - Tekst in gewoon Nederlands.
+
+
+Sudoku (`js/games/sudoku/`) is het voorbeeld: `engine.js` bevat alleen logica (met tests in `tests/`), `sudoku.js` het scherm.

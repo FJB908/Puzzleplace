@@ -90,6 +90,7 @@ async function render(moveFocus = true) {
   current = result;
 
   document.title = `${result.title} · ${APP.name}`;
+  main.dataset.wide = String(!!result.wide);
   main.replaceChildren(result.node);
   updateNav(result.nav);
 

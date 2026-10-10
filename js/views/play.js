@@ -114,5 +114,5 @@ export async function playView({ id, mode }, app) {
     }
   };
 
-  return { title: game.name, nav: null, node, onShow: start, cleanup: () => cleanup && cleanup() };
+  return { title: game.name, nav: null, wide: !!game.wide, node, onShow: start, cleanup: () => cleanup && cleanup() };
 }

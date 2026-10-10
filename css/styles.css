@@ -139,6 +139,7 @@ main {
   margin: 0 auto;
   padding: 1.25rem 1.25rem 2rem;
 }
+main[data-wide="true"] { max-width: 64rem; }
 .view { display: flex; flex-direction: column; gap: 1.5rem; animation: fade .2s ease-out; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
