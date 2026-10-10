@@ -64,7 +64,7 @@ De logica staat los van HTTP in `server/api.mjs` (`createApi(...).handle(...)`),
 De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **wie aan de beurt is** en **de versie** (geen dubbele zetten). De regels zijn één module per spel in `server/games/`, aangemeld in `server/games/index.mjs`:
 
 ```js
-export const kruisduelRules = {
+export const spelRegels = {
   // Nieuwe partij. config komt van de speler (bijv. { level: 'gemiddeld' }).
   create({ players, config }) {
     return { pub: { /* wat beide spelers zien */ }, secret: { /* alleen op de server, bijv. de oplossing */ }, turn: players[0] };
@@ -81,7 +81,7 @@ export const kruisduelRules = {
 - Engines die al in `js/games/*/engine.js` staan kunnen ook op de server worden gebruikt: het zijn gewone modules.
 - Client: een scherm onder `js/views/` dat `GET /matches/:id?since=<versie>` pollt (antwoordt `unchanged` als er niets is) en zetten stuurt met `POST .../move` (`{ version, move }`). Het badgetje bij Vrienden telt al partijen waarin je aan de beurt bent.
 
-Zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor het voorstel wat we hiermee gaan bouwen.
+Zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor het voorstel wat we hiermee gaan bouwen (Woordtuin).
 
 ## Later: inloggen met Facebook of Google
 

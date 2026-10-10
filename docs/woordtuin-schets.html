@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Woordtuin: schets van het scherm</title>
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+  body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 1rem 1rem 2rem; }
+  .wt { width: min(100%, 26rem); display: grid; gap: .9rem; }
+  .wt-top { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+  .wt-top { flex-wrap: wrap; } .wt-top h1 { font-size: 1.5rem; margin: 0; white-space: nowrap; }
+  .score { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .6rem; padding: .7rem .9rem; border-radius: 1.2rem; background: var(--surface); box-shadow: var(--shadow); }
+  .side { display: flex; align-items: center; gap: .6rem; font-weight: 700; }
+  .side.them { justify-content: flex-end; text-align: right; }
+  .side b { font-size: 1.7rem; line-height: 1; }
+  .side small { display: block; font-weight: 500; color: var(--text-muted); font-size: .8rem; }
+  .dot { width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-size: 1.1rem; }
+  .me .dot { background: #e9a6bd; color: #5b1530; } .them .dot { background: #8fc3cb; color: #0f3a42; }
+  .grey { color: var(--text-muted); font-size: .85rem; text-align: center; }
+  .board { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: .3rem; padding: .5rem; border-radius: 1.3rem; background: var(--surface-2); touch-action: none; }
+  .t { position: relative; aspect-ratio: 1; border-radius: .8rem; display: grid; place-items: center; font-size: clamp(1.5rem, 8vw, 2rem); font-weight: 800; text-transform: uppercase; background: #fff; color: var(--text); box-shadow: inset 0 -2px 0 rgba(0,0,0,.06); }
+  .t sub { position: absolute; right: .3rem; bottom: .15rem; font-size: .6rem; font-weight: 700; opacity: .7; }
+  .t.me { background: #f6d3df; color: #5b1530; }
+  .t.them { background: #cfe6ea; color: #0f3a42; }
+  .t.me::before, .t.them::before { position: absolute; left: .3rem; top: .15rem; font-size: .7rem; font-weight: 400; }
+  .t.me::before { content: "✿"; } .t.them::before { content: "❧"; }
+  .t.safe { box-shadow: inset 0 0 0 3px currentColor; }
+  .t.pick { background: var(--primary); color: #fff; transform: scale(1.04); z-index: 1; }
+  .t.pick.take { background: var(--accent); }
+  .t.pick .n { position: absolute; left: .3rem; top: .1rem; font-size: .7rem; font-weight: 700; opacity: .85; }
+  .t.pick::before { content: none; }
+  svg.path { position: absolute; inset: .5rem; pointer-events: none; }
+  .word { text-align: center; }
+  .word strong { font-size: 2rem; letter-spacing: .2em; margin-right: -.2em; text-transform: uppercase; }
+  .word p { margin: .15rem 0 0; color: var(--text-muted); }
+  .row { display: grid; grid-template-columns: 1fr 2fr; gap: .7rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: .4rem 1rem; justify-content: center; color: var(--text-muted); font-size: .85rem; }
+</style></head>
+<body>
+<div class="wt">
+  <div class="wt-top"><h1>Woordtuin</h1><span class="chip">Jij bent aan de beurt</span></div>
+  <div class="score" id="score">
+    <div class="side me"><span class="dot">✿</span><div><b id="nm">0</b><small>Jij</small></div></div>
+    <div class="grey">nog<br><b id="no" style="font-size:1.2rem;color:var(--text)">0</b><br>open</div>
+    <div class="side them"><div><b id="na">0</b><small>Anna</small></div><span class="dot">❧</span></div>
+  </div>
+  <div class="board" id="board" role="grid" aria-label="Het bord, 6 bij 6 letters"></div>
+  <div class="word"><strong>ROZEN</strong><p id="uitleg"></p></div>
+  <div class="row"><button class="btn">Wis</button><button class="btn btn-primary">Klaar</button></div>
+  <div class="legend"><span>✿ jouw bloemen</span><span>❧ van Anna</span><span>▢ omrand = beschermd</span><span><a href="#" onclick="return false">Tip (2 over)</a></span></div>
+</div>
+<script>
+  // letters, eigenaar (m = jij, a = Anna, . = open); het gekozen woord ROZEN als lijst van vakjes
+  const L = "BLOEMSTUINZEKAROEDNPERZEFAMWLEET".padEnd(36, "A").split("");
+  const grid = ["BLOEMS","TUINZE","KARODN","PESZER","MWLEEF","TSAKEN"];
+  const own  = ["mmmmm.","aaaa..","m..aa.","mm..a.","m.....","....a."];
+  // ROZEN: R(2,2) O(2,3) Z(3,3) E(3,4) N(2,5)
+  const pick = [[2,2],[2,3],[3,3],[3,4],[2,5]];
+  const N = 6, el = document.getElementById("board");
+  const key = (r, c) => r + "," + c, pk = new Map(pick.map(([r, c], i) => [key(r, c), i + 1]));
+  const safe = (r, c) => { const o = own[r][c]; if (o === ".") return false; for (const [a, b] of [[-1,0],[1,0],[0,-1],[0,1]]) { const x = r + a, y = c + b; if (x >= 0 && y >= 0 && x < N && y < N && own[x][y] !== o) return false; } return true; };
+  for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) {
+    const d = document.createElement("div"); d.className = "t"; d.setAttribute("role", "gridcell");
+    const o = own[r][c]; if (o === "m") d.classList.add("me"); if (o === "a") d.classList.add("them"); if (safe(r, c)) d.classList.add("safe");
+    if (pk.has(key(r, c))) { d.classList.add("pick"); if (o === "a" && !safe(r, c)) d.classList.add("take"); d.innerHTML = '<span class="n">' + pk.get(key(r, c)) + "</span>"; }
+    d.append(grid[r][c]); el.append(d);
+  }
+  const cnt = { m: 0, a: 0, '.': 0 }; own.join('').split('').forEach((x) => cnt[x]++);
+  document.getElementById('nm').textContent = cnt.m; document.getElementById('na').textContent = cnt.a; document.getElementById('no').textContent = cnt['.'];
+  document.getElementById('score').setAttribute('aria-label', `Stand: jij ${cnt.m} bloemen, Anna ${cnt.a}, nog ${cnt['.']} open`);
+  const taken = pick.filter(([r, c]) => own[r][c] === 'a' && !safe(r, c)).length, fresh = pick.filter(([r, c]) => own[r][c] === '.').length;
+  document.getElementById('uitleg').innerHTML = `Mooi woord. Dit pakt <b>${taken}</b> vakjes van Anna en kleurt <b>${fresh}</b> nieuwe.`;
+  // lijn door het gekozen woord
+  const tiles = el.querySelectorAll(".t");
+  requestAnimationFrame(() => {
+    const b = el.getBoundingClientRect(), pts = pick.map(([r, c]) => { const t = tiles[r * N + c].getBoundingClientRect(); return [t.left - b.left + t.width / 2, t.top - b.top + t.height / 2]; });
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("class", "path"); svg.setAttribute("viewBox", `0 0 ${b.width} ${b.height}`); svg.style.inset = "0"; svg.setAttribute("width", b.width); svg.setAttribute("height", b.height);
+    svg.innerHTML = `<polyline points="${pts.map(p => p.join(",")).join(" ")}" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+    el.append(svg);
+  });
+</script>
+</body></html>
