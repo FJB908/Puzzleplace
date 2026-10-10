@@ -23,11 +23,20 @@ losse bestand hierboven of de webserver.)
 
 ```bash
 npm install        # eenmalig, alleen nodig voor de build
-npm test           # test de engines van alle spellen en de versiering
+npm test           # test de engines van alle spellen, de versiering, de server en het samenvoegen van voortgang
 npm run build      # maakt dist/puzzelplaats.html opnieuw (doe dit na elke wijziging)
 node tools/make-blossoms.mjs   # tekent de bloesemtakken opnieuw (seeds staan bovenin het bestand)
 PREVIEW=/tmp/tak node tools/make-blossoms.mjs boog   # 6 varianten van één ontwerp om uit te kiezen
 ```
+
+## Met accounts en vrienden (optioneel)
+
+```bash
+npm run server     # http://127.0.0.1:8000, dient de app én de API; gegevens in server/data/
+```
+
+Met de server erbij verschijnt *Vrienden* in het menu en kun je een account maken om je voortgang op meer apparaten te hebben.
+Zonder server werkt alles als eerst, op het apparaat zelf. Uitleg, instellingen en veiligheid: [`docs/ACCOUNTS.md`](docs/ACCOUNTS.md).
 
 ## Wat zit erin
 
@@ -43,8 +52,8 @@ PREVIEW=/tmp/tak node tools/make-blossoms.mjs boog   # 6 varianten van één ont
 | Stijl, thema's, tekstgroottes | `css/styles.css` |
 | Kersenbloesem-versiering (7 ontwerpen, gegenereerd) | `js/decor/`, `assets/`, `tools/make-blossoms.mjs` |
 | Effecten (vallende blaadjes, rimpel, bloesemexplosie) | `js/effects.js` |
-| Toekomstige functies (accounts, vrienden, Facebook) | `js/config.js` + `js/services/` |
+| Accounts, vrienden, voortgang op meer apparaten | `js/services/`, `js/views/account.js`, `js/views/friends.js`, `server/` (zie [`docs/ACCOUNTS.md`](docs/ACCOUNTS.md)) |
 | Installeerbaar op het beginscherm + offline | `manifest.webmanifest`, `sw.js` |
 
-Meer uitleg: [`docs/ONTWERP.md`](docs/ONTWERP.md) (waarom het zo is opgezet) en
-[`docs/SPEL-TOEVOEGEN.md`](docs/SPEL-TOEVOEGEN.md).
+Meer uitleg: [`docs/ONTWERP.md`](docs/ONTWERP.md) (waarom het zo is opgezet), [`docs/SPEL-TOEVOEGEN.md`](docs/SPEL-TOEVOEGEN.md),
+[`docs/ACCOUNTS.md`](docs/ACCOUNTS.md) (server, accounts, vrienden) en [`docs/NIEUW-SPEL-VOOR-TWEE.md`](docs/NIEUW-SPEL-VOOR-TWEE.md) (voorstel voor een spel met beurten).

@@ -1,6 +1,6 @@
 // Offline-ondersteuning: eerst het netwerk (altijd de nieuwste versie), anders
 // de laatst bewaarde kopie. Verhoog VERSION bij een release om oude kopieën op te ruimen.
-const VERSION = 'puzzelplaats-v1';
+const VERSION = 'puzzelplaats-v2';
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -14,7 +14,8 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  const url = new URL(req.url);
+  if (req.method !== 'GET' || url.origin !== location.origin || url.pathname.startsWith('/api/')) return;   // API-antwoorden (vrienden, account) nooit bewaren
   event.respondWith(
     fetch(req)
       .then((res) => {

@@ -9,6 +9,9 @@ import { mountArt } from '../decor.js';
 import * as store from '../store.js';
 import { games, getGameInfo, dailyGame, isReady } from '../games/registry.js';
 import { gameArt } from '../games/art.js';
+import * as auth from '../services/auth.js';
+import * as social from '../services/social.js';
+import { avatar } from '../ui.js';
 
 function greeting() {
   const hour = new Date().getHours();
@@ -98,6 +101,18 @@ function dailyCard() {
   );
 }
 
+// Iemand wil je als vriend toevoegen: dat zie je meteen op Start
+function friendNotice() {
+  const user = auth.getUser();
+  const n = user ? auth.getCounts().incoming : 0;
+  if (!n) return null;
+  const cached = social.cached().incoming;
+  const first = cached[0];
+  return h('a', { class: 'notice-link', href: '#/vrienden' },
+    first && n === 1 ? avatar(first.name, first.id) : h('span', { class: 'bubble' }, icon('friends')),
+    h('span', {}, h('strong', {}, n === 1 ? (first ? `${first.name} wil je vriend worden` : 'Iemand wil je vriend worden') : `${n} mensen willen je vriend worden`), h('span', { class: 'muted' }, 'Tik om te antwoorden')));
+}
+
 function tile(game) {
   const ready = isReady(game);
   const rec = store.getGame(game.id);
@@ -118,6 +133,7 @@ export function homeView(_params, app) {
       h('p', {}, 'Wat wil je vandaag doen?'),
     ),
     store.getSettings().welcomeDone ? null : welcomeCard(app),
+    friendNotice(),
     mainCard(),
     dailyCard(),
     h('section', { 'aria-labelledby': 'tiles-title', class: 'stack' },

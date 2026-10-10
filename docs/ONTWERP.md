@@ -79,19 +79,24 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 
 Gewoon HTML, CSS en JavaScript-modules. Geen build, geen afhankelijkheden: makkelijk te begrijpen, snel op oude telefoons en later zo in een Android-app (Capacitor) te verpakken.
 
-## Toekomstige functies
+## Accounts en vrienden
 
-Alles staat klaar achter schakelaars in `js/config.js` (`FEATURES`). Staan ze uit, dan ziet de speler er niets van.
+Er is een kleine eigen server (`server/`, zonder pakketten) die ook de app dient. Zonder die server zijn er geen accounts en geen Vrienden-menu: de app merkt dat zelf (`/api/ping`) en doet dan alles op het apparaat. Alle uitleg staat in [`ACCOUNTS.md`](ACCOUNTS.md); de belangrijkste keuzes:
 
-| Functie | Wat er al ligt | Wat er nog moet |
-|---|---|---|
-| Account / Facebook-login | `js/services/auth.js` (contract), scherm `#/account`, rij in Instellingen | Provider kiezen (bijv. Firebase Auth) en `signIn` invullen |
-| Voortgang op meer apparaten | `js/store.js` heeft één duidelijke datastructuur | `js/services/sync.js` die die structuur met de server samenvoegt |
-| Vrienden | `js/services/social.js` (contract), scherm `#/vrienden`, menu-item | Backend + uitnodigen via e-mail of deelknop |
-| Delen van resultaten | `shareResult` in `social.js` | Deelknop op het felicitatiescherm |
+| Keuze | Waarom |
+|---|---|
+| Inloggen met e-mailadres + wachtwoord, **herstelcode** in plaats van herstel-e-mail | Er is geen mailserver nodig, en een herstelcode op papier is voor veel ouderen vertrouwder dan een mail die je moet vinden |
+| Wachtwoord laten voorstellen als drie woorden | Langer en makkelijker te onthouden dan wat mensen zelf kiezen |
+| Vrienden alleen toevoegen met een **code of link** | Geen zoeken op naam, dus geen vreemden en geen lastigvallen |
+| Vrienden zien alleen je voornaam en de dag van laatste bezoek | Zo min mogelijk persoonlijke gegevens |
+| Voortgang samenvoegen in plaats van overschrijven (`js/shared/merge.js`) | Wie op twee apparaten speelt, verliest nooit iets |
+| Instellingen horen bij het apparaat | Je telefoon heeft andere tekstgrootte nodig dan je tablet |
+| Spelen met beurten via één algemeen `matches`-systeem | Elk volgend spel voor twee is alleen regels en een scherm, zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) |
+
+Nog niet gedaan: inloggen met Facebook of Google (zie onderaan `ACCOUNTS.md`), meldingen als de app dicht is, delen van resultaten.
 
 Bewust niet gepland: openbare ranglijsten of chat met vreemden.
 
 ## Privacy
 
-Nu wordt er niets verstuurd: alles blijft in `localStorage` op het apparaat. Zodra accounts bestaan, hoort er een privacyverklaring bij.
+Zonder account wordt er niets verstuurd: alles blijft in `localStorage` op het apparaat. Met een account bewaart de server voornaam, e-mailadres (alleen om in te loggen), vriendschappen, voortgang en partijen; verwijderen wist alles. Zet er een privacyverklaring bij voordat je live gaat (details in `ACCOUNTS.md`).

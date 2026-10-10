@@ -72,6 +72,16 @@ export const setLastGame = (id, slot) => { data.lastGame = { id, slot }; persist
 // Een bewaard spel dat echt is begonnen (er is voortgang).
 export const hasProgress = (id, slot = 'normal') => getGame(id).slots[slot]?.state != null;
 
+// Voor synchronisatie met andere apparaten: alleen je voortgang en naam, nooit instellingen
+export const exportSync = () => JSON.parse(JSON.stringify({ profile: { name: data.profile.name }, games: data.games, lastGame: data.lastGame }));
+
+export function importSync(snapshot) {
+  data.profile.name = snapshot.profile?.name || data.profile.name;
+  data.games = snapshot.games || {};
+  data.lastGame = snapshot.lastGame ?? null;
+  persist();
+}
+
 export function resetAll() {
   data = defaults();
   persist();

@@ -4,6 +4,7 @@
 import { h, icon, confirmDialog, announce } from '../ui.js';
 import * as store from '../store.js';
 import { FEATURES } from '../config.js';
+import * as auth from '../services/auth.js';
 
 function radioGroup({ legend, hint, name, options, value, onChange }) {
   return h('fieldset', {},
@@ -84,7 +85,7 @@ export function settingsView(_params, app) {
     FEATURES.accounts
       ? h('a', { class: 'card card-link', href: '#/account' },
           h('span', { class: 'tile' }, icon('user')),
-          h('span', {}, h('span', { class: 'title' }, 'Account'), h('br'), h('span', { class: 'desc' }, 'Inloggen en je spellen op meer apparaten')),
+          h('span', {}, h('span', { class: 'title' }, 'Account'), h('br'), h('span', { class: 'desc' }, auth.getUser() ? `Ingelogd als ${auth.getUser().name}` : 'Inloggen of een account maken')),
           icon('chevron'))
       : null,
 

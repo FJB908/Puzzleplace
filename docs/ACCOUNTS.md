@@ -1,0 +1,88 @@
+# Accounts, vrienden en spelen met beurten
+
+Dit document legt uit hoe de server werkt, hoe je hem start en hoe je er een spel voor twee spelers aan hangt.
+De app werkt ook **zonder** server: dan zie je geen account en geen Vrienden-menu en blijft alles op het apparaat.
+
+## Starten
+
+```bash
+npm run server                # http://127.0.0.1:8000 (de app én de API)
+PORT=3000 HOST=0.0.0.0 DATA_DIR=/var/lib/puzzelplaats node server/index.mjs
+```
+
+Geen pakketten nodig (alleen Node 20+). De server dient ook de app zelf, dus `http://localhost:8000` is alles.
+
+| Variabele | Betekenis |
+|---|---|
+| `PORT`, `HOST` | Waar hij luistert (standaard 127.0.0.1:8000; zet `HOST=0.0.0.0` om van buiten bereikbaar te zijn) |
+| `DATA_DIR` | Waar `db.json` komt (standaard `server/data/`, staat in `.gitignore`) |
+| `TRUST_PROXY=1` | Zet dit aan als er een proxy voor staat (nginx, Caddy, ...) die `X-Forwarded-For` meegeeft. Anders tellen de limieten per proxy in plaats van per bezoeker. |
+| `ALLOW_ORIGIN` | Alleen nodig als de app op een ánder adres staat dan de server (bijv. `https://mijnapp.nl`). Zet dan hetzelfde adres in `API_BASE` in `js/config.js`. |
+
+**Draai hem altijd achter HTTPS** (Caddy of nginx met een certificaat). Wachtwoorden en sleutels gaan anders onbeschermd over de lijn.
+
+**Back-up:** kopieer `db.json` (veilig tijdens draaien: er wordt atomisch naar geschreven). **Schaal:** één bestand is prima tot enkele duizenden accounts. Daarboven vervang je `server/db.mjs` door een echte database; de rest praat alleen met `db.data` en `db.save()`.
+
+## Hoe aanmelden werkt (en waarom)
+
+- **Inloggen met e-mailadres + wachtwoord.** Er wordt geen e-mail verstuurd (er is geen mailserver). Het adres is alleen een unieke inlognaam en wordt aan niemand getoond.
+- **Herstelcode** (`XXXX-XXXX-XXXX`) voor wie het wachtwoord vergeet. Die krijg je bij het aanmelden, op een scherm waar je hem kunt kopiëren of printen. Hij is op de server alleen als hash bekend, wordt na gebruik vervangen en alle andere apparaten worden dan uitgelogd. Onder *Account* kun je een nieuwe laten maken.
+- **Wachtwoord:** minstens 8 tekens; de app kan drie woorden voorstellen ("brug-lente-kaars"), makkelijker te onthouden en langer dan wat de meeste mensen zelf bedenken.
+- Wachtwoorden en herstelcodes: scrypt met eigen zout. Sleutels: 32 willekeurige bytes, alleen als sha256 opgeslagen, 90 dagen geldig vanaf laatste gebruik.
+- Limieten (per adres en per e-mailadres) tegen raden: aanmelden 10/uur, inloggen 30 per 15 min (8 per e-mailadres), herstellen 10/uur, code opzoeken 30/uur.
+
+## Vrienden
+
+Je voegt iemand alleen toe met **zijn of haar vriendencode** (`XXXX-XXXX`, zonder I, L, O, 0 en 1 zodat niets verward wordt) of via een link (`#/vrienden/toevoegen/CODE`). Er is geen zoeken op naam, dus geen vreemden. Een verzoek moet worden geaccepteerd; sturen twee mensen elkaar tegelijk een verzoek, dan zijn ze meteen vrienden. De code is te vernieuwen. Een vriend ziet alleen je voornaam en de dag dat je laatst online was, nooit je e-mailadres of code. Maximaal 200 vrienden en 25 openstaande verzoeken.
+
+## Voortgang op meer apparaten
+
+`js/services/sync.js` voegt de lokale voortgang samen met die op de server (`GET/PUT /api/sync`, met `baseVersion`; bij een gelijktijdige wijziging krijgt de client de nieuwste stand terug en voegt opnieuw samen). De samenvoeglogica staat in `js/shared/merge.js` (hoogste aantal gespeeld, nieuwste puzzel van de dag, nieuwste lopende puzzel per spel) en heeft eigen tests. Instellingen (tekstgrootte enz.) horen bij het apparaat en worden niet gesynchroniseerd.
+
+## Privacy (AVG)
+
+Wat de server bewaart: voornaam, e-mailadres, gehashte wachtwoorden/codes, vriendschappen, voortgang, partijen. *Account verwijderen* wist alles direct (in partijen blijft alleen "verwijderd" staan, voor de tegenspeler). Er zijn geen cookies, geen advertenties en geen derden. Zet er een privacyverklaring bij voordat je live gaat.
+
+## API in het kort
+
+Alles onder `/api`, JSON, sleutel als `Authorization: Bearer ...`. Fouten: `{ error: { code, message } }`, `message` is Nederlands en direct te tonen.
+
+| | |
+|---|---|
+| `POST /signup`, `/login`, `/recover`, `/logout` | Aanmelden, inloggen, nieuw wachtwoord met herstelcode |
+| `GET/PATCH/DELETE /me` | Jezelf bekijken (met `counts`: `incoming`, `yourTurn`), voornaam wijzigen, account verwijderen |
+| `POST /me/password`, `/me/code`, `/me/recovery` | Wachtwoord wijzigen, nieuwe vriendencode, nieuwe herstelcode |
+| `GET /users/by-code/:code` | Wie hoort bij deze code? (alleen de naam) |
+| `GET /friends`, `POST /friends/request`, `POST /friends/:id/accept` / `decline`, `DELETE /friends/:id` | Vrienden |
+| `GET/PUT /sync` | Voortgang |
+| `POST /matches`, `GET /matches`, `GET /matches/:id?since=N`, `POST /matches/:id/move`, `POST /matches/:id/resign` | Partijen met beurten |
+
+De logica staat los van HTTP in `server/api.mjs` (`createApi(...).handle(...)`), zodat de tests (`tests/server.test.mjs`) hem zonder netwerk kunnen aanroepen.
+
+## Een spel voor twee spelers toevoegen
+
+De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **wie aan de beurt is** en **de versie** (geen dubbele zetten). De regels zijn één module per spel in `server/games/`, aangemeld in `server/games/index.mjs`:
+
+```js
+export const kruisduelRules = {
+  // Nieuwe partij. config komt van de speler (bijv. { level: 'gemiddeld' }).
+  create({ players, config }) {
+    return { pub: { /* wat beide spelers zien */ }, secret: { /* alleen op de server, bijv. de oplossing */ }, turn: players[0] };
+  },
+  // Eén zet. Ongeldig? gooi new RuleError('Nederlandse uitleg'). Dit bericht ziet de speler.
+  apply({ pub, secret, move, player, config }) {
+    return { pub: nieuweStand, secret, turn: andereSpeler /* of null = afgelopen */, result: { winner, scores } };
+  },
+};
+```
+
+- `secret` wordt **nooit** naar clients gestuurd. Oplossingen, geheime letters en kaartstapels horen daar.
+- De regels moeten een pure functie zijn (zelfde invoer, zelfde uitkomst); willekeur komt uit een zaad dat in `secret` staat. Dan zijn ze eenvoudig te testen.
+- Engines die al in `js/games/*/engine.js` staan kunnen ook op de server worden gebruikt: het zijn gewone modules.
+- Client: een scherm onder `js/views/` dat `GET /matches/:id?since=<versie>` pollt (antwoordt `unchanged` als er niets is) en zetten stuurt met `POST .../move` (`{ version, move }`). Het badgetje bij Vrienden telt al partijen waarin je aan de beurt bent.
+
+Zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor het voorstel wat we hiermee gaan bouwen.
+
+## Later: inloggen met Facebook of Google
+
+`auth.js` is het enige stuk dat de app aanroept (`signUp`, `signIn`, ...). Een extra aanbieder is: een route op de server die een Facebook/Google-token controleert en een eigen sleutel teruggeeft, plus een knop op het inlogscherm. De rest (vrienden, voortgang, partijen) verandert niet.

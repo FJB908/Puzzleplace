@@ -122,3 +122,36 @@ export function whenText(timestamp) {
   if (diff === 1) return 'gisteren';
   return `${diff} dagen geleden`;
 }
+
+// ----- Mensen: een ronde letter in een zachte kleur (geen foto's) -----
+export function avatar(name, id = name) {
+  let n = 0;
+  for (const ch of String(id)) n = (n * 31 + ch.charCodeAt(0)) >>> 0;
+  return h('span', { class: `avatar c${n % 6}`, 'aria-hidden': 'true' }, [...String(name).trim()][0]?.toUpperCase() || '?');
+}
+
+// ----- Kopiëren en delen -----
+export async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch {
+    const ta = h('textarea', { 'aria-hidden': 'true', style: 'position:fixed;opacity:0;left:-9999px' }, text);
+    document.body.append(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch { /* niet gelukt */ }
+    ta.remove(); return ok;
+  }
+}
+
+export async function shareText({ title, text, url }) {
+  if (navigator.share) { try { await navigator.share({ title, text, url }); return 'gedeeld'; } catch (e) { if (e.name === 'AbortError') return 'gestopt'; } }
+  return (await copyText(url ? `${text} ${url}` : text)) ? 'gekopieerd' : 'mislukt';
+}
+
+// "vandaag", "gisteren", "3 dagen geleden"
+export function dayText(isoDay) {
+  if (!isoDay) return '';
+  const diff = Math.round((new Date(new Date().toDateString()) - new Date(`${isoDay}T00:00:00`)) / 86400000);
+  if (diff <= 0) return 'vandaag';
+  if (diff === 1) return 'gisteren';
+  if (diff < 14) return `${diff} dagen geleden`;
+  return new Date(`${isoDay}T00:00:00`).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' });
+}

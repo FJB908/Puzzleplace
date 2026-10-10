@@ -20,16 +20,21 @@ import { gameDetailView } from './views/gameDetail.js';
 import { playView } from './views/play.js';
 import { settingsView } from './views/settings.js';
 import { helpView } from './views/help.js';
-import { accountView, friendsView } from './views/future.js';
+import { accountView } from './views/account.js';
+import { friendsView } from './views/friends.js';
+import { detect, hasBackend } from './services/backend.js';
+import * as auth from './services/auth.js';
+import * as social from './services/social.js';
+import * as sync from './services/sync.js';
 import { notFoundView } from './views/notFound.js';
 
 // ----- Menu: één lijst; nieuwe onderdelen komen hier bij -----
-const NAV = [
+const NAV_ALL = [
   { id: 'home', label: 'Start', href: '#/', icon: 'home' },
   { id: 'games', label: 'Spellen', href: '#/spellen', icon: 'games' },
   { id: 'friends', label: 'Vrienden', href: '#/vrienden', icon: 'friends', feature: 'friends' },
   { id: 'settings', label: 'Instellingen', href: '#/instellingen', icon: 'settings' },
-].filter((item) => !item.feature || FEATURES[item.feature]);
+];
 
 // [patroon, view, parameters uit het patroon]
 const ROUTES = [
@@ -39,8 +44,9 @@ const ROUTES = [
   [/^\/spel\/([\w-]+)\/speel(?:\/(dagelijks))?$/, playView, (m) => ({ id: m[1], mode: m[2] })],
   [/^\/instellingen$/, settingsView, () => ({})],
   [/^\/hulp$/, helpView, () => ({})],
-  [/^\/account$/, accountView, () => ({})],
+  [/^\/account(?:\/(\w+))?$/, accountView, (m) => ({ sub: m[1] })],
   [/^\/vrienden$/, friendsView, () => ({})],
+  [/^\/vrienden\/toevoegen\/([A-Za-z0-9-]{4,20})$/, friendsView, (m) => ({ code: m[1] })],
 ];
 
 // ----- Instellingen op de pagina toepassen -----
@@ -59,10 +65,29 @@ darkQuery.addEventListener?.('change', applySettings);
 
 // ----- Menu tekenen -----
 const navEl = document.getElementById('nav');
-navEl.style.setProperty('--nav-count', NAV.length);
-navEl.append(...NAV.map((item) => h('a', { href: item.href, 'data-nav': item.id }, icon(item.icon), item.label)));
+let activeNav = null;
+
+// Het menu bouwen: "Vrienden" komt erbij zodra de app een server vindt
+function buildNav() {
+  const items = NAV_ALL.filter((item) => !item.feature || FEATURES[item.feature]);
+  navEl.style.setProperty('--nav-count', items.length);
+  navEl.replaceChildren(...items.map((item) => h('a', { href: item.href, 'data-nav': item.id }, icon(item.icon), item.label)));
+  updateNav(activeNav);
+  updateBadge();
+}
+
+// Een bolletje met een getal op "Vrienden": nieuwe verzoeken (en later: jij bent aan de beurt)
+function updateBadge() {
+  const link = navEl.querySelector('[data-nav="friends"]');
+  if (!link) return;
+  const { incoming, yourTurn } = auth.getCounts();
+  const n = auth.getUser() ? incoming + yourTurn : 0;
+  if (n > 0) { link.dataset.badge = String(n); link.setAttribute('aria-label', `Vrienden, ${n} nieuw`); }
+  else { delete link.dataset.badge; link.removeAttribute('aria-label'); }
+}
 
 function updateNav(active) {
+  activeNav = active;
   navEl.hidden = active == null; // tijdens het spelen geen menu
   if (!navEl.hidden) document.documentElement.style.setProperty('--nav-h', `${navEl.offsetHeight}px`);
   navEl.querySelectorAll('a').forEach((a) => {
@@ -129,7 +154,28 @@ new ResizeObserver(() => { if (!navEl.hidden) document.documentElement.style.set
 initAmbient();
 initRipple();
 window.addEventListener('hashchange', () => render(true));
+buildNav();
 render(true);
+
+// Accounts en vrienden: alleen als er een server is. Geen server? Dan merkt niemand er iets van.
+(async () => {
+  if (!(await detect())) return;
+  buildNav();
+  let lastIncoming = 0, lastUser = null;
+  auth.subscribe(({ user, counts }) => {
+    updateBadge();
+    const onHome = (location.hash.replace(/^#/, '') || '/') === '/';
+    if (onHome && (user?.id !== lastUser || counts.incoming !== lastIncoming)) render(false);
+    lastUser = user?.id; lastIncoming = counts.incoming;
+  });
+  await auth.restore();
+  updateBadge();
+  social.startPolling();
+  sync.init();
+  // Schermen die door de server iets nieuws kunnen tonen, opnieuw tekenen (Start gebeurt via de melding hierboven)
+  const route = location.hash.replace(/^#/, '') || '/';
+  if (/^\/(account|vrienden|instellingen)(\/|$)/.test(route)) render(false);
+})();
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('sw.js').catch(() => { /* offline-modus is een extraatje */ });
