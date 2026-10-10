@@ -11,6 +11,8 @@
 
 import { h, icon, announce } from './ui.js';
 import { FEATURES, APP } from './config.js';
+import { setDecor } from './decor.js';
+import { initAmbient, initRipple, motionOK } from './effects.js';
 import * as store from './store.js';
 import { homeView } from './views/home.js';
 import { gamesView } from './views/games.js';
@@ -87,26 +89,43 @@ async function render(moveFocus = true) {
   if (!result && !ROUTES.some(([pattern]) => pattern.test(path))) result = notFoundView();
   if (mine !== token || result == null) return; // ondertussen ergens anders heen of doorgestuurd
 
-  current?.cleanup?.();
-  current = result;
+  const swap = () => {
+    current?.cleanup?.();
+    current = result;
 
-  document.title = `${result.title} · ${APP.name}`;
-  main.dataset.wide = String(!!result.wide);
-  document.body.dataset.view = result.view || 'page';
-  main.replaceChildren(result.node);
-  updateNav(result.nav);
+    document.title = `${result.title} · ${APP.name}`;
+    main.dataset.wide = String(!!result.wide);
+    document.body.dataset.view = result.view || 'page';
+    if (!moveFocus) result.node.classList.add('view--static');       // alleen verversen: niet opnieuw laten inschuiven
+    [...result.node.children].forEach((child, i) => child.style.setProperty('--i', i));
+    main.replaceChildren(result.node);
+    updateNav(result.nav);
 
-  result.onShow?.();
+    result.onShow?.();
 
-  if (moveFocus) {
-    window.scrollTo(0, 0);
-    const heading = main.querySelector('h1');
-    (heading || main).focus({ preventScroll: true });
-    announce(result.title);
-  }
+    if (moveFocus) {
+      window.scrollTo(0, 0);
+      const heading = main.querySelector('h1');
+      (heading || main).focus({ preventScroll: true });
+      announce(result.title);
+    }
+  };
+
+  // Zachte overgang tussen pagina's (waar de browser dat kan), anders direct wisselen.
+  if (moveFocus && motionOK() && document.startViewTransition && current) {
+    try { await document.startViewTransition(swap).updateCallbackDone; } catch { /* al gewisseld of onderbroken */ }
+  } else swap();
+
+  const s = store.getSettings();
+  setDecor(s.decor !== false && s.contrast !== 'high' ? result.decor ?? null : null);
 }
 
+// Weinig geheugen of processorkernen: wat rustiger op de achtergrond
+if ((navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2)) document.documentElement.dataset.lite = 'true';
+
 applySettings();
+initAmbient();
+initRipple();
 window.addEventListener('hashchange', () => render(true));
 render(true);
 

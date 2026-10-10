@@ -104,3 +104,43 @@ html[data-textsize="xlarge"] .action-btn { font-size: .65rem; }
   .sudoku-main { flex: 1 1 0; max-width: min(36rem, max(22rem, calc(100dvh - 17rem))); }
   .sudoku-controls { flex: none; width: 22rem; padding-top: 3.25rem; }
 }
+
+/* ===== Beweging en effecten ===== */
+.cell { transition: background-color .14s ease, box-shadow .14s ease; }
+.cell:active { background-color: var(--primary-soft); }
+
+/* Goed cijfer: het cijfer "plopt" in het vakje */
+.cell.pop .digit { animation: digit-pop .36s cubic-bezier(.2, 1.7, .4, 1) both; }
+@keyframes digit-pop { from { transform: scale(.3); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Fout cijfer: het cijfer schudt even */
+.cell.nope .digit { animation: digit-nope .5s ease both; }
+@keyframes digit-nope { 0%, 100% { transform: none; } 18% { transform: translateX(-16%) rotate(-8deg); } 36% { transform: translateX(14%) rotate(7deg); } 54% { transform: translateX(-9%) rotate(-4deg); } 72% { transform: translateX(5%); } }
+
+/* Rij, kolom of blokje klaar: een zachte golf van licht */
+.cell.wave { z-index: 1; animation: wave-pop .85s ease both; animation-delay: var(--wd, 0ms); }
+.cell.wave::before {
+  content: ""; position: absolute; inset: -30%; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle, var(--blush) 0%, color-mix(in srgb, var(--accent) 38%, transparent) 38%, transparent 70%);
+  animation: wave-glow .85s ease both; animation-delay: var(--wd, 0ms);
+}
+@keyframes wave-pop { 0%, 100% { transform: none; } 40% { transform: scale(1.14); } }
+@keyframes wave-glow { 0%, 100% { opacity: 0; } 40% { opacity: .95; } }
+
+/* Een leven valt: de bloesem wiebelt, krimpt en wordt grijs; de blaadjes vliegen weg (js/effects.js) */
+.life { transition: filter .5s ease; }
+.life.losing { animation: life-lose .9s ease forwards; }
+@keyframes life-lose {
+  0%   { transform: none; filter: none; }
+  22%  { transform: scale(1.4) rotate(-16deg); filter: brightness(1.1); }
+  55%  { transform: scale(.7) rotate(12deg); opacity: .8; }
+  100% { transform: none; filter: grayscale(1) opacity(.22); opacity: 1; }
+}
+
+/* Gewonnen: het rooster licht even op */
+.sudoku.won .sudoku-board { box-shadow: 0 0 0 3px var(--accent), 0 0 44px color-mix(in srgb, var(--accent) 55%, transparent); transition: box-shadow .6s ease; }
+
+/* Cijfertoetsen: duidelijke indruk bij het tikken */
+.pad-btn { transition: transform .1s ease, background-color .15s, opacity .3s; }
+.pad-btn:active { transform: scale(.88); background: var(--primary-soft); }
+.pad-btn.done { transform: scale(.8); }

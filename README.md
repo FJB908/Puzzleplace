@@ -25,7 +25,8 @@ losse bestand hierboven of de webserver.)
 npm install        # eenmalig, alleen nodig voor de build
 npm test           # test de sudoku-engine (unieke oplossing, moeilijkheid, snelheid)
 npm run build      # maakt dist/puzzelplaats.html opnieuw (doe dit na elke wijziging)
-node tools/make-blossoms.mjs   # tekent de bloesemtakken opnieuw (andere seed: branch=6 sprig=1)
+node tools/make-blossoms.mjs   # tekent de bloesemtakken opnieuw (seeds staan bovenin het bestand)
+PREVIEW=/tmp/tak node tools/make-blossoms.mjs boog   # 6 varianten van één ontwerp om uit te kiezen
 ```
 
 ## Wat zit erin
@@ -37,7 +38,8 @@ node tools/make-blossoms.mjs   # tekent de bloesemtakken opnieuw (andere seed: b
 | Sudoku (engine + scherm + stijl) | `js/games/sudoku/`, `css/games/sudoku.css` |
 | Opslag op het apparaat (voortgang, instellingen) | `js/store.js` |
 | Stijl, thema's, tekstgroottes | `css/styles.css` |
-| Kersenbloesem-versiering (SVG, gegenereerd) | `assets/`, `tools/make-blossoms.mjs` |
+| Kersenbloesem-versiering (7 ontwerpen, gegenereerd) | `js/decor/`, `assets/`, `tools/make-blossoms.mjs` |
+| Effecten (vallende blaadjes, rimpel, bloesemexplosie) | `js/effects.js` |
 | Toekomstige functies (accounts, vrienden, Facebook) | `js/config.js` + `js/services/` |
 | Installeerbaar op het beginscherm + offline | `manifest.webmanifest`, `sw.js` |
 

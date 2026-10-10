@@ -7,6 +7,7 @@
 
 import { h, icon, choiceDialog } from '../../ui.js';
 import { generate, candidateMask, bitCount, PEERS } from './engine.js';
+import { burst, rain, motionOK } from '../../effects.js';
 
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const MAX_HISTORY = 300;
@@ -36,6 +37,9 @@ export function mount(container, ctx) {
   let selected = Math.max(0, firstEmptyOrWrong());
   let pencil = false;
   let finished = false;
+  let lastPlaced = -1, lastNope = -1;      // voor het knallen/schudden van het laatste vakje
+  const waves = new Map();                  // vakje -> vertraging van de golf (ms)
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
   // ----- Opbouw -----
   const cells = [];
@@ -55,7 +59,9 @@ export function mount(container, ctx) {
     board.append(row);
   }
 
-  const livesEl = h('div', { class: 'sudoku-lives', role: 'img' });
+  const lifeEls = Array.from({ length: maxLives }, () => h('span', { class: 'life' }));
+  const livesEl = h('div', { class: 'sudoku-lives', role: 'img' }, lifeEls);
+  lifeEls.forEach((el) => el.addEventListener('animationend', () => el.classList.remove('losing')));
   const message = h('p', { class: 'sudoku-message', role: 'status', 'aria-live': 'polite' },
     'Tik op een vakje en kies daarna een cijfer.');
 
@@ -98,7 +104,11 @@ export function mount(container, ctx) {
         !isSel && selPeers.has(i) && 'peer',
         !isSel && selValue && v === selValue && !isWrong(i) && 'same',
         isWrong(i) && 'bad',
+        i === lastPlaced && 'pop',
+        i === lastNope && 'nope',
+        waves.has(i) && 'wave',
       ].filter(Boolean).join(' ');
+      if (waves.has(i)) cell.style.setProperty('--wd', `${waves.get(i)}ms`); else cell.style.removeProperty('--wd');
       cell.tabIndex = isSel ? 0 : -1;
       cell.setAttribute('aria-selected', String(isSel));
 
@@ -127,7 +137,49 @@ export function mount(container, ctx) {
     root.dataset.pencil = String(pencil);
 
     livesEl.setAttribute('aria-label', `Levens: ${state.lives} van ${maxLives}`);
-    livesEl.replaceChildren(...Array.from({ length: maxLives }, (_, k) => h('span', { class: `life${k < state.lives ? '' : ' lost'}` })));
+    lifeEls.forEach((el, k) => el.classList.toggle('lost', k >= state.lives));
+    lastPlaced = -1; lastNope = -1;                  // de beweging is nu gestart
+  }
+
+  // ----- Effecten -----
+  const center = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+
+  // Welke rijen, kolommen en blokjes staan helemaal goed?
+  function completeUnits() {
+    const done = new Set();
+    for (let n = 0; n < 9; n++) {
+      const row = Array.from({ length: 9 }, (_, k) => n * 9 + k);
+      const col = Array.from({ length: 9 }, (_, k) => k * 9 + n);
+      const box = Array.from({ length: 9 }, (_, k) => (Math.floor(n / 3) * 3 + Math.floor(k / 3)) * 9 + (n % 3) * 3 + (k % 3));
+      for (const [key, cells9] of [[`r${n}`, row], [`c${n}`, col], [`b${n}`, box]]) {
+        if (cells9.every((i) => values[i] === solution[i])) done.add(key);
+      }
+    }
+    return done;
+  }
+  const unitCells = (key) => {
+    const n = Number(key.slice(1));
+    return Array.from({ length: 9 }, (_, k) => key[0] === 'r' ? n * 9 + k : key[0] === 'c' ? k * 9 + n
+      : (Math.floor(n / 3) * 3 + Math.floor(k / 3)) * 9 + (n % 3) * 3 + (k % 3));
+  };
+
+  // Een golf over de vakjes, beginnend bij `origin`
+  function sweep(indices, origin) {
+    if (!motionOK()) return;
+    const [or, oc] = [Math.floor(origin / 9), origin % 9];
+    for (const i of indices) waves.set(i, (Math.abs(Math.floor(i / 9) - or) + Math.abs((i % 9) - oc)) * 55);
+    clearTimeout(sweep.t);
+    sweep.t = setTimeout(() => { waves.clear(); render(); }, 1500);
+  }
+
+  // Na een goed cijfer: popje, en een golf + blaadjes als een rij/kolom/blokje klaar is
+  function celebrateRight(cellIndex, before) {
+    lastPlaced = cellIndex;
+    const fresh = [...completeUnits()].filter((u) => !before.has(u));
+    if (!fresh.length) return;
+    sweep([...new Set(fresh.flatMap(unitCells))], cellIndex);
+    const [x, y] = center(cells[cellIndex]);
+    burst({ x, y, count: 7, power: 170, cone: [-160, -20], size: [10, 16], life: [900, 1300] });
   }
 
   function label(i) {
@@ -163,16 +215,31 @@ export function mount(container, ctx) {
     if (values.every((v, i) => v === solution[i])) win();
   }
 
-  function win() {
+  async function win() {
     finished = true;
     render();
     say('Gelukt! De puzzel is helemaal goed ingevuld.');
+    if (motionOK()) {                                    // eerst even genieten: golf over het hele rooster en een bui van blaadjes
+      root.classList.add('won');
+      sweep(values.map((_, i) => i), selected);
+      const [x, y] = center(board);
+      burst({ x, y, count: 26, power: 420, cone: [-170, -10], size: [14, 26], life: [1500, 2300] });
+      rain({ count: 40 });
+      await wait(1400);
+    }
     ctx.complete({ difficulty: ctx.difficulty, livesLeft: state.lives });
   }
 
   // ----- Fout gemaakt: een leven eraf -----
   function loseLife() {
     state.lives = Math.max(0, state.lives - 1);
+    lastNope = selected;
+    const gone = lifeEls[state.lives];                   // de bloesem die nu valt
+    if (gone && motionOK()) {
+      gone.classList.add('losing');
+      const [x, y] = center(gone);
+      burst({ x, y, count: 9, power: 140, cone: [-190, 10], size: [10, 17], life: [1000, 1500] });
+    }
     root.classList.remove('hit');
     void root.offsetWidth;                       // animatie opnieuw laten starten
     root.classList.add('hit');
@@ -234,9 +301,10 @@ export function mount(container, ctx) {
     const right = d === solution[selected];
     const entries = [[selected, d, 0]];
     if (right) for (const j of PEERS[selected]) if (!values[j] && notes[j] & (1 << (d - 1))) entries.push([j, 0, notes[j] & ~(1 << (d - 1))]);
+    const before = completeUnits();
     change(entries);
 
-    if (right) { say(''); afterChange(); return; }
+    if (right) { say(''); celebrateRight(selected, before); afterChange(); return; }
 
     loseLife();
     ctx.save(state);
@@ -291,8 +359,10 @@ export function mount(container, ctx) {
 
     const d = solution[target];
     selected = target;
+    const before = completeUnits();
     change([[target, d, 0], ...PEERS[target].filter((j) => !values[j] && notes[j] & (1 << (d - 1))).map((j) => [j, 0, notes[j] & ~(1 << (d - 1))])]);
     say(`Tip: in het gemarkeerde vakje hoort een ${d}.`);
+    celebrateRight(target, before);
     afterChange();
     if (!finished) cells[selected].focus({ preventScroll: true });
   }

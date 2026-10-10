@@ -31,7 +31,7 @@ export function gameDetailView({ id }, app) {
 
   if (!ready) {
     return {
-      title: game.name, nav: 'games',
+      title: game.name, nav: 'games', decor: 'hang-rechts',
       node: h('div', { class: 'view' }, header, howTo,
         h('div', { class: 'notice', role: 'note' },
           h('strong', {}, 'Dit spel komt binnenkort.'),
@@ -76,7 +76,7 @@ export function gameDetailView({ id }, app) {
     : [h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: startNew }, icon('play'), 'Spel starten')];
 
   return {
-    title: game.name, nav: 'games',
+    title: game.name, nav: 'games', decor: 'hang-rechts',
     node: h('div', { class: 'view' }, header, howTo, levelPicker, h('div', { class: 'stack' }, actions)),
   };
 }

@@ -113,5 +113,5 @@ export function settingsView(_params, app) {
       }, 'Alles wissen'),
     ),
   );
-  return { title: 'Instellingen', nav: 'settings', node };
+  return { title: 'Instellingen', nav: 'settings', decor: 'hang-links', node };
 }

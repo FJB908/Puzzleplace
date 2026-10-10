@@ -2,7 +2,7 @@ import { h } from '../ui.js';
 
 export function notFoundView() {
   return {
-    title: 'Niet gevonden', nav: 'home',
+    title: 'Niet gevonden', nav: 'home', decor: 'spray',
     node: h('div', { class: 'view' },
       h('header', { class: 'page-header' },
         h('h1', { tabindex: '-1' }, 'Deze pagina bestaat niet'),

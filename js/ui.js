@@ -1,3 +1,6 @@
+import { mountArt } from './decor.js';
+import { motionOK } from './effects.js';
+
 // Kleine bouwstenen voor de schermen: elementen maken, iconen, dialogen.
 // Tekst gaat altijd via textContent (nooit innerHTML), dus veilig voor namen.
 
@@ -57,16 +60,27 @@ export function icon(name) {
 export function choiceDialog({ title, text, body, actions, dismissValue = null, joy = false }) {
   return new Promise((resolve) => {
     const titleId = `dlg-${Math.random().toString(36).slice(2)}`;
+    const art = joy ? h('div', { class: 'dialog-art', 'aria-hidden': 'true' }) : null;
+    let done = false;
+    // Netjes sluiten met een korte uitgaande beweging
+    const finish = (i) => {
+      if (done) return;
+      done = true;
+      const end = () => dlg.close(i >= 0 ? String(i) : '');
+      if (motionOK()) { dlg.classList.add('closing'); setTimeout(end, 180); } else end();
+    };
     const dlg = h('dialog', { class: `dialog${joy ? ' dialog--joy' : ''}`, 'aria-labelledby': titleId },
+      art,
       h('h2', { id: titleId }, title),
       text && h('p', {}, text),
       body && h('div', { class: 'dialog-body' }, body),
       h('div', { class: 'dialog-actions' },
         actions.map((a, i) => h('button', {
           type: 'button', class: `btn ${a.primary ? 'btn-primary' : ''}${a.danger ? ' btn-danger' : ''}`, autofocus: a.autofocus,
-          onclick: () => dlg.close(String(i)),
+          onclick: () => finish(i),
         }, a.label))),
     );
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); finish(-1); });   // Escape
     dlg.addEventListener('close', () => {
       const i = dlg.returnValue === '' ? -1 : Number(dlg.returnValue);
       dlg.remove();
@@ -74,6 +88,7 @@ export function choiceDialog({ title, text, body, actions, dismissValue = null, 
     });
     document.body.append(dlg);
     dlg.showModal();
+    if (art) mountArt(art, 'takje-b');
   });
 }
 

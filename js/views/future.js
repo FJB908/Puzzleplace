@@ -21,7 +21,7 @@ export function accountView() {
       : h('div', { class: 'stack' }, providers.map((p) =>
           h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: () => auth.signIn(p.id) }, p.label))),
   );
-  return { title: 'Account', nav: 'settings', node };
+  return { title: 'Account', nav: 'settings', decor: 'spray', node };
 }
 
 export function friendsView() {
@@ -32,5 +32,5 @@ export function friendsView() {
       h('p', {}, 'Speel samen met mensen die je kent.')),
     h('div', { class: 'notice' }, h('p', {}, 'Je hebt nog geen vrienden toegevoegd.')),
   );
-  return { title: 'Vrienden', nav: 'friends', node };
+  return { title: 'Vrienden', nav: 'friends', decor: 'spray', node };
 }

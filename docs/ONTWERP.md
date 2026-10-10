@@ -28,7 +28,14 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 ## Uiterlijk
 
 - **Minimalistisch:** knoppen hebben meestal geen kader. Alleen de hoofdactie op een scherm (bijv. "Spel starten") is een gevulde knop; al het andere is tekst met een pictogram. Keuzelijsten zijn rijen met dunne lijnen en een rondje met vinkje rechts. Alleen in "Extra duidelijk" komen de kaders terug.
-- **Kersenbloesem:** een tak hangt vanuit de rechterbovenhoek in een eigen strook boven de kop (dus nooit achter tekst), een takje siert de hoofdkaart en het felicitatiescherm, losse blaadjes liggen linksonder, en een kleine bloesem markeert de gekozen pagina in het menu. De levens in sudoku zijn bloesems. Alles is vectorgraphics, getekend door `tools/make-blossoms.mjs` met een vaste seed, en kan in Instellingen worden uitgezet ("Bloesemtakken") en verdwijnt bij "Extra duidelijk".
+- **Kersenbloesem, realistisch en per pagina anders.** Zeven getekende ontwerpen: een brede tak vanuit rechtsboven (Spellen en Spel), vanuit linksboven (Instellingen), een volle bloeiende boog (Start), een luchtige spray (Hulp) en drie takjes (hoofdkaart en winscherm). Elke tak heeft schors met textuur en korstmos, jonge bruine en groene blaadjes, knoppen, half geopende en open bloemen met meeldraden, en diepte (bloemen achteraan zijn kleiner en lichter). Alles staat in een eigen strook boven de kop, nooit achter tekst. De tekeningen worden gegenereerd door `tools/make-blossoms.mjs` met een vaste seed (andere seed = ander ontwerp). Elke tak bestaat uit twee lagen: de schors met textuurfilter (wordt één keer getekend) en de bloemen (die bewegen), zodat het filter niet bij elke animatiestap opnieuw wordt berekend. Op apparaten met weinig geheugen of processorkernen gaan het wiegen en de vallende blaadjes vanzelf uit.
+- **Beweging en effecten** (allemaal uit bij "Rustige weergave" en als het besturingssysteem minder beweging vraagt):
+  - Bij elke pagina gaan de bloemen één voor één open, daarna wiegt de tak heel zachtjes. Bij een andere pagina wisselt de tak met een korte overgang.
+  - De onderdelen van een pagina schuiven na elkaar in; pagina's lopen zacht in elkaar over (View Transitions waar de browser dat kan).
+  - Rustig vallende blaadjes op de achtergrond (zeven stuks, alleen CSS-beweging).
+  - Gevulde knoppen krijgen een zachte rimpel; rijen, tegels, keuzerondjes en het menu reageren met een kleine beweging; de bloesem boven het gekozen menu-onderdeel gaat open.
+  - Dialogen zweven erin en uit; het winscherm heeft een bloeiend takje.
+  - Sudoku: een goed cijfer "plopt" in het vakje, een fout cijfer schudt, een voltooide rij, kolom of blokje laat een golf van licht lopen met opspattende blaadjes, een verloren leven (bloesem) valt uiteen in blaadjes, en bij winnen licht het rooster op en regent het blaadjes.
 - **Kleuren:** gebroken wit, donkerblauwgroen voor acties, roze/roos als accent. Licht, donker en hoog contrast.
 
 ## Sudoku: keuzes

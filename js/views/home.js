@@ -5,6 +5,7 @@
 //   4. Alle spellen
 
 import { h, icon, whenText } from '../ui.js';
+import { mountArt } from '../decor.js';
 import * as store from '../store.js';
 import { getGameInfo, dailyGame } from '../games/registry.js';
 
@@ -41,6 +42,14 @@ function welcomeCard(app) {
   );
 }
 
+// Hoofdkaart: donkerblauw vlak met een bloeiend takje bovenin
+function heroArt() {
+  const art = h('div', { class: 'hero-art', 'aria-hidden': 'true' });
+  const s = store.getSettings();
+  if (s.decor !== false) mountArt(art, 'takje-a');
+  return art;
+}
+
 function mainCard() {
   const last = store.getLastGame();
   const info = last && getGameInfo(last.id);
@@ -49,13 +58,13 @@ function mainCard() {
   if (info && slot && slot.state != null) {
     const href = `#/spel/${info.id}/speel${last.slot === 'daily' ? '/dagelijks' : ''}`;
     const level = info.difficulties.find((d) => d.id === slot.difficulty)?.label;
-    return h('section', { class: 'hero', 'aria-labelledby': 'hero-title' },
+    return h('section', { class: 'hero', 'aria-labelledby': 'hero-title' }, heroArt(),
       h('h2', { id: 'hero-title' }, `Verder met ${info.name}`),
       h('p', {}, `${level ? `${level} · ` : ''}laatst gespeeld ${whenText(slot.updatedAt)}`),
       h('a', { class: 'btn btn-block', href }, icon('play'), 'Verder spelen'),
     );
   }
-  return h('section', { class: 'hero', 'aria-labelledby': 'hero-title' },
+  return h('section', { class: 'hero', 'aria-labelledby': 'hero-title' }, heroArt(),
     h('h2', { id: 'hero-title' }, 'Kies een spel'),
     h('p', {}, 'Begin met een puzzel die bij je past. Je voortgang wordt vanzelf bewaard.'),
     h('a', { class: 'btn btn-block', href: '#/spellen' }, icon('games'), 'Naar alle spellen'),
@@ -98,5 +107,5 @@ export function homeView(_params, app) {
       : null,
     h('p', { class: 'muted' }, 'Even vastgelopen? ', h('a', { href: '#/hulp' }, 'Bekijk de hulp')),
   );
-  return { title: 'Start', nav: 'home', view: 'home', node };
+  return { title: 'Start', nav: 'home', view: 'home', decor: 'boog', node };
 }

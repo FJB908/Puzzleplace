@@ -31,5 +31,5 @@ export function helpView() {
         h('summary', {}, q),
         h('div', { class: 'disclosure-body' }, h('p', {}, a))))),
   );
-  return { title: 'Hulp', nav: 'settings', node };
+  return { title: 'Hulp', nav: 'settings', decor: 'spray', node };
 }

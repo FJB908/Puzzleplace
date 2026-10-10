@@ -31,5 +31,5 @@ export function gamesView() {
     ),
     h('ul', { class: 'list' }, sorted.map(gameCard)),
   );
-  return { title: 'Spellen', nav: 'games', node };
+  return { title: 'Spellen', nav: 'games', decor: 'hang-rechts', node };
 }
