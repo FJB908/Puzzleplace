@@ -1,0 +1,46 @@
+# Caça-palavras em português europeu. Temas fixos (ver tools/inhoud/SCHRIJVEN.md).
+
+## bloemen | Flores
+rosa tulipa cravo lírio violeta margarida girassol jasmim orquídea camélia hortênsia malmequer papoila narciso dália begónia azálea lavanda gerânio magnólia peónia jacinto açucena crisântemo petúnia gladíolo anémona
+
+## tuin | No jardim
+relva regador enxada ancinho tesoura canteiro roseira estufa adubo semente sebe horta poço banco vedação mangueira pomar árvore folha terra vaso muro jardineiro trepadeira laranjeira fonte caminho sombra
+
+## dieren | Animais
+cão gato cavalo vaca ovelha porco galinha coelho burro pato cabra leão tigre elefante girafa macaco urso lobo raposa esquilo tartaruga golfinho baleia águia coruja cegonha rato zebra
+
+## keuken | Na cozinha
+fogão forno panela tacho frigorífico colher garfo faca prato taça chávena copo tigela frigideira tábua ralador balança batedeira torradeira chaleira avental escorredor espremedor jarro cafeteira travessa saleiro concha peneira
+
+## eten | Comida
+pão sopa arroz massa carne peixe queijo ovo batata salada bolo fruta presunto chouriço bacalhau sardinha feijão azeite manteiga iogurte omelete bife frango cozido pudim tarte torrada gelado
+
+## weer | O tempo
+sol chuva vento neve nuvem trovão relâmpago nevoeiro geada granizo tempestade calor frio orvalho brisa temporal trovoada aguaceiro humidade seca clima ventania gelo bruma chuvisco sereno
+
+## reizen | Viajar
+viagem mala passaporte bilhete comboio autocarro avião barco hotel estação aeroporto mapa turista férias praia cruzeiro guia bagagem destino estrada carro táxi metro itinerário partida chegada paisagem
+
+## land | Portugal
+Lisboa Porto Coimbra Braga Faro Évora Sintra Algarve Alentejo Douro Tejo Minho Madeira Açores Fátima Guimarães Aveiro Óbidos fado azulejo pastel galo caravela Cascais Nazaré Setúbal Mondego calçada
+
+## familie | Família
+pai mãe filho filha irmão irmã tio tia primo prima sobrinho sobrinha neto neta marido mulher genro nora sogro sogra cunhado cunhada padrinho madrinha bisavô bisavó parente casal bebé
+
+## huis | Em casa
+sala quarto cozinha janela porta telhado escada parede chão cama mesa cadeira sofá armário candeeiro cortina tapete espelho varanda garagem corredor lareira sótão cave banheira chuveiro almofada estante relógio
+
+## natuur | Natureza
+rio mar monte serra floresta bosque vale rocha pedra campo prado árvore folha erva musgo cascata ribeiro nascente colina planície deserto ilha penhasco duna lagoa cume trilho selva
+
+## muziek | Música
+piano violino guitarra flauta trompete tambor harpa violoncelo orquestra coro canção melodia ritmo nota concerto maestro acordeão clarinete saxofone órgão bateria cantor ópera viola trombone partitura compasso
+
+## hobby | Passatempos
+leitura costura tricô croché pintura desenho fotografia jardinagem pesca caminhada cozinhar xadrez cartas dominó bordado cerâmica dança canto viajar bricolage coleção bilhar ténis natação ciclismo teatro cinema bingo
+
+## kleding | Roupa
+camisa casaco calças saia vestido sapato meia chapéu luvas cachecol gravata cinto botas blusa camisola pijama fato colete boné lenço sandálias impermeável roupão gabardine chinelos sapatilhas bata xaile
+
+## feest | Festas
+aniversário natal páscoa carnaval casamento batizado presente bolo vela balão festa convite brinde champanhe baile desfile procissão romaria arraial ceia fogueira prenda cartão decoração sardinhada alegria abraço lanterna

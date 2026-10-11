@@ -1,0 +1,404 @@
+# Mots croisés en français (France). Par ligne : réponse | définition | niveau (1 = connu, 2 = un peu moins connu, 3 = difficile). Voir tools/inhoud/maak.mjs.
+Paris | Capitale de la France | 1
+Lyon | Ville entre le Rhône et la Saône | 1
+Marseille | Grand port français sur la Méditerranée | 1
+Bordeaux | Ville du vin sur la Garonne | 1
+Toulouse | La ville rose du sud-ouest | 1
+Bretagne | Région de l'ouest aux crêpes et au cidre | 1
+Provence | Région du sud où chantent les cigales | 1
+Alsace | Région de la choucroute et des cigognes | 1
+Normandie | Région du camembert et du Débarquement | 1
+Corse | Île française de la Méditerranée | 1
+Loire | Plus long fleuve de France | 1
+Seine | Fleuve qui traverse Paris | 1
+Rhône | Fleuve qui passe à Lyon et Avignon | 1
+Alpes | Chaîne de montagnes avec le mont Blanc | 1
+Pyrénées | Montagnes entre la France et l'Espagne | 1
+Versailles | Château de Louis XIV près de Paris | 1
+Louvre | Grand musée de Paris avec la Joconde | 1
+camembert | Fromage normand à croûte blanche | 1
+baguette | Pain long et croustillant | 1
+croissant | Viennoiserie courbe et beurrée du matin | 1
+crêpe | Fine galette sucrée de la Chandeleur | 1
+madeleine | Petit gâteau en forme de coquille | 1
+champagne | Vin pétillant de Reims et d'Épernay | 1
+Nice | Ville de la Promenade des Anglais | 2
+Lille | Grande ville du nord, proche de la Belgique | 2
+Rennes | Capitale de la Bretagne | 2
+Cannes | Ville du célèbre festival de cinéma | 2
+Strasbourg | Grande ville d'Alsace au bord du Rhin | 2
+Nantes | Ville des ducs de Bretagne sur la Loire | 2
+Dijon | Ville de la moutarde en Bourgogne | 2
+Avignon | Ville du pont et du palais des papes | 2
+Bourgogne | Région viticole dont Dijon est la capitale | 2
+Garonne | Fleuve qui passe à Toulouse et Bordeaux | 2
+Montmartre | Colline de Paris avec le Sacré-Cœur | 2
+brioche | Pain doré et moelleux au beurre | 2
+éclair | Pâtisserie longue garnie de crème | 2
+cassoulet | Plat de haricots blancs du sud-ouest | 2
+choucroute | Plat alsacien servi avec des saucisses | 2
+ratatouille | Plat provençal de légumes mijotés | 2
+Metz | Ville de Lorraine sur la Moselle | 3
+Moselle | Rivière de Lorraine qui rejoint le Rhin | 3
+Camargue | Région du Rhône aux chevaux blancs | 3
+Chambord | Château de la Loire à l'escalier à double hélice | 3
+Chartres | Ville de la Beauce célèbre pour sa cathédrale | 3
+Colmar | Jolie ville alsacienne aux maisons colorées | 3
+chat | Petit félin qui ronronne | 1
+chien | Meilleur ami de l'homme, il aboie | 1
+vache | Elle donne du lait et meugle | 1
+cheval | On le monte pour galoper | 1
+mouton | Animal à laine qui bêle | 1
+cochon | Animal rose de la ferme qui grogne | 1
+poule | Elle pond des œufs | 1
+canard | Oiseau qui fait coin-coin sur l'étang | 1
+lapin | Il aime les carottes et a de longues oreilles | 1
+renard | Animal roux et rusé des fables | 1
+loup | Grand canidé qui hurle à la lune | 1
+ours | Gros animal qui dort tout l'hiver | 1
+lion | Roi des animaux | 1
+singe | Il grimpe aux arbres et aime les bananes | 1
+zèbre | Animal rayé noir et blanc d'Afrique | 1
+âne | Il porte les charges et fait hi-han | 1
+tortue | Animal lent protégé par sa carapace | 1
+grenouille | Elle saute et coasse dans la mare | 1
+papillon | Insecte aux ailes colorées | 1
+abeille | Insecte qui fait du miel | 1
+dauphin | Mammifère marin intelligent qui saute | 1
+baleine | Le plus gros animal marin | 1
+girafe | Animal au très long cou | 1
+éléphant | Gros animal gris à trompe | 1
+cygne | Grand oiseau blanc au cou courbé | 1
+hirondelle | Oiseau qui annonce le printemps | 1
+moineau | Petit oiseau brun des toits | 1
+corbeau | Grand oiseau noir qui croasse | 1
+araignée | Elle tisse sa toile | 1
+fourmi | Petit insecte qui travaille en colonie | 1
+chèvre | Animal à barbichette qui donne du fromage | 1
+cerf | Grand animal de la forêt aux bois ramifiés | 1
+mésange | Petit oiseau bleu et jaune du jardin | 2
+pinson | Petit oiseau chanteur à poitrine rosée | 2
+merle | Oiseau noir au bec jaune | 2
+chenille | Larve qui devient papillon | 2
+libellule | Insecte aux ailes transparentes près de l'eau | 2
+truite | Poisson de rivière aux points rouges | 2
+saumon | Poisson rose qui remonte les rivières | 2
+sanglier | Cousin sauvage du cochon | 2
+chevreuil | Petit cervidé brun de nos forêts | 2
+lièvre | Il perd la course contre la tortue | 2
+cigale | Insecte qui chante en été dans le Midi | 2
+coccinelle | Petit insecte rouge à points noirs | 2
+hérisson | Petit animal couvert de piquants | 2
+cigogne | Grand oiseau blanc aux pattes rouges | 2
+hibou | Oiseau de nuit aux grands yeux | 2
+écureuil | Petit rongeur roux qui aime les noisettes | 2
+brochet | Poisson d'eau douce aux dents pointues | 3
+blaireau | Animal à tête rayée qui vit dans un terrier | 3
+perdrix | Oiseau de plaine au plumage roux, gibier | 3
+rose | Fleur à épines très parfumée | 1
+tulipe | Fleur de printemps en forme de coupe | 1
+muguet | Brin porte-bonheur du premier mai | 1
+coquelicot | Fleur rouge des champs de blé | 1
+marguerite | Fleur blanche au cœur jaune qu'on effeuille | 1
+lavande | Plante violette qui sent bon en Provence | 1
+tournesol | Grande fleur jaune qui suit le soleil | 1
+tige | Elle porte la fleur | 1
+racine | Partie de la plante sous la terre | 1
+feuille | Elle tombe des arbres en automne | 1
+chêne | Arbre qui donne des glands | 1
+sapin | Arbre de Noël vert | 1
+champignon | Il pousse dans les bois après la pluie | 1
+herbe | Elle est verte et pousse dans la prairie | 1
+iris | Fleur violette ou jaune aux longs pétales | 2
+pivoine | Grosse fleur ronde rose du printemps | 2
+violette | Petite fleur mauve du sous-bois | 2
+peuplier | Arbre très haut des bords de route | 2
+saule | Arbre pleureur au bord de l'eau | 2
+bouleau | Arbre à écorce blanche | 2
+érable | Arbre du Canada à la feuille rouge | 2
+tilleul | Arbre dont les fleurs font une tisane | 2
+platane | Arbre des places du Midi à écorce tachetée | 2
+olivier | Arbre méditerranéen, symbole de paix | 2
+fougère | Plante des sous-bois aux feuilles très découpées | 2
+lilas | Arbuste à fleurs mauves parfumées | 2
+pétale | Partie colorée d'une fleur | 2
+hêtre | Arbre à écorce grise et lisse des forêts | 3
+cèpe | Champignon brun apprécié des gourmets | 3
+forêt | Grand espace couvert d'arbres | 1
+champ | Terrain cultivé à la campagne | 1
+prairie | Grand espace d'herbe où paissent les vaches | 1
+colline | Petite montagne arrondie | 1
+montagne | Haute élévation couverte de neige l'hiver | 1
+vallée | Terrain bas entre deux montagnes | 1
+rivière | Cours d'eau qui se jette dans un fleuve | 1
+fleuve | Grand cours d'eau qui va à la mer | 1
+lac | Grande étendue d'eau entourée de terre | 1
+étang | Petite étendue d'eau calme | 1
+mer | Grande étendue d'eau salée | 1
+plage | Bord de mer couvert de sable | 1
+île | Terre entourée d'eau | 1
+océan | L'Atlantique en est un | 1
+falaise | Haute paroi de roche au bord de la mer | 2
+source | Endroit où naît une rivière | 2
+sentier | Petit chemin de randonnée | 2
+volcan | Montagne qui crache de la lave | 2
+grotte | Cavité naturelle dans la roche | 2
+glacier | Rivière de glace de haute montagne | 2
+cascade | Chute d'eau dans la montagne | 2
+dune | Colline de sable au bord de la mer | 2
+neige | Flocons blancs de l'hiver | 1
+pluie | Eau qui tombe des nuages | 1
+vent | Air qui souffle et agite les feuilles | 1
+nuage | Masse blanche ou grise dans le ciel | 1
+orage | Éclairs et tonnerre en été | 1
+soleil | Il brille le jour | 1
+lune | Elle éclaire la nuit | 1
+étoile | Point brillant dans le ciel nocturne | 1
+ciel | Il est bleu ou gris au-dessus de nos têtes | 1
+printemps | Saison où les fleurs éclosent | 1
+été | Saison des grandes vacances | 1
+automne | Saison des feuilles mortes | 1
+hiver | Saison la plus froide | 1
+janvier | Premier mois de l'année | 1
+juin | Mois du début de l'été | 1
+juillet | Mois de la fête nationale | 1
+décembre | Dernier mois de l'année | 1
+lundi | Premier jour ouvrable de la semaine | 1
+samedi | Premier jour du week-end | 1
+dimanche | Jour de repos de la semaine | 1
+brouillard | Brume épaisse qui cache le paysage | 2
+verglas | Fine couche de glace dangereuse sur la route | 2
+grêle | Petits grains de glace qui tombent du ciel | 2
+tonnerre | Bruit sourd qui suit l'éclair | 2
+canicule | Grande chaleur de l'été | 2
+mistral | Vent froid et fort du sud de la France | 2
+août | Mois du milieu des grandes vacances | 2
+septembre | Mois de la rentrée des classes | 2
+maison | Lieu où l'on habite | 1
+porte | On l'ouvre pour entrer | 1
+fenêtre | Elle laisse entrer la lumière | 1
+toit | Il couvre la maison | 1
+mur | Paroi verticale qui sépare deux pièces | 1
+escalier | Il monte à l'étage | 1
+cave | Pièce sous la maison pour garder le vin | 1
+grenier | Pièce sous le toit | 1
+salon | Pièce où l'on reçoit des invités | 1
+chambre | Pièce où l'on dort | 1
+cuisine | Pièce où l'on prépare les repas | 1
+lit | Meuble pour dormir | 1
+table | Meuble où l'on mange | 1
+chaise | On s'assoit dessus à table | 1
+fauteuil | Siège confortable avec accoudoirs | 1
+canapé | Grand siège pour plusieurs personnes | 1
+tapis | Il couvre le sol du salon | 1
+rideau | Il se tire devant la fenêtre | 1
+lampe | Elle éclaire la pièce | 1
+garage | Abri pour la voiture | 1
+douche | On s'y lave sous l'eau qui tombe | 1
+armoire | Grand meuble pour ranger les vêtements | 1
+horloge | Elle donne l'heure | 2
+couloir | Passage étroit entre les pièces | 2
+cheminée | Là où l'on fait le feu en hiver | 2
+miroir | On s'y regarde | 2
+commode | Meuble à tiroirs de la chambre | 2
+tiroir | Il coulisse dans une commode | 2
+casserole | Récipient à manche pour faire cuire | 1
+poêle | Ustensile plat pour faire frire | 1
+four | Appareil qui cuit les gâteaux et les rôtis | 1
+évier | Cuve où l'on lave la vaisselle | 1
+frigo | Il garde les aliments au frais | 1
+assiette | On y sert le repas | 1
+couteau | Il coupe le pain | 1
+cuillère | Elle sert à manger la soupe | 1
+fourchette | On pique la nourriture avec elle | 1
+verre | On y boit de l'eau | 1
+bol | Récipient rond pour le café au lait | 1
+beurre | Il se tartine et vient de la crème | 1
+miel | Doré et sucré, fait par les abeilles | 1
+sucre | Cristaux blancs et doux pour le café | 1
+sel | Il assaisonne la soupe avec le poivre | 1
+œuf | Il se mange à la coque | 1
+lait | Boisson blanche de la vache | 1
+crème | Partie épaisse du lait | 1
+fromage | Produit du lait qui se mange avant le dessert | 1
+pain | Aliment de la boulangerie | 1
+gâteau | Dessert pour un anniversaire | 1
+chocolat | Friandise brune faite avec du cacao | 1
+soupe | Plat chaud qu'on mange à la cuillère | 1
+salade | Plat de feuilles vertes avec de la vinaigrette | 1
+pomme | Fruit rond rouge ou vert | 1
+poire | Fruit juteux en forme de goutte | 1
+fraise | Petit fruit rouge de juin | 1
+pêche | Fruit au duvet et au gros noyau | 1
+carotte | Légume orange que mange le lapin | 1
+tomate | Fruit rouge qu'on mange en salade | 1
+pâtes | Spaghetti, tagliatelles et coquillettes | 1
+frites | Bâtonnets dorés de pomme de terre | 1
+thé | Infusion chaude d'Angleterre | 1
+raisin | Fruit de la vigne | 1
+vigne | Plante grimpante qui donne le raisin | 1
+ail | Bulbe odorant à gousses | 1
+louche | Grande cuillère pour servir la soupe | 2
+passoire | Elle égoutte les pâtes | 2
+saladier | Grand bol pour la salade | 2
+cocotte | Marmite en fonte pour les plats mijotés | 2
+bouilloire | Elle fait chauffer l'eau pour le thé | 2
+cafetière | Elle filtre l'eau chaude sur la poudre brune | 2
+confiture | Fruits cuits avec du sucre à étaler sur du pain | 2
+farine | Poudre blanche pour faire le pain | 2
+omelette | Plat d'œufs battus cuits à la poêle | 2
+biscuit | Petit gâteau sec | 2
+poivre | Épice noire qu'on moud sur la viande | 2
+haricot | Légume vert ou blanc en gousse | 2
+aubergine | Légume violet et brillant | 2
+courgette | Légume vert allongé de la ratatouille | 2
+citrouille | Gros légume orange de la soupe d'automne | 2
+épicerie | Petit magasin d'alimentation de quartier | 2
+vendange | Récolte du raisin en automne | 2
+râpe | Ustensile à trous pour réduire le fromage en filaments | 3
+mère | Femme qui a des enfants | 1
+père | Homme qui a des enfants | 1
+fils | Garçon par rapport à ses parents | 1
+fille | Enfant de sexe féminin | 1
+frère | Garçon qui a les mêmes parents que vous | 1
+sœur | Fille qui a les mêmes parents que vous | 1
+oncle | Frère du père ou de la mère | 1
+tante | Sœur du père ou de la mère | 1
+cousin | Fils de l'oncle ou de la tante | 1
+mamie | Grand-mère, affectueusement | 1
+mari | Époux d'une femme | 1
+bébé | Très jeune enfant qui dort beaucoup | 1
+enfant | Fille ou garçon pas encore adulte | 1
+famille | Parents, enfants et grands-parents | 1
+voisin | Il habite à côté de chez vous | 1
+mariage | Cérémonie où deux personnes s'unissent | 1
+anniversaire | Jour de fête où l'on souffle des bougies | 1
+cadeau | Paquet qu'on offre | 1
+bougie | Cire allumée sur le gâteau | 1
+fête | Moment joyeux où l'on célèbre | 1
+Noël | Fête de fin décembre avec le sapin | 1
+Pâques | Fête de printemps avec des œufs en chocolat | 1
+carnaval | Fête où l'on se déguise | 1
+jumeau | Frère né en même temps que vous | 2
+ancêtre | Aïeul très lointain de la famille | 2
+parrain | Homme qui accompagne son filleul | 2
+marraine | Femme qui accompagne son filleul | 2
+réveillon | Repas de fête de la nuit de Noël | 2
+guirlande | Décoration en chaîne pour Noël | 2
+galette | Gâteau plat des Rois | 2
+trinquer | Choquer les verres en disant santé | 2
+neveu | Fils du frère ou de la sœur | 2
+nièce | Fille du frère ou de la sœur | 2
+naissance | Arrivée d'un bébé au monde | 2
+bru | Épouse de votre fils | 3
+héritage | Biens reçus d'un parent disparu | 3
+dragée | Bonbon enrobé offert au baptême | 3
+piano | Instrument à clavier noir et blanc | 1
+violon | Instrument à cordes joué avec un archet | 1
+guitare | Instrument à six cordes | 1
+flûte | Instrument à vent que l'on souffle | 1
+trompette | Instrument à vent en cuivre | 1
+chanson | Petit air avec des paroles | 1
+concert | Spectacle de musique en public | 1
+orchestre | Grand groupe de musiciens | 1
+tambour | Instrument qu'on frappe avec des baguettes | 2
+accordéon | Instrument à soufflet des bals populaires | 2
+orgue | Grand instrument des églises à tuyaux | 2
+clarinette | Instrument à vent noir à anche | 2
+saxophone | Instrument à vent doré en forme de J | 2
+opéra | Spectacle chanté en musique | 2
+mélodie | Suite de notes formant un air | 2
+partition | Feuille où la musique est écrite | 2
+violoncelle | Grand instrument à cordes entre les genoux | 2
+cloche | Instrument de bronze qui sonne l'heure | 2
+hautbois | Instrument à vent à anche double | 3
+contrebasse | Plus grand instrument à cordes de l'orchestre | 3
+cor | Instrument à vent enroulé qu'on joue à la chasse | 3
+tambourin | Petit instrument à peau et à grelots | 3
+robe | Vêtement féminin d'une seule pièce | 1
+jupe | Vêtement féminin qui part de la taille | 1
+pantalon | Il couvre les deux jambes | 1
+chemise | Vêtement à col et à boutons | 1
+veste | Elle se porte sur la chemise | 1
+manteau | Vêtement chaud pour l'hiver | 1
+pull | Tricot chaud qu'on enfile | 1
+chaussette | On la met dans la chaussure | 1
+chaussure | On la porte au pied pour marcher | 1
+chapeau | Il se porte sur la tête | 1
+écharpe | Longue bande de laine autour du cou | 1
+gant | Il protège la main du froid | 1
+ceinture | Elle serre le pantalon à la taille | 1
+pyjama | Vêtement pour dormir | 1
+lunettes | On les porte pour mieux voir | 1
+tricot | Ouvrage fait de laine avec deux aiguilles | 1
+imperméable | Manteau qui protège de la pluie | 2
+pantoufle | Chaussure douce qu'on met chez soi | 2
+casquette | Coiffure avec une visière | 2
+soie | Tissu brillant fabriqué par un ver | 2
+lin | Tissu frais des vêtements d'été | 2
+aiguille | Fine tige pointue pour coudre | 2
+laine | Fibre douce tirée du mouton | 2
+dentelle | Tissu ajouré et délicat des mariées | 3
+train | Il roule sur des rails | 1
+avion | Il vole dans le ciel avec des passagers | 1
+bateau | Il flotte sur l'eau | 1
+gare | Lieu où les trains s'arrêtent | 1
+billet | Papier pour monter dans un train | 1
+passeport | Document pour passer les frontières | 1
+carte | On la déplie pour trouver sa route | 1
+hôtel | Il loue des chambres aux voyageurs | 1
+camping | Séjour sous la tente | 1
+tente | Abri de toile pour dormir dehors | 1
+voiture | Véhicule à quatre roues | 1
+bagage | Valise ou sac de voyage | 1
+aéroport | Lieu où décollent les avions | 1
+vacances | Congés où l'on part se reposer | 1
+valise | Bagage qu'on prépare pour un voyage | 1
+route | Voie pour les voitures | 1
+vélo | Il a deux roues et des pédales | 1
+autocar | Grand véhicule pour excursions | 2
+croisière | Voyage en mer sur un grand bateau | 2
+boussole | Elle indique le nord | 2
+excursion | Petite sortie touristique d'une journée | 2
+hélicoptère | Aéronef à pales qui décolle à la verticale | 2
+touriste | Visiteur qui voyage pour le plaisir | 2
+frontière | Ligne entre deux pays | 2
+souvenir | Petit objet rapporté d'un voyage | 2
+peinture | Art de couvrir une toile de couleurs | 1
+natation | Sport dans la piscine | 1
+puzzle | Jeu de pièces à assembler | 1
+tennis | Sport de raquette sur un court | 1
+théâtre | Lieu où jouent les comédiens | 1
+football | Sport où l'on tape dans un ballon | 1
+lettre | Papier écrit envoyé par la poste | 1
+facteur | Il distribue le courrier | 1
+école | Lieu où les enfants apprennent | 1
+livre | Il se lit page après page | 1
+médecin | Il soigne les malades | 1
+église | Lieu de culte avec un clocher | 1
+château | Grande demeure d'un seigneur | 1
+moulin | Il tourne avec le vent pour moudre le grain | 1
+ferme | Exploitation agricole avec des animaux | 1
+village | Petite commune à la campagne | 1
+rue | Voie bordée de maisons en ville | 1
+cartes | Jeu avec rois et dames | 2
+échecs | Jeu de roi, reine et fous sur damier | 2
+broderie | Décor cousu au fil sur du tissu | 2
+poterie | Art de modeler l'argile | 2
+golf | Sport de balles et de trous sur gazon | 2
+yoga | Gymnastique douce venue d'Inde | 2
+belote | Jeu de cartes populaire | 2
+infirmière | Elle soigne les patients à l'hôpital | 2
+cathédrale | Très grande église d'une ville | 2
+fontaine | Elle jaillit au centre de la place | 2
+verger | Terrain planté d'arbres fruitiers | 2
+serre | Abri de verre pour les plantes frileuses | 2
+arrosoir | Récipient à pomme percée pour les plantes | 2
+sécateur | Outil pour tailler les rosiers | 2
+bêche | Outil pour retourner la terre | 2
+étable | Bâtiment où vivent les vaches | 2
+écurie | Bâtiment où vivent les chevaux | 2
+grange | Bâtiment pour stocker foin ou récolte | 2
+foin | Herbe séchée pour nourrir le bétail | 2
+maïs | Céréale aux grains jaunes en épi | 2
+ruche | Maison des abeilles | 2

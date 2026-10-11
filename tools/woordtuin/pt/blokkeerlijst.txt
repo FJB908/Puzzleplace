@@ -1,0 +1,28 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+abc abe abraao abu ada adam adao adele adi africa afro agnes aires alba
+ale alicia almeida alonso alpes aluguel amanda amelia amir angel anita anti antonio aquiles
+arabia ariana arianna asia augusto austria ava axe bacana bagunca bali ballet bang barbara
+batista beatles beirute bel belem belgica bianca bicha bilhao bilhoes bio bla blog bobagem
+boom bora boris bosnia braga brasil bruno buda cade cairo camila caribe carona castro
+cesar charles chi chico chile china cia colombo congo coreia cowboy cris cuba curte
+curtir curtis damasco dana dante deli demo diana didi dino dolores doo dora dra
+ecstasy emilio enrique erica escocia esporte eta etc eva filipe flash franca funk gaga
+gaia gale gales garcom gaza genebra goa gore grana guido guine gus han havana
+hein helena henry hermes hippie holanda homo hum iii india irene irlanda isabel israel
+jamaica jane japao jean jeova jesus joana joao jonas jorge judas jules juliana julieta
+jun junior kung lana las laura lazaro leila lena libia lili lina link lisboa
+loco lopes los luca lucas lucia lucifer luis lulu luna lux macau madame madonna
+mai malasia mamae manila mano manu manuel mari maria marisa marta mateus maxwell medina
+mega melissa mia miami miguel mimi min moi moises molina mona montana morse mos
+moscou navarro neo nepal nerd nerds nero net newton nico nicolau nilo nina nino
+nobel noe noel noruega olga onibus online opa ops oque orlando palermo pan pandora
+papai paris pascal paul paula pedro pepe pequim pete playboy polonia pre pro qui
+quixote quo rafa raquel rebeca regina renata renato rex reyes ribeiro ricardo rita roberta
+roberto rodrigo romeu rouge ruanda rue rui sabrina sacola salomao santana sara scooter sena
+sexy silas silva simao siria site sites slides soo sousa spam sra stevens sub
+sudao suecia suica susana tai tas tate teresa tesla tibete tico tina tito toledo
+tori trans trevor turne turquia twitter ucrania una uno val vanessa vargas vasco veado
+vernon vicente viii vip vogue volvo von vovo watts web weber whisky xicara xiii
+xix xvi xviii yang zoe zoom

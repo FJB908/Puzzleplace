@@ -42,7 +42,7 @@ Pyrénées baguette camembert ratatouille Marianne coq béret Versailles Louvre 
 
 ## familie | La famille
 mère père fils fille frère sœur oncle tante cousin neveu
-nièce mamie papi bébé enfant parent mari épouse jumeau ancêtre
+nièce mamie famille bébé enfant parent mari épouse jumeau ancêtre
 parrain marraine gendre naissance génération cadet berceau fiancé
 
 ## huis | À la maison

@@ -123,7 +123,7 @@ test('taalpakketten: alle teksten aanwezig, plaatshouders gelijk aan het Engels,
         const bron = en[k] ?? en[`${b}_other`];
         const wil = placeholders(bron).split(',').filter(Boolean), heeft = placeholders(v).split(',').filter(Boolean);
         for (const p of new Set(wil)) if (p !== 'n' || !meervoud) assert.ok(heeft.includes(p), `${id}: {${p}} mist in ${k}`);
-        for (const p of new Set(heeft)) assert.ok(wil.includes(p), `${id}: onbekende plaatshouder {${p}} in ${k}`);
+        for (const p of new Set(heeft)) assert.ok(wil.includes(p) || (p === 'n' && meervoud), `${id}: onbekende plaatshouder {${p}} in ${k}`);
         if (meervoud && meervoudsdekking(id)[k.match(VORMEN)[1]] > 1) assert.ok(heeft.includes('n'), `${id}: ${k} moet {n} bevatten`);
         assert.ok(!/[<>]/.test(v) || /^</.test(bron) || /[<>]/.test(bron), `${id}: ${k} bevat HTML-tekens`);
       }
