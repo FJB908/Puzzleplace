@@ -43,7 +43,7 @@ Donau Mosel Zugspitze Bodensee Ostsee Alpen Oktoberfest Lederhose Kuckucksuhr Fa
 ## familie | Familie
 Mutter Vater Oma Opa Schwester Bruder Nichte Neffe Tante Onkel
 Kind Baby Enkel Sohn Tochter Eltern Cousine Vetter Schwager Ehemann
-Ehefrau Geschwister Zwilling Verwandte Nachbar Freund Stammbaum Ehepaar
+Ehefrau Geschwister Zwilling Verwandte Urenkel Schwägerin Stammbaum Ehepaar
 
 ## huis | Im Haus
 Tür Fenster Dach Treppe Boden Decke Stuhl Tisch Schrank Lampe
@@ -68,7 +68,7 @@ Kegeln Singen Nähen Sammeln Rätsel Töpfern Billard Gymnastik Reiten Segeln
 ## kleding | Kleidung
 Jacke Mantel Hose Rock Kleid Schal Mütze Socke Bluse Weste
 Hut Gürtel Hemd Anorak Kostüm Handschuh Pullover Krawatte Schlafanzug Badeanzug
-Stiefel Sandale Pantoffel Strumpf Taschentuch Halstuch Kappe Tracht Dirndl
+Stiefel Sandale Pantoffel Strumpf Unterhemd Halstuch Kappe Tracht Dirndl
 
 ## feest | Feste und Feiern
 Weihnachten Ostern Silvester Neujahr Geburtstag Geschenk Girlande Luftballon Kerze Tannenbaum

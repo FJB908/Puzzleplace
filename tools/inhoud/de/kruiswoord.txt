@@ -97,8 +97,8 @@ Ameise | Fleißiges kleines Insekt im Haufen | 1
 Spinne | Webt ein Netz und fängt Fliegen | 1
 Schnecke | Trägt ihr Haus auf dem Rücken | 1
 Frosch | Grüner Hüpfer am Teich, der quakt | 1
-Marienkäfer | Roter Käfer mit schwarzen Punkten | 1
-Regenwurm | Kriecht nach dem Regen aus der Erde | 1
+Marienkäfer | Roter Glücksbringer mit schwarzen Punkten | 1
+Regenwurm | Kriecht nach einem Schauer aus der Erde | 1
 Maulwurf | Gräbt Gänge und wirft Hügel auf | 1
 Libelle | Insekt mit schillernden Flügeln am Teich | 2
 Wal | Riesiges Säugetier im Meer | 1
@@ -131,7 +131,7 @@ Maus | Kleiner Nager, den die Katze jagt | 1
 Katze | Haustier, das miaut und schnurrt | 1
 Hund | Bellt und bewacht das Haus | 1
 Ente | Wasservogel, der quakt | 1
-Gans | Schnatternder Vogel auf dem Hof | 1
+Gans | Schnatternder Vogel auf dem Hof, größer als die Ente | 1
 Kaninchen | Hoppelndes Haustier im Stall | 1
 Hamster | Kleiner Nager mit dicken Backentaschen | 1
 Papagei | Bunter Vogel, der sprechen lernt | 1
@@ -151,7 +151,7 @@ Tulpe | Frühlingsblume aus der Zwiebel | 1
 Nelke | Blume und zugleich ein Gewürz | 2
 Lilie | Weiße Blume, Zeichen der Reinheit | 2
 Veilchen | Kleines lila Frühlingsblümchen, das duftet | 2
-Sonnenblume | Hohe gelbe Blume mit essbaren Kernen | 1
+Sonnenblume | Hohe gelbe Pflanze mit essbaren Kernen | 1
 Löwenzahn | Gelbe Wiesenblume, später eine Pusteblume | 1
 Mohn | Rote Feldblume mit schwarzen Samen | 2
 Klee | Mit vier Blättern bringt er Glück | 1
@@ -195,7 +195,7 @@ Erbse | Kleine grüne Kugel aus der Schote | 1
 Bohne | Wird geröstet und zu Kaffee gemahlen | 1
 Reis | Körner aus Asien, im Wasser gegart | 1
 Nudel | Teigware, auch als Suppeneinlage | 1
-Pfannkuchen | Flach aus der Pfanne, mit Zucker oder Apfelmus | 1
+Pfannkuchen | Flach gebacken, mit Zucker oder Apfelmus | 1
 Bratwurst | Kommt vom Grill und wird mit Senf gegessen | 1
 Brezel | Salziges Laugengebäck mit Knoten | 1
 Sauerkraut | Gesäuerter Weißkohl | 1
@@ -224,12 +224,12 @@ Saft | Getränk aus gepresstem Obst | 1
 Wasser | Klar und frisch aus der Quelle | 1
 Sahne | Wird steif geschlagen und kommt auf den Kuchen | 1
 Zucker | Macht den Kaffee süß | 1
-Salz | Würzt die Suppe, kommt aus dem Meer | 1
+Salz | Würzt die Suppe, steht neben dem Pfeffer | 1
 Pfeffer | Scharfes Gewürz, schwarz oder weiß | 1
 Senf | Gelbe Würze zur Bratwurst | 1
 Mehl | Gemahlenes Getreide zum Backen | 1
 Quark | Weißer Frischkäse für den Käsekuchen | 2
-Eintopf | Deftiges Gericht, alles in einem Topf gekocht | 2
+Eintopf | Deftiges Gericht, bei dem alles zusammen gekocht wird | 2
 Kompott | Gekochtes Obst als Nachtisch | 2
 Eis | Kalte Leckerei in der Waffel | 1
 Rosine | Getrocknete Weintraube | 2
@@ -240,7 +240,7 @@ Fenster | Dadurch schaut man nach draußen | 1
 Dach | Schützt das Haus von oben | 1
 Treppe | Führt hinauf in den ersten Stock | 1
 Keller | Raum unter dem Haus | 1
-Dachboden | Raum direkt unter dem Dach | 1
+Dachboden | Abstellraum ganz oben im Haus | 1
 Stuhl | Darauf sitzt man am Tisch | 1
 Tisch | Daran isst die ganze Familie | 1
 Bett | Darin schläft man | 1
@@ -251,7 +251,7 @@ Decke | Hält im Bett schön warm | 1
 Kissen | Weich unter dem Kopf | 1
 Uhr | Zeigt die Zeit an | 1
 Vase | Darin stehen die Blumen | 1
-Sofa | Weiches Möbel für mehrere im Wohnzimmer | 1
+Sofa | Polstermöbel für mehrere Personen im Wohnzimmer | 1
 Sessel | Bequemer Polsterstuhl mit Armlehnen | 1
 Teppich | Liegt weich auf dem Boden | 1
 Vorhang | Geht im Theater auf und zu | 2
@@ -333,7 +333,7 @@ Hagel | Eiskörner, die vom Himmel prasseln | 1
 Gewitter | Wetter mit Blitz und Donner | 1
 Blitz | Greller Strahl bei Gewitter | 1
 Donner | Grollt nach dem Blitz | 1
-Regenbogen | Bunter Bogen am Himmel nach dem Schauer | 1
+Regenbogen | Bunter Halbkreis am Himmel nach dem Schauer | 1
 Wolke | Schwebt weiß oder grau am Himmel | 1
 Frost | Kälte unter null Grad | 1
 Tau | Morgens nasse Tropfen auf dem Gras | 2
@@ -356,7 +356,7 @@ Morgen | Beginn des Tages | 1
 Abend | Tageszeit nach dem Nachmittag | 1
 Nacht | Dunkle Zeit, in der man schläft | 1
 Mittag | Zwölf Uhr am Tag | 1
-Jahrhundert | Hundert Jahre | 1
+Jahrhundert | Zehn Jahrzehnte | 1
 Kalender | Zeigt Tage, Wochen und Monate | 1
 Klavier | Instrument mit schwarzen und weißen Tasten | 1
 Gitarre | Saiteninstrument, das man zupft | 1
@@ -368,7 +368,7 @@ Harfe | Großes Saiteninstrument, das Engel spielen | 2
 Orgel | Großes Instrument mit Pfeifen in der Kirche | 1
 Cello | Großes Streichinstrument zwischen den Knien | 2
 Akkordeon | Anderes Wort für Ziehharmonika | 2
-Lied | Wird gesungen | 1
+Lied | Wird gesungen, hat oft mehrere Strophen | 1
 Chor | Gruppe von Sängern | 1
 Note | Zeichen für einen Ton auf Papier | 1
 Melodie | Tonfolge, die man summen kann | 1
@@ -520,7 +520,7 @@ Wüste | Viel Sand und kaum Regen | 1
 Küste | Wo das Land ans Meer grenzt | 1
 Ebbe | Niedrigwasser, das Gegenteil von Flut | 2
 Flut | Steigendes Meerwasser | 2
-Watt | Meeresboden, der bei Ebbe trocken fällt | 2
+Watt | Meeresboden, über den man bei Ebbe wandern kann | 2
 Deich | Wall, der das Land vor dem Meer schützt | 1
 Wasserfall | Hier stürzt ein Bach in die Tiefe | 1
 Mond | Leuchtet nachts, mal voll, mal halb | 1
@@ -529,7 +529,7 @@ Erde | Unser Planet | 1
 Mars | Der rote Planet | 2
 Saturn | Planet mit auffälligen Ringen | 2
 Venus | Hellster Planet am Abendhimmel | 2
-Komet | Himmelskörper mit leuchtendem Schweif | 3
+Komet | Himmelskörper mit leuchtendem Schweif | 2
 Himmel | Blau über uns bei schönem Wetter | 1
 Feuer | Brennt und wärmt | 1
 Luft | Das atmen wir ein | 1

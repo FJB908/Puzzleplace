@@ -1,0 +1,619 @@
+app.name | Puzzleplace
+app.description | Des jeux de réflexion au calme, avec de grandes lettres et une présentation claire.
+app.skipToContent | Aller au contenu
+app.noscript | Puzzleplace a besoin de JavaScript. Activez JavaScript dans votre navigateur, puis rechargez la page.
+nav.main | Menu principal
+nav.home | Accueil
+nav.games | Jeux
+nav.friends | Amis
+nav.settings | Réglages
+nav.friendsNew | Amis, du nouveau : {n}
+common.noGoBack | Non, retour
+common.back | Retour
+common.close | Fermer
+common.loading | Chargement…
+common.retry | Réessayer
+common.somethingWentWrong | Cela n'a pas fonctionné.
+time.today | aujourd'hui
+time.yesterday | hier
+time.daysAgo_one | il y a {n} jour
+time.daysAgo_other | il y a {n} jours
+notFound.title | Page introuvable
+notFound.heading | Cette page n'existe pas
+notFound.text | Le lien n'est peut-être plus à jour. Ne vous inquiétez pas, votre progression est conservée.
+notFound.toHome | Aller à l'accueil
+loading.title | Chargement
+language.title | Langue
+language.choose | Choisissez votre langue
+language.chooseLater | Vous pourrez la changer plus tard dans les réglages.
+language.current | Langue
+language.chosen | sélectionnée
+home.greeting.morning | Bonjour
+home.greeting.afternoon | Bonjour
+home.greeting.evening | Bonsoir
+home.greetingName | {greeting}, {name}
+home.welcome.title | Le texte est-il facile à lire ?
+home.welcome.sizeGroup | Taille du texte
+size.normal | Normale
+size.large | Grande
+size.xlarge | Très grande
+home.welcome.ok | Ça me convient
+home.friends | Amis
+home.friends.request | Demande d'ami
+home.friends.accept | Oui
+home.friends.acceptAria | Ajouter {name} à vos amis
+home.friends.decline | Non
+home.friends.declineAria | Refuser la demande envoyée par {name}
+home.friends.nowFriends | {name} fait maintenant partie de vos amis.
+home.friends.declined | Demande refusée.
+home.friends.newGame | Nouvelle partie
+home.friends.newGameAria | Nouvelle partie avec {name}
+home.friends.yourTurn | À vous de jouer
+home.friends.waitingFor | À {name} de jouer
+home.friends.gamesCount_one | {n} partie
+home.friends.gamesCount_other | {n} parties
+home.friends.play | Jouer
+home.friends.rowAriaTurn | Jouer : {game} avec {name}. C'est votre tour.
+home.friends.rowAriaWait | Voir : {game} avec {name}. C'est à {name} de jouer.
+home.friends.signedOutTitle | Jouer avec des amis
+home.friends.signedOutText | Avec un compte, vous pouvez aussi continuer sur vos autres appareils.
+home.friends.createAccount | Créer un compte
+home.friends.logIn | Se connecter
+home.friends.none | Pas encore d'amis.
+home.friends.noneHint | Partagez votre code : vous pourrez ensuite jouer ensemble.
+home.friends.shareCode | Partager mon code
+home.friends.haveCode | J'ai un code
+home.friends.all | Tous vos amis ({n})
+home.friends.shareText | Jouons ensemble sur Puzzleplace ! Mon code ami est {code}.
+home.friends.linkCopied | Lien copié. Collez-le dans un message.
+home.chooseGame | Choisir un jeu
+home.chooseGameHint | Sudoku, mots mêlés et plus encore
+home.continue | Continuer
+home.continueAria | Continuer la partie de {game}, terminée à {pct} pour cent
+home.continueAriaNoPct | Continuer la partie de {game}
+home.daily | Grille du jour
+home.dailyDone | Terminée aujourd'hui
+common.hint | Indice
+sudoku.gridAria | Grille de sudoku
+sudoku.start | Touchez une case, puis choisissez un chiffre.
+sudoku.erase | Effacer
+sudoku.eraseAria | Effacer cette case
+sudoku.digits | Chiffres
+sudoku.undo | Annuler
+sudoku.pencil | Crayon
+sudoku.pencilOn | Crayon activé
+sudoku.digitAria | Chiffre {n}
+sudoku.digitDone | Chiffre {n}, tous placés
+sudoku.livesAria | Vies : {lives} sur {max}
+sudoku.cell.value | Ligne {r}, colonne {c} : {n}
+sudoku.cell.given | Ligne {r}, colonne {c} : {n}, fixe
+sudoku.cell.wrong | Ligne {r}, colonne {c} : {n}, incorrect
+sudoku.cell.notes | Ligne {r}, colonne {c} : vide, notes {notes}
+sudoku.cell.empty | Ligne {r}, colonne {c} : vide
+sudoku.say.fixedChoose | Ce chiffre est fixe et ne peut pas être modifié. Choisissez une case vide.
+sudoku.say.fixed | Ce chiffre est fixe et ne peut pas être modifié.
+sudoku.say.clearFirst | Effacez d'abord le chiffre de cette case pour prendre des notes.
+sudoku.say.alreadyEmpty | Cette case est déjà vide.
+sudoku.say.wrong_one | Ce chiffre ne va pas ici. Il vous reste {n} vie. Effacez-le ou essayez un autre chiffre.
+sudoku.say.wrong_other | Ce chiffre ne va pas ici. Il vous reste {n} vies. Effacez-le ou essayez un autre chiffre.
+sudoku.say.nothingToUndo | Il n'y a rien à annuler.
+sudoku.say.undone | Votre dernier coup a été annulé.
+sudoku.say.pencilOn | Crayon activé : les chiffres s'inscrivent en petit dans la case, comme une note.
+sudoku.say.pencilOff | Crayon désactivé : les chiffres s'inscrivent en grand dans la case.
+sudoku.say.hint | Indice : le chiffre {n} va dans la case mise en évidence.
+sudoku.say.nothingLeft | Il n'y a plus rien à remplir.
+sudoku.say.won | Terminé ! La grille est entièrement et correctement remplie.
+sudoku.say.noLives | Vous n'avez plus aucune vie.
+sudoku.say.retry | Nouvel essai. Bonne chance !
+sudoku.gameOver.title | Plus aucune vie
+sudoku.gameOver.text | Voulez-vous réessayer avec la même grille ?
+sudoku.gameOver.retry | Réessayer
+sudoku.gameOver.leaveDaily | Retour à l'accueil
+sudoku.gameOver.leave | Une autre grille
+sudoku.name | Sudoku
+sudoku.summary | Remplissez la grille avec les chiffres de 1 à 9.
+sudoku.howTo.1 | Dans chaque ligne, chaque colonne et chaque carré de 3 sur 3, chaque chiffre de 1 à 9 apparaît exactement une fois.
+sudoku.howTo.2 | Touchez une case vide, puis choisissez un chiffre ci-dessous.
+sudoku.howTo.3 | Si un chiffre est incorrect, vous le voyez tout de suite et une fleur (une vie) disparaît. Quand il n'y en a plus, vous recommencez.
+sudoku.howTo.4 | Avec « {pencil} », vous écrivez un chiffre en petit dans la case, comme une note. Les notes ne coûtent jamais de vie.
+sudoku.howTo.5 | Avec « {undo} », vous annulez votre dernier coup. Avec « {hint} », l'application remplit une case pour vous, sans vous faire perdre de vie.
+sudoku.level.makkelijk | Un début en douceur · 5 vies
+sudoku.level.gemiddeld | Un beau défi · 4 vies
+sudoku.level.moeilijk | Pour les joueurs expérimentés · 3 vies
+sudoku.level.extreem | Pour les vrais experts · 3 vies
+woordzoeker.gridAria | Grille de mots mêlés, {n} sur {n} lettres
+woordzoeker.start | Touchez la première lettre d'un mot, puis la dernière.
+woordzoeker.wordsAria | Mots à trouver
+woordzoeker.theme | Thème : {theme}
+woordzoeker.cell | Ligne {r}, colonne {c} : {letter}{extra}
+woordzoeker.cellFound | , fait partie d'un mot trouvé
+woordzoeker.cellStart | , début de votre sélection
+woordzoeker.foundCount | Trouvés : {n} sur {total}
+woordzoeker.foundValue | Mots trouvés : {n} sur {total}
+woordzoeker.chipFound | {word}, trouvé
+woordzoeker.chipTodo | {word}, pas encore trouvé. Touchez pour obtenir un indice.
+woordzoeker.say.beginChosen | Début choisi. Touchez maintenant la dernière lettre du mot.
+woordzoeker.say.cleared | Sélection annulée. Choisissez une nouvelle première lettre.
+woordzoeker.say.notInList | Ce mot n'est pas dans la liste. Essayez encore, vous ne risquez rien.
+woordzoeker.say.foundLeft_one | Trouvé : {word} ! Encore {n} mot à trouver.
+woordzoeker.say.foundLeft_other | Trouvé : {word} ! Encore {n} mots à trouver.
+woordzoeker.say.won | Terminé ! Vous avez trouvé tous les mots.
+woordzoeker.say.alreadyFound | Vous avez déjà trouvé {word}.
+woordzoeker.say.hint | Indice : {word} commence dans la case mise en évidence (ligne {r}, colonne {c}).
+woordzoeker.say.escape | Sélection annulée.
+woordzoeker.name | Mots mêlés
+woordzoeker.summary | Retrouvez les mots cachés parmi les lettres.
+woordzoeker.howTo.1 | Chaque grille a un thème, par exemple les fleurs. Les mots à chercher se trouvent à côté de la grille ou en dessous.
+woordzoeker.howTo.2 | Touchez la première lettre d'un mot, puis la dernière. Pour cette seconde lettre, pas besoin de viser très juste.
+woordzoeker.howTo.3 | Avec une souris, vous pouvez aussi faire glisser le pointeur. Les mots peuvent aller de gauche à droite, de haut en bas et, aux niveaux supérieurs, aussi en diagonale et à l'envers.
+woordzoeker.howTo.4 | Si le mot est dans la liste, il est mis en évidence et barré. Se tromper ne coûte rien.
+woordzoeker.howTo.5 | Un petit blocage ? Touchez un mot de la liste ou touchez « {hint} » : la première case du mot s'allume.
+woordzoeker.level.makkelijk | 8 sur 8 · 6 mots
+woordzoeker.level.gemiddeld | 10 sur 10 · aussi en diagonale
+woordzoeker.level.moeilijk | 12 sur 12 · aussi à l'envers
+woordzoeker.level.extreem | 13 sur 13 · 15 mots
+kruiswoord.gridAria | Grille de mots croisés
+kruiswoord.prevClue | Définition précédente
+kruiswoord.nextClue | Définition suivante
+kruiswoord.clueGroup | Définition
+kruiswoord.start | Touchez une case pour commencer.
+kruiswoord.backspace | Reculer et effacer la lettre
+kruiswoord.keyboard | Clavier
+kruiswoord.word | Mot
+kruiswoord.allClues | Toutes les définitions
+kruiswoord.acrossTitle | Horizontalement
+kruiswoord.downTitle | Verticalement
+kruiswoord.entryAcross | {n} horizontal
+kruiswoord.entryDown | {n} vertical
+kruiswoord.clueAcross | {n} horizontal →
+kruiswoord.clueDown | {n} vertical ↓
+kruiswoord.lettersCount_one | {n} lettre
+kruiswoord.lettersCount_other | {n} lettres
+kruiswoord.chooseCell | Choisissez une case
+kruiswoord.chooseHint | Touchez la grille. La définition s'affiche ici.
+kruiswoord.doneCount | Terminés : {n} sur {total}
+kruiswoord.doneValue | Mots terminés : {n} sur {total}
+kruiswoord.cellAria | Ligne {r}, colonne {c} : {state}. {numbers}
+kruiswoord.cellLetter | lettre {letter}
+kruiswoord.cellEmpty | vide
+kruiswoord.say.tapFirst | Touchez d'abord une case.
+kruiswoord.say.entry | {entry} : {clue} ({letters}).
+kruiswoord.say.good_one | Bravo ! {word} est correct. Encore {n} mot à trouver.
+kruiswoord.say.good_other | Bravo ! {word} est correct. Encore {n} mots à trouver.
+kruiswoord.say.notYet | Ce mot n'est pas encore correct. Relisez la définition, vous ne risquez rien.
+kruiswoord.say.alreadyRevealed | Cette case est déjà dévoilée.
+kruiswoord.say.tip | Indice : la lettre de cette case est {letter}.
+kruiswoord.say.theWord | Le mot était {word}.
+kruiswoord.say.won | Terminé ! Vous avez résolu toute la grille.
+kruiswoord.name | Mots croisés
+kruiswoord.summary | Trouvez les mots grâce aux définitions et remplissez la grille.
+kruiswoord.howTo.1 | Chaque case blanche fait partie d'un mot. La définition s'affiche au-dessus de la grille, avec le nombre de lettres.
+kruiswoord.howTo.2 | Touchez une case et écrivez avec le clavier sous la grille, ou avec votre propre clavier. Touchez de nouveau la même case pour alterner entre horizontal et vertical.
+kruiswoord.howTo.3 | Les mots se croisent : une lettre vous aide aussi pour l'autre mot.
+kruiswoord.howTo.4 | Dès qu'un mot est complet, vous voyez tout de suite s'il est juste. Un mot correct s'allume, un mot incorrect tremble un peu. Les erreurs ne coûtent rien.
+kruiswoord.howTo.5 | Avec « {hint} », vous dévoilez une lettre, avec « {word} », le mot entier. Toutes les définitions se trouvent sous la grille.
+kruiswoord.level.makkelijk | 8 mots · des mots connus
+kruiswoord.level.gemiddeld | 12 mots
+kruiswoord.level.moeilijk | 16 mots · quelques mots plus difficiles
+kruiswoord.level.extreem | 22 mots · très serrés
+woordtuin.you | Vous
+woordtuin.computer | Ordinateur
+woordtuin.boardAria | Le plateau, {n} sur {n} lettres
+woordtuin.tileAria | Lettre {letter}, ligne {r}, colonne {c}, {owner}{extra}
+woordtuin.owner.open | encore libre
+woordtuin.owner.mine | à vous
+woordtuin.owner.theirs | à votre adversaire
+woordtuin.tileProtected | , protégée
+woordtuin.tileNumber | , lettre {n} de votre mot
+woordtuin.standAria | Score : {me} {mine}, {them} {theirs}, cases libres : {open}
+woordtuin.openLeft_one | Encore {n} case libre.
+woordtuin.openLeft_other | Encore {n} cases libres.
+woordtuin.gameOver | La partie est terminée.
+woordtuin.yourTurn | C'est à vous de jouer.
+woordtuin.theirTurnPc | C'est à l'ordinateur de jouer.
+woordtuin.theirTurn | C'est à {name} de jouer.
+woordtuin.last.me | Vous avez joué {word}.
+woordtuin.last.me.took_one | Vous avez joué {word} et pris {n} case.
+woordtuin.last.me.took_other | Vous avez joué {word} et pris {n} cases.
+woordtuin.last.pc | L'ordinateur a joué {word}.
+woordtuin.last.pc.took_one | L'ordinateur a joué {word} et pris {n} case.
+woordtuin.last.pc.took_other | L'ordinateur a joué {word} et pris {n} cases.
+woordtuin.last.other | {name} a joué {word}.
+woordtuin.last.other.took_one | {name} a joué {word} et pris {n} case.
+woordtuin.last.other.took_other | {name} a joué {word} et pris {n} cases.
+woordtuin.passed.me | Vous ne pouvez plus former de mot : vous passez votre tour.
+woordtuin.passed.pc | L'ordinateur ne peut plus former de mot et passe son tour.
+woordtuin.passed.other | {name} ne peut plus former de mot et passe son tour.
+woordtuin.hint.swipe | Faites glisser le doigt sur les lettres ou touchez-les pour former un mot.
+woordtuin.hint.more_one | Choisissez encore au moins {n} lettre.
+woordtuin.hint.more_other | Choisissez encore au moins {n} lettres.
+woordtuin.preview.nice | Joli mot.
+woordtuin.preview.take_one | Vous prenez {n} case à votre adversaire.
+woordtuin.preview.take_other | Vous prenez {n} cases à votre adversaire.
+woordtuin.preview.fresh_one | Vous colorez {n} nouvelle case.
+woordtuin.preview.fresh_other | Vous colorez {n} nouvelles cases.
+woordtuin.preview.kept_one | {n} case est protégée et reste à votre adversaire.
+woordtuin.preview.kept_other | {n} cases sont protégées et restent à votre adversaire.
+woordtuin.legend | Clôture : case imprenable
+woordtuin.notOnBoard | Ce mot n'est pas sur le plateau, ou il ne colore aucune nouvelle case.
+woordtuin.waiting | Un instant…
+woordtuin.pcThinking | L'ordinateur réfléchit…
+woordtuin.otherPlace | Autre endroit
+woordtuin.type | Écrire
+woordtuin.clear | Effacer
+woordtuin.done | Valider
+woordtuin.undo | Annuler le coup
+woordtuin.hintLeft_one | Indice ({n} restant)
+woordtuin.hintLeft_other | Indice ({n} restants)
+woordtuin.typeAria | Écrivez un mot qui se trouve sur le plateau
+woordtuin.typePlaceholder | par exemple : jardin
+woordtuin.noHintsLeft | Vous n'avez plus d'indice pour cette partie.
+woordtuin.noWordLeft | Il n'y a plus de mot à trouver.
+woordtuin.hintText_one | Indice : cherchez un mot de {n} lettre qui commence dans la case mise en évidence.
+woordtuin.hintText_other | Indice : cherchez un mot de {n} lettres qui commence dans la case mise en évidence.
+woordtuin.nothingToUndo | Il n'y a rien à annuler.
+woordtuin.pc.won | Vous avez gagné, félicitations !
+woordtuin.pc.draw | Match nul !
+woordtuin.pc.lost | Bien joué !
+woordtuin.pc.score | Score final : vous {mine}, l'ordinateur {theirs}.
+woordtuin.pc.drawText_one | Vous avez chacun {n} fleur.
+woordtuin.pc.drawText_other | Vous avez chacun {n} fleurs.
+woordtuin.pc.lostText | L'ordinateur a gagné, {theirs} à {mine}. La prochaine fois, ce sera sûrement mieux : n'hésitez pas à réessayer.
+woordtuin.name | Jardin de mots
+woordtuin.summary | Formez des mots et faites pousser vos fleurs, contre l'ordinateur ou un ami.
+woordtuin.howTo.1 | Le plateau compte 6 lignes de 6 lettres. Formez un mot de 3 à 7 lettres en faisant glisser le doigt sur les lettres, ou touchez-les l'une après l'autre. Les lettres doivent se toucher, en diagonale aussi.
+woordtuin.howTo.2 | Les cases de votre mot deviennent les vôtres : elles fleurissent dans votre couleur. Si votre adversaire forme ensuite un mot qui passe par vos cases, elles deviennent les siennes.
+woordtuin.howTo.3 | Sauf les cases protégées : une case dont les voisines (à gauche, à droite, au-dessus et en dessous) ont toutes la même couleur ne peut pas être prise. Vous la reconnaissez à la petite clôture dans le coin.
+woordtuin.howTo.4 | Chaque mot doit colorer au moins une case libre et ne peut être joué qu'une seule fois. Tous les mots courants comptent, y compris les pluriels et les formes conjuguées (« fleur », « fleurs », « fleurit »). Les noms propres, les abréviations et les mots d'autres langues ne comptent pas. Les accents sont ignorés : « é » est simplement « e ».
+woordtuin.howTo.5 | Quand toutes les cases sont colorées, celui qui a le plus de fleurs gagne. Vous voyez à l'avance ce que rapporte un mot, et avec « {hint} », une case s'allume. Un mot qui n'existe pas ne coûte rien.
+woordtuin.level.makkelijk | Voit peu de mots et n'est pas toujours attentif
+woordtuin.level.gemiddeld | Ne voit qu'une partie des mots
+woordtuin.level.moeilijk | Voit beaucoup de mots et choisit habilement
+woordtuin.level.extreem | Voit tout et prévoit la suite
+games.title | Jeux
+games.subtitle | Choisissez un jeu.
+games.comingSoon | Bientôt disponible
+games.inProgress | En cours
+games.inProgressPct | En cours · {pct} %
+games.solved_one | Résolu une fois
+games.solved_other | Résolu {n} fois
+games.levels_one | {n} niveau
+games.levels_other | {n} niveaux
+level.makkelijk | Facile
+level.gemiddeld | Moyen
+level.moeilijk | Difficile
+level.extreem | Extrême
+level.default.makkelijk | Un début en douceur
+level.default.gemiddeld | Un beau défi
+level.default.moeilijk | Pour les joueurs expérimentés
+detail.solved_one | Déjà résolu une fois
+detail.solved_other | Déjà résolu {n} fois
+detail.howTo | Comment jouer
+detail.soon | Ce jeu arrive bientôt.
+detail.soonText | Nous y travaillons. En attendant, essayez un autre jeu.
+detail.backToGames | Retour aux jeux
+detail.howHard | Quel niveau ?
+detail.levelLocked | Une partie de ce jeu est déjà en cours. Choisissez « {newGame} » pour changer de niveau.
+detail.newGameConfirmTitle | Nouvelle partie ?
+detail.newGameConfirmText | Votre partie enregistrée sera remplacée.
+detail.newGameConfirmYes | Oui, nouvelle partie
+detail.continue | Continuer
+detail.continuePct | Continuer · {pct} %
+detail.newGame | Nouvelle partie
+detail.start | Commencer
+play.howTo | Règles du jeu
+play.howToTitle | {game} : comment jouer
+play.understood | Compris
+play.dailyTitle | Grille du jour : {game}
+play.autosave | Votre progression est enregistrée automatiquement.
+play.loading | Chargement du jeu…
+play.loadFailed | Le jeu n'a pas pu être chargé. Vérifiez votre connexion et réessayez.
+play.done.title | Bravo !
+play.done.text.daily | Vous avez terminé la grille du jour.
+play.done.text | Vous avez terminé cette partie.
+play.done.announce | Bravo ! La partie est terminée.
+play.done.again | Rejouer
+play.done.backHome | Retour à l'accueil
+play.done.otherGame | Choisir un autre jeu
+play.done.toHome | Aller à l'accueil
+settings.title | Réglages
+settings.subtitle | Adaptez Puzzleplace pour le confort de vos yeux.
+settings.sectionReading | Lecture
+settings.textSize | Taille du texte
+settings.preview | Voici à quoi ressemble le texte. Cela vous convient-il ?
+settings.sectionLook | Apparence
+settings.colours | Couleurs
+settings.coloursHint | « Automatique » suit le réglage de votre téléphone ou de votre ordinateur.
+settings.theme.auto | Automatique
+settings.theme.light | Clair
+settings.theme.dark | Sombre
+settings.contrast | Très lisible
+settings.contrastHint | Contraste plus fort et bordures plus épaisses
+settings.decor | Branches en fleurs
+settings.decorHint | Décor de cerisiers en fleurs
+settings.calm | Affichage calme
+settings.calmHint | Rien ne bouge à l'écran
+settings.sectionAbout | À propos de vous
+settings.firstName | Votre prénom
+settings.firstNameHint | Facultatif. Nous l'utilisons seulement pour vous saluer.
+settings.account | Compte
+settings.accountLoggedIn | Session ouverte : {name}
+settings.accountLogIn | Se connecter ou créer un compte
+settings.helpTitle | Aide
+settings.helpHint | Questions et réponses
+settings.sectionReset | Recommencer à zéro
+settings.reset | Tout effacer
+settings.resetHint | Efface votre progression et vos réglages sur cet appareil.
+settings.resetConfirmTitle | Tout effacer ?
+settings.resetConfirmText | Vos parties enregistrées et vos réglages seront effacés. Cette action est définitive.
+settings.resetConfirmYes | Oui, tout effacer
+settings.saved | Réglage enregistré
+settings.nameSaved | Prénom enregistré
+help.title | Aide
+help.subtitle | Touchez une question pour lire la réponse.
+help.q1 | Comment agrandir les lettres ?
+help.a1 | Allez dans [{settings}](#/instellingen) et, sous « {textSize} », choisissez « {large} » ou « {xlarge} ».
+help.q2 | Vais-je perdre ma progression si j'arrête ?
+help.a2 | Non. Après chaque coup, votre partie est enregistrée automatiquement sur cet appareil. Vous pouvez toujours toucher « {back} » et reprendre plus tard.
+help.q3 | Comment reprendre une partie ?
+help.a3 | Sur l'écran d'accueil, vous trouverez le jeu auquel vous jouiez. Touchez-le pour continuer. Vous le trouverez aussi sur la page du jeu.
+help.q4 | Comment recommencer une partie ?
+help.a4 | Ouvrez le jeu dans « {games} » et touchez « {newGame} ». Une confirmation vous est d'abord demandée : vous n'effacez donc jamais rien par erreur.
+help.q5 | Qu'est-ce que la grille du jour ?
+help.a5 | Une nouvelle grille vous attend chaque jour. Sur l'écran d'accueil, il suffit de la toucher pour la commencer.
+help.q6 | Puis-je ajouter Puzzleplace à mon écran d'accueil, comme une application ?
+help.a6 | Oui. Ouvrez le menu de votre navigateur et choisissez « Ajouter à l'écran d'accueil » ou « Installer l'application ».
+help.q7 | Faut-il se connecter ?
+help.a7 | Non. Vous pouvez jouer tout de suite, sans compte.
+help.q8 | Comment changer de langue ?
+help.a8 | Allez dans [{settings}](#/instellingen) et touchez « {language} ». Les grilles et les listes de mots changent en même temps.
+help.q9 | Comment fonctionne le jeu {game} ?
+help.a9 | Formez un mot de 3 à 7 lettres en faisant glisser le doigt sur des lettres voisines, ou en les touchant l'une après l'autre. Les cases de votre mot deviennent les vôtres. Si votre adversaire forme ensuite un mot qui passe par vos cases, elles deviennent les siennes, sauf les cases protégées (toutes leurs voisines ont la même couleur). Quand toutes les cases sont colorées, celui qui en a le plus gagne. Touchez « {instructions} » dans le jeu pour lire toutes les explications.
+help.q10 | Pourquoi mon mot est-il refusé dans le jeu {game} ?
+help.a10 | Tous les mots courants de la langue comptent, y compris les pluriels et les formes conjuguées (« arbre », « arbres », « grandit »). Ne comptent pas : les noms propres, les abréviations, les mots étrangers et les mots très rares. Un mot doit avoir au moins 3 lettres. Les accents n'ont pas d'importance : un « é » est simplement un « e ». Vous recevez toujours une courte explication, et une erreur ne vous coûte rien.
+help.q11 | D'où viennent les mots du jeu {game} ?
+help.a11 | La liste de mots a été établie à partir du dictionnaire orthographique libre du français {source} ({license}) et de données sur la fréquence des mots. Les noms propres, les mots étrangers et les mots que personne n'utilise ont été écartés. L'ordinateur ne joue que des mots courants.
+help.q12 | Comment jouer à {game} avec un ami ?
+help.a12 | Créez un compte dans [{account}](#/account), ajoutez votre ami dans [{friends}](#/vrienden) grâce à son code ami, puis touchez « {newGame} » à côté de son nom. Vous jouez chacun à votre tour : inutile d'attendre, l'application vous indique quand c'est à vous de jouer.
+forms.show | Afficher
+forms.hide | Masquer
+forms.suggestPassword | Proposez-moi un mot de passe
+forms.fieldEmpty | Ce champ est vide.
+forms.wrong | Un problème est survenu. Veuillez réessayer.
+forms.busy | Un instant…
+forms.passwordWords | maison,chemin,lapin,cerise,panier,violon,tortue,citron,mouton,chapeau,oiseau,carotte,cheval,sapin,colline,poire,bouton,lampe,piano,renard,canard,lavande,melon,tasse
+account.title | Compte
+account.password | Mot de passe
+account.yourPassword | Votre mot de passe
+account.currentPassword | Votre mot de passe actuel
+account.newPasswordLabel | Votre nouveau mot de passe
+account.newPassword | Un nouveau mot de passe
+account.firstName | Votre prénom
+account.email | Votre adresse e-mail
+account.facebook.continue | Continuer avec Facebook
+account.orEmail | ou avec votre adresse e-mail
+account.intro.text | Avec un compte, vous pouvez continuer sur tous vos appareils et jouer avec des amis.
+account.intro.p1.title | Votre progression sur tous vos appareils
+account.intro.p1.text | Commencez sur votre téléphone, continuez sur votre tablette.
+account.intro.p2.title | Famille et amis
+account.intro.p2.text | Ajoutez quelqu'un grâce à un code. Pas d'inconnus, pas de recherche.
+account.intro.p3.title | Jouer ensemble à {game}
+account.intro.p3.text | Formez des mots chacun à votre tour, même si vous n'êtes pas en ligne en même temps.
+account.create | Créer un compte
+account.haveOne | J'ai déjà un compte
+account.optional | Vous pouvez toujours continuer à jouer sans compte. Tout fonctionne alors sur cet appareil.
+account.firstNameHint | C'est ainsi que vos amis vous voient.
+account.emailHint | Vous l'utiliserez pour vous connecter. Nous n'envoyons jamais de publicité.
+account.passwordHint | Au moins 8 caractères. Trois mots à la suite : c'est sûr et facile à retenir.
+account.signup.pending | Créez d'abord un compte : vous pourrez ensuite ajouter votre ami.
+account.signup.busy | Création de votre compte…
+account.signup.haveAccount | Vous avez déjà un compte ? [Connectez-vous](#/account/inloggen).
+account.login | Se connecter
+account.login.busy | Vérification…
+account.forgot | Mot de passe oublié ?
+account.login.noAccount | Pas encore de compte ? [Créez-en un](#/account/nieuw).
+account.loggedIn | Connexion réussie.
+account.copy | Copier
+account.copied | Copié
+account.copyFailed | Non copié
+account.print | Imprimer
+account.recoveryCode | Votre code de récupération
+account.readyTitle | Compte créé
+account.toAccount | Aller à votre compte
+account.done.title | C'est fait, {name} !
+account.done.text | Votre compte est prêt. Encore une chose importante.
+account.done.keep | Conservez ce code en lieu sûr.
+account.done.keepText | Si vous oubliez un jour votre mot de passe, ce code vous permettra d'en choisir un nouveau. Notez-le sur une feuille ou rangez-le avec vos papiers importants. Nous ne pouvons pas le retrouver pour vous, mais vous pourrez toujours en faire créer un nouveau plus tard.
+account.done.saved | J'ai conservé le code
+account.done.continue | Continuer
+account.done.later | Je le ferai plus tard
+account.newRecovery | Nouveau code de récupération
+account.newRecovery.hint | Pour vérifier que c'est bien vous, avant de créer un nouveau code de récupération. L'ancien ne fonctionnera plus ensuite.
+account.newRecovery.make | Créer un nouveau code de récupération
+account.newRecovery.keep | Conservez ce nouveau code en lieu sûr. L'ancien ne fonctionne plus.
+account.forgotTitle | Mot de passe oublié
+account.forgot.text | Grâce à votre code de récupération, vous pouvez choisir un nouveau mot de passe.
+account.recoveryLabel | Votre code de récupération
+account.recoveryHint | C'est le code de 12 caractères que vous avez reçu lors de votre inscription, par exemple K7P4-QM2X-9TBR.
+account.setPassword | Enregistrer le mot de passe
+account.lostBoth | Vous avez aussi perdu votre code de récupération ? Dans ce cas, nous ne pouvons malheureusement pas vous redonner accès à votre compte. Vous pouvez créer un nouveau compte ; la progression sur vos appareils est conservée.
+account.sync.title | Votre progression sur tous vos appareils
+account.sync.now | Mettre à jour
+account.sync.busy | Mise à jour…
+account.sync.failed | Cela n'a pas fonctionné : {error}
+account.sync.ok | Tout est à jour ({time}).
+account.sync.soon | Mise à jour dans quelques instants.
+account.changeName | Modifier votre prénom
+account.save | Enregistrer
+account.nameSaved | Prénom enregistré
+account.viaFacebook | Compte relié à Facebook
+account.friendsHint | Votre code ami et vos amis
+account.changePassword | Changer de mot de passe
+account.changePasswordHint | Choisir un nouveau mot de passe
+account.newRecoveryHint | Si vous avez perdu l'ancien
+account.logout | Se déconnecter
+account.logout.title | Se déconnecter ?
+account.logout.text | Votre progression est en sécurité dans votre compte. Vous pourrez simplement vous reconnecter plus tard.
+account.logout.wipe | Se déconnecter et tout effacer sur cet appareil
+account.logout.stay | Rester connecté
+account.delete | Supprimer le compte
+account.delete.text | Votre compte, vos amis et votre progression enregistrée sur notre serveur seront effacés. Ce qui se trouve sur vos appareils est conservé.
+account.delete.passwordHint | Pour vérifier que c'est bien vous.
+account.delete.confirmTitle | Vous confirmez ?
+account.delete.confirmText | Cette action est définitive.
+account.delete.confirmYes | Oui, supprimer
+account.delete.submit | Oui, supprimer mon compte
+account.changePassword.text | Sur vos autres appareils, vous devrez ensuite vous reconnecter.
+account.changed.title | C'est fait
+account.changed.text | Votre mot de passe a été modifié.
+account.changed.ok | D'accord
+account.facebook.title | Connexion avec Facebook
+account.facebook.failed | La connexion avec Facebook n'a pas fonctionné, ou vous l'avez annulée. Vous pouvez réessayer, ou vous connecter avec votre adresse e-mail.
+account.facebook.failedShort | La connexion avec Facebook n'a pas fonctionné.
+common.backHome | Retour à l'accueil
+common.yes | Oui
+common.no | Non
+common.fine | D'accord
+common.didNotWork | Cela n'a pas fonctionné
+friends.subtitle | Jouez avec des personnes que vous connaissez.
+friends.loggedOut.link | Quelqu'un souhaite vous ajouter à ses amis. Créez d'abord un compte ou connectez-vous : vous pourrez ensuite continuer directement.
+friends.loggedOut.text | Jouez avec des personnes que vous connaissez. Pour cela, il vous faut un compte.
+friends.shareLinkCopied | Lien copié
+friends.renewCode | Créer un nouveau code
+friends.renew.title | Créer un nouveau code ?
+friends.renew.text | Votre ancien code ne fonctionnera plus. Vos amis actuels restent vos amis.
+friends.renew.yes | Oui, nouveau code
+friends.renewed | Nouveau code créé
+friends.yourCode | Votre code ami
+friends.yourCodeHint | Donnez ce code à une personne que vous connaissez. Elle pourra alors vous ajouter à ses amis.
+friends.score | Parties gagnées : vous {me}, {name} {them}
+friends.deletedAccount | Compte supprimé
+friends.addTitle | Ajouter un ami
+friends.haveCode | Vous avez reçu un code ?
+friends.haveCodeHint | Écrivez le code ami d'une autre personne. Les majuscules et les tirets n'ont pas d'importance.
+friends.sendRequest | Envoyer la demande
+friends.nowFriends | Vous êtes maintenant amis avec {name} !
+friends.nowFriendsAnnounce | Vous êtes maintenant amis avec {name}.
+friends.requestSentAnnounce | Demande envoyée à {name}.
+friends.requestSent | Demande envoyée à {name}. Dès qu'elle sera acceptée, vous le verrez ici.
+friends.wantsToBe | Voulez-vous devenir amis ?
+friends.wantsToBeRow | vous a envoyé une demande d'ami
+friends.waiting | En attente de réponse
+friends.asked | demande envoyée {when}
+friends.withdraw | Annuler
+friends.withdrawn | Demande annulée.
+friends.games | Vos parties
+friends.gameWith | {game} avec {name}
+friends.statusTurn | C'est à vous de jouer
+friends.statusTheirTurn | C'est à {name} de jouer
+friends.scoreLine | Vous {mine} · {name} {theirs} · {open} à prendre
+friends.play | Jouer
+friends.view | Voir
+friends.open | Ouvrir
+friends.ariaPlay | Jouer la partie avec {name}
+friends.ariaView | Voir la partie avec {name}
+friends.ariaOpen | Ouvrir la partie avec {name}
+friends.yourFriends | Vos amis
+friends.yourFriendsN | Vos amis ({n})
+friends.lastSeen | dernière visite {when}
+friends.playWith | Jouer à {game} avec {name}
+friends.remove | Retirer
+friends.removeAria | Retirer {name} de vos amis
+friends.removeTitle | Retirer {name} de vos amis ?
+friends.removeText | Vous ne serez plus amis. Vous pourrez toujours envoyer une nouvelle demande plus tard.
+friends.removeYes | Oui, retirer
+friends.removed | {name} ne fait plus partie de vos amis.
+friends.none.title | Pas encore d'amis
+friends.none.text | Partagez votre code avec une personne que vous connaissez, ou écrivez plus haut le code d'une autre personne. Dès que vous serez amis, vous pourrez jouer ensemble.
+friends.link.brokenTitle | Ce lien ne fonctionne pas
+friends.link.ownTitle | C'est votre propre code
+friends.link.ownText | Envoyez ce lien à quelqu'un d'autre : cette personne pourra alors vous ajouter.
+friends.link.addTitle | Ajouter {name} à vos amis ?
+friends.link.addText | Nous allons envoyer une demande à {name}. Dès qu'elle sera acceptée, vous serez amis.
+friends.link.yes | Oui, envoyer la demande
+match.loading | Chargement de la partie…
+match.with | avec {name}
+match.you | Vous
+match.opponent | Votre adversaire
+match.waitNote | Inutile d'attendre : vous pouvez fermer l'application. Lorsque {name} aura joué, un chiffre apparaîtra à côté de « {friends} » dans le menu.
+match.played | {name} a joué {word}. C'est à vous de jouer.
+match.over.resigned | La partie est terminée
+match.over.won | Vous avez gagné, félicitations !
+match.over.draw | Match nul !
+match.over.lost | Bien joué !
+match.again | Une autre partie avec {name}
+match.backToFriends | Retour aux amis
+match.stop | Arrêter cette partie
+match.stop.title | Arrêter cette partie ?
+match.stop.text | La partie se termine alors pour vous deux. Ce n'est pas grave du tout : vous pourrez toujours en commencer une nouvelle avec {name}.
+match.stop.yes | Oui, arrêter
+match.notFound | Cette partie n'existe pas (ou plus).
+match.versionChanged | Le plateau venait de changer. Regardez-le bien et proposez à nouveau votre mot.
+match.result.won | Vous avez gagné, {mine} à {theirs}.
+match.result.wonTiebreak | Vous avez gagné, {mine} à {theirs} (les scores étaient à égalité, les cases protégées ont fait la différence).
+match.result.lost | {name} a gagné, {theirs} à {mine}.
+match.result.lostTiebreak | {name} a gagné, {theirs} à {mine} (les scores étaient à égalité, les cases protégées ont fait la différence).
+match.result.draw_one | Match nul : vous avez chacun {n} fleur.
+match.result.draw_other | Match nul : vous avez chacun {n} fleurs.
+match.result.resignedMe | Vous avez arrêté cette partie.
+match.result.resignedThem | {name} a arrêté cette partie.
+err.notLoggedIn | Vous n'êtes pas connecté. Connectez-vous pour continuer.
+err.loggedOut | Votre session a pris fin. Reconnectez-vous.
+err.accountGone | Ce compte n'existe plus.
+err.tooFast | Cela va un peu trop vite. Attendez quelques minutes et réessayez.
+err.emailTaken | Un compte existe déjà avec cette adresse e-mail. Voulez-vous vous connecter ?
+err.tooManyLogins | Trop de tentatives de connexion. Attendez un quart d'heure et réessayez.
+err.loginWrong | L'adresse e-mail ou le mot de passe est incorrect.
+err.tooManyRecover | Trop de tentatives. Attendez une heure et réessayez.
+err.recoverWrong | L'adresse e-mail ou le code de récupération est incorrect.
+err.noPasswordFacebook | Ce compte n'a pas de mot de passe : vous vous connectez avec Facebook.
+err.currentPasswordWrong | Votre mot de passe actuel est incorrect.
+err.passwordWrong | Votre mot de passe est incorrect.
+err.facebookOff | La connexion avec Facebook n'est pas activée ici.
+err.facebookBadRequest | Cette demande n'est pas valide. Veuillez réessayer.
+err.facebookFailed | La connexion avec Facebook n'a pas fonctionné. Veuillez réessayer.
+err.tooManyLookups | Vous avez essayé beaucoup de codes. Réessayez plus tard.
+err.codeUnknown | Nous ne connaissons pas ce code ami. Vérifiez qu'il est écrit correctement.
+err.ownCode | C'est votre propre code ami. Donnez-le à un ami.
+err.alreadyFriends | Vous êtes déjà amis avec {name}.
+err.alreadyRequested | Vous avez déjà envoyé une demande à {name}. Un peu de patience.
+err.tooManyRequests | Vous avez déjà beaucoup de demandes en attente. Attendez que certaines aient reçu une réponse.
+err.maxFriends | Vous avez atteint le nombre maximal d'amis.
+err.requestGone | Cette demande n'existe plus.
+err.friendGone | Cette personne ne fait plus partie de vos amis.
+err.syncInvalid | Ces données de progression ne semblent pas valides.
+err.matchGone | Cette partie n'existe pas (ou plus).
+err.gameUnavailable | Ce jeu ne peut pas encore se jouer contre un ami.
+err.onlyFriends | Vous ne pouvez jouer qu'avec vos amis.
+err.tooManyMatches | Vous avez beaucoup de parties en cours. Terminez-en d'abord quelques-unes.
+err.lang.unknown | Ce jeu n'est pas disponible dans cette langue.
+err.matchOver | Cette partie est déjà terminée.
+err.notYourTurn | Ce n'est pas encore à vous de jouer.
+err.versionChanged | Le plateau a changé entre-temps. Actualisez la page et réessayez.
+err.notPlaying | Vous ne participez pas à cette partie.
+err.name.length | Choisissez un prénom de 2 à 24 caractères.
+err.name.chars | Ce prénom contient des caractères non autorisés.
+err.name.brackets | N'utilisez pas < ou > dans votre prénom.
+err.email.invalid | Cette adresse e-mail ne semble pas correcte. Elle doit ressembler à ceci : nom@exemple.com
+err.password.short | Un mot de passe doit contenir au moins 8 caractères. Astuce : trois mots à la suite, comme lapin-colline-cerise.
+err.password.long | Ce mot de passe est trop long (128 caractères au maximum).
+err.network | Impossible de joindre le serveur. Vérifiez votre connexion Internet et réessayez.
+err.noServer | Aucun serveur n'est disponible.
+err.generic | Un problème est survenu. Veuillez réessayer plus tard.
+err.syncConflict | Quelque chose a changé entre-temps sur un autre appareil.
+err.syncFailed | La mise à jour n'a pas fonctionné. Veuillez réessayer dans un instant.
+err.server | Un problème est survenu de notre côté. Veuillez réessayer plus tard.
+err.tooBig | C'est trop volumineux pour être envoyé.
+err.badJson | Ce message ne peut pas être lu.
+err.unknown | Cela n'existe pas.
+err.move.over | Cette partie est terminée.
+err.move.path | Ce tracé n'est pas valide.
+err.move.minLength_one | Un mot doit avoir au moins {n} lettre.
+err.move.minLength_other | Un mot doit avoir au moins {n} lettres.
+err.move.maxLength_one | Un mot ne peut pas dépasser {n} lettre.
+err.move.maxLength_other | Un mot ne peut pas dépasser {n} lettres.
+err.move.reuse | Vous ne pouvez utiliser chaque lettre qu'une seule fois.
+err.move.adjacent | Les lettres d'un mot doivent être voisines.
+err.move.unknown | Nous ne connaissons pas ce mot. Essayez-en un autre.
+err.move.played | « {word} » a déjà été joué dans cette partie. Choisissez un autre mot.
+err.move.noFresh | Chaque mot doit colorer au moins une case libre. Cherchez un mot qui passe par une case blanche.

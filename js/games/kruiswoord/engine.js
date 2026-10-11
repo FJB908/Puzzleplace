@@ -134,21 +134,21 @@ function finish(f) {
   return { rows, cols, grid, entries };
 }
 
-export function generate(seed, level = 'makkelijk', taal = 'nl') {
+// Een vast aantal pogingen, geen klok: dezelfde puzzel op elk apparaat en bij elke belasting (de puzzel van de dag is voor iedereen hetzelfde).
+export const POGINGEN = 14;
+export function generate(seed, level = 'makkelijk', taal = 'nl', pogingen = POGINGEN) {
   const ENTRIES = woorden(taal);                       // de woorden van de taal moeten al geladen zijn (laadWoorden)
   const spec = LEVELS[level] || LEVELS.makkelijk;
   const rng = makeRng(`${seed}|${level}`);
   const pool = ENTRIES.filter((e) => e.level <= spec.maxLevel && e.answer.length >= spec.minLen && e.answer.length <= Math.min(spec.maxLen, spec.max));
 
   let best = null, bestScore = -Infinity;
-  const t0 = Date.now();
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < pogingen; i++) {
     const f = attempt(pool, spec, rng);
     const area = (f.maxR - f.minR + 1) * (f.maxC - f.minC + 1);
     const score = f.placed.length * 100 + f.cross * 18 - area;
     if (score > bestScore) { bestScore = score; best = f; }
-    if (f.placed.length >= spec.words && Date.now() - t0 > 40) break;
-    if (Date.now() - t0 > 400) break;
+    if (f.placed.length >= spec.words && i >= 5) break;          // genoeg woorden en een paar pogingen om de beste te kiezen
   }
   const puzzle = finish(best);
   const problem = validate(puzzle);

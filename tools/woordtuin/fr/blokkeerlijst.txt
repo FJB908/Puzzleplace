@@ -1,0 +1,10 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+adele alpes alpha ana beurk bresil bull bye canada chi claude com coop cuba
+das der dia diane doc dora doris etc euh fanny fritz galles gallo gaza
+gilles hab han hans harper henry hermes heu hum inde indes jack jacques japon
+jenny jesus joseph julien jusqu kremlin leonard lulu mac manu maria martin max maxwell
+miam moreau mouais negre negres olympe ouah ouh oups paf patrice poe quo rene
+renee robert robin rosa russo sabine sen sil somalie soudan spencer sylvain tara terra
+tommy trad usa weber zoe

@@ -57,3 +57,16 @@ test('validate ziet fouten', () => {
   const bad = { ...p, grid: p.grid.map((row, i) => (i === 0 ? row.replace(/[A-Z]/, 'Q') : row)) };
   assert.notEqual(validate(bad), null);
 });
+
+test('de puzzel hangt niet van de klok af: op een trage of drukke telefoon is de puzzel van de dag dezelfde', () => {
+  const echt = Date.now;
+  try {
+    for (const level of Object.keys(LEVELS)) {
+      const normaal = JSON.stringify(generate(`klok-${level}`, level));
+      let t = 0; Date.now = () => (t += 500);                                  // een klok die razendsnel verspringt
+      const traag = JSON.stringify(generate(`klok-${level}`, level));
+      Date.now = echt;
+      assert.equal(traag, normaal, `${level}: andere puzzel bij een andere klok`);
+    }
+  } finally { Date.now = echt; }
+});
