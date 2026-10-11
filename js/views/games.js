@@ -32,6 +32,15 @@ function card(game) {
       pct != null ? h('span', { class: 'ws-bar gc-bar', 'aria-hidden': 'true' }, h('i', { style: `width:${pct}%` })) : null)));
 }
 
+// Alle spellen als kleine tegels, voor op Start: je ziet meteen wat er is en kiest met één tik
+export function gameTiles() {
+  return h('ul', { class: 'game-mini' }, games.filter(isReady).map((game) => {
+    const art = h('span', { class: 'art-box', 'aria-hidden': 'true' });
+    art.innerHTML = gameArt(game.id);
+    return h('li', {}, h('a', { class: `game-mini-tegel game--${game.id}`, href: `#/spel/${game.id}` }, h('span', { class: 'gm-art' }, art), h('strong', {}, game.name)));
+  }));
+}
+
 export function gamesView() {
   const sorted = [...games].sort((a, b) => Number(isReady(b)) - Number(isReady(a)));
   const node = h('div', { class: 'view' },

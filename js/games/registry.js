@@ -34,6 +34,11 @@ const GAMES = [
     wide: true,
     load: () => import('./sudoku/sudoku.js'),
   }, () => ({ pencil: t('sudoku.pencil'), undo: t('sudoku.undo'), hint: t('common.hint') })),
+  spel('woordtuin', {
+    icon: 'woordtuin',
+    status: 'ready',
+    load: () => import('./woordtuin/woordtuin.js'),
+  }, () => ({ hint: t('common.hint') })),
   spel('woordzoeker', {
     icon: 'woordzoeker',
     status: 'ready',
@@ -46,11 +51,6 @@ const GAMES = [
     wide: true,
     load: () => import('./kruiswoord/kruiswoord.js'),
   }, () => ({ hint: t('common.hint'), word: t('kruiswoord.word') })),
-  spel('woordtuin', {
-    icon: 'woordtuin',
-    status: 'ready',
-    load: () => import('./woordtuin/woordtuin.js'),
-  }, () => ({ hint: t('common.hint') })),
 ];
 
 // Voorbeeldspel om de flow te testen. Alleen zichtbaar via  index.html?demo=1

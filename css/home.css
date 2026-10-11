@@ -72,3 +72,17 @@ html[data-textsize="xlarge"] .rij-art { display: none; }
 .view--home .cal b { font-size: 1.4rem; padding: .15rem 0 .2rem; }
 .view--home .daily-text strong { font-size: 1.1rem; }
 .view--home .daily-text .chip { margin-top: .15rem; }
+
+/* ----- Alle spellen open op Start: kleine tegels, twee naast elkaar ----- */
+.home-spellen { display: flex; flex-direction: column; gap: .6rem; }
+.home-spellen h2 { margin: 0; font-size: 1.15rem; }
+.game-mini { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); gap: .7rem; }
+.game-mini-tegel { display: flex; flex-direction: column; align-items: center; gap: .45rem; padding: .7rem .5rem .8rem; border-radius: 1.2rem; background: var(--surface); box-shadow: var(--shadow); color: var(--text); text-decoration: none; text-align: center; min-height: var(--tap); transition: transform .15s ease; }
+html[data-theme="dark"] .game-mini-tegel { border: 1px solid var(--border); }
+html[data-contrast="high"] .game-mini-tegel { border: 3px solid var(--border); }
+.game-mini-tegel:active { transform: scale(.97); }
+.game-mini-tegel:focus-visible { outline: .22rem solid var(--focus); outline-offset: .15rem; }
+.gm-art { display: block; width: 100%; max-width: 6.5rem; aspect-ratio: 1; border-radius: .9rem; overflow: hidden; }
+.gm-art .art-box { display: block; width: 100%; height: 100%; }
+.gm-art .art-box svg { width: 100%; height: 100%; display: block; }
+.game-mini-tegel strong { overflow-wrap: anywhere; }

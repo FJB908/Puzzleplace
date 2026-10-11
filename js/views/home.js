@@ -11,6 +11,7 @@ import { TALEN } from '../shared/talen.js';
 import * as store from '../store.js';
 import { getGameInfo, dailyGame } from '../games/registry.js';
 import { gameArt } from '../games/art.js';
+import { gameTiles } from './games.js';
 import { FEATURES } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as social from '../services/social.js';
@@ -129,8 +130,7 @@ function continueRow() {
   const info = last && getGameInfo(last.id);
   const slot = info && store.getSlot(info.id, last.slot);
   if (!(info && slot && slot.state != null)) {
-    return h('a', { class: 'rij', href: '#/spellen' }, h('span', { class: 'tile' }, icon('games')),
-      h('span', { class: 'rij-tekst' }, h('strong', {}, t('home.chooseGame')), h('span', { class: 'muted' }, t('home.chooseGameHint'))), icon('chevron'));
+    return null;                                       // geen spel bezig: de spellen staan hieronder al open
   }
   const href = `#/spel/${info.id}/speel${last.slot === 'daily' ? '/dagelijks' : ''}`;
   const level = info.difficulties.find((d) => d.id === slot.difficulty)?.label;
@@ -162,7 +162,8 @@ function dailyRow() {
 export function homeView(_params, app) {
   const vrienden = friendsSection();
   const loggedIn = !!auth.getUser();
-  const delen = loggedIn ? [vrienden?.el, continueRow(), dailyRow()] : [continueRow(), dailyRow(), vrienden?.el];
+  const spellen = h('section', { class: 'home-spellen', 'aria-labelledby': 'home-spellen-titel' }, h('h2', { id: 'home-spellen-titel' }, t('games.title')), gameTiles());
+  const delen = loggedIn ? [vrienden?.el, continueRow(), dailyRow(), spellen] : [continueRow(), dailyRow(), spellen, vrienden?.el];
 
   const node = h('div', { class: 'view view--home' },
     h('h1', { class: 'home-titel', tabindex: '-1' }, greeting()),
