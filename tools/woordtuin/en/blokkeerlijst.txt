@@ -1,0 +1,16 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+abs afghan aha aka alps amazon amp asap ave bailey barbie barney bates batman
+bey billy blah bobby brad bros cal chad charlie china coco col colleen com
+comp cor corp cos cox danish dept dis don dos duh dunno dutch dyke
+ems est eta etc fag faggot french fritz gen gimme gonna google gotcha gotta
+graham gypsy hamburg hank harry hector hes hogan homo hon huh iii inc ins
+japan jean jeez jenny jimmy joey john johnny johns josh jun ken khan kinda
+lee lulu lux mac manila manning mans maria mars martin mas matt max mecca
+meg mick mickey midtown mike mil min molly morocco negro nelson nigga nigger noel
+non ole ooh oops ops ouch outta oxford paddy panama para pas peter peters
+phoebe pol pow prof queer quo rand randy rec reeves reg rep retard rick
+roger rogers roman romeo sally sanders sec sen sim sims sol ted tel terry
+til timothy ting tom tony troy tucker twitter ugh val versa viva wales wally
+wanna welsh whats whoa whoops wow yahoo yer yikes

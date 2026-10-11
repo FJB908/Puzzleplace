@@ -34,7 +34,7 @@ Asia Atlantic Pacific Paris London Rome Venice Sydney Everest Sahara Amazon Vien
 
 ## familie | Family
 mother father son daughter brother sister uncle aunt cousin nephew niece grandma grandpa granny
-grandad husband wife baby twins family parents children relatives toddler teenager sibling ancestor newborn
+godchild husband wife baby twins family parents children relatives toddler teenager sibling ancestor newborn
 
 ## huis | In the house
 door window roof wall floor ceiling stairs bedroom bathroom lounge hall garage attic cellar

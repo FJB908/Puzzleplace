@@ -1,0 +1,509 @@
+# Crossword in English (British spelling). Per line:  answer | clue | level   (1 = well known, 2 = a little less known, 3 = challenging). See tools/inhoud/maak.mjs.
+kettle | Boils water for a hot drink | 1
+toaster | Pops up golden slices of bread | 1
+oven | Roasts the Sunday joint | 1
+fridge | Keeps the milk and butter cold | 1
+spoon | Used to stir tea or eat soup | 1
+plate | Flat dish for your dinner | 1
+saucepan | Deep cooking vessel with a long handle | 1
+colander | Bowl with holes for draining pasta | 2
+whisk | Beats eggs into a froth | 2
+ladle | Deep spoon for serving soup | 2
+apron | Worn over clothes while cooking | 1
+sink | Basin where dishes are washed | 1
+freezer | Keeps peas and ice cream frozen | 1
+mug | Large cup with a handle | 1
+jug | Pours milk or water from a spout | 1
+cutlery | Knives, forks and spoons together | 2
+cupboard | Kitchen storage with doors | 1
+sofa | Comfortable seat for two or three | 1
+carpet | Soft covering for the floor | 1
+curtains | Hang at windows and close at night | 1
+mirror | Shows your reflection | 1
+pillow | Soft cushion for your head in bed | 1
+blanket | Warm cover on a cold night | 1
+duvet | Quilted bed cover filled with feathers | 2
+doormat | Wipe your shoes on it before coming in | 1
+stairs | Steps that lead to the next floor | 1
+chimney | Carries smoke up from the fire | 1
+attic | Room under the roof for old boxes | 1
+cellar | Underground room for wine or coal | 2
+radiator | Hot metal panel that heats a room | 1
+umbrella | Opened to keep off the rain | 1
+needle | Pointed sewing tool with an eye | 1
+candle | Wax stick with a wick | 1
+clock | Shows the time on the wall | 1
+towel | Dries you after a bath | 1
+bread | Baked from flour, yeast and water | 1
+butter | Yellow spread churned from cream | 1
+cheese | Cheddar and Stilton are types of it | 1
+milk | White drink from a cow | 1
+egg | Laid by a hen and boiled for breakfast | 1
+soup | Served hot in a bowl with a spoon | 1
+pasta | Spaghetti and penne are shapes of it | 1
+rice | Small white grains boiled as a side dish | 1
+potato | Chips and mash are made from it | 1
+carrot | Orange root that rabbits love | 1
+onion | Layered vegetable that makes you cry | 1
+cabbage | Large round leafy green vegetable | 1
+lettuce | Crisp leaves in a salad | 1
+tomato | Red fruit often sliced into salads | 1
+cucumber | Long green salad vegetable | 1
+sprouts | Small round greens served at Christmas lunch | 1
+cauliflower | White vegetable often served with cheese sauce | 2
+beetroot | Deep purple vegetable that stains your fingers | 2
+parsnip | Pale root vegetable roasted with the joint | 2
+apple | Crunchy red or green fruit used in crumbles | 1
+pear | Juicy fruit narrow at the top, wide below | 1
+banana | Yellow curved fruit with a skin to peel | 1
+orange | Round citrus fruit and a colour | 1
+lemon | Sour yellow citrus fruit | 1
+grape | Wine is made from this small fruit | 1
+plum | Purple stone fruit; prunes are dried ones | 2
+cherry | Small red fruit with a stone and a stalk | 1
+strawberry | Red summer fruit served with cream | 1
+raspberry | Red summer fruit used for jam | 2
+honey | Sweet food made by bees | 1
+jam | Fruit preserve spread on toast | 1
+sugar | Sweet white crystals for your tea | 1
+cake | Sweet baked treat with candles on birthdays | 1
+biscuit | Crisp sweet treat dunked in tea | 1
+scone | Served with jam and cream at teatime | 1
+pudding | Sweet dish served after the main course | 1
+custard | Yellow sauce poured over apple pie | 2
+porridge | Hot oat breakfast cooked with milk | 1
+sausage | Minced meat in a skin, fried or grilled | 1
+bacon | Salty rashers fried for breakfast | 1
+chicken | Roasted bird often served on Sundays | 1
+salmon | Pink fish that swims up rivers to spawn | 2
+tea | Hot drink made from dried leaves | 1
+coffee | Hot dark drink made from roasted beans | 1
+toast | Grilled slices of bread for breakfast | 1
+pie | Pastry case filled with meat or fruit | 1
+chips | Thick fried potato sticks served with fish | 1
+sandwich | Filling between two slices of bread | 1
+omelette | Beaten eggs folded and fried in a pan | 2
+pancake | Thin fried batter tossed on Shrove Tuesday | 2
+cheddar | Hard English cheese named after a Somerset village | 3
+gravy | Brown sauce poured over a roast dinner | 1
+spaghetti | Long thin strands of pasta | 2
+curry | Spicy dish from India served with rice | 1
+chocolate | Sweet brown treat made from cocoa | 1
+marmalade | Orange preserve spread on toast | 2
+rose | Thorny flower, often red | 1
+tulip | Spring flower grown from a bulb | 1
+daisy | Small white flower with a yellow centre on lawns | 1
+lily | Tall flower with trumpet-shaped petals | 2
+poppy | Red flower worn in November | 1
+daffodil | Yellow spring flower, emblem of Wales | 1
+snowdrop | First white flower of late winter | 2
+sunflower | Tall yellow bloom that turns to face the light | 1
+lavender | Purple herb with a calming scent | 1
+violet | Small purple spring flower, also a colour | 2
+orchid | Exotic flower often grown on windowsills | 2
+crocus | Early purple or yellow flower from a corm | 2
+primrose | Pale yellow spring flower of woods and banks | 2
+foxglove | Tall spiked flower with bell-like blooms | 2
+tree | Has a trunk, branches and leaves | 1
+oak | Strong tree that grows acorns | 1
+ash | Tree whose winged seeds are called keys | 2
+elm | Tree once hit by a Dutch disease | 2
+willow | Tree that weeps beside the river | 2
+birch | Tree with white papery bark | 2
+beech | Tree with smooth grey bark and copper leaves | 3
+yew | Evergreen often found in churchyards | 3
+pine | Evergreen tree with cones and needles | 1
+holly | Prickly evergreen with red berries at Christmas | 1
+ivy | Climbing evergreen that clings to walls | 1
+fern | Feathery green plant that grows in shade | 1
+moss | Soft green carpet on stones and logs | 1
+grass | Green blades covering the lawn | 1
+hedge | Row of bushes marking a boundary | 1
+acorn | Nut that grows on an oak tree | 1
+conker | Shiny brown seed of the horse chestnut | 2
+thistle | Prickly purple flower, emblem of Scotland | 2
+heather | Purple flowers on Scottish moors | 2
+bracken | Tall coarse fern of heaths and hillsides | 3
+nettle | Plant whose leaves sting your skin | 2
+clover | Three-leaved plant, four-leaved ones are lucky | 2
+mushroom | Fungus with a cap and stem | 2
+dog | Man's best friend that barks | 1
+cat | Purrs and chases mice | 1
+horse | Animal you can ride that gallops | 1
+cow | Gives milk and says moo | 1
+pig | Pink farm animal that oinks | 1
+sheep | Woolly animal that says baa | 1
+goat | Horned farm animal that nibbles anything | 2
+hen | Female bird that lays eggs | 1
+duck | Quacks and paddles on the pond | 1
+goose | Large white farm bird that hisses | 1
+swan | Elegant white bird with a long curved neck | 1
+robin | Small bird with a red breast | 1
+sparrow | Small brown garden bird | 1
+owl | Night bird that hoots | 1
+eagle | Large bird of prey with sharp talons | 2
+seagull | Noisy white bird at the beach that steals chips | 1
+pigeon | Grey city bird that coos | 1
+parrot | Colourful bird that can mimic speech | 1
+penguin | Black and white bird that swims but cannot fly | 1
+rabbit | Long-eared animal that hops | 1
+mouse | Small rodent that squeaks | 1
+squirrel | Bushy-tailed animal that buries nuts | 1
+hedgehog | Prickly garden animal that curls into a ball | 1
+fox | Red-furred animal with a bushy tail | 1
+badger | Black and white striped woodland animal | 2
+otter | Playful river animal that eats fish | 2
+deer | Stag, doe and fawn are all this | 1
+bear | Large furry animal that hibernates | 1
+lion | King of the jungle with a mane | 1
+tiger | Big cat with black stripes | 1
+elephant | Huge grey animal with a trunk | 1
+giraffe | Tallest animal with a very long neck | 1
+zebra | Striped horse-like animal of Africa | 1
+monkey | Climbs trees and loves bananas | 1
+kangaroo | Hops and carries its baby in a pouch | 1
+whale | Huge sea mammal that spouts water | 1
+dolphin | Clever sea creature that leaps and clicks | 1
+shark | Fierce sea fish with a dorsal fin | 1
+frog | Green amphibian that croaks and leaps | 1
+snail | Slow creature carrying a shell | 1
+snake | Slithering reptile with no legs | 1
+tortoise | Slow reptile with a hard shell | 1
+spider | Eight-legged creature that spins a web | 1
+bee | Buzzing insect that makes honey | 1
+ant | Tiny insect living in a large colony | 1
+butterfly | Colourful winged insect that was a caterpillar | 1
+caterpillar | Hungry crawler that becomes a butterfly | 1
+worm | Wriggles in the soil and is eaten by robins | 1
+crab | Sideways-walking shellfish with claws | 1
+donkey | Grey animal with long ears that brays | 1
+kitten | Young cat that plays with wool | 1
+puppy | Young dog full of energy | 1
+lamb | Young sheep born in spring | 1
+foal | Young horse at its mother's side | 3
+chick | Fluffy young bird that has just hatched | 1
+nest | Home that a bird builds from twigs | 1
+hive | Home for a swarm of bees | 2
+stag | Male deer with antlers | 2
+bull | Male of the cattle family, with horns | 2
+mother | Your female parent | 1
+father | Your male parent | 1
+brother | Boy with the same parents as you | 1
+sister | Girl with the same parents as you | 1
+uncle | Your parent's brother | 1
+aunt | Your parent's sister | 1
+cousin | Child of your aunt or uncle | 1
+nephew | Your brother's son | 2
+niece | Your sister's daughter | 2
+grandma | Your parent's mother | 1
+relative | Family member such as an aunt or cousin | 1
+husband | A wife's partner in marriage | 1
+baby | Tiny child who cries and crawls | 1
+twins | Two children born at the same time | 1
+friend | Someone you like and trust | 1
+neighbour | Person who lives next door | 1
+doctor | Treats patients at a surgery | 1
+nurse | Cares for patients in hospital | 1
+teacher | Leads lessons at a school | 1
+baker | Makes loaves and buns | 1
+butcher | Sells meat in a shop | 1
+farmer | Grows crops and keeps livestock | 1
+postman | Delivers letters to your door | 1
+gardener | Looks after lawns and borders | 1
+dentist | Looks after your teeth | 1
+pilot | Flies an aeroplane | 1
+sailor | Works on a ship | 1
+king | Male ruler who wears a crown | 1
+queen | Female ruler who wears a crown | 1
+knight | Armoured rider of the Middle Ages | 2
+castle | Medieval fortress with towers and a moat | 1
+crown | Worn on the head by a king or queen | 1
+rain | Falls from clouds in drops | 1
+snow | White flakes that fall in winter | 1
+wind | Moving air that blows leaves around | 1
+fog | Thick mist that hides the road | 1
+frost | White ice crystals on a winter morning | 1
+storm | Wild weather with thunder and gales | 1
+thunder | Loud rumble after lightning | 1
+lightning | Flash of electricity in the sky | 1
+rainbow | Seven colours arching across the sky after showers | 1
+cloud | Grey or white mass in the sky | 1
+breeze | Light wind that cools a summer day | 1
+drizzle | Very fine light rain | 2
+puddle | Small pool of rainwater on the road | 1
+sunshine | Warm bright rays on a fine day | 1
+river | Flows from hills to the sea | 1
+lake | Large inland body of water | 1
+sea | Salty water that covers most of the globe | 1
+ocean | Atlantic and Pacific are two of these | 1
+beach | Sandy shore beside the sea | 1
+island | Land surrounded by water | 1
+mountain | Very high land rising above the hills | 1
+hill | Gentle rise in the landscape | 1
+valley | Low land between two hills | 1
+cliff | Steep rock face by the sea | 1
+cave | Natural hollow in a hillside | 1
+forest | Large area covered with trees | 1
+field | Open land where crops grow or sheep graze | 1
+waterfall | River tumbling over a high ledge | 2
+pond | Small still pool in a garden | 1
+desert | Hot, dry, sandy region | 1
+volcano | Mountain that erupts with lava | 2
+star | Twinkling light in the night sky | 1
+moon | Shines at night and circles the Earth | 1
+sun | Star at the centre of our solar system | 1
+London | Capital of England on the Thames | 1
+Paris | French capital on the Seine | 1
+Rome | Italian capital built on seven hills | 1
+Madrid | Capital city of Spain | 1
+Berlin | German capital once divided by a wall | 2
+Vienna | Austrian capital famed for waltzes | 2
+Lisbon | Portuguese capital on the River Tagus | 2
+Athens | Greek capital beneath the Acropolis | 2
+Dublin | Irish capital on the River Liffey | 2
+Edinburgh | Scottish capital with a famous castle | 1
+Cardiff | Capital city of Wales | 2
+Belfast | Capital city of Northern Ireland | 2
+Glasgow | Scottish city on the River Clyde | 2
+Manchester | Northern English city famed for its cotton mills | 2
+Liverpool | English port city on the Mersey | 2
+Oxford | University city known for dreaming spires | 2
+Cambridge | University city on the River Cam | 2
+York | Northern city with a great Minster | 2
+Bath | Georgian spa city in Somerset | 2
+Venice | Italian city of canals and gondolas | 2
+Thames | River that flows through London | 1
+Severn | River that flows into the Bristol Channel | 3
+Snowdon | Highest mountain in Wales | 3
+Nevis | Mountain near Fort William, the highest in Britain | 3
+Danube | Long river through Vienna and Budapest | 3
+Stonehenge | Ring of huge prehistoric slabs in Wiltshire | 3
+Cornwall | Southwestern county with Land's End | 2
+Kent | Southeastern county called the Garden of England | 2
+England | Country whose patron saint is George | 1
+Scotland | Country of thistles and bagpipes | 1
+Wales | Country with a red dragon on its flag | 1
+Ireland | The Emerald Isle | 1
+France | Country of Paris and the Eiffel Tower | 1
+Spain | Country of flamenco and paella | 1
+Italy | Boot-shaped country in southern Europe | 1
+Germany | European country with Berlin as its capital | 1
+Greece | Country of ancient temples and sunny islands | 1
+Norway | Scandinavian country of deep fjords | 2
+Egypt | Land of pyramids and the Nile | 1
+Africa | Continent that contains the Sahara | 1
+Asia | Continent that includes India and China | 1
+Europe | Continent that includes France and Spain | 1
+Australia | Island continent in the southern hemisphere | 1
+Canada | North American country with a maple leaf flag | 1
+India | Country of the Taj Mahal | 1
+China | Country of the Great Wall | 1
+Japan | Island nation whose capital is Tokyo | 2
+Brazil | South American land of samba and carnival | 2
+Nile | Long river flowing through Egypt | 2
+Amazon | Great South American river and rainforest | 2
+Everest | Himalayan peak first climbed in 1953 | 2
+Sahara | Vast desert in northern Africa | 2
+Alps | Mountain range of Switzerland and Austria | 2
+Atlantic | Ocean between Europe and America | 2
+Pacific | Ocean that touches Japan and California | 2
+pyramid | Ancient Egyptian tomb with triangular sides | 2
+coat | Worn over your clothes in winter | 1
+jacket | Short coat with sleeves and pockets | 1
+jumper | Knitted top worn in cold weather | 1
+cardigan | Knitted jacket fastened with buttons | 1
+scarf | Wrapped round your neck in winter | 1
+gloves | Keep your hands warm | 1
+hat | Worn on your head against sun or cold | 1
+shirt | Top with a collar and buttons | 1
+blouse | Lady's top with buttons and a collar | 2
+dress | One-piece garment for women | 1
+skirt | Hangs from the waist with no legs | 1
+trousers | Cover both legs | 1
+jeans | Blue denim trousers | 1
+socks | Worn inside shoes | 1
+slippers | Soft shoes for indoors | 1
+pyjamas | Worn in bed at night | 1
+belt | Holds up your trousers | 1
+tie | Knotted at the neck beneath a collar | 2
+sandals | Open summer shoes with straps | 1
+zip | Fastener that slides up and down | 2
+piano | Instrument with black and white keys | 1
+violin | Stringed instrument played with a bow | 1
+guitar | Strummed instrument with six strings | 1
+drum | Beaten with sticks to keep the rhythm | 1
+flute | Wind instrument blown across a hole | 2
+harp | Triangular instrument with many strings | 2
+trumpet | Brass instrument with three valves | 2
+organ | Church instrument with pipes and pedals | 2
+choir | Group of singers in church | 1
+song | Words set to music | 1
+tune | Melody you can hum | 1
+band | Group of musicians | 1
+concert | Live musical performance | 1
+orchestra | Large group of musicians led by a conductor | 2
+conductor | Waves a baton in front of an orchestra | 2
+rhythm | Regular beat in music | 2
+opera | Drama sung on stage with an orchestra | 2
+waltz | Dance in three-four time | 2
+paint | Colour applied with a brush | 1
+easel | Stand that holds an artist's canvas | 3
+knitting | Making a jumper with two needles | 1
+sewing | Joining cloth with needle and thread | 1
+crochet | Making lace with a single hook | 2
+embroidery | Decorating cloth with coloured stitches | 3
+pottery | Craft of shaping clay and firing it in a kiln | 2
+gardening | Growing flowers and vegetables as a hobby | 1
+fishing | Angler's pastime with rod and line | 1
+cycling | Pedalling along country lanes | 1
+swimming | Moving through water using strokes | 1
+chess | Board game with kings, queens and pawns | 1
+cards | Whist and bridge are played with these | 2
+bingo | Game where numbers are called out | 1
+golf | Played with clubs on a course with eighteen holes | 1
+tennis | Game played with rackets over a net | 1
+cricket | Summer bat-and-ball game with wickets | 1
+football | Game of goals played by eleven a side | 1
+darts | Pub game of throwing small arrows at a board | 2
+bowls | Lawn game of rolling weighted balls towards a jack | 3
+jigsaw | Puzzle made of interlocking pieces | 1
+cinema | Place to watch films on a big screen | 1
+theatre | Building where plays are staged | 1
+film | Movie shown on a cinema screen | 1
+poem | Lines of verse that may rhyme | 2
+novel | Long fictional story in a book | 1
+library | Place where you borrow books | 1
+radio | Listened to at home without pictures | 1
+camera | Device used to take photographs | 1
+train | Runs on rails between stations | 1
+station | Where trains stop for passengers | 1
+bus | Large vehicle carrying passengers along a route | 1
+tram | Runs along city streets on rails | 2
+taxi | Hired car with a driver | 1
+car | Four-wheeled motor vehicle | 1
+bicycle | Two wheels, pedals and a saddle | 1
+lorry | Large vehicle carrying goods by road | 1
+ship | Large vessel crossing the sea | 1
+ferry | Boat that carries cars across water | 1
+plane | Flying machine with wings and engines | 1
+airport | Where aeroplanes take off and land | 1
+ticket | Proof you paid for a journey | 1
+passport | Document you show at the border | 1
+suitcase | Bag with a handle packed for a holiday | 1
+luggage | Bags you take on a trip | 1
+holiday | Break from work spent by the sea | 1
+hotel | Place to stay overnight, with a reception | 1
+map | Shows roads and places on paper | 1
+compass | Needle that always points north | 2
+journey | Trip from one place to another | 1
+road | Paved route for vehicles | 1
+motorway | Fast road with several lanes | 2
+platform | Where you wait for a train | 2
+anchor | Heavy hook dropped from a ship | 2
+postcard | Picture sent home from your holiday | 1
+camping | Sleeping in a tent in the countryside | 1
+tent | Canvas shelter pitched in a field | 1
+Christmas | December celebration with presents and a tree | 1
+Easter | Spring festival with chocolate eggs | 1
+birthday | Yearly celebration of the day you arrived | 1
+wedding | Bride and groom exchange rings at this | 1
+party | Social gathering with food and music | 1
+present | Gift wrapped in paper | 1
+fireworks | Rockets and sparklers on November the fifth | 2
+carnival | Street festival with floats and costumes | 2
+parade | Procession marching down the street | 2
+spring | Season when buds appear | 1
+summer | Warmest season, with long days | 1
+autumn | Season when leaves fall | 1
+winter | Coldest season, with short days | 1
+morning | Time of day before noon | 1
+evening | Time of day after the afternoon | 1
+night | Time when it is dark | 1
+Monday | First working day of the week | 1
+December | Last month of the year | 1
+watch | Worn on the wrist to tell the time | 1
+head | Part of the body above the neck | 1
+hand | Has five fingers | 1
+foot | Part of the body you stand on | 1
+finger | One of five on each hand | 1
+eye | Organ you see with | 1
+ear | Organ used for listening, with a lobe | 1
+nose | Organ in the middle of your face for smelling | 1
+mouth | Opening for eating and speaking | 1
+teeth | Brushed twice a day | 1
+heart | Pumps blood round the body | 1
+brain | Organ inside your skull used for thinking | 1
+hair | Grows on your head and is combed | 1
+garden | Plot behind a house with a lawn and borders | 1
+house | Building where a family lives | 1
+village | Small settlement smaller than a town | 1
+town | Larger than a village, smaller than a city | 1
+church | Building with a spire and bells | 1
+school | Where children learn their lessons | 1
+hospital | Where the sick are treated by doctors | 1
+shop | Place where you buy goods | 1
+market | Stalls selling fruit and vegetables outdoors | 1
+money | Coins and notes you spend | 1
+letter | Written message in an envelope | 1
+stamp | Stuck on an envelope to pay for delivery | 1
+newspaper | Printed daily with headlines and a crossword | 1
+book | Pages bound between covers | 1
+pencil | Writing tool with a lead | 1
+telephone | Used to speak to someone far away | 1
+scythe | Long curved blade for mowing tall grass by hand | 3
+anvil | Heavy iron block on which a blacksmith works | 3
+loom | Machine for weaving cloth | 3
+thatch | Straw roof covering on old cottages | 3
+cobbles | Rounded stones that pave old streets | 3
+kiln | Oven used for firing clay pots | 3
+lantern | Portable lamp with a glass case | 2
+almanac | Yearly book of calendars and weather forecasts | 3
+walk | Go on foot at a gentle pace | 1
+run | Move faster than a walk | 1
+swim | Move through water with strokes | 1
+sleep | Rest with closed eyes at night | 1
+laugh | Make a happy sound at a joke | 1
+sing | Make music with your voice | 1
+bake | Cook bread or cakes in the oven | 1
+read | Take in the words of a book | 1
+write | Put words on paper with a pen | 1
+climb | Go up a hill or a ladder | 1
+jump | Leap up from the ground | 1
+wash | Clean with soap and water | 1
+happy | Feeling cheerful and glad | 1
+sad | Feeling tearful and low | 1
+tall | Reaching high above the others | 1
+small | Little in size | 1
+quiet | Making hardly any noise | 1
+loud | Making a lot of noise | 1
+warm | Pleasantly hot, as in summer | 1
+cold | Having a low temperature | 1
+fast | Moving at great speed | 1
+slow | Taking a long time | 1
+sweet | Tasting of sugar | 1
+sour | Sharp-tasting like a lemon | 1
+brave | Not afraid of danger | 1
+kind | Gentle and helpful to others | 1
+clever | Quick at learning and understanding | 1
+honest | Always telling the truth | 2
+polite | Showing good manners | 2
+famous | Known by many people | 2
+ancient | Very old, from long ago | 2
+empty | Holding nothing at all | 1
+heavy | Difficult to lift | 1
+round | Shaped like a ball or circle | 1
+square | Shape with four equal sides | 1
+circle | Round shape with no corners | 1
+triangle | Shape with three sides | 1
+red | Colour of tomatoes and poppies | 1
+green | Colour of grass and leaves | 1
+blue | Colour of a clear sky | 1
+yellow | Colour of lemons and butter | 1
+purple | Colour of plums and violets | 1
+pink | Colour made by mixing red and white | 1
+black | Colour of coal | 1
+white | Colour of fresh snow | 1
+brown | Colour of chocolate and earth | 1
+grey | Colour of storm clouds | 1
+gold | Precious yellow metal | 1
+silver | Shiny grey-white metal used for cutlery | 2

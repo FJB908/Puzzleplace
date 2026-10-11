@@ -1,0 +1,46 @@
+# Sopa de letras en español (España). Temas fijos; palabras separadas por espacios. Ver tools/inhoud/maak.mjs.
+
+## bloemen | Flores
+rosa tulipán margarita clavel jazmín lirio violeta azucena orquídea girasol amapola geranio begonia dalia peonía petunia narciso hortensia camelia gladiolo lavanda azalea crisantemo nardo pensamiento jacinto iris fucsia
+
+## tuin | En el jardín
+césped rastrillo pala azada regadera manguera maceta semilla huerto seto valla banco estanque columpio tijeras carretilla abono invernadero hoja hierba sombrilla fuente terraza hamaca tierra raíz rama musgo
+
+## dieren | Animales
+perro gato caballo vaca oveja cerdo gallina pato conejo burro cabra ratón león elefante jirafa tigre delfín ballena tortuga águila mariposa abeja hormiga zorro ciervo lobo oso cigüeña
+
+## keuken | En la cocina
+cocina nevera horno sartén cazo olla cuchillo tenedor cuchara plato vaso taza fregadero batidora tostadora cafetera delantal abrelatas colador rallador espátula microondas fogón jarra bandeja tetera mantel servilleta
+
+## eten | Comida sabrosa
+pan queso jamón tortilla paella gazpacho ensalada sopa arroz pasta pollo pescado fruta manzana naranja plátano chocolate helado tarta galleta mantequilla miel huevo lentejas croqueta turrón bocadillo patata
+
+## weer | El tiempo
+lluvia sol viento nube niebla nieve tormenta trueno rayo granizo calor frío helada arcoíris relámpago tempestad chubasco llovizna bruma sequía brisa temperatura clima paraguas charco escarcha cielo huracán
+
+## reizen | De viaje
+viaje maleta billete tren avión barco hotel playa mapa pasaporte aeropuerto estación autobús taxi equipaje turista guía crucero destino vacaciones camping mochila carretera excursión aduana andén ruta autopista
+
+## land | España
+Madrid Barcelona Sevilla Valencia Granada Toledo Bilbao Córdoba Salamanca Cádiz Galicia Andalucía Cataluña Asturias Navarra Tajo Ebro Duero paella flamenco Alhambra Prado siesta Mallorca Canarias Teide Pirineos Mezquita
+
+## familie | La familia
+madre padre hijo hija abuelo abuela nieto nieta hermano hermana tío tía primo prima sobrino sobrina esposo esposa suegro suegra yerno nuera cuñado cuñada bebé familia padrino marido
+
+## huis | En casa
+casa puerta ventana techo suelo pared escalera sofá sillón mesa silla cama armario cortina alfombra lámpara espejo cuadro baño salón dormitorio pasillo tejado chimenea balcón almohada estantería reloj
+
+## natuur | La naturaleza
+bosque montaña río lago mar playa valle colina cueva isla selva desierto campo prado árbol roca piedra arena cascada arroyo volcán laguna pradera sendero océano costa acantilado manantial
+
+## muziek | La música
+música piano guitarra violín flauta tambor trompeta arpa canción coro orquesta concierto melodía ritmo nota partitura cantante acordeón saxofón clarinete violonchelo batería zarzuela vals ópera himno tenor sonata
+
+## hobby | Aficiones
+pintura dibujo costura ganchillo bordado fotografía pesca senderismo ajedrez dominó bricolaje cartas crucigrama lectura jardinería cerámica baile ciclismo natación tejer coser naipes escultura canto damas yoga petanca bolos
+
+## kleding | La ropa
+camisa pantalón falda vestido abrigo chaqueta jersey bufanda guantes sombrero gorra zapatos calcetines medias bota sandalia pijama bata corbata cinturón bolso pañuelo traje camiseta chaleco gabardina bañador zapatillas
+
+## feest | Celebraciones
+fiesta cumpleaños regalo vela globo boda bautizo aniversario brindis champán confeti desfile carnaval verbena pastel invitado baile villancico belén serpentina guirnalda banquete sorpresa tarjeta abrazo comida cena jolgorio

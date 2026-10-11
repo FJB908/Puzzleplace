@@ -1,0 +1,2 @@
+# Woorden die in het Engels vaker voorkomen dan in deze taal, maar die gewoon woorden van deze taal zijn: ze worden niet als Engels geweigerd.
+
