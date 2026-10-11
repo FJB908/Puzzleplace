@@ -1,0 +1,527 @@
+# Krzyżówka po polsku. Per regel:  antwoord | omschrijving | niveau
+dom | Tu mieszkasz z rodziną | 1
+kot | Mruczy i łowi myszy | 1
+pies | Wierny przyjaciel człowieka, szczeka | 1
+koń | Zwierzę z grzywą, na którym się jeździ | 1
+krowa | Daje mleko i muczy | 1
+owca | Daje wełnę | 1
+koza | Zwierzę z brodą i rogami, daje mleko | 1
+kura | Znosi jajka | 1
+kaczka | Pływa po stawie i kwacze | 1
+gęś | Duży ptak z długą szyją, syczy | 1
+świnia | Różowe zwierzę z chlewu | 1
+królik | Długie uszy, lubi marchewkę | 1
+lis | Rudy spryciarz z lasu | 1
+wilk | Dziki krewny psa, wyje do księżyca | 1
+jeleń | Leśne zwierzę z rozłożystym porożem | 1
+sarna | Mała leśna kuzynka jelenia | 2
+zając | Polny skoczek, szybszy od królika | 2
+jeż | Kolczasty mieszkaniec ogrodu | 1
+bocian | Biało-czarny ptak na gnieździe na dachu | 1
+sowa | Nocny ptak, ma wielkie oczy | 1
+żaba | Skacze i rechocze nad stawem | 1
+słoń | Wielki zwierzak z trąbą | 1
+lew | Król zwierząt | 1
+żyrafa | Zwierzę z najdłuższą szyją | 1
+małpa | Lubi banany i skacze po drzewach | 1
+osioł | Uparty szary zwierzak z długimi uszami | 1
+wróbel | Mały szary ptak, mieszka w mieście | 1
+pszczoła | Zbiera nektar i robi miód | 1
+motyl | Owad z kolorowymi skrzydłami | 1
+mrówka | Mały, bardzo pracowity owad | 1
+pająk | Tkacz sieci w kącie | 1
+ryba | Pływa w wodzie, ma płetwy | 1
+karp | Ryba na wigilijnym stole | 1
+łabędź | Biały ptak o długiej szyi na jeziorze | 1
+gołąb | Ptak, symbol pokoju | 1
+róża | Kwiat z kolcami | 1
+tulipan | Wiosenny kwiat z cebulki | 1
+mak | Czerwony kwiat na polu, z nasionkami do ciasta | 1
+słonecznik | Wielki żółty kwiat z pestkami | 1
+stokrotka | Mały biały kwiatek na trawniku | 1
+konwalia | Pachnący biały kwiat w kształcie dzwonków | 2
+chaber | Niebieski kwiat polny | 1
+lawenda | Fioletowa, pachnąca roślina | 1
+jaśmin | Biały pachnący krzew | 2
+bez | Fioletowy krzew, kwitnie w maju | 1
+lilia | Duży kwiat, symbol czystości | 2
+storczyk | Egzotyczny kwiat doniczkowy | 2
+kaktus | Kolczasta roślina z pustyni | 1
+drzewo | Ma pień, gałęzie i liście | 1
+dąb | Drzewo z żołędziami | 1
+sosna | Iglaste drzewo z szyszkami | 1
+brzoza | Drzewo o białej korze | 1
+buk | Drzewo z trójkątnymi orzeszkami | 2
+lipa | Drzewo, z którego kwiatów robi się herbatę | 1
+jabłoń | Drzewo owocowe, owoce idealne do szarlotki | 1
+wiśnia | Drzewo owocowe, kwaśne czerwone owoce na nalewkę | 2
+śliwa | Drzewo, z którego owoców robi się powidła | 2
+gruszka | Słodki owoc w kształcie żarówki | 1
+pomidor | Czerwone warzywo do sałatki | 1
+ogórek | Zielone warzywo, kiszone lub świeże | 1
+marchew | Pomarańczowe warzywo, lubi ją królik | 1
+ziemniak | Bulwa, z której robi się frytki | 1
+cebula | Warzywo, od którego łzawią oczy | 1
+czosnek | Pachnąca główka, odstrasza wampiry | 1
+kapusta | Warzywo na bigos i gołąbki | 1
+burak | Czerwone warzywo do barszczu | 1
+groch | Zielone kuleczki w strąku | 2
+fasola | Biała lub kolorowa roślina strączkowa | 1
+sałata | Zielone, chrupiące liście na kanapce | 1
+truskawka | Czerwony owoc z pestkami na zewnątrz | 1
+malina | Czerwony owoc z krzaczka, na syrop | 1
+porzeczka | Owoc w gronach, czerwony lub czarny | 2
+jagoda | Granatowy owoc z lasu | 1
+arbuz | Wielki zielony owoc z czerwonym miąższem | 1
+cytryna | Kwaśny żółty owoc | 1
+pomarańcza | Soczysty owoc cytrusowy | 2
+banan | Żółty owoc w skórce | 1
+winogrono | Zielone lub ciemne kulki na pędzie | 2
+chleb | Wypiekany codziennie, kroi się go na kromki | 1
+bułka | Mały okrągły wypiek na śniadanie | 1
+masło | Żółty tłuszcz do chleba | 1
+ser | Z mleka, dziurawy lub żółty | 1
+szynka | Wędlina z wieprzowiny | 1
+kiełbasa | Wędlina z grilla | 1
+zupa | Gorąca potrawa w talerzu | 1
+pieróg | Ugotowane ciasto z nadzieniem, np. ruskie | 1
+naleśnik | Cienki placek z patelni, z dżemem | 1
+makaron | Włoskie spaghetti jest jego rodzajem | 1
+ryż | Białe ziarna do risotto | 1
+jajko | Z kury, na twardo lub miękko | 1
+mleko | Biały napój od krowy | 1
+jogurt | Kwaśny przetwór mleczny z kubeczka | 1
+kotlet | Panierowane mięso na obiad | 1
+barszcz | Czerwona zupa z buraków | 1
+bigos | Staropolskie danie z kapusty i mięsa | 1
+placek | Płaski wypiek, np. z jabłkami | 2
+sernik | Ciasto z twarogu | 1
+szarlotka | Ciasto z jabłkami i cynamonem | 1
+miód | Słodki dar pszczół | 1
+dżem | Słodki przetwór owocowy do chleba | 1
+kasza | Zboże do gotowania, np. gryczana | 1
+omlet | Jajka usmażone na patelni, puszyste | 1
+tort | Duże ciasto urodzinowe | 1
+pączek | Smażony, słodki, z nadzieniem, na tłusty czwartek | 1
+galaretka | Drżąca słodka masa owocowa | 2
+kawa | Czarny, pobudzający napój | 1
+herbata | Parzone liście w filiżance | 1
+sok | Napój z owoców | 1
+woda | Płynie z kranu, ugasi pragnienie | 1
+piwo | Złocisty napój z chmielu | 1
+wino | Trunek w butelce z korkiem, czerwony lub biały | 2
+sól | Biała przyprawa na stole | 1
+cukier | Słodzi herbatę | 1
+pieprz | Ostra czarna przyprawa | 1
+mąka | Z niej robi się ciasto | 1
+olej | Rzepakowy lub słonecznikowy płyn do smażenia | 1
+ocet | Kwaśny płyn do sałatek | 1
+garnek | Gotuje się w nim zupę | 1
+patelnia | Smaży się na niej jajecznicę | 1
+talerz | Naczynie, z którego jesz obiad | 1
+kubek | Pijesz z niego herbatę, ma uszko | 1
+widelec | Sztuciec z ząbkami | 1
+nóż | Sztuciec do krojenia | 1
+łyżka | Sztuciec do zupy | 1
+miska | Głębokie naczynie na sałatkę | 1
+sitko | Przecedzasz nim herbatę | 2
+czajnik | Gotuje się w nim wodę na herbatę | 1
+lodówka | Trzyma jedzenie w chłodzie | 1
+piekarnik | W nim piecze się ciasto | 1
+kuchenka | Gazowa lub elektryczna, do gotowania | 1
+szklanka | Przezroczyste naczynie na wodę | 1
+tarka | Zetrzesz nią marchewkę | 2
+wałek | Drewniany przyrząd do ciasta na pierogi | 2
+mikser | Ubija nim śmietanę | 2
+toster | Przyrząd do opiekania chleba | 1
+fartuch | Chroni ubranie przy gotowaniu | 2
+rondel | Mały garnek z długą rączką | 2
+durszlak | Odcedzasz nim makaron | 2
+drzwi | Wchodzisz przez nie do pokoju | 1
+okno | Szyba w ścianie, przez którą widać podwórko | 1
+dach | Chroni budynek od góry przed deszczem | 1
+ściana | Pionowa część pokoju, na niej wisi obraz | 1
+podłoga | Chodzisz po niej w domu | 1
+sufit | Górna płaszczyzna pokoju | 1
+schody | Prowadzą na piętro | 1
+pokój | Pomieszczenie w mieszkaniu | 1
+kuchnia | Tu się gotuje | 1
+łazienka | Tu bierzesz kąpiel | 1
+sypialnia | Pokój do spania | 1
+balkon | Wąski taras wysoko przy mieszkaniu | 1
+komin | Wychodzi z niego dym nad dachem | 1
+kanapa | Mebel do siedzenia dla kilku osób | 1
+fotel | Wygodne siedzisko z podłokietnikami | 1
+stół | Przy nim jemy posiłki | 1
+krzesło | Siadasz na nim przy stole | 1
+szafa | Trzymasz w niej ubrania | 1
+łóżko | Mebel do spania | 1
+dywan | Miękki, leży na podłodze | 1
+lampa | Daje światło wieczorem | 1
+zasłona | Materiał wiszący przy oknie | 1
+lustro | Odbija twoją twarz | 1
+zegar | Pokazuje godzinę na ścianie | 1
+obraz | Wisi na ścianie w ramie | 1
+półka | Na niej stoją książki | 1
+poduszka | Kładziesz na niej głowę do snu | 1
+koc | Ciepłe okrycie na kanapie | 1
+wanna | Napełniona wodą, do kąpieli | 2
+koszula | Ubranie z kołnierzykiem i guzikami | 1
+spodnie | Mają dwie nogawki | 1
+spódnica | Damskie ubranie bez nogawek | 1
+sukienka | Kobiece ubranie w jednym kawałku | 1
+kurtka | Wierzchnie ubranie na chłodne dni | 1
+płaszcz | Długie okrycie wierzchnie na jesień | 1
+sweter | Wełniany, na zimne dni | 1
+szalik | Owija szyję zimą | 1
+czapka | Nakrycie głowy zimą | 1
+rękawiczka | Okrycie dłoni na zimę | 1
+skarpetka | Wkładasz ją na stopę przed butem | 1
+but | Nosisz go na stopie | 1
+kapelusz | Nakrycie głowy z rondem | 1
+bluzka | Lekka damska odzież na górę | 1
+marynarka | Część garnituru | 2
+krawat | Wiąże się go pod kołnierzem | 1
+pasek | Podtrzymuje spodnie w talii | 1
+piżama | Ubranie do spania | 1
+szlafrok | Narzucasz go po kąpieli | 2
+kamizelka | Ubranie bez rękawów, noszone na koszuli | 2
+chustka | Kwadratowa tkanina na głowę lub szyję | 2
+kalosz | Gumowy but na deszcz i błoto | 2
+sandał | Letni but z paskami | 2
+garnitur | Męski strój na ważne okazje | 1
+guzik | Zapinasz nim koszulę | 1
+igła | Szyje się nią, ma ucho | 1
+walizka | Pakujesz do niej rzeczy na urlop | 1
+bilet | Kupujesz go na pociąg lub do kina | 1
+pociąg | Jedzie po szynach | 1
+samolot | Leci w powietrzu z pasażerami | 1
+lotnisko | Tu startują i lądują samoloty | 1
+dworzec | Tu czeka się na pociąg | 1
+hotel | Wynajmujesz tu pokój na noc | 1
+plecak | Nosisz go na grzbiecie na wycieczce | 1
+mapa | Pokazuje drogi i miasta | 1
+paszport | Dokument potrzebny za granicą | 1
+autobus | Pojazd miejski z przystankami | 1
+statek | Pływa po morzu | 1
+plaża | Piasek nad morzem | 1
+namiot | Płócienny dom na kempingu | 1
+kemping | Pole z namiotami | 2
+wycieczka | Zwiedzanie z przewodnikiem | 1
+bagaż | To, co zabierasz w podróż | 1
+urlop | Wolne od pracy | 1
+morze | Słona woda aż po horyzont | 1
+góra | Wysoko wzniesiony szczyt skalny | 1
+tramwaj | Jeździ po torach po mieście | 1
+rower | Dwa koła i pedały | 1
+prom | Przewozi auta przez wodę | 2
+samochód | Czterokołowy pojazd z silnikiem | 1
+droga | Prowadzi z miasta do miasta | 1
+most | Przechodzi się po nim nad rzeką | 1
+las | Dużo drzew rośnie razem | 1
+rzeka | Płynie do morza | 1
+jezioro | Duży zbiornik wody otoczony lądem | 1
+łąka | Zielona trawa i kwiaty | 1
+pole | Rosną na nim zboża | 1
+dolina | Zagłębienie między górami | 1
+wzgórze | Niewielka górka | 1
+skała | Twardy, duży głaz w górach | 1
+liść | Zielona część drzewa | 1
+trawa | Zielona, rośnie na trawniku | 1
+mech | Miękka zielona roślina na pniu | 1
+grzyb | Kapelusz i trzon w lesie | 1
+strumień | Mały potok | 2
+wodospad | Woda spada z wysoka | 2
+wyspa | Ląd otoczony wodą | 1
+pustynia | Sucha kraina z piaskiem | 1
+bagno | Mokry, grząski teren | 2
+źródło | Początek rzeki | 1
+jaskinia | Podziemna dziura w skale | 2
+kamień | Twardy, leży na drodze | 1
+piasek | Sypie się go na plaży | 1
+słońce | Świeci w dzień | 1
+księżyc | Świeci nocą | 1
+gwiazda | Błyszczy na niebie wieczorem | 1
+niebo | Nad naszymi głowami, błękitne | 1
+chmura | Biała lub szara na niebie | 1
+deszcz | Kapie z chmur | 1
+śnieg | Biały puch zimą | 1
+wiatr | Porusza liście | 1
+burza | Grzmoty i błyskawice | 1
+tęcza | Kolorowy łuk po deszczu | 1
+mgła | Gęsta, biała nad ziemią rano | 1
+grad | Lodowe kulki z nieba | 1
+mróz | Bardzo niska temperatura zimą | 1
+upał | Gorąco jak w lecie | 1
+zima | Pora roku ze śniegiem | 1
+lato | Pora roku z wakacjami | 1
+wiosna | Pora roku, gdy wszystko rozkwita | 1
+jesień | Pora roku, gdy liście opadają | 1
+pianino | Instrument z klawiszami w salonie | 1
+skrzypce | Instrument ze smyczkiem | 1
+gitara | Instrument o sześciu strunach | 1
+flet | Instrument dęty, grasz w niego ustami | 1
+trąbka | Mosiężny instrument dęty | 2
+bęben | Uderzasz w niego pałeczkami | 1
+harfa | Instrument z wieloma strunami, grany palcami | 2
+akordeon | Instrument z miechem i klawiszami | 2
+organy | Duży instrument z piszczałkami | 2
+chór | Zespół śpiewaków | 1
+orkiestra | Duży zespół muzyków | 1
+koncert | Występ muzyczny | 1
+opera | Spektakl, w którym się śpiewa | 1
+walc | Taniec w rytmie na trzy czwarte | 2
+polka | Szybki taniec czeski | 2
+taniec | Poruszasz się do muzyki | 1
+piosenka | Krótki utwór ze słowami | 1
+melodia | Układ dźwięków, który się nuci | 1
+nuta | Zapis dźwięku na pięciolinii | 1
+dyrygent | Macha batutą przed orkiestrą | 2
+saksofon | Zakrzywiony instrument dęty z jazzu | 2
+wiolonczela | Duży smyczkowy instrument grany siedząc | 2
+klarnet | Drewniany instrument dęty ze stroikiem | 2
+fortepian | Duży instrument z klawiszami i pokrywą | 2
+radio | Odbiera audycje i muzykę | 1
+szydełko | Narzędzie do robótki z haczykiem | 2
+haft | Ozdoba igłą i kolorową nitką | 2
+rysunek | Obraz narysowany ołówkiem | 1
+fotografia | Zdjęcie zrobione aparatem | 1
+wędka | Łowi się nią ryby | 1
+czytanie | Zajęcie z książką | 1
+szachy | Gra na czarno-białej planszy z królem | 1
+warcaby | Gra pionkami na planszy | 2
+puzzle | Układanka z kawałków | 1
+krzyżówka | Układanka ze słowami, jak ta | 1
+znaczek | Naklejka na liście, zbierana przez filatelistów | 2
+moneta | Metalowy pieniądz | 1
+spacer | Przechadzka dla zdrowia | 1
+pływanie | Sport w basenie | 1
+szycie | Łączenie materiału nitką | 2
+rzeźba | Postać wykuta w kamieniu lub drewnie | 2
+książka | Czytasz ją wieczorem | 1
+gazeta | Codzienna prasa | 1
+mama | Matka w mowie dziecka | 1
+tata | Ojciec w mowie dziecka | 1
+babcia | Mama mamy lub taty | 1
+dziadek | Tata mamy lub taty | 1
+wnuk | Syn syna lub córki | 1
+wnuczka | Córka syna lub córki | 2
+córka | Dziewczynka dla swoich rodziców | 1
+syn | Chłopiec dla swoich rodziców | 1
+brat | Rodzeństwo płci męskiej | 1
+siostra | Rodzeństwo płci żeńskiej | 1
+ciocia | Siostra mamy lub taty | 1
+wujek | Brat mamy lub taty | 1
+kuzyn | Syn wujka lub cioci | 1
+teściowa | Mama żony lub męża | 2
+teść | Tata żony lub męża | 2
+zięć | Mąż córki | 2
+synowa | Żona syna | 2
+szwagier | Mąż siostry | 2
+rodzina | Mama, tata i dzieci | 1
+dziecko | Mały człowiek | 1
+mąż | Ślubny partner kobiety | 1
+żona | Ślubna partnerka mężczyzny | 1
+sąsiad | Mieszka obok ciebie | 1
+przyjaciel | Bliska osoba, której ufasz | 1
+urodziny | Dzień, gdy dostajesz tort | 1
+wesele | Przyjęcie po ślubie | 1
+choinka | Ozdobione drzewko na święta | 1
+prezent | Pakowany podarunek | 1
+życzenia | Miłe słowa na urodziny | 1
+balon | Napełniony powietrzem, lata | 1
+świeca | Woskowa z knotem, pali się | 1
+opłatek | Cienki biały wafel wigilijny | 2
+pisanka | Kolorowe jajko na Wielkanoc | 1
+wigilia | Wieczór przed Bożym Narodzeniem | 1
+karnawał | Czas balów przed postem | 2
+sylwester | Ostatni dzień roku | 1
+imieniny | Święto osoby noszącej dane imię | 2
+jubileusz | Uroczysta rocznica | 2
+szampan | Musujący trunek na Nowy Rok | 2
+bukiet | Kwiaty związane razem w prezencie | 1
+ślub | Uroczystość zawarcia małżeństwa | 1
+kolęda | Piosenka na Boże Narodzenie | 1
+fajerwerk | Kolorowy wybuch na niebie w sylwestra | 2
+Warszawa | Stolica Polski | 1
+Kraków | Miasto z Wawelem | 1
+Gdańsk | Miasto nad Bałtykiem z Długim Targiem | 1
+Poznań | Miasto koziołków na ratuszu | 1
+Wrocław | Miasto krasnali nad Odrą | 2
+Łódź | Miasto z ulicą Piotrkowską | 2
+Toruń | Miasto pierników i Kopernika | 1
+Lublin | Miasto na wschodzie z zamkiem | 2
+Szczecin | Duże miasto portowe na zachodzie | 2
+Katowice | Stolica Górnego Śląska | 2
+Zakopane | Stolica polskich Tatr | 1
+Wisła | Najdłuższa rzeka Polski | 1
+Odra | Rzeka płynąca przez Wrocław | 2
+Bałtyk | Morze na północy Polski | 1
+Tatry | Najwyższe góry Polski | 1
+Wawel | Zamek królewski w Krakowie | 1
+Mazury | Kraina tysiąca jezior | 1
+Kaszuby | Kraina na północy z własnym językiem | 2
+Śląsk | Kraina z kopalniami węgla | 2
+Podhale | Kraina u stóp Tatr z góralami | 2
+Mazowsze | Region wokół Warszawy | 2
+Pomorze | Kraina nad Bałtykiem | 2
+Sopot | Kurort z molo nad morzem | 2
+Malbork | Miasto z największym zamkiem krzyżackim | 3
+Wieliczka | Miasto słynące z kopalni soli | 2
+Gniezno | Dawna stolica z katedrą, kolebka Polski | 3
+Hel | Półwysep na Bałtyku | 2
+Śnieżka | Najwyższy szczyt Karkonoszy | 3
+Rysy | Najwyższy szczyt Polski | 3
+Częstochowa | Miasto z Jasną Górą | 3
+Białystok | Największe miasto północnego wschodu Polski | 3
+Rzeszów | Miasto na południowym wschodzie, na Podkarpaciu | 3
+Opole | Miasto z festiwalem piosenki | 3
+Śniardwy | Największe polskie jezioro | 3
+Giewont | Szczyt z krzyżem nad Zakopanem | 3
+Bieszczady | Góry na południowym wschodzie Polski | 3
+Bug | Rzeka na wschodniej granicy Polski | 3
+żubr | Największy ssak lądowy Europy, żyje w Białowieży | 2
+żurek | Kwaśna zupa na zakwasie z jajkiem | 2
+oscypek | Wędzony ser z gór | 2
+makowiec | Rolada z ciasta drożdżowego z czarnym nadzieniem | 2
+bursztyn | Żywica z Bałtyku, zamieniona w ozdobę | 2
+polonez | Narodowy taniec szlachecki | 3
+mazurek | Płaskie wielkanocne ciasto na kruchym spodzie | 2
+Paryż | Stolica Francji z Wieżą Eiffla | 1
+Berlin | Stolica Niemiec | 1
+Rzym | Wieczne Miasto | 1
+Londyn | Stolica Wielkiej Brytanii | 1
+Madryt | Stolica Hiszpanii | 2
+Praga | Stolica Czech | 2
+Wiedeń | Stolica Austrii | 2
+Lizbona | Stolica Portugalii | 2
+Ateny | Stolica Grecji | 2
+Moskwa | Stolica Rosji | 2
+Wenecja | Włoskie miasto na kanałach | 2
+Nil | Najsłynniejsza rzeka Egiptu | 2
+Alpy | Góry z Mont Blanc | 2
+Everest | Najwyższa góra świata | 2
+Sahara | Największa gorąca pustynia świata | 2
+Afryka | Kontynent z lwami i sawanną | 2
+Europa | Kontynent, na którym leży Polska | 1
+Azja | Największy kontynent | 2
+Atlantyk | Ocean między Europą a Ameryką | 2
+telefon | Dzwoni, aby rozmawiać na odległość | 1
+zegarek | Nosisz go na nadgarstku | 1
+okulary | Pomagają lepiej widzieć | 1
+parasol | Chroni przed deszczem | 1
+klucz | Otwiera zamek w drzwiach | 1
+telewizor | Oglądasz w nim filmy | 1
+komputer | Maszyna z klawiaturą i myszką | 1
+młotek | Wbija nim gwoździe | 1
+piła | Narzędzie do cięcia drewna | 1
+gwóźdź | Wbijasz go młotkiem | 1
+szkoła | Uczą się w niej dzieci | 1
+szpital | Tu leczą chorych | 1
+sklep | Tu robisz zakupy | 1
+bank | Tu trzymasz pieniądze | 1
+park | Zielony teren w mieście ze ścieżkami | 1
+ulica | Droga między domami w mieście | 1
+rynek | Główny plac w starym mieście | 2
+ratusz | Budynek władz miasta | 2
+wieś | Mała miejscowość wśród pól | 1
+miasto | Duża miejscowość | 1
+czerwony | Barwa pomidora | 1
+niebieski | Barwa nieba | 1
+zielony | Barwa trawy | 1
+żółty | Barwa cytryny | 1
+biały | Barwa śniegu | 1
+czarny | Barwa węgla | 1
+słodki | Taki jak cukier | 1
+kwaśny | Taki jak cytryna | 1
+spać | Odpoczywać w łóżku w nocy | 1
+jeść | Przyjmować posiłek | 1
+pić | Łykać napój | 1
+biegać | Szybko poruszać się nogami | 1
+śpiewać | Wydawać z siebie melodię | 1
+tańczyć | Poruszać się do rytmu | 1
+czytać | Patrzeć w książkę | 1
+pisać | Prowadzić długopisem po kartce | 1
+gotować | Przygotowywać obiad na kuchence | 1
+pływać | Poruszać się w wodzie | 1
+malować | Kłaść farbę pędzlem | 1
+szyć | Łączyć igłą i nitką | 1
+ołówek | Rysujesz nim szarą kreskę | 1
+długopis | Pisze atramentem | 1
+kartka | Cienki kawałek papieru | 1
+zeszyt | Notes ucznia w linie | 1
+tablica | W szkole pisze się na niej kredą | 1
+pędzel | Malujesz nim obraz | 1
+farba | Kolorowa ciecz do malowania | 1
+nożyczki | Tną papier | 1
+klej | Skleja papier | 1
+wiadro | Nosisz w nim wodę | 1
+miotła | Zamiatasz nią podłogę | 1
+mydło | Myje ręce | 1
+ręcznik | Wycierasz nim ręce po umyciu | 1
+szczoteczka | Do mycia zębów | 2
+grzebień | Rozczesujesz nim włosy | 1
+pralka | Pierze ubrania | 1
+żelazko | Prasuje koszule | 1
+odkurzacz | Zasysa kurz z dywanu | 1
+serce | Pompuje krew | 1
+ręka | Ma pięć palców | 1
+noga | Chodzisz na dwóch | 1
+głowa | Mieści mózg i twarz | 1
+oko | Służy do widzenia | 1
+ucho | Służy do słyszenia | 1
+nos | Służy do wąchania | 1
+ząb | Gryzie jedzenie | 1
+palec | Pięć na dłoni | 1
+włosy | Rosną na głowie | 1
+kolano | Zgina się w nodze | 1
+plecy | Tylna część tułowia | 1
+tydzień | Siedem dni | 1
+miesiąc | Około trzydziestu dni | 1
+rok | Dwanaście miesięcy | 1
+dzień | Jasna część doby | 1
+noc | Ciemna część doby | 1
+godzina | Sześćdziesiąt minut | 1
+minuta | Sześćdziesiąt sekund | 1
+lekarz | Leczy chorych | 1
+nauczyciel | Uczy w szkole | 1
+kucharz | Gotuje w restauracji | 1
+piekarz | Wypieka pieczywo | 1
+rolnik | Uprawia pole | 1
+listonosz | Roznosi listy | 1
+strażak | Gasi pożary | 1
+krawiec | Szyje ubrania na miarę | 1
+malarz | Maluje obrazy lub ściany | 1
+fryzjer | Strzyże włosy | 1
+rybak | Łowi ryby na morzu | 1
+kierowca | Prowadzi autobus lub samochód | 1
+pielęgniarka | Opiekuje się chorymi w szpitalu | 2
+kormoran | Czarny ptak łowiący ryby | 3
+żuraw | Wielki ptak o głośnym klangorze i długich nogach | 3
+kos | Czarny śpiewak z żółtym dziobem | 3
+barometr | Mierzy ciśnienie powietrza | 3
+witraż | Kolorowe szkło w oknie kościoła | 3
+termometr | Mierzy temperaturę | 2
+kalendarz | Pokazuje dni, tygodnie i miesiące | 2
+parapet | Półka pod oknem | 2
+garaż | Tu stoi auto | 2
+piwnica | Podziemne pomieszczenie w domu | 2
+strych | Miejsce tuż pod dachem | 2
+podwórko | Placyk przed domem | 2
+studnia | Głęboki dół z wodą | 2
+stodoła | Wiejski budynek na siano | 2
+pastuch | Pilnuje krów na łące | 2
+ul | Dom pszczół | 2
+gniazdo | Ptasie domostwo z gałązek | 2
+kurnik | Dom dla kur | 2
+stajnia | Tu mieszkają konie | 2
+świerk | Choinka rosnąca w lesie | 2
+kasztan | Brązowy owoc, z którego robi się ludziki | 2
+żołądź | Owoc dębu | 2
+szyszka | Owoc sosny lub świerka | 2
+chmiel | Pnącze do piwa | 3
+len | Roślina, z której robi się płótno | 3
+pszenica | Zboże na chleb | 2
+żyto | Zboże na ciemny chleb | 2
+owies | Zboże na płatki dla koni i ludzi | 2
+kukurydza | Żółte ziarna w kolbie | 2

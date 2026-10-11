@@ -1,0 +1,23 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+aaa abc abdul afryce afryka afryke afryki aha aids albert alberta amelia ameryki ana
+anno apollo apple ariel audi aurora axel bam batmana bauer bella belle ben bene
+berlin berlina bernard bing bla blanco ble bob boba bobby bono bostonu braun bum
+carmen carol cezar cezara cha chan che chen chi chin chinach chinami chiny cho
+chu ciota cody coli com curry cygan cze daniel daniela del derek des diablo
+don dona donald donalda dong dot dra elka est europie europy ewa felix feng
+ferrari fiction fidzi filip filipa ford franco galaxy gierek gigi gilbert gloria godz gordon
+grande hai han harley hawaje heh henry hindi hola homo iii info itd itp
+jack jacka jackiem jamajce jamajki jehowy jin joker jordan jork jorku juan jun jung
+kali kanada kanady kato kent kongo kris kurt lana lara lee lego lex lima
+ling lol lola ludwik ludwika lulu luna lux lwow lynch mac madame madison madonna
+mai maks maksa mann marian marina markiem marko martin martina max maya med meksyk
+meksyku mel mer mig miki mikolaj miranda mniam mon mona moreno murzyn nelson nick
+nicka nicki nickiem nicku nico nieee niema nike nikola nom notre oho ole omar
+ooo panama panamie panamy pedal pedalem pedalow pedaly pepsi philips pip pit pitt porsche
+porto pow pro quo ren renault rex roman romeo ros rossa ruska san santo
+sierra silva sim sony spencer sur suzuki taaak taco tag tai taj teksas teksasu
+tel tesla tom toto tyko tys uff ufo umm una und uno usg uuu
+vale vista vito volvo wanda whiskey wiki wiktor wlochow wlochy wow wszytko yale yang
+yorku yyy zach zeus

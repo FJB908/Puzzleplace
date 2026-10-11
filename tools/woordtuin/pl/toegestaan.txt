@@ -1,0 +1,3 @@
+# Gewone woorden die het spellingswoordenboek mist en die toch meetellen.
+
+kope
