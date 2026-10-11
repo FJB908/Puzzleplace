@@ -10,7 +10,8 @@
     "dev": "node server/index.mjs",
     "test": "node --test tests/*.test.mjs",
     "build": "node tools/build.mjs",
-    "testvrienden": "node tools/testvrienden.mjs"
+    "testvrienden": "node tools/testvrienden.mjs",
+    "mailtest": "node tools/mailtest.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.0"

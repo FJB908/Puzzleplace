@@ -138,3 +138,10 @@ Google kan op dezelfde manier: nog een `…/start` en `…/callback` die een pro
 * **Wachtwoord vergeten** (`#/account/herstel`): je vult je e-mailadres in, krijgt een code van 8 tekens (30 minuten geldig, één keer te gebruiken, 5 pogingen) en kiest daarmee een nieuw wachtwoord. Het antwoord is altijd hetzelfde, ook voor een adres zonder account, zodat niemand kan zien welke adressen bestaan. Wie zijn herstelcode heeft, kan die nog steeds gebruiken (`#/account/herstel/code`).
 * **Wachtwoord veranderen** (ingelogd): twee manieren. Met je huidige wachtwoord + het nieuwe (zonder e-mail), of met "Stuur me een code": we mailen een code naar het adres van je account en met die code kies je een nieuw wachtwoord, zonder je oude te kennen (zo kan een Facebook-account ook een wachtwoord toevoegen). Alle andere apparaten moeten daarna opnieuw inloggen.
 * De e-mails staan in de taal van de app (`server/mailteksten.mjs`: Engels, Nederlands, Duits, Frans, Spaans, Italiaans, Portugees, Pools). `server/mail.mjs` is een kleine SMTP-client zonder extra pakketten; getest tegen een nagebouwde server (inloggen, ontvanger, tekst met accenten). Verbinden met een echte SMTP-server (TLS) is hier niet uitgeprobeerd.
+
+### E-mail instellen in vier stappen (zonder iets van servers te weten)
+
+1. Kopieer `.env.voorbeeld` naar `.env` (het bestand `.env` komt nooit in git).
+2. Met een gewoon Gmail-adres: zet "Verificatie in twee stappen" aan en maak een *app-wachtwoord* op myaccount.google.com/apppasswords. Vul in `.env` je adres (met `%40` voor de `@`) en dat app-wachtwoord in.
+3. Proef: `npm run mailtest -- jouw@adres.nl`. Er staat meteen bij waarom het niet lukt als het niet lukt.
+4. Start de server (`npm run server`): de codes gaan nu echt per e-mail.

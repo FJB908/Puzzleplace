@@ -19,6 +19,7 @@ import { join, normalize, extname, sep } from 'node:path';
 import { Db } from './db.mjs';
 import { createApi } from './api.mjs';
 import { createMailer } from './mail.mjs';
+import { laadInstellingen } from './instellingen.mjs';
 import { engelseTekst } from './validate.mjs';
 import { GAMES } from './games/index.mjs';
 
@@ -132,6 +133,7 @@ export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trus
 
 // Starten vanaf de opdrachtregel
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  laadInstellingen();                                                  // het bestand .env (als het er is) vult de instellingen aan
   const port = Number(process.env.PORT || 8000), host = process.env.HOST || '127.0.0.1';
   const dataDir = process.env.DATA_DIR || fileURLToPath(new URL('./data/', import.meta.url));
   const { FACEBOOK_APP_ID: appId, FACEBOOK_APP_SECRET: appSecret } = process.env;
