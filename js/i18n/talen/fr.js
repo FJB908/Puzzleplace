@@ -492,6 +492,7 @@ export default {
   "account.forgot.useRecovery": "J’ai un code de récupération",
   "account.forgot.useMail": "Plutôt un code par e-mail",
   "account.changePassword.mailText": "Vous ne connaissez plus votre mot de passe actuel ? Nous pouvons vous envoyer un code par e-mail. Avec ce code, vous choisissez un nouveau mot de passe.",
+  "account.changePassword.noOld": "Vous ne vous souvenez plus de votre mot de passe actuel ? Vous êtes connecté sur cet appareil : vous pouvez donc en choisir un nouveau sans l’ancien. Vos autres appareils devront se reconnecter.",
   "common.yes": "Oui",
   "common.no": "Non",
   "common.fine": "D'accord",

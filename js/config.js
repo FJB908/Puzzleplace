@@ -16,6 +16,7 @@ export const APP = {
 export const FEATURES = {
   accounts: false,       // inloggen / account
   friends: false,        // vrienden
+  emailCodes: false,     // codes per e-mail (wachtwoord vergeten): alleen als de server e-mail kan versturen (SMTP_URL, zie docs/ACCOUNTS.md)
   facebookLogin: false,  // "Doorgaan met Facebook": gaat vanzelf aan als de server een Facebook-app heeft (zie docs/ACCOUNTS.md)
 };
 

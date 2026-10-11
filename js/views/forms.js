@@ -10,8 +10,8 @@ export function suggestPassword() {
   return `${pick()}-${pick()}-${pick()}`;
 }
 
-export function field({ label, name, type = 'text', autocomplete, hint, value = '', inputmode, maxlength, required = true, enterkeyhint, autofocus = false, suggestions = [] }) {
-  const id = `f-${name}`;
+export function field({ label, name, type = 'text', autocomplete, hint, value = '', inputmode, maxlength, required = true, enterkeyhint, autofocus = false, suggestions = [], idExtra = '' }) {
+  const id = `f-${name}${idExtra}`;
   const err = h('p', { class: 'field-error', id: `${id}-err`, role: 'alert', hidden: true });
   const input = h('input', {
     class: 'text-input', id, name, type, value, autocomplete, list: suggestions.length ? `${id}-opties` : null, inputmode, maxlength, required, enterkeyhint, autofocus,
@@ -27,8 +27,8 @@ export function field({ label, name, type = 'text', autocomplete, hint, value = 
 }
 
 // Wachtwoordveld: met "Toon" (zodat je kunt controleren wat je typt) en optioneel "Bedenk een wachtwoord"
-export function passwordField({ label = t('account.password'), name = 'wachtwoord', autocomplete = 'current-password', hint, suggest = false }) {
-  const f = field({ label, name, type: 'password', autocomplete, hint });
+export function passwordField({ label = t('account.password'), name = 'wachtwoord', autocomplete = 'current-password', hint, suggest = false, idExtra = '' }) {
+  const f = field({ label, name, type: 'password', autocomplete, hint, idExtra });
   const toggle = h('button', { type: 'button', class: 'btn pw-toggle', 'aria-pressed': 'false', onclick: () => {
     const show = f.input.type === 'password';
     f.input.type = show ? 'text' : 'password';

@@ -163,7 +163,7 @@ function recoverView(modus) {
           stash.set(PENDING_RECOVERY, r.recoveryCode);
           location.hash = '#/account/klaar';
         } }),
-      h('p', { class: 'center' }, h('a', { href: '#/account/herstel' }, t('account.forgot.useMail'))),
+      FEATURES.emailCodes ? h('p', { class: 'center' }, h('a', { href: '#/account/herstel' }, t('account.forgot.useMail'))) : null,
       h('p', { class: 'muted' }, t('account.lostBoth'))));
   }
   const slot = h('div', { class: 'stack' });
@@ -248,6 +248,8 @@ function changePasswordView() {
   };
   const f = { oud: passwordField({ label: t('account.currentPassword'), name: 'wachtwoord' }), nieuw: passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true }) };
   const metWachtwoord = form({ fields: [f.oud, f.nieuw], submitLabel: t('account.changePassword'), onSubmit: async (v) => { await auth.changePassword(v.wachtwoord, v.nieuw); await klaar(); } });
+  const zonderOud = h('section', { class: 'card stack' }, h('p', {}, t('account.changePassword.noOld')),
+    form({ fields: [passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true, idExtra: '-zonder' })], submitLabel: t('account.changePassword'), onSubmit: async (v) => { await auth.setPasswordLoggedIn(v.nieuw); await klaar(); } }));
   const mailBlok = h('section', { class: 'card stack' });
   const knop = () => {
     const melding = h('p', { class: 'form-error', role: 'alert', hidden: true });
@@ -259,12 +261,12 @@ function changePasswordView() {
   };
   const stap2 = () => {
     const code = field({ label: t('account.mail.codeLabel'), name: 'code', autocomplete: 'one-time-code', hint: t('account.mail.codeHint'), autofocus: true });
-    const nieuw = passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true });
+    const nieuw = passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true, idExtra: '-mail' });
     mailBlok.replaceChildren(h('p', { class: 'notice', role: 'status' }, t('account.mail.sentChange', { email: auth.getUser()?.email || '' })),
       form({ fields: [code, nieuw], submitLabel: t('account.changePassword'), onSubmit: async (v) => { await auth.changePassword('', v.nieuw, v.code); await klaar(); } }));
   };
   knop();
-  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.text'), '#/account'), metWachtwoord, mailBlok));
+  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.text'), '#/account'), metWachtwoord, zonderOud, FEATURES.emailCodes ? mailBlok : null));
 }
 
 function deleteView() {
@@ -298,7 +300,7 @@ export function accountView({ sub, arg }, app) {
   const user = auth.getUser();
   if (sub === 'nieuw') return user ? overview(app) : signupView();
   if (sub === 'inloggen') return user ? overview(app) : loginView();
-  if (sub === 'herstel') return recoverView(arg);
+  if (sub === 'herstel') return recoverView(arg || (FEATURES.emailCodes ? undefined : 'code'));
   if (sub === 'klaar') return readyView();
   if (sub === 'facebook' && arg) return FEATURES.facebookLogin ? facebookView(arg) : notFoundView();
   if (!user) return intro();

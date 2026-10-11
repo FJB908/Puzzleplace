@@ -526,3 +526,19 @@ test('ingelogd een nieuw wachtwoord kiezen met een code per e-mail, zonder het o
   assert.equal((await s.call('GET', '/api/me', undefined, a.token)).status, 200, 'dit apparaat blijft ingelogd');
   await s.close();
 });
+
+test('ingelogd een nieuw wachtwoord kiezen zonder het oude te kennen', async () => {
+  const s = await start();
+  const a = await signup(s, 'Anna', 'anna@voorbeeld.nl');
+  const ander = await s.call('POST', '/api/login', { email: 'anna@voorbeeld.nl', password: a.password });
+  assert.equal((await s.call('POST', '/api/me/password', { newPassword: 'nieuw-wachtwoord-1', zonderOud: true })).status, 401, 'alleen ingelogd');
+  assert.equal((await s.call('POST', '/api/me/password', { newPassword: 'kort', zonderOud: true }, a.token)).status, 400);
+  assert.equal((await s.call('POST', '/api/me/password', { newPassword: 'nieuw-wachtwoord-1', zonderOud: true }, a.token)).status, 200);
+  assert.equal(s.mailer.outbox.length, 0, 'geen e-mail nodig');
+  assert.equal((await s.call('POST', '/api/login', { email: 'anna@voorbeeld.nl', password: 'nieuw-wachtwoord-1' })).status, 200);
+  assert.equal((await s.call('POST', '/api/login', { email: 'anna@voorbeeld.nl', password: a.password })).status, 401, 'het oude wachtwoord werkt niet meer');
+  assert.equal((await s.call('GET', '/api/me', undefined, ander.json.token)).status, 401, 'andere apparaten moeten opnieuw inloggen');
+  assert.equal((await s.call('GET', '/api/me', undefined, a.token)).status, 200, 'dit apparaat blijft ingelogd');
+  assert.equal((await s.call('GET', '/api/ping')).json.mail, false, 'de server zegt of hij e-mail kan versturen');
+  await s.close();
+});

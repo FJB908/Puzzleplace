@@ -492,6 +492,7 @@ export default {
   "account.forgot.useRecovery": "Ik heb een herstelcode",
   "account.forgot.useMail": "Liever een code per e-mail",
   "account.changePassword.mailText": "Weet je je huidige wachtwoord niet? We kunnen je ook een code mailen. Met die code kies je een nieuw wachtwoord.",
+  "account.changePassword.noOld": "Weet je je huidige wachtwoord niet meer? Je bent op dit apparaat ingelogd, dus je kunt zonder het oude een nieuw wachtwoord kiezen. Je andere apparaten moeten dan opnieuw inloggen.",
   "common.yes": "Ja",
   "common.no": "Nee",
   "common.fine": "Prima",

@@ -512,6 +512,7 @@ export default {
   "account.forgot.useRecovery": "Mam kod odzyskiwania",
   "account.forgot.useMail": "Wolę kod e-mailem",
   "account.changePassword.mailText": "Nie znasz obecnego hasła? Możemy zamiast tego wysłać Ci kod e-mailem. Za pomocą tego kodu ustawisz nowe hasło.",
+  "account.changePassword.noOld": "Nie pamiętasz obecnego hasła? Jesteś zalogowany na tym urządzeniu, więc możesz ustawić nowe bez starego. Pozostałe urządzenia będą musiały zalogować się ponownie.",
   "common.yes": "Tak",
   "common.no": "Nie",
   "common.fine": "W porządku",

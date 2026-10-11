@@ -32,14 +32,16 @@ const emit = (event) => listeners.forEach((fn) => fn(event));
 
 export async function detect() {
   if (base === null) { available = false; return false; }
-  let facebook = false;
+  let facebook = false, mail = false;
   try {
     const res = await fetch(`${base}/api/ping`, { signal: AbortSignal.timeout(2500), cache: 'no-store' });
     const json = res.ok ? await res.json() : null;
     available = json?.app === 'puzzelplaats' && json.accounts === true;
     facebook = available && json.facebook === true;
+    mail = available && json.mail === true;
   } catch { available = false; }
   FEATURES.accounts = FEATURES.friends = available;
+  FEATURES.emailCodes = mail;
   FEATURES.facebookLogin = facebook;                       // alleen als de server een Facebook-app kent
   return available;
 }

@@ -186,8 +186,11 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   async function changePassword(req) {
     const { user, key } = auth(req);
     limit(req, 'pw', 10, 3600_000);
-    const metCode = !!String(req.body.emailCode ?? '').trim() || !req.body.password;
-    if (metCode) {
+    const metCode = !!String(req.body.emailCode ?? '').trim() || (!req.body.password && req.body.zonderOud !== true);
+    if (req.body.zonderOud === true && !req.body.password && !metCode) {
+      // Ingelogd op dit apparaat, het oude wachtwoord niet meer weten: een nieuw wachtwoord kiezen mag. Alle andere apparaten moeten dan opnieuw inloggen.
+      user.pass = await hashSecret(cleanPassword(req.body.newPassword, 'nieuw'));
+    } else if (metCode) {
       const nieuw = cleanPassword(req.body.newPassword, 'nieuw');
       controleerCode(user, 'change', req.body.emailCode);
       user.pass = await hashSecret(nieuw);
@@ -485,7 +488,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
 
   // ----- Routes -----
   const routes = [
-    ['GET', '/api/ping', () => ({ body: { ok: true, app: 'puzzelplaats', version, accounts: true, facebook: !!facebook } })],
+    ['GET', '/api/ping', () => ({ body: { ok: true, app: 'puzzelplaats', version, accounts: true, facebook: !!facebook, mail: !!mailer.echt } })],
     ['GET', '/api/auth/facebook/start', facebookStart], ['GET', '/api/auth/facebook/callback', facebookCallback], ['POST', '/api/auth/facebook/claim', facebookClaim],
     ['POST', '/api/signup', signup], ['POST', '/api/login', login], ['POST', '/api/recover', recover], ['POST', '/api/forgot', forgot], ['POST', '/api/reset', reset],
     ['POST', '/api/logout', (req) => { const { key } = auth(req); delete D.sessions[key]; db.save(); return { body: { ok: true } }; }],

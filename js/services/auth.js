@@ -79,6 +79,8 @@ export async function signOut() {
 export async function rename(name) { const r = await api('PATCH', '/api/me', { name }); set(r.user); return r.user; }
 // Met je huidige wachtwoord, of (zonder wachtwoord) met de code die per e-mail kwam
 export const changePassword = (password, newPassword, emailCode) => api('POST', '/api/me/password', { password: password || undefined, newPassword, emailCode });
+// Ingelogd, maar het oude wachtwoord is vergeten: een nieuw wachtwoord kiezen zonder het oude
+export const setPasswordLoggedIn = (newPassword) => api('POST', '/api/me/password', { newPassword, zonderOud: true });
 // Een code per e-mail: voor "wachtwoord vergeten" (zonder inloggen) en om je wachtwoord te veranderen (ingelogd)
 export const forgotMail = (email) => api('POST', '/api/forgot', { email, taal: getTaal() });
 export async function resetMail({ email, code, password }) {

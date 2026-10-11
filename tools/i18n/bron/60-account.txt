@@ -105,3 +105,5 @@ account.forgot.mailText | We send a code to your email address. With that code y
 account.forgot.useRecovery | I have a recovery code instead | Ik heb een herstelcode
 account.forgot.useMail | Send a code by email instead | Liever een code per e-mail
 account.changePassword.mailText | Don't know your current password? We can email you a code instead. With that code you choose a new password. | Weet je je huidige wachtwoord niet? We kunnen je ook een code mailen. Met die code kies je een nieuw wachtwoord.
+# Onder het formulier "wachtwoord veranderen": voor wie het huidige wachtwoord is vergeten maar wel ingelogd is.
+account.changePassword.noOld | Do you not know your current password? You are logged in on this device, so you can choose a new password without it. Your other devices will have to log in again. | Weet je je huidige wachtwoord niet meer? Je bent op dit apparaat ingelogd, dus je kunt zonder het oude een nieuw wachtwoord kiezen. Je andere apparaten moeten dan opnieuw inloggen.

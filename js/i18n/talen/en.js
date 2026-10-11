@@ -492,6 +492,7 @@ export default {
   "account.forgot.useRecovery": "I have a recovery code instead",
   "account.forgot.useMail": "Send a code by email instead",
   "account.changePassword.mailText": "Don't know your current password? We can email you a code instead. With that code you choose a new password.",
+  "account.changePassword.noOld": "Do you not know your current password? You are logged in on this device, so you can choose a new password without it. Your other devices will have to log in again.",
   "common.yes": "Yes",
   "common.no": "No",
   "common.fine": "Fine",
