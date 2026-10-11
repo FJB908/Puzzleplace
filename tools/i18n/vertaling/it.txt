@@ -657,3 +657,6 @@ detail.friend.none | Non hai ancora amici qui. Aggiungi un amico con un codice a
 detail.friend.addButton | Aggiungi un amico
 detail.friend.played | Partite insieme: {n}
 detail.friend.all | Tutti gli amici
+detail.virtual.title | Gioca contro un giocatore virtuale
+detail.virtual.text | I giocatori virtuali sono il computer con un nome e un ritmo tutto loro. Giocano sul tuo dispositivo, quindi non servono account né internet.
+detail.virtual.play | Gioca

@@ -31,6 +31,7 @@ export async function playView({ id, mode }, app) {
       seed: daily ? today : Math.random().toString(36).slice(2, 10),
       taal: getTaal(),
       difficulty: daily ? 'gemiddeld' : record.difficulty,
+      ...(!daily && record.persona ? { persona: record.persona } : {}),                // een virtuele speler (Woordtuin)
       state: null,
       updatedAt: Date.now(),
       ...(daily ? { day: today } : {}),
@@ -72,6 +73,7 @@ export async function playView({ id, mode }, app) {
     gameId: id,
     daily,
     difficulty: slot.difficulty,
+    persona: slot.persona || null,
     seed: slot.seed,
     taal: slot.taal || 'nl',
     saved: slot.state,
@@ -145,7 +147,7 @@ export async function playView({ id, mode }, app) {
       dismissValue: 'houd',
     });
     if (keuze !== 'nieuw') return;
-    slot = { seed: daily ? today : Math.random().toString(36).slice(2, 10), taal: naar, difficulty: slot.difficulty, state: null, updatedAt: Date.now(), ...(daily ? { day: today } : {}) };
+    slot = { seed: daily ? today : Math.random().toString(36).slice(2, 10), taal: naar, difficulty: slot.difficulty, ...(slot.persona ? { persona: slot.persona } : {}), state: null, updatedAt: Date.now(), ...(daily ? { day: today } : {}) };
     store.updateGame(id, (r) => { r.slots[slotName] = slot; });
     Object.assign(ctx, { seed: slot.seed, taal: naar, saved: null });
   }

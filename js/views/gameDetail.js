@@ -8,6 +8,7 @@ import * as social from '../services/social.js';
 import * as matches from '../services/matches.js';
 import { meestGespeeld } from '../shared/startvrienden.js';
 import { nieuwePartij } from './partij.js';
+import { SPELERS } from '../games/woordtuin/spelers.js';
 import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { gameArt } from '../games/art.js';
@@ -89,7 +90,7 @@ export function gameDetailView({ id }, app) {
       app.refresh();
       return;
     }
-    store.updateGame(id, (r) => { r.slots.normal = store.clearedSlot(); r.difficulty = level; });
+    store.updateGame(id, (r) => { r.slots.normal = store.clearedSlot(); r.difficulty = level; r.persona = null; });
     location.hash = `#/spel/${id}/speel`;
   }
 
@@ -103,10 +104,11 @@ export function gameDetailView({ id }, app) {
 
   // Woordtuin: ook tegen een vriend, met de meest gespeelde vrienden bovenaan
   const vriendenBlok = id === 'woordtuin' && FEATURES.friends ? vriendenSectie() : null;
+  const virtueel = id === 'woordtuin' ? virtueleSpelers(game) : null;
 
   return {
     title: game.name, nav: 'games', decor: 'hang-rechts',
-    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), vriendenBlok?.el),
+    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), virtueel, vriendenBlok?.el),
     cleanup: () => vriendenBlok?.off(),
   };
 }
@@ -138,4 +140,25 @@ function vriendenSectie() {
   if (auth.getUser()) { social.list().catch(() => {}); matches.list().catch(() => {}); }
   const offs = [social.subscribe(render), matches.subscribe(render), auth.subscribe(render)];
   return { el, off: () => offs.forEach((f) => f()) };
+}
+
+
+// Virtuele spelers: de computer met een naam en een eigen tempo; werkt zonder account en zonder internet
+function virtueleSpelers(game) {
+  const label = (niveau) => game.difficulties.find((d) => d.id === niveau)?.label || '';
+  const speel = async (sp) => {
+    if (store.getSlot('woordtuin', 'normal')?.state != null) {
+      const ok = await confirmDialog({ title: t('detail.newGameConfirmTitle'), text: t('detail.newGameConfirmText'), confirmLabel: t('detail.newGameConfirmYes') });
+      if (!ok) return;
+    }
+    store.updateGame('woordtuin', (r) => { r.slots.normal = store.clearedSlot(); r.difficulty = sp.niveau; r.persona = sp.id; });
+    location.hash = '#/spel/woordtuin/speel';
+  };
+  return h('section', { class: 'card stack detail-vrienden', 'aria-labelledby': 'dvs-titel' },
+    h('h2', { id: 'dvs-titel' }, t('detail.virtual.title')),
+    h('p', { class: 'muted' }, t('detail.virtual.text')),
+    h('ul', { class: 'dv-lijst' }, SPELERS.map((sp) => h('li', { class: 'dv-rij' },
+      avatar(sp.naam, sp.id),
+      h('span', { class: 'dv-wie' }, h('strong', {}, sp.naam), h('small', { class: 'muted' }, label(sp.niveau))),
+      h('button', { type: 'button', class: 'btn btn-primary', onclick: () => speel(sp) }, icon('play'), t('detail.virtual.play'))))));
 }

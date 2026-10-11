@@ -17,6 +17,17 @@ Puzzleplace is één Node-server die de app **en** de accounts/partijen levert. 
 
 Draai `npm run server` en geef er een tijdelijk openbaar adres aan, bijvoorbeeld met Cloudflare Tunnel (`cloudflared tunnel --url http://localhost:8000`, gratis, geen account nodig). Je vrienden gebruiken het adres dat het programma laat zien. Je gegevens blijven op je eigen computer, maar het werkt alleen zolang je computer en het programma aan staan.
 
+## Andere goedkope of gratis plekken
+
+Prijzen en gratis-voorwaarden veranderen vaak: kijk op de site zelf voor de stand van nu. Waar je op moet letten is **een schijf die blijft bestaan**, want daar staan de accounts en partijen op.
+* **Een kleine VPS** (bij aanbieders als Hetzner, een paar euro per maand): de meest rechttoe-rechtaan optie met blijvende gegevens. `node server/index.mjs` onder `systemd` of met de meegeleverde `Dockerfile`, met een gratis TLS-slot via Caddy of Cloudflare.
+* **Fly.io, Koyeb, Railway** en vergelijkbare diensten: draaien de `Dockerfile` of `node server/index.mjs`. Kleine abonnementen of een tegoed zijn er vaak; een blijvend volume (`DATA_DIR=/data`) kost meestal een paar euro per maand of valt binnen een gratis deel.
+* **Oracle Cloud "Always Free"** en soortgelijke gratis servers van grote clouds: echt gratis en met een schijf die blijft, maar het instellen is meer werk en er is meestal een betaalkaart nodig om je aan te melden.
+
+## Zonder server: virtuele spelers
+
+Je hebt geen server nodig om online-achtig te spelen. Op het scherm van Woordtuin staat **"Speel tegen een virtuele speler"**: Fien, Cor, Bram, Gert, Els en Hanna zijn de computer met een naam, een niveau en een eigen tempo (Cor denkt langzaam, Hanna is sterk). Ze spelen op je eigen apparaat, zonder account of internet, en zijn duidelijk als virtuele spelers aangegeven; het zijn geen echte mensen. Voor echte tegenstanders blijft de server nodig.
+
 ## Alleen de app, zonder vrienden
 
 De spellen tegen de computer werken ook op een gewone statische website (bijvoorbeeld GitHub Pages) met het bestand `dist/puzzleplace.html` of de map zelf. Spelen tegen een vriend en accounts hebben altijd de server nodig.

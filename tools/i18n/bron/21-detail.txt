@@ -24,3 +24,8 @@ detail.friend.addButton | Add a friend | Vriend toevoegen
 # {n} is het aantal partijen dat je samen met deze vriend speelde.
 detail.friend.played | Games together: {n} | Samen gespeeld: {n}
 detail.friend.all | All friends | Alle vrienden
+##### Virtuele spelers (Woordtuin tegen de computer met een naam)
+detail.virtual.title | Play against a virtual player | Speel tegen een virtuele speler
+# Uitleg: dit zijn geen echte mensen maar de computer met een naam en een eigen tempo.
+detail.virtual.text | Virtual players are the computer with a name and their own pace. They play on your device, so you need no account or internet. | Virtuele spelers zijn de computer met een naam en een eigen tempo. Ze spelen op je eigen apparaat, dus je hebt geen account of internet nodig.
+detail.virtual.play | Play | Spelen

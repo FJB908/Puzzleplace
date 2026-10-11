@@ -10,6 +10,7 @@ import { laadWoordenboek } from './woordenboek.js';
 import { uitslagKaart } from './uitslag.js';
 import { burst, rain, motionOK } from '../../effects.js';
 import { t } from '../../i18n/index.js';
+import { speler } from './spelers.js';
 
 const ME = 1, PC = 2;
 const geldig = (s) => s && s.game && Array.isArray(s.game.owner) && s.game.owner.length === s.game.size * s.game.size && typeof s.game.letters === 'string';
@@ -20,12 +21,14 @@ export async function mount(container, ctx) {
   const state = geldig(ctx.saved) ? { stack: [], ...ctx.saved } : { game: newGame(ctx.seed, { first: ME, lang: ctx.taal }), stack: [] };
   let dood = false, klaar = false;
   const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
-  const niveau = ctx.difficulty;
+  const vs = speler(ctx.persona);                          // een virtuele speler met een naam, of gewoon de computer
+  const niveau = vs ? vs.niveau : ctx.difficulty;
+  const tegenNaam = vs ? vs.naam : t('woordtuin.computer');
 
   const paneel = maakPaneel({
     me: ME,
-    names: { [ME]: t('woordtuin.you'), [PC]: t('woordtuin.computer') },
-    tegenComputer: true,
+    names: { [ME]: t('woordtuin.you'), [PC]: tegenNaam },
+    tegenComputer: !vs,
     onZet: async (path) => {
       state.stack = [...state.stack.slice(-4), state.game];                  // om "Zet terug" mogelijk te maken
       state.game = applyMove(state.game, ME, path);
@@ -60,8 +63,8 @@ export async function mount(container, ctx) {
   // De computer is aan de beurt (en blijft het als jij niets meer kunt)
   async function verder() {
     while (!dood && !state.game.over && state.game.turn === PC) {
-      paneel.setBericht(t('woordtuin.pcThinking'));
-      await wacht(motionOK() ? 1100 : 400);
+      paneel.setBericht(vs ? t('woordtuin.theirTurn', { name: vs.naam }) : t('woordtuin.pcThinking'));
+      await wacht(motionOK() ? 1100 * (vs?.wacht || 1) : 400);
       if (dood) return;
       const zet = botMove(state.game, PC, niveau, makeRng(`pc|${ctx.seed}|${state.game.played.length}`));
       state.game = zet ? applyMove(state.game, PC, zet.path) : geefDoor(state.game, PC);
@@ -83,11 +86,13 @@ export async function mount(container, ctx) {
     }
     ctx.complete({
       delay: gewonnen && motionOK() ? 1200 : 0,
-      title: t(gewonnen ? 'woordtuin.pc.won' : gelijk ? 'woordtuin.pc.draw' : 'woordtuin.pc.lost'),
-      text: gewonnen ? t('woordtuin.pc.score', { mine: wij, theirs: zij }) : gelijk ? t('woordtuin.pc.drawText', { n: wij }) : t('woordtuin.pc.lostText', { mine: wij, theirs: zij }),
+      title: vs ? t(gewonnen ? 'match.over.won' : gelijk ? 'match.over.draw' : 'match.over.lost') : t(gewonnen ? 'woordtuin.pc.won' : gelijk ? 'woordtuin.pc.draw' : 'woordtuin.pc.lost'),
+      text: vs
+        ? (gelijk ? t('match.result.draw', { n: wij }) : gewonnen ? t('match.result.won', { mine: wij, theirs: zij }) : t('match.result.lost', { name: vs.naam, mine: wij, theirs: zij }))
+        : gewonnen ? t('woordtuin.pc.score', { mine: wij, theirs: zij }) : gelijk ? t('woordtuin.pc.drawText', { n: wij }) : t('woordtuin.pc.lostText', { mine: wij, theirs: zij }),
       joy: gewonnen || gelijk,
       closable: true,
-      body: uitslagKaart(state.game, { [ME]: { naam: t('woordtuin.you'), id: 'ik' }, [PC]: { naam: t('woordtuin.computer'), id: 'computer' } }, ME),
+      body: uitslagKaart(state.game, { [ME]: { naam: t('woordtuin.you'), id: 'ik' }, [PC]: { naam: tegenNaam, id: vs ? vs.id : 'computer' } }, ME),
     });
   }
 
