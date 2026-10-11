@@ -13,7 +13,8 @@
 // De test-vrienden hebben het e-mailadres naam@test.puzzelplaats.invalid en wachtwoord "testvriend-123". Ze staan alleen in de
 // database van die server; draai dit dus nooit tegen een echte server met echte mensen.
 
-import { botMove, legalMoves, makeRng } from '../js/games/woordtuin/engine.js';
+import { botMove, legalMoves, makeRng, taalVan } from '../js/games/woordtuin/engine.js';
+import { laadWoordenboek } from '../js/games/woordtuin/woordenboek.js';
 
 const WACHTWOORD = 'testvriend-123';
 const PERSONAS = [
@@ -31,7 +32,14 @@ const PERSONAS = [
 const args = process.argv.slice(2);
 const flag = (n) => args.includes(`--${n}`);
 const waarde = (n) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : undefined; };
-const SERVER = (waarde('server') || 'http://127.0.0.1:8000').replace(/\/+$/, '');
+async function vindServer() {
+  if (waarde('server')) return waarde('server').replace(/\/+$/, '');
+  for (let poort = 8000; poort <= 8020; poort++) {
+    try { const r = await fetch(`http://127.0.0.1:${poort}/api/friends`, { signal: AbortSignal.timeout(800) }); if (r.status === 401) return `http://127.0.0.1:${poort}`; } catch { /* niet deze poort */ }
+  }
+  return 'http://127.0.0.1:8000';
+}
+const SERVER = await vindServer();
 const tempo = flag('eens') ? 0 : flag('snel') ? 0.3 : 1;
 
 // ----- API (met een eigen sleutel per persoon) -----
@@ -106,7 +114,7 @@ function speler(m, jijId) {
     partijGemaakt = true;
     const lopend = (await api(m.token, 'GET', '/api/matches')).matches.some((x) => x.status === 'active' && x.players.some((p) => p.id === jij.id));
     if (lopend) return;                                                                              // bij nog eens draaien niet nog een partij
-    await api(m.token, 'POST', '/api/matches', { with: jij.id, game: 'woordtuin', config: { tips: 3 } });
+    await api(m.token, 'POST', '/api/matches', { with: jij.id, game: 'woordtuin', config: { tips: 3, lang: waarde('taal') || 'nl' } });
   }
 
   async function beurt() {
@@ -123,6 +131,7 @@ function speler(m, jijId) {
     const { match } = await api(m.token, 'GET', `/api/matches/${id}`);
     if (match.status !== 'active' || !match.yourTurn) return;
     const slot = match.pub.players.indexOf(m.user.id) + 1;
+    await laadWoordenboek(taalVan(match.pub));                      // de woorden van de taal van deze partij
     const rng = makeRng(`${id}|${match.version}`);
     const zet = botMove(match.pub, slot, m.niveau, rng) || legalMoves(match.pub, slot)[0];
     if (!zet) { await api(m.token, 'POST', `/api/matches/${id}/resign`, {}); console.log(`  ${m.naam} kon niets meer en stopte de partij.`); return; }
