@@ -1,0 +1,430 @@
+# Crucigrama en español (España). Por línea:  respuesta | pista | nivel   (1 = conocida, 2 = algo menos conocida, 3 = desafiante). Ver tools/inhoud/maak.mjs.
+perro | El mejor amigo del hombre, ladra | 1
+gato | Felino doméstico que maúlla | 1
+vaca | Animal que da leche y muge | 1
+oveja | Animal que da lana y bala | 1
+cerdo | Animal de granja del que sale el jamón | 1
+caballo | Animal que se monta y relincha | 1
+gallina | Ave de corral que pone huevos | 1
+conejo | Orejudo que el mago saca de la chistera | 1
+burro | Animal de carga que rebuzna, como Platero | 1
+ratón | Roedor pequeño al que persigue el gato | 1
+león | Rey de la selva | 1
+elefante | Animal enorme con trompa y colmillos | 1
+jirafa | Animal de cuello larguísimo | 1
+tigre | Felino rayado de la selva | 1
+delfín | Mamífero marino muy simpático | 1
+ballena | El mayor animal del mar | 1
+tortuga | Reptil lento con caparazón | 1
+águila | Ave rapaz de vista muy aguda | 1
+mariposa | Insecto de alas de colores | 1
+abeja | Insecto que fabrica la miel | 1
+hormiga | Insecto pequeño que trabaja sin parar | 1
+ciervo | Animal del bosque con cuernos ramificados | 1
+lobo | Animal salvaje que aúlla | 1
+oso | Animal grande que hiberna en invierno | 1
+loro | Ave que repite lo que oye | 1
+cigüeña | Ave de patas largas que anida en campanarios | 1
+golondrina | Ave que vuelve cada primavera | 1
+pez | Animal acuático con aletas y escamas | 1
+serpiente | Reptil sin patas que se arrastra | 1
+caracol | Animal lento que lleva la casa a cuestas | 1
+jabalí | Cerdo salvaje de grandes colmillos | 2
+pulpo | Molusco de ocho brazos, famoso a la gallega | 2
+cocodrilo | Reptil de río con muchos dientes | 2
+murciélago | Mamífero volador que duerme boca abajo | 2
+erizo | Animal pequeño cubierto de púas | 2
+ardilla | Roedor de cola peluda que come nueces | 2
+topo | Animal que vive bajo tierra y casi no ve | 2
+petirrojo | Pájaro de pecho naranja rojizo | 2
+avestruz | Ave enorme que no vuela y corre mucho | 2
+gaviota | Ave marina blanca que grita en los puertos | 2
+tiburón | Pez marino de grandes dientes y aleta dorsal | 2
+cangrejo | Animal marino de pinzas que anda de lado | 2
+pan | Alimento básico que se hace con harina | 1
+queso | Se hace con leche cuajada | 1
+jamón | Pata de cerdo curada y salada | 1
+tortilla | Plato de huevos y patatas muy español | 1
+paella | Plato de arroz típico de Valencia | 1
+gazpacho | Sopa fría de tomate para el verano | 1
+arroz | Grano blanco que se cultiva en campos inundados | 1
+manzana | Fruta redonda de piel roja, verde o amarilla | 1
+naranja | Fruta cítrica de la que sale un zumo | 1
+plátano | Fruta amarilla y alargada de Canarias | 1
+limón | Fruta cítrica muy ácida y amarilla | 1
+fresa | Fruta roja pequeña que se toma con nata | 1
+sandía | Fruta grande, verde por fuera y roja por dentro | 1
+patata | Tubérculo con el que se hace la tortilla | 1
+ajo | Bulbo de dientes y olor muy fuerte | 1
+zanahoria | Raíz naranja que come el conejo | 1
+aceite | Grasa líquida que se saca de las olivas | 1
+aceituna | Fruto pequeño del olivo, verde o negro | 1
+cerveza | Bebida con espuma hecha de cebada | 1
+leche | Bebida blanca que da la vaca | 1
+miel | Dulce que hacen las abejas | 1
+azúcar | Polvo blanco y dulce para endulzar | 1
+huevo | Lo pone la gallina | 1
+helado | Postre frío de cucurucho | 1
+tarta | Postre grande con velas el día del cumpleaños | 1
+galleta | Dulce crujiente que se moja en leche | 1
+chocolate | Dulce marrón hecho con cacao | 1
+turrón | Dulce navideño de almendras y miel | 1
+bocadillo | Pan relleno que se come a media mañana | 1
+tomate | Hortaliza roja de la ensalada | 1
+café | Bebida oscura y aromática del desayuno | 1
+vino | Bebida que se obtiene de la uva | 1
+garbanzo | Legumbre del cocido madrileño | 2
+croqueta | Bolita frita y cremosa de bechamel | 2
+mantequilla | Grasa de la leche que se unta en el pan | 2
+mermelada | Fruta cocida con azúcar para untar | 2
+almendra | Fruto seco del que se hace el mazapán | 2
+bizcocho | Dulce esponjoso que se hornea en un molde | 2
+casa | Lugar donde vive una familia | 1
+mesa | Mueble con patas donde comemos | 1
+silla | Asiento con respaldo y cuatro patas | 1
+cama | Mueble para dormir | 1
+sofá | Asiento mullido para varias personas | 1
+puerta | Se abre para entrar en casa | 1
+ventana | Se abre para que entre el aire | 1
+escalera | Sirve para subir de un piso a otro | 1
+armario | Mueble donde se guarda la ropa | 1
+espejo | Cristal en el que te ves reflejado | 1
+lámpara | Da luz en una habitación | 1
+alfombra | Tapiz grande que cubre el suelo | 1
+reloj | Marca las horas | 1
+chimenea | Por ella sale el humo del fuego | 1
+cocina | Habitación donde se prepara la comida | 1
+baño | Habitación con ducha y lavabo | 1
+almohada | Se apoya la cabeza en ella para dormir | 1
+jabón | Con agua forma espuma y limpia las manos | 1
+lavadora | Electrodoméstico que limpia la ropa sucia | 1
+nevera | Mantiene fríos los alimentos en la cocina | 1
+horno | Electrodoméstico para asar y hacer pasteles | 1
+paraguas | Nos protege cuando llueve | 1
+sábana | Tela que cubre el colchón | 1
+olla | Recipiente grande para cocer alimentos | 1
+sartén | Recipiente plano con mango para freír | 1
+cuchillo | Cubierto afilado para cortar la carne | 1
+tenedor | Cubierto con puntas para pinchar | 1
+cuchara | Cubierto hondo para tomar la sopa | 1
+plato | Sobre él se sirve la comida | 1
+taza | Recipiente con asa para la leche o el té | 1
+cafetera | Aparato para preparar una bebida oscura y aromática | 1
+delantal | Prenda que protege la ropa al cocinar | 1
+mantel | Tela que cubre la mesa | 1
+balcón | Plataforma abierta que sale de la fachada | 2
+escoba | Palo con cerdas para barrer el suelo | 2
+cazo | Recipiente pequeño con mango para el caldo | 2
+bandeja | Superficie plana para llevar copas y platos | 2
+fregadero | Pila de la cocina donde se lavan los platos | 2
+servilleta | Se usa para limpiarse la boca en la mesa | 2
+abrelatas | Herramienta para abrir conservas | 2
+microondas | Electrodoméstico para calentar comida en segundos | 2
+tetera | Recipiente con pico para preparar infusiones | 2
+flor | Parte de la planta con pétalos de colores | 1
+árbol | Planta alta con tronco y copa | 1
+huerto | Terreno donde se cultivan verduras | 1
+tierra | Nuestro planeta, el tercero desde el Sol | 1
+hierba | Las vacas la comen en el prado | 1
+raíz | Parte de la planta que crece bajo tierra | 1
+bosque | Lugar con muchos árboles | 1
+montaña | Gran elevación del terreno | 1
+río | Corriente de agua que desemboca en el mar | 1
+lago | Gran masa de agua rodeada de tierra | 1
+mar | Gran masa de agua salada | 1
+playa | Orilla de arena junto al mar | 1
+isla | Tierra rodeada de agua por todas partes | 1
+selva | Bosque tropical muy denso | 1
+desierto | Zona árida con mucha arena y poca lluvia | 1
+piedra | Material duro que se encuentra en el suelo | 1
+cascada | Caída de agua desde lo alto | 1
+volcán | Montaña que expulsa lava | 1
+niebla | Nube baja que dificulta ver | 1
+nube | Flota en el cielo y puede traer lluvia | 1
+lluvia | Gotas de agua que caen del cielo | 1
+nieve | Copos blancos que caen en invierno | 1
+viento | Aire en movimiento | 1
+tormenta | Lluvia fuerte con rayos y truenos | 1
+rayo | Descarga de luz en la tormenta | 1
+arcoíris | Aparece con sol y lluvia, de siete colores | 1
+sol | Estrella que nos da luz y calor | 1
+luna | Satélite que brilla de noche | 1
+estrella | Punto brillante en el cielo nocturno | 1
+césped | Hierba corta y cuidada del jardín | 2
+océano | Inmensa extensión de agua salada | 2
+arroyo | Río muy pequeño | 2
+trueno | Ruido fuerte que sigue al rayo | 2
+helada | Congelación del agua por el frío nocturno | 2
+primavera | Estación en la que florecen los campos | 1
+verano | Estación más calurosa del año | 1
+otoño | Estación en la que caen las hojas | 1
+invierno | Estación más fría del año | 1
+lunes | Primer día laborable de la semana | 1
+sábado | Primer día del fin de semana | 1
+domingo | Día de descanso, último de la semana | 1
+enero | Primer mes del año | 1
+mayo | Mes de las flores | 1
+agosto | Mes de vacaciones por excelencia | 1
+septiembre | Mes en que vuelven los niños al colegio | 1
+diciembre | Último mes del año | 1
+semana | Siete días seguidos | 1
+mañana | Primera parte del día | 1
+noche | Tiempo de oscuridad entre dos días | 1
+miércoles | Día que está en medio de la semana laboral | 2
+abril | Mes de las aguas mil, dice el refrán | 2
+madre | Mujer que tiene hijos | 1
+padre | Hombre que tiene hijos | 1
+hijo | Varón respecto a sus padres | 1
+abuelo | Padre de tu padre o de tu madre | 1
+abuela | Madre de tu padre o de tu madre | 1
+nieto | Hijo de tu hijo | 1
+hermano | Hijo de tus mismos padres | 1
+tío | Hermano de tu padre o de tu madre | 1
+primo | Hijo de tu tío | 1
+bebé | Niño recién nacido | 1
+familia | Padres, hijos y abuelos que viven juntos | 1
+boda | Ceremonia en la que dos personas se casan | 1
+novia | Mujer que se casa, vestida de blanco | 1
+yerno | Marido de tu hija | 2
+nuera | Mujer de tu hijo | 2
+suegra | Madre de tu cónyuge | 2
+cuñado | Hermano de tu esposa o de tu marido | 2
+madrina | Mujer que acompaña al niño en el bautizo | 2
+médico | Profesional que cura a los enfermos | 1
+maestro | Persona que enseña en la escuela | 1
+pintor | Artista que usa pincel y lienzo | 1
+cocinero | Profesional que prepara platos en un restaurante | 1
+pescador | Persona que lanza redes al mar | 1
+bombero | Apaga los incendios | 1
+policía | Agente que vigila la seguridad en la calle | 1
+cartero | Reparte el correo a domicilio | 1
+enfermera | Cuida a los pacientes en el hospital | 1
+músico | Persona que toca un instrumento | 1
+panadero | Profesional que amasa y hornea hogazas | 2
+carpintero | Trabaja la madera | 2
+agricultor | Persona que cultiva los campos | 2
+albañil | Construye muros con ladrillos | 2
+fontanero | Arregla tuberías y grifos | 2
+abogado | Defiende a las personas en un juicio | 2
+peluquero | Corta y arregla el cabello | 2
+marinero | Trabaja a bordo de un barco | 2
+pastor | Cuida el rebaño de ovejas | 2
+dentista | Médico que arregla las muelas | 2
+camisa | Prenda con cuello y botones | 1
+pantalón | Prenda que cubre las dos piernas | 1
+falda | Prenda que cae desde la cintura | 1
+vestido | Prenda de una sola pieza para mujer | 1
+abrigo | Prenda gruesa para el frío | 1
+chaqueta | Prenda con mangas que se lleva sobre la camisa | 1
+jersey | Prenda de lana que abriga | 1
+bufanda | Se enrolla al cuello en invierno | 1
+guantes | Cubren las manos del frío | 1
+sombrero | Prenda para cubrir la cabeza del sol | 1
+zapatos | Calzado que se lleva en la calle | 1
+camiseta | Prenda ligera de manga corta | 1
+bata | Prenda cómoda para estar por casa | 2
+chaleco | Prenda sin mangas que se lleva sobre la camisa | 2
+pendiente | Joya que cuelga de la oreja | 2
+ojo | Órgano con el que vemos | 1
+oreja | Parte externa del oído | 1
+nariz | Parte de la cara con la que olemos | 1
+boca | Parte de la cara con labios y dientes | 1
+mano | Extremidad del brazo con cinco dedos | 1
+pie | Extremidad sobre la que nos apoyamos al caminar | 1
+pierna | Extremidad que une la cadera con el pie | 1
+brazo | Extremidad que va del hombro a la mano | 1
+cabeza | Parte del cuerpo donde está el cerebro | 1
+corazón | Órgano que late en el pecho | 1
+lengua | Órgano de la boca con el que saboreamos | 1
+rodilla | Articulación en medio de la pierna | 2
+hombro | Une el brazo con el tronco | 2
+oído | Sentido con el que percibimos los sonidos | 2
+viaje | Desplazamiento a un lugar lejano | 1
+maleta | Se llena de ropa para irse de vacaciones | 1
+billete | Papel que permite subir al tren | 1
+tren | Transporte que circula sobre raíles | 1
+avión | Transporte que vuela por el aire | 1
+barco | Transporte que navega por el mar | 1
+pasaporte | Documento para viajar al extranjero | 1
+aeropuerto | Lugar de donde despegan los aviones | 1
+estación | Lugar donde paran los trenes | 1
+autobús | Vehículo grande con paradas por la ciudad | 1
+equipaje | Conjunto de maletas de un viajero | 1
+turista | Persona que visita lugares por placer | 1
+vacaciones | Días de descanso lejos del trabajo | 1
+carretera | Vía asfaltada por la que circulan coches | 1
+bicicleta | Vehículo de dos ruedas con pedales | 1
+crucero | Viaje en un gran barco de placer | 2
+aduana | Oficina que controla lo que pasa por la frontera | 2
+autopista | Vía rápida y ancha con varios carriles | 2
+semáforo | Cambia de rojo a verde en la calle | 2
+túnel | Paso que atraviesa una montaña | 2
+Madrid | Capital de España | 1
+Barcelona | Ciudad catalana de la Sagrada Familia | 1
+Sevilla | Ciudad andaluza de la Giralda | 1
+Valencia | Ciudad de las Fallas y la paella | 1
+Granada | Ciudad andaluza de la Alhambra | 1
+flamenco | Baile andaluz de taconeo y guitarra | 1
+siesta | Sueño corto después de comer | 1
+Toledo | Ciudad castellana de espadas y mazapán | 2
+Bilbao | Ciudad vasca a orillas de una ría | 2
+Córdoba | Ciudad andaluza famosa por su mezquita | 2
+Salamanca | Ciudad universitaria con Plaza Mayor | 2
+Segovia | Ciudad castellana con acueducto romano | 2
+Cádiz | Ciudad andaluza famosa por su carnaval | 2
+Galicia | Región del noroeste con Santiago de Compostela | 2
+Andalucía | Región del sur con Sevilla y Granada | 2
+Cataluña | Región del nordeste cuya capital es Barcelona | 2
+Asturias | Región del norte con los Picos de Europa | 2
+Navarra | Comunidad de Pamplona y los Sanfermines | 2
+Tajo | Río más largo de la península ibérica | 2
+Ebro | Río que pasa por Zaragoza | 2
+Duero | Río que cruza Castilla y desemboca en Oporto | 2
+Alhambra | Palacio de Granada de origen árabe | 2
+Prado | Gran museo de pintura de Madrid | 2
+Mallorca | Mayor isla de las Baleares | 2
+Canarias | Archipiélago español del Atlántico | 2
+Teide | Volcán más alto de España | 2
+Pirineos | Cordillera entre España y Francia | 2
+Zaragoza | Ciudad del Ebro con la basílica del Pilar | 2
+Quijote | Hidalgo manchego que luchó contra molinos | 2
+sangría | Bebida fría de vino y fruta troceada | 2
+horchata | Bebida blanca de chufa típica de Valencia | 2
+Guadalquivir | Río andaluz que pasa por Córdoba y Sevilla | 3
+Cervantes | Autor de la novela del ingenioso hidalgo | 3
+Goya | Pintor aragonés de La maja desnuda | 3
+Picasso | Pintor malagueño del Guernica | 3
+acueducto | Construcción romana que lleva agua sobre arcos | 3
+Giralda | Torre de la catedral de Sevilla | 3
+Alcázar | Palacio fortificado de origen árabe | 3
+Gaudí | Arquitecto de la Sagrada Familia | 3
+Velázquez | Pintor de Las Meninas | 3
+Mancha | Región de los molinos de Don Quijote | 3
+Rioja | Región española famosa por su vino | 3
+Mezquita | Templo musulmán, como el de Córdoba | 3
+Burgos | Ciudad castellana con una gran catedral gótica | 3
+Oviedo | Capital de Asturias | 3
+Pamplona | Capital de Navarra | 3
+Santander | Capital de Cantabria | 3
+Valladolid | Ciudad castellana, antigua capital de España | 3
+Extremadura | Región del oeste con Mérida y Cáceres | 3
+Amazonas | Río más caudaloso del mundo | 3
+Europa | Continente donde está España | 1
+Francia | País vecino de España al norte, tras los Pirineos | 1
+Portugal | País vecino de España al oeste | 1
+Italia | País europeo con forma de bota | 1
+Roma | Capital de Italia | 1
+Atlántico | Océano que baña la costa oeste de Portugal | 2
+Mediterráneo | Mar de la costa este de España | 2
+Nilo | Río africano que cruza Egipto | 2
+Everest | Montaña más alta del mundo | 2
+Alpes | Cordillera de Suiza y Austria | 2
+música | Arte de combinar sonidos | 1
+piano | Instrumento de teclas blancas y negras | 1
+guitarra | Instrumento de seis cuerdas | 1
+violín | Instrumento de cuerda que se toca con arco | 1
+flauta | Instrumento de viento que se sopla | 1
+canción | Pieza musical con letra | 1
+coro | Grupo de personas que cantan juntas | 1
+orquesta | Gran conjunto de músicos con director | 1
+trompeta | Instrumento de viento de metal con pistones | 2
+arpa | Instrumento de cuerdas verticales que se puntean | 2
+melodía | Sucesión de notas que forma una tonada | 2
+ritmo | Compás que marca el pulso de una música | 2
+vals | Baile de tres tiempos | 2
+ópera | Obra de teatro cantada con orquesta | 2
+zarzuela | Género lírico español con partes habladas | 2
+acordeón | Instrumento de fuelle y teclas | 2
+castañuelas | Instrumento de madera que se toca con los dedos | 2
+pandereta | Instrumento redondo con sonajas | 2
+ajedrez | Juego de tablero con reyes y peones | 1
+dominó | Juego de fichas con puntos | 1
+baraja | Mazo de cartas con oros, copas y espadas | 1
+aguja | Fina barrita metálica con un ojo para el hilo | 1
+fútbol | Deporte de once jugadores y un balón | 1
+natación | Deporte que se practica en la piscina | 1
+costura | Arte de unir telas con aguja e hilo | 1
+bordado | Dibujo hecho con hilo sobre tela | 2
+lienzo | Tela sobre la que pinta el artista | 2
+pincel | Herramienta con cerdas para pintar | 2
+cámara | Aparato que sirve para hacer fotos | 2
+anzuelo | Gancho metálico que lleva el cebo | 2
+bolos | Juego de derribar pinos con una bola | 2
+petanca | Juego de bolas de metal que se lanzan hacia otra pequeña | 2
+golf | Deporte con palos y hoyos | 2
+ciclismo | Deporte de pedales y carreras | 2
+senderismo | Caminar por el campo y la montaña | 2
+baloncesto | Deporte de cinco contra cinco que se juega con canasta | 2
+caña | Vara flexible de la que cuelga el sedal | 2
+libro | Conjunto de páginas encuadernadas para leer | 1
+papel | Hoja fina sobre la que se escribe | 1
+museo | Lugar donde se exponen obras de arte | 1
+teatro | Lugar donde actúan los actores sobre un escenario | 1
+cine | Sala donde se ven películas | 1
+escuela | Lugar donde los niños aprenden | 1
+hospital | Edificio donde se atiende a los enfermos | 1
+plaza | Espacio abierto en el centro de un pueblo | 1
+castillo | Fortaleza con torres y murallas | 1
+mercado | Lugar con puestos para comprar alimentos | 1
+tiza | Barrita blanca para escribir en la pizarra | 2
+regla | Instrumento para trazar líneas rectas | 2
+sello | Se pega en el sobre para enviar la carta | 2
+sobre | Envoltorio de papel para meter una carta | 2
+diccionario | Libro que explica el significado de las palabras | 2
+revista | Publicación con fotos que sale cada semana o mes | 2
+pizarra | Superficie negra sobre la que escribe la tiza | 2
+campana | Instrumento de bronce que suena en la torre | 2
+cuaderno | Libreta de hojas para tomar notas | 2
+torre | Construcción alta y estrecha | 2
+Navidad | Fiesta de diciembre con belén y villancicos | 1
+cumpleaños | Día en que soplas las velas de la tarta | 1
+regalo | Obsequio que se da a alguien | 1
+fiesta | Reunión alegre con música y baile | 1
+globo | Bolsa de goma hinchada con aire | 1
+villancico | Canción típica de Navidad | 2
+belén | Representación con figuritas que se monta en Navidad | 2
+confeti | Papelitos de colores que se lanzan en las fiestas | 2
+desfile | Marcha de personas o carrozas por la calle | 2
+verbena | Fiesta popular nocturna al aire libre | 2
+feria | Fiesta con atracciones y casetas, como la de Sevilla | 2
+brindis | Se hace al levantar las copas | 2
+invitado | Persona convocada a una fiesta | 2
+aniversario | Día en que se recuerda un suceso de años atrás | 2
+carnaval | Fiesta de disfraces y comparsas en febrero | 2
+rojo | Color de la sangre y de la fresa | 1
+azul | Color del cielo despejado | 1
+verde | Color de la hierba | 1
+amarillo | Color del limón y del sol | 1
+negro | Color de la noche más oscura | 1
+blanco | Color de la nieve | 1
+rosa | Flor con espinas, símbolo del amor | 1
+marrón | Color del chocolate o de la tierra | 2
+morado | Color de las berenjenas, entre azul y rojo | 2
+siete | Número de días de la semana | 1
+doce | Número de meses del año | 1
+diez | Número de dedos de las dos manos | 1
+cien | Número de años de un siglo | 1
+abrir | Lo contrario de cerrar | 1
+subir | Ir de abajo hacia arriba | 1
+bajar | Ir desde un piso alto hasta el suelo | 1
+correr | Ir deprisa moviendo las piernas | 1
+lavar | Limpiar con agua y jabón | 1
+dormir | Descansar con los ojos cerrados | 1
+barrer | Limpiar el suelo con la escoba | 1
+bailar | Mover el cuerpo al ritmo de la música | 1
+regar | Echar agua a las plantas | 1
+comprar | Pagar para llevarse algo de una tienda | 1
+caminar | Andar a pie de un sitio a otro | 2
+escuchar | Prestar atención a lo que se oye | 2
+planchar | Alisar la ropa con calor | 2
+abrazar | Rodear con cariño a un ser querido | 2
+sonreír | Gesto de alegría que curva los labios | 2
+soñar | Imaginar cosas mientras se duerme | 2
+ayudar | Echar una mano a alguien | 2
+dulce | Con sabor a azúcar | 1
+feliz | Contento, lleno de alegría | 1
+lento | Que va muy despacio | 1
+fuerte | Robusto, que resiste mucho peso | 2
+suave | Agradable al tacto, como la seda | 2
+amargo | Con el sabor del café sin azúcar | 2
+salado | Que sabe como el agua del mar | 2
