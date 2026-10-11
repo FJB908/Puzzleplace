@@ -4,8 +4,15 @@
 import { h, avatar } from '../../ui.js';
 import { t } from '../../i18n/index.js';
 import { counts, result } from './engine.js';
+import { TULP } from './bord.js';
 
 // spelers: { 1: { naam, id }, 2: { naam, id } }; ik: welke speler jij bent (1 of 2)
+function symbool(mijn) {
+  const e = h('span', { class: 'ut-symbool', 'aria-hidden': 'true' });
+  if (mijn) e.textContent = '✿'; else e.innerHTML = TULP;
+  return e;
+}
+
 export function uitslagKaart(state, spelers, ik) {
   const c = counts(state), r = result(state);
   const woorden = { 1: [], 2: [] };
@@ -18,7 +25,7 @@ export function uitslagKaart(state, spelers, ik) {
       wint && h('span', { class: 'ut-kroon' }, t('uitslag.winner')),
       avatar(spelers[p].naam, spelers[p].id),
       h('span', { class: 'ut-naam' }, spelers[p].naam),
-      h('b', { class: 'ut-tal', 'aria-label': `${t('uitslag.flowers')}: ${c[p]}` }, h('span', { 'aria-hidden': 'true' }, p === ik ? '✿ ' : '❧ '), String(c[p])),
+      h('b', { class: 'ut-tal', 'aria-label': `${t('uitslag.flowers')}: ${c[p]}` }, symbool(p === ik), String(c[p])),
       h('small', {}, t('uitslag.flowers')),
       state.by?.length ? h('small', { class: 'ut-meer' }, t('uitslag.words', { n: woorden[p].length })) : null,
       l ? h('small', { class: 'ut-meer' }, t('uitslag.longest', { word: l.toUpperCase() })) : null);

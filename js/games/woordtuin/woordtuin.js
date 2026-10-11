@@ -80,6 +80,7 @@ export async function mount(container, ctx) {
       title: t(gewonnen ? 'woordtuin.pc.won' : gelijk ? 'woordtuin.pc.draw' : 'woordtuin.pc.lost'),
       text: gewonnen ? t('woordtuin.pc.score', { mine: wij, theirs: zij }) : gelijk ? t('woordtuin.pc.drawText', { n: wij }) : t('woordtuin.pc.lostText', { mine: wij, theirs: zij }),
       joy: gewonnen || gelijk,
+      closable: true,
       body: uitslagKaart(state.game, { [ME]: { naam: t('woordtuin.you'), id: 'ik' }, [PC]: { naam: t('woordtuin.computer'), id: 'computer' } }, ME),
     });
   }

@@ -328,6 +328,7 @@ export default {
   "play.otherLanguage.text": "La tua partita salvata è in {from}, e ora l’app è in {to}. Una nuova partita in {to} sostituisce quella salvata.",
   "play.otherLanguage.new": "Nuova partita in {language}",
   "play.otherLanguage.keep": "Continua in {language}",
+  "play.viewResult": "Mostra il risultato",
   "settings.title": "Impostazioni",
   "settings.subtitle": "Rendi Puzzleplace comodo per i tuoi occhi.",
   "settings.sectionReading": "Lettura",

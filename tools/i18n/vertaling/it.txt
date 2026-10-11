@@ -641,3 +641,4 @@ account.forgot.useMail | Meglio un codice per e-mail
 account.changePassword.mailText | Non conosci la password attuale? Possiamo inviarti un codice per e-mail. Con quel codice scegli una nuova password.
 err.noEmail | Questo account non ha un indirizzo e-mail, quindi non possiamo inviare un codice.
 account.changePassword.noOld | Non ricordi più la password attuale? Hai effettuato l’accesso su questo dispositivo, quindi puoi sceglierne una nuova senza quella vecchia. Gli altri tuoi dispositivi dovranno accedere di nuovo.
+play.viewResult | Mostra il risultato

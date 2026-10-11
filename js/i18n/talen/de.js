@@ -328,6 +328,7 @@ export default {
   "play.otherLanguage.text": "Ihr gespeichertes Spiel ist auf {from}, die App ist jetzt auf {to}. Ein neues Spiel auf {to} ersetzt das gespeicherte.",
   "play.otherLanguage.new": "Neues Spiel auf {language}",
   "play.otherLanguage.keep": "Weiter auf {language}",
+  "play.viewResult": "Ergebnis anzeigen",
   "settings.title": "Optionen",
   "settings.subtitle": "Passen Sie Puzzleplace an Ihre Augen an.",
   "settings.sectionReading": "Lesen",

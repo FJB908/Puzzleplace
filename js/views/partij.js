@@ -60,6 +60,7 @@ export function partijView({ id }, app) {
 
   let match = null, paneel = null, slot = 1, opp = t('match.opponent'), timer = null, dood = false, afgerond = false;
   const banner = h('p', { class: 'wt-uitslag', role: 'status' });
+  const uitslagKnop = h('button', { type: 'button', class: 'btn btn-primary btn-block', hidden: true, onclick: () => einde() }, icon('check'), t('play.viewResult'));
   const wacht = h('p', { class: 'wt-wacht' });
   const stop = h('button', { type: 'button', class: 'btn btn-quiet wt-stop', onclick: stoppen }, t('match.stop'));
 
@@ -70,6 +71,7 @@ export function partijView({ id }, app) {
     const klaar = m.status !== 'active';
     banner.textContent = klaar ? uitslagTekst(m, user.id, opp) : '';
     banner.hidden = !klaar;
+    uitslagKnop.hidden = !klaar || !!m.result?.resigned;
     wacht.hidden = klaar || m.yourTurn;
     wacht.textContent = t('match.waitNote', { name: opp, friends: t('nav.friends') });
     stop.hidden = klaar;
@@ -91,14 +93,15 @@ export function partijView({ id }, app) {
       title: t(r.resigned ? 'match.over.resigned' : gewonnen ? 'match.over.won' : gelijk ? 'match.over.draw' : 'match.over.lost'),
       text: uitslagTekst(match, user.id, opp),
       joy: gewonnen || gelijk,
+      closable: true,                                               // kruisje: eerst de partij nog bekijken; "Toon de uitslag" brengt dit venster terug
       body: r.resigned ? null : uitslagKaart(match.pub, { [slot]: { naam: persoonNaam(user), id: user.id }, [3 - slot]: { naam: opp, id: match.players.find((p) => p.id !== user.id)?.id || opp } }, slot),
       actions: [
         { label: t('match.again', { name: opp }), value: 'nog', primary: true, autofocus: true },
         { label: t('match.backToFriends'), value: 'terug' },
       ],
-      dismissValue: 'terug',
+      dismissValue: 'blijf',
     });
-    if (dood) return;
+    if (dood || keuze === 'blijf') return;
     if (keuze === 'nog') {
       const vriend = match.players.find((p) => p.id !== user.id);
       if (!vriend?.id) { location.hash = '#/vrienden'; return; }
@@ -144,12 +147,13 @@ export function partijView({ id }, app) {
         try { toon(await matches.move(id, match.version, { path }), { animeer: true }); }
         catch (e) {
           if (e.code === 'versie') { await ververs(); throw new Error(t('match.versionChanged')); }
+          if (e.key === 'move.over') { await ververs({ animeer: false }); throw e; }          // de partij is al afgelopen (de ander was eerder): laat de uitslag zien
           throw e;
         }
       },
       onTip: tips === null ? undefined : async () => { const hint = tip(match.pub, slot, makeRng(`tip|${id}|${usedTips(id)}`)); if (hint) useTip(id); return hint; },
     });
-    stage.replaceChildren(h('div', {}, paneel.el, banner, wacht, h('div', { class: 'wt-onder' }, stop)));
+    stage.replaceChildren(h('div', {}, paneel.el, banner, uitslagKnop, wacht, h('div', { class: 'wt-onder' }, stop)));
     afgerond = m.status !== 'active';
     toon(m);
     afgerond = m.status !== 'active';

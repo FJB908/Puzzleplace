@@ -479,6 +479,10 @@ dialog.dialog--joy { padding-top: 6.5rem; overflow-x: hidden; overflow-y: auto; 
 .dialog-art { position: absolute; top: 0; left: 0; height: 6.25rem; aspect-ratio: var(--ratio, 1.64); pointer-events: none; }
 html[data-theme="dark"] dialog.dialog { border: 1px solid var(--border); }
 html[data-contrast="high"] dialog.dialog { border: 3px solid var(--border); }
+.dialog-close { position: sticky; top: 0; align-self: flex-end; z-index: 3; flex: none; width: 3.1rem; height: 3.1rem; margin: -.6rem -.6rem -2.6rem 0; display: grid; place-items: center; border: 2px solid var(--control-border); border-radius: 50%; background: var(--surface); color: var(--text); cursor: pointer; box-shadow: var(--shadow); }
+.dialog-close:hover { background: var(--blush); }
+.dialog-close:focus-visible { outline: .22rem solid var(--focus); outline-offset: .15rem; }
+.dialog-close .icon { width: 1.5rem; height: 1.5rem; }
 .dialog-actions { display: flex; flex-direction: column; gap: .25rem; margin-top: .5rem; }
 .dialog-body { display: flex; flex-direction: column; gap: .75rem; }
 .dialog-body ol, .dialog-body ul { margin: 0; padding-left: 1.4rem; display: flex; flex-direction: column; gap: .5rem; }

@@ -59,6 +59,7 @@ const ICONS = {
   backspace: '<path d="M20 12H5M11 6l-6 6 6 6"/>',
   eraser: '<path d="M4 16l9-9a2 2 0 0 1 3 0l3 3a2 2 0 0 1 0 3l-6 6H8zM9 11l5 5M12 20h8"/>',
   globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
   mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
   eye: '<path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   // spelpictogrammen
@@ -77,7 +78,7 @@ export function icon(name) {
 
 // ----- Dialogen (met <dialog>: toetsenbord, focus en Escape werken vanzelf) -----
 // actions: [{ label, value, primary?, autofocus? }]. Geeft de gekozen value terug.
-export function choiceDialog({ title, text, body, actions, dismissValue = null, joy = false }) {
+export function choiceDialog({ title, text, body, actions, dismissValue = null, joy = false, closable = false }) {
   return new Promise((resolve) => {
     const titleId = `dlg-${Math.random().toString(36).slice(2)}`;
     const art = joy ? h('div', { class: 'dialog-art', 'aria-hidden': 'true' }) : null;
@@ -91,6 +92,7 @@ export function choiceDialog({ title, text, body, actions, dismissValue = null, 
     };
     const dlg = h('dialog', { class: `dialog${joy ? ' dialog--joy' : ''}`, 'aria-labelledby': titleId },
       art,
+      closable ? h('button', { type: 'button', class: 'dialog-close', 'aria-label': t('common.close'), onclick: () => finish(-1) }, icon('close')) : null,
       h('h2', { id: titleId }, title),
       text && h('p', {}, text),
       body && h('div', { class: 'dialog-body' }, body),

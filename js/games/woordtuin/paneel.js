@@ -5,7 +5,7 @@
 import { h, icon } from '../../ui.js';
 import { t, foutTekst } from '../../i18n/index.js';
 import { TALEN, vouw, isAlfabet, typInvoer } from '../../shared/talen.js';
-import { maakBord, HEK } from './bord.js';
+import { maakBord, HEK, TULP } from './bord.js';
 import { checkMove, MoveError, counts, pathsFor, MIN_LEN, other, taalVan } from './engine.js';
 
 // tegenComputer: de tegenstander is de computer (dan zeggen we "de computer" in plaats van een naam)
@@ -20,7 +20,7 @@ export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('matc
   let open = 0;
   const stand = h('div', { class: 'wt-stand' },
     h('div', { class: 'wt-kant mijn' }, h('span', { class: 'wt-bol', 'aria-hidden': 'true' }, '✿'), h('div', {}, mijnTal, h('small', {}, names[me]))),
-    h('div', { class: 'wt-kant hun' }, h('div', {}, hunTal, h('small', {}, names[other(me)])), h('span', { class: 'wt-bol', 'aria-hidden': 'true' }, '❧')));
+    h('div', { class: 'wt-kant hun' }, h('div', {}, hunTal, h('small', {}, names[other(me)])), (() => { const e = h('span', { class: 'wt-bol', 'aria-hidden': 'true' }); e.innerHTML = TULP; return e; })()));
 
   const beurt = h('p', { class: 'wt-beurt', role: 'status', 'aria-live': 'polite' });
   const laatste = h('p', { class: 'wt-laatste' });
@@ -54,6 +54,11 @@ export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('matc
   const hekje = h('span', {}); hekje.innerHTML = HEK; hekje.append(` ${t('woordtuin.legend')}`);
   const legenda = h('p', { class: 'wt-legenda' }, hekje);
   const el = h('div', { class: 'wt' }, stand, h('div', { class: 'wt-info' }, beurt, laatste), bord.el, legenda, woordBlok, typBlok, extra, knoppen);
+
+  // Is de partij afgelopen en probeert iemand toch te spelen? Dan zeggen we dat vriendelijk.
+  const alAfgelopen = () => { if (state?.over) { uitleg.textContent = t('err.move.over'); } };
+  bord.el.addEventListener('pointerdown', alAfgelopen);
+  bord.el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') alAfgelopen(); });
 
   // ----- Weergave -----
   const aanDeBeurt = () => !!state && !state.over && state.turn === me && !busy;

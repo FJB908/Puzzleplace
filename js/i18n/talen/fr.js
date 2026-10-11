@@ -328,6 +328,7 @@ export default {
   "play.otherLanguage.text": "Votre partie enregistrée est en {from}, et l’application est maintenant en {to}. Une nouvelle partie en {to} remplace la partie enregistrée.",
   "play.otherLanguage.new": "Nouvelle partie en {language}",
   "play.otherLanguage.keep": "Continuer en {language}",
+  "play.viewResult": "Voir le résultat",
   "settings.title": "Réglages",
   "settings.subtitle": "Adaptez Puzzleplace pour le confort de vos yeux.",
   "settings.sectionReading": "Lecture",

@@ -328,6 +328,7 @@ export default {
   "play.otherLanguage.text": "Je bewaarde spel is in het {from}, en de app staat nu in het {to}. Een nieuw spel in het {to} vervangt het bewaarde spel.",
   "play.otherLanguage.new": "Nieuw spel in het {language}",
   "play.otherLanguage.keep": "Verder in het {language}",
+  "play.viewResult": "Toon de uitslag",
   "settings.title": "Instellingen",
   "settings.subtitle": "Maak Puzzelplaats prettig voor jouw ogen.",
   "settings.sectionReading": "Lezen",

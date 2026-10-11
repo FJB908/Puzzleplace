@@ -63,6 +63,7 @@ export async function playView({ id, mode }, app) {
     h('p', { class: 'save-note' }, t('play.autosave')),
   );
 
+  const viewKnop = h('button', { type: 'button', class: 'btn btn-primary btn-block view-result' }, icon('check'), t('play.viewResult'));
   let cleanup = null;
   let finished = false;      // het spel is afgelopen of weggegooid: er wordt niets meer bewaard
   let gone = false;          // je hebt het scherm verlaten: dan geen slotbericht meer
@@ -104,19 +105,29 @@ export async function playView({ id, mode }, app) {
       if (result.delay) await new Promise((resolve) => setTimeout(resolve, result.delay));
       if (gone) return;
       announce(result.title ?? t('play.done.announce'));
-      const choice = await choiceDialog({
-        title: result.title ?? t('play.done.title'),
-        text: result.text ?? t(daily ? 'play.done.text.daily' : 'play.done.text'),
-        body: result.body,
-        joy: result.joy ?? true,
-        actions: [
-          { label: daily ? t('play.done.backHome') : t('play.done.again'), value: daily ? 'home' : 'again', primary: true, autofocus: true },
-          { label: t('play.done.otherGame'), value: 'games' },
-          ...(daily ? [] : [{ label: t('play.done.toHome'), value: 'home' }]),
-        ],
-        dismissValue: daily ? 'home' : 'detail',
-      });
-      location.hash = choice === 'again' ? `#/spel/${id}` : choice === 'games' ? '#/spellen' : choice === 'detail' ? `#/spel/${id}` : '#/';
+      const toon = async () => {
+        const choice = await choiceDialog({
+          title: result.title ?? t('play.done.title'),
+          text: result.text ?? t(daily ? 'play.done.text.daily' : 'play.done.text'),
+          body: result.body,
+          joy: result.joy ?? true,
+          closable: !!result.closable,                                 // met een kruisje kun je het bord nog bekijken; "Toon de uitslag" brengt het venster terug
+          actions: [
+            { label: daily ? t('play.done.backHome') : t('play.done.again'), value: daily ? 'home' : 'again', primary: true, autofocus: true },
+            { label: t('play.done.otherGame'), value: 'games' },
+            ...(daily ? [] : [{ label: t('play.done.toHome'), value: 'home' }]),
+          ],
+          dismissValue: result.closable ? 'blijf' : daily ? 'home' : 'detail',
+        });
+        if (choice === 'blijf') {
+          if (gone) return;
+          if (!viewKnop.isConnected) node.insertBefore(viewKnop, stage);
+          viewKnop.onclick = toon;
+          return;
+        }
+        location.hash = choice === 'again' ? `#/spel/${id}` : choice === 'games' ? '#/spellen' : choice === 'detail' ? `#/spel/${id}` : '#/';
+      };
+      await toon();
     },
   };
 

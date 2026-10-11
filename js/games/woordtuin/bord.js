@@ -15,6 +15,9 @@ const svgNS = 'http://www.w3.org/2000/svg';
 // Een beschermd vakje staat achter een tuinhekje: drie spijlen met een dwarslat, in de kleur van de eigenaar
 export const HEK = '<svg viewBox="0 0 24 18" aria-hidden="true" focusable="false"><path d="M2 17V6l2-3 2 3v11M10 17V6l2-3 2 3v11M18 17V6l2-3 2 3v11M1 10h22M1 14.500h22" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+// De bloem van de ander: een tulp (de jouwe is een rond bloemetje, ✿)
+export const TULP = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2.500c-1.600 0-2.700 1-3.400 2.400C7.500 4.200 6 4.300 5.300 5.500c-.9 1.600-.3 4.800 1.600 6.700 1.200 1.200 3 1.800 5.100 1.800s3.900-.6 5.100-1.800c1.900-1.900 2.500-5.100 1.600-6.700-.7-1.200-2.200-1.300-3.300-.6C14.700 3.500 13.600 2.500 12 2.500z"/><path d="M11.200 13.500h1.600V21h-1.600z"/><path d="M12 20.500c-3.600.1-5.700-1.700-6.300-5 3.200-.2 5.600 1.300 6.300 5zM12 20.500c3.600.1 5.700-1.700 6.300-5-3.200-.2-5.600 1.300-6.300 5z" opacity=".9"/></svg>';
+
 export function maakBord({ size = 6, onChange }) {
   const N = size;
   let state = null, me = 1, path = [], enabled = true, cursor = 0, preview = null;
