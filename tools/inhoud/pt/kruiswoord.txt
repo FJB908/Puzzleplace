@@ -419,7 +419,7 @@ Guadiana | Rio que faz fronteira no sul | 3
 Espanha | País vizinho de Portugal | 1
 Madrid | Capital de Espanha | 1
 Paris | Capital de França | 1
-Roma | Capital de Itália | 1
+Moscovo | Capital da Rússia | 2
 Berlim | Capital da Alemanha | 2
 Londres | Capital de Inglaterra | 1
 Bruxelas | Capital da Bélgica | 2
@@ -440,7 +440,7 @@ Luanda | Capital de Angola | 3
 Moçambique | País africano de língua portuguesa no Índico | 3
 fado | Canção portuguesa triste e saudosa | 1
 guitarra | Instrumento de cordas do fado e da serenata | 1
-azulejo | Ladrilho pintado de azul | 1
+azulejo | Ladrilho pintado que reveste paredes | 1
 calçada | Pavimento de pedras brancas e pretas | 2
 caravela | Navio dos Descobrimentos | 2
 cortiça | Casca do sobreiro | 2
@@ -459,7 +459,7 @@ balão | Enche-se de ar para a festa | 1
 convite | Cartão para ir a uma festa | 1
 brinde | Copos erguidos em honra de alguém | 2
 champanhe | Vinho com bolhas para celebrar | 2
-máscara | Cobre a cara no carnaval | 1
+máscara | Disfarce que cobre o rosto no entrudo | 1
 castanha | Fruto assado do São Martinho | 2
 música | Arte dos sons e das melodias | 1
 piano | Instrumento de teclas pretas e brancas | 1
@@ -656,7 +656,7 @@ triste | Contrário de alegre | 1
 doce | Sabor do açúcar | 1
 azedo | Sabor do limão | 1
 amargo | Sabor do café sem açúcar | 2
-quente | Contrário de frio | 1
+quente | Diz-se do café acabado de fazer | 1
 vermelho | Cor do tomate maduro | 1
 azul | Cor do céu limpo | 1
 verde | Cor da relva | 1

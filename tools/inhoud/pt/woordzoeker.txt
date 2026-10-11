@@ -1,7 +1,7 @@
 # Caça-palavras em português europeu. Temas fixos (ver tools/inhoud/SCHRIJVEN.md).
 
 ## bloemen | Flores
-rosa tulipa cravo lírio violeta margarida girassol jasmim orquídea camélia hortênsia malmequer papoila narciso dália begónia azálea lavanda gerânio magnólia peónia jacinto açucena crisântemo petúnia gladíolo anémona
+rosa tulipa cravo lírio violeta margarida girassol jasmim orquídea camélia hortênsia malmequer papoila narciso dália begónia azálea lavanda gerânio magnólia rododendrojacinto açucena crisântemo petúnia gladíolo anémona
 
 ## tuin | No jardim
 relva regador enxada ancinho tesoura canteiro roseira estufa adubo semente sebe horta poço banco vedação mangueira pomar árvore folha terra vaso muro jardineiro trepadeira laranjeira fonte caminho sombra
@@ -25,7 +25,7 @@ viagem mala passaporte bilhete comboio autocarro avião barco hotel estação ae
 Lisboa Porto Coimbra Braga Faro Évora Sintra Algarve Alentejo Douro Tejo Minho Madeira Açores Fátima Guimarães Aveiro Óbidos fado azulejo pastel galo caravela Cascais Nazaré Setúbal Mondego calçada
 
 ## familie | Família
-pai mãe filho filha irmão irmã tio tia primo prima sobrinho sobrinha neto neta marido mulher genro nora sogro sogra cunhado cunhada padrinho madrinha bisavô bisavó parente casal bebé
+pai mãe filho filha irmão irmã tio tia primo prima sobrinho sobrinha neto neta marido mulher genro nora sogro sogra cunhado cunhada padrinho madrinha bisavôparente casal bebé
 
 ## huis | Em casa
 sala quarto cozinha janela porta telhado escada parede chão cama mesa cadeira sofá armário candeeiro cortina tapete espelho varanda garagem corredor lareira sótão cave banheira chuveiro almofada estante relógio

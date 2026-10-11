@@ -1,0 +1,46 @@
+# Wykreślanka po polsku. Format: ## id | Tytuł, potem słowa oddzielone spacjami.
+
+## bloemen | Kwiaty
+róża tulipan lilia mak bratek stokrotka narcyz hiacynt chaber fiołek konwalia piwonia gerbera malwa bez jaśmin lawenda goździk irys orchidea słonecznik krokus margerytka dalia nagietek żonkil
+
+## tuin | W ogrodzie
+grządka łopata grabie konewka szklarnia kompost trawnik żywopłot altana płot furtka ziemia nasiona sadzonka krzew drzewo jabłoń wiśnia śliwa malina porzeczka truskawka marchew pomidor ogórek cebula sekator taczka
+
+## dieren | Zwierzęta
+pies kot koń krowa świnia owca koza kura kaczka gęś królik lis wilk niedźwiedź jeleń sarna zając jeż wiewiórka bocian sowa żaba słoń lew żyrafa małpa osioł wróbel
+
+## keuken | W kuchni
+garnek patelnia talerz kubek widelec nóż łyżka miska sitko czajnik piekarnik lodówka zlew kuchenka szklanka półmisek tarka deska wałek mikser toster rondel durszlak fartuch filiżanka solniczka
+
+## eten | Smaczne jedzenie
+chleb bułka masło szynka kiełbasa zupa pierogi naleśnik makaron ryż ziemniak sałatka jajko mleko jogurt kotlet barszcz bigos placek sernik szarlotka miód dżem kasza omlet tort pączek racuch galaretka
+
+## weer | Pogoda
+deszcz śnieg wiatr burza słońce chmura mgła grad mróz upał tęcza błyskawica piorun pogoda ciepło chłód szron rosa wichura zamieć przymrozek ochłodzenie opady zima lód wilgoć parasol
+
+## reizen | Podróże
+podróż walizka bilet pociąg samolot lotnisko dworzec hotel wakacje plecak mapa paszport autobus statek plaża namiot kemping przewodnik wycieczka bagaż rezerwacja urlop morze tramwaj rower prom pasażer
+
+## land | Polska
+Warszawa Kraków Gdańsk Poznań Wrocław Łódź Toruń Lublin Szczecin Katowice Zakopane Mazury Kaszuby Śląsk Wisła Odra Bałtyk Tatry Wawel Pomorze Sopot Hel Malbork Wieliczka żurek pierogi bigos Gniezno
+
+## familie | Rodzina
+mama tata babcia dziadek wnuk wnuczka córka siostra ciocia wujek kuzyn kuzynka teść teściowa zięć synowa szwagier bratanek siostrzenica rodzice rodzina dziecko mąż żona matka ojciec rodzeństwo
+
+## huis | W domu
+dom drzwi okno dach ściana podłoga sufit schody pokój kuchnia łazienka sypialnia balkon komin kanapa fotel stół krzesło szafa łóżko dywan lampa zasłona lustro zegar obraz półka poduszka
+
+## natuur | Przyroda
+las rzeka jezioro góra morze łąka pole dolina wzgórze skała drzewo liść trawa mech grzyb jagoda strumień wodospad wyspa pustynia bagno źródło wydma jaskinia gleba kamień piasek
+
+## muziek | Muzyka
+pianino skrzypce gitara flet trąbka bęben harfa akordeon organy wiolonczela klarnet saksofon nuty melodia piosenka chór orkiestra koncert opera walc polka śpiew dyrygent dźwięk rytm smyczek fortepian mandolina
+
+## hobby | Hobby
+szydełko druty haft malowanie rysunek fotografia wędkarstwo ogrodnictwo czytanie szachy warcaby puzzle krzyżówka gotowanie pieczenie kolekcja znaczki monety spacer taniec pływanie szycie rzeźba robótki grzybobranie turystyka
+
+## kleding | Ubrania
+koszula spodnie spódnica sukienka kurtka płaszcz sweter szalik czapka rękawiczki skarpetki buty kapelusz bluzka marynarka krawat pasek piżama szlafrok kamizelka bielizna chustka kalosze sandały garnitur szelki
+
+## feest | Święta i uroczystości
+urodziny wesele święta wigilia choinka prezent tort życzenia goście balon świeca kolęda opłatek pisanka wielkanoc karnawał sylwester imieniny jubileusz toast szampan bukiet zaproszenie rocznica ślub zabawa fajerwerki
