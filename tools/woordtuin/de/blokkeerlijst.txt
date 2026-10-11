@@ -1,0 +1,39 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+abel abraham adam adams adolf adrian afrika afrikas agypten alba alex alf alfons alfred
+alice allah amerika amerikas amor andrea andreas andy angela anita anja anke anna annas
+anne annette annie anton antonio apollo apple arabien arnold arthur asien asterix astrid athen
+attila audi aviv babylon bagdad bali bambi bangkok barbara barbie baumann bea beate beatles
+beck becker beirut belgien belgrad ben berger berlin berlins bern bernd bert bettina betty
+billy birgit bjorn boris bosch bosnien brandt britta bruno brussel buddha buenos bull calvin
+cannes carlo carlos carola casar castro charles charlie chi chile china chinas christa christi
+cisco claude claudia clemens connor daniel daniela daniels dante darwin david davids dell dennis
+diana dieter dirk disney dominik don donald donau dora doris dresden dubai dublin edgar
+edith eduard egon eli elias emil emilia emma emmas england erich erwin europa europas
+eva evas fabian felix ferrari florenz florian ford franco franz fritz gabriel gandhi genf
+genfer georg george georges gerd gerda gerhard gestapo gina gisela goethe google goring gregor
+guido gunther hagen hamburg hamlet hannes hans harald harold harry havanna hawaii heidi heinz
+helene helga helmut henning henry herbert hermann hermes hilde hilton hitler hitlers holger holland
+homer homo honda huber hubert hugo hussein indien indiens ingrid irak iran irland isaac
+isis israel israels italien ivan iwan jacob jacobs jacques jakob jamaika jan jap japan
+japans jean jemen jens jesu jesus joachim johann john johns jorg josef joseph julia
+julias julius jupiter jurgen kabul kairo kanada kanadas karibik karin karl karls karsten katrin
+kenia kennedy kerstin kiew klaus knox koln kongo konrad kreml kruger kuba ladies lady
+ladys lars lehmann leipzig lenin leopold libanon lima linus lisa lisas lloyd london londons
+lorenz lothar lotte louis louvre ludwig luther mac madrid mailand mali malmo manfred manuela
+mao marc marcel maria marias marie marilyn marion marius markus marlene marokko mars martin
+martina martins marx maurice max maya meier melanie merkur merlin mexiko mexikos meyer meyers
+miami michael michel mick miriam mister monaco monika monroe mont monte morris moses moskau
+moskaus mozart munchen nadine nassau nato neapel neger negerin negern negers negro nero nicole
+nigeria nigga nigger nil nils nina ninas nizza noah olaf olga oliver orleans oscar
+oscars oskar oslo otto ottos pablo paris pariser patrick paul paula pauls paulus pazifik
+pedro peggy peking peru peter peters petra petrus philipp philips picasso porsche prag rafael
+rainer ralf ralph raphael renate renault rhein richard rico rio robert roberts robin roger
+roland rolf rom roms ronald roth rudi rudolf rupert sabine sabrina sahara sam samuel
+san sandra santa sascha saturn saul schmidt schulz schweiz seoul simon simone simons sofia
+sonja sophia sophie spanien sparta stalin stasi stefan stephan stevens sudan susanne sven sylvia
+syrien taiwan tanja teheran theo theodor theresa therese thomas thor thrones tibet tim tina
+tinas titanic tobias tokio tom toyota trump turkei udo ukraine ulla ulrich ulrike ursula
+uwe van vatikan venedig venus verona viagra victor vietnam vista volvo walter walther werner
+wien wilhelm willi willis willy york yorker yvonne zeus zurich zypern

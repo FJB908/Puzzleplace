@@ -376,7 +376,7 @@ export default {
   "help.q11": "Woher kommen die Wörter in {game}?",
   "help.a11": "Die Wortliste beruht auf dem freien deutschen Rechtschreibwörterbuch {source} ({license}) und auf Daten dazu, wie häufig Wörter vorkommen. Namen, Wörter aus anderen Sprachen und Wörter, die niemand benutzt, wurden weggelassen. Der Computer spielt nur alltägliche Wörter.",
   "help.q12": "Wie spiele ich {game} mit Freunden?",
-  "help.a12": "Erstellen Sie unter [{account}](#/account) ein Konto, fügen Sie unter [{friends}](#/vrienden) Ihre Freundin oder Ihren Freund mit dem Freundescode hinzu und tippen Sie neben dem Namen auf „{newGame}“. Sie spielen abwechselnd: Sie müssen nicht warten, die App zeigt Ihnen, wenn Sie an der Reihe sind.",
+  "help.a12": "Erstellen Sie unter [{account}](#/account) ein Konto, fügen Sie unter [{friends}](#/vrienden) Ihre Freundin oder Ihren Freund mit dem Freundescode hinzu und tippen Sie neben dem Namen auf „{newGame}“. Sie spielen abwechselnd: Sie müssen nicht warten, die App zeigt Ihnen an, wann Sie an der Reihe sind.",
   "forms.show": "Anzeigen",
   "forms.hide": "Verbergen",
   "forms.suggestPassword": "Passwort vorschlagen",

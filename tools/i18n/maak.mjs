@@ -79,7 +79,9 @@ function controleer(taal, en, vertaling) {
     // {n} mag alleen ontbreken in een vorm die precies één getal dekt (Engels "one" = 1); anders zou "21" als "1" worden getoond
     const enkel = vorm && meervoudsdekking(taal)[vorm] === 1;
     for (const p of wil) if (!heeft.has(p) && !(p === 'n' && enkel)) fouten.push(`plaatshouder {${p}} mist in ${k}`);
-    for (const p of heeft) if (!wil.has(p)) fouten.push(`onbekende plaatshouder {${p}} in ${k}`);
+    for (const p of heeft) if (!wil.has(p) && !(p === 'n' && vorm)) fouten.push(`onbekende plaatshouder {${p}} in ${k}`);
+    // een vorm die ook voor andere getallen geldt (Fransen: 0 en 1, Lets: 21, 31, ...) moet {n} bevatten, ook als het Engels geen getal noemt
+    if (vorm && meervoudsdekking(taal)[vorm] > 1 && /\{n\}/.test(bron + v) === false && !heeft.has('n')) fouten.push(`{n} ontbreekt in ${k}: deze vorm geldt voor meer dan één getal`);
   }
   // De woordenlijst voor voorgestelde wachtwoorden: 24 verschillende woorden, alleen letters, kleine letters
   const pw = vertaling['forms.passwordWords'];

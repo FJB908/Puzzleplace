@@ -349,7 +349,7 @@ export async function mount(container, ctx) {
   function onKey(e) {
     if (document.querySelector('dialog[open]') || e.ctrlKey || e.metaKey || e.altKey) return;
     const letter = e.key.length === 1 ? typInvoer(e.key, ctx.taal).toUpperCase() : '';           // "é" op het toetsenbord is gewoon een "E"
-    if (letter.length === 1) { typeLetter(letter); e.preventDefault(); }
+    if (letter) { for (const ch of letter) typeLetter(ch); e.preventDefault(); }                  // "ß" is SS, "œ" is OE: twee vakjes
     else if (e.key === 'Backspace' || e.key === 'Delete') { backspace(); e.preventDefault(); }
     else if (e.key === 'ArrowLeft') { arrow(0, -1); e.preventDefault(); }
     else if (e.key === 'ArrowRight') { arrow(0, 1); e.preventDefault(); }

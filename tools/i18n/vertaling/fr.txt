@@ -115,12 +115,12 @@ sudoku.summary | Remplissez la grille avec les chiffres de 1 à 9.
 sudoku.howTo.1 | Dans chaque ligne, chaque colonne et chaque carré de 3 sur 3, chaque chiffre de 1 à 9 apparaît exactement une fois.
 sudoku.howTo.2 | Touchez une case vide, puis choisissez un chiffre ci-dessous.
 sudoku.howTo.3 | Si un chiffre est incorrect, vous le voyez tout de suite et une fleur (une vie) disparaît. Quand il n'y en a plus, vous recommencez.
-sudoku.howTo.4 | Avec « {pencil} », vous écrivez un chiffre en petit dans la case, comme une note. Les notes ne coûtent jamais de vie.
-sudoku.howTo.5 | Avec « {undo} », vous annulez votre dernier coup. Avec « {hint} », l'application remplit une case pour vous, sans vous faire perdre de vie.
-sudoku.level.makkelijk | Un début en douceur · 5 vies
-sudoku.level.gemiddeld | Un beau défi · 4 vies
-sudoku.level.moeilijk | Pour les joueurs expérimentés · 3 vies
-sudoku.level.extreem | Pour les vrais experts · 3 vies
+sudoku.howTo.4 | Avec « {pencil} », vous écrivez un chiffre en petit dans la case, comme une note. Les notes ne coûtent jamais de vie.
+sudoku.howTo.5 | Avec « {undo} », vous annulez votre dernier coup. Avec « {hint} », l'application remplit une case pour vous, sans vous faire perdre de vie.
+sudoku.level.makkelijk | Un début en douceur · 5 vies
+sudoku.level.gemiddeld | Un beau défi · 4 vies
+sudoku.level.moeilijk | Pour les joueurs expérimentés · 3 vies
+sudoku.level.extreem | Pour les vrais experts · 3 vies
 woordzoeker.gridAria | Grille de mots mêlés, {n} sur {n} lettres
 woordzoeker.start | Touchez la première lettre d'un mot, puis la dernière.
 woordzoeker.wordsAria | Mots à trouver
@@ -147,11 +147,11 @@ woordzoeker.howTo.1 | Chaque grille a un thème, par exemple les fleurs. Les mot
 woordzoeker.howTo.2 | Touchez la première lettre d'un mot, puis la dernière. Pour cette seconde lettre, pas besoin de viser très juste.
 woordzoeker.howTo.3 | Avec une souris, vous pouvez aussi faire glisser le pointeur. Les mots peuvent aller de gauche à droite, de haut en bas et, aux niveaux supérieurs, aussi en diagonale et à l'envers.
 woordzoeker.howTo.4 | Si le mot est dans la liste, il est mis en évidence et barré. Se tromper ne coûte rien.
-woordzoeker.howTo.5 | Un petit blocage ? Touchez un mot de la liste ou touchez « {hint} » : la première case du mot s'allume.
-woordzoeker.level.makkelijk | 8 sur 8 · 6 mots
-woordzoeker.level.gemiddeld | 10 sur 10 · aussi en diagonale
-woordzoeker.level.moeilijk | 12 sur 12 · aussi à l'envers
-woordzoeker.level.extreem | 13 sur 13 · 15 mots
+woordzoeker.howTo.5 | Un petit blocage ? Touchez un mot de la liste ou touchez « {hint} » : la première case du mot s'allume.
+woordzoeker.level.makkelijk | 8 sur 8 · 6 mots
+woordzoeker.level.gemiddeld | 10 sur 10 · aussi en diagonale
+woordzoeker.level.moeilijk | 12 sur 12 · aussi à l'envers
+woordzoeker.level.extreem | 13 sur 13 · 15 mots
 kruiswoord.gridAria | Grille de mots croisés
 kruiswoord.prevClue | Définition précédente
 kruiswoord.nextClue | Définition suivante
@@ -191,11 +191,11 @@ kruiswoord.howTo.1 | Chaque case blanche fait partie d'un mot. La définition s'
 kruiswoord.howTo.2 | Touchez une case et écrivez avec le clavier sous la grille, ou avec votre propre clavier. Touchez de nouveau la même case pour alterner entre horizontal et vertical.
 kruiswoord.howTo.3 | Les mots se croisent : une lettre vous aide aussi pour l'autre mot.
 kruiswoord.howTo.4 | Dès qu'un mot est complet, vous voyez tout de suite s'il est juste. Un mot correct s'allume, un mot incorrect tremble un peu. Les erreurs ne coûtent rien.
-kruiswoord.howTo.5 | Avec « {hint} », vous dévoilez une lettre, avec « {word} », le mot entier. Toutes les définitions se trouvent sous la grille.
-kruiswoord.level.makkelijk | 8 mots · des mots connus
+kruiswoord.howTo.5 | Avec « {hint} », vous dévoilez une lettre, avec « {word} », le mot entier. Toutes les définitions se trouvent sous la grille.
+kruiswoord.level.makkelijk | 8 mots · des mots connus
 kruiswoord.level.gemiddeld | 12 mots
-kruiswoord.level.moeilijk | 16 mots · quelques mots plus difficiles
-kruiswoord.level.extreem | 22 mots · très serrés
+kruiswoord.level.moeilijk | 16 mots · quelques mots plus difficiles
+kruiswoord.level.extreem | 22 mots · très serrés
 woordtuin.you | Vous
 woordtuin.computer | Ordinateur
 woordtuin.boardAria | Le plateau, {n} sur {n} lettres
@@ -264,8 +264,8 @@ woordtuin.summary | Formez des mots et faites pousser vos fleurs, contre l'ordin
 woordtuin.howTo.1 | Le plateau compte 6 lignes de 6 lettres. Formez un mot de 3 à 7 lettres en faisant glisser le doigt sur les lettres, ou touchez-les l'une après l'autre. Les lettres doivent se toucher, en diagonale aussi.
 woordtuin.howTo.2 | Les cases de votre mot deviennent les vôtres : elles fleurissent dans votre couleur. Si votre adversaire forme ensuite un mot qui passe par vos cases, elles deviennent les siennes.
 woordtuin.howTo.3 | Sauf les cases protégées : une case dont les voisines (à gauche, à droite, au-dessus et en dessous) ont toutes la même couleur ne peut pas être prise. Vous la reconnaissez à la petite clôture dans le coin.
-woordtuin.howTo.4 | Chaque mot doit colorer au moins une case libre et ne peut être joué qu'une seule fois. Tous les mots courants comptent, y compris les pluriels et les formes conjuguées (« fleur », « fleurs », « fleurit »). Les noms propres, les abréviations et les mots d'autres langues ne comptent pas. Les accents sont ignorés : « é » est simplement « e ».
-woordtuin.howTo.5 | Quand toutes les cases sont colorées, celui qui a le plus de fleurs gagne. Vous voyez à l'avance ce que rapporte un mot, et avec « {hint} », une case s'allume. Un mot qui n'existe pas ne coûte rien.
+woordtuin.howTo.4 | Chaque mot doit colorer au moins une case libre et ne peut être joué qu'une seule fois. Tous les mots courants comptent, y compris les pluriels et les formes conjuguées (« fleur », « fleurs », « fleurit »). Les noms propres, les abréviations et les mots d'autres langues ne comptent pas. Les accents sont ignorés : « é » est simplement « e ».
+woordtuin.howTo.5 | Quand toutes les cases sont colorées, celui qui a le plus de fleurs gagne. Vous voyez à l'avance ce que rapporte un mot, et avec « {hint} », une case s'allume. Un mot qui n'existe pas ne coûte rien.
 woordtuin.level.makkelijk | Voit peu de mots et n'est pas toujours attentif
 woordtuin.level.gemiddeld | Ne voit qu'une partie des mots
 woordtuin.level.moeilijk | Voit beaucoup de mots et choisit habilement
@@ -274,8 +274,8 @@ games.title | Jeux
 games.subtitle | Choisissez un jeu.
 games.comingSoon | Bientôt disponible
 games.inProgress | En cours
-games.inProgressPct | En cours · {pct} %
-games.solved_one | Résolu une fois
+games.inProgressPct | En cours · {pct} %
+games.solved_one | Résolu {n} fois
 games.solved_other | Résolu {n} fois
 games.levels_one | {n} niveau
 games.levels_other | {n} niveaux
@@ -286,19 +286,19 @@ level.extreem | Extrême
 level.default.makkelijk | Un début en douceur
 level.default.gemiddeld | Un beau défi
 level.default.moeilijk | Pour les joueurs expérimentés
-detail.solved_one | Déjà résolu une fois
+detail.solved_one | Déjà résolu {n} fois
 detail.solved_other | Déjà résolu {n} fois
 detail.howTo | Comment jouer
 detail.soon | Ce jeu arrive bientôt.
 detail.soonText | Nous y travaillons. En attendant, essayez un autre jeu.
 detail.backToGames | Retour aux jeux
 detail.howHard | Quel niveau ?
-detail.levelLocked | Une partie de ce jeu est déjà en cours. Choisissez « {newGame} » pour changer de niveau.
+detail.levelLocked | Une partie de ce jeu est déjà en cours. Choisissez « {newGame} » pour changer de niveau.
 detail.newGameConfirmTitle | Nouvelle partie ?
 detail.newGameConfirmText | Votre partie enregistrée sera remplacée.
 detail.newGameConfirmYes | Oui, nouvelle partie
 detail.continue | Continuer
-detail.continuePct | Continuer · {pct} %
+detail.continuePct | Continuer · {pct} %
 detail.newGame | Nouvelle partie
 detail.start | Commencer
 play.howTo | Règles du jeu
@@ -323,7 +323,7 @@ settings.textSize | Taille du texte
 settings.preview | Voici à quoi ressemble le texte. Cela vous convient-il ?
 settings.sectionLook | Apparence
 settings.colours | Couleurs
-settings.coloursHint | « Automatique » suit le réglage de votre téléphone ou de votre ordinateur.
+settings.coloursHint | « Automatique » suit le réglage de votre téléphone ou de votre ordinateur.
 settings.theme.auto | Automatique
 settings.theme.light | Clair
 settings.theme.dark | Sombre
@@ -352,29 +352,29 @@ settings.nameSaved | Prénom enregistré
 help.title | Aide
 help.subtitle | Touchez une question pour lire la réponse.
 help.q1 | Comment agrandir les lettres ?
-help.a1 | Allez dans [{settings}](#/instellingen) et, sous « {textSize} », choisissez « {large} » ou « {xlarge} ».
+help.a1 | Allez dans [{settings}](#/instellingen) et, sous « {textSize} », choisissez « {large} » ou « {xlarge} ».
 help.q2 | Vais-je perdre ma progression si j'arrête ?
-help.a2 | Non. Après chaque coup, votre partie est enregistrée automatiquement sur cet appareil. Vous pouvez toujours toucher « {back} » et reprendre plus tard.
+help.a2 | Non. Après chaque coup, votre partie est enregistrée automatiquement sur cet appareil. Vous pouvez toujours toucher « {back} » et reprendre plus tard.
 help.q3 | Comment reprendre une partie ?
 help.a3 | Sur l'écran d'accueil, vous trouverez le jeu auquel vous jouiez. Touchez-le pour continuer. Vous le trouverez aussi sur la page du jeu.
 help.q4 | Comment recommencer une partie ?
-help.a4 | Ouvrez le jeu dans « {games} » et touchez « {newGame} ». Une confirmation vous est d'abord demandée : vous n'effacez donc jamais rien par erreur.
+help.a4 | Ouvrez le jeu dans « {games} » et touchez « {newGame} ». Une confirmation vous est d'abord demandée : vous n'effacez donc jamais rien par erreur.
 help.q5 | Qu'est-ce que la grille du jour ?
 help.a5 | Une nouvelle grille vous attend chaque jour. Sur l'écran d'accueil, il suffit de la toucher pour la commencer.
 help.q6 | Puis-je ajouter Puzzleplace à mon écran d'accueil, comme une application ?
-help.a6 | Oui. Ouvrez le menu de votre navigateur et choisissez « Ajouter à l'écran d'accueil » ou « Installer l'application ».
+help.a6 | Oui. Ouvrez le menu de votre navigateur et choisissez « Ajouter à l'écran d'accueil » ou « Installer l'application ».
 help.q7 | Faut-il se connecter ?
 help.a7 | Non. Vous pouvez jouer tout de suite, sans compte.
 help.q8 | Comment changer de langue ?
-help.a8 | Allez dans [{settings}](#/instellingen) et touchez « {language} ». Les grilles et les listes de mots changent en même temps.
+help.a8 | Allez dans [{settings}](#/instellingen) et touchez « {language} ». Les grilles et les listes de mots changent en même temps.
 help.q9 | Comment fonctionne le jeu {game} ?
-help.a9 | Formez un mot de 3 à 7 lettres en faisant glisser le doigt sur des lettres voisines, ou en les touchant l'une après l'autre. Les cases de votre mot deviennent les vôtres. Si votre adversaire forme ensuite un mot qui passe par vos cases, elles deviennent les siennes, sauf les cases protégées (toutes leurs voisines ont la même couleur). Quand toutes les cases sont colorées, celui qui en a le plus gagne. Touchez « {instructions} » dans le jeu pour lire toutes les explications.
+help.a9 | Formez un mot de 3 à 7 lettres en faisant glisser le doigt sur des lettres voisines, ou en les touchant l'une après l'autre. Les cases de votre mot deviennent les vôtres. Si votre adversaire forme ensuite un mot qui passe par vos cases, elles deviennent les siennes, sauf les cases protégées (toutes leurs voisines ont la même couleur). Quand toutes les cases sont colorées, celui qui en a le plus gagne. Touchez « {instructions} » dans le jeu pour lire toutes les explications.
 help.q10 | Pourquoi mon mot est-il refusé dans le jeu {game} ?
-help.a10 | Tous les mots courants de la langue comptent, y compris les pluriels et les formes conjuguées (« arbre », « arbres », « grandit »). Ne comptent pas : les noms propres, les abréviations, les mots étrangers et les mots très rares. Un mot doit avoir au moins 3 lettres. Les accents n'ont pas d'importance : un « é » est simplement un « e ». Vous recevez toujours une courte explication, et une erreur ne vous coûte rien.
+help.a10 | Tous les mots courants de la langue comptent, y compris les pluriels et les formes conjuguées (« arbre », « arbres », « grandit »). Ne comptent pas : les noms propres, les abréviations, les mots étrangers et les mots très rares. Un mot doit avoir au moins 3 lettres. Les accents n'ont pas d'importance : un « é » est simplement un « e ». Vous recevez toujours une courte explication, et une erreur ne vous coûte rien.
 help.q11 | D'où viennent les mots du jeu {game} ?
 help.a11 | La liste de mots a été établie à partir du dictionnaire orthographique libre du français {source} ({license}) et de données sur la fréquence des mots. Les noms propres, les mots étrangers et les mots que personne n'utilise ont été écartés. L'ordinateur ne joue que des mots courants.
 help.q12 | Comment jouer à {game} avec un ami ?
-help.a12 | Créez un compte dans [{account}](#/account), ajoutez votre ami dans [{friends}](#/vrienden) grâce à son code ami, puis touchez « {newGame} » à côté de son nom. Vous jouez chacun à votre tour : inutile d'attendre, l'application vous indique quand c'est à vous de jouer.
+help.a12 | Créez un compte dans [{account}](#/account), ajoutez votre ami dans [{friends}](#/vrienden) grâce à son code ami, puis touchez « {newGame} » à côté de son nom. Vous jouez chacun à votre tour : inutile d'attendre, l'application vous indique quand c'est à vous de jouer.
 forms.show | Afficher
 forms.hide | Masquer
 forms.suggestPassword | Proposez-moi un mot de passe
@@ -506,7 +506,7 @@ friends.games | Vos parties
 friends.gameWith | {game} avec {name}
 friends.statusTurn | C'est à vous de jouer
 friends.statusTheirTurn | C'est à {name} de jouer
-friends.scoreLine | Vous {mine} · {name} {theirs} · {open} à prendre
+friends.scoreLine | Vous {mine} · {name} {theirs} · {open} à prendre
 friends.play | Jouer
 friends.view | Voir
 friends.open | Ouvrir
@@ -535,7 +535,7 @@ match.loading | Chargement de la partie…
 match.with | avec {name}
 match.you | Vous
 match.opponent | Votre adversaire
-match.waitNote | Inutile d'attendre : vous pouvez fermer l'application. Lorsque {name} aura joué, un chiffre apparaîtra à côté de « {friends} » dans le menu.
+match.waitNote | Inutile d'attendre : vous pouvez fermer l'application. Lorsque {name} aura joué, un chiffre apparaîtra à côté de « {friends} » dans le menu.
 match.played | {name} a joué {word}. C'est à vous de jouer.
 match.over.resigned | La partie est terminée
 match.over.won | Vous avez gagné, félicitations !
@@ -615,5 +615,5 @@ err.move.maxLength_other | Un mot ne peut pas dépasser {n} lettres.
 err.move.reuse | Vous ne pouvez utiliser chaque lettre qu'une seule fois.
 err.move.adjacent | Les lettres d'un mot doivent être voisines.
 err.move.unknown | Nous ne connaissons pas ce mot. Essayez-en un autre.
-err.move.played | « {word} » a déjà été joué dans cette partie. Choisissez un autre mot.
+err.move.played | « {word} » a déjà été joué dans cette partie. Choisissez un autre mot.
 err.move.noFresh | Chaque mot doit colorer au moins une case libre. Cherchez un mot qui passe par une case blanche.

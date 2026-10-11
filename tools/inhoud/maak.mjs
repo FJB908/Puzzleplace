@@ -119,6 +119,8 @@ function controleerKruiswoord(taal, entries, fouten, waarsch) {
     const woorden = clue.split(/[^\p{L}]+/u).filter(Boolean).map((x) => vouw(x, taal).toUpperCase());
     if (woorden.includes(answer)) f(`${p}: het antwoord staat in de omschrijving`);
     else if (answer.length >= 4 && woorden.some((x) => x.includes(answer))) w(`${p}: een woord in de omschrijving bevat het antwoord ("${clue}")`);
+    // een samengesteld antwoord dat een woord uit de omschrijving bevat verklapt de helft ("Roter Käfer" voor Marienkäfer, "Hier woon je" voor Woonkamer)
+    else if (answer.length >= 7 && woorden.some((x) => x.length >= 4 && x.length < answer.length && (answer.startsWith(x) || answer.endsWith(x)))) w(`${p}: de omschrijving bevat een deel van het antwoord ("${clue}")`);
     uit.push({ answer, clue, level: e.level });
   }
   if (uit.length < KW_MIN_ENTRIES) f(`${uit.length} woorden, minimaal ${KW_MIN_ENTRIES}`);
