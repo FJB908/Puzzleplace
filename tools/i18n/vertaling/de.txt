@@ -662,3 +662,15 @@ play.otherLanguage.title | Dieses Spiel ist in einer anderen Sprache
 play.otherLanguage.text | Ihr gespeichertes Spiel ist auf {from}, die App ist jetzt auf {to}. Ein neues Spiel auf {to} ersetzt das gespeicherte.
 play.otherLanguage.new | Neues Spiel auf {language}
 play.otherLanguage.keep | Weiter auf {language}
+err.mailCodeWrong | Der Code stimmt nicht oder ist abgelaufen. Fordern Sie einen neuen Code an.
+err.mailCodeNeeded | Geben Sie den Code aus der E-Mail ein.
+err.mailFailed | Die E-Mail konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal.
+account.mail.send | Code senden
+account.mail.sentForgot | Falls es ein Konto mit dieser E-Mail-Adresse gibt, haben wir einen Code dorthin gesendet. Der Code gilt 30 Minuten. Schauen Sie auch im Spam-Ordner nach.
+account.mail.sentChange | Wir haben einen Code an {email} gesendet. Der Code gilt 30 Minuten. Schauen Sie auch im Spam-Ordner nach.
+account.mail.codeLabel | Code aus der E-Mail
+account.mail.codeHint | Der Code hat 8 Zeichen, zum Beispiel K7P4-QM2X.
+account.forgot.mailText | Wir senden einen Code an Ihre E-Mail-Adresse. Mit diesem Code wählen Sie ein neues Passwort.
+account.forgot.useRecovery | Ich habe einen Wiederherstellungscode
+account.forgot.useMail | Lieber einen Code per E-Mail
+account.changePassword.mailText | Zu Ihrer Sicherheit senden wir zuerst einen Code an Ihre E-Mail-Adresse. Diesen geben Sie ein, um die Änderung abzuschließen.

@@ -3,6 +3,7 @@
 // Je blijft ingelogd op dit apparaat (de sleutel staat in de opslag van de browser). Op een gedeelde
 // computer log je uit; dat staat duidelijk bij Account.
 
+import { getTaal } from '../i18n/index.js';
 import { api, apiUrl, getToken, setToken, on, hasBackend } from './backend.js';
 
 let user = null;
@@ -76,7 +77,16 @@ export async function signOut() {
 }
 
 export async function rename(name) { const r = await api('PATCH', '/api/me', { name }); set(r.user); return r.user; }
-export const changePassword = (password, newPassword) => api('POST', '/api/me/password', { password, newPassword });
+export const changePassword = (password, newPassword, emailCode) => api('POST', '/api/me/password', { password, newPassword, emailCode });
+// Een code per e-mail: voor "wachtwoord vergeten" (zonder inloggen) en om je wachtwoord te veranderen (ingelogd)
+export const forgotMail = (email) => api('POST', '/api/forgot', { email, taal: getTaal() });
+export async function resetMail({ email, code, password }) {
+  const r = await api('POST', '/api/reset', { email, code, password });
+  setToken(r.token); set(r.user);
+  await refresh();
+  return r.user;
+}
+export const changePasswordCode = (password) => api('POST', '/api/me/password/code', { password, taal: getTaal() });
 export async function newFriendCode() { const r = await api('POST', '/api/me/code', {}); set(r.user); return r.user.code; }
 export async function deleteAccount(password) { await api('DELETE', '/api/me', { password }); setToken(''); set(null); }
 

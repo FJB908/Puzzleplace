@@ -63,6 +63,6 @@ export async function api(method, path, body, { quiet = false } = {}) {
   const err = json?.error || {};
   const fail = new ApiFail(res.status, err.code || 'fout', err.message || t('err.generic'), err.key || (err.message ? null : 'generic'), err.params || null);
   fail.data = json;
-  if (res.status === 401 && token && !quiet && !['inloggen', 'herstel', 'wachtwoord'].includes(fail.code)) { setToken(''); emit('uitgelogd'); }
+  if (res.status === 401 && token && !quiet && !['inloggen', 'herstel', 'wachtwoord', 'code'].includes(fail.code)) { setToken(''); emit('uitgelogd'); }
   throw fail;
 }

@@ -18,6 +18,7 @@ Geen pakketten nodig (alleen Node 20+). De server dient ook de app zelf, dus `ht
 | `DATA_DIR` | Waar `db.json` komt (standaard `server/data/`, staat in `.gitignore`) |
 | `TRUST_PROXY=1` | Zet dit aan als er een proxy voor staat (nginx, Caddy, ...) die `X-Forwarded-For` meegeeft. Anders tellen de limieten per proxy in plaats van per bezoeker. |
 | `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`, `PUBLIC_URL` | Alle drie instellen om "Doorgaan met Facebook" aan te zetten, zie *Inloggen met Facebook* hieronder. `PUBLIC_URL` is het adres waarop mensen de app openen (bijv. `https://puzzelplaats.nl`, zonder `/` erachter). |
+| `SMTP_URL`, `MAIL_FROM` | E-mail voor de codes bij *wachtwoord vergeten* en *wachtwoord veranderen*. `SMTP_URL` is bijv. `smtps://gebruiker:wachtwoord@smtp.voorbeeld.nl:465` (versleuteld) of `smtp://…:587` (STARTTLS); `MAIL_FROM` bijv. `"Puzzleplace <noreply@voorbeeld.nl>"`. Zonder `SMTP_URL` wordt er niets verstuurd: de e-mail verschijnt in het venster van de server, zodat je alles kunt uitproberen. Zet het vóór je de app echt gebruikt. |
 | `ALLOW_ORIGIN` | Alleen nodig als de app op een ánder adres staat dan de server (bijv. `https://mijnapp.nl`). Zet dan hetzelfde adres in `API_BASE` in `js/config.js`. |
 
 **Draai hem altijd achter HTTPS** (Caddy of nginx met een certificaat). Wachtwoorden en sleutels gaan anders onbeschermd over de lijn.
@@ -130,3 +131,10 @@ Google kan op dezelfde manier: nog een `…/start` en `…/callback` die een pro
 ## Later: Google
 
 `auth.js` is het enige stuk dat de app aanroept (`signUp`, `signIn`, ...). Een extra aanbieder (Google) is: een route op de server die een token controleert en een eigen sleutel teruggeeft (zoals Facebook, zie boven), plus een knop op het inlogscherm. De rest (vrienden, voortgang, partijen) verandert niet.
+
+
+## Code per e-mail (wachtwoord vergeten en wachtwoord veranderen)
+
+* **Wachtwoord vergeten** (`#/account/herstel`): je vult je e-mailadres in, krijgt een code van 8 tekens (30 minuten geldig, één keer te gebruiken, 5 pogingen) en kiest daarmee een nieuw wachtwoord. Het antwoord is altijd hetzelfde, ook voor een adres zonder account, zodat niemand kan zien welke adressen bestaan. Wie zijn herstelcode heeft, kan die nog steeds gebruiken (`#/account/herstel/code`).
+* **Wachtwoord veranderen** (ingelogd): huidig en nieuw wachtwoord invullen, dan komt er een code per e-mail die je invult om het af te ronden. Alle andere apparaten moeten daarna opnieuw inloggen.
+* De e-mails staan in de taal van de app (`server/mailteksten.mjs`: Engels, Nederlands, Duits, Frans, Spaans, Italiaans, Portugees, Pools). `server/mail.mjs` is een kleine SMTP-client zonder extra pakketten; getest tegen een nagebouwde server (inloggen, ontvanger, tekst met accenten). Verbinden met een echte SMTP-server (TLS) is hier niet uitgeprobeerd.

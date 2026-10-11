@@ -6,6 +6,8 @@
 
 import { hashSecret, verifySecret, DUMMY, newToken, sha, newId, newFriendCode, newRecoveryCode, cleanCode, formatCode } from './crypto.mjs';
 import { createLimiter } from './ratelimit.mjs';
+import { createMailer } from './mail.mjs';
+import { mailTekst, MAIL_TALEN } from './mailteksten.mjs';
 import { ApiError, fail, engelseTekst, cleanName, cleanEmail, cleanPassword, isObject } from './validate.mjs';
 
 const DAY = 86400000;
@@ -17,7 +19,7 @@ export class RuleError extends Error {
   constructor(key, params) { super(engelseTekst(key, params)); this.key = key; this.params = params || null; }
 }
 
-export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0', facebook = null }) {
+export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0', facebook = null, mailer = createMailer() }) {
   const D = db.data;
   const day = (t) => new Date(t).toISOString().slice(0, 10);
 
@@ -126,12 +128,67 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     return { body: { user: selfView(user) } };
   }
 
+  // ----- Code per e-mail: wachtwoord vergeten, en wachtwoord veranderen als je ingelogd bent -----
+  const MAIL_MIN = 30;
+  const mailTaal = (v) => (MAIL_TALEN.includes(v) ? v : 'en');
+  const mailHash = (user, code) => sha(`${user.id}|${cleanCode(code)}`);
+  async function stuurCode(user, soort, taal) {
+    const code = newFriendCode();                                     // 8 tekens, bijv. K7P4-QM2X
+    user.mailCode = { soort, hash: mailHash(user, code), exp: now() + MAIL_MIN * 60_000, tries: 0 };
+    db.save();
+    const { subject, text } = mailTekst(soort, mailTaal(taal), { naam: user.name, code, min: MAIL_MIN });
+    try { await mailer.send({ to: user.email, subject, text }); }
+    catch (e) { delete user.mailCode; db.save(); console.error(`e-mail naar ${user.email} mislukt: ${e.message}`); fail(502, 'email', 'mailFailed'); }
+  }
+  // Klopt de code? Een code werkt één keer, een beperkte tijd en maximaal 5 pogingen.
+  function controleerCode(user, soort, code) {
+    const m = user?.mailCode;
+    if (!code || !String(code).trim()) fail(400, 'code', 'mailCodeNeeded');
+    if (!m || m.soort !== soort || m.exp < now() || m.tries >= 5) fail(401, 'code', 'mailCodeWrong');
+    if (m.hash !== mailHash(user, code)) { m.tries++; db.save(); fail(401, 'code', 'mailCodeWrong'); }
+    delete user.mailCode;
+  }
+
+  async function forgot(req) {
+    limit(req, 'forgot-ip', 10, 3600_000);
+    const email = String(req.body.email ?? '').trim().toLowerCase();
+    if (!limiter.hit(`forgot-mail:${email}`, 3, 3600_000)) fail(429, 'te-snel', 'tooManyRecover');
+    const user = userById(D.emails[email]);
+    if (user && user.pass) await stuurCode(user, 'reset', req.body.taal);
+    return { body: { ok: true } };                                      // altijd hetzelfde antwoord: zo is niet te zien welke adressen bestaan
+  }
+
+  async function reset(req) {
+    limit(req, 'reset-ip', 20, 3600_000);
+    const email = String(req.body.email ?? '').trim().toLowerCase();
+    if (!limiter.hit(`reset-mail:${email}`, 10, 3600_000)) fail(429, 'te-snel', 'tooManyRecover');
+    const password = cleanPassword(req.body.password);
+    const user = userById(D.emails[email]);
+    controleerCode(user, 'reset', req.body.code);
+    user.pass = await hashSecret(password);
+    revokeSessions(user.id);
+    const token = newSession(user.id);
+    db.save();
+    return { body: { token, user: selfView(user) } };
+  }
+
+  async function changePasswordCode(req) {
+    const { user } = auth(req);
+    limit(req, 'pw-code', 10, 3600_000);
+    if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
+    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'currentPasswordWrong');
+    await stuurCode(user, 'change', req.body.taal);
+    return { body: { ok: true } };
+  }
+
   async function changePassword(req) {
     const { user, key } = auth(req);
     limit(req, 'pw', 10, 3600_000);
     if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
     if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'currentPasswordWrong');
-    user.pass = await hashSecret(cleanPassword(req.body.newPassword, 'nieuw'));
+    const nieuw = cleanPassword(req.body.newPassword, 'nieuw');
+    controleerCode(user, 'change', req.body.emailCode);                // de code die per e-mail kwam
+    user.pass = await hashSecret(nieuw);
     revokeSessions(user.id, key);
     db.save();
     return { body: { ok: true } };
@@ -423,10 +480,10 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
   const routes = [
     ['GET', '/api/ping', () => ({ body: { ok: true, app: 'puzzelplaats', version, accounts: true, facebook: !!facebook } })],
     ['GET', '/api/auth/facebook/start', facebookStart], ['GET', '/api/auth/facebook/callback', facebookCallback], ['POST', '/api/auth/facebook/claim', facebookClaim],
-    ['POST', '/api/signup', signup], ['POST', '/api/login', login], ['POST', '/api/recover', recover],
+    ['POST', '/api/signup', signup], ['POST', '/api/login', login], ['POST', '/api/recover', recover], ['POST', '/api/forgot', forgot], ['POST', '/api/reset', reset],
     ['POST', '/api/logout', (req) => { const { key } = auth(req); delete D.sessions[key]; db.save(); return { body: { ok: true } }; }],
     ['GET', '/api/me', me], ['PATCH', '/api/me', rename], ['DELETE', '/api/me', deleteAccount],
-    ['POST', '/api/me/password', changePassword], ['POST', '/api/me/code', newFriendCodeFor], ['POST', '/api/me/recovery', newRecovery],
+    ['POST', '/api/me/password', changePassword], ['POST', '/api/me/password/code', changePasswordCode], ['POST', '/api/me/code', newFriendCodeFor], ['POST', '/api/me/recovery', newRecovery],
     ['GET', '/api/users/by-code/:code', codeLookup],
     ['GET', '/api/friends', listFriends], ['POST', '/api/friends/request', friendRequest],
     ['POST', '/api/friends/:id/accept', (r) => answerFriend(r, true)], ['POST', '/api/friends/:id/decline', (r) => answerFriend(r, false)],

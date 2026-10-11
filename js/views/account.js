@@ -148,19 +148,40 @@ function newRecoveryView() {
     } }), out));
 }
 
-function recoverView() {
-  const f = { email: field({ label: t('account.email'), name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', value: emails.remembered()[0] || '', suggestions: emails.remembered() }),
-    herstelCode: field({ label: t('account.recoveryLabel'), name: 'herstelcode', autocomplete: 'off', hint: t('account.recoveryHint') }),
-    wachtwoord: passwordField({ label: t('account.newPassword'), name: 'wachtwoord', autocomplete: 'new-password', suggest: true }) };
+// Wachtwoord vergeten: standaard met een code per e-mail; wie zijn herstelcode heeft kan die ook gebruiken (#/account/herstel/code)
+function recoverView(modus) {
+  const emailVeld = () => field({ label: t('account.email'), name: 'email', type: 'email', autocomplete: 'username', inputmode: 'email', value: emails.remembered()[0] || '', suggestions: emails.remembered() });
+  if (modus === 'code') {
+    const f = { email: emailVeld(),
+      herstelCode: field({ label: t('account.recoveryLabel'), name: 'herstelcode', autocomplete: 'off', hint: t('account.recoveryHint') }),
+      wachtwoord: passwordField({ label: t('account.newPassword'), name: 'wachtwoord', autocomplete: 'new-password', suggest: true }) };
+    return page(t('account.forgotTitle'), h('div', { class: 'view' },
+      header(t('account.forgotTitle'), t('account.forgot.text'), '#/account/inloggen'),
+      form({ fields: [f.email, f.herstelCode, f.wachtwoord], submitLabel: t('account.setPassword'),
+        onSubmit: async (v) => {
+          const r = await auth.recover({ email: v.email, recoveryCode: v.herstelcode, password: v.wachtwoord }).catch((e) => { if (e.code === 'herstel') e.code = 'herstelcode'; throw e; });
+          stash.set(PENDING_RECOVERY, r.recoveryCode);
+          location.hash = '#/account/klaar';
+        } }),
+      h('p', { class: 'center' }, h('a', { href: '#/account/herstel' }, t('account.forgot.useMail'))),
+      h('p', { class: 'muted' }, t('account.lostBoth'))));
+  }
+  const slot = h('div', { class: 'stack' });
+  const stap1 = () => {
+    const email = emailVeld();
+    slot.replaceChildren(form({ fields: [email], submitLabel: t('account.mail.send'), onSubmit: async (v) => { await auth.forgotMail(v.email); stap2(v.email); } }));
+  };
+  const stap2 = (adres) => {
+    const code = field({ label: t('account.mail.codeLabel'), name: 'code', autocomplete: 'one-time-code', hint: t('account.mail.codeHint'), autofocus: true });
+    const nieuw = passwordField({ label: t('account.newPassword'), name: 'wachtwoord', autocomplete: 'new-password', suggest: true });
+    slot.replaceChildren(h('p', { class: 'notice', role: 'status' }, t('account.mail.sentForgot')),
+      form({ fields: [code, nieuw], submitLabel: t('account.setPassword'), onSubmit: async (v) => { await auth.resetMail({ email: adres, code: v.code, password: v.wachtwoord }); afterLogin(); } }));
+  };
+  stap1();
   return page(t('account.forgotTitle'), h('div', { class: 'view' },
-    header(t('account.forgotTitle'), t('account.forgot.text'), '#/account/inloggen'),
-    form({ fields: [f.email, f.herstelCode, f.wachtwoord], submitLabel: t('account.setPassword'),
-      onSubmit: async (v) => {
-        const r = await auth.recover({ email: v.email, recoveryCode: v.herstelcode, password: v.wachtwoord }).catch((e) => { if (e.code === 'herstel') e.code = 'herstelcode'; throw e; });
-        stash.set(PENDING_RECOVERY, r.recoveryCode);
-        location.hash = '#/account/klaar';
-      } }),
-    h('p', { class: 'muted' }, t('account.lostBoth'))));
+    header(t('account.forgotTitle'), t('account.forgot.mailText'), '#/account/inloggen'),
+    slot,
+    h('p', { class: 'center' }, h('a', { href: '#/account/herstel/code' }, t('account.forgot.useRecovery')))));
 }
 
 // ----- Ingelogd -----
@@ -219,14 +240,21 @@ function overview(app) {
   return page(t('account.title'), node, { cleanup: s.off });
 }
 
+// Wachtwoord veranderen: eerst het huidige en het nieuwe wachtwoord, dan komt er een code per e-mail die je invult om het af te ronden
 function changePasswordView() {
+  const slot = h('div', { class: 'stack' });
   const f = { oud: passwordField({ label: t('account.currentPassword'), name: 'wachtwoord' }), nieuw: passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true }) };
-  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.text'), '#/account'),
-    form({ fields: [f.oud, f.nieuw], submitLabel: t('account.changePassword'), onSubmit: async (v) => {
-      await auth.changePassword(v.wachtwoord, v.nieuw);
-      await choiceDialog({ title: t('account.changed.title'), text: t('account.changed.text'), actions: [{ label: t('account.changed.ok'), value: true, primary: true, autofocus: true }] });
-      location.hash = '#/account';
-    } })));
+  const stap2 = (oud, nieuw) => {
+    const code = field({ label: t('account.mail.codeLabel'), name: 'code', autocomplete: 'one-time-code', hint: t('account.mail.codeHint'), autofocus: true });
+    slot.replaceChildren(h('p', { class: 'notice', role: 'status' }, t('account.mail.sentChange', { email: auth.getUser()?.email || '' })),
+      form({ fields: [code], submitLabel: t('account.changePassword'), onSubmit: async (v) => {
+        await auth.changePassword(oud, nieuw, v.code);
+        await choiceDialog({ title: t('account.changed.title'), text: t('account.changed.text'), actions: [{ label: t('account.changed.ok'), value: true, primary: true, autofocus: true }] });
+        location.hash = '#/account';
+      } }));
+  };
+  slot.append(form({ fields: [f.oud, f.nieuw], submitLabel: t('account.mail.send'), onSubmit: async (v) => { await auth.changePasswordCode(v.wachtwoord); stap2(v.wachtwoord, v.nieuw); } }));
+  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.mailText'), '#/account'), slot));
 }
 
 function deleteView() {
@@ -260,7 +288,7 @@ export function accountView({ sub, arg }, app) {
   const user = auth.getUser();
   if (sub === 'nieuw') return user ? overview(app) : signupView();
   if (sub === 'inloggen') return user ? overview(app) : loginView();
-  if (sub === 'herstel') return recoverView();
+  if (sub === 'herstel') return recoverView(arg);
   if (sub === 'klaar') return readyView();
   if (sub === 'facebook' && arg) return FEATURES.facebookLogin ? facebookView(arg) : notFoundView();
   if (!user) return intro();

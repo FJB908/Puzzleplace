@@ -63,3 +63,7 @@ err.move.unknown | We do not know this word. Try another word. | Dit woord kenne
 # {word} is het woord dat de speler probeerde
 err.move.played | "{word}" has already been played in this game. Choose another word. | "{word}" is in deze partij al gespeeld. Kies een ander woord.
 err.move.noFresh | Every word must colour at least one open square. Look for a word with a white square. | Elk woord moet minstens één open vakje kleuren. Zoek een woord met een wit vakje.
+# Code per e-mail (wachtwoord vergeten of veranderen)
+err.mailCodeWrong | The code is not correct, or it has expired. Ask for a new code. | De code klopt niet of is verlopen. Vraag een nieuwe code aan.
+err.mailCodeNeeded | Enter the code from the email. | Vul de code uit de e-mail in.
+err.mailFailed | We could not send the email just now. Please try again in a little while. | De e-mail kon nu niet worden verstuurd. Probeer het zo nog eens.

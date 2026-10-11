@@ -9,6 +9,7 @@
 //   DATA_DIR      waar de gegevens staan (standaard server/data)
 //   ALLOW_ORIGIN  alleen nodig als de app op een ANDER adres staat dan de server (bijv. https://mijnapp.nl)
 //   TRUST_PROXY   zet op 1 als de server achter een proxy staat die X-Forwarded-For meegeeft
+//   SMTP_URL, MAIL_FROM   e-mail voor de codes bij "wachtwoord vergeten" en "wachtwoord veranderen" (zie docs/ACCOUNTS.md). Zonder SMTP_URL wordt er niets verstuurd: de mail verschijnt in dit venster.
 //   FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, PUBLIC_URL   zet je deze alle drie, dan verschijnt "Doorgaan met Facebook" (zie docs/ACCOUNTS.md)
 
 import { createServer as httpServer } from 'node:http';
@@ -17,6 +18,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join, normalize, extname, sep } from 'node:path';
 import { Db } from './db.mjs';
 import { createApi } from './api.mjs';
+import { createMailer } from './mail.mjs';
 import { engelseTekst } from './validate.mjs';
 import { GAMES } from './games/index.mjs';
 
@@ -135,7 +137,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const { FACEBOOK_APP_ID: appId, FACEBOOK_APP_SECRET: appSecret } = process.env;
   const publicUrl = (process.env.PUBLIC_URL || `http://localhost:${port}`).replace(/\/+$/, '');
   const facebook = appId && appSecret ? { appId, appSecret, publicUrl } : null;
-  const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook } });
+  const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook, mailer: createMailer({ url: process.env.SMTP_URL || '', from: process.env.MAIL_FROM || '' }) } });
   // Is de poort bezet? Zonder PORT probeert de server vanzelf de volgende (8001, 8002, ...); met PORT zegt hij het gewoon.
   let nu = port;
   const luister = () => server.listen(nu, host, () => console.log(`Puzzleplace draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${nu}  (gegevens in ${dataDir})`));

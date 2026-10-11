@@ -627,3 +627,15 @@ play.otherLanguage.title | Cette partie est dans une autre langue
 play.otherLanguage.text | Votre partie enregistrée est en {from}, et l’application est maintenant en {to}. Une nouvelle partie en {to} remplace la partie enregistrée.
 play.otherLanguage.new | Nouvelle partie en {language}
 play.otherLanguage.keep | Continuer en {language}
+err.mailCodeWrong | Le code est incorrect ou a expiré. Demandez un nouveau code.
+err.mailCodeNeeded | Saisissez le code reçu par e-mail.
+err.mailFailed | L’e-mail n’a pas pu être envoyé pour le moment. Réessayez dans quelques instants.
+account.mail.send | M’envoyer un code
+account.mail.sentForgot | Si un compte existe avec cette adresse e-mail, nous lui avons envoyé un code. Le code est valable 30 minutes. Regardez aussi dans vos courriers indésirables.
+account.mail.sentChange | Nous avons envoyé un code à {email}. Le code est valable 30 minutes. Regardez aussi dans vos courriers indésirables.
+account.mail.codeLabel | Code reçu par e-mail
+account.mail.codeHint | Le code compte 8 caractères, par exemple K7P4-QM2X.
+account.forgot.mailText | Nous envoyons un code à votre adresse e-mail. Avec ce code, vous choisissez un nouveau mot de passe.
+account.forgot.useRecovery | J’ai un code de récupération
+account.forgot.useMail | Plutôt un code par e-mail
+account.changePassword.mailText | Pour la sécurité de votre compte, nous envoyons d’abord un code à votre adresse e-mail. Vous le saisissez pour terminer.

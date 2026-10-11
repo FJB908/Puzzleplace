@@ -627,3 +627,15 @@ play.otherLanguage.title | Esta partida está en otro idioma
 play.otherLanguage.text | Tu partida guardada está en {from}, y la aplicación ahora está en {to}. Una partida nueva en {to} sustituye a la guardada.
 play.otherLanguage.new | Partida nueva en {language}
 play.otherLanguage.keep | Seguir en {language}
+err.mailCodeWrong | El código no es correcto o ha caducado. Pide un código nuevo.
+err.mailCodeNeeded | Escribe el código del correo.
+err.mailFailed | Ahora no hemos podido enviar el correo. Inténtalo de nuevo dentro de un rato.
+account.mail.send | Envíame un código
+account.mail.sentForgot | Si existe una cuenta con este correo electrónico, le hemos enviado un código. El código vale durante 30 minutos. Mira también en la carpeta de spam.
+account.mail.sentChange | Hemos enviado un código a {email}. El código vale durante 30 minutos. Mira también en la carpeta de spam.
+account.mail.codeLabel | Código del correo
+account.mail.codeHint | El código tiene 8 caracteres, como K7P4-QM2X.
+account.forgot.mailText | Enviamos un código a tu correo electrónico. Con ese código eliges una contraseña nueva.
+account.forgot.useRecovery | Tengo un código de recuperación
+account.forgot.useMail | Mejor un código por correo
+account.changePassword.mailText | Para mantener tu cuenta segura, primero enviamos un código a tu correo electrónico. Lo escribes para terminar.

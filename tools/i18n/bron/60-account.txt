@@ -92,3 +92,16 @@ account.facebook.title | Logging in with Facebook | Inloggen met Facebook
 account.facebook.failed | Logging in with Facebook did not work, or you cancelled. You can try again, or log in with your email address. | Het inloggen met Facebook is niet gelukt, of je hebt het geannuleerd. Je kunt het nog eens proberen, of inloggen met je e-mailadres.
 account.facebook.failedShort | Logging in with Facebook did not work. | Het inloggen met Facebook is niet gelukt.
 common.backHome | Back to Home | Terug naar Start
+##### Code per e-mail
+# Knop: er wordt een e-mail met een code gestuurd.
+account.mail.send | Send me a code | Stuur me een code
+# Na het versturen, bij "wachtwoord vergeten". We zeggen niet of het adres een account heeft (privacy).
+account.mail.sentForgot | If there is an account for this email address, we have sent a code to it. The code works for 30 minutes. Look in your spam folder too. | Als er een account is met dit e-mailadres, hebben we er een code naartoe gestuurd. De code werkt 30 minuten. Kijk ook in je map met ongewenste e-mail.
+# Na het versturen, bij "wachtwoord veranderen" (ingelogd). {email} is het e-mailadres van het account.
+account.mail.sentChange | We sent a code to {email}. The code works for 30 minutes. Look in your spam folder too. | We hebben een code gestuurd naar {email}. De code werkt 30 minuten. Kijk ook in je map met ongewenste e-mail.
+account.mail.codeLabel | Code from the email | Code uit de e-mail
+account.mail.codeHint | The code has 8 characters, like K7P4-QM2X. | De code heeft 8 tekens, zoals K7P4-QM2X.
+account.forgot.mailText | We send a code to your email address. With that code you choose a new password. | We sturen een code naar je e-mailadres. Met die code kies je een nieuw wachtwoord.
+account.forgot.useRecovery | I have a recovery code instead | Ik heb een herstelcode
+account.forgot.useMail | Send a code by email instead | Liever een code per e-mail
+account.changePassword.mailText | To keep your account safe, we first send a code to your email address. You enter that code to finish. | Voor de veiligheid sturen we eerst een code naar je e-mailadres. Die vul je in om het af te ronden.

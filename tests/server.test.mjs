@@ -4,6 +4,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createApp } from '../server/index.mjs';
+import { createMailer } from '../server/mail.mjs';
 import { RuleError } from '../server/api.mjs';
 
 // Een klein testspel voor twee spelers: wie als eerste 3 punten heeft wint. De zet is { add: 1..2 }.
@@ -26,7 +27,8 @@ after(() => { for (const s of open) { s.close(); s.closeAllConnections?.(); } })
 async function start(opts = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'pp-'));
   const file = join(dir, 'db.json');
-  const app = createApp({ dataFile: file, trustProxy: true, games: GAMES, ...opts });
+  const mailer = createMailer({ log: () => {} });                  // geen echte e-mail in de tests: alles komt in mailer.outbox
+  const app = createApp({ dataFile: file, trustProxy: true, games: GAMES, ...opts, api: { mailer, ...(opts.api || {}) } });
   await new Promise((r) => app.server.listen(0, '127.0.0.1', r));
   open.add(app.server);
   const base = `http://127.0.0.1:${app.server.address().port}`;
@@ -41,7 +43,8 @@ async function start(opts = {}) {
     return { status: res.status, json, text, headers: res.headers };
   };
   const close = () => new Promise((r) => { app.server.close(() => { rmSync(dir, { recursive: true, force: true }); r(); }); app.server.closeAllConnections?.(); });
-  return { ...app, base, call, close, file, dir };
+  const mailCode = () => /[A-Z0-9]{4}-[A-Z0-9]{4}/.exec(mailer.outbox.at(-1)?.text || '')?.[0];
+  return { ...app, base, call, close, file, dir, mailer, mailCode };
 }
 
 async function signup(s, name, email, password = 'rozen-molen-zomer') {
@@ -130,7 +133,17 @@ test('naam, wachtwoord en vriendencode wijzigen', async () => {
   assert.equal((await s.call('PATCH', '/api/me', { name: 'Anna de Vries' }, a.token)).json.user.name, 'Anna de Vries');
   assert.equal((await s.call('PATCH', '/api/me', { name: 'x' }, a.token)).status, 400);
   assert.equal((await s.call('POST', '/api/me/password', { password: 'fout', newPassword: 'nieuw-wachtwoord-1' }, a.token)).status, 401);
-  assert.equal((await s.call('POST', '/api/me/password', { password: a.password, newPassword: 'nieuw-wachtwoord-1' }, a.token)).status, 200);
+  // Een wachtwoord veranderen gaat met een code per e-mail
+  const zonder = await s.call('POST', '/api/me/password', { password: a.password, newPassword: 'nieuw-wachtwoord-1' }, a.token);
+  assert.equal(zonder.status, 400); assert.equal(zonder.json.error.code, 'code');
+  assert.equal((await s.call('POST', '/api/me/password/code', { password: 'fout' }, a.token)).status, 401);
+  assert.equal(s.mailer.outbox.length, 0, 'bij een fout wachtwoord wordt er niets gemaild');
+  assert.equal((await s.call('POST', '/api/me/password/code', { password: a.password, taal: 'nl' }, a.token)).status, 200);
+  assert.equal(s.mailer.outbox.length, 1); assert.equal(s.mailer.outbox[0].to, 'anna@voorbeeld.nl'); assert.match(s.mailer.outbox[0].subject, /Puzzelplaats/);
+  const fout = await s.call('POST', '/api/me/password', { password: a.password, newPassword: 'nieuw-wachtwoord-1', emailCode: 'AAAA-AAAA' }, a.token);
+  assert.equal(fout.status, 401); assert.equal(fout.json.error.code, 'code');
+  assert.equal((await s.call('POST', '/api/me/password', { password: a.password, newPassword: 'nieuw-wachtwoord-1', emailCode: s.mailCode() }, a.token)).status, 200);
+  assert.equal((await s.call('POST', '/api/me/password', { password: 'nieuw-wachtwoord-1', newPassword: 'nog-een-wachtwoord-2', emailCode: s.mailCode() }, a.token)).status, 401, 'een code werkt maar één keer');
   assert.equal((await s.call('GET', '/api/me', undefined, second.json.token)).status, 401, 'andere apparaten moeten opnieuw inloggen');
   assert.equal((await s.call('GET', '/api/me', undefined, a.token)).status, 200, 'dit apparaat blijft ingelogd');
   const code = (await s.call('GET', '/api/me', undefined, a.token)).json.user.code;
@@ -467,5 +480,36 @@ test('Facebook: misbruik wordt tegengehouden', async () => {
   assert.ok(geweigerd.headers.get('location').endsWith('/fout'));
   assert.equal((await handmatig(s, '/api/auth/facebook/start?nonce=kort')).status, 400);
   assert.equal((await s.call('POST', '/api/auth/facebook/claim', {})).status, 401);
+  await s.close();
+});
+
+test('wachtwoord vergeten per e-mail: code, nieuw wachtwoord, en het lekt niet welke adressen bestaan', async () => {
+  const s = await start();
+  const a = await signup(s, 'Anna', 'anna@voorbeeld.nl');
+  const onbekend = await s.call('POST', '/api/forgot', { email: 'niemand@voorbeeld.nl', taal: 'nl' });
+  const bekend = await s.call('POST', '/api/forgot', { email: ' Anna@Voorbeeld.nl ', taal: 'de' });
+  assert.equal(onbekend.status, 200); assert.equal(bekend.status, 200);
+  assert.deepEqual(onbekend.json, bekend.json, 'zelfde antwoord');
+  assert.equal(s.mailer.outbox.length, 1, 'alleen het bestaande adres krijgt een e-mail');
+  assert.match(s.mailer.outbox[0].subject, /Puzzleplace-Code/); assert.match(s.mailer.outbox[0].text, /Guten Tag Anna/);
+  const code = s.mailCode();
+  assert.ok(code);
+  const slecht = await s.call('POST', '/api/reset', { email: 'anna@voorbeeld.nl', code: 'ZZZZ-ZZZZ', password: 'heel-nieuw-wachtwoord' });
+  assert.equal(slecht.status, 401); assert.equal(slecht.json.error.code, 'code');
+  const goed = await s.call('POST', '/api/reset', { email: 'anna@voorbeeld.nl', code: code.toLowerCase(), password: 'heel-nieuw-wachtwoord' });
+  assert.equal(goed.status, 200); assert.ok(goed.json.token);
+  assert.equal((await s.call('GET', '/api/me', undefined, a.token)).status, 401, 'oude sessies zijn weg');
+  assert.equal((await s.call('POST', '/api/login', { email: 'anna@voorbeeld.nl', password: 'heel-nieuw-wachtwoord' })).status, 200);
+  assert.equal((await s.call('POST', '/api/reset', { email: 'anna@voorbeeld.nl', code, password: 'nog-eens-een-wachtwoord' })).status, 401, 'een code werkt maar één keer');
+  await s.close();
+});
+
+test('een code per e-mail: na vijf foute pogingen werkt ook de goede niet meer', async () => {
+  const s = await start();
+  await signup(s, 'Anna', 'anna@voorbeeld.nl');
+  await s.call('POST', '/api/forgot', { email: 'anna@voorbeeld.nl' });
+  const code = s.mailCode();
+  for (let i = 0; i < 5; i++) assert.equal((await s.call('POST', '/api/reset', { email: 'anna@voorbeeld.nl', code: 'AAAA-AAA' + i, password: 'heel-nieuw-wachtwoord' })).status, 401);
+  assert.equal((await s.call('POST', '/api/reset', { email: 'anna@voorbeeld.nl', code, password: 'heel-nieuw-wachtwoord' })).status, 401);
   await s.close();
 });
