@@ -152,7 +152,7 @@ woordzoeker.level.makkelijk | 8 por 8 · 6 palavras
 woordzoeker.level.gemiddeld | 10 por 10 · também na diagonal
 woordzoeker.level.moeilijk | 12 por 12 · também de trás para a frente
 woordzoeker.level.extreem | 13 por 13 · 15 palavras
-kruiswoord.gridAria | Grelha de palavras cruzadas
+kruiswoord.gridAria | Grelha das palavras cruzadas
 kruiswoord.prevClue | Pista anterior
 kruiswoord.nextClue | Pista seguinte
 kruiswoord.clueGroup | Pista
@@ -438,7 +438,7 @@ account.recoveryHint | É o código de 12 caracteres que recebeu ao criar a cont
 account.setPassword | Definir nova palavra-passe
 account.lostBoth | Perdeu também o código de recuperação? Então, infelizmente, não lhe podemos dar acesso à conta. Pode criar uma conta nova; o progresso nos seus dispositivos mantém-se.
 account.sync.title | O seu progresso em todos os dispositivos
-account.sync.now | Sincronizar agora
+account.sync.now | Atualizar
 account.sync.busy | A atualizar…
 account.sync.failed | Não resultou: {error}
 account.sync.ok | Tudo atualizado ({time}).
@@ -458,7 +458,7 @@ account.logout.wipe | Terminar sessão e apagar tudo neste dispositivo
 account.logout.stay | Manter a sessão iniciada
 account.delete | Eliminar conta
 account.delete.text | A sua conta, os seus amigos e o seu progresso guardado no nosso servidor serão apagados. O que está nos seus dispositivos mantém-se.
-account.delete.passwordHint | Para confirmar que é mesmo o próprio.
+account.delete.passwordHint | Para confirmar que é o próprio.
 account.delete.confirmTitle | Tem a certeza?
 account.delete.confirmText | Isto não pode ser desfeito.
 account.delete.confirmYes | Sim, eliminar

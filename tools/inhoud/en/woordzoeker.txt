@@ -1,0 +1,61 @@
+# Word search in English (British spelling). Per theme: a heading "## id | title" followed by the words. See tools/inhoud/maak.mjs.
+
+## bloemen | Flowers
+rose tulip daisy lily iris lilac violet orchid poppy peony pansy crocus daffodil bluebell
+sunflower carnation lavender marigold snowdrop foxglove hyacinth buttercup dahlia jasmine geranium begonia cowslip
+
+## tuin | In the garden
+spade fork rake hoe shed lawn hedge pond path patio fence bench greenhouse wheelbarrow
+hosepipe compost flowerbed seeds trowel shovel mower bulbs orchard weeds trellis birdbath secateurs sprinkler
+
+## dieren | Animals
+horse sheep rabbit hedgehog squirrel badger otter fox deer cow pig goat donkey duck
+goose swan robin owl mouse cat dog tortoise butterfly ladybird hamster giraffe elephant penguin
+
+## keuken | In the kitchen
+kettle toaster oven cooker fridge freezer saucepan colander whisk spoon fork knife plate bowl
+mug teapot grater ladle sieve apron tray sink dishcloth blender peeler cutlery casserole microwave
+
+## eten | Tasty food
+bread butter cheese cake soup pasta rice potato carrot apple pear banana orange
+strawberry sausage omelette biscuit pudding chocolate sandwich salad jam honey cherry plum porridge custard marmalade
+
+## weer | The weather
+rain sunshine cloud wind snow frost fog mist storm thunder lightning breeze shower drizzle
+hail sleet ice thaw gale forecast umbrella drought downpour puddle overcast chilly heatwave flood
+
+## reizen | Travelling
+train ticket passport suitcase luggage airport hotel holiday beach harbour ferry cruise coach taxi
+bus map tourist journey flight station platform tram camping souvenir postcard guide compass backpack
+
+## land | Around the world
+France Spain Italy Germany Greece Egypt India China Japan Canada Brazil Australia Africa Europe
+Asia Atlantic Pacific Paris London Rome Venice Sydney Everest Sahara Amazon Vienna Madrid Pyramids
+
+## familie | Family
+mother father son daughter brother sister uncle aunt cousin nephew niece grandma grandpa granny
+grandad husband wife baby twins family parents children relatives toddler teenager sibling ancestor newborn
+
+## huis | In the house
+door window roof wall floor ceiling stairs bedroom bathroom lounge hall garage attic cellar
+chimney sofa chair table lamp carpet curtains mirror cupboard wardrobe shelf radiator pillow blanket
+
+## natuur | Nature
+forest river mountain valley meadow lake hill stream waterfall cliff coast island rock stone
+moss fern tree leaf wood field cave desert sunrise sunset marsh glacier volcano canyon
+
+## muziek | Music
+piano violin guitar drum flute harp trumpet cello organ choir song tune band concert
+orchestra singer melody rhythm chorus opera clarinet saxophone accordion recorder symphony conductor lullaby waltz
+
+## hobby | Hobbies
+knitting sewing painting drawing reading cooking baking gardening fishing walking cycling swimming dancing singing
+chess cards puzzles crochet embroidery pottery photography bingo golf bowls woodwork hiking yoga darts
+
+## kleding | Clothes
+coat jacket jumper cardigan scarf gloves hat cap shirt blouse dress skirt trousers jeans
+socks shoes boots sandals slippers pyjamas tie belt shorts tights mittens anorak trainers pullover
+
+## feest | Celebrations
+birthday wedding party present candles balloons fireworks anniversary carnival festival parade banquet feast toast
+champagne guests invitation gifts confetti decorations cake card wine ribbon bonfire tinsel mistletoe crackers
