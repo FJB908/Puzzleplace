@@ -1,0 +1,654 @@
+# Puzzleplace – Deutsch (de). Anrede: Sie. Pro Zeile: Schlüssel | Übersetzung
+
+##### 00-app
+app.name | Puzzleplace
+app.description | Entspanntes Rätseln mit großer Schrift und übersichtlicher Gestaltung.
+app.skipToContent | Zum Inhalt springen
+app.noscript | Puzzleplace braucht JavaScript. Schalten Sie JavaScript in Ihrem Browser ein und laden Sie die Seite neu.
+nav.main | Hauptmenü
+nav.home | Start
+nav.games | Spiele
+nav.friends | Freunde
+nav.settings | Optionen
+nav.friendsNew | Freunde, {n} neu
+common.noGoBack | Nein, zurück
+common.back | Zurück
+common.close | Schließen
+common.loading | Wird geladen…
+common.retry | Erneut versuchen
+common.somethingWentWrong | Das hat nicht geklappt.
+time.today | heute
+time.yesterday | gestern
+time.daysAgo_one | vor {n} Tag
+time.daysAgo_other | vor {n} Tagen
+notFound.title | Seite nicht gefunden
+notFound.heading | Diese Seite gibt es nicht
+notFound.text | Vielleicht ist der Link veraltet. Keine Sorge, Ihr Spielstand ist sicher.
+notFound.toHome | Zur Startseite
+loading.title | Wird geladen
+
+##### 05-taal
+language.title | Sprache
+language.choose | Wählen Sie Ihre Sprache
+language.chooseLater | Sie können das später unter „Optionen“ ändern.
+language.current | Sprache
+language.chosen | ausgewählt
+
+##### 10-home
+home.greeting.morning | Guten Morgen
+home.greeting.afternoon | Guten Tag
+home.greeting.evening | Guten Abend
+home.greetingName | {greeting}, {name}
+home.welcome.title | Ist der Text gut lesbar?
+home.welcome.sizeGroup | Schriftgröße
+size.normal | Normal
+size.large | Groß
+size.xlarge | Sehr groß
+home.welcome.ok | So ist es gut
+home.friends | Freunde
+home.friends.request | Freundschaftsanfrage
+home.friends.accept | Ja
+home.friends.acceptAria | {name} zu Ihren Freunden hinzufügen
+home.friends.decline | Nein
+home.friends.declineAria | Anfrage von {name} ablehnen
+home.friends.nowFriends | {name} ist jetzt mit Ihnen befreundet.
+home.friends.declined | Anfrage abgelehnt.
+home.friends.newGame | Neue Partie
+home.friends.newGameAria | Neue Partie mit {name}
+home.friends.yourTurn | Sie sind dran
+home.friends.waitingFor | Warten auf {name}
+home.friends.gamesCount_one | {n} Partie
+home.friends.gamesCount_other | {n} Partien
+home.friends.play | Spielen
+home.friends.rowAriaTurn | Spielen: {game} mit {name}. Sie sind an der Reihe.
+home.friends.rowAriaWait | Ansehen: {game} mit {name}. {name} ist an der Reihe.
+home.friends.signedOutTitle | Mit Freunden spielen
+home.friends.signedOutText | Mit einem Konto können Sie auch auf Ihren anderen Geräten weiterspielen.
+home.friends.createAccount | Konto erstellen
+home.friends.logIn | Anmelden
+home.friends.none | Noch keine Freunde.
+home.friends.noneHint | Teilen Sie Ihren Code, dann können Sie zusammen spielen.
+home.friends.shareCode | Meinen Code teilen
+home.friends.haveCode | Ich habe einen Code
+home.friends.all | Alle Freunde ({n})
+home.friends.shareText | Spielen wir zusammen auf Puzzleplace! Mein Freundescode ist {code}.
+home.friends.linkCopied | Link kopiert. Fügen Sie ihn in eine Nachricht ein.
+home.chooseGame | Wählen Sie ein Spiel
+home.chooseGameHint | Sudoku, Wortsuche und mehr
+home.continue | Weiterspielen
+home.continueAria | {game} fortsetzen, {pct} Prozent geschafft
+home.continueAriaNoPct | {game} fortsetzen
+home.daily | Rätsel des Tages
+home.dailyDone | Heute geschafft
+
+##### 100-sudoku
+common.hint | Tipp
+sudoku.gridAria | Sudoku-Gitter
+sudoku.start | Tippen Sie auf ein Kästchen und wählen Sie dann eine Ziffer.
+sudoku.erase | Löschen
+sudoku.eraseAria | Dieses Kästchen leeren
+sudoku.digits | Ziffern
+sudoku.undo | Rückgängig
+sudoku.pencil | Bleistift
+sudoku.pencilOn | Bleistift an
+sudoku.digitAria | Ziffer {n}
+sudoku.digitDone | Ziffer {n}, alle gesetzt
+sudoku.livesAria | Leben: {lives} von {max}
+sudoku.cell.value | Zeile {r}, Spalte {c}: {n}
+sudoku.cell.given | Zeile {r}, Spalte {c}: {n}, vorgegeben
+sudoku.cell.wrong | Zeile {r}, Spalte {c}: {n}, falsch
+sudoku.cell.notes | Zeile {r}, Spalte {c}: leer, Notizen {notes}
+sudoku.cell.empty | Zeile {r}, Spalte {c}: leer
+sudoku.say.fixedChoose | Diese Ziffer ist vorgegeben und lässt sich nicht ändern. Wählen Sie ein leeres Kästchen.
+sudoku.say.fixed | Diese Ziffer ist vorgegeben und lässt sich nicht ändern.
+sudoku.say.clearFirst | Löschen Sie zuerst die Ziffer in diesem Kästchen, um Notizen zu machen.
+sudoku.say.alreadyEmpty | Dieses Kästchen ist schon leer.
+sudoku.say.wrong_one | Diese Ziffer gehört nicht hierher. Sie haben noch {n} Leben. Löschen Sie die Ziffer oder versuchen Sie eine andere.
+sudoku.say.wrong_other | Diese Ziffer gehört nicht hierher. Sie haben noch {n} Leben. Löschen Sie die Ziffer oder versuchen Sie eine andere.
+sudoku.say.nothingToUndo | Es gibt nichts rückgängig zu machen.
+sudoku.say.undone | Ihr letzter Schritt wurde rückgängig gemacht.
+sudoku.say.pencilOn | Bleistift ist an: Die Ziffern kommen klein ins Kästchen, als Notiz.
+sudoku.say.pencilOff | Bleistift ist aus: Die Ziffern kommen groß ins Kästchen.
+sudoku.say.hint | Tipp: In das markierte Kästchen gehört die {n}.
+sudoku.say.nothingLeft | Es gibt nichts mehr auszufüllen.
+sudoku.say.won | Geschafft! Das Rätsel ist vollständig richtig ausgefüllt.
+sudoku.say.noLives | Sie haben keine Leben mehr.
+sudoku.say.retry | Neuer Versuch. Viel Glück!
+sudoku.gameOver.title | Keine Leben mehr
+sudoku.gameOver.text | Möchten Sie es mit demselben Rätsel noch einmal versuchen?
+sudoku.gameOver.retry | Erneut versuchen
+sudoku.gameOver.leaveDaily | Zurück zur Startseite
+sudoku.gameOver.leave | Anderes Rätsel
+sudoku.name | Sudoku
+sudoku.summary | Füllen Sie das Gitter mit den Ziffern 1 bis 9.
+sudoku.howTo.1 | In jeder Zeile, jeder Spalte und jedem Block aus 3 mal 3 Kästchen kommt jede Ziffer von 1 bis 9 genau einmal vor.
+sudoku.howTo.2 | Tippen Sie auf ein leeres Kästchen und wählen Sie dann unten eine Ziffer.
+sudoku.howTo.3 | Ist eine Ziffer falsch, sehen Sie das sofort, und eine Blüte (ein Leben) geht verloren. Sind alle Blüten weg, beginnen Sie von vorn.
+sudoku.howTo.4 | Mit „{pencil}“ schreiben Sie eine Ziffer klein ins Kästchen, als Notiz. Notizen kosten nie ein Leben.
+sudoku.howTo.5 | Mit „{undo}“ nehmen Sie Ihren letzten Schritt zurück. Mit „{hint}“ füllt die App ein Kästchen für Sie aus, ohne dass Sie ein Leben verlieren.
+sudoku.level.makkelijk | Ein ruhiger Einstieg · 5 Leben
+sudoku.level.gemiddeld | Eine schöne Herausforderung · 4 Leben
+sudoku.level.moeilijk | Für erfahrene Rätselfreunde · 3 Leben
+sudoku.level.extreem | Für echte Könner · 3 Leben
+
+##### 110-wordsearch
+woordzoeker.gridAria | Wortsuche, {n} mal {n} Buchstaben
+woordzoeker.start | Tippen Sie auf den ersten Buchstaben eines Wortes und dann auf den letzten.
+woordzoeker.wordsAria | Gesuchte Wörter
+woordzoeker.theme | Thema: {theme}
+woordzoeker.cell | Zeile {r}, Spalte {c}: {letter}{extra}
+woordzoeker.cellFound | , Teil eines gefundenen Wortes
+woordzoeker.cellStart | , Anfang Ihrer Auswahl
+woordzoeker.foundCount | {n} von {total} gefunden
+woordzoeker.foundValue | {n} von {total} Wörtern gefunden
+woordzoeker.chipFound | {word}, gefunden
+woordzoeker.chipTodo | {word}, noch nicht gefunden. Tippen Sie darauf, um einen Tipp zu bekommen.
+woordzoeker.say.beginChosen | Anfang gewählt. Tippen Sie jetzt auf den letzten Buchstaben des Wortes.
+woordzoeker.say.cleared | Auswahl gelöscht. Wählen Sie einen neuen ersten Buchstaben.
+woordzoeker.say.notInList | Das ist kein Wort aus der Liste. Versuchen Sie es noch einmal, Sie können nichts falsch machen.
+woordzoeker.say.foundLeft_one | Gefunden: {word}! Es fehlt noch {n} Wort.
+woordzoeker.say.foundLeft_other | Gefunden: {word}! Es fehlen noch {n} Wörter.
+woordzoeker.say.won | Geschafft! Sie haben alle Wörter gefunden.
+woordzoeker.say.alreadyFound | {word} haben Sie schon gefunden.
+woordzoeker.say.hint | Tipp: {word} beginnt im markierten Kästchen (Zeile {r}, Spalte {c}).
+woordzoeker.say.escape | Auswahl gelöscht.
+woordzoeker.name | Wortsuche
+woordzoeker.summary | Finden Sie die versteckten Wörter zwischen den Buchstaben.
+woordzoeker.howTo.1 | Jedes Rätsel hat ein Thema, zum Beispiel Blumen. Neben oder unter dem Gitter stehen die Wörter, die Sie suchen.
+woordzoeker.howTo.2 | Tippen Sie auf den ersten Buchstaben eines Wortes und dann auf den letzten Buchstaben. Beim zweiten Tippen müssen Sie nicht ganz genau treffen.
+woordzoeker.howTo.3 | Mit der Maus können Sie auch ziehen. Die Wörter verlaufen von links nach rechts und von oben nach unten, auf höheren Stufen auch schräg und rückwärts.
+woordzoeker.howTo.4 | Steht das Wort auf der Liste, wird es markiert und durchgestrichen. Ein Fehlversuch kostet nichts.
+woordzoeker.howTo.5 | Kommen Sie gerade nicht weiter? Tippen Sie auf ein Wort in der Liste oder auf „{hint}“: Dann leuchtet das erste Kästchen des Wortes auf.
+woordzoeker.level.makkelijk | 8 mal 8 · 6 Wörter
+woordzoeker.level.gemiddeld | 10 mal 10 · auch schräg
+woordzoeker.level.moeilijk | 12 mal 12 · auch rückwärts
+woordzoeker.level.extreem | 13 mal 13 · 15 Wörter
+
+##### 120-crossword
+kruiswoord.gridAria | Rätselgitter
+kruiswoord.prevClue | Vorherige Frage
+kruiswoord.nextClue | Nächste Frage
+kruiswoord.clueGroup | Frage
+kruiswoord.start | Tippen Sie auf ein Kästchen, um zu beginnen.
+kruiswoord.backspace | Zurück und Buchstaben löschen
+kruiswoord.keyboard | Tastatur
+kruiswoord.word | Wort
+kruiswoord.allClues | Alle Fragen
+kruiswoord.acrossTitle | Waagerecht
+kruiswoord.downTitle | Senkrecht
+kruiswoord.entryAcross | {n} waagerecht
+kruiswoord.entryDown | {n} senkrecht
+kruiswoord.clueAcross | {n} waagerecht →
+kruiswoord.clueDown | {n} senkrecht ↓
+kruiswoord.lettersCount_one | {n} Buchstabe
+kruiswoord.lettersCount_other | {n} Buchstaben
+kruiswoord.chooseCell | Wählen Sie ein Kästchen
+kruiswoord.chooseHint | Tippen Sie auf das Gitter. Die Frage erscheint dann hier.
+kruiswoord.doneCount | {n} von {total} gelöst
+kruiswoord.doneValue | {n} von {total} Wörtern gelöst
+kruiswoord.cellAria | Zeile {r}, Spalte {c}: {state}. {numbers}
+kruiswoord.cellLetter | Buchstabe {letter}
+kruiswoord.cellEmpty | leer
+kruiswoord.say.tapFirst | Tippen Sie zuerst auf ein Kästchen.
+kruiswoord.say.entry | {entry}: {clue} ({letters}).
+kruiswoord.say.good_one | Gut! {word} ist richtig. Es fehlt noch {n} Wort.
+kruiswoord.say.good_other | Gut! {word} ist richtig. Es fehlen noch {n} Wörter.
+kruiswoord.say.notYet | Dieses Wort stimmt noch nicht. Lesen Sie die Frage noch einmal, Sie können nichts falsch machen.
+kruiswoord.say.alreadyRevealed | Dieses Kästchen ist schon aufgedeckt.
+kruiswoord.say.tip | Tipp: In dieses Kästchen gehört ein {letter}.
+kruiswoord.say.theWord | Das Wort lautet {word}.
+kruiswoord.say.won | Geschafft! Sie haben das ganze Rätsel gelöst.
+kruiswoord.name | Kreuzworträtsel
+kruiswoord.summary | Beantworten Sie die Fragen und tragen Sie die Wörter ein.
+kruiswoord.howTo.1 | Jedes weiße Kästchen gehört zu einem Wort. Die Frage steht über dem Gitter, mit der Anzahl der Buchstaben.
+kruiswoord.howTo.2 | Tippen Sie auf ein Kästchen und schreiben Sie mit der Tastatur unter dem Gitter oder mit Ihrer eigenen Tastatur. Tippen Sie noch einmal auf dasselbe Kästchen, um zwischen waagerecht und senkrecht zu wechseln.
+kruiswoord.howTo.3 | Die Wörter kreuzen sich: Ein Buchstabe hilft also auch beim anderen Wort.
+kruiswoord.howTo.4 | Ist ein Wort vollständig, sehen Sie sofort, ob es stimmt. Ein richtiges Wort leuchtet auf, ein falsches wackelt kurz. Fehler kosten nichts.
+kruiswoord.howTo.5 | Mit „{hint}“ decken Sie einen Buchstaben auf, mit „{word}“ das ganze Wort. Unter dem Gitter stehen alle Fragen.
+kruiswoord.level.makkelijk | 8 Wörter · bekannte Wörter
+kruiswoord.level.gemiddeld | 12 Wörter
+kruiswoord.level.moeilijk | 16 Wörter · auch schwierigere
+kruiswoord.level.extreem | 22 Wörter · dicht beieinander
+
+##### 130-wordgarden
+woordtuin.you | Sie
+woordtuin.computer | Computer
+woordtuin.boardAria | Das Spielfeld, {n} mal {n} Buchstaben
+woordtuin.tileAria | Buchstabe {letter}, Zeile {r}, Spalte {c}, {owner}{extra}
+woordtuin.owner.open | noch frei
+woordtuin.owner.mine | gehört Ihnen
+woordtuin.owner.theirs | gehört Ihrem Gegner
+woordtuin.tileProtected | , geschützt
+woordtuin.tileNumber | , {n}. Buchstabe Ihres Wortes
+woordtuin.standAria | Stand: {me} {mine}, {them} {theirs}, noch {open} frei
+woordtuin.openLeft_one | Noch {n} Feld frei.
+woordtuin.openLeft_other | Noch {n} Felder frei.
+woordtuin.gameOver | Das Spiel ist zu Ende.
+woordtuin.yourTurn | Sie sind an der Reihe.
+woordtuin.theirTurnPc | Der Computer ist an der Reihe.
+woordtuin.theirTurn | {name} ist an der Reihe.
+woordtuin.last.me | Sie haben {word} gespielt.
+woordtuin.last.me.took_one | Sie haben {word} gespielt und {n} Feld übernommen.
+woordtuin.last.me.took_other | Sie haben {word} gespielt und {n} Felder übernommen.
+woordtuin.last.pc | Der Computer hat {word} gespielt.
+woordtuin.last.pc.took_one | Der Computer hat {word} gespielt und {n} Feld übernommen.
+woordtuin.last.pc.took_other | Der Computer hat {word} gespielt und {n} Felder übernommen.
+woordtuin.last.other | {name} hat {word} gespielt.
+woordtuin.last.other.took_one | {name} hat {word} gespielt und {n} Feld übernommen.
+woordtuin.last.other.took_other | {name} hat {word} gespielt und {n} Felder übernommen.
+woordtuin.passed.me | Sie können kein Wort mehr bilden und setzen einmal aus.
+woordtuin.passed.pc | Der Computer kann kein Wort mehr bilden und setzt einmal aus.
+woordtuin.passed.other | {name} kann kein Wort mehr bilden und setzt einmal aus.
+woordtuin.hint.swipe | Wischen Sie über die Buchstaben oder tippen Sie diese an, um ein Wort zu bilden.
+woordtuin.hint.more_one | Wählen Sie noch mindestens {n} Buchstaben.
+woordtuin.hint.more_other | Wählen Sie noch mindestens {n} Buchstaben.
+woordtuin.preview.nice | Schönes Wort.
+woordtuin.preview.take_one | Sie übernehmen {n} Feld von Ihrem Gegner.
+woordtuin.preview.take_other | Sie übernehmen {n} Felder von Ihrem Gegner.
+woordtuin.preview.fresh_one | Sie färben {n} neues Feld.
+woordtuin.preview.fresh_other | Sie färben {n} neue Felder.
+woordtuin.preview.kept_one | {n} Feld ist geschützt und bleibt bei Ihrem Gegner.
+woordtuin.preview.kept_other | {n} Felder sind geschützt und bleiben bei Ihrem Gegner.
+woordtuin.legend | Zaun: kann nicht übernommen werden
+woordtuin.notOnBoard | Dieses Wort liegt nicht auf dem Spielfeld, oder es färbt nichts Neues.
+woordtuin.waiting | Einen Moment…
+woordtuin.pcThinking | Der Computer überlegt…
+woordtuin.otherPlace | Andere Stelle
+woordtuin.type | Eingeben
+woordtuin.clear | Löschen
+woordtuin.done | Fertig
+woordtuin.undo | Zug zurücknehmen
+woordtuin.hintLeft_one | Tipp ({n} übrig)
+woordtuin.hintLeft_other | Tipp ({n} übrig)
+woordtuin.typeAria | Geben Sie ein Wort ein, das auf dem Spielfeld liegt
+woordtuin.typePlaceholder | zum Beispiel: Garten
+woordtuin.noHintsLeft | Sie haben in dieser Partie keine Tipps mehr.
+woordtuin.noWordLeft | Es gibt kein Wort mehr zu finden.
+woordtuin.hintText_one | Tipp: Suchen Sie ein Wort mit {n} Buchstaben, das im markierten Feld beginnt.
+woordtuin.hintText_other | Tipp: Suchen Sie ein Wort mit {n} Buchstaben, das im markierten Feld beginnt.
+woordtuin.nothingToUndo | Es gibt nichts zurückzunehmen.
+woordtuin.pc.won | Sie haben gewonnen, herzlichen Glückwunsch!
+woordtuin.pc.draw | Unentschieden!
+woordtuin.pc.lost | Gut gespielt!
+woordtuin.pc.score | Endstand: Sie {mine}, der Computer {theirs}.
+woordtuin.pc.drawText_one | Sie haben beide {n} Blume.
+woordtuin.pc.drawText_other | Sie haben beide {n} Blumen.
+woordtuin.pc.lostText | Der Computer hat mit {theirs} zu {mine} gewonnen. Beim nächsten Mal klappt es bestimmt: Versuchen Sie es ruhig noch einmal.
+woordtuin.name | Wortgarten
+woordtuin.summary | Bilden Sie Wörter und lassen Sie Ihre Blumen wachsen, gegen den Computer oder gegen Freunde.
+woordtuin.howTo.1 | Das Spielfeld hat 6 mal 6 Buchstaben. Bilden Sie ein Wort aus 3 bis 7 Buchstaben, indem Sie über die Buchstaben wischen oder sie nacheinander antippen. Die Buchstaben müssen aneinandergrenzen, auch schräg.
+woordtuin.howTo.2 | Die Felder Ihres Wortes gehören dann Ihnen und blühen in Ihrer Farbe auf. Bildet Ihr Gegner später ein Wort durch Ihre Felder, übernimmt er sie.
+woordtuin.howTo.3 | Ausgenommen sind geschützte Felder: Ein Feld, dessen Nachbarn (links, rechts, oben und unten) alle dieselbe Farbe haben, kann nicht übernommen werden. Das erkennen Sie am kleinen Zaun in der Ecke.
+woordtuin.howTo.4 | Jedes Wort muss mindestens ein freies Feld färben und darf nur einmal gespielt werden. Alle gewöhnlichen Wörter zählen, auch Mehrzahl- und Verbformen („Blume“, „Blumen“, „sagt“). Namen, Abkürzungen und Wörter aus anderen Sprachen zählen nicht. Umlaute und Akzente spielen keine Rolle: „ü“ ist einfach „u“, und „ß“ wird zu „ss“.
+woordtuin.howTo.5 | Sind alle Felder gefärbt, gewinnt, wer die meisten Blumen hat. Sie sehen vorher, was ein Wort einbringt, und mit „{hint}“ leuchtet ein Feld auf. Ein Wort, das es nicht gibt, kostet nichts.
+woordtuin.level.makkelijk | Sieht wenige Wörter und passt nicht immer auf
+woordtuin.level.gemiddeld | Sieht nur einen Teil der Wörter
+woordtuin.level.moeilijk | Sieht viele Wörter und wählt geschickt
+woordtuin.level.extreem | Sieht alles und denkt voraus
+
+##### 20-games
+games.title | Spiele
+games.subtitle | Wählen Sie ein Spiel aus.
+games.comingSoon | Kommt bald
+games.inProgress | Angefangen
+games.inProgressPct | Angefangen · {pct} %
+games.solved_one | Einmal gelöst
+games.solved_other | {n}-mal gelöst
+games.levels_one | {n} Stufe
+games.levels_other | {n} Stufen
+level.makkelijk | Leicht
+level.gemiddeld | Mittel
+level.moeilijk | Schwer
+level.extreem | Extrem
+level.default.makkelijk | Ein ruhiger Einstieg
+level.default.gemiddeld | Eine schöne Herausforderung
+level.default.moeilijk | Für erfahrene Rätselfreunde
+
+##### 21-detail
+detail.solved_one | Schon einmal gelöst
+detail.solved_other | Schon {n}-mal gelöst
+detail.howTo | So geht’s
+detail.soon | Dieses Spiel kommt bald.
+detail.soonText | Wir arbeiten daran. Probieren Sie in der Zwischenzeit ein anderes Spiel aus.
+detail.backToGames | Zurück zu allen Spielen
+detail.howHard | Wie schwer?
+detail.levelLocked | Sie spielen dieses Spiel bereits. Wählen Sie „{newGame}“, wenn Sie eine andere Stufe spielen möchten.
+detail.newGameConfirmTitle | Neues Spiel beginnen?
+detail.newGameConfirmText | Ihr gespeicherter Spielstand wird dann ersetzt.
+detail.newGameConfirmYes | Ja, neues Spiel
+detail.continue | Weiterspielen
+detail.continuePct | Weiterspielen · {pct} %
+detail.newGame | Neues Spiel
+detail.start | Spiel starten
+
+##### 30-play
+play.howTo | Anleitung
+play.howToTitle | {game}: So geht’s
+play.understood | Verstanden
+play.dailyTitle | Tagesrätsel: {game}
+play.autosave | Ihr Spielstand wird automatisch gespeichert.
+play.loading | Das Spiel wird geladen…
+play.loadFailed | Das Spiel konnte nicht geladen werden. Prüfen Sie Ihre Internetverbindung und versuchen Sie es noch einmal.
+play.done.title | Gut gemacht!
+play.done.text.daily | Sie haben das Rätsel des Tages gelöst.
+play.done.text | Sie haben dieses Spiel geschafft.
+play.done.announce | Gut gemacht! Das Spiel ist beendet.
+play.done.again | Noch eine Runde
+play.done.backHome | Zurück zur Startseite
+play.done.otherGame | Anderes Spiel wählen
+play.done.toHome | Zur Startseite
+
+##### 40-settings
+settings.title | Optionen
+settings.subtitle | Passen Sie Puzzleplace an Ihre Augen an.
+settings.sectionReading | Lesen
+settings.textSize | Schriftgröße
+settings.preview | So sieht der Text aus. Passt das so für Sie?
+settings.sectionLook | Aussehen
+settings.colours | Farben
+settings.coloursHint | „Automatisch“ richtet sich nach der Einstellung Ihres Handys oder Computers.
+settings.theme.auto | Automatisch
+settings.theme.light | Hell
+settings.theme.dark | Dunkel
+settings.contrast | Extra deutlich
+settings.contrastHint | Stärkerer Kontrast und dickere Ränder
+settings.decor | Blütenzweige
+settings.decorHint | Verzierung mit Kirschblüten
+settings.calm | Ruhige Darstellung
+settings.calmHint | Nichts bewegt sich
+settings.sectionAbout | Über Sie
+settings.firstName | Ihr Vorname
+settings.firstNameHint | Freiwillig. Wir verwenden ihn nur, um Sie zu begrüßen.
+settings.account | Konto
+settings.accountLoggedIn | Angemeldet als {name}
+settings.accountLogIn | Anmelden oder Konto erstellen
+settings.helpTitle | Hilfe
+settings.helpHint | Fragen und Antworten
+settings.sectionReset | Neu anfangen
+settings.reset | Alles löschen
+settings.resetHint | Löscht Ihren Spielstand und Ihre Einstellungen auf diesem Gerät.
+settings.resetConfirmTitle | Alles löschen?
+settings.resetConfirmText | Ihre gespeicherten Spiele und Einstellungen werden gelöscht. Das lässt sich nicht rückgängig machen.
+settings.resetConfirmYes | Ja, alles löschen
+settings.saved | Einstellung gespeichert
+settings.nameSaved | Name gespeichert
+
+##### 41-help
+help.title | Hilfe
+help.subtitle | Tippen Sie auf eine Frage, um die Antwort zu lesen.
+help.q1 | Wie mache ich die Schrift größer?
+help.a1 | Öffnen Sie die [{settings}](#/instellingen) und wählen Sie bei „{textSize}“ die Größe „{large}“ oder „{xlarge}“.
+help.q2 | Geht mein Spielstand verloren, wenn ich aufhöre?
+help.a2 | Nein. Nach jedem Zug wird Ihr Spiel automatisch auf diesem Gerät gespeichert. Sie können jederzeit auf „{back}“ tippen und später weitermachen.
+help.q3 | Wie setze ich ein Spiel fort?
+help.a3 | Auf der Startseite finden Sie das Spiel, das Sie angefangen haben. Tippen Sie darauf, um weiterzuspielen. Sie finden es auch auf der Seite des Spiels selbst.
+help.q4 | Wie fange ich neu an?
+help.a4 | Öffnen Sie das Spiel unter „{games}“ und tippen Sie auf „{newGame}“. Sie werden vorher gefragt, damit Sie nie versehentlich etwas löschen.
+help.q5 | Was ist das Rätsel des Tages?
+help.a5 | Jeden Tag steht ein neues Rätsel bereit. Auf der Startseite starten Sie es mit einem Fingertipp.
+help.q6 | Kann ich Puzzleplace als App auf meinen Startbildschirm legen?
+help.a6 | Ja. Öffnen Sie das Menü Ihres Browsers und wählen Sie „Zum Startbildschirm hinzufügen“ oder „App installieren“.
+help.q7 | Muss ich mich anmelden?
+help.a7 | Nein. Sie können sofort ohne Konto spielen.
+help.q8 | Wie ändere ich die Sprache?
+help.a8 | Öffnen Sie die [{settings}](#/instellingen) und tippen Sie auf „{language}“. Die Rätsel und die Wortlisten ändern sich dann mit.
+help.q9 | Wie funktioniert {game}?
+help.a9 | Bilden Sie ein Wort aus 3 bis 7 Buchstaben, indem Sie über benachbarte Buchstaben wischen oder sie nacheinander antippen. Die Felder Ihres Wortes gehören dann Ihnen. Bildet Ihr Gegner später ein Wort durch Ihre Felder, übernimmt er sie, außer geschützten Feldern (alle Nachbarn in derselben Farbe). Sind alle Felder gefärbt, gewinnt, wer die meisten hat. Die ausführliche Erklärung finden Sie im Spiel unter „{instructions}“.
+help.q10 | Warum wird mein Wort in {game} nicht angenommen?
+help.a10 | Alle gewöhnlichen deutschen Wörter zählen, auch Mehrzahl- und Verbformen (zum Beispiel „Baum“, „Bäume“, „wächst“). Nicht: Namen, Abkürzungen, Wörter aus anderen Sprachen und sehr seltene Wörter. Ein Wort mit weniger als 3 Buchstaben ist nicht möglich. Umlaute und Akzente spielen keine Rolle: Ein „ü“ ist einfach ein „u“, und aus „ß“ wird „ss“. Sie bekommen immer eine kurze Erklärung, und ein Fehlversuch kostet Sie nichts.
+help.q11 | Woher kommen die Wörter in {game}?
+help.a11 | Die Wortliste beruht auf dem freien deutschen Rechtschreibwörterbuch {source} ({license}) und auf Daten dazu, wie häufig Wörter vorkommen. Namen, Wörter aus anderen Sprachen und Wörter, die niemand benutzt, wurden weggelassen. Der Computer spielt nur alltägliche Wörter.
+help.q12 | Wie spiele ich {game} mit Freunden?
+help.a12 | Erstellen Sie unter [{account}](#/account) ein Konto, fügen Sie unter [{friends}](#/vrienden) Ihre Freundin oder Ihren Freund mit dem Freundescode hinzu und tippen Sie neben dem Namen auf „{newGame}“. Sie spielen abwechselnd: Sie müssen nicht warten, die App zeigt Ihnen, wenn Sie an der Reihe sind.
+
+##### 50-forms
+forms.show | Anzeigen
+forms.hide | Verbergen
+forms.suggestPassword | Passwort vorschlagen
+forms.fieldEmpty | Dieses Feld ist noch leer.
+forms.wrong | Da ist etwas schiefgegangen. Bitte versuchen Sie es noch einmal.
+forms.busy | Einen Moment…
+forms.passwordWords | wiese,tanne,linde,amsel,igel,katze,fenster,kissen,zimt,herbst,schnee,welle,muschel,geige,lampe,koffer,perle,brunnen,turm,pinsel,waffel,biene,insel,flieder
+
+##### 60-account
+account.title | Konto
+account.password | Passwort
+account.yourPassword | Ihr Passwort
+account.currentPassword | Ihr aktuelles Passwort
+account.newPasswordLabel | Ihr neues Passwort
+account.newPassword | Ein neues Passwort
+account.firstName | Ihr Vorname
+account.email | Ihre E-Mail-Adresse
+account.facebook.continue | Weiter mit Facebook
+account.orEmail | oder mit Ihrer E-Mail-Adresse
+account.intro.text | Mit einem Konto machen Sie auf allen Ihren Geräten weiter und können mit Freunden spielen.
+account.intro.p1.title | Ihr Spielstand auf allen Ihren Geräten
+account.intro.p1.text | Auf dem Handy anfangen, auf dem Tablet weitermachen.
+account.intro.p2.title | Freunde und Familie
+account.intro.p2.text | Fügen Sie jemanden mit einem Code hinzu. Keine Fremden, kein Suchen.
+account.intro.p3.title | Gemeinsam {game} spielen
+account.intro.p3.text | Abwechselnd Wörter bilden, auch wenn Sie nicht gleichzeitig online sind.
+account.create | Konto erstellen
+account.haveOne | Ich habe schon ein Konto
+account.optional | Sie können jederzeit auch ohne Konto weiterspielen. Alles funktioniert dann auf diesem Gerät.
+account.firstNameHint | Unter diesem Namen sehen Ihre Freunde Sie.
+account.emailHint | Damit melden Sie sich an. Wir schicken Ihnen nie Werbung.
+account.passwordHint | Mindestens 8 Zeichen. Drei Wörter hintereinander sind sicher und leicht zu merken.
+account.signup.pending | Erstellen Sie zuerst ein Konto, dann können Sie Ihre Freundin oder Ihren Freund hinzufügen.
+account.signup.busy | Ihr Konto wird erstellt…
+account.signup.haveAccount | Haben Sie schon ein Konto? [Dann melden Sie sich an](#/account/inloggen).
+account.login | Anmelden
+account.login.busy | Wird geprüft…
+account.forgot | Passwort vergessen?
+account.login.noAccount | Noch kein Konto? [Erstellen Sie eines](#/account/nieuw).
+account.loggedIn | Sie sind angemeldet.
+account.copy | Kopieren
+account.copied | Kopiert
+account.copyFailed | Hat nicht geklappt
+account.print | Drucken
+account.recoveryCode | Ihr Wiederherstellungscode
+account.readyTitle | Konto eingerichtet
+account.toAccount | Zu Ihrem Konto
+account.done.title | Geschafft, {name}!
+account.done.text | Ihr Konto ist eingerichtet. Jetzt noch etwas Wichtiges.
+account.done.keep | Bewahren Sie diesen Code an einem sicheren Ort auf.
+account.done.keepText | Falls Sie Ihr Passwort einmal vergessen, wählen Sie mit diesem Code ein neues. Schreiben Sie ihn auf Papier, oder bewahren Sie ihn bei Ihren wichtigen Unterlagen auf. Wir können ihn nicht für Sie nachsehen, aber Sie können später jederzeit einen neuen erstellen lassen.
+account.done.saved | Ich habe den Code aufbewahrt
+account.done.continue | Weiter
+account.done.later | Das mache ich später
+account.newRecovery | Neuer Wiederherstellungscode
+account.newRecovery.hint | Zur Bestätigung, dass Sie es sind, bevor wir einen neuen Wiederherstellungscode erstellen. Der alte funktioniert danach nicht mehr.
+account.newRecovery.make | Neuen Wiederherstellungscode erstellen
+account.newRecovery.keep | Bewahren Sie diesen neuen Code gut auf. Der alte funktioniert nicht mehr.
+account.forgotTitle | Passwort vergessen
+account.forgot.text | Mit Ihrem Wiederherstellungscode wählen Sie ein neues Passwort.
+account.recoveryLabel | Ihr Wiederherstellungscode
+account.recoveryHint | Das ist der 12-stellige Code, den Sie beim Erstellen Ihres Kontos bekommen haben, zum Beispiel K7P4-QM2X-9TBR.
+account.setPassword | Neues Passwort festlegen
+account.lostBoth | Auch den Wiederherstellungscode verloren? Dann können wir Ihnen leider keinen Zugang zu Ihrem Konto geben. Sie können ein neues Konto erstellen; der Spielstand auf Ihren Geräten bleibt erhalten.
+account.sync.title | Ihr Spielstand auf allen Ihren Geräten
+account.sync.now | Jetzt abgleichen
+account.sync.busy | Wird abgeglichen…
+account.sync.failed | Hat nicht geklappt: {error}
+account.sync.ok | Alles ist auf dem neuesten Stand ({time}).
+account.sync.soon | Wird gleich abgeglichen.
+account.changeName | Ihren Namen ändern
+account.save | Speichern
+account.nameSaved | Name gespeichert
+account.viaFacebook | Mit Facebook angemeldet
+account.friendsHint | Ihr Freundescode und Ihre Freunde
+account.changePassword | Passwort ändern
+account.changePasswordHint | Wählen Sie ein neues Passwort
+account.newRecoveryHint | Falls Sie den alten verloren haben
+account.logout | Abmelden
+account.logout.title | Abmelden?
+account.logout.text | Ihr Spielstand ist in Ihrem Konto sicher. Sie können sich später einfach wieder anmelden.
+account.logout.wipe | Abmelden und alles auf diesem Gerät löschen
+account.logout.stay | Angemeldet bleiben
+account.delete | Konto löschen
+account.delete.text | Ihr Konto, Ihre Freundesliste und Ihr gespeicherter Spielstand auf unserem Server werden gelöscht. Was auf Ihren Geräten ist, bleibt erhalten.
+account.delete.passwordHint | Zur Bestätigung, dass Sie es sind.
+account.delete.confirmTitle | Sind Sie sicher?
+account.delete.confirmText | Das lässt sich nicht rückgängig machen.
+account.delete.confirmYes | Ja, löschen
+account.delete.submit | Ja, mein Konto löschen
+account.changePassword.text | Auf Ihren anderen Geräten müssen Sie sich danach neu anmelden.
+account.changed.title | Erledigt
+account.changed.text | Ihr Passwort wurde geändert.
+account.changed.ok | In Ordnung
+account.facebook.title | Anmeldung mit Facebook
+account.facebook.failed | Die Anmeldung mit Facebook hat nicht geklappt, oder Sie haben sie abgebrochen. Sie können es noch einmal versuchen oder sich mit Ihrer E-Mail-Adresse anmelden.
+account.facebook.failedShort | Die Anmeldung mit Facebook hat nicht geklappt.
+common.backHome | Zurück zur Startseite
+
+##### 70-friends
+common.yes | Ja
+common.no | Nein
+common.fine | In Ordnung
+common.didNotWork | Das hat nicht geklappt
+friends.subtitle | Spielen Sie gemeinsam mit Menschen, die Sie kennen.
+friends.loggedOut.link | Jemand möchte mit Ihnen befreundet sein. Erstellen Sie zuerst ein Konto oder melden Sie sich an; danach geht es sofort weiter.
+friends.loggedOut.text | Spielen Sie gemeinsam mit Menschen, die Sie kennen. Dafür brauchen Sie ein Konto.
+friends.shareLinkCopied | Link kopiert
+friends.renewCode | Neuen Code erstellen
+friends.renew.title | Neuen Code erstellen?
+friends.renew.text | Ihr alter Code funktioniert dann nicht mehr. Ihre bisherigen Freunde bleiben Ihre Freunde.
+friends.renew.yes | Ja, neuer Code
+friends.renewed | Neuer Code erstellt
+friends.yourCode | Ihr Freundescode
+friends.yourCodeHint | Geben Sie diesen Code an jemanden weiter, den Sie kennen. Dann kann diese Person Sie zu ihren Freunden hinzufügen.
+friends.score | Gewonnene Partien: Sie {me}, {name} {them}
+friends.deletedAccount | Gelöschtes Konto
+friends.addTitle | Freunde hinzufügen
+friends.haveCode | Haben Sie einen Code bekommen?
+friends.haveCodeHint | Geben Sie den Freundescode einer anderen Person ein. Groß- und Kleinschreibung sowie Bindestriche spielen keine Rolle.
+friends.sendRequest | Anfrage senden
+friends.nowFriends | Sie und {name} sind jetzt Freunde!
+friends.nowFriendsAnnounce | Sie und {name} sind jetzt Freunde.
+friends.requestSentAnnounce | Anfrage an {name} gesendet.
+friends.requestSent | Anfrage an {name} gesendet. Sobald {name} annimmt, sehen Sie es hier.
+friends.wantsToBe | Möchten Sie Freunde werden?
+friends.wantsToBeRow | möchte mit Ihnen befreundet sein
+friends.waiting | Warten auf Antwort
+friends.asked | angefragt: {when}
+friends.withdraw | Zurückziehen
+friends.withdrawn | Anfrage zurückgezogen.
+friends.games | Ihre Partien
+friends.gameWith | {game} mit {name}
+friends.statusTurn | Sie sind an der Reihe
+friends.statusTheirTurn | {name} ist an der Reihe
+friends.scoreLine | Sie {mine} · {name} {theirs} · noch {open} frei
+friends.play | Spielen
+friends.view | Ansehen
+friends.open | Öffnen
+friends.ariaPlay | Partie mit {name} spielen
+friends.ariaView | Partie mit {name} ansehen
+friends.ariaOpen | Partie mit {name} öffnen
+friends.yourFriends | Ihre Freunde
+friends.yourFriendsN | Ihre Freunde ({n})
+friends.lastSeen | zuletzt aktiv: {when}
+friends.playWith | {game} mit {name} spielen
+friends.remove | Entfernen
+friends.removeAria | {name} entfernen
+friends.removeTitle | {name} entfernen?
+friends.removeText | Sie sind dann nicht mehr befreundet. Sie können später jederzeit eine neue Anfrage senden.
+friends.removeYes | Ja, entfernen
+friends.removed | {name} wurde entfernt.
+friends.none.title | Noch keine Freunde
+friends.none.text | Teilen Sie Ihren Code mit jemandem, den Sie kennen, oder geben Sie oben den Code einer anderen Person ein. Sobald Sie befreundet sind, können Sie zusammen spielen.
+friends.link.brokenTitle | Dieser Link funktioniert nicht
+friends.link.ownTitle | Das ist Ihr eigener Code
+friends.link.ownText | Schicken Sie diesen Link an jemand anderen, dann kann diese Person Sie hinzufügen.
+friends.link.addTitle | {name} zu Ihren Freunden hinzufügen?
+friends.link.addText | Wir senden {name} eine Anfrage. Sobald {name} annimmt, sind Sie befreundet.
+friends.link.yes | Ja, Anfrage senden
+
+##### 80-match
+match.loading | Die Partie wird geladen…
+match.with | mit {name}
+match.you | Sie
+match.opponent | Ihr Gegner
+match.waitNote | Sie müssen nicht warten: Sie können die App ruhig schließen. Sobald {name} gespielt hat, sehen Sie im Menü eine Zahl bei „{friends}“.
+match.played | {name} hat {word} gespielt. Sie sind an der Reihe.
+match.over.resigned | Die Partie ist beendet
+match.over.won | Sie haben gewonnen, herzlichen Glückwunsch!
+match.over.draw | Unentschieden!
+match.over.lost | Gut gespielt!
+match.again | Noch eine Partie mit {name}
+match.backToFriends | Zurück zu den Freunden
+match.stop | Partie beenden
+match.stop.title | Diese Partie beenden?
+match.stop.text | Die Partie endet dann für Sie beide. Das ist überhaupt nicht schlimm: Sie können jederzeit eine neue mit {name} beginnen.
+match.stop.yes | Ja, beenden
+match.notFound | Diese Partie gibt es nicht (mehr).
+match.versionChanged | Der Spielstand hat sich gerade geändert. Schauen Sie sich das Spielfeld an und versuchen Sie Ihr Wort noch einmal.
+match.result.won | Sie haben mit {mine} zu {theirs} gewonnen.
+match.result.wonTiebreak | Sie haben mit {mine} zu {theirs} gewonnen (bei Gleichstand gaben die geschützten Felder den Ausschlag).
+match.result.lost | {name} hat mit {theirs} zu {mine} gewonnen.
+match.result.lostTiebreak | {name} hat mit {theirs} zu {mine} gewonnen (bei Gleichstand gaben die geschützten Felder den Ausschlag).
+match.result.draw_one | Unentschieden: Sie haben beide {n} Blume.
+match.result.draw_other | Unentschieden: Sie haben beide {n} Blumen.
+match.result.resignedMe | Sie haben diese Partie beendet.
+match.result.resignedThem | {name} hat diese Partie beendet.
+
+##### 90-errors
+err.notLoggedIn | Sie sind nicht angemeldet. Melden Sie sich an, um weiterzumachen.
+err.loggedOut | Sie wurden abgemeldet. Melden Sie sich wieder an.
+err.accountGone | Dieses Konto gibt es nicht mehr.
+err.tooFast | Das geht gerade zu schnell. Warten Sie ein paar Minuten und versuchen Sie es dann noch einmal.
+err.emailTaken | Für diese E-Mail-Adresse gibt es schon ein Konto. Möchten Sie sich anmelden?
+err.tooManyLogins | Zu viele Anmeldeversuche. Warten Sie eine Viertelstunde und versuchen Sie es dann noch einmal.
+err.loginWrong | Die E-Mail-Adresse oder das Passwort stimmt nicht.
+err.tooManyRecover | Zu viele Versuche. Warten Sie eine Stunde und versuchen Sie es dann noch einmal.
+err.recoverWrong | Die E-Mail-Adresse oder der Wiederherstellungscode stimmt nicht.
+err.noPasswordFacebook | Dieses Konto hat kein Passwort: Sie melden sich mit Facebook an.
+err.currentPasswordWrong | Ihr aktuelles Passwort stimmt nicht.
+err.passwordWrong | Ihr Passwort stimmt nicht.
+err.facebookOff | Die Anmeldung mit Facebook ist hier nicht eingeschaltet.
+err.facebookBadRequest | Diese Anfrage ist nicht gültig. Bitte versuchen Sie es noch einmal.
+err.facebookFailed | Die Anmeldung mit Facebook hat nicht geklappt. Bitte versuchen Sie es noch einmal.
+err.tooManyLookups | Sie haben viele Codes ausprobiert. Versuchen Sie es später noch einmal.
+err.codeUnknown | Diesen Freundescode kennen wir nicht. Prüfen Sie, ob Sie ihn richtig eingegeben haben.
+err.ownCode | Das ist Ihr eigener Freundescode. Geben Sie ihn an Freunde weiter.
+err.alreadyFriends | Sie und {name} sind schon befreundet.
+err.alreadyRequested | Sie haben {name} schon eine Anfrage gesendet. Bitte haben Sie etwas Geduld.
+err.tooManyRequests | Sie haben schon viele offene Anfragen. Warten Sie, bis einige beantwortet sind.
+err.maxFriends | Sie haben die Höchstzahl an Freunden erreicht.
+err.requestGone | Diese Anfrage gibt es nicht mehr.
+err.friendGone | Diese Person ist nicht mehr in Ihrer Freundesliste.
+err.syncInvalid | Das sieht nicht nach einem gültigen Spielstand aus.
+err.matchGone | Diese Partie gibt es nicht (mehr).
+err.gameUnavailable | Dieses Spiel lässt sich noch nicht gegen Freunde spielen.
+err.onlyFriends | Sie können nur mit Freunden spielen.
+err.tooManyMatches | Sie haben viele laufende Partien. Spielen Sie zuerst ein paar zu Ende.
+err.lang.unknown | Dieses Spiel ist in dieser Sprache nicht verfügbar.
+err.matchOver | Diese Partie ist schon beendet.
+err.notYourTurn | Sie sind noch nicht an der Reihe.
+err.versionChanged | Der Spielstand hat sich inzwischen geändert. Laden Sie die Seite neu und versuchen Sie es noch einmal.
+err.notPlaying | Sie spielen bei dieser Partie nicht mit.
+err.name.length | Wählen Sie einen Namen mit 2 bis 24 Zeichen.
+err.name.chars | Dieser Name enthält Zeichen, die nicht erlaubt sind.
+err.name.brackets | Verwenden Sie bitte kein < oder > in Ihrem Namen.
+err.email.invalid | Diese E-Mail-Adresse scheint nicht zu stimmen. So sieht eine E-Mail-Adresse aus: name@beispiel.de
+err.password.short | Ein Passwort muss mindestens 8 Zeichen haben. Tipp: drei Wörter hintereinander, zum Beispiel wiese-amsel-herbst.
+err.password.long | Dieses Passwort ist zu lang (höchstens 128 Zeichen).
+err.network | Es besteht keine Verbindung zum Server. Prüfen Sie Ihre Internetverbindung und versuchen Sie es noch einmal.
+err.noServer | Es ist kein Server erreichbar.
+err.generic | Da ist etwas schiefgegangen. Bitte versuchen Sie es später noch einmal.
+err.syncConflict | Auf einem anderen Gerät hat sich inzwischen etwas geändert.
+err.syncFailed | Der Abgleich hat nicht geklappt. Bitte versuchen Sie es gleich noch einmal.
+err.server | Bei uns ist etwas schiefgegangen. Bitte versuchen Sie es später noch einmal.
+err.tooBig | Das ist zu groß zum Senden.
+err.badJson | Diese Nachricht lässt sich nicht lesen.
+err.unknown | Das ist nicht vorhanden.
+err.move.over | Diese Partie ist beendet.
+err.move.path | Dieser Weg ist nicht möglich.
+err.move.minLength_one | Ein Wort hat mindestens {n} Buchstaben.
+err.move.minLength_other | Ein Wort hat mindestens {n} Buchstaben.
+err.move.maxLength_one | Ein Wort hat höchstens {n} Buchstaben.
+err.move.maxLength_other | Ein Wort hat höchstens {n} Buchstaben.
+err.move.reuse | Sie können jeden Buchstaben nur einmal verwenden.
+err.move.adjacent | Die Buchstaben eines Wortes müssen aneinandergrenzen.
+err.move.unknown | Dieses Wort kennen wir nicht. Versuchen Sie ein anderes Wort.
+err.move.played | „{word}“ wurde in dieser Partie schon gespielt. Wählen Sie ein anderes Wort.
+err.move.noFresh | Jedes Wort muss mindestens ein freies Feld färben. Suchen Sie ein Wort mit einem weißen Feld.

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { TALEN, TAAL_IDS, vouw, typInvoer, isAlfabet, herkenTaal, isTaal } from '../js/shared/talen.js';
+import { TALEN, TAAL_IDS, KLAAR, vouw, typInvoer, isAlfabet, herkenTaal, isTaal, isKlaar } from '../js/shared/talen.js';
 import { zoek, invullen, meervoudsvormen, meervoudsdekking } from '../js/shared/opmaak.js';
 
 const pad = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
@@ -48,8 +48,18 @@ test('taal herkennen: de eerste voorkeur die we hebben, anders niets (dan vraagt
     [['no'], 'nb'], [['nb-NO'], 'nb'], [['nn-NO'], 'nb'], [['pt-BR'], 'pt'], [['pt-PT'], 'pt'], [['ca-ES-valencia'], 'ca'], [['EL'], 'el'], [['bg-BG'], 'bg'],
     [['sr-Latn'], null], [['gsw-CH'], null], [['sv_SE'], 'sv'], [['fil', 'pl'], 'pl'], [[''], null], [[null, 'fr'], 'fr'], [['fi-FI'], 'fi'], [['et'], 'et'],
   ];
-  for (const [voorkeur, verwacht] of g) assert.equal(herkenTaal(voorkeur), verwacht, JSON.stringify(voorkeur));
+  for (const [voorkeur, verwacht] of g) assert.equal(herkenTaal(voorkeur, TAAL_IDS), verwacht, JSON.stringify(voorkeur));
   assert.ok(isTaal('de') && !isTaal('xx') && !isTaal('toString') && !isTaal('__proto__'));
+});
+
+test('taal herkennen: alleen talen die klaar zijn worden aangeboden', () => {
+  assert.ok(KLAAR.includes('en') && KLAAR.includes('nl') && KLAAR.every(isTaal));
+  assert.equal(herkenTaal(['nl-NL']), 'nl');
+  assert.equal(herkenTaal(['xx', 'en-GB']), 'en');
+  assert.equal(herkenTaal(['ja']), null);
+  assert.equal(herkenTaal(['de-DE', 'nl'], ['nl', 'en']), 'nl', 'een taal die nog niet klaar is wordt overgeslagen');
+  assert.equal(herkenTaal(['de-DE'], ['nl', 'en']), null);
+  assert.ok(isKlaar('nl') && !isKlaar('xx'));
 });
 
 test('elke taal: alfabet, klinkers en toetsenbord kloppen met elkaar', () => {
@@ -132,14 +142,14 @@ test('taalpakketten: links in de hulp staan er in elke taal precies zo in', asyn
   }
 });
 
-test('elke taal heeft alles wat nodig is (dit is de poort voor de oplevering)', () => {
+test('elke taal die klaar is heeft alles wat nodig is (dit is de poort voor de oplevering)', () => {
   const ontbreekt = [];
-  for (const id of TAAL_IDS) {
+  for (const id of KLAAR) {
     for (const [wat, p] of [['teksten', `js/i18n/talen/${id}.js`], ['woordtuin', `js/games/woordtuin/talen/${id}.js`], ['woordzoeker', `js/games/woordzoeker/talen/${id}.js`], ['kruiswoord', `js/games/kruiswoord/talen/${id}.js`]]) {
       if (!existsSync(pad(p))) ontbreekt.push(`${id}: ${wat}`);
     }
   }
   assert.deepEqual(ontbreekt, [], `er ontbreekt nog: ${ontbreekt.join(', ')}`);
   const schaal = readFileSync(pad('js/games/woordtuin/schaal.js'), 'utf8');
-  for (const id of TAAL_IDS) assert.match(schaal, new RegExp(`"${id}":`), `schaal.js mist ${id}: draai tools/woordenlijst/kalibreer.mjs`);
+  for (const id of KLAAR) assert.match(schaal, new RegExp(`"${id}":`), `schaal.js mist ${id}: draai tools/woordenlijst/kalibreer.mjs`);
 });

@@ -46,7 +46,7 @@ Wat de server bewaart: voornaam, e-mailadres, (bij Facebook) je Facebook-id, geh
 
 ## API in het kort
 
-Alles onder `/api`, JSON, sleutel als `Authorization: Bearer ...`. Fouten: `{ error: { code, message } }`, `message` is Nederlands en direct te tonen.
+Alles onder `/api`, JSON, sleutel als `Authorization: Bearer ...`. Fouten: `{ error: { code, key, params, message } }`. `key` (en `params`) verwijzen naar een tekst in het taalpakket (`err.<key>` in `tools/i18n/bron/90-errors.txt`), zodat de app de melding in de taal van de speler toont; `message` is dezelfde tekst in het **Engels** (voor wie geen vertaling heeft of de API rechtstreeks gebruikt).
 
 | | |
 |---|---|
@@ -81,12 +81,14 @@ De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **
 ```js
 export const spelRegels = {
   // (optioneel) maakt van de gekozen instellingen een nette versie; wat hier niet in zit, wordt weggegooid
-  config(config) { return { tips: [0, 3].includes(config?.tips) ? config.tips : 0 }; },
+  config(config) { return { tips: [0, 3].includes(config?.tips) ? config.tips : 0 }; },       // Woordtuin bewaart hier ook de taal van de partij (lang)
   // Nieuwe partij. players = [id, id].
   create({ players, config }) {
     return { pub: { /* wat beide spelers zien */ }, secret: { /* alleen op de server, bijv. de oplossing */ }, turn: players[0] };
   },
-  // Eén zet. Ongeldig? gooi new RuleError('Nederlandse uitleg'). Dit bericht ziet de speler.
+  // (optioneel) maak klaar wat het spel nodig heeft, bijvoorbeeld een woordenboek laden; mag async. Daarna zijn create en apply synchroon.
+  async prepare({ config }) {},
+  // Eén zet. Ongeldig? gooi new RuleError('sleutel', { n: 3 }): de sleutel verwijst naar err.<sleutel> in het taalpakket (zie hierboven).
   apply({ pub, secret, move, player, config }) {
     return { pub: nieuweStand, secret, turn: andereSpeler /* of null = afgelopen */, result: { winner, scores } };
   },
@@ -125,56 +127,6 @@ Google kan op dezelfde manier: nog een `…/start` en `…/callback` die een pro
 
 `js/services/sync.js` voegt de lokale voortgang samen met die op de server (`GET/PUT /api/sync`, met `baseVersion`; bij een gelijktijdige wijziging krijgt de client de nieuwste stand terug en voegt opnieuw samen). De samenvoeglogica staat in `js/shared/merge.js` (hoogste aantal gespeeld, nieuwste puzzel van de dag, nieuwste lopende puzzel per spel) en heeft eigen tests. Instellingen (tekstgrootte enz.) horen bij het apparaat en worden niet gesynchroniseerd.
 
-## Privacy (AVG)
+## Later: Google
 
-Wat de server bewaart: voornaam, e-mailadres, (bij Facebook) je Facebook-id, gehashte wachtwoorden/codes, vriendschappen, voortgang, partijen. *Account verwijderen* wist alles direct (in partijen blijft alleen "verwijderd" staan, voor de tegenspeler). Er zijn geen cookies, geen advertenties en geen derden. Zet er een privacyverklaring bij voordat je live gaat.
-
-## API in het kort
-
-Alles onder `/api`, JSON, sleutel als `Authorization: Bearer ...`. Fouten: `{ error: { code, message } }`, `message` is Nederlands en direct te tonen.
-
-| | |
-|---|---|
-| `POST /signup`, `/login`, `/recover`, `/logout` | Aanmelden, inloggen, nieuw wachtwoord met herstelcode |
-| `GET /auth/facebook/start`, `GET /auth/facebook/callback`, `POST /auth/facebook/claim` | Inloggen met Facebook (alleen als de server een Facebook-app kent; `GET /ping` meldt `facebook: true`) |
-| `GET/PATCH/DELETE /me` | Jezelf bekijken (met `counts`: `incoming`, `yourTurn`), voornaam wijzigen, account verwijderen |
-| `POST /me/password`, `/me/code`, `/me/recovery` | Wachtwoord wijzigen, nieuwe vriendencode, nieuwe herstelcode |
-| `GET /users/by-code/:code` | Wie hoort bij deze code? (alleen de naam) |
-| `GET /friends`, `POST /friends/request`, `POST /friends/:id/accept` / `decline`, `DELETE /friends/:id` | Vrienden |
-| `GET/PUT /sync` | Voortgang |
-| `POST /matches`, `GET /matches`, `GET /matches/:id?since=N`, `POST /matches/:id/move`, `POST /matches/:id/resign` | Partijen met beurten |
-
-De logica staat los van HTTP in `server/api.mjs` (`createApi(...).handle(...)`), zodat de tests (`tests/server.test.mjs`) hem zonder netwerk kunnen aanroepen.
-
-## Een spel voor twee spelers toevoegen
-
-De server kent geen enkel spel: hij bewaakt alleen **wie** speelt (vrienden), **wie aan de beurt is** en **de versie** (geen dubbele zetten). De regels zijn één module per spel in `server/games/`, aangemeld in `server/games/index.mjs`. Het voorbeeld is `server/games/woordtuin.mjs`.
-
-```js
-export const spelRegels = {
-  // (optioneel) maakt van de gekozen instellingen een nette versie; wat hier niet in zit, wordt weggegooid
-  config(config) { return { tips: [0, 3].includes(config?.tips) ? config.tips : 0 }; },
-  // Nieuwe partij. players = [id, id].
-  create({ players, config }) {
-    return { pub: { /* wat beide spelers zien */ }, secret: { /* alleen op de server, bijv. de oplossing */ }, turn: players[0] };
-  },
-  // Eén zet. Ongeldig? gooi new RuleError('Nederlandse uitleg'). Dit bericht ziet de speler.
-  apply({ pub, secret, move, player, config }) {
-    return { pub: nieuweStand, secret, turn: andereSpeler /* of null = afgelopen */, result: { winner, scores } };
-  },
-  // (optioneel) een korte samenvatting voor in de lijst met partijen (de lijst bevat niet de hele stand)
-  summary({ pub }) { return { scores: { /* id: aantal */ } }; },
-};
-```
-
-- `secret` wordt **nooit** naar clients gestuurd. Oplossingen, geheime letters en kaartstapels horen daar. (Woordtuin heeft er geen: beide spelers zien alles.)
-- De beurt gaat naar de speler die `turn` aangeeft; dat mag dezelfde speler zijn (Woordtuin: kan de ander niets meer, dan slaat die over).
-- De regels moeten een pure functie zijn (zelfde invoer, zelfde uitkomst); willekeur komt uit een zaad dat in `pub` of `secret` staat. Dan zijn ze eenvoudig te testen.
-- Engines die in `js/games/*/engine.js` staan kunnen ook op de server worden gebruikt: het zijn gewone modules zonder scherm. Zo draait Woordtuin in de app en op de server dezelfde code, en kan niemand valsspelen met een aangepaste app.
-- Client: een scherm dat `GET /matches/:id?since=<versie>` pollt (antwoordt `unchanged` als er niets is) en zetten stuurt met `POST .../move` (`{ version, move }`): zie `js/services/matches.js` en `js/views/partij.js`. Het getal bij Vrienden telt al partijen waarin je aan de beurt bent.
-
-Zie [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor Woordtuin en de keuzes erachter.
-
-## Later: inloggen met Facebook of Google
-
-`auth.js` is het enige stuk dat de app aanroept (`signUp`, `signIn`, ...). Een extra aanbieder is: een route op de server die een Facebook/Google-token controleert en een eigen sleutel teruggeeft, plus een knop op het inlogscherm. De rest (vrienden, voortgang, partijen) verandert niet.
+`auth.js` is het enige stuk dat de app aanroept (`signUp`, `signIn`, ...). Een extra aanbieder (Google) is: een route op de server die een token controleert en een eigen sleutel teruggeeft (zoals Facebook, zie boven), plus een knop op het inlogscherm. De rest (vrienden, voortgang, partijen) verandert niet.

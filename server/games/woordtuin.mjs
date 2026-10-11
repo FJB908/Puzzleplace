@@ -8,7 +8,7 @@ import { randomBytes, randomInt } from 'node:crypto';
 import { RuleError } from '../api.mjs';
 import { newGame, applyMove, result, counts, MoveError, taalVan } from '../../js/games/woordtuin/engine.js';
 import { laadWoordenboek } from '../../js/games/woordtuin/woordenboek.js';
-import { isTaal } from '../../js/shared/talen.js';
+import { isKlaar } from '../../js/shared/talen.js';
 
 const slotOf = (pub, player) => pub.players.indexOf(player) + 1;
 
@@ -17,7 +17,7 @@ export const woordtuinRules = {
   // (een partij zonder taal is van voor de meertaligheid en dus Nederlands)
   config(config) {
     const lang = config?.lang ?? 'nl';
-    if (!isTaal(lang)) throw new RuleError('lang.unknown');
+    if (!isKlaar(lang)) throw new RuleError('lang.unknown');
     return { tips: [0, 3].includes(config?.tips) ? config.tips : 0, lang };
   },
 

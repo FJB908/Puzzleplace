@@ -2,7 +2,7 @@ import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { TALEN, TAAL_IDS, typInvoer, vouw } from '../js/shared/talen.js';
+import { TALEN, TAAL_IDS, KLAAR, typInvoer, vouw } from '../js/shared/talen.js';
 import { laadWoordenboek } from '../js/games/woordtuin/woordenboek.js';
 import { newGame, legalMoves, applyMove, botMove, result, counts, pathsFor, makeRng, checkMove, MoveError, SIZE } from '../js/games/woordtuin/engine.js';
 import { SCHAAL } from '../js/games/woordtuin/schaal.js';
@@ -110,8 +110,8 @@ test('de server speelt Woordtuin in elke taal: partij maken en een zet doen', as
   assert.equal((await call('POST', '/api/friends/request', { code: b.code }, a.token)).status, 201);
   assert.equal((await call('POST', `/api/friends/${a.id}/accept`, {}, b.token)).status, 200);
   const token = { [a.id]: a.token, [b.id]: b.token };
-  for (const taal of talen) {
-    // een partij per taal; eerdere partijen blijven lopen (de server staat er veel toe), dus ruim genoeg
+  for (const taal of talen.filter((t) => KLAAR.includes(t))) {
+    // een partij per taal die klaar is; eerdere partijen blijven lopen (de server staat er veel toe), dus ruim genoeg
     const made = await call('POST', '/api/matches', { with: b.id, game: 'woordtuin', config: { tips: 0, lang: taal } }, a.token);
     assert.equal(made.status, 201, `${taal}: ${JSON.stringify(made.json)}`);
     const m = made.json.match;

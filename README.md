@@ -1,4 +1,4 @@
-# Puzzelplaats
+# Puzzleplace
 
 Een rustig platform om puzzelspellen te spelen (sudoku, woordzoeker, kruiswoordpuzzels, ...),
 ontworpen voor ouderen: grote letters, duidelijke knoppen en een zo simpel mogelijke opzet.
@@ -7,7 +7,7 @@ ontworpen voor ouderen: grote letters, duidelijke knoppen en een zo simpel mogel
 
 ## Uitproberen
 
-**Het snelst:** open `dist/puzzelplaats.html` door er op te dubbelklikken. Dat is één los bestand met alles erin
+**Het snelst:** open `dist/puzzleplace.html` door er op te dubbelklikken. Dat is één los bestand met alles erin
 (gemaakt met `npm run build`), dus geen webserver nodig.
 
 **Tijdens het ontwikkelen**, met een simpele webserver:
@@ -24,7 +24,7 @@ losse bestand hierboven of de webserver.)
 ```bash
 npm install        # eenmalig, alleen nodig voor de build
 npm test           # test de engines van alle spellen, de versiering, de server en het samenvoegen van voortgang
-npm run build      # maakt dist/puzzelplaats.html opnieuw (doe dit na elke wijziging)
+npm run build      # maakt dist/puzzleplace.html opnieuw (doe dit na elke wijziging)
 node tools/make-blossoms.mjs   # tekent de bloesemtakken opnieuw (seeds staan bovenin het bestand)
 PREVIEW=/tmp/tak node tools/make-blossoms.mjs boog   # 6 varianten van één ontwerp om uit te kiezen
 ```
@@ -48,7 +48,9 @@ Zonder server werkt alles als eerst, op het apparaat zelf. Uitleg, instellingen 
 | Sudoku (engine + scherm + stijl) | `js/games/sudoku/`, `css/games/sudoku.css` |
 | Woordzoeker (woordenlijsten, engine, scherm, stijl) | `js/games/woordzoeker/`, `css/games/woordzoeker.css` |
 | Kruiswoordpuzzel (350 woorden met omschrijving, engine, scherm, stijl) | `js/games/kruiswoord/`, `css/games/kruiswoord.css` |
-| Woordtuin (regels, woordenlijst, bord, scherm; tegen de computer en een vriend) | `js/games/woordtuin/`, `server/games/woordtuin.mjs`, `js/views/partij.js`, `tools/make-woordtuin-lijst.mjs` |
+| Woordtuin (regels, woordenlijsten per taal, bord, scherm; tegen de computer en een vriend) | `js/games/woordtuin/`, `server/games/woordtuin.mjs`, `js/views/partij.js`, `tools/woordenlijst/` |
+| Talen: Engels (officieel) en 23 andere; taalherkenning, taalkeuze, teksten, vouwen van accenten, toetsenborden | `js/i18n/`, `js/shared/talen.js`, `js/views/taal.js`, `tools/i18n/` (zie [`docs/TALEN.md`](docs/TALEN.md)) |
+| Puzzelinhoud per taal (woordzoeker-thema's, kruiswoord-omschrijvingen) | `tools/inhoud/<taal>/`, gegenereerd naar `js/games/woordzoeker/talen/` en `js/games/kruiswoord/talen/` |
 | Illustraties per spel (voor kaarten en startschermen) | `js/games/art.js` |
 | Opslag op het apparaat (voortgang, instellingen) | `js/store.js` |
 | Stijl, thema's, tekstgroottes | `css/styles.css` |

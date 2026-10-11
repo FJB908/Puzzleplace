@@ -2,6 +2,7 @@
 //
 //   node tools/i18n/maak.mjs                    alles maken en controleren (stopt met een foutmelding als er iets niet klopt)
 //   node tools/i18n/maak.mjs --controleer <taal> controleert alleen die vertaling en schrijft niets (handig tijdens het vertalen)
+//   node tools/i18n/maak.mjs --naast <taal> <bestand>   het Engels en de vertaling onder elkaar (voor de beoordelaar)
 //   node tools/i18n/maak.mjs --blad [<taal>]    schrijft het vertaalblad (Engels, met uitleg voor vertalers): tools/i18n/vertaalblad.txt, met een taal
 //                                               erbij ook de vormen die die taal nodig heeft voor meervouden
 //
@@ -153,6 +154,32 @@ if (process.argv.includes('--sjabloon')) {
   }
   writeFileSync(bestand, uit);
   console.log(`${bestand}: ${sleutelsVoor(taal).length} regels om te vertalen`);
+  process.exit(0);
+}
+
+// ----- Naast elkaar: het Engels en de vertaling onder elkaar, voor wie de vertaling nakijkt -----
+if (process.argv.includes('--naast')) {
+  const taal = argTaal('--naast'), bestand = process.argv[process.argv.indexOf('--naast') + 2];
+  const v = taal && TALEN[taal] ? (taal === 'nl' ? nl : leesVertaling(taal)) : null;
+  if (!v || !bestand) { console.error('Gebruik: node tools/i18n/maak.mjs --naast <taal> <uitvoerbestand>  (de vertaling moet bestaan)'); process.exit(1); }
+  let uit = `# ${TALEN[taal].english} (${taal}): the English source (EN) and the translation (${taal}) under each other. Notes (NOTE) are for the translator. Plural forms: EN has one/other, ${taal} has ${meervoudsvormen(taal).join('/')}.\n`;
+  let laatste = '', gedaan = new Set();
+  for (const k of volgorde) {
+    if (sectie[k] !== laatste) { uit += `\n##### ${sectie[k]}\n`; laatste = sectie[k]; }
+    if (isVorm(k)) {
+      const basis = basisVan(k);
+      if (gedaan.has(basis)) continue;
+      gedaan.add(basis);
+      if (uitleg[k]) uit += `NOTE: ${uitleg[k]}\n`;
+      for (const [vorm, tekst] of Object.entries(en).filter(([x]) => basisVan(x) === basis && isVorm(x))) uit += `EN ${vorm.replace(`${basis}_`, '')}: ${tekst}\n`;
+      for (const f of meervoudsvormen(taal).sort((a, b) => FORMVOLGORDE.indexOf(a) - FORMVOLGORDE.indexOf(b))) uit += `${taal} ${f} (${basis}_${f}): ${v[`${basis}_${f}`] ?? '(MISSING)'}\n`;
+    } else {
+      if (uitleg[k]) uit += `NOTE: ${uitleg[k]}\n`;
+      uit += `[${k}]\nEN: ${en[k]}\n${taal}: ${v[k] ?? '(MISSING)'}\n`;
+    }
+  }
+  writeFileSync(bestand, uit);
+  console.log(`${bestand}: ${Math.round(uit.length / 1000)} kB`);
   process.exit(0);
 }
 

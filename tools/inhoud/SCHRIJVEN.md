@@ -53,7 +53,7 @@ One line per entry: `answer | clue | level`.
 
     huis | Hier woon je | 1          (this is only the format; write your own language)
 
-* **At least 350 entries** (Dutch has 352), about 62% level 1, 34% level 2 and a few percent (at least 12) level 3.
+* **At least 350 entries** (Dutch has 352): at least 150 of level 1, 60 of level 2 and 10 of level 3 (Dutch: 218 / 121 / 13; more entries are welcome, up to about 650).
   Level 1 = a word everyone knows with a clear clue; 2 = a bit less common or a bit more thinking; 3 = challenging but fair.
 * The answer is one word of 3 to 12 letters after folding, written normally (with diacritics, capitals where the language wants them). No spaces,
   hyphens or apostrophes. Mix of lengths: at least 40 answers of 3–4 letters, 80 of 5–7, 30 of 8–12. Words with many vowels and common consonants

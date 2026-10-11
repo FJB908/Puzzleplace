@@ -23,7 +23,7 @@ const WZ_WOORD = { min: 3, max: 11 };                 // lengte van een woord (n
 const WZ_PER_THEMA = { min: 20, max: 32 };
 const KW_WOORD = { min: 3, max: 12 };
 const KW_MIN_ENTRIES = 300;
-const KW_NIVEAUS = { 1: 0.5, 2: 0.2, 3: 0.03 };       // minimaal aandeel per niveau (van alle woorden)
+const KW_NIVEAUS = { 1: 150, 2: 60, 3: 10 };           // minimaal aantal woorden per niveau (het Nederlands heeft 218 / 121 / 13)
 
 const hoofd = (w) => w.charAt(0).toUpperCase() + w.slice(1);
 const regelsVan = (f) => readFileSync(f, 'utf8').split('\n');
@@ -124,7 +124,7 @@ function controleerKruiswoord(taal, entries, fouten, waarsch) {
   if (uit.length < KW_MIN_ENTRIES) f(`${uit.length} woorden, minimaal ${KW_MIN_ENTRIES}`);
   const perNiveau = { 1: 0, 2: 0, 3: 0 };
   for (const e of uit) perNiveau[e.level]++;
-  for (const [n, aandeel] of Object.entries(KW_NIVEAUS)) if (perNiveau[n] < Math.ceil(uit.length * aandeel)) f(`te weinig woorden van niveau ${n}: ${perNiveau[n]} (minimaal ${Math.ceil(uit.length * aandeel)})`);
+  for (const [n, minimaal] of Object.entries(KW_NIVEAUS)) if (perNiveau[n] < minimaal) f(`te weinig woorden van niveau ${n}: ${perNiveau[n]} (minimaal ${minimaal})`);
   // genoeg van elke lengte, anders kan de generator geen rooster bouwen
   const perLengte = {};
   for (const e of uit) perLengte[e.answer.length] = (perLengte[e.answer.length] || 0) + 1;

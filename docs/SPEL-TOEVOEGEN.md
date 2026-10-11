@@ -6,7 +6,9 @@
 4. Geef het spel een illustratie in `js/games/art.js` en een tint in `css/styles.css` (`.game--mijnspel { --tint: ...; --tint-2: ...; }`, en een donkere variant). Die komen op de kaarten en het startscherm.
 5. Wil je dat het spel op de kaart een voortgangsbalk toont? Geef dan bij `ctx.save(state, { progress })` een getal van 0 tot 1 mee.
 6. Schrijf een test voor de logica in `tests/` (zie de engines van de bestaande spellen).
-7. Draai `npm run build` om `dist/puzzelplaats.html` te verversen.
+7. Zet alle teksten van het spel (naam, samenvatting, uitleg, niveaus, meldingen) in `tools/i18n/bron/` (Engels | Nederlands, zie [`TALEN.md`](TALEN.md)) en gebruik in de code `t('sleutel')`; in de registry maak je het spel met `spel('<id>', {...})`, dat de naam, samenvatting, uitleg en niveaus uit het taalpakket haalt. Draai daarna `node tools/i18n/maak.mjs`. De andere talen volgen via het vertaalproces.
+8. Heeft het spel inhoud per taal (woorden, omschrijvingen)? Laad die dan per taal (zoals `js/games/woordzoeker/themas.js`) en schrijf de bron in `tools/inhoud/<taal>/`.
+9. Draai `npm run build` om `dist/puzzleplace.html` te verversen.
 
 Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren van voortgang, "Verder spelen", het felicitatiescherm en de puzzel van de dag werken vanzelf.
 
@@ -19,7 +21,7 @@ Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren va
 - Geef elk spel een **Ongedaan maken**-knop, zodat niets onherstelbaar is.
 - Gebruik de bestaande knopstijlen (`btn`, `btn-primary`) en `rem`-eenheden; tikvlakken minimaal 3rem. Raster-vakjes mogen compacter, maar liefst niet kleiner dan 2,5rem.
 - Geen tijdsdruk, geen geluid dat vanzelf start, geen flitsende animaties.
-- Tekst in gewoon Nederlands.
+- Geen tekst in de code: alles via `t('sleutel')` (Engels is de bron). Schrijf zinnen zonder woordvolgorde die in andere talen niet werkt: één plaatshouder per gegeven (`{name}`), geen stukjes zin aan elkaar plakken, en meervouden als `sleutel_one` / `sleutel_other` met `{n}` in elke vorm.
 
 
 De drie spellen in `js/games/` zijn de voorbeelden: `engine.js` bevat alleen logica (met tests in `tests/`), het andere bestand het scherm. Een spel mag een functie teruggeven uit `mount` om op te ruimen (de kruiswoordpuzzel doet dat voor zijn toetsenbord).

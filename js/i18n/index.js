@@ -3,7 +3,7 @@
 // Engels is de officiële taal van de app en staat altijd klaar (en vult aan als een vertaling iets mist). Alle andere talen
 // worden pas geladen als ze nodig zijn. Teksten staan in js/i18n/talen/<taal>.js (gemaakt uit tools/i18n/bron, zie daar).
 
-import { TALEN, STANDAARD_TAAL, herkenTaal, isTaal } from '../shared/talen.js';
+import { TALEN, STANDAARD_TAAL, herkenTaal, isKlaar } from '../shared/talen.js';
 import { invullen, zoek } from '../shared/opmaak.js';
 import EN from './talen/en.js';
 
@@ -47,12 +47,12 @@ export const sorteer = (a, b) => a.localeCompare(b, TALEN[taal].locale);
 
 // De taal van een bezoeker: wat hij zelf koos, anders wat zijn browser aangeeft. Geen van beide? Dan null: vraag het.
 export function bepaalTaal(keuze, voorkeuren = (typeof navigator !== 'undefined' ? navigator.languages || [navigator.language] : [])) {
-  if (keuze && isTaal(keuze)) return keuze;
+  if (keuze && isKlaar(keuze)) return keuze;
   return herkenTaal(voorkeuren);
 }
 
 export async function zetTaal(id) {
-  if (!isTaal(id)) id = STANDAARD_TAAL;
+  if (!isKlaar(id)) id = STANDAARD_TAAL;
   if (id !== 'en') {
     try { pakket = (await import(`./talen/${id}.js`)).default; }
     catch (e) { console.error(`Taal ${id} kon niet worden geladen`, e); id = 'en'; pakket = EN; }

@@ -22,7 +22,7 @@ Start ──► Spellen ──► Spel (uitleg, niveau) ──► Spelen
 - Kleur is nooit het enige signaal: gekozen opties hebben een vinkje, het actieve menu-item een balk en vetgedrukte tekst, "aan/uit" staat in woorden.
 - Thema's: licht, donker, automatisch, plus een hoog-contrastmodus. "Rustige weergave" zet alle animaties uit (en `prefers-reduced-motion` wordt gevolgd).
 - Dikke, goed zichtbare focusrand voor toetsenbordgebruik; "Naar de inhoud"-link; na elke paginawissel gaat de focus naar de kop en leest een schermlezer de nieuwe pagina voor.
-- Taal van de interface: gewoon Nederlands, korte zinnen, geen jargon of Engelse termen.
+- Taal van de interface: **Engels is de officiële taal** en de bron van alle teksten; de app herkent de taal van de bezoeker (24 talen, zie [`TALEN.md`](TALEN.md)) en vraagt anders welke taal hij wil. In elke taal: gewone woorden, korte zinnen, geen jargon, nooit een verwijt.
 - Geen tijdsdruk, geen verplichte timers, geen flitsende elementen.
 
 ## Uiterlijk
@@ -84,7 +84,7 @@ Het volledige verhaal (waarom dit spel, de metingen, de woordenlijst) staat in [
 | Woorden maak je door aangrenzende letters aan te raken (zoals Woordzoeker), niet met een rek letters | Je ziet de woorden die er zijn in plaats van letters te moeten schuiven; geen geluk met een slechte trekking |
 | Vakjes veroveren en beschermen in plaats van punten tellen | Alles wat jij doet verandert wat de ander kan (schaarste en gevolgen); je ziet in één blik wie er voor staat |
 | Elk woord moet een open vakje kleuren, en elk woord kan maar één keer | Zo eindigt het spel (±10 zetten per speler) en is een lang woord ook een zet die je de ander afneemt |
-| De officiële Nederlandse spelling (alle vormen), zonder namen, Engelse woorden en onzin; de computer speelt alleen alledaagse, nette woorden | Een gewoon woord wordt nooit geweigerd, en de computer speelt nooit iets raars of grofs |
+| De officiële spelling van de taal (alle vormen), zonder namen, Engelse woorden en onzin; de computer speelt alleen alledaagse, nette woorden | Een gewoon woord wordt nooit geweigerd, en de computer speelt nooit iets raars of grofs |
 | Je ziet vooraf wat een woord oplevert, en pas dan "Klaar" | Geen misklikken, geen spijt |
 | Kleur én symbool (✿ en ❧), typen als alternatief voor vegen, geen tijdsdruk, tips in een vriendelijke partij | Voor iedereen bruikbaar, ook voor kleurenblinden en wie niet goed kan vegen |
 | Dezelfde regels in de app en op de server | De computertegenstander, de tip en de server gebruiken één bron; valsspelen met een aangepaste app kan niet |

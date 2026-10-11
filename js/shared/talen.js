@@ -44,6 +44,11 @@ export const TAAL_IDS = Object.keys(TALEN);
 export const STANDAARD_TAAL = 'en';
 export const isTaal = (id) => Object.prototype.hasOwnProperty.call(TALEN, id);
 
+// De talen die klaar zijn voor gebruik: alle teksten, Woordtuin, Woordzoeker en Kruiswoord zijn er, gecontroleerd en beoordeeld. De app herkent en biedt
+// alleen deze aan. Een taal komt er pas bij als alles van die taal klaar is; tests/talen.test.mjs controleert dat ze echt compleet zijn.
+export const KLAAR = ['en', 'nl', 'de'];
+export const isKlaar = (id) => KLAAR.includes(id);
+
 // Streepjes en tekens op letters weghalen. Cyrillisch niet: daar zijn "й" en "и" echt verschillende letters.
 function zonderTekens(s, schrift) {
   return schrift === 'cyrillisch' ? s : s.normalize('NFD').replace(/\p{M}/gu, '');
@@ -72,14 +77,14 @@ export function typInvoer(tekst, taal) {
 }
 
 // ----- Welke taal spreekt deze bezoeker? -----
-// `voorkeuren` is navigator.languages ("nl-BE", "en-US", ...). De eerste voorkeur die we hebben wint. Geen enkele? Dan null:
+// `voorkeuren` is navigator.languages ("nl-BE", "en-US", ...). De eerste voorkeur die we hebben (en die klaar is) wint. Geen enkele? Dan null:
 // de app vraagt het dan. Een paar vaste vertalingen: Noors heet "no", "nb" of "nn" (we hebben bokmål).
 const ALIAS = { no: 'nb', nn: 'nb' };
-export function herkenTaal(voorkeuren = []) {
+export function herkenTaal(voorkeuren = [], beschikbaar = KLAAR) {
   for (const v of voorkeuren) {
     const basis = String(v || '').toLowerCase().split(/[-_]/)[0];
     const id = ALIAS[basis] || basis;
-    if (isTaal(id)) return id;
+    if (beschikbaar.includes(id)) return id;
   }
   return null;
 }

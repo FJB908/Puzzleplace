@@ -1,0 +1,631 @@
+# Kreuzworträtsel auf Deutsch. Pro Zeile:  Antwort | Umschreibung | Stufe   (1 = bekannt, 2 = etwas weniger bekannt, 3 = anspruchsvoll). Siehe tools/inhoud/maak.mjs.
+Berlin | Hauptstadt von Deutschland | 1
+Hamburg | Hafenstadt an der Elbe mit dem Michel | 1
+München | Bayerische Hauptstadt an der Isar | 1
+Köln | Domstadt am Rhein | 1
+Bremen | Stadt der berühmten Stadtmusikanten | 1
+Frankfurt | Bankenstadt am Main | 2
+Dresden | Hauptstadt von Sachsen mit der Frauenkirche | 2
+Stuttgart | Hauptstadt von Baden-Württemberg | 2
+Hannover | Hauptstadt von Niedersachsen | 2
+Leipzig | Messestadt in Sachsen mit dem Gewandhaus | 2
+Nürnberg | Fränkische Stadt, berühmt für Lebkuchen | 2
+Heidelberg | Universitätsstadt am Neckar mit Schlossruine | 2
+Lübeck | Hansestadt mit Holstentor und Marzipan | 2
+Bonn | Geburtsstadt Beethovens am Rhein | 2
+Aachen | Stadt Karls des Großen, bekannt für Printen | 3
+Weimar | Stadt in Thüringen, in der Goethe und Schiller lebten | 3
+Bayern | Bundesland mit Alpen und Weißwurst | 1
+Sachsen | Bundesland mit Dresden und Leipzig | 2
+Hessen | Bundesland mit Frankfurt und Wiesbaden | 2
+Rhein | Strom durch Köln und Düsseldorf | 1
+Elbe | Fluss durch Dresden und Hamburg | 1
+Donau | Fluss durch Regensburg und Wien | 1
+Mosel | Weinfluss, der bei Koblenz in den Rhein mündet | 2
+Main | Fluss durch Frankfurt und Würzburg | 2
+Neckar | Fluss durch Stuttgart und Heidelberg | 2
+Weser | Fluss durch Bremen und Hameln | 2
+Isar | Fluss durch München | 2
+Spree | Fluss an der Berliner Museumsinsel | 2
+Zugspitze | Höchster Berg Deutschlands | 1
+Bodensee | See zwischen Deutschland, Österreich und der Schweiz | 1
+Ostsee | Meer an der Küste von Kiel und Rügen | 1
+Nordsee | Meer mit Ebbe, Flut und Wattenmeer | 1
+Rügen | Größte Insel Deutschlands, mit Kreidefelsen | 2
+Sylt | Nördlichste Insel Deutschlands | 2
+Harz | Mittelgebirge mit dem Brocken | 2
+Brocken | Höchster Berg im Harz | 3
+Eifel | Mittelgebirge mit Maaren, westlich des Rheins | 3
+Schwarzwald | Mittelgebirge mit Kuckucksuhren und Kirschtorte | 1
+Alpen | Hochgebirge im Süden | 1
+Loreley | Sagenhafter Felsen am Rhein | 3
+Erzgebirge | Heimat der Nussknacker und Räuchermännchen | 3
+Oktoberfest | Berühmtes Volksfest in München | 1
+Paris | Hauptstadt von Frankreich | 1
+Rom | Hauptstadt von Italien | 1
+Wien | Hauptstadt von Österreich | 1
+Madrid | Hauptstadt von Spanien | 1
+London | Hauptstadt von England | 1
+Bern | Hauptstadt der Schweiz | 2
+Prag | Goldene Stadt an der Moldau | 2
+Athen | Hauptstadt von Griechenland | 2
+Oslo | Hauptstadt von Norwegen | 2
+Lissabon | Hauptstadt von Portugal | 2
+Kopenhagen | Hauptstadt von Dänemark | 2
+Helsinki | Hauptstadt von Finnland | 3
+Budapest | Hauptstadt von Ungarn | 3
+Venedig | Stadt der Gondeln und Kanäle | 2
+Sahara | Größte heiße Wüste der Erde | 2
+Nil | Längster Fluss Afrikas | 2
+Amazonas | Wasserreichster Fluss der Erde | 3
+Afrika | Erdteil mit der Sahara | 1
+Europa | Erdteil, zu dem Deutschland gehört | 1
+Asien | Größter Erdteil der Welt | 2
+Himalaja | Höchstes Gebirge der Erde | 2
+Kuh | Gibt Milch und macht Muh | 1
+Pferd | Darauf reitet man | 1
+Schaf | Gibt Wolle und blökt | 1
+Ziege | Meckerndes Tier mit Bart | 1
+Schwein | Rosa Hoftier mit Ringelschwanz | 1
+Huhn | Legt Eier im Stall | 1
+Hahn | Kräht frühmorgens auf dem Mist | 1
+Esel | Graues Lasttier mit langen Ohren | 1
+Hase | Langohr, das über das Feld hoppelt | 1
+Igel | Stacheliges Tier, das Winterschlaf hält | 1
+Eichhörnchen | Rotes Tier, das Nüsse für den Winter versteckt | 1
+Storch | Klappernder Vogel, der die Babys bringt | 1
+Schwan | Weißer Wasservogel mit langem Hals | 1
+Eule | Nachtvogel mit großen Augen | 1
+Amsel | Schwarzer Singvogel mit gelbem Schnabel | 2
+Spatz | Frecher kleiner Vogel, auch Sperling genannt | 1
+Taube | Gurrender Vogel auf dem Marktplatz | 1
+Rabe | Großer schwarzer Vogel, der krächzt | 2
+Specht | Vogel, der an Baumstämme klopft | 1
+Möwe | Kreischender Vogel am Meer | 1
+Kuckuck | Vogel, der seine Eier in fremde Nester legt | 2
+Adler | König der Lüfte | 1
+Schwalbe | Eine allein macht noch keinen Sommer | 2
+Nachtigall | Singvogel, der auch nachts singt | 2
+Kranich | Großer grauer Zugvogel mit lautem Ruf | 3
+Uhu | Große Eule mit Federohren | 2
+Biene | Summt und macht Honig | 1
+Wespe | Ungebetener Gast am Pflaumenkuchen | 2
+Mücke | Sticht und summt nachts im Schlafzimmer | 1
+Fliege | Insekt, aber auch eine Schleife am Kragen | 2
+Floh | Kleiner Springer im Fell des Hundes | 2
+Ameise | Fleißiges kleines Insekt im Haufen | 1
+Spinne | Webt ein Netz und fängt Fliegen | 1
+Schnecke | Trägt ihr Haus auf dem Rücken | 1
+Frosch | Grüner Hüpfer am Teich, der quakt | 1
+Marienkäfer | Roter Käfer mit schwarzen Punkten | 1
+Regenwurm | Kriecht nach dem Regen aus der Erde | 1
+Maulwurf | Gräbt Gänge und wirft Hügel auf | 1
+Libelle | Insekt mit schillernden Flügeln am Teich | 2
+Wal | Riesiges Säugetier im Meer | 1
+Robbe | Tier mit Schnurrhaaren auf der Sandbank | 2
+Delfin | Kluges Meerestier, das gern aus dem Wasser springt | 1
+Hai | Raubfisch mit scharfen Zähnen | 1
+Aal | Langer Fisch, wie eine Schlange | 2
+Forelle | Gefleckter Fisch im klaren Bach | 2
+Karpfen | Teichfisch, den man zu Silvester isst | 2
+Hering | Silbriger Fisch, oft eingelegt | 2
+Lachs | Rosafarbener Speisefisch | 2
+Krabbe | Krebstier, das seitwärts läuft | 2
+Qualle | Glibbriges Meerestier am Strand | 2
+Muschel | Findet man am Strand, darin rauscht das Meer | 1
+Elefant | Großes Tier mit Rüssel | 1
+Giraffe | Tier mit dem längsten Hals | 1
+Löwe | König der Tiere | 1
+Tiger | Große gestreifte Raubkatze | 1
+Bär | Großes Tier, das gern Honig nascht | 1
+Kamel | Wüstentier mit zwei Höckern | 1
+Pinguin | Vogel im Frack, der nicht fliegen kann | 1
+Krokodil | Panzerechse mit gewaltigem Maul | 2
+Biber | Nagetier, das Dämme baut | 2
+Dachs | Nachtaktiver Waldbewohner mit gestreiftem Kopf | 2
+Fuchs | Schlaues rotes Raubtier | 1
+Wolf | Böses Tier aus dem Märchen vom Rotkäppchen | 1
+Hirsch | Waldtier mit großem Geweih | 1
+Reh | Scheues Waldtier, kleiner als der Hirsch | 1
+Maus | Kleiner Nager, den die Katze jagt | 1
+Katze | Haustier, das miaut und schnurrt | 1
+Hund | Bellt und bewacht das Haus | 1
+Ente | Wasservogel, der quakt | 1
+Gans | Schnatternder Vogel auf dem Hof | 1
+Kaninchen | Hoppelndes Haustier im Stall | 1
+Hamster | Kleiner Nager mit dicken Backentaschen | 1
+Papagei | Bunter Vogel, der sprechen lernt | 1
+Fledermaus | Fliegt nachts und hängt kopfüber | 1
+Eidechse | Kleines Reptil, das sich auf Steinen sonnt | 2
+Schildkröte | Langsames Tier mit Panzer | 1
+Eiche | Kräftiger Laubbaum mit gelappten Blättern | 1
+Buche | Laubbaum mit glatter grauer Rinde | 2
+Birke | Baum mit weißer Rinde | 1
+Tanne | Nadelbaum, beliebt als Weihnachtsbaum | 1
+Linde | Baum mit herzförmigen Blättern | 2
+Kastanie | Baum mit glänzenden braunen Früchten | 1
+Weide | Baum am Wasser mit hängenden Zweigen | 2
+Ahorn | Baum, dessen Früchte wie Propeller fliegen | 2
+Rose | Blume mit Dornen | 1
+Tulpe | Frühlingsblume aus der Zwiebel | 1
+Nelke | Blume und zugleich ein Gewürz | 2
+Lilie | Weiße Blume, Zeichen der Reinheit | 2
+Veilchen | Kleines lila Frühlingsblümchen, das duftet | 2
+Sonnenblume | Hohe gelbe Blume mit essbaren Kernen | 1
+Löwenzahn | Gelbe Wiesenblume, später eine Pusteblume | 1
+Mohn | Rote Feldblume mit schwarzen Samen | 2
+Klee | Mit vier Blättern bringt er Glück | 1
+Moos | Weiches Grün auf Steinen | 1
+Farn | Waldpflanze mit gefiederten Wedeln | 2
+Pilz | Wächst im Wald, manche sind giftig | 1
+Efeu | Immergrüne Kletterpflanze an Mauern | 2
+Distel | Stachelige Pflanze mit lila Blüte | 2
+Brennnessel | Pflanze, die auf der Haut brennt | 1
+Lavendel | Lila duftende Pflanze aus der Provence | 1
+Kaktus | Stachelige Pflanze aus der Wüste | 1
+Gras | Wächst auf der Wiese und wird gemäht | 1
+Blatt | Fällt im Herbst vom Baum | 1
+Wurzel | Teil der Pflanze unter der Erde | 1
+Knospe | Daraus öffnet sich die Blüte | 2
+Holunder | Strauch mit dunklen Beeren für Saft | 3
+Hagebutte | Rote Frucht der Heckenrose | 3
+Edelweiß | Weiße Alpenblume in Sternform | 2
+Enzian | Tiefblaue Blume der Alpen | 2
+Flieder | Strauch mit duftenden lila Blüten im Mai | 2
+Brot | Backt der Bäcker jeden Morgen | 1
+Brötchen | Knusprig zum Frühstück, im Süden auch Semmel | 1
+Butter | Gelber Aufstrich aus Sahne | 1
+Käse | Gouda oder Emmentaler | 1
+Wurst | Aufschnitt, etwa Salami | 1
+Schinken | Geräuchert oder gekocht vom Schwein | 1
+Honig | Süßes Werk der Bienen | 1
+Kuchen | Gibt es sonntags zum Kaffee | 1
+Torte | Festlicher Kuchen mit Sahne | 1
+Keks | Kleines knuspriges Gebäck | 1
+Suppe | Warme Vorspeise, die man löffelt | 1
+Kartoffel | Knolle für Püree, Pommes und Klöße | 1
+Möhre | Orangefarbenes Gemüse, das Hasen lieben | 1
+Gurke | Grünes Gemüse, oft sauer eingelegt | 1
+Tomate | Rotes Gemüse für Salat und Soße | 1
+Zwiebel | Bringt beim Schneiden die Tränen | 1
+Kohl | Gemüse, aus dem man Sauerkraut macht | 1
+Spargel | Weißes Stangengemüse im Frühling | 1
+Spinat | Grünes Blattgemüse, oft mit Spiegelei | 1
+Erbse | Kleine grüne Kugel aus der Schote | 1
+Bohne | Wird geröstet und zu Kaffee gemahlen | 1
+Reis | Körner aus Asien, im Wasser gegart | 1
+Nudel | Teigware, auch als Suppeneinlage | 1
+Pfannkuchen | Flach aus der Pfanne, mit Zucker oder Apfelmus | 1
+Bratwurst | Kommt vom Grill und wird mit Senf gegessen | 1
+Brezel | Salziges Laugengebäck mit Knoten | 1
+Sauerkraut | Gesäuerter Weißkohl | 1
+Schnitzel | Paniertes Fleisch nach Wiener Art | 1
+Knödel | Runde Beilage aus Kartoffeln oder Semmeln | 1
+Spätzle | Schwäbische Eiernudeln | 2
+Lebkuchen | Würziges Honiggebäck aus Nürnberg | 1
+Stollen | Weihnachtsgebäck mit Rosinen aus Dresden | 1
+Plätzchen | Mit Förmchen ausgestochenes Weihnachtsgebäck | 1
+Apfel | Rundes Obst, rot, gelb oder grün | 1
+Birne | Obst, das auch in der Lampe steckt | 2
+Banane | Gelbe krumme Frucht | 1
+Kirsche | Kleine rote Steinfrucht am Stiel | 1
+Erdbeere | Rote Frucht mit Kernchen außen | 1
+Pflaume | Blaue Steinfrucht für Kuchen und Mus | 1
+Traube | Wächst am Weinstock | 1
+Zitrone | Saure gelbe Zitrusfrucht | 1
+Orange | Runde Zitrusfrucht, auch Apfelsine genannt | 1
+Nuss | Harte Schale, essbarer Kern | 1
+Kaffee | Heißgetränk aus gerösteten Bohnen | 1
+Tee | Heißgetränk aus getrockneten Blättern | 1
+Milch | Weißes Getränk von der Kuh | 1
+Bier | Gebraut aus Hopfen und Malz | 1
+Wein | Getränk aus vergorenen Trauben, rot oder weiß | 1
+Saft | Getränk aus gepresstem Obst | 1
+Wasser | Klar und frisch aus der Quelle | 1
+Sahne | Wird steif geschlagen und kommt auf den Kuchen | 1
+Zucker | Macht den Kaffee süß | 1
+Salz | Würzt die Suppe, kommt aus dem Meer | 1
+Pfeffer | Scharfes Gewürz, schwarz oder weiß | 1
+Senf | Gelbe Würze zur Bratwurst | 1
+Mehl | Gemahlenes Getreide zum Backen | 1
+Quark | Weißer Frischkäse für den Käsekuchen | 2
+Eintopf | Deftiges Gericht, alles in einem Topf gekocht | 2
+Kompott | Gekochtes Obst als Nachtisch | 2
+Eis | Kalte Leckerei in der Waffel | 1
+Rosine | Getrocknete Weintraube | 2
+Frühstück | Erste Mahlzeit des Tages | 1
+Abendbrot | Kalte Mahlzeit nach Feierabend | 1
+Tür | Hat eine Klinke und ein Schloss | 1
+Fenster | Dadurch schaut man nach draußen | 1
+Dach | Schützt das Haus von oben | 1
+Treppe | Führt hinauf in den ersten Stock | 1
+Keller | Raum unter dem Haus | 1
+Dachboden | Raum direkt unter dem Dach | 1
+Stuhl | Darauf sitzt man am Tisch | 1
+Tisch | Daran isst die ganze Familie | 1
+Bett | Darin schläft man | 1
+Schrank | Darin hängt die Kleidung | 1
+Lampe | Spendet Licht im Zimmer | 1
+Spiegel | Darin sieht man sich selbst | 1
+Decke | Hält im Bett schön warm | 1
+Kissen | Weich unter dem Kopf | 1
+Uhr | Zeigt die Zeit an | 1
+Vase | Darin stehen die Blumen | 1
+Sofa | Weiches Möbel für mehrere im Wohnzimmer | 1
+Sessel | Bequemer Polsterstuhl mit Armlehnen | 1
+Teppich | Liegt weich auf dem Boden | 1
+Vorhang | Geht im Theater auf und zu | 2
+Kamin | Offenes Feuer im Wohnzimmer | 1
+Ofen | Darin backt man den Kuchen | 1
+Herd | Darauf stehen die Töpfe beim Kochen | 1
+Kühlschrank | Hält Lebensmittel kalt | 1
+Topf | Darin kocht man Kartoffeln | 1
+Pfanne | Darin brät man Spiegeleier | 1
+Löffel | Damit isst man Suppe | 1
+Gabel | Besteckteil mit Zinken | 1
+Messer | Damit schneidet man Brot | 1
+Teller | Darauf liegt das Essen | 1
+Tasse | Daraus trinkt man Kaffee | 1
+Kanne | Daraus gießt man Tee oder Kaffee ein | 1
+Schüssel | Tiefes Gefäß für Salat | 1
+Sieb | Lässt das Wasser durch, die Nudeln nicht | 1
+Besen | Damit fegt man den Boden | 1
+Eimer | Darin trägt man Wasser zum Putzen | 1
+Staubsauger | Saugt den Schmutz vom Teppich | 1
+Bügeleisen | Macht die Wäsche wieder glatt | 1
+Nadel | Damit näht man | 1
+Schere | Hat zwei Klingen und schneidet Papier | 1
+Schlüssel | Damit schließt man die Tür auf | 1
+Klingel | Damit meldet sich der Besuch an der Tür | 1
+Briefkasten | Hier steckt der Postbote die Post ein | 1
+Heizung | Macht im Winter die Zimmer warm | 1
+Badewanne | Darin nimmt man ein Vollbad | 1
+Dusche | Wasser von oben im Badezimmer | 1
+Handtuch | Damit trocknet man sich ab | 1
+Seife | Damit wäscht man sich die Hände | 1
+Kerze | Brennt mit Docht und Flamme | 1
+Balkon | Plattform mit Geländer an der Hauswand | 1
+Garage | Hier parkt man das Auto | 1
+Garten | Grünes Stück Land am Haus | 1
+Zaun | Grenze rund um den Garten | 1
+Wand | Hier hängt das Bild | 1
+Flur | Gang in der Wohnung | 1
+Kommode | Niedriger Schrank mit Schubladen | 2
+Regal | Möbel mit Brettern für Bücher | 1
+Wiege | Schaukelndes Bettchen für das Baby | 2
+Fernseher | Gerät für Filme und Nachrichten | 1
+Telefon | Damit ruft man an | 1
+Radio | Daraus hört man Musik und Nachrichten | 1
+Computer | Rechner mit Bildschirm und Tastatur | 1
+Brille | Hilft beim Sehen | 1
+Jacke | Zieht man bei kühlem Wetter über | 1
+Mantel | Langer warmer Überzieher für den Winter | 1
+Hose | Kleidungsstück mit zwei Beinen | 1
+Rock | Kleidungsstück für Damen, ohne Hosenbeine | 1
+Kleid | Festliches Gewand für die Dame | 1
+Schal | Hält den Hals warm | 1
+Mütze | Hält den Kopf im Winter warm | 1
+Handschuh | Hält die Finger warm | 1
+Socke | Trägt man im Schuh | 1
+Schuh | Hat eine Sohle und Schnürsenkel | 1
+Stiefel | Hoher Schuh für Regen und Schnee | 1
+Pullover | Gestricktes warmes Oberteil | 1
+Bluse | Damenoberteil mit Knöpfen | 1
+Hemd | Herrenoberteil mit Kragen | 1
+Krawatte | Wird zum Anzug um den Hals gebunden | 1
+Gürtel | Hält die Hose oben | 1
+Hut | Kopfbedeckung mit Krempe | 1
+Schlafanzug | Kleidung für die Nacht | 1
+Weste | Ärmelloses Oberteil über dem Hemd | 2
+Anzug | Sakko und Hose aus gleichem Stoff | 1
+Dirndl | Bayerisches Trachtenkleid | 1
+Lederhose | Bayerische Trachtenhose | 1
+Knopf | Hält das Hemd vorne zusammen | 1
+Tasche | Darin trägt man Sachen bei sich | 1
+Badeanzug | Kleidung zum Schwimmen für Damen | 1
+Sonne | Scheint am Tag vom Himmel | 1
+Regen | Dafür braucht man einen Schirm | 1
+Wind | Lässt die Blätter rauschen | 1
+Sturm | Die Ruhe vor dem … | 2
+Nebel | Grauer Dunst, man sieht kaum etwas | 1
+Schnee | Weiße Flocken im Winter | 1
+Hagel | Eiskörner, die vom Himmel prasseln | 1
+Gewitter | Wetter mit Blitz und Donner | 1
+Blitz | Greller Strahl bei Gewitter | 1
+Donner | Grollt nach dem Blitz | 1
+Regenbogen | Bunter Bogen am Himmel nach dem Schauer | 1
+Wolke | Schwebt weiß oder grau am Himmel | 1
+Frost | Kälte unter null Grad | 1
+Tau | Morgens nasse Tropfen auf dem Gras | 2
+Frühling | Jahreszeit, in der alles zu blühen beginnt | 1
+Sommer | Wärmste Jahreszeit | 1
+Herbst | Jahreszeit, in der die Blätter fallen | 1
+Winter | Kälteste Jahreszeit | 1
+Januar | Erster Monat des Jahres | 1
+Februar | Kürzester Monat des Jahres | 1
+Mai | Der Wonnemonat | 1
+Dezember | Letzter Monat des Jahres | 1
+Montag | Erster Tag der Arbeitswoche | 1
+Sonntag | Ruhetag am Ende der Woche | 1
+Samstag | Tag vor dem Sonntag | 1
+Stunde | Sechzig Minuten | 1
+Minute | Sechzig Sekunden | 1
+Woche | Sieben Tage | 1
+Jahr | Zwölf Monate | 1
+Morgen | Beginn des Tages | 1
+Abend | Tageszeit nach dem Nachmittag | 1
+Nacht | Dunkle Zeit, in der man schläft | 1
+Mittag | Zwölf Uhr am Tag | 1
+Jahrhundert | Hundert Jahre | 1
+Kalender | Zeigt Tage, Wochen und Monate | 1
+Klavier | Instrument mit schwarzen und weißen Tasten | 1
+Gitarre | Saiteninstrument, das man zupft | 1
+Geige | Wird unter dem Kinn mit dem Bogen gespielt | 1
+Flöte | Instrument des Rattenfängers von Hameln | 2
+Trompete | Glänzendes Blechblasinstrument mit drei Ventilen | 2
+Trommel | Darauf schlägt man mit Stöcken | 1
+Harfe | Großes Saiteninstrument, das Engel spielen | 2
+Orgel | Großes Instrument mit Pfeifen in der Kirche | 1
+Cello | Großes Streichinstrument zwischen den Knien | 2
+Akkordeon | Anderes Wort für Ziehharmonika | 2
+Lied | Wird gesungen | 1
+Chor | Gruppe von Sängern | 1
+Note | Zeichen für einen Ton auf Papier | 1
+Melodie | Tonfolge, die man summen kann | 1
+Orchester | Viele Musiker unter einem Dirigenten | 1
+Dirigent | Leitet das Orchester mit dem Taktstock | 1
+Konzert | Musikalische Aufführung im Saal | 1
+Oper | Musiktheater mit Gesang auf der Bühne | 1
+Walzer | Tanz im Dreivierteltakt | 1
+Beethoven | Komponist aus Bonn, später taub | 2
+Mozart | Komponist aus Salzburg | 1
+Bach | Kleiner Fluss, auch ein großer Komponist | 2
+Goethe | Dichter des „Faust“ | 2
+Schiller | Dichter von „Wilhelm Tell“ | 3
+Grimm | Brüder, die Märchen sammelten | 2
+Dürer | Nürnberger Maler des berühmten Feldhasen | 3
+Museum | Hier betrachtet man Kunst und alte Dinge | 1
+Theater | Hier spielen Schauspieler auf der Bühne | 1
+Kino | Hier sieht man Filme auf großer Leinwand | 1
+Buch | Hat Seiten und einen festen Einband | 1
+Zeitung | Täglich gedruckte Nachrichten | 1
+Brief | Kommt im Umschlag mit der Post | 1
+Briefmarke | Klebt man oben rechts auf den Umschlag | 1
+Märchen | Beginnt meist mit „Es war einmal“ | 1
+Hexe | Wohnt im Märchen im Knusperhäuschen | 1
+Zwerg | Schneewittchen wohnte bei sieben davon | 1
+Prinz | Königssohn im Märchen | 1
+Riese | Märchenfigur von gewaltiger Größe | 1
+Drache | Feuerspeiendes Fabeltier | 1
+Ritter | Kämpfer in Rüstung auf der Burg | 1
+Burg | Festung mit Mauern und Türmen | 1
+Schloss | Prächtiger Bau eines Königs, auch an der Tür | 2
+König | Herrscher mit Krone und Zepter | 1
+Krone | Goldener Kopfschmuck des Königs | 1
+Rübezahl | Berggeist aus dem Riesengebirge | 3
+Herz | Pumpt das Blut durch den Körper | 1
+Kopf | Darauf sitzt der Hut | 1
+Nase | Damit riecht man | 1
+Ohr | Damit hört man | 1
+Auge | Damit sieht man | 1
+Mund | Damit isst und spricht man | 1
+Hand | Hat fünf Finger | 1
+Fuß | Hat fünf Zehen | 1
+Knie | Gelenk in der Mitte des Beins | 1
+Ellenbogen | Gelenk in der Mitte des Arms | 1
+Rücken | Hier sitzt die Wirbelsäule | 1
+Zahn | Damit beißt man | 1
+Haar | Wächst auf dem Kopf | 1
+Haut | Bedeckt den ganzen Körper | 1
+Bauch | Körpermitte mit dem Nabel | 1
+Daumen | Kurzer, dicker Finger | 1
+Arzt | Hilft, wenn man krank ist | 1
+Krankenhaus | Hier wird man operiert und gepflegt | 1
+Apotheke | Hier holt man Medizin | 1
+Pille | Medizin zum Schlucken | 1
+Pflaster | Klebt man auf eine kleine Wunde | 1
+Schnupfen | Erkältung mit laufender Nase | 1
+Bäcker | Backt Brot und Brötchen | 1
+Metzger | Verkauft Wurst und Fleisch | 1
+Maler | Streicht Wände oder malt Bilder | 1
+Zimmermann | Baut den Dachstuhl aus Holz | 2
+Friseur | Schneidet und föhnt die Haare | 1
+Bauer | Bestellt die Felder und melkt die Kühe | 1
+Lehrer | Unterrichtet in der Schule | 1
+Feuerwehr | Löscht Brände | 1
+Polizei | Sorgt für Ordnung, Notruf 110 | 1
+Fischer | Fährt mit dem Kutter hinaus aufs Meer | 1
+Gärtner | Pflegt Blumen und Beete | 1
+Koch | Bereitet im Restaurant das Essen zu | 1
+Schneider | Näht Kleidung nach Maß | 1
+Postbote | Bringt die Briefe ins Haus | 1
+Pilot | Fliegt das Flugzeug | 1
+Kapitän | Hat das Kommando auf dem Schiff | 1
+Schmied | Formt glühendes Eisen am Amboss | 2
+Winzer | Baut Wein an | 2
+Imker | Hält Bienen und erntet Honig | 2
+Fußball | Mannschaftssport mit elf Spielern und zwei Toren | 1
+Tennis | Sport mit Schläger und Netz | 1
+Golf | Sport mit kleinem Ball und Löchern im Rasen | 2
+Schach | Brettspiel mit König und Dame | 1
+Skat | Kartenspiel für drei Spieler | 2
+kegeln | Mit der Kugel „alle Neune“ werfen | 1
+schwimmen | Sich im Wasser fortbewegen | 1
+wandern | Mit Rucksack durch die Berge gehen | 1
+stricken | Mit zwei Nadeln und Wolle arbeiten | 1
+häkeln | Handarbeit mit einer Nadel mit Haken | 1
+angeln | Mit Rute und Köder am Wasser sitzen | 1
+tanzen | Sich zur Musik bewegen | 1
+singen | Mit der Stimme Musik machen | 1
+lesen | Was man mit einem Buch macht | 1
+kochen | Essen am Herd zubereiten | 1
+backen | Kuchen im Ofen zubereiten | 1
+malen | Mit Pinsel und Farbe ein Bild machen | 1
+Rätsel | Aufgabe zum Knobeln | 1
+Puzzle | Viele Teile ergeben ein Bild | 1
+Ski | Zwei lange Bretter für den Schnee | 1
+Schlitten | Damit saust man den verschneiten Hang hinab | 1
+Würfel | Hat sechs Seiten mit Punkten | 1
+Camping | Urlaub mit Zelt oder Wohnwagen | 2
+Gymnastik | Turnübungen zum Fitbleiben | 2
+Spiel | Wird gewonnen oder verloren | 1
+Ball | Rundes Spielzeug zum Werfen und Kicken | 1
+Puppe | Spielfigur zum Anziehen und Kämmen | 1
+Foto | Bild aus der Kamera | 1
+Kamera | Damit macht man Fotos | 1
+Zug | Fährt auf Schienen von Bahnhof zu Bahnhof | 1
+Bus | Hält an der Haltestelle | 1
+Auto | Hat vier Räder und einen Motor | 1
+Fahrrad | Zweirad mit Pedalen | 1
+Schiff | Großes Fahrzeug auf dem Meer | 1
+Boot | Kleines Wasserfahrzeug mit Rudern | 1
+Flugzeug | Bringt Urlauber durch die Luft | 1
+Bahnhof | Hier steigt man in den Zug | 1
+Hafen | Hier legen die Schiffe an | 1
+Brücke | Führt über einen Fluss | 1
+Tunnel | Weg mitten durch den Berg | 1
+Koffer | Darin packt man die Kleidung für die Reise | 1
+Reisepass | Ausweis für Fahrten ins Ausland | 1
+Hotel | Hier übernachtet man im Urlaub | 1
+Strand | Sand am Meer | 1
+Zelt | Unterkunft aus Stoff beim Camping | 1
+Landkarte | Darauf findet man den Weg | 1
+Kompass | Seine Nadel zeigt nach Norden | 1
+Urlaub | Freie Tage vom Arbeitgeber | 1
+Ferien | Schulfreie Zeit | 1
+Autobahn | Schnellstraße mit mehreren Spuren | 1
+Ampel | Zeigt Rot, Gelb und Grün an der Kreuzung | 1
+Taxi | Auto mit Fahrer, das man bezahlt | 1
+Fähre | Bringt Autos über das Wasser | 1
+Insel | Land, das ganz von Wasser umgeben ist | 1
+Berg | Höher als ein Hügel | 1
+Gipfel | Höchster Punkt eines Berges | 1
+Tal | Senke zwischen Bergen | 1
+Rucksack | Tasche, die man auf dem Rücken trägt | 1
+Postkarte | Gruß aus dem Urlaub mit Bild | 1
+Leuchtturm | Weist den Schiffen nachts den Weg | 1
+Fluss | Fließendes Gewässer, größer als ein Bach | 1
+See | Stehendes Gewässer im Land | 1
+Meer | Großes salziges Wasser | 1
+Wald | Viele Bäume beisammen | 1
+Wiese | Grünes Land mit Gras und Blumen | 1
+Feld | Hier wächst das Getreide | 1
+Acker | Gepflügtes Land des Bauern | 2
+Hügel | Kleine Erhebung in der Landschaft | 1
+Quelle | Hier entspringt ein Bach | 2
+Heide | Lila blühende Landschaft bei Lüneburg | 2
+Moor | Nasse Landschaft mit Torf | 2
+Höhle | Dunkler Raum im Felsen | 1
+Wüste | Viel Sand und kaum Regen | 1
+Küste | Wo das Land ans Meer grenzt | 1
+Ebbe | Niedrigwasser, das Gegenteil von Flut | 2
+Flut | Steigendes Meerwasser | 2
+Watt | Meeresboden, der bei Ebbe trocken fällt | 2
+Deich | Wall, der das Land vor dem Meer schützt | 1
+Wasserfall | Hier stürzt ein Bach in die Tiefe | 1
+Mond | Leuchtet nachts, mal voll, mal halb | 1
+Stern | Funkelt am Nachthimmel | 1
+Erde | Unser Planet | 1
+Mars | Der rote Planet | 2
+Saturn | Planet mit auffälligen Ringen | 2
+Venus | Hellster Planet am Abendhimmel | 2
+Komet | Himmelskörper mit leuchtendem Schweif | 3
+Himmel | Blau über uns bei schönem Wetter | 1
+Feuer | Brennt und wärmt | 1
+Luft | Das atmen wir ein | 1
+Gold | Gelbes, kostbares Metall | 1
+Silber | Edelmetall der Medaille für Platz zwei | 1
+Eisen | Metall, das rosten kann | 1
+Holz | Kommt vom Baum, man baut damit | 1
+Glas | Daraus ist eine Fensterscheibe | 1
+Stein | Hart und grau, liegt am Wegrand | 1
+Sand | Daraus bauen Kinder Burgen am Strand | 1
+Ton | Daraus formt der Töpfer Krüge | 2
+Papier | Darauf schreibt man | 1
+Bleistift | Schreibt grau und lässt sich radieren | 1
+Füller | Schreibgerät mit Tinte und Feder | 1
+Radiergummi | Entfernt Bleistiftstriche | 1
+Lineal | Damit zieht man gerade Striche | 1
+Barometer | Gerät, das den Luftdruck misst | 3
+Freund | Mit ihm versteht man sich gut | 1
+Nachbar | Wohnt nebenan | 1
+Familie | Eltern und Kinder zusammen | 1
+Oma | Mutter von Mutter oder Vater | 1
+Opa | Vater von Vater oder Mutter | 1
+Onkel | Bruder von Vater oder Mutter | 1
+Tante | Schwester von Mutter oder Vater | 1
+Enkel | Kind von Sohn oder Tochter | 1
+Neffe | Sohn von Bruder oder Schwester | 2
+Nichte | Tochter von Bruder oder Schwester | 2
+Cousine | Tochter von Onkel und Tante | 2
+Baby | Neugeborenes Kind | 1
+Zwilling | Mit Bruder oder Schwester am selben Tag geboren | 1
+Eltern | Vater und Mutter zusammen | 1
+Braut | Trägt am Hochzeitstag ein weißes Kleid | 1
+Hochzeit | Feier von Braut und Bräutigam | 1
+Weihnachten | Fest mit Tannenbaum und Geschenken | 1
+Ostern | Fest mit Hasen und bunten Eiern | 1
+Silvester | Letzter Tag des Jahres | 1
+Neujahr | Erster Tag des Jahres | 1
+Geburtstag | Tag, an dem man ein Jahr älter wird | 1
+Geschenk | Bekommt man schön eingepackt | 1
+Fest | Fröhliche Feier mit vielen Gästen | 1
+Advent | Die vier Wochen vor Weihnachten | 1
+Nikolaus | Füllt am sechsten Dezember die Stiefel | 1
+Karneval | Fünfte Jahreszeit im Rheinland | 2
+Luftballon | Bunte Gummihülle, die man aufbläst | 1
+Feuerwerk | Bunte Raketen in der Silvesternacht | 1
+Laterne | Kinder tragen sie am Martinstag | 2
+Maibaum | Geschmückter Stamm, am ersten Mai aufgestellt | 2
+Osterhase | Bringt die bunten Eier | 1
+Einladung | Bitte, zu einem Fest zu kommen | 1
+Polterabend | Feier vor der Hochzeit, bei der Porzellan zerbricht | 2
+Jubiläum | Feier zu einem runden Jahrestag | 2
+Konfetti | Bunte Papierschnipsel zum Werfen | 1
+rot | Farbe der Liebe und der Tomate | 1
+grün | Farbe von Gras und Blättern | 1
+blau | Farbe des Himmels | 1
+gelb | Farbe von Zitrone und Sonne | 1
+weiß | Farbe des Schnees | 1
+schwarz | Farbe der Nacht | 1
+braun | Farbe von Schokolade | 1
+lila | Farbe von Flieder und Lavendel | 1
+grau | Farbe von Asche und Regenwolken | 1
+rosa | Mischung aus Rot und Weiß | 1
+warm | Nicht kalt und nicht heiß | 1
+alt | Gegenteil von jung | 1
+groß | Gegenteil von klein | 1
+leise | Kaum zu hören | 1
+süß | So schmeckt Zucker | 1
+sauer | So schmeckt die Zitrone | 1
+schlafen | Was man nachts im Bett tut | 1
+lachen | Das tut man bei einem guten Witz | 1
+weinen | Das tut man, wenn man traurig ist | 1
+schreiben | Mit dem Stift Wörter aufs Papier bringen | 1
+spazieren | Gemütlich und ohne Eile umhergehen | 2
+gießen | Den Blumen Wasser geben | 1
+segeln | Mit dem Wind über das Wasser gleiten | 2
+rudern | Ein Boot mit Riemen bewegen | 2
+reiten | Auf dem Pferd unterwegs sein | 1
+Bauernhof | Hier leben Kühe, Schweine und Hühner | 1
+Stall | Hier stehen nachts die Kühe | 1
+Scheune | Hier lagert der Bauer das Heu | 1
+Traktor | Zieht den Pflug über den Acker | 1
+Mühle | Mahlt das Korn zu Mehl | 1
+Heu | Getrocknetes Gras als Winterfutter | 1
+Stroh | Getrocknete Halme vom Getreide | 1
+Weizen | Getreide, aus dem helles Mehl gemahlen wird | 2
+Roggen | Getreide für dunkles Brot | 2
+Hafer | Getreide für Flocken und Pferdefutter | 2
+Mais | Gelbe Kolben auf dem Feld | 1
+Ernte | Wird im Herbst eingefahren | 1
+Weinberg | Hang, an dem die Reben wachsen | 1
+Hopfen | Kletterpflanze, die das Bier würzt | 2
+Geld | Damit bezahlt man | 1
+Münze | Rundes Geldstück | 1
+Schule | Hier lernen Kinder lesen und schreiben | 1
+Kirche | Gotteshaus mit Glockenturm | 1
+Glocke | Läutet im Kirchturm | 1
+Rathaus | Sitz des Bürgermeisters | 1
+Markt | Hier gibt es frisches Obst vom Stand | 1
+Sanduhr | Zeitmesser mit rieselnden Körnchen | 2

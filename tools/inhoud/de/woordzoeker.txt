@@ -1,0 +1,76 @@
+# Suchsel (Woordzoeker) auf Deutsch. Pro Thema: die Wörter in der normalen Schreibweise, durch Leerzeichen getrennt. Siehe tools/inhoud/maak.mjs.
+
+## bloemen | Blumen
+Rose Tulpe Lilie Nelke Mohn Iris Aster Dahlie Primel Enzian
+Azalee Mimose Narzisse Sonnenblume Orchidee Flieder Begonie Veilchen Lavendel Magnolie
+Geranie Kornblume Löwenzahn Margerite Hortensie Edelweiß Kamille Osterglocke
+
+## tuin | Im Garten
+Spaten Harke Gießkanne Hecke Schuppen Teich Beet Rasenmäher Schlauch Gewächshaus
+Baum Strauch Unkraut Kompost Frosch Igel Amsel Schubkarre Gartenzwerg Zaun
+Laube Liegestuhl Vogelhaus Maulwurf Schnecke Biene Erde Gärtner Schaukel Hängematte
+
+## dieren | Tiere
+Hase Kaninchen Pferd Kuh Schaf Ziege Schwein Huhn Ente Gans
+Hund Katze Maus Hirsch Reh Fuchs Dachs Schwan Storch Eule
+Biber Robbe Delfin Esel Krokodil Elefant Giraffe Löwe Bär Pinguin
+
+## keuken | In der Küche
+Topf Pfanne Löffel Gabel Messer Teller Schüssel Tasse Herd Ofen
+Kühlschrank Teekanne Sieb Reibe Eieruhr Backblech Kelle Toaster Spüle Schürze
+Nudelholz Schneebesen Waage Krug Glas Deckel Kochbuch Geschirr Besteck Mikrowelle
+
+## eten | Leckeres Essen
+Brot Käse Butter Suppe Apfel Birne Banane Möhre Kartoffel Spinat
+Blumenkohl Erbse Bohne Reis Nudel Fleisch Fisch Honig Torte Keks
+Pfannkuchen Bratwurst Sauerkraut Brezel Knödel Schnitzel Spätzle Spargel Erdbeere Marmelade
+
+## weer | Das Wetter
+Sonne Wind Sturm Nebel Schnee Hagel Gewitter Blitz Donner Regenbogen
+Wolke Frost Dürre Hitze Frühling Sommer Herbst Winter Brise Tau
+Glatteis Raureif Orkan Schauer Kälte Pfütze Eiszapfen Unwetter Thermometer Abendrot
+
+## reizen | Auf Reisen
+Koffer Reisepass Flugzeug Bahnhof Strand Hotel Landkarte Kompass Zelt Urlaub
+Meer Gebirge Insel Brücke Tunnel Bus Fahrrad Schiff Rucksack Fähre
+Taxi Gepäck Flughafen Postkarte Pension Wohnwagen Autobahn Kreuzfahrt Ausflug Andenken
+
+## land | Deutschland
+Berlin Hamburg München Köln Frankfurt Stuttgart Dresden Leipzig Bremen Nürnberg
+Heidelberg Lübeck Bayern Sachsen Schwarzwald Harz Rügen Sylt Rhein Elbe
+Donau Mosel Zugspitze Bodensee Ostsee Alpen Oktoberfest Lederhose Kuckucksuhr Fachwerk
+
+## familie | Familie
+Mutter Vater Oma Opa Schwester Bruder Nichte Neffe Tante Onkel
+Kind Baby Enkel Sohn Tochter Eltern Cousine Vetter Schwager Ehemann
+Ehefrau Geschwister Zwilling Verwandte Nachbar Freund Stammbaum Ehepaar
+
+## huis | Im Haus
+Tür Fenster Dach Treppe Boden Decke Stuhl Tisch Schrank Lampe
+Spiegel Vorhang Teppich Kissen Bett Gemälde Uhr Vase Badezimmer Keller
+Flur Balkon Schornstein Sofa Sessel Kamin Heizung Wohnzimmer Kommode Schlüssel
+
+## natuur | Natur
+Eiche Buche Tanne Birke Pappel Blatt Zweig Stamm Rinde Moos
+Pilz Farn Brombeere Kastanie Hügel Bach Fluss See Wiese Acker
+Heide Wald Feld Wasserfall Landschaft Quelle Tal Gipfel Felsen Höhle
+
+## muziek | Musik
+Klavier Gitarre Geige Flöte Trompete Trommel Harfe Orgel Cello Gesang
+Lied Chor Note Melodie Orchester Konzert Dirigent Akkordeon Klarinette Saxofon
+Posaune Kontrabass Oper Walzer Takt Sänger Pauke Zither
+
+## hobby | Hobbys
+Radfahren Schwimmen Wandern Stricken Malen Lesen Kochen Backen Gärtnern Angeln
+Tanzen Yoga Golf Tennis Schach Skat Puzzle Basteln Fotografie Häkeln
+Kegeln Singen Nähen Sammeln Rätsel Töpfern Billard Gymnastik Reiten Segeln
+
+## kleding | Kleidung
+Jacke Mantel Hose Rock Kleid Schal Mütze Socke Bluse Weste
+Hut Gürtel Hemd Anorak Kostüm Handschuh Pullover Krawatte Schlafanzug Badeanzug
+Stiefel Sandale Pantoffel Strumpf Taschentuch Halstuch Kappe Tracht Dirndl
+
+## feest | Feste und Feiern
+Weihnachten Ostern Silvester Neujahr Geburtstag Geschenk Girlande Luftballon Kerze Tannenbaum
+Osterei Feuerwerk Gäste Einladung Konfetti Tanz Karneval Hochzeit Jubiläum Feier
+Plätzchen Nikolaus Advent Laterne Maibaum Polterabend Kirmes Lametta Umzug Sekt

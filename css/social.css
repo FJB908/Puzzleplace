@@ -11,9 +11,9 @@
 .form-error { background: var(--danger-soft); border-radius: .8rem; padding: .75rem 1rem; }
 html[data-contrast="high"] .form-error { border: 3px solid var(--danger); }
 
-.pw-wrap { display: flex; align-items: stretch; gap: .25rem; }
-.pw-wrap .text-input { flex: 1; min-width: 0; margin-top: .15rem; }
-.pw-toggle { flex: none; min-height: var(--tap); padding: 0 .9rem; color: var(--text-muted); }
+.pw-wrap { display: flex; flex-wrap: wrap; align-items: stretch; gap: .25rem; }
+.pw-wrap .text-input { flex: 1 1 9rem; min-width: 0; margin-top: .15rem; }
+.pw-toggle { flex: 0 1 auto; min-height: var(--tap); padding: 0 .9rem; color: var(--text-muted); }
 .pw-toggle .icon { width: 1.3rem; height: 1.3rem; }
 .pw-suggest { align-self: flex-start; min-height: 2.8rem; padding-left: .2rem; margin-top: .1rem; }
 

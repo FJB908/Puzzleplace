@@ -3,7 +3,7 @@
 
 import { h, icon } from '../ui.js';
 import { t, getTaal, zetTaal } from '../i18n/index.js';
-import { TALEN } from '../shared/talen.js';
+import { TALEN, KLAAR } from '../shared/talen.js';
 import * as store from '../store.js';
 
 export function taalView({ eerste = false, klaar = null } = {}) {
@@ -14,7 +14,7 @@ export function taalView({ eerste = false, klaar = null } = {}) {
     await zetTaal(id);                                        // de rest van de app tekent zichzelf opnieuw
     location.hash = '#/instellingen';
   };
-  const lijst = Object.entries(TALEN).sort(([, a], [, b]) => a.english.localeCompare(b.english, 'en'));
+  const lijst = Object.entries(TALEN).filter(([id]) => KLAAR.includes(id)).sort(([, a], [, b]) => a.english.localeCompare(b.english, 'en'));
   const node = h('div', { class: 'view' },
     h('header', { class: 'page-header' },
       !eerste ? h('a', { class: 'btn btn-quiet back', href: '#/instellingen' }, icon('back'), t('common.back')) : null,

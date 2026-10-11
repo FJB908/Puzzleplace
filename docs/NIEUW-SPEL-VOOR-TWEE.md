@@ -30,7 +30,7 @@ Bij Wordfeud zijn dat de bonusvakjes en je rek; bij Woordtuin zijn dat de vakjes
 
 ## De regels
 
-1. **Bord.** 6×6 letters volgens de Nederlandse letterverdeling, bij het begin gecontroleerd (genoeg woorden, geen onspeelbaar bord).
+1. **Bord.** 6×6 letters volgens de letterverdeling van de taal van de partij (bij het Nederlands: de Nederlandse), bij het begin gecontroleerd (genoeg woorden, geen onspeelbaar bord).
 2. **Je beurt.** Tik of veeg een woord van 3 tot 7 letters over aangrenzende vakjes (ook schuin, elk vakje maar één keer per woord).
    Het woord moet in de woordenlijst staan en mag in deze partij nog niet gespeeld zijn, door niemand.
 3. **Kleuren.** De vakjes van je woord worden van jou. Behalve **beschermde** vakjes: een vakje dat aan alle kanten (links, rechts,
@@ -71,9 +71,9 @@ richting, geen garantie* (wat er nog met echte spelers getest moet worden staat 
 - **Nooit wachten op een vriend.** Er is een **computertegenstander** in vier sterktes (dezelfde bot als in de metingen), zodat je altijd kunt spelen en de regels kunt leren.
 - **Een eigen stand.** Onder elke vriend: "Jullie staan 3–2." Geen ranglijst met vreemden.
 
-## De woordenlijst: gewoon Nederlands, zo compleet mogelijk
+## De woordenlijst: gewone woorden, zo compleet mogelijk (in elke taal)
 
-Een woordspel staat of valt met zijn woordenlijst, en die heb ik twee keer moeten bouwen:
+Een woordspel staat of valt met zijn woordenlijst, en die heb ik voor het Nederlands twee keer moeten bouwen (daarna is dezelfde werkwijze voor alle andere talen gebruikt, zie onder):
 
 1. **Eerste versie: te streng.** Alleen stamwoorden, met de hand uitgezocht (±3.600 woorden). Daardoor werden echte woorden geweigerd:
    "zeg", "zegt", "hoor", "hoes", "moed", "doorn", "smit". Dat was fout: wie een gewoon Nederlands woord speelt, moet dat woord altijd kunnen spelen.
@@ -86,17 +86,27 @@ Wat er wél uit gaat, en hoe:
 - **Woorden die niemand gebruikt** ("naoogde", "vimmen"): ze moeten in ondertitels en in het wordfreq-bestand (een mix van boeken, nieuws,
   Wikipedia en web) voorkomen.
 - **Engelse woorden** (ondertitels zitten er vol mee: "airport", "choice", "device"): de computer vergelijkt hoe gewoon een woord in het Engels en in het Nederlands is
-  (`tools/make-woordtuin-zipf.py`). Echt Nederlandse woorden die vaak Engels voorkomen ("game", "bad", "box") staan op `tools/woordtuin/engels-maar-nederlands.txt`.
-- **Namen, afkortingen en beledigingen die groepen kwetsen** (`tools/woordtuin/blokkeerlijst.txt`, met de hand beoordeeld, ±760 woorden).
+  (`tools/woordenlijst/extract.py`). Echt Nederlandse woorden die vaak Engels voorkomen ("game", "bad", "box") staan op `tools/woordtuin/nl/engels-maar-lokaal.txt`.
+- **Namen, afkortingen en beledigingen die groepen kwetsen** (`tools/woordtuin/nl/blokkeerlijst.txt`, met de hand beoordeeld, ±760 woorden).
 - **Grove woorden** ("hoer", "kut", "kloot") zijn gewoon Nederlands, dus als een speler ze speelt tellen ze mee. Maar de computer speelt ze **nooit** en ze komen niet
-  in een tip (`tools/woordtuin/ruw.txt`). Zo zie je ze alleen als je ze zelf speelt.
+  in een tip (`tools/woordtuin/nl/ruw.txt`). Zo zie je ze alleen als je ze zelf speelt.
 
 Twee soorten woorden dus: *alles wat meetelt* (ruim, zodat een gewoon woord nooit wordt geweigerd) en *alledaags* (±5.900: vaak voorkomend en netjes;
 alleen die speelt de computer en alleen die tellen mee om te bepalen of een bord een goed bord is). Heeft de computer geen alledaags woord meer, dan slaat hij over.
 
-Wil je een woord toevoegen of weigeren? Zet het op `toegestaan.txt`, `blokkeerlijst.txt` of `ruw.txt` en draai
-`node tools/make-woordtuin-lijst.mjs <map met bronbestanden>` (de bronbestanden en hoe je ze maakt staan boven in dat bestand). Dat maakt
-`js/games/woordtuin/woorden.js` (±115 kB).
+Wil je een woord toevoegen of weigeren? Zet het op `toegestaan.txt`, `blokkeerlijst.txt`, `ruw.txt` of `rar.txt` in `tools/woordtuin/<taal>/` en draai
+`node tools/woordenlijst/bouw.mjs <taal> <map met bronbestanden>` (de bronbestanden haal je met `tools/woordenlijst/haal-bronnen.sh`; zie
+[`tools/woordenlijst/bronnen.md`](../tools/woordenlijst/bronnen.md)). Dat maakt `js/games/woordtuin/talen/<taal>.js` (Nederlands ±115 kB).
+
+### In elke taal
+
+Woordtuin heeft een woordenlijst per taal (24 talen, zie [`TALEN.md`](TALEN.md)), gemaakt met dezelfde stappen en dezelfde strengheid, naar de grootte van het
+ondertitelkorpus van die taal (zodat "komt minstens 1 keer per 13 miljoen woorden voor" in elke taal hetzelfde betekent). Elke lijst is daarna door een
+beoordelaar met kennis van de taal nagelopen (`tools/woordenlijst/BEOORDELEN.md`) en door een tweede, onafhankelijke steekproef gecontroleerd. Een partij heeft **één taal**
+(`state.lang`, bij een partij met een vriend `config.lang`; partijen van voor de meertaligheid zijn Nederlands) en gebruikt alleen het woordenboek van die taal;
+de app laadt dat pas als het nodig is, de server ook (`prepare` in `server/games/woordtuin.mjs`). Het bord wordt getrokken uit de letters van die taal
+(`ZAK`: zo vaak als ze in de alledaagse woorden voorkomen) en moet er natuurlijk uitzien (een gewoon aandeel klinkers). Typen: wat je intikt wordt gevouwen
+(accenten tellen niet mee, "ß" is "ss", Griekse tonos vallen weg), zie `typInvoer` in `js/shared/talen.js`.
 
 Opnieuw gemeten met deze lijst (6×6, 60 partijen, bots): ±9,6 zetten per speler, ±230 alledaagse woorden (±440 in totaal) aan het begin van een
 partij, de sterkste computer wint 56–4 van de gemiddelde, en de beginner wint ongeveer de helft van de beslissende partijen. Het spel blijft dus
@@ -120,7 +130,7 @@ Gemeten met 40 partijen per rij (computer tegen computer, beginner wisselt): Mak
 | Onderdeel | Waar |
 |---|---|
 | Spelregels (één module voor de app én de server) | `js/games/woordtuin/engine.js` |
-| Woordenlijst (gegenereerd) en de scripts die hem maken | `js/games/woordtuin/woorden.js`, `tools/make-woordtuin-lijst.mjs`, `tools/make-woordtuin-zipf.py`, `tools/woordtuin/` |
+| Woordenlijsten per taal (gegenereerd), de lader en de scripts die ze maken | `js/games/woordtuin/talen/<taal>.js`, `woordenboek.js`, `schaal.js`, `tools/woordenlijst/`, `tools/woordtuin/<taal>/` |
 | Bord (vegen, tikken, toetsenbord) en scherm (stand, woord, knoppen, typen, tip) | `js/games/woordtuin/bord.js`, `paneel.js`, `css/games/woordtuin.css` |
 | Tegen de computer (niveaus makkelijk tot extreem, "Zet terug", tips) | `js/games/woordtuin/woordtuin.js` |
 | Tegen een vriend: de server | `server/games/woordtuin.mjs` (past in het beurtsysteem van `docs/ACCOUNTS.md`) |
