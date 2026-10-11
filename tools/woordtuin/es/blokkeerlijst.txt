@@ -1,0 +1,18 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+abc adan africa agustin aja ale ali alonso amador ami andes anti apolo armenia
+artico augusta augusto aveces barbara batista bel belen ben benito bla boom bosnia brasil
+bretana bruce bruno camilo caracas caribe carla carmen castro celia cha charles che china
+cho cid cisco claudia congo corea cristo cuba damasco dante dela depto der diana
+diego din dina dom enrique escobar escocia esteban estonia eta etc fausto ferry gaga
+gales galileo garcia gaza genesis gilbert gob guido guinea habana helena henry holanda india
+irlanda isa japon java jorge juan judas juliana junior lazaro lego libia lidia lisa
+lucia lucifer lucio luis luisa malasia manolo manuela marco marcos maria mariana mariano marica
+maricon marta martin martina mateo meca medina mega milan miranda moises moro moros moya
+nacho nasa navarro newton nobel noruega nova ortega pal pamela panama pancho paris pascal
+paula paulo pedro pepe peralta pete pol pos pro pum qui quijote rae rafa
+ramon reg rita rivera rodrigo roma romeo roque ros rosita sabina salomon san sancho
+sao sen serbia silva simon siria sor sos soto sra sres sta suiza susana
+tac tao tel teresa tesla tito ucrania val vargas vega vegas victor vita vito
+weber yang york zapata
