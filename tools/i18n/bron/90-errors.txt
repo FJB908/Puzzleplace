@@ -67,3 +67,4 @@ err.move.noFresh | Every word must colour at least one open square. Look for a w
 err.mailCodeWrong | The code is not correct, or it has expired. Ask for a new code. | De code klopt niet of is verlopen. Vraag een nieuwe code aan.
 err.mailCodeNeeded | Enter the code from the email. | Vul de code uit de e-mail in.
 err.mailFailed | We could not send the email just now. Please try again in a little while. | De e-mail kon nu niet worden verstuurd. Probeer het zo nog eens.
+err.noEmail | This account has no email address, so we cannot send a code. | Dit account heeft geen e-mailadres, dus we kunnen geen code sturen.

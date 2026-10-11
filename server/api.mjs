@@ -172,23 +172,30 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     return { body: { token, user: selfView(user) } };
   }
 
+  // Een code per e-mail sturen naar het adres van je account (ingelogd): daarmee kies je een nieuw wachtwoord zonder je oude te kennen
+  // (of voeg je er een toe als je via Facebook bent gekomen en nog geen wachtwoord hebt).
   async function changePasswordCode(req) {
     const { user } = auth(req);
     limit(req, 'pw-code', 10, 3600_000);
-    if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
-    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'currentPasswordWrong');
+    if (!user.email) fail(400, 'email', 'noEmail');
     await stuurCode(user, 'change', req.body.taal);
     return { body: { ok: true } };
   }
 
+  // Wachtwoord veranderen: met je huidige wachtwoord, of met een code die per e-mail kwam
   async function changePassword(req) {
     const { user, key } = auth(req);
     limit(req, 'pw', 10, 3600_000);
-    if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
-    if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'currentPasswordWrong');
-    const nieuw = cleanPassword(req.body.newPassword, 'nieuw');
-    controleerCode(user, 'change', req.body.emailCode);                // de code die per e-mail kwam
-    user.pass = await hashSecret(nieuw);
+    const metCode = !!String(req.body.emailCode ?? '').trim() || !req.body.password;
+    if (metCode) {
+      const nieuw = cleanPassword(req.body.newPassword, 'nieuw');
+      controleerCode(user, 'change', req.body.emailCode);
+      user.pass = await hashSecret(nieuw);
+    } else {
+      if (!user.pass) fail(400, 'wachtwoord', 'noPasswordFacebook');
+      if (!(await verifySecret(String(req.body.password ?? ''), user.pass))) fail(401, 'wachtwoord', 'currentPasswordWrong');
+      user.pass = await hashSecret(cleanPassword(req.body.newPassword, 'nieuw'));
+    }
     revokeSessions(user.id, key);
     db.save();
     return { body: { ok: true } };

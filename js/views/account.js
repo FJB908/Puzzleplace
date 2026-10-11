@@ -240,21 +240,31 @@ function overview(app) {
   return page(t('account.title'), node, { cleanup: s.off });
 }
 
-// Wachtwoord veranderen: eerst het huidige en het nieuwe wachtwoord, dan komt er een code per e-mail die je invult om het af te ronden
+// Wachtwoord veranderen: met je huidige wachtwoord, of (als je dat niet weet) met een code die we per e-mail sturen
 function changePasswordView() {
-  const slot = h('div', { class: 'stack' });
-  const f = { oud: passwordField({ label: t('account.currentPassword'), name: 'wachtwoord' }), nieuw: passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true }) };
-  const stap2 = (oud, nieuw) => {
-    const code = field({ label: t('account.mail.codeLabel'), name: 'code', autocomplete: 'one-time-code', hint: t('account.mail.codeHint'), autofocus: true });
-    slot.replaceChildren(h('p', { class: 'notice', role: 'status' }, t('account.mail.sentChange', { email: auth.getUser()?.email || '' })),
-      form({ fields: [code], submitLabel: t('account.changePassword'), onSubmit: async (v) => {
-        await auth.changePassword(oud, nieuw, v.code);
-        await choiceDialog({ title: t('account.changed.title'), text: t('account.changed.text'), actions: [{ label: t('account.changed.ok'), value: true, primary: true, autofocus: true }] });
-        location.hash = '#/account';
-      } }));
+  const klaar = async () => {
+    await choiceDialog({ title: t('account.changed.title'), text: t('account.changed.text'), actions: [{ label: t('account.changed.ok'), value: true, primary: true, autofocus: true }] });
+    location.hash = '#/account';
   };
-  slot.append(form({ fields: [f.oud, f.nieuw], submitLabel: t('account.mail.send'), onSubmit: async (v) => { await auth.changePasswordCode(v.wachtwoord); stap2(v.wachtwoord, v.nieuw); } }));
-  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.mailText'), '#/account'), slot));
+  const f = { oud: passwordField({ label: t('account.currentPassword'), name: 'wachtwoord' }), nieuw: passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true }) };
+  const metWachtwoord = form({ fields: [f.oud, f.nieuw], submitLabel: t('account.changePassword'), onSubmit: async (v) => { await auth.changePassword(v.wachtwoord, v.nieuw); await klaar(); } });
+  const mailBlok = h('section', { class: 'card stack' });
+  const knop = () => {
+    const melding = h('p', { class: 'form-error', role: 'alert', hidden: true });
+    const b = h('button', { type: 'button', class: 'btn', onclick: async () => {
+      b.disabled = true; melding.hidden = true;
+      try { await auth.changePasswordCode(); stap2(); } catch (e) { melding.textContent = foutTekst(e); melding.hidden = false; b.disabled = false; }
+    } }, icon('mail'), t('account.mail.send'));
+    mailBlok.replaceChildren(h('p', {}, t('account.changePassword.mailText')), b, melding);
+  };
+  const stap2 = () => {
+    const code = field({ label: t('account.mail.codeLabel'), name: 'code', autocomplete: 'one-time-code', hint: t('account.mail.codeHint'), autofocus: true });
+    const nieuw = passwordField({ label: t('account.newPasswordLabel'), name: 'nieuw', autocomplete: 'new-password', suggest: true });
+    mailBlok.replaceChildren(h('p', { class: 'notice', role: 'status' }, t('account.mail.sentChange', { email: auth.getUser()?.email || '' })),
+      form({ fields: [code, nieuw], submitLabel: t('account.changePassword'), onSubmit: async (v) => { await auth.changePassword('', v.nieuw, v.code); await klaar(); } }));
+  };
+  knop();
+  return page(t('account.changePassword'), h('div', { class: 'view' }, header(t('account.changePassword'), t('account.changePassword.text'), '#/account'), metWachtwoord, mailBlok));
 }
 
 function deleteView() {

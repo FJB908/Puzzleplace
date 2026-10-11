@@ -511,7 +511,7 @@ export default {
   "account.forgot.mailText": "Wyślemy kod na Twój adres e-mail. Za pomocą tego kodu ustawisz nowe hasło.",
   "account.forgot.useRecovery": "Mam kod odzyskiwania",
   "account.forgot.useMail": "Wolę kod e-mailem",
-  "account.changePassword.mailText": "Dla bezpieczeństwa konta najpierw wyślemy kod na Twój adres e-mail. Wpisz go, aby dokończyć.",
+  "account.changePassword.mailText": "Nie znasz obecnego hasła? Możemy zamiast tego wysłać Ci kod e-mailem. Za pomocą tego kodu ustawisz nowe hasło.",
   "common.yes": "Tak",
   "common.no": "Nie",
   "common.fine": "W porządku",
@@ -664,4 +664,5 @@ export default {
   "err.mailCodeWrong": "Kod jest nieprawidłowy lub wygasł. Poproś o nowy kod.",
   "err.mailCodeNeeded": "Wpisz kod z e-maila.",
   "err.mailFailed": "Nie udało się teraz wysłać e-maila. Spróbuj ponownie za chwilę.",
+  "err.noEmail": "To konto nie ma adresu e-mail, więc nie możemy wysłać kodu.",
 };

@@ -77,7 +77,8 @@ export async function signOut() {
 }
 
 export async function rename(name) { const r = await api('PATCH', '/api/me', { name }); set(r.user); return r.user; }
-export const changePassword = (password, newPassword, emailCode) => api('POST', '/api/me/password', { password, newPassword, emailCode });
+// Met je huidige wachtwoord, of (zonder wachtwoord) met de code die per e-mail kwam
+export const changePassword = (password, newPassword, emailCode) => api('POST', '/api/me/password', { password: password || undefined, newPassword, emailCode });
 // Een code per e-mail: voor "wachtwoord vergeten" (zonder inloggen) en om je wachtwoord te veranderen (ingelogd)
 export const forgotMail = (email) => api('POST', '/api/forgot', { email, taal: getTaal() });
 export async function resetMail({ email, code, password }) {
@@ -86,7 +87,7 @@ export async function resetMail({ email, code, password }) {
   await refresh();
   return r.user;
 }
-export const changePasswordCode = (password) => api('POST', '/api/me/password/code', { password, taal: getTaal() });
+export const changePasswordCode = () => api('POST', '/api/me/password/code', { taal: getTaal() });
 export async function newFriendCode() { const r = await api('POST', '/api/me/code', {}); set(r.user); return r.user.code; }
 export async function deleteAccount(password) { await api('DELETE', '/api/me', { password }); setToken(''); set(null); }
 

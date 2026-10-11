@@ -491,7 +491,7 @@ export default {
   "account.forgot.mailText": "We sturen een code naar je e-mailadres. Met die code kies je een nieuw wachtwoord.",
   "account.forgot.useRecovery": "Ik heb een herstelcode",
   "account.forgot.useMail": "Liever een code per e-mail",
-  "account.changePassword.mailText": "Voor de veiligheid sturen we eerst een code naar je e-mailadres. Die vul je in om het af te ronden.",
+  "account.changePassword.mailText": "Weet je je huidige wachtwoord niet? We kunnen je ook een code mailen. Met die code kies je een nieuw wachtwoord.",
   "common.yes": "Ja",
   "common.no": "Nee",
   "common.fine": "Prima",
@@ -641,4 +641,5 @@ export default {
   "err.mailCodeWrong": "De code klopt niet of is verlopen. Vraag een nieuwe code aan.",
   "err.mailCodeNeeded": "Vul de code uit de e-mail in.",
   "err.mailFailed": "De e-mail kon nu niet worden verstuurd. Probeer het zo nog eens.",
+  "err.noEmail": "Dit account heeft geen e-mailadres, dus we kunnen geen code sturen.",
 };

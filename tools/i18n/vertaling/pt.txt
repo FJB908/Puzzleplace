@@ -638,4 +638,5 @@ account.mail.codeHint | O código tem 8 caracteres, como K7P4-QM2X.
 account.forgot.mailText | Enviamos um código para o seu endereço de e-mail. Com esse código escolhe uma nova palavra-passe.
 account.forgot.useRecovery | Tenho um código de recuperação
 account.forgot.useMail | Prefiro um código por e-mail
-account.changePassword.mailText | Para manter a sua conta segura, enviamos primeiro um código para o seu endereço de e-mail. Introduza-o para concluir.
+account.changePassword.mailText | Não sabe a palavra-passe atual? Podemos enviar-lhe um código por e-mail. Com esse código escolhe uma nova palavra-passe.
+err.noEmail | Esta conta não tem endereço de e-mail, por isso não podemos enviar um código.

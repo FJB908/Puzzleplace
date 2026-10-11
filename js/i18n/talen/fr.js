@@ -491,7 +491,7 @@ export default {
   "account.forgot.mailText": "Nous envoyons un code à votre adresse e-mail. Avec ce code, vous choisissez un nouveau mot de passe.",
   "account.forgot.useRecovery": "J’ai un code de récupération",
   "account.forgot.useMail": "Plutôt un code par e-mail",
-  "account.changePassword.mailText": "Pour la sécurité de votre compte, nous envoyons d’abord un code à votre adresse e-mail. Vous le saisissez pour terminer.",
+  "account.changePassword.mailText": "Vous ne connaissez plus votre mot de passe actuel ? Nous pouvons vous envoyer un code par e-mail. Avec ce code, vous choisissez un nouveau mot de passe.",
   "common.yes": "Oui",
   "common.no": "Non",
   "common.fine": "D'accord",
@@ -641,4 +641,5 @@ export default {
   "err.mailCodeWrong": "Le code est incorrect ou a expiré. Demandez un nouveau code.",
   "err.mailCodeNeeded": "Saisissez le code reçu par e-mail.",
   "err.mailFailed": "L’e-mail n’a pas pu être envoyé pour le moment. Réessayez dans quelques instants.",
+  "err.noEmail": "Ce compte n’a pas d’adresse e-mail, nous ne pouvons donc pas envoyer de code.",
 };
