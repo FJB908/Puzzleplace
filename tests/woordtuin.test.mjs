@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { laadWoordenboek } from '../js/games/woordtuin/woordenboek.js';
 import {
-  SIZE, newGame, makeBoard, checkMove, applyMove, legalMoves, hasMove, isProtected, counts, result, pathsFor, botMove, tip,
+  SIZE, newGame, makeBoard, checkMove, applyMove, legalMoves, hasMove, hasEasyMove, isProtected, counts, result, pathsFor, botMove, tip,
   geefDoor, isWord, MoveError, makeRng, NIVEAUS,
 } from '../js/games/woordtuin/engine.js';
 
@@ -137,7 +137,7 @@ test('een hele partij: bots spelen tot het einde, de beurt wisselt, niets gaat m
     assert.equal(r.scores[1] + r.scores[2] + r.open, 36);
     assert.ok(n >= 8 && n <= 50, `aantal zetten ${n}`);
     assert.equal(new Set(s.played).size, s.played.length, 'geen woord twee keer');
-    assert.ok(s.turn === null && !hasMove(s, 1) || c[0] === 0, 'afgelopen betekent: alles gekleurd of niemand kan meer');
+    assert.ok(c[0] === 0 || (!hasEasyMove(s, 1) && !hasEasyMove(s, 2)), 'afgelopen betekent: alles gekleurd of niemand kan nog een gewoon woord maken');
   }
 });
 

@@ -271,7 +271,7 @@ orkiestra | Duży zespół muzyków | 1
 koncert | Występ muzyczny | 1
 opera | Spektakl, w którym się śpiewa | 1
 walc | Taniec w rytmie na trzy czwarte | 2
-polka | Szybki taniec czeski | 2
+krakowiak | Żywy taniec ludowy z okolic stolicy dawnych królów | 3
 taniec | Poruszasz się do muzyki | 1
 piosenka | Krótki utwór ze słowami | 1
 melodia | Układ dźwięków, który się nuci | 1
@@ -336,7 +336,7 @@ pisanka | Kolorowe jajko na Wielkanoc | 1
 wigilia | Wieczór przed Bożym Narodzeniem | 1
 karnawał | Czas balów przed postem | 2
 sylwester | Ostatni dzień roku | 1
-imieniny | Święto osoby noszącej dane imię | 2
+imieniny | Dzień świętowania według kalendarza, jak urodziny | 2
 jubileusz | Uroczysta rocznica | 2
 szampan | Musujący trunek na Nowy Rok | 2
 bukiet | Kwiaty związane razem w prezencie | 1
@@ -454,7 +454,7 @@ tablica | W szkole pisze się na niej kredą | 1
 pędzel | Malujesz nim obraz | 1
 farba | Kolorowa ciecz do malowania | 1
 nożyczki | Tną papier | 1
-klej | Skleja papier | 1
+klej | Lepka masa do łączenia papieru | 1
 wiadro | Nosisz w nim wodę | 1
 miotła | Zamiatasz nią podłogę | 1
 mydło | Myje ręce | 1
@@ -511,7 +511,7 @@ podwórko | Placyk przed domem | 2
 studnia | Głęboki dół z wodą | 2
 stodoła | Wiejski budynek na siano | 2
 pastuch | Pilnuje krów na łące | 2
-ul | Dom pszczół | 2
+pasieka | Miejsce z wieloma domkami pszczół | 2
 gniazdo | Ptasie domostwo z gałązek | 2
 kurnik | Dom dla kur | 2
 stajnia | Tu mieszkają konie | 2

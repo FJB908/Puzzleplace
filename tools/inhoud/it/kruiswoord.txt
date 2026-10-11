@@ -1,0 +1,439 @@
+# Cruciverba in italiano. Per riga:  risposta | definizione | livello   (1 = conosciuta, 2 = meno conosciuta, 3 = impegnativa). Vedi tools/inhoud/maak.mjs.
+cane | Il miglior amico dell'uomo, abbaia | 1
+gatto | Fa le fusa e dà la caccia ai topi | 1
+mucca | Animale che dà il latte e muggisce | 1
+pecora | Animale che dà la lana e bela | 1
+cavallo | Animale in sella, galoppa e nitrisce | 1
+capra | Animale da latte che sale sulle rocce | 1
+maiale | Animale da fattoria che grufola | 1
+gallina | Fa le uova nel pollaio | 1
+anatra | Uccello che nuota e fa qua qua | 1
+oca | Uccello da cortile dal lungo collo bianco | 2
+coniglio | Orecchie lunghe, vive spesso in gabbia | 1
+leone | Il re della savana con la criniera | 1
+tigre | Grande felino dal manto a strisce | 1
+elefante | Ha la proboscide e le grandi zanne | 1
+giraffa | Ha il collo più lungo di tutti | 1
+scimmia | Salta tra gli alberi e mangia banane | 1
+orso | Dorme tutto l'inverno nella tana | 1
+lupo | Ulula alla luna, nemico di Cappuccetto Rosso | 1
+volpe | Animale astuto dalla coda folta | 1
+cervo | Ha le corna ramificate nel bosco | 2
+topo | Piccolo roditore che teme il gatto | 1
+rana | Gracida e salta nello stagno | 1
+farfalla | Insetto dalle ali colorate | 1
+ape | Produce il miele nell'alveare | 1
+ragno | Animale a otto zampe che tesse la tela | 1
+formica | Piccolo insetto che lavora in fila | 1
+delfino | Mammifero marino molto intelligente | 2
+balena | Il più grande mammifero del mare | 1
+tartaruga | Ha un guscio e cammina lenta | 1
+cigno | Elegante uccello bianco dei laghi | 1
+rondine | Uccello che torna in primavera | 1
+pappagallo | Uccello colorato che imita le parole | 1
+lumaca | Porta la casa sulla schiena | 1
+zanzara | Insetto che punge d'estate | 1
+cammello | Ha le gobbe e vive nel deserto | 1
+pinguino | Uccello del Polo Sud che non vola | 1
+asino | Animale da soma dai lunghi orecchi | 1
+colomba | Uccello bianco simbolo di pace | 1
+cinghiale | Selvatico dalle zanne che vive nei boschi | 2
+lucertola | Piccolo rettile che prende il sole sui muri | 2
+pipistrello | Mammifero che vola di notte | 2
+scoiattolo | Roditore degli alberi che raccoglie ghiande | 2
+istrice | Roditore con aculei neri e bianchi | 3
+mulo | Incrocio tra un asino e una cavalla | 3
+castoro | Roditore costruttore di dighe | 3
+pane | Si fa col grano e si cuoce nel forno | 1
+pasta | Spaghetti e penne sono di questo tipo | 1
+pizza | Disco di pasta con pomodoro e mozzarella | 1
+formaggio | Si ricava dal latte, come il pecorino | 1
+latte | Bevanda bianca della mucca | 1
+burro | Si ottiene dalla panna ed è giallo | 1
+uovo | Lo depone la gallina nel nido | 1
+miele | Dolce prodotto dalle api | 1
+mela | Frutto tondo, rosso o verde, dell'albero | 1
+pera | Frutto dolce a forma di goccia | 1
+arancia | Agrume dolce per la spremuta | 1
+limone | Agrume giallo e aspro | 1
+fragola | Piccolo frutto rosso con la panna | 1
+pesca | Frutto estivo dalla buccia vellutata | 1
+uva | Cresce a grappoli sulla vite | 1
+banana | Frutto giallo e curvo | 1
+albicocca | Frutto estivo arancione con nocciolo | 2
+carota | Ortaggio arancione, buono per la vista | 1
+patata | Tubero che si frigge o si lessa | 1
+pomodoro | Ortaggio rosso della salsa | 1
+cipolla | Ortaggio che fa piangere quando si taglia | 1
+aglio | Spicchi profumati per il soffritto | 2
+insalata | Foglie verdi condite con olio e aceto | 1
+riso | Cereale bianco che cresce nell'acqua | 1
+farina | Polvere bianca per fare il pane | 1
+zucchero | Dolcifica il caffè | 1
+sale | Condimento bianco che insaporisce | 1
+olio | Si ricava dalle olive | 1
+caffè | Bevanda scura del mattino | 1
+vino | Bevanda rossa o bianca fatta con l'uva | 1
+acqua | Si beve e scorre nei fiumi | 1
+gelato | Dolce freddo al cono o in coppetta | 1
+torta | Dolce da compleanno con le candeline | 1
+biscotto | Dolce secco da inzuppare nel latte | 1
+cioccolato | Dolce marrone fatto con il cacao | 1
+marmellata | Confettura di frutta da spalmare sul pane | 1
+minestrone | Zuppa di verdure miste | 1
+polenta | Piatto giallo di farina di mais | 1
+risotto | Primo cremoso allo zafferano o ai funghi | 2
+lasagne | Pasta al forno a strati con ragù | 1
+spaghetti | Pasta lunga e sottile col sugo | 1
+tortellini | Pasta ripiena in brodo tipica dell'Emilia | 2
+prosciutto | Salume rosa, crudo o cotto | 1
+salame | Insaccato stagionato da affettare | 1
+parmigiano | Formaggio duro da grattugiare sulla pasta | 1
+mozzarella | Formaggio fresco e bianco della pizza | 1
+panettone | Dolce lievitato del Natale milanese | 2
+carne | Bistecche e arrosti sono fatti di questo | 1
+pollo | Volatile arrosto della domenica | 1
+bistecca | Fetta di carne da cuocere alla griglia | 1
+noce | Frutto secco con il guscio duro | 1
+cannolo | Dolce siciliano con crema di ricotta | 3
+vongola | Piccolo mollusco bivalve per gli spaghetti | 3
+casa | Qui si abita con la famiglia | 1
+porta | Si apre e si chiude per entrare | 1
+finestra | Da qui si guarda fuori ed entra la luce | 1
+tetto | Copre la casa dalla pioggia | 1
+muro | Parete di mattoni | 2
+scala | Si sale gradino dopo gradino | 1
+camera | Stanza dove si dorme | 1
+letto | Ci si dorme di notte | 1
+cucina | Stanza dove si prepara da mangiare | 1
+bagno | Stanza con vasca o doccia | 1
+salotto | Stanza con divano e poltrone per gli ospiti | 1
+divano | Comodo sedile per più persone | 1
+poltrona | Sedile imbottito con i braccioli | 1
+sedia | Ha quattro gambe e uno schienale | 1
+tavolo | Piano su cui si apparecchia per il pranzo | 1
+armadio | Mobile per appendere i vestiti | 1
+cassetto | Parte scorrevole del comò | 2
+specchio | Ti mostra la tua immagine | 1
+lampada | Fa luce sul comodino | 1
+tappeto | Si stende sul pavimento | 1
+tenda | Si tira davanti alla finestra | 1
+cuscino | Morbido appoggio per la testa | 1
+coperta | La si tira su quando fa freddo a letto | 1
+materasso | Base morbida su cui si dorme | 2
+frigorifero | Conserva il cibo al freddo | 1
+forno | Si accende per cuocere il pane | 1
+lavatrice | Elettrodomestico con oblò per i panni sporchi | 1
+pentola | Si usa per bollire la pasta | 1
+padella | Serve per friggere le uova | 1
+cucchiaio | Posata per la minestra | 1
+forchetta | Posata con le punte per infilzare | 1
+coltello | Posata che taglia | 1
+piatto | Ci si serve il cibo a tavola | 1
+bicchiere | Ci si versa il vino o l'acqua | 1
+tazza | Per il tè o il latte caldo | 1
+ombrello | Ripara dalla pioggia | 1
+chiave | Apre la serratura | 1
+orologio | Al polso o sul muro segna le ore | 1
+asciugamano | Telo morbido dopo il bagno | 2
+camino | Dove brucia la legna d'inverno | 1
+giardino | Spazio verde accanto alla casa | 1
+cantina | Locale sotto casa dove si tiene il vino | 2
+martello | Attrezzo per piantare chiodi | 1
+trapano | Attrezzo elettrico che fa i buchi | 3
+cacciavite | Attrezzo a punta piatta o a croce | 3
+caldaia | Scalda l'acqua e i termosifoni | 3
+sole | Brilla in cielo di giorno | 1
+luna | Illumina il cielo di notte | 1
+stella | Puntino luminoso nel cielo notturno | 1
+nuvola | Bianca o grigia, fluttua in cielo | 1
+pioggia | Cade dalle nuvole in gocce | 1
+neve | Fiocchi bianchi d'inverno | 1
+vento | Muove le foglie degli alberi | 1
+nebbia | Riduce la visibilità sulle strade | 1
+temporale | Tuoni, lampi e acquazzone | 1
+fulmine | Scarica elettrica che cade dalle nuvole | 2
+tuono | Il fragore dopo il lampo | 1
+arcobaleno | Fascia di sette colori dopo la pioggia | 1
+grandine | Chicchi di ghiaccio che cadono dal cielo | 2
+ghiaccio | Acqua diventata dura per il freddo | 1
+estate | La stagione più calda | 1
+inverno | La stagione più fredda | 1
+autunno | Stagione in cui cadono le foglie | 1
+primavera | Stagione in cui sbocciano i fiori | 1
+alba | Il sorgere del sole | 1
+tramonto | Il sole scompare all'orizzonte | 1
+mare | Distesa d'acqua salata | 1
+lago | Specchio d'acqua circondato dalla terra | 1
+fiume | Corso d'acqua che sfocia nel mare | 1
+collina | Rilievo meno alto della montagna | 1
+montagna | Alta vetta rocciosa e innevata | 1
+valle | Zona bassa tra due monti | 1
+bosco | Terreno fitto di alberi | 1
+prato | Distesa d'erba verde | 1
+albero | Ha tronco, rami e foglie | 1
+foglia | Cade in autunno dal ramo | 1
+fiore | Ha petali colorati e profumo | 1
+sabbia | Granelli fini sulla spiaggia | 1
+spiaggia | Riva sabbiosa del mare | 1
+isola | Terra circondata dall'acqua | 1
+deserto | Distesa di sabbia con pochissima acqua | 1
+cascata | Salto dell'acqua da un'altura | 2
+grotta | Cavità naturale nella roccia | 2
+roccia | Dura massa di pietra | 2
+cielo | Azzurro sopra le nostre teste | 1
+foresta | Grande bosco molto fitto | 2
+stagno | Piccola pozza d'acqua ferma | 2
+vulcano | Montagna che sputa lava | 2
+palude | Terreno allagato con acqua stagnante | 3
+rosa | Fiore con le spine | 1
+tulipano | Fiore olandese a forma di calice | 1
+margherita | Fiore bianco dal cuore giallo | 1
+girasole | Grande fiore giallo con tanti semi | 1
+giglio | Fiore bianco simbolo di purezza | 2
+orchidea | Fiore tropicale elegante | 2
+garofano | Fiore profumato, spesso rosso | 2
+lavanda | Pianta violetta che profuma la biancheria | 2
+mimosa | Fiore giallo della festa della donna | 2
+papavero | Fiore rosso dei campi di grano | 2
+quercia | Albero che produce le ghiande | 2
+pino | Albero con aghi e pigne | 1
+abete | Albero di Natale classico | 1
+ulivo | Albero dell'olio e della pace | 1
+cipresso | Albero alto e snello delle colline toscane | 2
+salice | Albero dai rami penduli presso l'acqua | 2
+siepe | Fila di arbusti che delimita il giardino | 2
+orto | Dove si coltivano le verdure | 1
+cactus | Pianta spinosa del deserto | 2
+edera | Pianta rampicante sempreverde | 2
+felce | Pianta del sottobosco con grandi fronde | 3
+betulla | Albero dal tronco bianco | 3
+madre | La genitrice di una persona | 1
+padre | Il genitore maschio di un figlio | 1
+figlio | Lo è un bambino rispetto ai genitori | 1
+nonno | Il padre di uno dei tuoi genitori | 1
+nonna | La madre di uno dei tuoi genitori | 1
+nipote | Per un nonno è il figlio di suo figlio | 1
+zio | Fratello di tuo padre o di tua madre | 1
+zia | Sorella di un tuo genitore | 1
+cugino | Figlio di uno zio | 2
+fratello | Maschio nato dagli stessi genitori | 1
+sorella | Femmina nata dagli stessi genitori | 1
+marito | Lo sposo, in una coppia sposata | 1
+moglie | La sposa, in una coppia sposata | 1
+suocera | La madre di tua moglie o di tuo marito | 2
+genero | Il marito di tua figlia | 2
+bambino | Piccolo che gioca e cresce | 1
+neonato | Bimbo nei suoi primissimi giorni di vita | 2
+gemelli | Fratelli nati insieme dallo stesso parto | 2
+famiglia | Genitori e figli che vivono insieme | 1
+parente | Persona legata a te da vincoli di sangue | 2
+sposa | Veste di bianco il giorno delle nozze | 1
+amico | Compagno fedele, non è un parente | 1
+vicino | Chi abita nella casa accanto | 1
+medico | Cura i malati in ambulatorio | 1
+cuoco | Prepara i piatti in un ristorante | 1
+contadino | Chi coltiva i campi e alleva animali | 1
+postino | Porta le lettere a casa | 1
+maestra | Insegna a leggere ai bambini | 1
+pompiere | Spegne gli incendi con la sirena | 2
+falegname | Artigiano che lavora il legno | 2
+infermiera | Assiste i pazienti in corsia | 2
+camicia | Indumento con colletto e bottoni | 1
+gonna | Indumento femminile che scende dalla vita | 1
+pantaloni | Coprono le gambe, con due tasche | 1
+giacca | Si indossa sopra la camicia | 1
+cappotto | Pesante capo d'inverno | 1
+cappello | Si porta in testa | 1
+sciarpa | Si avvolge intorno al collo | 1
+scarpa | Si indossa sul piede per camminare | 1
+calza | Si infila nel piede sotto la scarpa | 1
+maglione | Indumento caldo di lana per l'inverno | 1
+cravatta | Si annoda al collo con la camicia | 1
+cintura | Tiene su i pantaloni | 1
+pigiama | Si indossa per dormire | 1
+stivali | Calzature alte di gomma per la pioggia | 2
+sandali | Calzature aperte per l'estate | 1
+pantofole | Scarpe morbide da casa | 2
+occhiali | Servono per vedere meglio | 1
+bottone | Chiude la camicia | 1
+tasca | Ci si mettono le mani o le chiavi | 1
+lana | Si ricava dalle pecore | 1
+seta | Tessuto pregiato prodotto dal baco | 2
+ago | Piccolo e appuntito, serve per cucire | 1
+filo | Si infila nella cruna dell'ago | 2
+ricamo | Disegno fatto con ago e filo su stoffa | 2
+treno | Corre sui binari | 1
+aereo | Vola da un paese all'altro | 1
+nave | Grande imbarcazione in mare | 1
+barca | Piccolo natante a remi o a vela | 1
+autobus | Mezzo pubblico con fermate in città | 1
+tram | Corre sui binari in città | 1
+taxi | Auto pubblica con tassametro | 1
+bicicletta | Mezzo a due ruote con i pedali | 1
+auto | Mezzo a quattro ruote con motore | 1
+stazione | Qui arrivano e partono i treni | 1
+aeroporto | Qui decollano e atterrano gli aerei | 1
+porto | Dove attraccano le navi | 1
+biglietto | Ti serve per salire sul treno | 1
+passaporto | Documento per andare all'estero | 2
+albergo | Dove si dorme quando si viaggia | 1
+vacanza | Periodo di riposo lontano da casa | 1
+viaggio | Spostamento verso un luogo lontano | 1
+turista | Chi visita luoghi lontani per svago | 1
+mappa | Carta con strade e città | 1
+zaino | Si porta sulle spalle in escursione | 1
+ponte | Collega le due rive del fiume | 1
+strada | Ci passano auto e pedoni | 1
+valigia | Si riempie prima di partire | 1
+semaforo | Rosso, giallo e verde in città | 1
+galleria | Tunnel scavato sotto un monte | 3
+bussola | Ago magnetico che indica il nord | 3
+crociera | Viaggio di piacere su una grande nave | 2
+frontiera | Linea che separa due Stati | 2
+pianoforte | Strumento con tasti bianchi e neri | 1
+chitarra | Strumento a sei corde | 1
+violino | Strumento ad arco suonato sotto il mento | 1
+tromba | Strumento a fiato d'ottone | 1
+flauto | Strumento a fiato che si soffia di lato | 1
+tamburo | Si suona battendo con le bacchette | 1
+arpa | Strumento a corde dalla forma di triangolo | 2
+fisarmonica | Strumento a mantice con tastiera e bottoni | 2
+organo | Grande strumento a canne delle chiese | 2
+orchestra | Gruppo numeroso di musicisti | 1
+coro | Gruppo di persone che cantano insieme | 1
+canzone | Brano con parole e musica | 1
+melodia | Successione di note che si canticchia | 1
+nota | Do, re o mi nella scala musicale | 1
+opera | Spettacolo lirico cantato in teatro | 2
+concerto | Spettacolo di musica dal vivo | 1
+cantante | Artista con il microfono | 2
+valzer | Danza in tre quarti nata a Vienna | 2
+tango | Danza argentina di coppia | 2
+tarantella | Danza veloce e allegra del Sud Italia | 3
+teatro | Luogo dove si recitano le commedie | 1
+cinema | Sala con grande schermo e poltroncine | 1
+libro | Pagine rilegate da leggere | 1
+lettera | Si scrive e si spedisce con il francobollo | 1
+francobollo | Si incolla sulla busta per spedire | 1
+penna | Scrive con l'inchiostro | 1
+matita | Scrive con la grafite e si cancella | 1
+scuola | Dove i bambini imparano a leggere | 1
+disegno | Immagine fatta con matita o colori | 1
+quadro | Dipinto appeso al muro | 1
+telefono | Serve per parlare con chi è lontano | 1
+scacchi | Gioco con re, regina e alfieri | 1
+carte | Mazzo da briscola e scopa | 1
+tombola | Gioco natalizio con i numeri estratti | 1
+dama | Gioco con pedine su scacchiera | 2
+dado | Cubo con sei facce e puntini | 1
+tennis | Sport con racchetta e rete | 1
+calcio | Sport con un pallone e due porte | 1
+nuoto | Sport che si pratica in piscina | 1
+sci | Sport sulla neve con le tavole ai piedi | 2
+uncinetto | Lavoro con un solo ferro a gancio | 3
+giardinaggio | Cura di fiori e piante nell'orto | 2
+lunedì | Primo giorno della settimana lavorativa | 1
+mercoledì | Giorno a metà della settimana | 2
+venerdì | Giorno prima del fine settimana | 2
+sabato | Giorno prima della domenica | 1
+domenica | Giorno di festa e di riposo | 1
+giorno | Dura ventiquattro ore | 1
+settimana | Sette giorni di fila | 1
+anno | Periodo di dodici mesi | 1
+gennaio | Primo mese dell'anno | 1
+febbraio | Il mese più corto dell'anno | 1
+marzo | Mese che porta l'inizio della primavera | 1
+aprile | Quarto mese dell'anno | 1
+maggio | Quinto mese dell'anno | 1
+giugno | Sesto mese dell'anno | 1
+luglio | Settimo mese dell'anno | 1
+agosto | Ottavo mese dell'anno | 1
+settembre | Nono mese dell'anno | 1
+ottobre | Decimo mese dell'anno | 1
+novembre | Undicesimo mese dell'anno | 1
+dicembre | L'ultimo mese dell'anno | 1
+Roma | Capitale d'Italia sul Tevere | 1
+Milano | Grande città lombarda con il Duomo | 1
+Napoli | Città sotto il Vesuvio | 1
+Torino | Capoluogo del Piemonte | 2
+Firenze | Città toscana del Ponte Vecchio | 1
+Venezia | Città sull'acqua con canali e gondole | 1
+Bologna | Città emiliana delle due torri | 2
+Genova | Capoluogo ligure con il porto | 2
+Palermo | Capoluogo della Sicilia | 2
+Verona | La città di Romeo e Giulietta | 2
+Pisa | Città della Torre pendente | 1
+Siena | Città toscana del Palio | 2
+Sicilia | La più grande isola del Mediterraneo | 2
+Sardegna | Isola italiana con i nuraghi | 2
+Toscana | Regione di Firenze e Siena | 2
+Puglia | Regione che forma il tacco dello stivale | 2
+Calabria | Regione che forma la punta dello stivale | 3
+Umbria | Regione verde al centro dell'Italia | 3
+Tevere | Fiume che attraversa Roma | 2
+Arno | Fiume che attraversa Firenze e Pisa | 2
+Adige | Fiume che bagna Verona | 3
+Garda | Il più grande lago italiano | 2
+Vesuvio | Vulcano che sovrasta Napoli | 2
+Etna | Vulcano attivo della Sicilia | 2
+Colosseo | Anfiteatro simbolo dell'antica Roma | 1
+Alpi | Catena montuosa del nord Italia | 2
+Appennini | Catena montuosa lungo la penisola | 3
+Pompei | Città romana sepolta dalle ceneri | 3
+tricolore | Bandiera verde, bianca e rossa | 2
+mano | Parte del corpo con cinque dita | 1
+piede | Parte del corpo su cui ti reggi | 1
+testa | Sta sopra il collo | 1
+occhio | L'organo con cui vedi | 1
+naso | Serve per sentire gli odori | 1
+bocca | Ha le labbra e i denti | 1
+orecchio | Serve per sentire i suoni | 1
+dente | Si usa per masticare | 1
+capelli | Crescono sulla testa | 1
+braccio | Va dalla spalla alla mano | 1
+gamba | Va dall'anca al piede | 1
+ginocchio | Articolazione a metà della gamba | 2
+cuore | Batte nel petto, pompa il sangue | 1
+dito | Ce ne sono cinque per mano | 1
+schiena | Parte posteriore del tronco | 2
+pelle | Ricopre tutto il nostro corpo | 2
+grande | Il contrario di piccolo | 1
+piccolo | Il contrario di grande | 1
+caldo | Il contrario di freddo | 1
+freddo | Il contrario di caldo | 1
+alto | Il contrario di basso | 1
+basso | Il contrario di alto | 1
+felice | Contento, sereno e allegro | 1
+triste | Il contrario di allegro | 1
+dolce | Ha il sapore dello zucchero | 1
+amaro | Sapore del caffè senza zucchero | 2
+rumore | Suono forte e fastidioso | 2
+silenzio | Assenza di ogni rumore | 2
+sorriso | Si fa con le labbra quando si è contenti | 1
+bacio | Gesto d'affetto con le labbra | 1
+rosso | Il colore dei pomodori maturi | 1
+azzurro | Il colore del cielo sereno | 1
+verde | Il colore dell'erba | 1
+giallo | Il colore del limone maturo | 1
+bianco | Il colore della neve | 1
+nero | Il colore del carbone | 1
+regalo | Pacco con il fiocco da donare | 1
+auguri | Si fanno a Natale e al compleanno | 1
+compleanno | Giorno in cui si spengono le candeline | 1
+candela | Cera con stoppino che fa luce | 1
+carnevale | Festa di maschere e coriandoli | 1
+maschera | Copre il viso a carnevale | 1
+natale | Festa di dicembre con presepe e regali | 1
+pasqua | Festa primaverile con le uova di cioccolato | 1
+moneta | Pezzo di metallo da spendere | 1
+banca | Qui si tiene il conto corrente | 1
+negozio | Qui si compra la merce | 1
+ristorante | Locale dove si mangia pagando | 1
+farmacia | Qui si comprano le medicine | 1
+ospedale | Qui si curano i malati | 1
+cucinare | Preparare i pasti sul fuoco | 1
+camminare | Andare a piedi con passo lento | 2
+mangiare | Masticare e inghiottire il cibo | 1
+coraggio | Virtù di chi affronta la paura | 2
+gentile | Educato e premuroso con tutti | 2

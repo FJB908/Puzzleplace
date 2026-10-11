@@ -617,3 +617,9 @@ err.move.adjacent | Les lettres d'un mot doivent être voisines.
 err.move.unknown | Nous ne connaissons pas ce mot. Essayez-en un autre.
 err.move.played | « {word} » a déjà été joué dans cette partie. Choisissez un autre mot.
 err.move.noFresh | Chaque mot doit colorer au moins une case libre. Cherchez un mot qui passe par une case blanche.
+uitslag.winner | Gagnant
+uitslag.flowers | Fleurs
+uitslag.words | Mots : {n}
+uitslag.longest | Le plus long : {word}
+uitslag.garden | Le jardin à la fin
+uitslag.allWords | Tous les mots, dans l’ordre

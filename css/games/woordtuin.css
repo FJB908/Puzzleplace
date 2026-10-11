@@ -119,3 +119,29 @@ html[data-contrast="high"] .wt-tegel.hun { background: #d8f0f3; }
 .wt-wacht { margin: .6rem 0 0; text-align: center; color: var(--text-muted); font-size: .95rem; }
 .wt-onder { display: flex; justify-content: center; padding-top: .4rem; }
 .wt-stop[hidden] { display: none; }
+
+/* ----- Uitslag: spelers met punten, het tuintje aan het eind en alle woorden ----- */
+.uitslag {
+  --mijn: #f6d3df; --mijn-tekst: #5b1530; --mijn-rand: #c9577f; --hun: #cfe6ea; --hun-tekst: #0f3a42; --hun-rand: #3f8e98;
+  display: flex; flex-direction: column; gap: .8rem; text-align: center; min-width: 0;
+}
+html[data-theme="dark"] .uitslag { --mijn: #55283a; --mijn-tekst: #fbdbe6; --mijn-rand: #e08aa8; --hun: #1f4a52; --hun-tekst: #d3eef2; --hun-rand: #6cc0cc; }
+html[data-contrast="high"] .uitslag { --mijn: #fff; --mijn-tekst: #000; --mijn-rand: #8a0f3c; --hun: #fff; --hun-tekst: #000; --hun-rand: #004d57; }
+.ut-spelers { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .6rem; }
+.ut-kant { position: relative; display: flex; flex-direction: column; align-items: center; gap: .15rem; padding: .9rem .5rem .7rem; border-radius: 1.1rem; min-width: 0; border: .15rem solid transparent; }
+.ut-kant.mijn { background: var(--mijn); color: var(--mijn-tekst); } .ut-kant.hun { background: var(--hun); color: var(--hun-tekst); }
+.ut-kant.mijn.wint { border-color: var(--mijn-rand); } .ut-kant.hun.wint { border-color: var(--hun-rand); }
+.ut-kant .avatar { width: 3.2rem; height: 3.2rem; font-size: 1.5rem; }
+.ut-kroon { position: absolute; top: -.7rem; padding: .05rem .7rem; border-radius: 1rem; background: var(--surface); color: var(--text); font-size: .85rem; font-weight: 700; box-shadow: var(--shadow); border: .12rem solid currentColor; }
+.ut-naam { font-weight: 700; max-width: 100%; overflow-wrap: anywhere; }
+.ut-tal { font-size: 2.4rem; line-height: 1.1; }
+.ut-kant small { font-size: .85rem; opacity: .85; overflow-wrap: anywhere; }
+.ut-balk { display: flex; height: .7rem; border-radius: .4rem; overflow: hidden; background: var(--border); }
+.ut-balk .mijn { background: var(--mijn-rand); } .ut-balk .hun { background: var(--hun-rand); }
+.ut-kop { margin: .2rem 0 0; font-size: 1rem; color: var(--text-muted); font-weight: 600; }
+.ut-tuin { display: grid; grid-template-columns: repeat(6, 1fr); gap: .2rem; width: min(100%, 14rem); margin-inline: auto; }
+.ut-vak { aspect-ratio: 1; display: grid; place-items: center; border-radius: .35rem; background: var(--border); font-size: .95rem; font-weight: 700; text-transform: uppercase; }
+.ut-vak.mijn { background: var(--mijn); color: var(--mijn-tekst); } .ut-vak.hun { background: var(--hun); color: var(--hun-tekst); }
+.ut-woorden { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem; max-height: 9rem; overflow: auto; }
+.ut-woorden li { padding: .1rem .6rem; border-radius: 1rem; background: var(--border); font-size: .95rem; }
+.ut-woorden li.mijn { background: var(--mijn); color: var(--mijn-tekst); } .ut-woorden li.hun { background: var(--hun); color: var(--hun-tekst); }

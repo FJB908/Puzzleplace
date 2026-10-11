@@ -136,7 +136,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const publicUrl = (process.env.PUBLIC_URL || `http://localhost:${port}`).replace(/\/+$/, '');
   const facebook = appId && appSecret ? { appId, appSecret, publicUrl } : null;
   const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook } });
-  server.listen(port, host, () => console.log(`Puzzelplaats draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${port}  (gegevens in ${dataDir})`));
+  // Is de poort bezet (vaak een eerdere server die nog draait)? Zeg dat gewoon, en wijs de weg, in plaats van een lange foutmelding.
+  server.on('error', (e) => {
+    if (e.code !== 'EADDRINUSE') throw e;
+    console.error(`\nPoort ${port} is al in gebruik: waarschijnlijk draait Puzzleplace al (of een ander programma gebruikt die poort).\n` +
+      `  - Open http://localhost:${port} in je browser om te kijken, of stop het programma dat de poort gebruikt (Ctrl+C in dat venster).\n` +
+      `  - Of start op een andere poort:  PORT=${port + 1} npm run server   (in Windows PowerShell:  $env:PORT=${port + 1}; npm run server)\n`);
+    process.exit(1);
+  });
+  server.listen(port, host, () => console.log(`Puzzleplace draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${port}  (gegevens in ${dataDir})`));
   const stop = () => { db.flush(); server.close(() => process.exit(0)); setTimeout(() => process.exit(0), 2000).unref(); };
   process.on('SIGINT', stop); process.on('SIGTERM', stop);
 }

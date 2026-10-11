@@ -1,0 +1,13 @@
+##### Uitslagscherm van Woordtuin (na afloop van een spel)
+# Naam boven de speler die gewonnen heeft (een klein label op de kaart). Kort.
+uitslag.winner | Winner | Winnaar
+# Onder het aantal: bloemen zijn de punten van Woordtuin (de gekleurde vakjes). Kort, zonder getal.
+uitslag.flowers | Flowers | Bloemen
+# {n} is het aantal woorden dat die speler heeft gemaakt.
+uitslag.words | Words: {n} | Woorden: {n}
+# {word} is het langste woord van die speler, in hoofdletters.
+uitslag.longest | Longest: {word} | Langste: {word}
+# Kopje boven het kleine bord aan het eind van het spel.
+uitslag.garden | The garden at the end | De tuin aan het eind
+# Kopje boven de lijst van alle gespeelde woorden.
+uitslag.allWords | All words, in order | Alle woorden, op volgorde

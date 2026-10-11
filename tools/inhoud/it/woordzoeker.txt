@@ -1,0 +1,44 @@
+## bloemen | I fiori
+rosa tulipano margherita giglio viola orchidea geranio garofano girasole narciso mughetto ortensia lavanda camelia papavero iris peonia glicine primula ciclamino fiordaliso gelsomino azalea dalia mimosa croco lillà
+
+## tuin | In giardino
+prato aiuola siepe vaso rastrello zappa pala forbici seme bulbo albero cespuglio orto serra pergola panchina fontana sentiero cancello ghiaia terriccio concime carriola tosaerba potare fiore foglia radice
+
+## dieren | Gli animali
+cane gatto cavallo mucca pecora capra maiale gallina anatra oca coniglio leone tigre elefante giraffa scimmia orso lupo volpe cervo topo rana farfalla delfino balena tartaruga scoiattolo riccio
+
+## keuken | In cucina
+pentola padella forchetta coltello cucchiaio piatto bicchiere tazza forno frigorifero fornello lavello mestolo tagliere bollitore caffettiera teiera tovaglia dispensa spugna ciotola bottiglia tavolo sedia tegame pinza sale
+
+## eten | Cibo buono
+pane pasta pizza formaggio prosciutto salame risotto lasagne gelato torta biscotto mela pera arancia limone fragola pesca uva minestrone polenta tiramisù cioccolato marmellata miele uovo burro insalata zuppa
+
+## weer | Il tempo
+sole pioggia vento neve nebbia nuvola temporale fulmine tuono grandine arcobaleno gelo caldo freddo umido brezza tempesta ombrello nuvoloso sereno afa bufera rugiada clima ghiaccio foschia cielo temperatura
+
+## reizen | In viaggio
+valigia treno aereo nave biglietto passaporto albergo stazione aeroporto autobus taxi mappa viaggio vacanza turista mare spiaggia montagna crociera hotel guida bagaglio zaino camera binario tenda
+
+## land | L'Italia
+Roma Milano Napoli Torino Firenze Venezia Bologna Genova Palermo Verona Pisa Siena Sicilia Sardegna Toscana Piemonte Puglia Calabria Tevere Arno Garda Como Vesuvio Etna Colosseo gondola carnevale pizza
+
+## familie | La famiglia
+madre padre figlio figlia nonno nonna nipote zio zia cugino cugina fratello sorella marito moglie mamma papà bambino bambina genero nuora suocero suocera cognato cognata famiglia parente neonato
+
+## huis | In casa
+porta finestra tetto parete pavimento soffitto scala cucina camera bagno salotto divano poltrona letto armadio lampada tappeto tenda specchio cuscino coperta cassetto balcone cantina camino chiave mobile lavatrice
+
+## natuur | La natura
+bosco foresta montagna collina valle fiume lago mare oceano spiaggia isola roccia sasso sabbia albero foglia luna sorgente cascata ruscello grotta deserto pianura ghiacciaio scogliera tramonto alba stella
+
+## muziek | La musica
+pianoforte violino chitarra tromba flauto tamburo arpa fisarmonica organo canto coro melodia ritmo nota opera concerto orchestra cantante canzone sinfonia violoncello clarinetto mandolino suonare spartito banda valzer tastiera
+
+## hobby | Passatempi
+leggere cucire ricamo dipingere disegnare cucinare ballare cantare passeggiata collezione rebus carte scacchi tombola bocce uncinetto maglia pittura fotografia cruciverba teatro cinema nuoto ciclismo viaggiare giocare pesca danza
+
+## kleding | I vestiti
+camicia gonna pantaloni giacca cappotto cappello sciarpa guanti scarpe calze maglione vestito cravatta cintura pigiama berretto stivali sandali pantofole giubbotto borsa collana occhiali bottone tasca manica lana seta
+
+## feest | Le feste
+natale pasqua compleanno festa regalo torta candela brindisi auguri matrimonio battesimo carnevale maschera coriandoli capodanno panettone pandoro presepe ghirlanda tombola invitati sposa sposo palloncino spumante cenone vigilia ballo

@@ -106,6 +106,7 @@ export async function playView({ id, mode }, app) {
       const choice = await choiceDialog({
         title: result.title ?? t('play.done.title'),
         text: result.text ?? t(daily ? 'play.done.text.daily' : 'play.done.text'),
+        body: result.body,
         joy: result.joy ?? true,
         actions: [
           { label: daily ? t('play.done.backHome') : t('play.done.again'), value: daily ? 'home' : 'again', primary: true, autofocus: true },

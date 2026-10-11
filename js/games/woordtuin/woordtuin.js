@@ -7,6 +7,7 @@
 import { maakPaneel } from './paneel.js';
 import { newGame, applyMove, botMove, geefDoor, tip, result, counts, makeRng, taalVan } from './engine.js';
 import { laadWoordenboek } from './woordenboek.js';
+import { uitslagKaart } from './uitslag.js';
 import { burst, rain, motionOK } from '../../effects.js';
 import { t } from '../../i18n/index.js';
 
@@ -79,6 +80,7 @@ export async function mount(container, ctx) {
       title: t(gewonnen ? 'woordtuin.pc.won' : gelijk ? 'woordtuin.pc.draw' : 'woordtuin.pc.lost'),
       text: gewonnen ? t('woordtuin.pc.score', { mine: wij, theirs: zij }) : gelijk ? t('woordtuin.pc.drawText', { n: wij }) : t('woordtuin.pc.lostText', { mine: wij, theirs: zij }),
       joy: gewonnen || gelijk,
+      body: uitslagKaart(state.game, { [ME]: { naam: t('woordtuin.you'), id: 'ik' }, [PC]: { naam: t('woordtuin.computer'), id: 'computer' } }, ME),
     });
   }
 

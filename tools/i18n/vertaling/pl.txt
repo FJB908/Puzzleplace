@@ -640,3 +640,9 @@ err.move.adjacent | Litery słowa muszą ze sobą sąsiadować.
 err.move.unknown | Nie znamy tego słowa. Spróbuj innego.
 err.move.played | Słowo „{word}” zostało już zagrane w tej grze. Wybierz inne.
 err.move.noFresh | Każde słowo musi zająć co najmniej jedno wolne pole. Poszukaj słowa z białym polem.
+uitslag.winner | Zwycięzca
+uitslag.flowers | Kwiaty
+uitslag.words | Słowa: {n}
+uitslag.longest | Najdłuższe: {word}
+uitslag.garden | Ogród na koniec
+uitslag.allWords | Wszystkie słowa po kolei

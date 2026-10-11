@@ -125,7 +125,7 @@ export function makeBoard(seed, size = SIZE, taal = 'nl') {
 
 export function newGame(seed, { size = SIZE, first = 1, lang = 'nl' } = {}) {
   const letters = makeBoard(seed, size, lang);
-  return { lang, size, letters, owner: new Array(size * size).fill(0), played: [], turn: first, over: false, passed: false, last: null };
+  return { lang, size, letters, owner: new Array(size * size).fill(0), played: [], by: [], turn: first, over: false, passed: false, last: null };
 }
 
 export const other = (p) => 3 - p;
@@ -169,6 +169,9 @@ export function checkMove(state, player, path) {
 }
 
 export const hasMove = (state, player) => legalMoves(state, player, true).length > 0;
+// Kan er nog een gewoon woord? Zeldzame woorden die bijna niemand kent tellen niet mee voor "het spel is afgelopen":
+// zit niemand meer met een gewoon woord, dan stopt het spel, in plaats van door te gaan zonder dat iemand nog een woord vindt.
+export const hasEasyMove = (state, player) => legalMoves(state, player, true, true).length > 0;
 
 // Alle toegestane zetten van een speler (met 'first' stopt het bij de eerste: handig om te weten of er nog iets kan;
 // met 'alledaags' alleen gewone, niet-grove woorden: die kiest de computer en die gebruiken de tips).
@@ -204,7 +207,7 @@ export function applyMove(state, player, path) {
   const owner = state.owner.slice();
   for (const i of [...fresh, ...took]) owner[i] = player;
   const next = {
-    ...state, owner, played: [...state.played, word], passed: false,
+    ...state, owner, played: [...state.played, word], by: [...(state.by || []), player], passed: false,
     last: { player, word, path: [...path], took, fresh },
   };
   settle(next, player);
@@ -216,8 +219,8 @@ function settle(state, player) {
   const open = state.owner.includes(0);
   if (!open) { state.over = true; state.turn = null; return; }
   const them = other(player);
-  if (hasMove(state, them)) { state.turn = them; return; }
-  if (hasMove(state, player)) { state.turn = player; state.passed = true; return; }
+  if (hasEasyMove(state, them)) { state.turn = them; return; }
+  if (hasEasyMove(state, player)) { state.turn = player; state.passed = true; return; }
   state.over = true; state.turn = null;
 }
 
@@ -304,6 +307,6 @@ export function tip(state, player, rng = Math.random) {
 export function geefDoor(state, player) {
   const next = { ...state, passed: true, last: state.last };
   const them = other(player);
-  if (hasMove(next, them)) next.turn = them; else { next.over = true; next.turn = null; }
+  if (hasEasyMove(next, them)) next.turn = them; else { next.over = true; next.turn = null; }
   return next;
 }

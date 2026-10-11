@@ -617,3 +617,9 @@ err.move.adjacent | As letras de uma palavra têm de estar lado a lado.
 err.move.unknown | Não conhecemos esta palavra. Experimente outra.
 err.move.played | «{word}» já foi jogada neste jogo. Escolha outra palavra.
 err.move.noFresh | Cada palavra tem de colorir pelo menos uma casa livre. Procure uma palavra com uma casa branca.
+uitslag.winner | Vencedor
+uitslag.flowers | Flores
+uitslag.words | Palavras: {n}
+uitslag.longest | A mais comprida: {word}
+uitslag.garden | O jardim no fim
+uitslag.allWords | Todas as palavras, por ordem

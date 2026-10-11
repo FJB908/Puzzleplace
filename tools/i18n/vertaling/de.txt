@@ -652,3 +652,9 @@ err.move.adjacent | Die Buchstaben eines Wortes müssen aneinandergrenzen.
 err.move.unknown | Dieses Wort kennen wir nicht. Versuchen Sie ein anderes Wort.
 err.move.played | „{word}“ wurde in dieser Partie schon gespielt. Wählen Sie ein anderes Wort.
 err.move.noFresh | Jedes Wort muss mindestens ein freies Feld färben. Suchen Sie ein Wort mit einem weißen Feld.
+uitslag.winner | Gewinner
+uitslag.flowers | Blumen
+uitslag.words | Wörter: {n}
+uitslag.longest | Längstes: {word}
+uitslag.garden | Der Garten am Ende
+uitslag.allWords | Alle Wörter, der Reihe nach

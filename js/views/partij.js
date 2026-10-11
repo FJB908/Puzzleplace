@@ -11,6 +11,7 @@ import { getGameInfo } from '../games/registry.js';
 import { maakPaneel } from '../games/woordtuin/paneel.js';
 import { tip, makeRng, taalVan } from '../games/woordtuin/engine.js';
 import { laadWoordenboek } from '../games/woordtuin/woordenboek.js';
+import { uitslagKaart } from '../games/woordtuin/uitslag.js';
 import { TALEN } from '../shared/talen.js';
 import { burst, rain, motionOK } from '../effects.js';
 import * as auth from '../services/auth.js';
@@ -90,6 +91,7 @@ export function partijView({ id }, app) {
       title: t(r.resigned ? 'match.over.resigned' : gewonnen ? 'match.over.won' : gelijk ? 'match.over.draw' : 'match.over.lost'),
       text: uitslagTekst(match, user.id, opp),
       joy: gewonnen || gelijk,
+      body: r.resigned ? null : uitslagKaart(match.pub, { [slot]: { naam: persoonNaam(user), id: user.id }, [3 - slot]: { naam: opp, id: match.players.find((p) => p.id !== user.id)?.id || opp } }, slot),
       actions: [
         { label: t('match.again', { name: opp }), value: 'nog', primary: true, autofocus: true },
         { label: t('match.backToFriends'), value: 'terug' },

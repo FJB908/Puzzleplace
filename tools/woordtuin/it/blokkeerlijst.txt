@@ -1,0 +1,17 @@
+# Woorden die NIET in Woordtuin mogen, ook al staan ze in de woordenlijst: namen, vreemde woorden, afkortingen, geluiden, woorden die groepen mensen
+# beledigen en onzin. Met de hand beoordeeld (zie tools/woordenlijst/BEOORDELEN.md).
+
+ade alice alma apache apollo ari ariana armando art audi augusta augusto band bang
+banner barbara barbie bari bea bellini bob bona bono boom canyon carmine castro cecilia
+cesare cipro colombo corea cowboy cuba damasco dante diana diane dina disk domingo dora
+eduardo ehm elisa elsa emo ercole erica eros etiopia fausto finn froci frocio gaetano
+gaia gal galileo gang giacomo gianni gigi gilda glie goblin granada gustavo homo iii
+indie jack junior khan killer lego libano libia linda lisa liv loco longo lori
+luigi macho madame madison magna magnum malta mancini manu mao marco mariana mariano martin
+max maya mecca melissa merlino miranda mister montana morelli moretti mozart muffin negri negro
+nepal nerd network newton nico ninja nino nobel noir olivia omero omo orlando oscar
+palmer pan panama pandora paolo par pascal ping pong por post pote prof psi
+quo ram ranger rio rivera robbie rocco rodolfo rodrigo rom romeo rouge sabina sabine
+sabrina sequel siberia sierra simone sonia spa spoiler strauss stuart sub suzanne tac tam
+tao tesla tibet tonino toto trans tullio tweet ucraina ufo uhm une val van
+vanessa vietnam vin vip xiii yang yin zingari zingaro

@@ -617,3 +617,9 @@ err.move.adjacent | Le lettere di una parola devono essere vicine tra loro.
 err.move.unknown | Non conosciamo questa parola. Prova con un'altra.
 err.move.played | «{word}» è già stata giocata in questa partita. Scegli un'altra parola.
 err.move.noFresh | Ogni parola deve colorare almeno una casella libera. Cerca una parola con una casella bianca.
+uitslag.winner | Vincitore
+uitslag.flowers | Fiori
+uitslag.words | Parole: {n}
+uitslag.longest | La più lunga: {word}
+uitslag.garden | Il giardino alla fine
+uitslag.allWords | Tutte le parole, in ordine
