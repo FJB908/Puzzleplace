@@ -1,0 +1,76 @@
+# Mots mêlés en français (France). Par thème : ## id | titre, puis les mots. Voir tools/inhoud/SCHRIJVEN.md.
+
+## bloemen | Les fleurs
+rose tulipe lys iris muguet jonquille pivoine marguerite violette coquelicot
+œillet dahlia lilas orchidée tournesol jasmin lavande glaïeul bleuet pensée
+hortensia mimosa myosotis géranium primevère camélia jacinthe anémone pâquerette
+
+## tuin | Au jardin
+pelle râteau brouette arrosoir tondeuse haie pelouse potager serre graine
+bêche sécateur tuyau ver limace escargot pommier banc clôture compost
+fourche gazon allée cabane binette terreau nichoir semis
+
+## dieren | Les animaux
+chat chien vache cheval mouton cochon poule canard lapin souris
+renard loup ours lion tigre éléphant girafe singe zèbre chèvre
+âne hibou écureuil hérisson tortue grenouille papillon abeille dauphin baleine
+
+## keuken | Dans la cuisine
+casserole poêle four évier frigo assiette couteau cuillère verre bol
+tasse louche passoire saladier plateau torchon tablier cocotte bouilloire cafetière
+théière fouet râpe balance placard tiroir robinet nappe cuisinière
+
+## eten | Bons petits plats
+pain fromage soupe tarte gâteau crêpe omelette quiche pâtes riz
+poulet jambon salade frites ragoût gratin purée compote confiture beurre
+miel yaourt chocolat brioche croissant poisson fraise biscuit madeleine
+
+## weer | La météo
+soleil pluie neige vent nuage orage éclair tonnerre brouillard brume
+grêle gel givre verglas averse tempête chaleur froid rosée ciel
+bruine rafale canicule ondée thermomètre mistral tornade flocon
+
+## reizen | En voyage
+valise train avion bateau gare billet passeport carte hôtel plage
+camping tente voiture autocar croisière bagage aéroport guide musée vacances
+touriste boussole randonnée frontière souvenir quai excursion photo
+
+## land | La France
+Paris Lyon Marseille Bordeaux Nice Lille Toulouse Strasbourg Nantes Bretagne
+Provence Alsace Normandie Corse Bourgogne Loire Seine Rhône Garonne Alpes
+Pyrénées baguette camembert ratatouille Marianne coq béret Versailles Louvre pétanque
+
+## familie | La famille
+mère père fils fille frère sœur oncle tante cousin neveu
+nièce mamie papi bébé enfant parent mari épouse jumeau ancêtre
+parrain marraine gendre naissance génération cadet berceau fiancé
+
+## huis | À la maison
+porte fenêtre toit mur escalier cave grenier salon chambre lit
+table chaise fauteuil canapé armoire tapis rideau lampe miroir horloge
+cheminée couloir garage balcon douche baignoire étagère coussin plafond volet
+
+## natuur | La nature
+forêt arbre rivière lac montagne colline prairie vallée ruisseau étang
+mer océan sable rocher falaise chêne sapin feuille mousse fougère
+champignon oiseau cascade source grotte île sentier bois marais dune
+
+## muziek | La musique
+piano violon guitare flûte tambour trompette harpe orgue accordéon clarinette
+saxophone chanson chœur concert orchestre opéra note rythme mélodie valse
+partition disque radio refrain chanteur musicien tango triangle hautbois contrebasse
+
+## hobby | Les loisirs
+lecture tricot couture jardinage peinture dessin cuisine pêche marche vélo
+natation danse chant photo puzzle cartes échecs broderie poterie golf
+tennis yoga bricolage belote loto théâtre cinéma lire coudre collection
+
+## kleding | Les vêtements
+robe jupe pantalon chemise veste manteau pull chaussette chaussure botte
+chapeau écharpe gant cravate ceinture gilet blouse pyjama imperméable costume
+bonnet sandale pantoufle bouton poche foulard maillot collant tailleur casquette
+
+## feest | Les fêtes
+fête bougie cadeau ballon guirlande invité danse champagne mariage réveillon
+confetti lampion toast fanfare défilé carnaval masque déguisement banquet bouquet
+invitation galette surprise dragée noces repas jouet musique gâteau trinquer

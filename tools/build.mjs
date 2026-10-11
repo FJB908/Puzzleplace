@@ -1,4 +1,4 @@
-// Maakt één los bestand: dist/puzzelplaats.html (stijl + code erin).
+// Maakt één los bestand: dist/puzzleplace.html (stijl + code erin).
 // Dat bestand werkt door er gewoon op te dubbelklikken, zonder webserver, en is
 // handig om te mailen of op een USB-stick te zetten.
 //
@@ -38,5 +38,5 @@ html = html
   .replace(/<script type="module" src="js\/app.js"><\/script>/, () => `<script>${js}</script>`);
 
 await mkdir(new URL('dist/', root), { recursive: true });
-await writeFile(new URL('dist/puzzelplaats.html', root), html);
-console.log(`dist/puzzelplaats.html: ${(html.length / 1024).toFixed(0)} kB`);
+await writeFile(new URL('dist/puzzleplace.html', root), html);
+console.log(`dist/puzzleplace.html: ${(html.length / 1024).toFixed(0)} kB`);
