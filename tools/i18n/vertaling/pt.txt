@@ -1,0 +1,619 @@
+app.name | Puzzleplace
+app.description | Passatempos tranquilos, com letras grandes e uma apresentação clara.
+app.skipToContent | Saltar para o conteúdo
+app.noscript | O Puzzleplace precisa de JavaScript. Ative o JavaScript no seu navegador e volte a carregar a página.
+nav.main | Menu principal
+nav.home | Início
+nav.games | Jogos
+nav.friends | Amigos
+nav.settings | Definições
+nav.friendsNew | Amigos, novidades: {n}
+common.noGoBack | Não, voltar
+common.back | Voltar
+common.close | Fechar
+common.loading | A carregar…
+common.retry | Tentar de novo
+common.somethingWentWrong | Não resultou.
+time.today | hoje
+time.yesterday | ontem
+time.daysAgo_one | há {n} dia
+time.daysAgo_other | há {n} dias
+notFound.title | Página não encontrada
+notFound.heading | Esta página não existe
+notFound.text | Talvez a ligação esteja desatualizada. Não se preocupe, o seu progresso está seguro.
+notFound.toHome | Ir para o Início
+loading.title | A carregar
+language.title | Idioma
+language.choose | Escolha o seu idioma
+language.chooseLater | Pode alterar isto mais tarde, nas Definições.
+language.current | Idioma
+language.chosen | selecionado
+home.greeting.morning | Bom dia
+home.greeting.afternoon | Boa tarde
+home.greeting.evening | Boa noite
+home.greetingName | {greeting}, {name}
+home.welcome.title | O texto lê-se bem?
+home.welcome.sizeGroup | Tamanho do texto
+size.normal | Normal
+size.large | Grande
+size.xlarge | Muito grande
+home.welcome.ok | Está bom assim
+home.friends | Amigos
+home.friends.request | Pedido de amizade
+home.friends.accept | Sim
+home.friends.acceptAria | Adicionar {name} aos amigos
+home.friends.decline | Não
+home.friends.declineAria | Recusar o pedido de {name}
+home.friends.nowFriends | Fez uma nova amizade: {name}.
+home.friends.declined | Pedido recusado.
+home.friends.newGame | Novo jogo
+home.friends.newGameAria | Novo jogo com {name}
+home.friends.yourTurn | A sua vez
+home.friends.waitingFor | À espera de {name}
+home.friends.gamesCount_one | {n} jogo
+home.friends.gamesCount_other | {n} jogos
+home.friends.play | Jogar
+home.friends.rowAriaTurn | Jogar: {game} com {name}. É a sua vez.
+home.friends.rowAriaWait | Ver: {game} com {name}. É a vez de {name}.
+home.friends.signedOutTitle | Jogar com amigos
+home.friends.signedOutText | Com uma conta, também pode continuar nos seus outros dispositivos.
+home.friends.createAccount | Criar conta
+home.friends.logIn | Iniciar sessão
+home.friends.none | Ainda não tem amigos.
+home.friends.noneHint | Partilhe o seu código e poderão jogar juntos.
+home.friends.shareCode | Partilhar o meu código
+home.friends.haveCode | Tenho um código
+home.friends.all | Todos os amigos ({n})
+home.friends.shareText | Jogamos juntos no Puzzleplace? O meu código de amigo é {code}.
+home.friends.linkCopied | Ligação copiada. Cole-a numa mensagem.
+home.chooseGame | Escolha um jogo
+home.chooseGameHint | Sudoku, sopa de letras e muito mais
+home.continue | Continuar
+home.continueAria | Continuar {game}, progresso de {pct} por cento
+home.continueAriaNoPct | Continuar {game}
+home.daily | Desafio do dia
+home.dailyDone | Feito hoje
+common.hint | Dica
+sudoku.gridAria | Grelha de sudoku
+sudoku.start | Toque numa casa e depois escolha um número.
+sudoku.erase | Apagar
+sudoku.eraseAria | Apagar esta casa
+sudoku.digits | Números
+sudoku.undo | Desfazer
+sudoku.pencil | Lápis
+sudoku.pencilOn | Lápis ligado
+sudoku.digitAria | Número {n}
+sudoku.digitDone | Número {n}, todos colocados
+sudoku.livesAria | Vidas: {lives} de {max}
+sudoku.cell.value | Linha {r}, coluna {c}: {n}
+sudoku.cell.given | Linha {r}, coluna {c}: {n}, fixo
+sudoku.cell.wrong | Linha {r}, coluna {c}: {n}, não encaixa
+sudoku.cell.notes | Linha {r}, coluna {c}: vazia, notas {notes}
+sudoku.cell.empty | Linha {r}, coluna {c}: vazia
+sudoku.say.fixedChoose | Este número é fixo e não pode mudar. Escolha uma casa vazia.
+sudoku.say.fixed | Este número é fixo e não pode mudar.
+sudoku.say.clearFirst | Apague primeiro o número desta casa para fazer notas.
+sudoku.say.alreadyEmpty | Esta casa já está vazia.
+sudoku.say.wrong_one | Esse número não pertence aqui. Resta-lhe {n} vida. Apague-o ou experimente outro número.
+sudoku.say.wrong_other | Esse número não pertence aqui. Restam-lhe {n} vidas. Apague-o ou experimente outro número.
+sudoku.say.nothingToUndo | Não há nada para desfazer.
+sudoku.say.undone | O seu último passo foi desfeito.
+sudoku.say.pencilOn | O lápis está ligado: os números entram na casa pequenos, como nota.
+sudoku.say.pencilOff | O lápis está desligado: os números entram na casa em tamanho grande.
+sudoku.say.hint | Dica: o número {n} vai na casa realçada.
+sudoku.say.nothingLeft | Já não há nada para preencher.
+sudoku.say.won | Conseguiu! O jogo está todo preenchido corretamente.
+sudoku.say.noLives | Já não tem vidas.
+sudoku.say.retry | Nova tentativa. Boa sorte!
+sudoku.gameOver.title | Sem vidas
+sudoku.gameOver.text | Quer tentar de novo com o mesmo jogo?
+sudoku.gameOver.retry | Tentar de novo
+sudoku.gameOver.leaveDaily | Voltar ao Início
+sudoku.gameOver.leave | Outro jogo
+sudoku.name | Sudoku
+sudoku.summary | Preencha a grelha com os números de 1 a 9.
+sudoku.howTo.1 | Em cada linha, em cada coluna e em cada quadrado de 3 por 3, cada número de 1 a 9 aparece exatamente uma vez.
+sudoku.howTo.2 | Toque numa casa vazia e depois escolha um número, em baixo.
+sudoku.howTo.3 | Se um número estiver errado, o aviso é imediato e perde uma flor (vida). Quando acabarem, começa de novo.
+sudoku.howTo.4 | Com «{pencil}» escreve um número pequeno na casa, como nota. As notas nunca custam uma vida.
+sudoku.howTo.5 | Com «{undo}» desfaz o último passo. Com «{hint}», a aplicação preenche uma casa por si, sem perder uma vida.
+sudoku.level.makkelijk | Um início tranquilo · 5 vidas
+sudoku.level.gemiddeld | Um bom desafio · 4 vidas
+sudoku.level.moeilijk | Para quem já tem prática · 3 vidas
+sudoku.level.extreem | Para verdadeiros peritos · 3 vidas
+woordzoeker.gridAria | Sopa de letras, {n} por {n} letras
+woordzoeker.start | Toque na primeira letra de uma palavra e depois na última.
+woordzoeker.wordsAria | Palavras a encontrar
+woordzoeker.theme | Tema: {theme}
+woordzoeker.cell | Linha {r}, coluna {c}: {letter}{extra}
+woordzoeker.cellFound | , parte de uma palavra encontrada
+woordzoeker.cellStart | , início da sua escolha
+woordzoeker.foundCount | {n} de {total} encontradas
+woordzoeker.foundValue | {n} de {total} palavras encontradas
+woordzoeker.chipFound | {word}, encontrada
+woordzoeker.chipTodo | {word}, ainda por encontrar. Toque para ver uma dica.
+woordzoeker.say.beginChosen | Início escolhido. Agora toque na última letra da palavra.
+woordzoeker.say.cleared | Limpo. Escolha uma nova primeira letra.
+woordzoeker.say.notInList | Essa não é uma palavra da lista. Tente de novo, não há maneira de errar.
+woordzoeker.say.foundLeft_one | Encontrou: {word}! Falta {n}.
+woordzoeker.say.foundLeft_other | Encontrou: {word}! Faltam {n}.
+woordzoeker.say.won | Conseguiu! Encontrou todas as palavras.
+woordzoeker.say.alreadyFound | Já encontrou {word}.
+woordzoeker.say.hint | Dica: {word} começa na casa realçada (linha {r}, coluna {c}).
+woordzoeker.say.escape | Limpo.
+woordzoeker.name | Sopa de letras
+woordzoeker.summary | Encontre as palavras escondidas entre as letras.
+woordzoeker.howTo.1 | Cada jogo tem um tema, por exemplo flores. Ao lado da grelha, ou por baixo, estão as palavras que procura.
+woordzoeker.howTo.2 | Toque na primeira letra de uma palavra e depois na última. O segundo toque não tem de ser exato.
+woordzoeker.howTo.3 | Com o rato, também pode arrastar. As palavras podem seguir da esquerda para a direita, de cima para baixo e, nos níveis mais difíceis, também na diagonal e de trás para a frente.
+woordzoeker.howTo.4 | Se a palavra estiver na lista, fica realçada e riscada. Errar não custa nada.
+woordzoeker.howTo.5 | Está um pouco encalhado? Toque numa palavra da lista ou em «{hint}»: a primeira casa da palavra acende-se.
+woordzoeker.level.makkelijk | 8 por 8 · 6 palavras
+woordzoeker.level.gemiddeld | 10 por 10 · também na diagonal
+woordzoeker.level.moeilijk | 12 por 12 · também de trás para a frente
+woordzoeker.level.extreem | 13 por 13 · 15 palavras
+kruiswoord.gridAria | Grelha de palavras cruzadas
+kruiswoord.prevClue | Pista anterior
+kruiswoord.nextClue | Pista seguinte
+kruiswoord.clueGroup | Pista
+kruiswoord.start | Toque numa casa para começar.
+kruiswoord.backspace | Recuar e apagar a letra
+kruiswoord.keyboard | Teclado
+kruiswoord.word | Palavra
+kruiswoord.allClues | Todas as pistas
+kruiswoord.acrossTitle | Horizontais
+kruiswoord.downTitle | Verticais
+kruiswoord.entryAcross | {n} horizontal
+kruiswoord.entryDown | {n} vertical
+kruiswoord.clueAcross | {n} horizontal →
+kruiswoord.clueDown | {n} vertical ↓
+kruiswoord.lettersCount_one | {n} letra
+kruiswoord.lettersCount_other | {n} letras
+kruiswoord.chooseCell | Escolha uma casa
+kruiswoord.chooseHint | Toque na grelha. A pista aparece aqui.
+kruiswoord.doneCount | {n} de {total} feitas
+kruiswoord.doneValue | {n} de {total} palavras feitas
+kruiswoord.cellAria | Linha {r}, coluna {c}: {state}. {numbers}
+kruiswoord.cellLetter | letra {letter}
+kruiswoord.cellEmpty | vazia
+kruiswoord.say.tapFirst | Toque primeiro numa casa.
+kruiswoord.say.entry | {entry}: {clue} ({letters}).
+kruiswoord.say.good_one | Muito bem! A palavra {word} está certa. Falta {n}.
+kruiswoord.say.good_other | Muito bem! A palavra {word} está certa. Faltam {n}.
+kruiswoord.say.notYet | Esta palavra ainda não está certa. Leia a pista de novo, não há maneira de errar.
+kruiswoord.say.alreadyRevealed | Esta casa já foi revelada.
+kruiswoord.say.tip | Dica: a letra desta casa é {letter}.
+kruiswoord.say.theWord | A palavra era {word}.
+kruiswoord.say.won | Conseguiu! Resolveu o jogo todo.
+kruiswoord.name | Palavras cruzadas
+kruiswoord.summary | Resolva as pistas e preencha as palavras.
+kruiswoord.howTo.1 | Cada casa branca pertence a uma palavra. A pista aparece por cima da grelha, com o número de letras.
+kruiswoord.howTo.2 | Toque numa casa e escreva com o teclado que está por baixo da grelha, ou com o seu próprio teclado. Toque outra vez na mesma casa para alternar entre horizontal e vertical.
+kruiswoord.howTo.3 | As palavras cruzam-se: uma letra também ajuda na outra palavra.
+kruiswoord.howTo.4 | Quando uma palavra fica completa, vê logo se está certa. Uma palavra certa acende-se, uma errada abana um pouco. Os erros não custam nada.
+kruiswoord.howTo.5 | Com «{hint}» revela uma letra, com «{word}» a palavra toda. Por baixo da grelha estão todas as pistas.
+kruiswoord.level.makkelijk | 8 palavras · palavras conhecidas
+kruiswoord.level.gemiddeld | 12 palavras
+kruiswoord.level.moeilijk | 16 palavras · algumas mais difíceis
+kruiswoord.level.extreem | 22 palavras · muito juntas
+woordtuin.you | Eu
+woordtuin.computer | Computador
+woordtuin.boardAria | O tabuleiro, {n} por {n} letras
+woordtuin.tileAria | Letra {letter}, linha {r}, coluna {c}, {owner}{extra}
+woordtuin.owner.open | ainda livre
+woordtuin.owner.mine | sua
+woordtuin.owner.theirs | do outro jogador
+woordtuin.tileProtected | , protegida
+woordtuin.tileNumber | , número {n} da sua palavra
+woordtuin.standAria | Resultado: {me} {mine}, {them} {theirs}, {open} ainda livres
+woordtuin.openLeft_one | Resta {n} casa livre.
+woordtuin.openLeft_other | Restam {n} casas livres.
+woordtuin.gameOver | O jogo terminou.
+woordtuin.yourTurn | É a sua vez.
+woordtuin.theirTurnPc | É a vez do computador.
+woordtuin.theirTurn | É a vez de {name}.
+woordtuin.last.me | Jogou {word}.
+woordtuin.last.me.took_one | Jogou {word} e conquistou {n} casa.
+woordtuin.last.me.took_other | Jogou {word} e conquistou {n} casas.
+woordtuin.last.pc | O computador jogou {word}.
+woordtuin.last.pc.took_one | O computador jogou {word} e conquistou {n} casa.
+woordtuin.last.pc.took_other | O computador jogou {word} e conquistou {n} casas.
+woordtuin.last.other | {name} jogou {word}.
+woordtuin.last.other.took_one | {name} jogou {word} e conquistou {n} casa.
+woordtuin.last.other.took_other | {name} jogou {word} e conquistou {n} casas.
+woordtuin.passed.me | Já não consegue formar mais nenhuma palavra, por isso passa a vez.
+woordtuin.passed.pc | O computador já não consegue formar mais nenhuma palavra e passa a vez.
+woordtuin.passed.other | {name} já não consegue formar mais nenhuma palavra e passa a vez.
+woordtuin.hint.swipe | Deslize ou toque nas letras para formar uma palavra.
+woordtuin.hint.more_one | Escolha pelo menos mais {n} letra.
+woordtuin.hint.more_other | Escolha pelo menos mais {n} letras.
+woordtuin.preview.nice | Boa palavra.
+woordtuin.preview.take_one | Tira {n} casa ao adversário.
+woordtuin.preview.take_other | Tira {n} casas ao adversário.
+woordtuin.preview.fresh_one | Colore {n} casa nova.
+woordtuin.preview.fresh_other | Colore {n} casas novas.
+woordtuin.preview.kept_one | {n} casa está protegida e fica com o adversário.
+woordtuin.preview.kept_other | {n} casas estão protegidas e ficam com o adversário.
+woordtuin.legend | Cerca: não pode ser tirada
+woordtuin.notOnBoard | Esta palavra não está no tabuleiro ou não colore nada de novo.
+woordtuin.waiting | Um momento…
+woordtuin.pcThinking | O computador está a pensar…
+woordtuin.otherPlace | Outro sítio
+woordtuin.type | Escrever
+woordtuin.clear | Limpar
+woordtuin.done | Feito
+woordtuin.undo | Desfazer jogada
+woordtuin.hintLeft_one | Dica ({n} restante)
+woordtuin.hintLeft_other | Dica ({n} restantes)
+woordtuin.typeAria | Escreva uma palavra que esteja no tabuleiro
+woordtuin.typePlaceholder | por exemplo: jardim
+woordtuin.noHintsLeft | Já não tem dicas neste jogo.
+woordtuin.noWordLeft | Já não há nenhuma palavra por encontrar.
+woordtuin.hintText_one | Dica: procure uma palavra de {n} letra que comece na casa realçada.
+woordtuin.hintText_other | Dica: procure uma palavra de {n} letras que comece na casa realçada.
+woordtuin.nothingToUndo | Não há nada para desfazer.
+woordtuin.pc.won | Ganhou, parabéns!
+woordtuin.pc.draw | Empate!
+woordtuin.pc.lost | Bem jogado!
+woordtuin.pc.score | Resultado final: eu {mine}, o computador {theirs}.
+woordtuin.pc.drawText_one | Ambos têm {n} flor.
+woordtuin.pc.drawText_other | Ambos têm {n} flores.
+woordtuin.pc.lostText | O computador ganhou, {theirs} a {mine}. Da próxima vez vai com certeza correr melhor: fique à vontade para tentar de novo.
+woordtuin.name | Jardim de palavras
+woordtuin.summary | Forme palavras e faça crescer as suas flores, contra o computador ou um amigo.
+woordtuin.howTo.1 | O tabuleiro tem 6 por 6 letras. Forme uma palavra de 3 a 7 letras, deslizando sobre as letras ou tocando nelas uma a seguir à outra. As letras têm de se tocar, também na diagonal.
+woordtuin.howTo.2 | As casas da sua palavra passam a ser suas: florescem na sua cor. Se mais tarde o outro jogador formar uma palavra que passe pelas suas casas, fica com elas.
+woordtuin.howTo.3 | Exceto as casas protegidas: uma casa cujos vizinhos (à esquerda, à direita, acima e abaixo) têm todos a mesma cor não pode ser tirada. Reconhece-a pela pequena cerca no canto.
+woordtuin.howTo.4 | Cada palavra tem de colorir pelo menos uma casa livre e só pode ser jogada uma vez. Contam todas as palavras comuns, incluindo plurais e formas verbais («rosa», «rosas», «canta»). Nomes próprios, abreviaturas e palavras de outras línguas não contam. Os acentos são ignorados: «ç» é simplesmente «c».
+woordtuin.howTo.5 | Quando todas as casas estiverem coloridas, ganha quem tiver mais flores. Vê antes quanto vale uma palavra e, com «{hint}», acende-se uma casa. Uma palavra que não exista não custa nada.
+woordtuin.level.makkelijk | Vê poucas palavras e nem sempre está atento
+woordtuin.level.gemiddeld | Só vê parte das palavras
+woordtuin.level.moeilijk | Vê muitas palavras e escolhe com esperteza
+woordtuin.level.extreem | Vê tudo e pensa à frente
+games.title | Jogos
+games.subtitle | Escolha um jogo para jogar.
+games.comingSoon | Em breve
+games.inProgress | Em curso
+games.inProgressPct | Em curso · {pct}%
+games.solved_one | Resolvido {n} vez
+games.solved_other | Resolvido {n} vezes
+games.levels_one | {n} nível
+games.levels_other | {n} níveis
+level.makkelijk | Fácil
+level.gemiddeld | Médio
+level.moeilijk | Difícil
+level.extreem | Extremo
+level.default.makkelijk | Um início tranquilo
+level.default.gemiddeld | Um bom desafio
+level.default.moeilijk | Para quem já tem prática
+detail.solved_one | Já resolvido {n} vez
+detail.solved_other | Já resolvido {n} vezes
+detail.howTo | Como funciona
+detail.soon | Este jogo chega em breve.
+detail.soonText | Estamos a trabalhar nele. Entretanto, experimente outro jogo.
+detail.backToGames | Voltar a todos os jogos
+detail.howHard | Que dificuldade?
+detail.levelLocked | Já está a jogar este jogo. Escolha «{newGame}» para escolher outro nível.
+detail.newGameConfirmTitle | Começar um novo jogo?
+detail.newGameConfirmText | O jogo guardado será substituído.
+detail.newGameConfirmYes | Sim, novo jogo
+detail.continue | Continuar
+detail.continuePct | Continuar · {pct}%
+detail.newGame | Novo jogo
+detail.start | Começar o jogo
+play.howTo | Instruções
+play.howToTitle | Como jogar: {game}
+play.understood | Percebi
+play.dailyTitle | Desafio do dia: {game}
+play.autosave | O seu progresso é guardado automaticamente.
+play.loading | O jogo está a carregar…
+play.loadFailed | Não foi possível carregar o jogo. Verifique a sua ligação e tente de novo.
+play.done.title | Muito bem!
+play.done.text.daily | Terminou o desafio de hoje.
+play.done.text | Terminou este jogo.
+play.done.announce | Muito bem! O jogo terminou.
+play.done.again | Jogar de novo
+play.done.backHome | Voltar ao Início
+play.done.otherGame | Escolher outro jogo
+play.done.toHome | Ir para o Início
+settings.title | Definições
+settings.subtitle | Torne o Puzzleplace confortável para os seus olhos.
+settings.sectionReading | Leitura
+settings.textSize | Tamanho do texto
+settings.preview | É assim que o texto fica. Serve-lhe bem?
+settings.sectionLook | Aspeto
+settings.colours | Cores
+settings.coloursHint | Automático segue a definição do seu telemóvel ou computador.
+settings.theme.auto | Automático
+settings.theme.light | Claro
+settings.theme.dark | Escuro
+settings.contrast | Extra nítido
+settings.contrastHint | Contraste mais forte e contornos mais grossos
+settings.decor | Ramos em flor
+settings.decorHint | Decoração com flores de cerejeira
+settings.calm | Ecrã calmo
+settings.calmHint | Sem movimento
+settings.sectionAbout | Sobre si
+settings.firstName | O seu primeiro nome
+settings.firstNameHint | Opcional. Só o usamos para o cumprimentar.
+settings.account | Conta
+settings.accountLoggedIn | Sessão iniciada como {name}
+settings.accountLogIn | Iniciar sessão ou criar conta
+settings.helpTitle | Ajuda
+settings.helpHint | Perguntas e respostas
+settings.sectionReset | Recomeçar
+settings.reset | Apagar tudo
+settings.resetHint | Apaga o seu progresso e as definições neste dispositivo.
+settings.resetConfirmTitle | Apagar tudo?
+settings.resetConfirmText | Os seus jogos guardados e as definições serão apagados. Isto não pode ser desfeito.
+settings.resetConfirmYes | Sim, apagar tudo
+settings.saved | Definição guardada
+settings.nameSaved | Nome guardado
+help.title | Ajuda
+help.subtitle | Toque numa pergunta para ler a resposta.
+help.q1 | Como posso aumentar as letras?
+help.a1 | Vá a [{settings}](#/instellingen) e escolha «{large}» ou «{xlarge}» em «{textSize}».
+help.q2 | Perco o meu progresso se parar?
+help.a2 | Não. Depois de cada jogada, o seu jogo é guardado automaticamente neste dispositivo. Pode sempre tocar em «{back}» e continuar mais tarde.
+help.q3 | Como continuo um jogo?
+help.a3 | No ecrã Início encontra o jogo que estava a jogar. Toque nele para continuar. Também o encontra na página do próprio jogo.
+help.q4 | Como recomeço?
+help.a4 | Abra o jogo em «{games}» e toque em «{newGame}». Primeiro é-lhe perguntado se quer mesmo, por isso nunca apaga nada por engano.
+help.q5 | O que é o desafio do dia?
+help.a5 | Há um novo desafio todos os dias. No ecrã Início pode começá-lo com um toque.
+help.q6 | Posso pôr o Puzzleplace no ecrã principal como uma aplicação?
+help.a6 | Sim. Abra o menu do seu navegador e escolha «Adicionar ao ecrã principal» ou «Instalar aplicação».
+help.q7 | Tenho de iniciar sessão?
+help.a7 | Não. Pode jogar logo, sem conta.
+help.q8 | Como mudo o idioma?
+help.a8 | Vá a [{settings}](#/instellingen) e toque em «{language}». Os jogos e as listas de palavras mudam com ele.
+help.q9 | Como funciona o jogo {game}?
+help.a9 | Forme uma palavra de 3 a 7 letras, deslizando por letras vizinhas ou tocando nelas uma a seguir à outra. As casas da sua palavra passam a ser suas. Se o outro jogador depois formar uma palavra que passe pelas suas casas, fica com elas, exceto as casas protegidas (todos os vizinhos com a mesma cor). Quando todas as casas estiverem coloridas, ganha quem tiver mais. Toque em «{instructions}» no jogo para ver a explicação completa.
+help.q10 | Porque é que a minha palavra não é aceite no jogo {game}?
+help.a10 | Contam todas as palavras comuns da língua, incluindo plurais e formas verbais. Não contam: nomes próprios, abreviaturas, palavras estrangeiras e palavras muito raras. Uma palavra com menos de 3 letras não é possível. Os acentos não importam: um «ç» é simplesmente um «c». Recebe sempre uma breve explicação e errar não lhe custa nada.
+help.q11 | De onde vêm as palavras do jogo {game}?
+help.a11 | A lista de palavras é construída a partir do dicionário ortográfico aberto {source} ({license}) e de dados sobre a frequência das palavras. Nomes próprios, palavras estrangeiras e palavras que ninguém usa ficaram de fora. O computador só joga palavras do dia a dia.
+help.q12 | Como posso desafiar um amigo no jogo {game}?
+help.a12 | Crie uma conta em [{account}](#/account), adicione o seu amigo em [{friends}](#/vrienden) com o respetivo código de amigo e toque em «{newGame}» junto do seu amigo. Jogam à vez: não tem de esperar, a aplicação mostra quando é a sua vez.
+forms.show | Mostrar
+forms.hide | Ocultar
+forms.suggestPassword | Sugerir uma palavra-passe
+forms.fieldEmpty | Este campo está vazio.
+forms.wrong | Algo correu mal. Tente de novo.
+forms.busy | Um momento…
+forms.passwordWords | rosas,moinho,tulipas,chuva,luar,estrela,bolo,flores,jardim,pera,barco,praia,vela,trevo,ponte,nuvens,brisa,janela,pomar,laranja,campo,mesa,lago,sombra
+account.title | Conta
+account.password | Palavra-passe
+account.yourPassword | A sua palavra-passe
+account.currentPassword | A sua palavra-passe atual
+account.newPasswordLabel | A sua nova palavra-passe
+account.newPassword | Uma nova palavra-passe
+account.firstName | O seu primeiro nome
+account.email | O seu endereço de e-mail
+account.facebook.continue | Continuar com o Facebook
+account.orEmail | ou com o seu e-mail
+account.intro.text | Com uma conta, pode continuar em todos os seus dispositivos e jogar com amigos.
+account.intro.p1.title | O seu progresso em todos os dispositivos
+account.intro.p1.text | Comece no telemóvel e continue no tablet.
+account.intro.p2.title | Amigos e família
+account.intro.p2.text | Adicione alguém com um código. Sem estranhos, sem procuras.
+account.intro.p3.title | Jogar {game} em conjunto
+account.intro.p3.text | Formem palavras à vez, mesmo quando não estão ligados ao mesmo tempo.
+account.create | Criar conta
+account.haveOne | Já tenho uma conta
+account.optional | Pode sempre continuar a jogar sem conta. Tudo funciona então neste dispositivo.
+account.firstNameHint | É este o nome que os seus amigos veem.
+account.emailHint | É com ele que inicia sessão. Nunca enviamos publicidade.
+account.passwordHint | Pelo menos 8 caracteres. Três palavras seguidas são seguras e fáceis de lembrar.
+account.signup.pending | Primeiro crie uma conta, depois pode adicionar o seu amigo.
+account.signup.busy | A criar a sua conta…
+account.signup.haveAccount | Já tem uma conta? [Inicie sessão](#/account/inloggen).
+account.login | Iniciar sessão
+account.login.busy | A verificar…
+account.forgot | Esqueceu-se da palavra-passe?
+account.login.noAccount | Ainda não tem conta? [Crie uma](#/account/nieuw).
+account.loggedIn | Iniciou sessão.
+account.copy | Copiar
+account.copied | Copiado
+account.copyFailed | Não resultou
+account.print | Imprimir
+account.recoveryCode | O seu código de recuperação
+account.readyTitle | Conta pronta
+account.toAccount | Ir para a sua conta
+account.done.title | Pronto, {name}!
+account.done.text | A sua conta está pronta. Falta mais uma coisa importante.
+account.done.keep | Guarde este código num local seguro.
+account.done.keepText | Se alguma vez se esquecer da palavra-passe, usa este código para escolher uma nova. Escreva-o em papel ou guarde-o com os seus documentos importantes. Não o podemos consultar por si, mas pode sempre pedir um novo mais tarde.
+account.done.saved | Guardei o código
+account.done.continue | Continuar
+account.done.later | Faço isto mais tarde
+account.newRecovery | Novo código de recuperação
+account.newRecovery.hint | Para confirmar que é mesmo o próprio, antes de criarmos um novo código de recuperação. O anterior deixa de funcionar depois.
+account.newRecovery.make | Criar um novo código de recuperação
+account.newRecovery.keep | Guarde bem este novo código. O anterior já não funciona.
+account.forgotTitle | Esqueceu-se da palavra-passe
+account.forgot.text | Com o seu código de recuperação escolhe uma nova palavra-passe.
+account.recoveryLabel | O seu código de recuperação
+account.recoveryHint | É o código de 12 caracteres que recebeu ao criar a conta, como K7P4-QM2X-9TBR.
+account.setPassword | Definir nova palavra-passe
+account.lostBoth | Perdeu também o código de recuperação? Então, infelizmente, não lhe podemos dar acesso à conta. Pode criar uma conta nova; o progresso nos seus dispositivos mantém-se.
+account.sync.title | O seu progresso em todos os dispositivos
+account.sync.now | Sincronizar agora
+account.sync.busy | A atualizar…
+account.sync.failed | Não resultou: {error}
+account.sync.ok | Tudo atualizado ({time}).
+account.sync.soon | Será atualizado em breve.
+account.changeName | Alterar o seu nome
+account.save | Guardar
+account.nameSaved | Nome guardado
+account.viaFacebook | Sessão iniciada com o Facebook
+account.friendsHint | O seu código de amigo e os seus amigos
+account.changePassword | Alterar palavra-passe
+account.changePasswordHint | Escolha uma nova palavra-passe
+account.newRecoveryHint | Se perdeu o anterior
+account.logout | Terminar sessão
+account.logout.title | Terminar sessão?
+account.logout.text | O seu progresso está seguro na sua conta. Pode simplesmente iniciar sessão de novo mais tarde.
+account.logout.wipe | Terminar sessão e apagar tudo neste dispositivo
+account.logout.stay | Manter a sessão iniciada
+account.delete | Eliminar conta
+account.delete.text | A sua conta, os seus amigos e o seu progresso guardado no nosso servidor serão apagados. O que está nos seus dispositivos mantém-se.
+account.delete.passwordHint | Para confirmar que é mesmo o próprio.
+account.delete.confirmTitle | Tem a certeza?
+account.delete.confirmText | Isto não pode ser desfeito.
+account.delete.confirmYes | Sim, eliminar
+account.delete.submit | Sim, eliminar a minha conta
+account.changePassword.text | Nos seus outros dispositivos, terá de iniciar sessão de novo depois.
+account.changed.title | Feito
+account.changed.text | A sua palavra-passe foi alterada.
+account.changed.ok | Está bem
+account.facebook.title | Iniciar sessão com o Facebook
+account.facebook.failed | Não foi possível iniciar sessão com o Facebook, ou cancelou. Pode tentar de novo ou iniciar sessão com o seu e-mail.
+account.facebook.failedShort | Não foi possível iniciar sessão com o Facebook.
+common.backHome | Voltar ao Início
+common.yes | Sim
+common.no | Não
+common.fine | Está bem
+common.didNotWork | Não resultou
+friends.subtitle | Jogue em conjunto com pessoas que conhece.
+friends.loggedOut.link | Alguém quer ser seu amigo. Primeiro crie uma conta ou inicie sessão; depois continua logo.
+friends.loggedOut.text | Jogue em conjunto com pessoas que conhece. Para isso precisa de uma conta.
+friends.shareLinkCopied | Ligação copiada
+friends.renewCode | Criar um novo código
+friends.renew.title | Criar um novo código?
+friends.renew.text | O seu código antigo deixa de funcionar. Os amigos que já tem continuam a ser seus amigos.
+friends.renew.yes | Sim, novo código
+friends.renewed | Novo código criado
+friends.yourCode | O seu código de amigo
+friends.yourCodeHint | Dê este código a alguém que conheça. Assim, essa pessoa pode enviar-lhe um pedido de amizade.
+friends.score | Jogos ganhos: eu {me}, {name} {them}
+friends.deletedAccount | Conta eliminada
+friends.addTitle | Adicionar um amigo
+friends.haveCode | Recebeu um código?
+friends.haveCodeHint | Escreva o código de amigo de outra pessoa. Maiúsculas e traços não importam.
+friends.sendRequest | Enviar pedido
+friends.nowFriends | Fez uma nova amizade: {name}!
+friends.nowFriendsAnnounce | Fez uma nova amizade: {name}.
+friends.requestSentAnnounce | Pedido enviado a {name}.
+friends.requestSent | Pedido enviado a {name}. Assim que {name} aceitar, verá isso aqui.
+friends.wantsToBe | Aceita esta amizade?
+friends.wantsToBeRow | pede a sua amizade
+friends.waiting | À espera de resposta
+friends.asked | pedido {when}
+friends.withdraw | Retirar
+friends.withdrawn | Pedido retirado.
+friends.games | Os seus jogos
+friends.gameWith | {game} com {name}
+friends.statusTurn | É a sua vez
+friends.statusTheirTurn | É a vez de {name}
+friends.scoreLine | Eu {mine} · {name} {theirs} · {open} livres
+friends.play | Jogar
+friends.view | Ver
+friends.open | Abrir
+friends.ariaPlay | Jogar o jogo com {name}
+friends.ariaView | Ver o jogo com {name}
+friends.ariaOpen | Abrir o jogo com {name}
+friends.yourFriends | Os seus amigos
+friends.yourFriendsN | Os seus amigos ({n})
+friends.lastSeen | última visita {when}
+friends.playWith | Jogar {game} com {name}
+friends.remove | Remover
+friends.removeAria | Remover {name}
+friends.removeTitle | Remover {name}?
+friends.removeText | Deixam de ser amigos. Pode sempre enviar um novo pedido mais tarde.
+friends.removeYes | Sim, remover
+friends.removed | {name} já não está nos seus amigos.
+friends.none.title | Ainda sem amigos
+friends.none.text | Partilhe o seu código com alguém que conheça ou escreva acima o código de outra pessoa. Assim que forem amigos, podem jogar juntos.
+friends.link.brokenTitle | Esta ligação não funciona
+friends.link.ownTitle | Este é o seu próprio código
+friends.link.ownText | Envie esta ligação a outra pessoa, para que ela lhe possa enviar um pedido.
+friends.link.addTitle | Adicionar {name} aos amigos?
+friends.link.addText | Vamos enviar um pedido a {name}. Assim que {name} aceitar, são amigos.
+friends.link.yes | Sim, enviar pedido
+match.loading | O jogo está a carregar…
+match.with | com {name}
+match.you | Eu
+match.opponent | O adversário
+match.waitNote | Não precisa de esperar: pode fechar a aplicação. Assim que {name} jogar, verá um número junto a {friends} no menu.
+match.played | {name} jogou {word}. É a sua vez.
+match.over.resigned | O jogo terminou
+match.over.won | Ganhou, parabéns!
+match.over.draw | Empate!
+match.over.lost | Bem jogado!
+match.again | Mais um jogo com {name}
+match.backToFriends | Voltar aos Amigos
+match.stop | Parar este jogo
+match.stop.title | Parar este jogo?
+match.stop.text | O jogo termina então para ambos. Não há problema nenhum: pode sempre começar um novo com {name}.
+match.stop.yes | Sim, parar
+match.notFound | Este jogo não existe (ou já não existe).
+match.versionChanged | A posição tinha acabado de mudar. Veja o tabuleiro e experimente a sua palavra de novo.
+match.result.won | Ganhou, {mine} a {theirs}.
+match.result.wonTiebreak | Ganhou, {mine} a {theirs} (os resultados estavam empatados, por isso decidiram as casas protegidas).
+match.result.lost | {name} ganhou, {theirs} a {mine}.
+match.result.lostTiebreak | {name} ganhou, {theirs} a {mine} (os resultados estavam empatados, por isso decidiram as casas protegidas).
+match.result.draw_one | Empate: ambos têm {n} flor.
+match.result.draw_other | Empate: ambos têm {n} flores.
+match.result.resignedMe | Parou este jogo.
+match.result.resignedThem | {name} parou este jogo.
+err.notLoggedIn | Não tem sessão iniciada. Inicie sessão para continuar.
+err.loggedOut | A sua sessão foi terminada. Inicie sessão de novo.
+err.accountGone | Esta conta já não existe.
+err.tooFast | Está a ir depressa demais. Espere alguns minutos e tente de novo.
+err.emailTaken | Já existe uma conta com este e-mail. Quer iniciar sessão?
+err.tooManyLogins | Demasiadas tentativas de início de sessão. Espere um quarto de hora e tente de novo.
+err.loginWrong | O e-mail ou a palavra-passe não estão corretos.
+err.tooManyRecover | Demasiadas tentativas. Espere uma hora e tente de novo.
+err.recoverWrong | O e-mail ou o código de recuperação não estão corretos.
+err.noPasswordFacebook | Esta conta não tem palavra-passe: inicia sessão com o Facebook.
+err.currentPasswordWrong | A sua palavra-passe atual não está correta.
+err.passwordWrong | A sua palavra-passe não está correta.
+err.facebookOff | O início de sessão com o Facebook não está ativado aqui.
+err.facebookBadRequest | Este pedido não é válido. Tente de novo.
+err.facebookFailed | Não foi possível iniciar sessão com o Facebook. Tente de novo.
+err.tooManyLookups | Experimentou muitos códigos. Tente de novo mais tarde.
+err.codeUnknown | Não conhecemos este código de amigo. Confirme se o escreveu bem.
+err.ownCode | Este é o seu próprio código de amigo. Dê-o a um amigo.
+err.alreadyFriends | Já tem {name} entre os seus amigos.
+err.alreadyRequested | Já enviou um pedido a {name}. Tenha um pouco de paciência.
+err.tooManyRequests | Já tem muitos pedidos em aberto. Espere até alguns serem respondidos.
+err.maxFriends | Atingiu o número máximo de amigos.
+err.requestGone | Este pedido já não existe.
+err.friendGone | Este amigo já não está na sua lista.
+err.syncInvalid | Isto não parece ser um progresso válido.
+err.matchGone | Este jogo não existe (ou já não existe).
+err.gameUnavailable | Este jogo ainda não pode ser jogado contra um amigo.
+err.onlyFriends | Só pode jogar com amigos.
+err.tooManyMatches | Tem muitos jogos a decorrer. Termine alguns primeiro.
+err.lang.unknown | Este jogo não está disponível nesse idioma.
+err.matchOver | Este jogo já terminou.
+err.notYourTurn | Ainda não é a sua vez.
+err.versionChanged | Entretanto, a posição mudou. Atualize e tente de novo.
+err.notPlaying | Não faz parte deste jogo.
+err.name.length | Escolha um nome com 2 a 24 caracteres.
+err.name.chars | Este nome contém caracteres que não são permitidos.
+err.name.brackets | Não use < nem > no seu nome.
+err.email.invalid | Este endereço de e-mail não parece estar certo. Tem este aspeto: nome@exemplo.com
+err.password.short | Uma palavra-passe deve ter pelo menos 8 caracteres. Dica: três palavras seguidas, como rosas-moinho-luar.
+err.password.long | Esta palavra-passe é demasiado longa (no máximo 128 caracteres).
+err.network | Não há ligação ao servidor. Verifique a sua internet e tente de novo.
+err.noServer | Não há nenhum servidor disponível.
+err.generic | Algo correu mal. Tente de novo mais tarde.
+err.syncConflict | Entretanto, algo mudou noutro dispositivo.
+err.syncFailed | A sincronização não resultou. Tente de novo daqui a pouco.
+err.server | Algo correu mal do nosso lado. Tente de novo mais tarde.
+err.tooBig | Isto é grande demais para ser enviado.
+err.badJson | Esta mensagem não pode ser lida.
+err.unknown | Isto não existe.
+err.move.over | Este jogo terminou.
+err.move.path | Este caminho não é válido.
+err.move.minLength_one | Uma palavra tem pelo menos {n} letra.
+err.move.minLength_other | Uma palavra tem pelo menos {n} letras.
+err.move.maxLength_one | Uma palavra tem no máximo {n} letra.
+err.move.maxLength_other | Uma palavra tem no máximo {n} letras.
+err.move.reuse | Só pode usar cada letra uma vez.
+err.move.adjacent | As letras de uma palavra têm de estar lado a lado.
+err.move.unknown | Não conhecemos esta palavra. Experimente outra.
+err.move.played | «{word}» já foi jogada neste jogo. Escolha outra palavra.
+err.move.noFresh | Cada palavra tem de colorir pelo menos uma casa livre. Procure uma palavra com uma casa branca.

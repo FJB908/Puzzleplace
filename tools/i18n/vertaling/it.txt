@@ -33,7 +33,7 @@ home.greeting.afternoon | Buon pomeriggio
 home.greeting.evening | Buonasera
 home.greetingName | {greeting}, {name}
 home.welcome.title | Il testo si legge bene?
-home.welcome.sizeGroup | Dimensione del testo
+home.welcome.sizeGroup | Dimensione testo
 size.normal | Normale
 size.large | Grande
 size.xlarge | Molto grande
@@ -153,14 +153,14 @@ woordzoeker.level.gemiddeld | 10 per 10 · anche in diagonale
 woordzoeker.level.moeilijk | 12 per 12 · anche al contrario
 woordzoeker.level.extreem | 13 per 13 · 15 parole
 kruiswoord.gridAria | Griglia del cruciverba
-kruiswoord.prevClue | Definizione precedente
-kruiswoord.nextClue | Definizione successiva
+kruiswoord.prevClue | Precedente
+kruiswoord.nextClue | Successiva
 kruiswoord.clueGroup | Definizione
 kruiswoord.start | Tocca una casella per iniziare.
 kruiswoord.backspace | Torna indietro e cancella la lettera
 kruiswoord.keyboard | Tastiera
 kruiswoord.word | Parola
-kruiswoord.allClues | Tutte le definizioni
+kruiswoord.allClues | Definizioni
 kruiswoord.acrossTitle | Orizzontali
 kruiswoord.downTitle | Verticali
 kruiswoord.entryAcross | {n} orizzontale
@@ -319,7 +319,7 @@ play.done.toHome | Vai a Inizio
 settings.title | Impostazioni
 settings.subtitle | Rendi Puzzleplace comodo per i tuoi occhi.
 settings.sectionReading | Lettura
-settings.textSize | Dimensione del testo
+settings.textSize | Dimensione testo
 settings.preview | Ecco come appare il testo. Va bene per te?
 settings.sectionLook | Aspetto
 settings.colours | Colori
@@ -409,7 +409,7 @@ account.signup.pending | Prima crea un account, poi potrai aggiungere il tuo ami
 account.signup.busy | Creazione dell'account in corso…
 account.signup.haveAccount | Hai già un account? [Accedi](#/account/inloggen).
 account.login | Accedi
-account.login.busy | Verifica in corso…
+account.login.busy | Verifica…
 account.forgot | Hai dimenticato la password?
 account.login.noAccount | Non hai ancora un account? [Creane uno](#/account/nieuw).
 account.loggedIn | Hai effettuato l'accesso.
@@ -439,7 +439,7 @@ account.setPassword | Imposta la nuova password
 account.lostBoth | Hai perso anche il codice di recupero? Purtroppo allora non possiamo darti accesso al tuo account. Puoi creare un nuovo account; i progressi sui tuoi dispositivi restano.
 account.sync.title | I tuoi progressi su tutti i dispositivi
 account.sync.now | Sincronizza ora
-account.sync.busy | Aggiornamento in corso…
+account.sync.busy | Aggiorno…
 account.sync.failed | Non ha funzionato: {error}
 account.sync.ok | Tutto aggiornato ({time}).
 account.sync.soon | Verrà aggiornato a breve.
