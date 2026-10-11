@@ -207,7 +207,7 @@ async function startServer() {
   sync.init();
   // Schermen die pas met de server compleet zijn (Start met vrienden, account, partijen), nu opnieuw tekenen
   const route = location.hash.replace(/^#/, '') || '/';
-  if (route === '/' || /^\/(account|vrienden|partij|instellingen|hulp)(\/|$)/.test(route)) render(false);
+  if (route === '/' || /^\/(account|vrienden|partij|instellingen|hulp)(\/|$)/.test(route) || route === '/spel/woordtuin') render(false);
 }
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {

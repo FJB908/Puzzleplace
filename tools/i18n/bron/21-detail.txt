@@ -15,3 +15,12 @@ detail.continue | Continue | Verder spelen
 detail.continuePct | Continue · {pct}% | Verder spelen · {pct}%
 detail.newGame | New game | Nieuw spel
 detail.start | Start game | Spel starten
+##### Woordtuin: speel tegen een vriend (op het scherm van het spel)
+detail.friend.title | Play against a friend | Speel tegen een vriend
+detail.friend.login | Log in or make an account to play Word Garden against a friend. | Log in of maak een account om Woordtuin tegen een vriend te spelen.
+detail.friend.loginButton | Log in or sign up | Inloggen of account maken
+detail.friend.none | You have no friends here yet. Add a friend with a friend code. | Je hebt hier nog geen vrienden. Voeg een vriend toe met een vriendencode.
+detail.friend.addButton | Add a friend | Vriend toevoegen
+# {n} is het aantal partijen dat je samen met deze vriend speelde.
+detail.friend.played | Games together: {n} | Samen gespeeld: {n}
+detail.friend.all | All friends | Alle vrienden

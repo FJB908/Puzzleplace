@@ -685,3 +685,10 @@ woordtuin.pass.yes | Ja, passen
 woordtuin.last.me.pass | Sie haben gepasst. Passt {name} ebenfalls, ist das Spiel zu Ende.
 woordtuin.last.other.pass | {name} hat gepasst. Passen Sie ebenfalls, ist das Spiel zu Ende.
 woordtuin.last.pc.pass | Der Computer hat gepasst. Passen Sie ebenfalls, ist das Spiel zu Ende.
+detail.friend.title | Gegen einen Freund spielen
+detail.friend.login | Melden Sie sich an oder erstellen Sie ein Konto, um Wortgarten gegen einen Freund zu spielen.
+detail.friend.loginButton | Anmelden oder Konto erstellen
+detail.friend.none | Sie haben hier noch keine Freunde. Fügen Sie einen Freund mit einem Freundescode hinzu.
+detail.friend.addButton | Freund hinzufügen
+detail.friend.played | Zusammen gespielt: {n}
+detail.friend.all | Alle Freunde

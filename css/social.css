@@ -89,3 +89,10 @@ html[data-contrast="high"] .btn-facebook { border: 3px solid var(--border); }
   .code-card { box-shadow: none; }
   .code-card::before { display: none; }
 }
+
+/* ----- Woordtuin: speel tegen een vriend (op het scherm van het spel) ----- */
+.detail-vrienden h2 { margin: 0; font-size: 1.2rem; }
+.dv-lijst { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+.dv-rij { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+.dv-wie { flex: 1 1 7rem; min-width: 0; display: flex; flex-direction: column; overflow-wrap: anywhere; }
+.dv-rij .btn { flex: 0 1 auto; }

@@ -1,0 +1,16 @@
+# Eén klik online op Render (render.com): "New +" > "Blueprint" > kies deze repository. Zie docs/ONLINE.md.
+services:
+  - type: web
+    name: puzzleplace
+    runtime: node
+    plan: free
+    buildCommand: echo "geen bouwstap nodig"
+    startCommand: node server/index.mjs
+    healthCheckPath: /api/ping
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: TRUST_PROXY
+        value: "1"
+      - key: NODE_VERSION
+        value: "22"

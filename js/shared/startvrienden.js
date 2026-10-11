@@ -44,3 +44,20 @@ export const partijTaal = (m, uiTaal) => {
   const taal = m.config?.lang ?? 'nl';
   return taal === uiTaal ? '' : taal;
 };
+
+
+// Vrienden om tegen te spelen, de meest gespeelde bovenaan: het aantal partijen (ook afgelopen) dat je met elk samen speelde.
+// Daarna wie het laatst online was, daarna op naam. Heeft een vriend een lopende partij, dan staat die erbij (om verder te spelen).
+export function meestGespeeld(me, friends, partijen, game = 'woordtuin') {
+  const telling = new Map(), lopend = new Map();
+  for (const m of partijen) {
+    if (m.game !== game) continue;
+    const other = m.players.find((p) => p.id !== me);
+    if (!other?.id) continue;
+    telling.set(other.id, (telling.get(other.id) || 0) + 1);
+    if (m.status === 'active' && (!lopend.has(other.id) || lopend.get(other.id).updatedAt < m.updatedAt)) lopend.set(other.id, m);
+  }
+  return friends
+    .map((friend) => ({ friend, aantal: telling.get(friend.id) || 0, lopend: lopend.get(friend.id) || null }))
+    .sort((a, b) => b.aantal - a.aantal || (b.friend.lastSeen || '').localeCompare(a.friend.lastSeen || '') || a.friend.name.localeCompare(b.friend.name));
+}

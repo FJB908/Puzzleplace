@@ -1,7 +1,13 @@
 // Voor het spelen: wat is dit spel, welk niveau, en dan één grote knop.
 // Flow: Spellen -> dit scherm -> Spelen. Nooit meer dan drie tikken vanaf Start.
 
-import { h, icon, confirmDialog } from '../ui.js';
+import { h, icon, avatar, confirmDialog } from '../ui.js';
+import { FEATURES } from '../config.js';
+import * as auth from '../services/auth.js';
+import * as social from '../services/social.js';
+import * as matches from '../services/matches.js';
+import { meestGespeeld } from '../shared/startvrienden.js';
+import { nieuwePartij } from './partij.js';
 import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { gameArt } from '../games/art.js';
@@ -95,8 +101,41 @@ export function gameDetailView({ id }, app) {
       ]
     : [h('button', { type: 'button', class: 'btn btn-primary btn-block', onclick: startNew }, icon('play'), t('detail.start'))];
 
+  // Woordtuin: ook tegen een vriend, met de meest gespeelde vrienden bovenaan
+  const vriendenBlok = id === 'woordtuin' && FEATURES.friends ? vriendenSectie() : null;
+
   return {
     title: game.name, nav: 'games', decor: 'hang-rechts',
-    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions)),
+    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), vriendenBlok?.el),
+    cleanup: () => vriendenBlok?.off(),
   };
+}
+
+
+// "Speel tegen een vriend": zonder account een uitnodiging om in te loggen, anders de vrienden (meest gespeeld eerst) met één knop per vriend
+function vriendenSectie() {
+  const lijst = h('div', { class: 'stack' });
+  const el = h('section', { class: 'card stack detail-vrienden', 'aria-labelledby': 'dv-titel' }, h('h2', { id: 'dv-titel' }, t('detail.friend.title')), lijst);
+  const nodig = () => h('a', { class: 'btn btn-block', href: '#/account/inloggen' }, icon('user'), t('detail.friend.loginButton'));
+  function render() {
+    const u = auth.getUser();
+    if (!u) { lijst.replaceChildren(h('p', {}, t('detail.friend.login')), nodig()); return; }
+    const data = social.cached(), partijen = matches.cached();
+    if (!(social.isLoaded() && matches.isLoaded())) { lijst.replaceChildren(h('p', { class: 'muted' }, t('common.loading'))); return; }
+    const rijen = meestGespeeld(u.id, data.friends, partijen);
+    if (!rijen.length) { lijst.replaceChildren(h('p', {}, t('detail.friend.none')), h('a', { class: 'btn btn-block', href: '#/vrienden' }, icon('friends'), t('detail.friend.addButton'))); return; }
+    const MAX = 6;
+    lijst.replaceChildren(...[
+      h('ul', { class: 'dv-lijst' }, rijen.slice(0, MAX).map(({ friend, aantal, lopend }) => h('li', { class: 'dv-rij' },
+        avatar(friend.name, friend.id),
+        h('span', { class: 'dv-wie' }, h('strong', {}, friend.name), aantal ? h('small', { class: 'muted' }, t('detail.friend.played', { n: aantal })) : null),
+        lopend
+          ? h('a', { class: 'btn btn-primary', href: `#/partij/${lopend.id}` }, icon('play'), t('detail.continue'))
+          : h('button', { type: 'button', class: 'btn btn-primary', onclick: () => nieuwePartij(friend) }, icon('play'), t('detail.newGame'))))),
+      rijen.length > MAX ? h('a', { class: 'link-quiet', href: '#/vrienden' }, t('detail.friend.all')) : null].filter(Boolean));
+  }
+  render();
+  if (auth.getUser()) { social.list().catch(() => {}); matches.list().catch(() => {}); }
+  const offs = [social.subscribe(render), matches.subscribe(render), auth.subscribe(render)];
+  return { el, off: () => offs.forEach((f) => f()) };
 }

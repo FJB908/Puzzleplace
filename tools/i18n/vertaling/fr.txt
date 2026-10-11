@@ -650,3 +650,10 @@ woordtuin.pass.yes | Oui, passer
 woordtuin.last.me.pass | Vous avez passé. Si {name} passe aussi, la partie est terminée.
 woordtuin.last.other.pass | {name} a passé. Si vous passez aussi, la partie est terminée.
 woordtuin.last.pc.pass | L’ordinateur a passé. Si vous passez aussi, la partie est terminée.
+detail.friend.title | Jouer contre un ami
+detail.friend.login | Connectez-vous ou créez un compte pour jouer à Jardin de mots contre un ami.
+detail.friend.loginButton | Se connecter ou créer un compte
+detail.friend.none | Vous n’avez pas encore d’amis ici. Ajoutez un ami avec un code ami.
+detail.friend.addButton | Ajouter un ami
+detail.friend.played | Parties ensemble : {n}
+detail.friend.all | Tous les amis

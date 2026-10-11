@@ -673,3 +673,10 @@ woordtuin.pass.yes | Tak, pasuję
 woordtuin.last.me.pass | Pasujesz. Jeśli {name} też spasuje, gra się kończy.
 woordtuin.last.other.pass | {name} pasuje. Jeśli ty też spasujesz, gra się kończy.
 woordtuin.last.pc.pass | Komputer pasuje. Jeśli ty też spasujesz, gra się kończy.
+detail.friend.title | Graj z przyjacielem
+detail.friend.login | Zaloguj się lub załóż konto, aby grać w Ogród słów z przyjacielem.
+detail.friend.loginButton | Zaloguj się lub załóż konto
+detail.friend.none | Nie masz tu jeszcze znajomych. Dodaj znajomego za pomocą kodu znajomego.
+detail.friend.addButton | Dodaj znajomego
+detail.friend.played | Wspólne gry: {n}
+detail.friend.all | Wszyscy znajomi
