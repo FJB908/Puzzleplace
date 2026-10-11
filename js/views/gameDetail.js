@@ -78,6 +78,10 @@ export function gameDetailView({ id }, app) {
         confirmLabel: t('detail.newGameConfirmYes'),
       });
       if (!ok) return;
+      // Het bewaarde spel is weg: het scherm gaat open voor een ander niveau (kies er een en tik op Starten)
+      store.updateGame(id, (r) => { r.slots.normal = store.clearedSlot(); });
+      app.refresh();
+      return;
     }
     store.updateGame(id, (r) => { r.slots.normal = store.clearedSlot(); r.difficulty = level; });
     location.hash = `#/spel/${id}/speel`;

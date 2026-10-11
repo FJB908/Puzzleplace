@@ -125,7 +125,7 @@ export function makeBoard(seed, size = SIZE, taal = 'nl') {
 
 export function newGame(seed, { size = SIZE, first = 1, lang = 'nl' } = {}) {
   const letters = makeBoard(seed, size, lang);
-  return { lang, size, letters, owner: new Array(size * size).fill(0), played: [], by: [], turn: first, over: false, passed: false, last: null };
+  return { lang, size, letters, owner: new Array(size * size).fill(0), played: [], by: [], passes: 0, turn: first, over: false, passed: false, last: null };
 }
 
 export const other = (p) => 3 - p;
@@ -207,10 +207,19 @@ export function applyMove(state, player, path) {
   const owner = state.owner.slice();
   for (const i of [...fresh, ...took]) owner[i] = player;
   const next = {
-    ...state, owner, played: [...state.played, word], by: [...(state.by || []), player], passed: false,
+    ...state, owner, played: [...state.played, word], by: [...(state.by || []), player], passed: false, passes: 0,
     last: { player, word, path: [...path], took, fresh },
   };
   settle(next, player);
+  return next;
+}
+
+// Passen: je slaat je beurt vrijwillig over. Past de ander daarna ook (of kan de ander niets meer), dan is het spel afgelopen.
+export function passTurn(state, player) {
+  if (state.over) throw new MoveError('klaar', 'move.over');
+  const them = other(player);
+  const next = { ...state, passed: false, passes: (state.passes || 0) + 1, last: { player, word: '', pass: true, path: [], took: [], fresh: [] } };
+  if (next.passes >= 2 || !hasEasyMove(next, them)) { next.over = true; next.turn = null; } else next.turn = them;
   return next;
 }
 

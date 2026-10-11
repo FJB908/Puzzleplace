@@ -642,3 +642,11 @@ account.changePassword.mailText | ¿No sabes tu contraseña actual? Podemos envi
 err.noEmail | Esta cuenta no tiene correo electrónico, así que no podemos enviar un código.
 account.changePassword.noOld | ¿No recuerdas tu contraseña actual? Has iniciado sesión en este dispositivo, así que puedes elegir una nueva sin la antigua. Tus otros dispositivos tendrán que volver a iniciar sesión.
 play.viewResult | Ver el resultado
+woordtuin.pass | Pasar
+woordtuin.pass.title | ¿Pasar tu turno?
+woordtuin.pass.text.pc | Si el ordenador tampoco puede formar ninguna palabra, la partida termina.
+woordtuin.pass.text.other | Si {name} también pasa, la partida termina.
+woordtuin.pass.yes | Sí, pasar
+woordtuin.last.me.pass | Has pasado. Si {name} también pasa, la partida termina.
+woordtuin.last.other.pass | {name} ha pasado. Si tú también pasas, la partida termina.
+woordtuin.last.pc.pass | El ordenador ha pasado. Si tú también pasas, la partida termina.

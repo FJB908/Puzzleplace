@@ -677,3 +677,11 @@ account.changePassword.mailText | Kennen Sie Ihr jetziges Passwort nicht? Wir k�
 err.noEmail | Dieses Konto hat keine E-Mail-Adresse, daher können wir keinen Code senden.
 account.changePassword.noOld | Kennen Sie Ihr jetziges Passwort nicht mehr? Sie sind auf diesem Gerät angemeldet, also können Sie ohne das alte ein neues Passwort wählen. Ihre anderen Geräte müssen sich dann neu anmelden.
 play.viewResult | Ergebnis anzeigen
+woordtuin.pass | Passen
+woordtuin.pass.title | Beim Zug passen?
+woordtuin.pass.text.pc | Kann der Computer auch kein Wort mehr bilden, ist das Spiel zu Ende.
+woordtuin.pass.text.other | Passt {name} ebenfalls, ist das Spiel zu Ende.
+woordtuin.pass.yes | Ja, passen
+woordtuin.last.me.pass | Sie haben gepasst. Passt {name} ebenfalls, ist das Spiel zu Ende.
+woordtuin.last.other.pass | {name} hat gepasst. Passen Sie ebenfalls, ist das Spiel zu Ende.
+woordtuin.last.pc.pass | Der Computer hat gepasst. Passen Sie ebenfalls, ist das Spiel zu Ende.

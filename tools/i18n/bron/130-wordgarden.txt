@@ -92,3 +92,16 @@ woordtuin.level.makkelijk | Sees few words and does not always pay attention | Z
 woordtuin.level.gemiddeld | Only sees part of the words | Ziet maar een deel van de woorden
 woordtuin.level.moeilijk | Sees many words and chooses cleverly | Ziet veel woorden en kiest slim
 woordtuin.level.extreem | Sees everything and thinks ahead | Ziet alles en denkt vooruit
+##### Passen (je beurt overslaan)
+# Knop naast Tip en Zet terug. Eén woord, kort.
+woordtuin.pass | Pass | Pas
+woordtuin.pass.title | Pass your turn? | Je beurt overslaan?
+# Uitleg in het bevestigingsvenster als je tegen de computer speelt.
+woordtuin.pass.text.pc | If the computer cannot make a word either, the game ends. | Kan de computer ook geen woord meer maken, dan is het spel afgelopen.
+# Uitleg als je tegen een vriend speelt. {name} is de naam van de ander.
+woordtuin.pass.text.other | If {name} passes too, the game ends. | Past {name} ook, dan is het spel afgelopen.
+woordtuin.pass.yes | Yes, pass | Ja, passen
+# Regel boven het bord na een pas. me = jij zelf ({name} is de ander), other/pc = de ander.
+woordtuin.last.me.pass | You passed. If {name} passes too, the game ends. | Jij hebt gepast. Past {name} ook, dan is het spel afgelopen.
+woordtuin.last.other.pass | {name} passed. If you pass too, the game ends. | {name} heeft gepast. Pas jij ook, dan is het spel afgelopen.
+woordtuin.last.pc.pass | The computer passed. If you pass too, the game ends. | De computer heeft gepast. Pas jij ook, dan is het spel afgelopen.

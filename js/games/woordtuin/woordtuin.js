@@ -5,7 +5,7 @@
 // (hoeveel woorden hij ziet, hoe slordig hij kiest en of hij vooruitkijkt, zie NIVEAUS in engine.js).
 
 import { maakPaneel } from './paneel.js';
-import { newGame, applyMove, botMove, geefDoor, tip, result, counts, makeRng, taalVan } from './engine.js';
+import { newGame, applyMove, passTurn, botMove, geefDoor, tip, result, counts, makeRng, taalVan } from './engine.js';
 import { laadWoordenboek } from './woordenboek.js';
 import { uitslagKaart } from './uitslag.js';
 import { burst, rain, motionOK } from '../../effects.js';
@@ -29,6 +29,12 @@ export async function mount(container, ctx) {
     onZet: async (path) => {
       state.stack = [...state.stack.slice(-4), state.game];                  // om "Zet terug" mogelijk te maken
       state.game = applyMove(state.game, ME, path);
+      bewaar(); toon(true);
+      await verder();
+    },
+    onPas: async () => {
+      state.stack = [...state.stack.slice(-4), state.game];
+      state.game = passTurn(state.game, ME);
       bewaar(); toon(true);
       await verder();
     },

@@ -2,14 +2,14 @@
 // over wie wat speelt: de ouder (tegen de computer, of tegen een vriend via de server) geeft in `onZet` aan wat er met
 // een zet gebeurt. Zo is het scherm voor beide precies hetzelfde.
 
-import { h, icon } from '../../ui.js';
+import { h, icon, choiceDialog } from '../../ui.js';
 import { t, foutTekst } from '../../i18n/index.js';
 import { TALEN, vouw, isAlfabet, typInvoer } from '../../shared/talen.js';
 import { maakBord, HEK, TULP } from './bord.js';
 import { checkMove, MoveError, counts, pathsFor, MIN_LEN, other, taalVan } from './engine.js';
 
 // tegenComputer: de tegenstander is de computer (dan zeggen we "de computer" in plaats van een naam)
-export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('match.opponent') }, tegenComputer = false, tips = null, onZet, onTip, onTerug = null, kanTerug = () => true }) {
+export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you'), 2: t('match.opponent') }, tegenComputer = false, tips = null, onZet, onTip, onTerug = null, kanTerug = () => true }) {
   let state = null, busy = false, tipsOver = tips, plekken = [], plek = 0;
 
   const bord = maakBord({ onChange: (path, bron) => bijwerken(bron) });
@@ -49,7 +49,8 @@ export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('matc
   const tipKnop = onTip ? h('button', { type: 'button', class: 'btn', onclick: tip }, icon('bulb'), h('span', {}, t('common.hint'))) : null;
   const terugKnop = onTerug ? h('button', { type: 'button', class: 'btn', onclick: terug }, icon('undo'), t('woordtuin.undo')) : null;
   const knoppen = h('div', { class: 'wt-knoppen' }, wis, klaarKnop);
-  const extra = h('div', { class: 'wt-extra' }, tipKnop, terugKnop, typKnop);
+  const pasKnop = onPas ? h('button', { type: 'button', class: 'btn', onclick: pas }, icon('close'), h('span', {}, t('woordtuin.pass'))) : null;
+  const extra = h('div', { class: 'wt-extra' }, tipKnop, terugKnop, pasKnop, typKnop);
 
   const hekje = h('span', {}); hekje.innerHTML = HEK; hekje.append(` ${t('woordtuin.legend')}`);
   const legenda = h('p', { class: 'wt-legenda' }, hekje);
@@ -77,6 +78,7 @@ export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('matc
     else beurt.textContent = `${tegenComputer ? t('woordtuin.theirTurnPc') : t('woordtuin.theirTurn', { name: names[state.turn] })}${nog}`;
     beurt.classList.toggle('jij', !state.over && state.turn === me);
     if (state.passed && !state.over) laatste.textContent = zinMet('passed', other(state.turn));
+    else if (state.last?.pass) laatste.textContent = t(`woordtuin.last.${wie(state.last.player)}.pass`, { name: state.last.player === me ? names[hun] : names[state.last.player] });
     else if (state.last) {
       const l = state.last, word = l.word.toUpperCase();
       laatste.textContent = l.took.length
@@ -93,6 +95,7 @@ export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('matc
     typKnop.disabled = !mag;
     if (tipKnop) tipKnop.disabled = !mag || (tipsOver !== null && tipsOver <= 0);
     if (terugKnop) terugKnop.disabled = !mag || !kanTerug();
+    if (pasKnop) pasKnop.disabled = !mag;
   }
 
   function bijwerken() {
@@ -177,6 +180,23 @@ export function maakPaneel({ me = 1, names = { 1: t('woordtuin.you'), 2: t('matc
     if (!tipKnop) return;
     tipKnop.lastChild.textContent = tipsOver === null ? t('common.hint') : t('woordtuin.hintLeft', { n: tipsOver });
     tipKnop.disabled = tipsOver !== null && tipsOver <= 0;
+  }
+
+  // Passen: eerst vragen (en uitleggen dat het spel afloopt als de ander ook past), dan doorgeven
+  async function pas() {
+    if (!aanDeBeurt() || !onPas) return;
+    const ander = names[hun];
+    const ok = await choiceDialog({
+      title: t('woordtuin.pass.title'),
+      text: tegenComputer ? t('woordtuin.pass.text.pc') : t('woordtuin.pass.text.other', { name: ander }),
+      actions: [{ label: t('common.noGoBack'), value: false, primary: true, autofocus: true }, { label: t('woordtuin.pass.yes'), value: true }],
+      dismissValue: false,
+    });
+    if (!ok || !aanDeBeurt()) return;
+    busy = true; beschikbaar(); uitleg.textContent = t('woordtuin.waiting');
+    try { await onPas(); bord.setPath([], 'klaar'); invoer.value = ''; plekken = []; anderePlek.hidden = true; }
+    catch (e) { uitleg.textContent = foutTekst(e); }
+    finally { busy = false; beschikbaar(); bijwerken(); }
   }
 
   async function terug() {

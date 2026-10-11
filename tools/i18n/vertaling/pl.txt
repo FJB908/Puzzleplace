@@ -665,3 +665,11 @@ account.changePassword.mailText | Nie znasz obecnego hasła? Możemy zamiast teg
 err.noEmail | To konto nie ma adresu e-mail, więc nie możemy wysłać kodu.
 account.changePassword.noOld | Nie pamiętasz obecnego hasła? Jesteś zalogowany na tym urządzeniu, więc możesz ustawić nowe bez starego. Pozostałe urządzenia będą musiały zalogować się ponownie.
 play.viewResult | Pokaż wynik
+woordtuin.pass | Pas
+woordtuin.pass.title | Spasować?
+woordtuin.pass.text.pc | Jeśli komputer też nie może ułożyć żadnego słowa, gra się kończy.
+woordtuin.pass.text.other | Jeśli {name} też spasuje, gra się kończy.
+woordtuin.pass.yes | Tak, pasuję
+woordtuin.last.me.pass | Pasujesz. Jeśli {name} też spasuje, gra się kończy.
+woordtuin.last.other.pass | {name} pasuje. Jeśli ty też spasujesz, gra się kończy.
+woordtuin.last.pc.pass | Komputer pasuje. Jeśli ty też spasujesz, gra się kończy.

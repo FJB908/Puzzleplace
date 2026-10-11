@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { laadWoordenboek } from '../js/games/woordtuin/woordenboek.js';
 import {
-  SIZE, newGame, makeBoard, checkMove, applyMove, legalMoves, hasMove, hasEasyMove, isProtected, counts, result, pathsFor, botMove, tip,
+  SIZE, newGame, makeBoard, checkMove, applyMove, passTurn, legalMoves, hasMove, hasEasyMove, isProtected, counts, result, pathsFor, botMove, tip,
   geefDoor, isWord, MoveError, makeRng, NIVEAUS,
 } from '../js/games/woordtuin/engine.js';
 
@@ -196,4 +196,20 @@ test('de computer slaat over als hij alleen nog woorden heeft die hij niet speel
     if (gevonden >= 3) break;
   }
   assert.ok(gevonden >= 3);
+});
+
+test('passen: past de ander ook, dan is het spel afgelopen; speelt de ander, dan loopt het door', () => {
+  const g = newGame('pas-1', { first: 1 });
+  const een = passTurn(g, 1);
+  assert.equal(een.over, false); assert.equal(een.turn, 2); assert.equal(een.passes, 1); assert.equal(een.last.pass, true);
+  assert.equal(een.last.player, 1);
+  const twee = passTurn(een, 2);
+  assert.equal(twee.over, true); assert.equal(twee.turn, null, 'beide spelers passen: afgelopen');
+  assert.throws(() => passTurn(twee, 1), (e) => e instanceof MoveError && e.key === 'move.over');
+  // speelt de ander een woord, dan telt een eerdere pas niet meer mee
+  const zet = legalMoves(een, 2, true)[0];
+  const na = applyMove(een, 2, zet.path);
+  assert.equal(na.passes, 0);
+  assert.equal(passTurn(na, 1).over, false);
+  assert.equal(g.passes, 0, 'de oude toestand blijft ongemoeid');
 });

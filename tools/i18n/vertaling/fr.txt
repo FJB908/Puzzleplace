@@ -642,3 +642,11 @@ account.changePassword.mailText | Vous ne connaissez plus votre mot de passe act
 err.noEmail | Ce compte n’a pas d’adresse e-mail, nous ne pouvons donc pas envoyer de code.
 account.changePassword.noOld | Vous ne vous souvenez plus de votre mot de passe actuel ? Vous êtes connecté sur cet appareil : vous pouvez donc en choisir un nouveau sans l’ancien. Vos autres appareils devront se reconnecter.
 play.viewResult | Voir le résultat
+woordtuin.pass | Passer
+woordtuin.pass.title | Passer votre tour ?
+woordtuin.pass.text.pc | Si l’ordinateur ne peut plus former de mot non plus, la partie est terminée.
+woordtuin.pass.text.other | Si {name} passe aussi, la partie est terminée.
+woordtuin.pass.yes | Oui, passer
+woordtuin.last.me.pass | Vous avez passé. Si {name} passe aussi, la partie est terminée.
+woordtuin.last.other.pass | {name} a passé. Si vous passez aussi, la partie est terminée.
+woordtuin.last.pc.pass | L’ordinateur a passé. Si vous passez aussi, la partie est terminée.

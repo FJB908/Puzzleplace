@@ -6,7 +6,7 @@
 
 import { randomBytes, randomInt } from 'node:crypto';
 import { RuleError } from '../api.mjs';
-import { newGame, applyMove, result, counts, MoveError, taalVan } from '../../js/games/woordtuin/engine.js';
+import { newGame, applyMove, passTurn, result, counts, MoveError, taalVan } from '../../js/games/woordtuin/engine.js';
 import { laadWoordenboek } from '../../js/games/woordtuin/woordenboek.js';
 import { isKlaar } from '../../js/shared/talen.js';
 
@@ -37,7 +37,7 @@ export const woordtuinRules = {
     if (!slot) throw new RuleError('notPlaying');
     const path = move?.path;
     let next;
-    try { next = applyMove(pub, slot, path); }
+    try { next = move?.pass === true ? passTurn(pub, slot) : applyMove(pub, slot, path); }
     catch (e) { if (e instanceof MoveError) throw new RuleError(e.key, e.params); throw e; }
     const out = { pub: { ...next, players: pub.players }, secret: null, turn: next.over ? null : pub.players[next.turn - 1] };
     if (next.over) {
@@ -50,6 +50,6 @@ export const woordtuinRules = {
   // Een korte samenvatting voor in de lijst met partijen (de lijst bevat niet het hele bord)
   summary({ pub }) {
     const c = counts(pub);
-    return { scores: { [pub.players[0]]: c[1], [pub.players[1]]: c[2] }, open: c[0], last: pub.last ? { player: pub.players[pub.last.player - 1], word: pub.last.word } : null, lang: taalVan(pub) };
+    return { scores: { [pub.players[0]]: c[1], [pub.players[1]]: c[2] }, open: c[0], last: pub.last ? { player: pub.players[pub.last.player - 1], word: pub.last.word, pass: !!pub.last.pass } : null, lang: taalVan(pub) };
   },
 };

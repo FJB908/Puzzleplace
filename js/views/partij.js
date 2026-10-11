@@ -76,7 +76,7 @@ export function partijView({ id }, app) {
     wacht.textContent = t('match.waitNote', { name: opp, friends: t('nav.friends') });
     stop.hidden = klaar;
     if (eerder && eerder.version !== m.version && m.pub.last && m.pub.last.player !== slot) {
-      announce(t('match.played', { name: opp, word: m.pub.last.word }));
+      announce(m.pub.last.pass ? t('woordtuin.last.other.pass', { name: opp }) : t('match.played', { name: opp, word: m.pub.last.word }));
     }
     if (klaar && !afgerond && eerder) { afgerond = true; einde(); }
     if (klaar) afgerond = true;
@@ -148,6 +148,14 @@ export function partijView({ id }, app) {
         catch (e) {
           if (e.code === 'versie') { await ververs(); throw new Error(t('match.versionChanged')); }
           if (e.key === 'move.over') { await ververs({ animeer: false }); throw e; }          // de partij is al afgelopen (de ander was eerder): laat de uitslag zien
+          throw e;
+        }
+      },
+      onPas: async () => {
+        try { toon(await matches.move(id, match.version, { pass: true }), { animeer: true }); }
+        catch (e) {
+          if (e.code === 'versie') { await ververs(); throw new Error(t('match.versionChanged')); }
+          if (e.key === 'move.over') { await ververs({ animeer: false }); throw e; }
           throw e;
         }
       },
