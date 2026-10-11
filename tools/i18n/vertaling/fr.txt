@@ -623,3 +623,7 @@ uitslag.words | Mots : {n}
 uitslag.longest | Le plus long : {word}
 uitslag.garden | Le jardin à la fin
 uitslag.allWords | Tous les mots, dans l’ordre
+play.otherLanguage.title | Cette partie est dans une autre langue
+play.otherLanguage.text | Votre partie enregistrée est en {from}, et l’application est maintenant en {to}. Une nouvelle partie en {to} remplace la partie enregistrée.
+play.otherLanguage.new | Nouvelle partie en {language}
+play.otherLanguage.keep | Continuer en {language}

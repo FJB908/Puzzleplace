@@ -658,3 +658,7 @@ uitslag.words | Wörter: {n}
 uitslag.longest | Längstes: {word}
 uitslag.garden | Der Garten am Ende
 uitslag.allWords | Alle Wörter, der Reihe nach
+play.otherLanguage.title | Dieses Spiel ist in einer anderen Sprache
+play.otherLanguage.text | Ihr gespeichertes Spiel ist auf {from}, die App ist jetzt auf {to}. Ein neues Spiel auf {to} ersetzt das gespeicherte.
+play.otherLanguage.new | Neues Spiel auf {language}
+play.otherLanguage.keep | Weiter auf {language}

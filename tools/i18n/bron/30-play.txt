@@ -15,3 +15,8 @@ play.done.again | Play again | Nog een keer
 play.done.backHome | Back to Home | Terug naar Start
 play.done.otherGame | Choose another game | Ander spel kiezen
 play.done.toHome | Go to Home | Naar Start
+# Verschijnt als je een spel wilt hervatten dat in een andere taal is begonnen dan de taal van de app nu. {from} en {to} zijn de namen van de talen, in die taal zelf (bijv. Nederlands, English).
+play.otherLanguage.title | This game is in another language | Dit spel is in een andere taal
+play.otherLanguage.text | Your saved game is in {from}, and the app is now in {to}. A new game in {to} replaces the saved one. | Je bewaarde spel is in het {from}, en de app staat nu in het {to}. Een nieuw spel in het {to} vervangt het bewaarde spel.
+play.otherLanguage.new | New game in {language} | Nieuw spel in het {language}
+play.otherLanguage.keep | Continue in {language} | Verder in het {language}

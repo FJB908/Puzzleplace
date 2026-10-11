@@ -623,3 +623,7 @@ uitslag.words | Parole: {n}
 uitslag.longest | La più lunga: {word}
 uitslag.garden | Il giardino alla fine
 uitslag.allWords | Tutte le parole, in ordine
+play.otherLanguage.title | Questa partita è in un’altra lingua
+play.otherLanguage.text | La tua partita salvata è in {from}, e ora l’app è in {to}. Una nuova partita in {to} sostituisce quella salvata.
+play.otherLanguage.new | Nuova partita in {language}
+play.otherLanguage.keep | Continua in {language}

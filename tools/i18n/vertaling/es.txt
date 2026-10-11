@@ -623,3 +623,7 @@ uitslag.words | Palabras: {n}
 uitslag.longest | La más larga: {word}
 uitslag.garden | El jardín al final
 uitslag.allWords | Todas las palabras, en orden
+play.otherLanguage.title | Esta partida está en otro idioma
+play.otherLanguage.text | Tu partida guardada está en {from}, y la aplicación ahora está en {to}. Una partida nueva en {to} sustituye a la guardada.
+play.otherLanguage.new | Partida nueva en {language}
+play.otherLanguage.keep | Seguir en {language}

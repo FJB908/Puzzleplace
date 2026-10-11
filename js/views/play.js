@@ -7,6 +7,7 @@ import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { notFoundView } from './notFound.js';
 import { t, getTaal } from '../i18n/index.js';
+import { TALEN } from '../shared/talen.js';
 
 export async function playView({ id, mode }, app) {
   const game = getGameInfo(id);
@@ -119,9 +120,29 @@ export async function playView({ id, mode }, app) {
     },
   };
 
+  // Een spel dat al loopt is in zijn eigen taal begonnen. Is de app nu in een andere taal, dan vragen we wat je wilt: verder in die taal, of een nieuw spel in de taal van nu.
+  async function taalKeuze() {
+    const van = slot.taal || 'nl', naar = getTaal();
+    if (slot.state == null || van === naar || !TALEN[van]) return;
+    const keuze = await choiceDialog({
+      title: t('play.otherLanguage.title'),
+      text: t('play.otherLanguage.text', { from: TALEN[van].native, to: TALEN[naar].native }),
+      actions: [
+        { label: t('play.otherLanguage.new', { language: TALEN[naar].native }), value: 'nieuw', primary: true, autofocus: true },
+        { label: t('play.otherLanguage.keep', { language: TALEN[van].native }), value: 'houd' },
+      ],
+      dismissValue: 'houd',
+    });
+    if (keuze !== 'nieuw') return;
+    slot = { seed: daily ? today : Math.random().toString(36).slice(2, 10), taal: naar, difficulty: slot.difficulty, state: null, updatedAt: Date.now(), ...(daily ? { day: today } : {}) };
+    store.updateGame(id, (r) => { r.slots[slotName] = slot; });
+    Object.assign(ctx, { seed: slot.seed, taal: naar, saved: null });
+  }
+
   // Spel laden en starten zodra het kader op het scherm staat (onShow).
   const start = async () => {
     try {
+      await taalKeuze();
       const mod = await game.load();
       stage.replaceChildren();
       const result = await mod.mount(stage, ctx);

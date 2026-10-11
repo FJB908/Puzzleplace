@@ -646,3 +646,7 @@ uitslag.words | Słowa: {n}
 uitslag.longest | Najdłuższe: {word}
 uitslag.garden | Ogród na koniec
 uitslag.allWords | Wszystkie słowa po kolei
+play.otherLanguage.title | Ta gra jest w innym języku
+play.otherLanguage.text | Twoja zapisana gra jest w języku: {from}, a aplikacja ma teraz język: {to}. Nowa gra w tym języku ({to}) zastąpi zapisaną.
+play.otherLanguage.new | Nowa gra: {language}
+play.otherLanguage.keep | Kontynuuj: {language}
