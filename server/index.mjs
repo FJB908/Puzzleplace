@@ -136,15 +136,16 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const publicUrl = (process.env.PUBLIC_URL || `http://localhost:${port}`).replace(/\/+$/, '');
   const facebook = appId && appSecret ? { appId, appSecret, publicUrl } : null;
   const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook } });
-  // Is de poort bezet (vaak een eerdere server die nog draait)? Zeg dat gewoon, en wijs de weg, in plaats van een lange foutmelding.
+  // Is de poort bezet? Zonder PORT probeert de server vanzelf de volgende (8001, 8002, ...); met PORT zegt hij het gewoon.
+  let nu = port;
+  const luister = () => server.listen(nu, host, () => console.log(`Puzzleplace draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${nu}  (gegevens in ${dataDir})`));
   server.on('error', (e) => {
     if (e.code !== 'EADDRINUSE') throw e;
-    console.error(`\nPoort ${port} is al in gebruik: waarschijnlijk draait Puzzleplace al (of een ander programma gebruikt die poort).\n` +
-      `  - Open http://localhost:${port} in je browser om te kijken, of stop het programma dat de poort gebruikt (Ctrl+C in dat venster).\n` +
-      `  - Of start op een andere poort:  PORT=${port + 1} npm run server   (in Windows PowerShell:  $env:PORT=${port + 1}; npm run server)\n`);
+    if (!process.env.PORT && nu < port + 20) { console.log(`Poort ${nu} is bezet, ik probeer ${nu + 1}...`); nu++; luister(); return; }
+    console.error(`\nPoort ${nu} is al in gebruik. Kies een andere:  PORT=${nu + 1} npm run server   (PowerShell:  $env:PORT=${nu + 1}; npm run server)\n`);
     process.exit(1);
   });
-  server.listen(port, host, () => console.log(`Puzzleplace draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${port}  (gegevens in ${dataDir})`));
+  luister();
   const stop = () => { db.flush(); server.close(() => process.exit(0)); setTimeout(() => process.exit(0), 2000).unref(); };
   process.on('SIGINT', stop); process.on('SIGTERM', stop);
 }
