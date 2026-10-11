@@ -300,7 +300,7 @@ detail.newGameConfirmYes | Oui, nouvelle partie
 detail.continue | Continuer
 detail.continuePct | Continuer · {pct} %
 detail.newGame | Nouvelle partie
-detail.start | Commencer
+detail.start | Jouer
 play.howTo | Règles du jeu
 play.howToTitle | {game} : comment jouer
 play.understood | Compris

@@ -1,8 +1,9 @@
 # Talen
 
-**Engels is de officiële taal van de app** en de bron van alle teksten. De app heeft er 23 andere talen bij (alle officiële talen van de EU behalve Iers en Maltees,
-plus Catalaans en Noors): Nederlands, Duits, Frans, Spaans, Italiaans, Portugees, Pools, Tsjechisch, Slowaaks, Sloveens, Kroatisch, Hongaars, Roemeens, Zweeds, Deens,
-Fins, Ests, Lets, Litouws, Grieks en Bulgaars. Elke taal is net zo compleet als het Nederlands: de hele app, **en** de woorden en omschrijvingen van de spellen.
+**Engels is de officiële taal van de app** en de bron van alle teksten. Er zijn acht talen klaar: **Engels, Nederlands, Duits, Frans, Spaans, Italiaans, Portugees (Portugal) en Pools**.
+Elke taal is net zo compleet als het Nederlands: de hele app, **en** de woorden en omschrijvingen van de spellen, met een woordenlijst voor Woordtuin die groot genoeg is om gewone woorden
+nooit te weigeren (15.000 tot 36.000 woorden per taal). Voor nog 16 andere talen (Catalaans, Tsjechisch, Slowaaks, Sloveens, Kroatisch, Hongaars, Roemeens, Zweeds, Deens, Noors, Fins, Ests, Lets,
+Litouws, Grieks, Bulgaars) staan de taalgegevens en een voorlopige woordenlijst klaar, maar ze zijn nog niet vertaald en nagekeken en worden dus niet aangeboden.
 
 ## Hoe de app de taal kiest
 
@@ -62,5 +63,6 @@ controleert alles, inclusief de **spelling van elk woord tegen het echte spellin
 * De vertalingen en puzzels zijn gemaakt en nagekeken met taalmodellen en gecontroleerd met woordenboeken en tests, **niet door moedertaalsprekers**. Laat ze door een moedertaalspreker
   nalopen voordat je de app in een land wilt uitbrengen; de keuzes voor de aanspreekvorm per taal (u/je, Sie/du, vous, ...) staan in `tools/i18n/VERTALEN.md` en zijn met één regel per taal te wijzigen.
 * De woordenlijsten komen uit open woordenboeken met verschillende licenties (GPL, LGPL, MPL, BSD): zie [`bronnen.md`](../tools/woordenlijst/bronnen.md) voor de licentievraag voor je de app uitbrengt.
-* Iers en Maltees (ook EU-talen) ontbreken, evenals Luxemburgs, Baskisch, Galicisch en andere regionale talen.
+* Alleen de acht talen hierboven zijn klaar. Een nieuwe taal toevoegen: vertaling (`tools/i18n/VERTALEN.md`), puzzelinhoud (`tools/inhoud/SCHRIJVEN.md`), woordenlijst beoordelen (`tools/woordenlijst/BEOORDELEN.md`), `kalibreer.mjs`, en dan pas de taal in `KLAAR` zetten. Iers en Maltees (ook EU-talen) ontbreken, evenals Luxemburgs, Baskisch, Galicisch en andere regionale talen.
+* Woordtuin: woorden zijn 3 tot 7 letters. Het spel stopt zodra niemand nog een gewoon woord kan maken (zeldzame woorden tellen daarvoor niet mee).
 * De naam van de app is overal "Puzzleplace", behalve in het Nederlands ("Puzzelplaats").

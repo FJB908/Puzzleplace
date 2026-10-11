@@ -107,6 +107,7 @@ export function choiceDialog({ title, text, body, actions, dismissValue = null, 
     });
     document.body.append(dlg);
     dlg.showModal();
+    dlg.scrollTop = 0;                                   // een lang venster (bijv. de uitslag) begint bij de titel, niet bij de knoppen
     if (art) mountArt(art, 'takje-b');
   });
 }

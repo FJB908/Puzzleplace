@@ -240,9 +240,9 @@ main { view-transition-name: page; }
 /* ---------- Knoppen ---------- */
 /* Standaard: tekst met pictogram, zonder kader. Gevuld alleen voor de hoofdactie. */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: clamp(.35rem, 2vw, .6rem);
   min-height: var(--tap);
-  padding: .5rem 1.25rem;
+  padding: .5rem clamp(.6rem, 4vw, 1.25rem);
   border: 0;
   border-radius: 99px;
   background: transparent;
@@ -442,13 +442,12 @@ html[data-textsize="large"] .nav a { font-size: min(.74rem, 3.2vw); }
 html[data-textsize="xlarge"] .nav a { font-size: min(.66rem, 3.1vw); }
 
 /* ---------- Spelscherm ---------- */
-.play-bar { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "back help" "title title"; align-items: center; gap: 0 .25rem; }
-.play-bar .back { grid-area: back; justify-self: start; margin-left: -.6rem; }
-.play-bar > .btn:not(.back) { grid-area: help; }
-.play-bar .btn { padding-inline: .6rem; min-height: 3rem; font-size: .95rem; gap: .4rem; min-width: 0; }
+.play-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 .25rem; }
+.play-bar .back { margin-left: -.6rem; }
+.play-bar .btn { padding-inline: .6rem; min-height: 3rem; font-size: .95rem; gap: .4rem; white-space: nowrap; }
 .play-bar .btn .icon { width: 1.25rem; height: 1.25rem; }
 .play-bar .back { padding-left: .4rem; }
-.play-title { grid-area: title; display: flex; align-items: baseline; gap: .15rem .7rem; flex-wrap: wrap; min-width: 0; padding-top: .1rem; }
+.play-title { flex: 1 0 100%; display: flex; align-items: baseline; gap: .15rem .7rem; flex-wrap: wrap; min-width: 0; padding-top: .1rem; }
 .play-title h1 { font-size: 1.3rem; }
 .play-title p { font-size: 1rem; line-height: 1.2; }
 .stage { background: var(--surface); border-radius: var(--radius); padding: 1rem; min-height: 16rem; box-shadow: var(--shadow); }
@@ -465,7 +464,7 @@ dialog.dialog {
   background: var(--surface); color: var(--text); padding: 1.5rem;
   box-shadow: 0 20px 60px rgba(30, 20, 30, .3);
 }
-.dialog { position: relative; }
+dialog.dialog { position: fixed; }
 dialog.dialog[open] { animation: dlg-in .38s cubic-bezier(.2, .9, .3, 1.12) both; }
 dialog.dialog[open]::backdrop { animation: backdrop-in .3s ease both; }
 dialog.dialog.closing { animation: dlg-out .18s ease-in both; }
@@ -476,7 +475,7 @@ dialog.dialog.closing::backdrop { animation: backdrop-out .18s ease-in both; }
 @keyframes backdrop-out { to { opacity: 0; } }
 dialog.dialog::backdrop { background: rgba(20, 24, 27, .55); }
 dialog.dialog[open] { display: flex; flex-direction: column; gap: 1rem; }
-dialog.dialog--joy { padding-top: 6.5rem; overflow: hidden; }
+dialog.dialog--joy { padding-top: 6.5rem; overflow-x: hidden; overflow-y: auto; }
 .dialog-art { position: absolute; top: 0; left: 0; height: 6.25rem; aspect-ratio: var(--ratio, 1.64); pointer-events: none; }
 html[data-theme="dark"] dialog.dialog { border: 1px solid var(--border); }
 html[data-contrast="high"] dialog.dialog { border: 3px solid var(--border); }
