@@ -77,7 +77,7 @@ export async function mount(container, ctx) {
   function maten(vastCw) {
     const breedte = tafel.clientWidth;
     if (breedte <= 0) return null;
-    const ruimte = Math.max(32, Math.min(96, Math.floor((breedte - 2 * RAND) / (7 + 6 * GAP))));
+    const ruimte = Math.max(32, Math.min(112, Math.floor((breedte - 2 * RAND) / (7 + 6 * GAP))));
     const cw = vastCw ? Math.min(vastCw, ruimte) : ruimte;
     const ch = Math.round(cw * RATIO), gap = Math.floor(cw * GAP);
     const x0 = Math.round((breedte - (7 * cw + 6 * gap)) / 2);
@@ -146,7 +146,6 @@ export async function mount(container, ctx) {
     pos = indeling(g);
     tafel.style.setProperty('--cw', `${maat.cw}px`); tafel.style.setProperty('--ch', `${maat.ch}px`);
     tafel.style.height = `${pos.hoogte}px`;
-    const doelen = sel ? E.bestemmingen(g, sel) : null;
     const selKaarten = sel ? new Set(kaartenVan(sel)) : null;
     kaarten.forEach((el, k) => {
       const p = pos[k];
@@ -161,7 +160,6 @@ export async function mount(container, ctx) {
       el.classList.toggle('diep', (p.pile === 'stock' && p.z < g.stock.length - 2) || (p.pile === 'waste' && p.i < g.waste.length - 4) || (p.pile === 'found' && p.i < g.found[p.s] - 2));       // diep in een stapel: geen eigen schaduw
       el.classList.toggle('speelbaar', !!bron);
       el.classList.toggle('gekozen', !!selKaarten?.has(k));
-      el.classList.toggle('doel', !!doelen && ((p.pile === 'tab' && doelen.stapels.includes(p.col) && p.i === g.tab[p.col].k.length - 1) || (p.pile === 'found' && doelen.fundament && p.s === E.kleur(eerste(sel)) && p.i === g.found[p.s] - 1)));
       el.setAttribute('aria-pressed', selKaarten?.has(k) ? 'true' : 'false');
       el.setAttribute('aria-label', p.up ? kaartNaam(k) : t(p.pile === 'stock' ? 'solitaire.stock' : 'solitaire.cardDown', { n: g.stock.length }));
     });
@@ -175,12 +173,10 @@ export async function mount(container, ctx) {
     voorraadVak.disabled = g.stock.length === 0 && g.waste.length === 0;
     fundVakken.forEach((el, s) => {
       zet(el, kolX(3 + s), maat.yBoven);
-      el.classList.toggle('doel', !!doelen?.fundament && E.kleur(eerste(sel)) === s);
       el.setAttribute('aria-label', t('solitaire.foundation', { suit: t(`solitaire.suit.${s}`), n: g.found[s] }));
     });
     stapelVakken.forEach((el, i) => {
       zet(el, kolX(i), maat.yTab);
-      el.classList.toggle('doel', !!doelen?.stapels.includes(i) && g.tab[i].k.length === 0);
       el.hidden = g.tab[i].k.length > 0;
     });
     const n = E.opFundamenten(g);
@@ -216,14 +212,13 @@ export async function mount(container, ctx) {
   function kies(bron) {
     sel = bron; wisTip();
     teken();
-    if (!bron) { zeg(t('solitaire.msg.start')); return; }
-    const d = E.bestemmingen(g, bron);
-    zeg(t(d.fundament || d.stapels.length ? 'solitaire.msg.picked' : 'solitaire.msg.nowhere'));
+    zeg(t(bron ? 'solitaire.msg.picked' : 'solitaire.msg.start'));            // geen aanwijzingen: je ziet zelf waar een kaart heen kan
   }
   function bewaar() { ctx.save(state, { progress: E.progress(g) }); }
   function doe(zet, opties = {}) {
     try { g = E.speel(g, zet); } catch { teken(); return false; }
     state.zetten.push(zet);
+    ctx.grootBeeld?.auto();
     sel = null; wisTip(); plan = plan?.gevonden && plan.pad.length ? plan : null;
     bewaar();
     teken({ animeer: true, ...opties });
@@ -255,23 +250,29 @@ export async function mount(container, ctx) {
     if (p.pile === 'stock') { trek(); return; }
     const bron = bronVan(k);
     if (sel) {
-      // Een gemarkeerde plek: de bovenste kaart van een stapel of van een fundament
-      const d = E.bestemmingen(g, sel);
-      if (p.pile === 'tab' && d.stapels.includes(p.col) && p.i === g.tab[p.col].k.length - 1) { doe(E.zetVoor(sel, { soort: 'stapel', naar: p.col })); return; }
-      if (p.pile === 'found' && d.fundament && p.s === E.kleur(eerste(sel))) { doe(E.zetVoor(sel, { soort: 'fundament' })); return; }
       if (zelfde(bron, sel)) { slimmeZet(sel); return; }
+      // Een kaart bovenop een stapel of een fundament is ook een plek om neer te leggen
+      const bovenop = (p.pile === 'tab' && p.i === g.tab[p.col].k.length - 1) || (p.pile === 'found' && p.i === g.found[p.s] - 1);
+      if (bovenop) {
+        const d = E.bestemmingen(g, sel);
+        if (p.pile === 'tab' && d.stapels.includes(p.col)) { doe(E.zetVoor(sel, { soort: 'stapel', naar: p.col })); return; }
+        if (p.pile === 'found' && d.fundament && p.s === E.kleur(eerste(sel))) { doe(E.zetVoor(sel, { soort: 'fundament' })); return; }
+        if (p.pile === 'tab' || p.pile === 'found') {                       // past niet: de gekozen kaart schudt, en de aangetikte kaart wordt de nieuwe keuze
+          const oud = kaartenVan(sel); kies(bron || null); oud.forEach((x) => wiebel(kaarten[x])); zeg(t('solitaire.msg.nowhere')); return;
+        }
+      }
     }
-    if (!bron) { wiebel(kaarten[k]); zeg(t(p.pile === 'tab' && !p.up ? 'solitaire.msg.closed' : 'solitaire.msg.nowhere')); if (sel) kies(null); return; }
-    const d = E.bestemmingen(g, bron);
-    if (!d.fundament && !d.stapels.length) { wiebel(kaarten[k]); kies(null); zeg(t('solitaire.msg.nowhere')); return; }
+    if (!bron) { wiebel(kaarten[k]); if (p.pile === 'tab' && !p.up) zeg(t('solitaire.msg.closed')); if (sel) kies(null); return; }
     kies(bron);
   }
   function tikDoel(doel) {
     if (afgerond || bezig || !sel) return;
     const d = E.bestemmingen(g, sel);
     if (doel.soort === 'fundament' ? d.fundament : d.stapels.includes(doel.naar)) doe(E.zetVoor(sel, doel));
-    else { zeg(t('solitaire.msg.nowhere')); }
+    else { schud(); zeg(t('solitaire.msg.nowhere')); }
   }
+  // De gekozen kaart(en) schudden: dat kan hier niet
+  function schud() { if (sel) kaartenVan(sel).forEach((k) => wiebel(kaarten[k])); }
   // Nog een keer op de gekozen kaart: naar het fundament als dat kan, anders naar de beste stapel
   function slimmeZet(bron) {
     const d = E.bestemmingen(g, bron);
@@ -281,7 +282,7 @@ export async function mount(container, ctx) {
       doe(E.zetVoor(bron, { soort: 'stapel', naar: (metKaarten.length ? metKaarten : d.stapels)[0] }));
       return;
     }
-    kies(null);
+    schud(); zeg(t('solitaire.msg.nowhere'));
   }
 
   // ----- Slepen met muis of vinger (een korte tik is gewoon aantikken) -----
@@ -317,7 +318,7 @@ export async function mount(container, ctx) {
     const r = tafel.getBoundingClientRect();
     const doel = geannuleerd ? null : doelBij(s, e.clientX - r.left, e.clientY - r.top);
     s.els.forEach((el) => { el.classList.remove('sleept'); el._x += s.dx; el._y += s.dy; });         // de animatie begint waar de kaart nu is
-    if (doel) doe(E.zetVoor(s.bron, doel)); else { teken({ animeer: true }); }
+    if (doel) doe(E.zetVoor(s.bron, doel)); else { teken({ animeer: true }); zeg(t('solitaire.msg.nowhere')); }
   };
   tafel.addEventListener('pointerup', (e) => einde(e, false));
   tafel.addEventListener('pointercancel', (e) => einde(e, true));

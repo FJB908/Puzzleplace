@@ -700,14 +700,12 @@ mahjong.dragon.1 | Dragão verde
 mahjong.dragon.2 | Dragão branco
 mahjong.flower | Flor
 mahjong.season | Estação
-mahjong.bigger | Maior
-mahjong.smaller | Menor
 
 ##### 160-solitaire
 solitaire.name | Paciência
 solitaire.summary | O clássico jogo de cartas numa mesa verde: construa os quatro naipes do ás ao rei.
 solitaire.howTo.1 | Mova as cartas das sete colunas de modo que desçam do rei ao ás, alternando vermelho e preto.
-solitaire.howTo.2 | Toque numa carta e depois num lugar realçado, ou arraste a carta até lá. Se tocar outra vez na carta escolhida, ela vai sozinha para o melhor lugar.
+solitaire.howTo.2 | Toque numa carta e depois no lugar para onde deve ir, ou arraste a carta até lá. Se tocar outra vez na carta escolhida, ela vai sozinha para o melhor lugar.
 solitaire.howTo.3 | Só um rei pode ir para uma coluna vazia. Tire cartas novas do baralho em cima à esquerda. Nos quatro lugares em cima à direita junta cada naipe, do ás para cima.
 solitaire.howTo.4 | Ficou preso? Use «{undo}» as vezes que quiser ou peça uma «{hint}». Quando todas as cartas estão viradas para cima, «{finish}» faz o resto.
 solitaire.level.makkelijk | Uma carta de cada vez, sempre ganhável
@@ -736,9 +734,9 @@ solitaire.letter.1 | A
 solitaire.letter.11 | V
 solitaire.letter.12 | D
 solitaire.letter.13 | R
-solitaire.msg.start | Toque numa carta e depois num lugar realçado. Arrastar também funciona.
-solitaire.msg.picked | Agora toque num lugar realçado ou arraste a carta até lá.
-solitaire.msg.nowhere | Essa carta não pode ir para lado nenhum agora.
+solitaire.msg.start | Toque numa carta e depois no lugar para onde deve ir. Arrastar também funciona.
+solitaire.msg.picked | Agora toque no lugar para onde a carta deve ir ou arraste-a até lá.
+solitaire.msg.nowhere | Isso não encaixa aí.
 solitaire.msg.closed | Essa carta está virada para baixo. Vira-se quando as cartas que estão por cima forem movidas.
 solitaire.msg.recycled | As cartas descartadas voltaram ao baralho. Tire-as outra vez.
 solitaire.msg.canFinish | Todas as cartas estão viradas para cima. Toque em «{finish}» e o resto faz-se sozinho.
@@ -751,3 +749,5 @@ solitaire.msg.undone | Movimento anulado.
 solitaire.done.title | Conseguiu!
 solitaire.done.text | Todas as cartas estão nas quatro bases. Muito bem jogado.
 mahjong.pairs | Pares possíveis: {n}
+play.bigView | Ecrã grande
+play.smallView | Ecrã normal

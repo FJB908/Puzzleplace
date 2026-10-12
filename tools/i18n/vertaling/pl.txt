@@ -723,14 +723,12 @@ mahjong.dragon.1 | Zielony smok
 mahjong.dragon.2 | Biały smok
 mahjong.flower | Kwiat
 mahjong.season | Pora roku
-mahjong.bigger | Większe
-mahjong.smaller | Mniejsze
 
 ##### 160-solitaire
 solitaire.name | Pasjans
 solitaire.summary | Klasyczna gra karciana na zielonym stole: ułóż cztery kolory od asa do króla.
 solitaire.howTo.1 | Przesuwaj karty na siedmiu kolumnach tak, by malały od króla do asa i na przemian były czerwone i czarne.
-solitaire.howTo.2 | Dotknij karty, a potem zaznaczonego miejsca, albo przeciągnij kartę tam. Jeśli dotkniesz wybranej karty jeszcze raz, sama pójdzie na najlepsze miejsce.
+solitaire.howTo.2 | Dotknij karty, a potem miejsca, gdzie ma trafić, albo przeciągnij kartę tam. Jeśli dotkniesz wybranej karty jeszcze raz, sama pójdzie na najlepsze miejsce.
 solitaire.howTo.3 | Tylko król może trafić na pustą kolumnę. Nowe karty bierzesz ze stosu w lewym górnym rogu. Na czterech miejscach w prawym górnym rogu zbierasz każdy kolor, od asa w górę.
 solitaire.howTo.4 | Utknąłeś? Używaj „{undo}” tyle razy, ile chcesz, albo poproś o „{hint}”. Gdy wszystkie karty leżą odkryte, „{finish}” zrobi resztę.
 solitaire.level.makkelijk | Jedna karta naraz, zawsze do wygrania
@@ -759,9 +757,9 @@ solitaire.letter.1 | A
 solitaire.letter.11 | W
 solitaire.letter.12 | D
 solitaire.letter.13 | K
-solitaire.msg.start | Dotknij karty, a potem zaznaczonego miejsca. Można też przeciągać.
-solitaire.msg.picked | Teraz dotknij zaznaczonego miejsca albo przeciągnij kartę tam.
-solitaire.msg.nowhere | Ta karta nie może teraz nigdzie pójść.
+solitaire.msg.start | Dotknij karty, a potem miejsca, gdzie ma trafić. Można też przeciągać.
+solitaire.msg.picked | Teraz dotknij miejsca, gdzie ma trafić karta, albo przeciągnij ją tam.
+solitaire.msg.nowhere | To tam nie pasuje.
 solitaire.msg.closed | Ta karta leży zakryta. Odkryje się, gdy karty na niej zostaną przesunięte.
 solitaire.msg.recycled | Odłożone karty wróciły na stos. Bierz je jeszcze raz.
 solitaire.msg.canFinish | Wszystkie karty leżą odkryte. Dotknij „{finish}”, a reszta pójdzie sama.
@@ -774,3 +772,5 @@ solitaire.msg.undone | Ruch cofnięty.
 solitaire.done.title | Udało się!
 solitaire.done.text | Wszystkie karty leżą na czterech stosach docelowych. Pięknie zagrane.
 mahjong.pairs | Możliwe pary: {n}
+play.bigView | Duży widok
+play.smallView | Zwykły widok

@@ -27,8 +27,6 @@ export function mount(container, ctx) {
   let state = geldig(ctx.saved) ? ctx.saved : newGame(ctx.seed, ctx.difficulty);
   const b = bord(state.niveau);
   let gekozen = null, focus = 0, tipTimer = null, bezig = false, afgerond = false, dood = false;
-  let groot = false;                                              // vergroten: grotere tegels, het bord schuift dan
-  try { groot = localStorage.getItem('pp-mahjong-groot') === '1'; } catch { /* zonder opslag blijft het klein */ }
 
   // ----- Het scherm -----
   const aantal = h('span', { class: 'mj-aantal' });
@@ -40,11 +38,10 @@ export function mount(container, ctx) {
   const terugKnop = h('button', { type: 'button', class: 'btn', onclick: terug }, icon('undo'), h('span', {}, t('mahjong.undo')));
   const tipKnop = h('button', { type: 'button', class: 'btn', onclick: geefTip }, icon('bulb'), h('span', {}, t('common.hint')));
   const husselKnop = h('button', { type: 'button', class: 'btn', onclick: husselen }, icon('shuffle'), h('span', {}, t('mahjong.shuffle')));
-  const grootKnop = h('button', { type: 'button', class: 'btn', 'aria-pressed': String(groot), onclick: wisselGroot }, icon('woordzoeker'), h('span', {}, t(groot ? 'mahjong.smaller' : 'mahjong.bigger')));
   container.classList.add('stage--bare');
   container.append(h('div', { class: 'mj' },
     h('div', { class: 'mj-kop' }, h('div', { class: 'mj-tellers' }, aantal, paren), h('span', { class: 'ws-bar mj-balk', 'aria-hidden': 'true' }, balk)),
-    melding, veld, h('div', { class: 'mj-knoppen' }, terugKnop, tipKnop, husselKnop, grootKnop)));
+    melding, veld, h('div', { class: 'mj-knoppen' }, terugKnop, tipKnop, husselKnop)));
 
   const tegels = b.tegels.map((tg, i) => {
     const el = h('button', { type: 'button', class: 'mj-tegel', 'data-i': i, tabindex: '-1', onclick: () => klik(i), onkeydown: (e) => toets(e, i), onfocus: () => { focus = i; } },
@@ -62,21 +59,13 @@ export function mount(container, ctx) {
     if (breedte <= 0) return;
     const kolommen = b.breed / 2, lagen = b.lagen - 1, rijen = b.hoog / 2;
     const perBreedte = breedte / (kolommen + (lagen + 1) * DIEPTE);
-    const maxHoogte = Math.max(380, window.innerHeight * 0.74);
+    const maxHoogte = Math.max(380, window.innerHeight * (ctx.grootBeeld?.actief ? 0.8 : 0.74));
     const perHoogte = maxHoogte / (rijen * RATIO + (lagen + 1) * DIEPTE);
-    const tw = groot ? Math.min(Math.max(perBreedte * 1.45, 52), 84) : Math.max(30, Math.min(perBreedte, Math.max(perHoogte, 44), 84));
-    veld.classList.toggle('groot', groot);
+    const tw = Math.max(30, Math.min(perBreedte, Math.max(perHoogte, 44), 96));
     const th = tw * RATIO, d = tw * DIEPTE;
     bordEl.style.setProperty('--uw', `${tw / 2}px`); bordEl.style.setProperty('--uh', `${th / 2}px`); bordEl.style.setProperty('--d', `${d}px`); bordEl.style.setProperty('--tw', `${tw}px`);
     bordEl.style.width = `${b.breed * tw / 2 + (lagen + 1) * d}px`;
     bordEl.style.height = `${b.hoog * th / 2 + (lagen + 1) * d}px`;
-  }
-  function wisselGroot() {
-    groot = !groot;
-    try { localStorage.setItem('pp-mahjong-groot', groot ? '1' : '0'); } catch { /* geen opslag: dan geldt het alleen nu */ }
-    grootKnop.setAttribute('aria-pressed', String(groot));
-    grootKnop.querySelector('span').textContent = t(groot ? 'mahjong.smaller' : 'mahjong.bigger');
-    pas();
   }
   const ro = new ResizeObserver(pas); ro.observe(veld);
   window.addEventListener('resize', pas);
@@ -160,6 +149,7 @@ export function mount(container, ctx) {
   function neem(a, c) {
     wisTip();
     state = neemWeg(state, a, c);
+    ctx.grootBeeld?.auto();
     gekozen = null;
     bewaar();
     verfris({ behoud: [a, c] });

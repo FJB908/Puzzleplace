@@ -52,11 +52,31 @@ export async function playView({ id, mode }, app) {
     });
   }
 
+  // Groot beeld: de kop en de tekst eromheen verdwijnen en het spel krijgt de hele breedte. Het knopje wisselt heen en weer; bij Patience en
+  // Mahjong gaat het vanzelf aan na de eerste zet (ctx.grootBeeld.auto), tenzij je zelf al hebt gekozen.
+  let groot = false, zelfGekozen = false;
+  const grootKnop = h('button', { type: 'button', class: 'btn big-view', 'aria-pressed': 'false', onclick: () => { zelfGekozen = true; zetGroot(!groot, { scherm: true }); } });
+  const grootLabel = () => { grootKnop.replaceChildren(icon(groot ? 'shrink' : 'expand'), t(groot ? 'play.smallView' : 'play.bigView')); grootKnop.setAttribute('aria-pressed', String(groot)); };
+  function zetGroot(aan, { scherm = false } = {}) {
+    if (aan === groot) return;
+    groot = aan;
+    document.body.classList.toggle('groot-beeld', aan);
+    grootLabel();
+    if (scherm) {                                                    // waar de browser het kan ook echt beeldvullend (niet overal mogelijk: dan blijft het bij de grote weergave)
+      try { if (aan) document.documentElement.requestFullscreen?.()?.catch?.(() => {}); else if (document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {}); } catch { /* geen beeldvullend: prima */ }
+    }
+    window.dispatchEvent(new Event('resize'));
+  }
+  const bijSchermWissel = () => { if (groot && !document.fullscreenElement && fullscreenGevraagd) { zetGroot(false); zelfGekozen = true; } };
+  let fullscreenGevraagd = false;
+  document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) fullscreenGevraagd = true; else { bijSchermWissel(); fullscreenGevraagd = false; } });
+  grootLabel();
+
   const node = h('div', { class: 'view' },
     // Compacte kop: terug, de naam en het niveau in het midden, uitleg rechts. Zo blijft er zoveel mogelijk ruimte voor het spel.
     h('div', { class: 'play-bar' },
       h('a', { class: 'btn btn-quiet back', href: backHref }, icon('back'), t('common.back')),
-      helpButton,
+      grootKnop, helpButton,
       h('header', { class: 'play-title' },
         h('h1', { tabindex: '-1' }, daily ? t('play.dailyTitle', { game: game.name }) : game.name),
         h('p', { class: 'muted' }, level))),
@@ -79,6 +99,10 @@ export async function playView({ id, mode }, app) {
     saved: slot.state,
     settings: { ...store.getSettings() },
     announce,
+    grootBeeld: {
+      auto() { if (!zelfGekozen && !groot) { zelfGekozen = true; zetGroot(true); } },        // één keer, daarna beslis jij
+      aan: () => zetGroot(true), uit: () => zetGroot(false), get actief() { return groot; },
+    },
     // meta.progress (0 tot 1) laat op de kaarten zien hoe ver je bent. Zonder progress verdwijnt een oude waarde,
     // zodat er nooit een stand getoond wordt die bij een eerder moment hoort.
     save(state, meta = {}) {
@@ -170,5 +194,5 @@ export async function playView({ id, mode }, app) {
     }
   };
 
-  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => { gone = true; if (cleanup) cleanup(); } };
+  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => { gone = true; if (groot) { document.body.classList.remove('groot-beeld'); try { if (document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {}); } catch { /* niets aan te doen */ } } if (cleanup) cleanup(); } };
 }

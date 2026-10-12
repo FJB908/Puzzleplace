@@ -1,0 +1,3 @@
+##### Groot beeld: de kop verdwijnt en het spel krijgt de hele breedte (knop bovenaan het spel, kort)
+play.bigView | Big view | Groot beeld
+play.smallView | Normal view | Normaal beeld

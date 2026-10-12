@@ -99,3 +99,4 @@ html[data-calm="true"] .sol-binnen { transition: none; }
 
 /* Op een smal scherm mag de tafel de randen van de pagina opzoeken: grotere kaarten zijn prettiger om aan te tikken */
 @media (max-width: 34rem) { .sol-tafel { margin-inline: -.8rem; border-width: .35rem; border-radius: 1.2rem; } }
+body.groot-beeld .sol-tafel { margin-inline: 0; }

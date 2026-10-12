@@ -446,7 +446,7 @@ html[data-textsize="xlarge"] .nav a { font-size: min(.66rem, 3.1vw); }
 /* ---------- Spelscherm ---------- */
 .play-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 .25rem; }
 .play-bar .back { margin-left: -.6rem; }
-.play-bar .btn { padding-inline: .6rem; min-height: 3rem; font-size: .95rem; gap: .4rem; white-space: nowrap; }
+.play-bar .btn { padding-inline: .45rem; min-height: 3rem; font-size: .95rem; gap: .35rem; white-space: nowrap; }
 .play-bar .btn .icon { width: 1.25rem; height: 1.25rem; }
 .play-bar .back { padding-left: .4rem; }
 .play-title { flex: 1 0 100%; display: flex; align-items: baseline; gap: .15rem .7rem; flex-wrap: wrap; min-width: 0; padding-top: .1rem; }
@@ -454,6 +454,11 @@ html[data-textsize="xlarge"] .nav a { font-size: min(.66rem, 3.1vw); }
 .play-title p { font-size: 1rem; line-height: 1.2; }
 .stage { background: var(--surface); border-radius: var(--radius); padding: 1rem; min-height: 16rem; box-shadow: var(--shadow); }
 .stage--bare { background: none; box-shadow: none; padding: 0; min-height: 0; }
+.play-bar .big-view[aria-pressed="true"] { background: var(--blush); }
+/* Groot beeld: alleen terug en "Normaal beeld" blijven over; het spel krijgt de hele breedte */
+body.groot-beeld main { max-width: none; padding: .5rem .4rem 1rem; }
+body.groot-beeld .play-title, body.groot-beeld .play-bar .btn:not(.back):not(.big-view), body.groot-beeld .save-note { display: none; }
+body.groot-beeld .view { gap: .5rem; }
 .save-note { color: var(--text-muted); font-size: .95rem; text-align: center; }
 
 .notice { background: var(--surface-2); border-radius: var(--radius); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: .5rem; }

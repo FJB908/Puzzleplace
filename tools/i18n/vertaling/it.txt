@@ -700,14 +700,12 @@ mahjong.dragon.1 | Drago verde
 mahjong.dragon.2 | Drago bianco
 mahjong.flower | Fiore
 mahjong.season | Stagione
-mahjong.bigger | Più grande
-mahjong.smaller | Più piccolo
 
 ##### 160-solitaire
 solitaire.name | Solitario
 solitaire.summary | Il classico gioco di carte su un tavolo verde: costruisca i quattro semi dall'asso al re.
 solitaire.howTo.1 | Sposti le carte sulle sette colonne in modo che scendano dal re all'asso, alternando rosso e nero.
-solitaire.howTo.2 | Tocchi una carta e poi un punto evidenziato, oppure trascini la carta fin lì. Se tocca ancora la carta scelta, va da sola nel punto migliore.
+solitaire.howTo.2 | Tocchi una carta e poi il punto dove deve andare, oppure trascini la carta fin lì. Se tocca ancora la carta scelta, va da sola nel punto migliore.
 solitaire.howTo.3 | Solo un re può andare su una colonna vuota. Prenda nuove carte dal mazzo in alto a sinistra. Nei quattro punti in alto a destra raccoglie ogni seme, dall'asso in su.
 solitaire.howTo.4 | È bloccato? Usi «{undo}» quante volte vuole oppure chieda un «{hint}». Quando tutte le carte sono scoperte, «{finish}» fa il resto.
 solitaire.level.makkelijk | Una carta alla volta, sempre vincibile
@@ -736,9 +734,9 @@ solitaire.letter.1 | A
 solitaire.letter.11 | J
 solitaire.letter.12 | Q
 solitaire.letter.13 | K
-solitaire.msg.start | Tocchi una carta e poi un punto evidenziato. Si può anche trascinare.
-solitaire.msg.picked | Ora tocchi un punto evidenziato oppure trascini la carta fin lì.
-solitaire.msg.nowhere | Quella carta ora non può andare da nessuna parte.
+solitaire.msg.start | Tocchi una carta e poi il punto dove deve andare. Si può anche trascinare.
+solitaire.msg.picked | Ora tocchi il punto dove deve andare la carta oppure la trascini fin lì.
+solitaire.msg.nowhere | Lì non va bene.
 solitaire.msg.closed | Quella carta è coperta. Si scopre quando le carte sopra di essa vengono spostate.
 solitaire.msg.recycled | Le carte scartate sono di nuovo sul mazzo. Le prenda ancora.
 solitaire.msg.canFinish | Tutte le carte sono scoperte. Tocchi «{finish}» e il resto va da solo.
@@ -751,3 +749,5 @@ solitaire.msg.undone | Mossa annullata.
 solitaire.done.title | Ci è riuscito!
 solitaire.done.text | Tutte le carte sono sulle quattro basi. Giocato benissimo.
 mahjong.pairs | Coppie possibili: {n}
+play.bigView | Schermo grande
+play.smallView | Schermo normale

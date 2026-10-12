@@ -47,6 +47,3 @@ mahjong.dragon.1 | Green dragon | Groene draak
 mahjong.dragon.2 | White dragon | Witte draak
 mahjong.flower | Flower | Bloem
 mahjong.season | Season | Seizoen
-# Knop onder het bord: de tegels groter maken (het bord schuift dan), en weer kleiner. Kort.
-mahjong.bigger | Bigger | Groter
-mahjong.smaller | Smaller | Kleiner

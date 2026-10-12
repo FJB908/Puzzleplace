@@ -4,7 +4,7 @@ solitaire.name | Solitaire | Patience
 solitaire.summary | The classic card game on a green table: build the four suits from ace to king. | Het klassieke kaartspel op een groene tafel: leg de vier kleuren op van aas tot heer.
 # Uitleg: {undo}, {hint} en {finish} zijn de namen van de knoppen.
 solitaire.howTo.1 | Move the cards on the seven columns so that they run down in order, from king to ace, and alternate between red and black. | Verplaats de kaarten op de zeven stapels zo dat ze aflopen van heer naar aas, en afwisselend rood en zwart zijn.
-solitaire.howTo.2 | Tap a card and then a highlighted spot, or drag the card there. Tap a chosen card again and it goes to the best spot by itself. | Tik op een kaart en daarna op een gemarkeerde plek, of sleep de kaart erheen. Tik je nog een keer op de gekozen kaart, dan gaat hij vanzelf naar de beste plek.
+solitaire.howTo.2 | Tap a card and then the spot where it should go, or drag the card there. Tap a chosen card again and it goes to the best spot by itself. | Tik op een kaart en daarna op de plek waar hij heen moet, of sleep de kaart erheen. Tik je nog een keer op de gekozen kaart, dan gaat hij vanzelf naar de beste plek.
 solitaire.howTo.3 | Only a king may go on an empty column. Take new cards from the pile at the top left. The four spots at the top right collect each suit, from ace upwards. | Alleen een heer mag op een lege stapel. Pak nieuwe kaarten van de voorraad linksboven. Op de vier plekken rechtsboven verzamel je elke kleur, van aas omhoog.
 solitaire.howTo.4 | Stuck? Use "{undo}" as often as you like, or ask for a "{hint}". When every card is face up, "{finish}" does the rest. | Zit je vast? Gebruik "{undo}" zo vaak je wilt, of vraag een "{hint}". Liggen alle kaarten open, dan maakt "{finish}" de rest af.
 solitaire.level.makkelijk | One card at a time, always winnable | Eén kaart tegelijk, altijd te winnen
@@ -39,9 +39,9 @@ solitaire.letter.11 | J | B
 solitaire.letter.12 | Q | V
 solitaire.letter.13 | K | H
 # Meldingen onder de titel. Vriendelijk en kort; er is nooit iets "fout".
-solitaire.msg.start | Tap a card, then a highlighted spot. Dragging works too. | Tik op een kaart en daarna op een gemarkeerde plek. Slepen kan ook.
-solitaire.msg.picked | Now tap a highlighted spot, or drag the card there. | Tik nu op een gemarkeerde plek, of sleep de kaart erheen.
-solitaire.msg.nowhere | That card has nowhere to go right now. | Die kaart kan nu nergens heen.
+solitaire.msg.start | Tap a card, then the spot where it should go. Dragging works too. | Tik op een kaart en daarna op de plek waar hij heen moet. Slepen kan ook.
+solitaire.msg.picked | Now tap where the card should go, or drag it there. | Tik nu op de plek waar de kaart heen moet, of sleep hem erheen.
+solitaire.msg.nowhere | That doesn't fit there. | Dat past daar niet.
 solitaire.msg.closed | That card is face down. It turns over once the cards on top of it are moved. | Die kaart ligt nog dicht. Hij gaat open als de kaarten erop zijn verplaatst.
 solitaire.msg.recycled | The discards are back on the pile. Take cards again. | De afgelegde kaarten liggen weer op de voorraad. Pak ze opnieuw.
 solitaire.msg.canFinish | All the cards are face up. Tap "{finish}" and the rest goes by itself. | Alle kaarten liggen open. Tik op "{finish}" en de rest gaat vanzelf.

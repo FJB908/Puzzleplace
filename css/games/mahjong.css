@@ -26,7 +26,6 @@ html[data-theme="dark"] .mj-veld { --vilt-1: #266b52; --vilt-2: #194f3c; --vilt-
 html[data-contrast="high"] .mj-veld { background: #14532d; border: .4rem solid #000; }
 html[data-contrast="high"] .mj-veld::before, html[data-contrast="high"] .mj-veld::after { display: none; }
 
-.mj-veld.groot { justify-content: flex-start; max-height: 74vh; overflow: auto; overscroll-behavior: contain; }
 .mj-bord { position: relative; flex: none; margin: .1rem; }
 .mj-tegel {
   position: absolute; padding: 0; border: 0; background: none; cursor: pointer; font-size: var(--tw); -webkit-tap-highlight-color: transparent;
