@@ -1,6 +1,6 @@
 ##### Patience (Klondike): kaarten op volgorde leggen tot alle vier de kleuren van aas tot heer op hun eigen stapel liggen
-# Naam van het spel: het gewone woord voor dit kaartspel in jouw taal (in het Engels "Solitaire", in het Nederlands "Patience").
-solitaire.name | Solitaire | Patience
+# Naam van het spel: het gewone woord voor dit kaartspel in jouw taal (in het Engels "Solitaire", in het Nederlands "Solitaire").
+solitaire.name | Solitaire | Solitaire
 solitaire.summary | The classic card game on a green table: build the four suits from ace to king. | Het klassieke kaartspel op een groene tafel: leg de vier kleuren op van aas tot heer.
 # Uitleg: {undo}, {hint} en {finish} zijn de namen van de knoppen.
 solitaire.howTo.1 | Move the cards on the seven columns so that they run down in order, from king to ace, and alternate between red and black. | Verplaats de kaarten op de zeven stapels zo dat ze aflopen van heer naar aas, en afwisselend rood en zwart zijn.

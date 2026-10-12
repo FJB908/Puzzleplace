@@ -325,7 +325,7 @@ export default {
   "mahjong.dragon.2": "Witte draak",
   "mahjong.flower": "Bloem",
   "mahjong.season": "Seizoen",
-  "solitaire.name": "Patience",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "Het klassieke kaartspel op een groene tafel: leg de vier kleuren op van aas tot heer.",
   "solitaire.howTo.1": "Verplaats de kaarten op de zeven stapels zo dat ze aflopen van heer naar aas, en afwisselend rood en zwart zijn.",
   "solitaire.howTo.2": "Tik op een kaart en daarna op de plek waar hij heen moet, of sleep de kaart erheen. Tik je nog een keer op de gekozen kaart, dan gaat hij vanzelf naar de beste plek.",
