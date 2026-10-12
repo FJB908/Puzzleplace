@@ -373,6 +373,8 @@ export default {
   "solitaire.done.text": "Toutes les cartes sont sur les quatre fondations. Très bien joué.",
   "play.bigView": "Plein écran",
   "play.smallView": "Écran normal",
+  "common.congrats": "Félicitations !",
+  "common.congratsName": "Félicitations, {name} !",
   "games.title": "Jeux",
   "games.subtitle": "Choisissez un jeu.",
   "games.comingSoon": "Bientôt disponible",

@@ -12,6 +12,7 @@ import { t } from '../../i18n/index.js';
 import { burst, motionOK } from '../../effects.js';
 import * as E from './engine.js';
 import { kaartSvg, kleurIcoon } from './kaarten.js';
+import { felicitatie } from '../../shared/felicitatie.js';
 import { HOFPLAATJES } from './hofplaatjes.js';
 
 const RATIO = 1.4;                      // hoogte van een kaart ten opzichte van de breedte
@@ -195,6 +196,7 @@ export async function mount(container, ctx) {
     return { x: m.m41, y: m.m42 };
   }
   function plaats(el, x, y, vertraging) {
+    if (vertraging === null && el._x === x && el._y === y) return;                 // niets verplaatst: een lopende beweging niet afbreken
     const van = el._x === null ? null : visueel(el);
     el.getAnimations().forEach((a) => a.cancel());
     el.style.transform = `translate(${x}px, ${y}px)`;
@@ -202,6 +204,7 @@ export async function mount(container, ctx) {
     if (vertraging === null || !van || !motionOK() || (Math.abs(van.x - x) < 1 && Math.abs(van.y - y) < 1)) return;
     const afstand = Math.hypot(x - van.x, y - van.y);
     el.classList.add('vliegt');
+    el.style.zIndex = String(600 + Number(el.style.zIndex || 0));                  // onderweg boven de rest, in de volgorde van de stapel
     const an = el.animate([{ transform: `translate(${van.x}px, ${van.y}px)` }, { transform: `translate(${x}px, ${y}px)` }],
       { duration: Math.min(560, 230 + afstand * 0.55), delay: vertraging, easing: 'cubic-bezier(.22,.8,.25,1)', fill: 'backwards' });
     an.finished.then(() => el.classList.remove('vliegt'), () => el.classList.remove('vliegt'));
@@ -222,12 +225,27 @@ export async function mount(container, ctx) {
     ctx.grootBeeld?.auto();
     sel = null; wisTip(); plan = plan?.gevonden && plan.pad.length ? plan : null;
     bewaar();
-    teken({ animeer: true, ...opties });
+    teken({ animeer: true, ...staffel(zet), ...opties });
     if (E.klaar(g)) { winnen(); return true; }
     if (E.kanAfmaken(g)) zeg(t('solitaire.msg.canFinish', { finish: t('solitaire.finish') }));
     else if (zet[0] === 'r') zeg(t('solitaire.msg.recycled'));
     else zeg(t('solitaire.msg.start'));
     return true;
+  }
+  // Kaarten die samen bewegen vertrekken kort na elkaar: het ziet er zachter uit dan alles tegelijk, en de stapel blijft mooi geordend
+  function staffel(zet) {
+    const vertraging = new Map(), flipVertraging = new Map();
+    const soort = zet[0];
+    if (soort === 'd') {
+      g.waste.slice(-g.wv).forEach((k, j) => { vertraging.set(k, j * 75); flipVertraging.set(k, (j * 75 + 110) / 1000); });
+    } else if (soort === 'r') {
+      const n = g.stock.length, stap = Math.min(22, 420 / Math.max(1, n));
+      for (let j = 0; j < n; j++) { const k = g.stock[n - 1 - j]; vertraging.set(k, j * stap); flipVertraging.set(k, (j * stap + 90) / 1000); }
+    } else if (soort === 'tt') {
+      const c = g.tab[zet[3]];
+      c.k.slice(c.k.length - zet[2]).forEach((k, j) => vertraging.set(k, j * 35));
+    }
+    return { vertraging, flipVertraging };
   }
   function trek() {
     if (afgerond || bezig) return;
@@ -395,24 +413,34 @@ export async function mount(container, ctx) {
     if (afgerond) return;
     afgerond = true; sel = null; teken();
     if (motionOK()) {
-      // De kaarten springen één voor één van de mat af (heren eerst) en komen daarna zacht weer terug
+      // De kaarten springen één voor één van de mat af (heren eerst) en blijven weg; na de felicitatie komen ze zacht weer terug
       const r = tafel.getBoundingClientRect();
       const volgorde = [];
       for (let rang = 12; rang >= 0; rang--) for (const s of [0, 1, 2, 3]) volgorde.push(s * 13 + rang);
       volgorde.forEach((k, j) => {
         const el = kaarten[k], richting = (k % 2 ? 1 : -1) * (0.6 + ((k * 37) % 10) / 14);
         const dx = richting * r.width * 0.9, hoog = maat.ch * (1.2 + ((k * 13) % 5) / 4);
-        const an = el.animate([
+        el.classList.add('vliegt');
+        el.animate([
           { transform: `translate(${el._x}px, ${el._y}px) rotate(0)`, opacity: 1 },
           { transform: `translate(${el._x + dx * 0.35}px, ${el._y - hoog}px) rotate(${richting * 70}deg)`, opacity: 1, offset: 0.3 },
           { transform: `translate(${el._x + dx * 0.7}px, ${el._y + r.height * 0.25}px) rotate(${richting * 160}deg)`, opacity: 0.9, offset: 0.62 },
           { transform: `translate(${el._x + dx}px, ${el._y + r.height * 0.1}px) rotate(${richting * 250}deg)`, opacity: 0 },
         ], { duration: 1700, delay: j * 42, easing: 'cubic-bezier(.3,.1,.5,1)', fill: 'forwards' });
-        an.finished.then(() => { if (dood) return; an.cancel(); el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, easing: 'ease-out' }); }, () => {});
         if (j % 9 === 0) setTimeout(() => !dood && burst({ x: r.left + el._x + maat.cw / 2, y: r.top + el._y, count: 8, power: 220, cone: [-170, -10], size: [10, 18], life: [900, 1500] }), j * 42 + 200);
       });
     }
-    ctx.complete({ title: t('solitaire.done.title'), text: t('solitaire.done.text'), joy: true, delay: motionOK() ? 2600 : 0 });
+    Promise.resolve(ctx.complete({ title: felicitatie(), text: t('solitaire.done.text'), joy: true, delay: motionOK() ? 2600 : 0 })).then(() => { if (!dood) terugKomen(); });
+  }
+  // De kaarten verschijnen weer op hun plek, aas tot heer, zacht en één voor één
+  function terugKomen() {
+    kaarten.forEach((el) => { el.getAnimations().forEach((a) => a.cancel()); el.classList.remove('vliegt'); });
+    if (!motionOK()) return;
+    for (let rang = 0; rang < 13; rang++) for (let s = 0; s < 4; s++) {
+      const el = kaarten[s * 13 + rang];
+      el.animate([{ opacity: 0, transform: `translate(${el._x}px, ${el._y - 10}px) scale(.96)` }, { opacity: 1, transform: `translate(${el._x}px, ${el._y}px) scale(1)` }],
+        { duration: 520, delay: (rang * 4 + s) * 26, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'backwards' });
+    }
   }
 
   // ----- Toetsenbord: Tab naar de mat, pijltjes tussen de stapels, Enter of spatie tikt aan, Escape laat los -----
@@ -466,7 +494,8 @@ export async function mount(container, ctx) {
   });
 
   // ----- Start -----
-  const ro = new ResizeObserver(() => teken());
+  let laatsteBreedte = 0;
+  const ro = new ResizeObserver(() => { if (tafel.clientWidth !== laatsteBreedte) { laatsteBreedte = tafel.clientWidth; teken(); } });          // alleen bij een andere breedte: de hoogte past zich zelf aan en mag lopende bewegingen niet afbreken
   maat = maten();
   if (nieuw) {
     // Delen: alle kaarten beginnen op de voorraad en glijden naar hun plek, rij voor rij

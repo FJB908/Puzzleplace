@@ -49,7 +49,6 @@ html[data-contrast="high"] .sol-tafel::before { display: none; }
   position: absolute; left: 0; top: 0; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; z-index: 1;
   width: var(--cw); height: var(--ch); font-size: var(--cw); perspective: calc(var(--cw) * 7); touch-action: none; -webkit-tap-highlight-color: transparent;
 }
-.sol-kaart.vliegt { z-index: 900 !important; }
 .sol-kaart.sleept { z-index: 950 !important; transition: none; cursor: grabbing; }
 .sol-kaart:focus-visible { outline: none; }
 .sol-kaart:focus-visible .sol-voor { box-shadow: 0 0 0 .1em #ffe37a, 0 0 0 .16em #3a2a00; }

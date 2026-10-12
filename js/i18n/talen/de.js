@@ -373,6 +373,8 @@ export default {
   "solitaire.done.text": "Alle Karten liegen auf den vier Ablagen. Schön gespielt.",
   "play.bigView": "Großbild",
   "play.smallView": "Normalbild",
+  "common.congrats": "Herzlichen Glückwunsch!",
+  "common.congratsName": "Herzlichen Glückwunsch, {name}!",
   "games.title": "Spiele",
   "games.subtitle": "Wählen Sie ein Spiel aus.",
   "games.comingSoon": "Kommt bald",

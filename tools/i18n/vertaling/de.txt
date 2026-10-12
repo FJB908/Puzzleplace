@@ -785,3 +785,5 @@ solitaire.done.title | Geschafft!
 solitaire.done.text | Alle Karten liegen auf den vier Ablagen. Schön gespielt.
 play.bigView | Großbild
 play.smallView | Normalbild
+common.congrats | Herzlichen Glückwunsch!
+common.congratsName | Herzlichen Glückwunsch, {name}!

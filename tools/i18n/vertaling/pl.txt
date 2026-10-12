@@ -773,3 +773,5 @@ solitaire.done.title | Udało się!
 solitaire.done.text | Wszystkie karty leżą na czterech stosach docelowych. Pięknie zagrane.
 play.bigView | Duży widok
 play.smallView | Zwykły widok
+common.congrats | Gratulacje!
+common.congratsName | Gratulacje, {name}!

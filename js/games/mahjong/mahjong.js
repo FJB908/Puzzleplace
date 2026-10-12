@@ -9,6 +9,7 @@ import { t } from '../../i18n/index.js';
 import { burst, motionOK } from '../../effects.js';
 import { bord, newGame, neemWeg, zetTerug, hussel, tip, isVrij, wegSet, klaar, tegelsOver, vastgelopen, passen, progress } from './engine.js';
 import { plaatjeSvg, plaatjeNaam } from './tegels.js';
+import { felicitatie } from '../../shared/felicitatie.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
 const DIEPTE = 0.085;                       // dikte van een tegel en verschuiving per laag, als deel van de tegelbreedte
@@ -117,7 +118,7 @@ export function mount(container, ctx) {
       const r = bordEl.getBoundingClientRect();
       for (let k = 0; k < 5; k++) setTimeout(() => !dood && burst({ x: r.left + r.width * (0.15 + 0.175 * k), y: r.top + r.height * 0.45, count: 14, power: 340, cone: [-165, -15], size: [12, 22], life: [1400, 2200] }), k * 140);
     }
-    ctx.complete({ title: t('mahjong.done.title'), text: t('mahjong.done.text'), joy: true, delay: motionOK() ? 1100 : 0 });
+    ctx.complete({ title: felicitatie(), text: t('mahjong.done.text'), joy: true, delay: motionOK() ? 1100 : 0 });
   }
 
   // ----- Kiezen en wegnemen -----

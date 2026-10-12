@@ -750,3 +750,5 @@ solitaire.done.title | Conseguiu!
 solitaire.done.text | Todas as cartas estão nas quatro bases. Muito bem jogado.
 play.bigView | Ecrã grande
 play.smallView | Ecrã normal
+common.congrats | Parabéns!
+common.congratsName | Parabéns, {name}!

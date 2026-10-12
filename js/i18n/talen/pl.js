@@ -390,6 +390,8 @@ export default {
   "solitaire.done.text": "Wszystkie karty leżą na czterech stosach docelowych. Pięknie zagrane.",
   "play.bigView": "Duży widok",
   "play.smallView": "Zwykły widok",
+  "common.congrats": "Gratulacje!",
+  "common.congratsName": "Gratulacje, {name}!",
   "games.title": "Gry",
   "games.subtitle": "Wybierz grę.",
   "games.comingSoon": "Wkrótce",

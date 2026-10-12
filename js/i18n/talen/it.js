@@ -373,6 +373,8 @@ export default {
   "solitaire.done.text": "Tutte le carte sono sulle quattro basi. Giocato benissimo.",
   "play.bigView": "Schermo grande",
   "play.smallView": "Schermo normale",
+  "common.congrats": "Complimenti!",
+  "common.congratsName": "Complimenti, {name}!",
   "games.title": "Giochi",
   "games.subtitle": "Scegli un gioco.",
   "games.comingSoon": "In arrivo",

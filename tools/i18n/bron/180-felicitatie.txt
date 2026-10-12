@@ -1,0 +1,4 @@
+##### Felicitatie na een gewonnen spel (Patience en Mahjong); met de voornaam als je bent ingelogd
+common.congrats | Congratulations! | Gefeliciteerd!
+# {name} is de voornaam van de speler.
+common.congratsName | Congratulations, {name}! | Gefeliciteerd, {name}!

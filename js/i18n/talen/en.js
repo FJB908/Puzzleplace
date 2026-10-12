@@ -373,6 +373,8 @@ export default {
   "solitaire.done.text": "All the cards are on the four piles. Beautifully played.",
   "play.bigView": "Big view",
   "play.smallView": "Normal view",
+  "common.congrats": "Congratulations!",
+  "common.congratsName": "Congratulations, {name}!",
   "games.title": "Games",
   "games.subtitle": "Choose a game to play.",
   "games.comingSoon": "Coming soon",

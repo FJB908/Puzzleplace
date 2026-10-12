@@ -373,6 +373,8 @@ export default {
   "solitaire.done.text": "Alle kaarten liggen op de vier stapels. Mooi gespeeld.",
   "play.bigView": "Groot beeld",
   "play.smallView": "Normaal beeld",
+  "common.congrats": "Gefeliciteerd!",
+  "common.congratsName": "Gefeliciteerd, {name}!",
   "games.title": "Spellen",
   "games.subtitle": "Kies een spel om te spelen.",
   "games.comingSoon": "Komt binnenkort",
