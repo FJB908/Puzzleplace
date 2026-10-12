@@ -31,3 +31,12 @@ Je hebt geen server nodig om online-achtig te spelen. Op het scherm van Woordtui
 ## Alleen de app, zonder vrienden
 
 De spellen tegen de computer werken ook op een gewone statische website (bijvoorbeeld GitHub Pages) met het bestand `dist/puzzleplace.html` of de map zelf. Spelen tegen een vriend en accounts hebben altijd de server nodig.
+
+## Testen op je telefoon (zelfde wifi)
+
+1. Draai op de computer in de projectmap: `npm run telefoon` (werkt in cmd, PowerShell en op Mac/Linux). Er verschijnen een of meer adressen zoals `http://192.168.1.23:8000`.
+2. Tik dat adres in op je telefoon. De telefoon moet op **hetzelfde wifi** zitten (niet op mobiel internet, niet op een gastnetwerk).
+3. Vraagt Windows of Node.js het netwerk op mag? Kies **Toestaan** (voor privénetwerken). Zet een VPN uit.
+4. Een andere poort: `set PORT=3000&& npm run telefoon` (cmd, let op: geen spatie voor `&&`) of `$env:PORT=3000; npm run telefoon` (PowerShell).
+
+`HOST=0.0.0.0 npm run server` werkt alleen op Mac/Linux; in cmd en PowerShell zet je een variabele anders (zie hierboven), daarom is `npm run telefoon` het makkelijkst.
