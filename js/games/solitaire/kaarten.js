@@ -40,7 +40,7 @@ const PIPS = {
 // Boer, vrouw en heer: de figuur is een plaatje (zie hofplaatjes.js), met een zelfgetekende hoekmarkering eromheen. Zonder plaatje een eenvoudig kader.
 function hofkaart(k, s, kl, hof) {
   const plaatje = hof?.[k];
-  if (plaatje) return `<image href="${plaatje}" x="13" y="14.500" width="34" height="55.500" preserveAspectRatio="none"/>`;
+  if (plaatje) return `<image href="${plaatje}" x="12.750" y="14.500" width="34.500" height="55.500" preserveAspectRatio="none"/>`;
   return `<rect x="12" y="17" width="36" height="50" rx="3.500" fill="none" stroke="${kl}" stroke-width="1" opacity=".6"/>`;
 }
 
@@ -65,7 +65,7 @@ export function kaartSvg(k, letters, hof = null) {
   } else {
     midden = hofkaart(k, s, kl, hof);
   }
-  const uit = `${hoek}<g transform="rotate(180 30 42)">${hoek}</g>${midden}`;
+  const uit = `${midden}${hoek}<g transform="rotate(180 30 42)">${hoek}</g>`;
   cache.set(sl, uit);
   return uit;
 }
