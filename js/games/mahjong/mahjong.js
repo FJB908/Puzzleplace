@@ -30,7 +30,6 @@ export function mount(container, ctx) {
 
   // ----- Het scherm -----
   const aantal = h('span', { class: 'mj-aantal' });
-  const paren = h('span', { class: 'mj-paren' });
   const balk = h('i', {});
   const melding = h('p', { class: 'mj-melding', role: 'status', 'aria-live': 'polite' });
   const bordEl = h('div', { class: 'mj-bord', role: 'group' });
@@ -40,7 +39,7 @@ export function mount(container, ctx) {
   const husselKnop = h('button', { type: 'button', class: 'btn', onclick: husselen }, icon('shuffle'), h('span', {}, t('mahjong.shuffle')));
   container.classList.add('stage--bare');
   container.append(h('div', { class: 'mj' },
-    h('div', { class: 'mj-kop' }, h('div', { class: 'mj-tellers' }, aantal, paren), h('span', { class: 'ws-bar mj-balk', 'aria-hidden': 'true' }, balk)),
+    h('div', { class: 'mj-kop' }, h('div', { class: 'mj-tellers' }, aantal), h('span', { class: 'ws-bar mj-balk', 'aria-hidden': 'true' }, balk)),
     melding, veld, h('div', { class: 'mj-knoppen' }, terugKnop, tipKnop, husselKnop)));
 
   const tegels = b.tegels.map((tg, i) => {
@@ -75,11 +74,6 @@ export function mount(container, ctx) {
   function verfris({ behoud = [] } = {}) {
     const weg = wegSet(state);
     const matchFace = gekozen !== null ? state.faces[gekozen] : null;
-    // Welke vrije tegels hebben nu een vrije tegel die erbij past? Die zijn te zien aan een gouden randje, en geteld boven het bord.
-    const vrijen = tegels.flatMap((_, i) => (!weg.has(i) && isVrij(state, i, weg) ? [i] : []));
-    const heeftMaatje = new Set(vrijen.filter((i) => vrijen.some((j) => j !== i && passen(state.faces[i], state.faces[j]))));
-    let nMogelijk = 0;
-    { const gebruikt = new Set(); for (const i of vrijen) { if (gebruikt.has(i)) continue; const j = vrijen.find((x) => x !== i && !gebruikt.has(x) && passen(state.faces[i], state.faces[x])); if (j !== undefined) { gebruikt.add(i); gebruikt.add(j); nMogelijk++; } } }
     tegels.forEach((el, i) => {
       const f = state.faces[i], isWeg = weg.has(i);
       if (el._f !== f) {
@@ -91,15 +85,12 @@ export function mount(container, ctx) {
       el.classList.toggle('weg', isWeg && !behoud.includes(i));
       el.classList.toggle('vrij', vrij); el.classList.toggle('vast', !isWeg && !vrij);
       el.classList.toggle('gekozen', gekozen === i);
-      el.classList.toggle('speelbaar', vrij && heeftMaatje.has(i));
-      el.classList.toggle('maatje', vrij && gekozen !== null && i !== gekozen && passen(matchFace, f));
       el.disabled = isWeg && !behoud.includes(i);
       el.setAttribute('aria-pressed', String(gekozen === i));
       el.setAttribute('aria-label', t(vrij ? 'mahjong.tile.free' : 'mahjong.tile.blocked', { face: faceNaam(f) }));
     });
     const n = tegelsOver(state);
     aantal.textContent = t('mahjong.left', { n });
-    paren.textContent = klaar(state) ? '' : t('mahjong.pairs', { n: nMogelijk });
     balk.style.width = `${Math.round(progress(state) * 100)}%`;
     bordEl.setAttribute('aria-label', t('mahjong.boardAria', { n }));
     terugKnop.disabled = state.history.length === 0;
@@ -133,8 +124,7 @@ export function mount(container, ctx) {
   function kies(i) {
     gekozen = i; wisTip(); verfris();
     if (i === null) { zeg(t('mahjong.msg.start')); return; }
-    const heeftMaatje = tegels.some((el) => el.classList.contains('maatje'));
-    zeg(t(heeftMaatje ? 'mahjong.msg.picked' : 'mahjong.msg.noPartner'));
+    zeg(t('mahjong.msg.picked'));                // geen aanwijzingen: je ziet zelf of er een tegel bij past
   }
   function klik(i) {
     if (afgerond || bezig) return;

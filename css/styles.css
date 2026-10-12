@@ -446,7 +446,7 @@ html[data-textsize="xlarge"] .nav a { font-size: min(.66rem, 3.1vw); }
 /* ---------- Spelscherm ---------- */
 .play-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 .25rem; }
 .play-bar .back { margin-left: -.6rem; }
-.play-bar .btn { padding-inline: .45rem; min-height: 3rem; font-size: .95rem; gap: .35rem; white-space: nowrap; }
+.play-bar .btn { padding-inline: .3rem; min-height: 3rem; font-size: .9rem; gap: .3rem; white-space: nowrap; }
 .play-bar .btn .icon { width: 1.25rem; height: 1.25rem; }
 .play-bar .back { padding-left: .4rem; }
 .play-title { flex: 1 0 100%; display: flex; align-items: baseline; gap: .15rem .7rem; flex-wrap: wrap; min-width: 0; padding-top: .1rem; }

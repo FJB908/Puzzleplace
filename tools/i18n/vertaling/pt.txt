@@ -663,7 +663,7 @@ detail.virtual.play | Jogar
 err.deviceToken | Não foi possível registar este dispositivo para as notificações.
 mahjong.name | Mahjong
 mahjong.summary | Retire pares de peças iguais até o tabuleiro ficar vazio.
-mahjong.howTo.1 | Uma peça está livre quando nada está por cima dela e o lado esquerdo ou direito está aberto. As peças livres que têm par têm uma borda dourada.
+mahjong.howTo.1 | Uma peça está livre quando nada está por cima dela e o lado esquerdo ou direito está aberto.
 mahjong.howTo.2 | Toque numa peça livre e depois noutra peça livre com o mesmo desenho. O par desaparece.
 mahjong.howTo.3 | Cada flor combina com qualquer outra flor, e cada estação com qualquer outra estação.
 mahjong.howTo.4 | Está preso? Use «{undo}» as vezes que quiser, peça uma «{hint}» ou carregue em «{shuffle}» para misturar as peças que restam: o tabuleiro pode sempre ser terminado.
@@ -678,10 +678,10 @@ mahjong.boardAria | Tabuleiro de mahjong, restam {n} peças
 mahjong.tile.free | {face}, livre
 mahjong.tile.blocked | {face}, bloqueada
 mahjong.msg.start | Toque numa peça livre e depois numa que combine.
-mahjong.msg.picked | Agora toque na peça que combina. As que combinam têm uma borda dourada.
+mahjong.msg.picked | Agora toque na peça que combina.
 mahjong.msg.noPartner | Ainda não há nenhuma peça livre que combine. Escolha outra ou retire primeiro outra peça.
 mahjong.msg.pair | Um par! Peças que restam: {n}.
-mahjong.msg.blocked | Essa peça está presa: há algo por cima ou os dois lados estão fechados. Pode tirar as peças com borda dourada.
+mahjong.msg.blocked | Essa peça está presa: há algo por cima ou os dois lados estão fechados.
 mahjong.msg.noMoves | Já não há pares. Toque em «{shuffle}»: as peças são misturadas e pode continuar.
 mahjong.msg.shuffled | Misturadas! Há uma maneira de terminar este tabuleiro.
 mahjong.msg.tip | Estas duas peças combinam.
@@ -748,6 +748,5 @@ solitaire.msg.noTip | Não encontro nenhum movimento que ajude. Tente anular alg
 solitaire.msg.undone | Movimento anulado.
 solitaire.done.title | Conseguiu!
 solitaire.done.text | Todas as cartas estão nas quatro bases. Muito bem jogado.
-mahjong.pairs | Pares possíveis: {n}
 play.bigView | Ecrã grande
 play.smallView | Ecrã normal
