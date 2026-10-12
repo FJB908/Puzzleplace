@@ -14,6 +14,7 @@ import * as store from '../store.js';
 import { gameArt } from '../games/art.js';
 import { notFoundView } from './notFound.js';
 import { t } from '../i18n/index.js';
+import { tijdTekst, reeks } from '../shared/dagelijks.js';
 
 // Het aantal bloesems laat zien hoe moeilijk een niveau is (1 tot 4)
 function bloomRow(n, total) {
@@ -108,7 +109,7 @@ export function gameDetailView({ id }, app) {
 
   return {
     title: game.name, nav: 'games', decor: 'hang-rechts',
-    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), virtueel, vriendenBlok?.el),
+    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), id === 'sudoku' ? dagBlok() : null, id === 'sudoku' ? statsKaart(game) : null, virtueel, vriendenBlok?.el),
     cleanup: () => vriendenBlok?.off(),
   };
 }
@@ -161,4 +162,41 @@ function virtueleSpelers(game) {
       avatar(sp.naam, sp.id),
       h('span', { class: 'dv-wie' }, h('strong', {}, sp.naam), h('small', { class: 'muted' }, label(sp.niveau))),
       h('button', { type: 'button', class: 'btn btn-primary', onclick: () => speel(sp) }, icon('play'), t('detail.virtual.play'))))));
+}
+
+
+// Sudoku: de puzzel van de dag (met je reeks) en een weg naar het archief
+function dagBlok() {
+  const today = store.todayKey();
+  const rec = store.getDaily('sudoku');
+  const n = reeks(rec, today);
+  const klaar = !!rec[today];
+  return h('section', { class: 'card stack', 'aria-labelledby': 'dagblok-titel' },
+    h('h2', { id: 'dagblok-titel' }, t('detail.daily.title')),
+    h('p', {}, t('detail.daily.text')),
+    n > 0 ? h('p', { class: 'streak' }, icon('flame'), t('home.dailyStreak', { n })) : null,
+    h('div', { class: 'stack' },
+      h('a', { class: `btn ${klaar ? '' : 'btn-primary'} btn-block`, href: '#/spel/sudoku/speel/dagelijks' }, h('span', {}, t(klaar ? 'detail.daily.again' : 'detail.daily.play'))),
+      h('a', { class: 'btn btn-block', href: '#/spel/sudoku/dagelijks' }, icon('calendar'), h('span', {}, t('detail.daily.archive')))));
+}
+
+// Je statistieken per niveau: gespeeld, gewonnen, beste en gemiddelde tijd
+function statsKaart(game) {
+  const stats = store.getStats(game.id);
+  const heeft = game.difficulties.some((d) => stats[d.id]?.won);
+  const waarde = (tekst, label, klas = '') => h('span', { class: `stats-waarde ${klas}` }, h('b', {}, tekst), h('small', {}, label));
+  const rijen = game.difficulties.map((d) => {
+    const s = stats[d.id];
+    return h('div', { class: 'stats-niveau', role: 'group', 'aria-label': d.label },
+      h('strong', {}, d.label),
+      h('div', { class: 'stats-waarden' },
+        waarde(s?.best != null ? tijdTekst(s.best) : '–', t('stats.best'), s?.best != null ? 'best' : ''),
+        waarde(s?.won ? tijdTekst(Math.round(s.total / s.won)) : '–', t('stats.average')),
+        waarde(s ? `${s.won}/${s.started}` : '–', t('stats.played'))));
+  });
+  return h('section', { class: 'card stack stats-kaart', 'aria-labelledby': 'stats-titel' },
+    h('h2', { id: 'stats-titel' }, t('detail.stats.title')),
+    heeft ? null : h('p', { class: 'muted stats-leeg' }, t('detail.stats.none')),
+    rijen,
+    heeft ? h('p', { class: 'muted stats-noot' }, t('stats.note')) : null);
 }

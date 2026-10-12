@@ -5,7 +5,8 @@
 //   #/spellen                   Alle spellen
 //   #/spel/:id                  Spel: uitleg + niveau + starten
 //   #/spel/:id/speel            Spelen (verder of nieuw)
-//   #/spel/:id/speel/dagelijks  Puzzel van de dag
+//   #/spel/:id/speel/dagelijks  Puzzel van de dag (altijd Sudoku); .../dagelijks/JJJJ-MM-DD een dag uit het archief
+//   #/spel/sudoku/dagelijks     Het archief van de puzzel van de dag (kalender)
 //   #/instellingen  #/hulp
 //   #/account  #/vrienden       (alleen als FEATURES aan staat)
 
@@ -20,6 +21,7 @@ import { homeView } from './views/home.js';
 import { gamesView } from './views/games.js';
 import { gameDetailView } from './views/gameDetail.js';
 import { playView } from './views/play.js';
+import { dagArchiefView } from './views/dagArchief.js';
 import { settingsView } from './views/settings.js';
 import { helpView } from './views/help.js';
 import { accountView } from './views/account.js';
@@ -46,7 +48,8 @@ const ROUTES = [
   [/^\/?$/, homeView, () => ({})],
   [/^\/spellen$/, gamesView, () => ({})],
   [/^\/spel\/([\w-]+)$/, gameDetailView, (m) => ({ id: m[1] })],
-  [/^\/spel\/([\w-]+)\/speel(?:\/(dagelijks))?$/, playView, (m) => ({ id: m[1], mode: m[2] })],
+  [/^\/spel\/([\w-]+)\/speel(?:\/(dagelijks)(?:\/(\d{4}-\d{2}-\d{2}))?)?$/, playView, (m) => ({ id: m[1], mode: m[2], date: m[3] })],
+  [/^\/spel\/sudoku\/dagelijks$/, dagArchiefView, () => ({})],
   [/^\/instellingen$/, settingsView, () => ({})],
   [/^\/taal$/, taalView, () => ({})],
   [/^\/hulp$/, helpView, () => ({})],

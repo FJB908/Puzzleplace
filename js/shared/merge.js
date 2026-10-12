@@ -14,6 +14,31 @@ const later = (a, b) => ((a?.updatedAt ?? 0) >= (b?.updatedAt ?? 0) ? a : b);
 // een wismarkering is: zo komt een afgerond spel niet terug vanaf een apparaat dat het nog als lopend spel kent.
 const mergeSlot = (a, b) => (!a || !b ? a || b : later(a, b));
 
+// De dagen die je hebt opgelost: alle dagen blijven, bij dezelfde dag de snelste tijd
+function mergeDaily(a, b) {
+  if (!a && !b) return null;
+  const uit = {};
+  for (const dag of new Set([...Object.keys(a || {}), ...Object.keys(b || {})])) {
+    const x = a?.[dag], y = b?.[dag];
+    uit[dag] = !x || !y ? { difficulty: (x || y).difficulty, time: (x || y).time ?? null } : { difficulty: x.difficulty, time: Math.min(x.time ?? Infinity, y.time ?? Infinity) === Infinity ? null : Math.min(x.time ?? Infinity, y.time ?? Infinity) };
+  }
+  return uit;
+}
+
+// Statistieken per niveau: de tellers van het apparaat met de meeste winsten (samen optellen zou dubbel tellen), de beste tijd is de snelste
+function mergeStats(a, b) {
+  if (!a && !b) return null;
+  const uit = {};
+  for (const niveau of new Set([...Object.keys(a || {}), ...Object.keys(b || {})])) {
+    const x = a?.[niveau], y = b?.[niveau];
+    if (!x || !y) { const z = x || y; uit[niveau] = { started: z.started ?? 0, won: z.won ?? 0, best: z.best ?? null, total: z.total ?? 0 }; continue; }
+    const basis = (x.won ?? 0) >= (y.won ?? 0) ? x : y;
+    const bests = [x.best, y.best].filter((v) => v != null);
+    uit[niveau] = { started: Math.max(x.started ?? 0, y.started ?? 0), won: basis.won ?? 0, best: bests.length ? Math.min(...bests) : null, total: basis.total ?? 0 };
+  }
+  return uit;
+}
+
 function mergeGame(a = {}, b = {}) {
   const slots = {};
   for (const name of new Set([...Object.keys(a.slots || {}), ...Object.keys(b.slots || {})])) {
@@ -22,12 +47,16 @@ function mergeGame(a = {}, b = {}) {
   }
   const newest = later(Object.values(a.slots || {}).filter(Boolean).reduce((x, y) => later(x, y), null), Object.values(b.slots || {}).filter(Boolean).reduce((x, y) => later(x, y), null));
   const fromNewest = newest && (a.slots && Object.values(a.slots).includes(newest) ? a : b);
-  return {
+  const uit = {
     difficulty: fromNewest?.difficulty ?? a.difficulty ?? b.difficulty ?? 'makkelijk',
     completed: Math.max(a.completed || 0, b.completed || 0),
     dailyDone: [a.dailyDone, b.dailyDone].filter(Boolean).sort().pop() ?? null,
     slots,
   };
+  const daily = mergeDaily(a.daily, b.daily), stats = mergeStats(a.stats, b.stats);
+  if (daily) uit.daily = daily;
+  if (stats) uit.stats = stats;
+  return uit;
 }
 
 export function mergeSnapshots(local, remote) {

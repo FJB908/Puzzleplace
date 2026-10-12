@@ -752,3 +752,62 @@ play.bigView | Schermo grande
 play.smallView | Schermo normale
 common.congrats | Complimenti!
 common.congratsName | Complimenti, {name}!
+
+##### 190-sudoku-tijd
+daily.archiveTitle | Sfide del giorno
+daily.archiveText | Ogni giorno un nuovo Sudoku, uguale per tutti. Ha perso un giorno? Lo giochi qui.
+daily.play | Gioca la sfida di oggi
+daily.continue | Continua la sfida di oggi
+daily.playAgain | Gioca ancora la sfida di oggi
+daily.prevMonth | Mese precedente
+daily.nextMonth | Mese successivo
+daily.monthProgress | {done} su {total} risolti
+daily.stat.streak | Serie
+daily.stat.longest | Più lunga
+daily.stat.solved | Risolti
+daily.day.done | {date}: risolto in {time}
+daily.day.busy | {date}: iniziato
+daily.day.open | {date}: non ancora giocato
+daily.day.today | {date} (oggi): non ancora giocato
+daily.day.closed | {date}: non disponibile
+daily.legend.done | Risolto
+daily.legend.today | Oggi
+daily.legend.busy | Iniziato
+daily.levelNote | Il livello cambia di giorno in giorno: tranquillo a inizio settimana, più impegnativo nel fine settimana.
+daily.again.title | Già risolto
+daily.again.text | Ha risolto questa sfida in {time}. Vuole rigiocarla?
+daily.again.yes | Gioca ancora
+daily.again.no | Indietro
+play.done.archive | Archivio
+home.dailyDoneTime | Risolto in {time}
+home.dailyBusy | Iniziato
+home.dailyStreak_one | {n} giorno di fila
+home.dailyStreak_other | {n} giorni di fila
+home.dailyHint | Ogni giorno un nuovo Sudoku
+home.dailyArchive | Archivio
+detail.daily.title | Sfida del giorno
+detail.daily.text | Ogni giorno un nuovo Sudoku, uguale per tutti. Ha perso un giorno? È nell'archivio.
+detail.daily.play | Gioca oggi
+detail.daily.archive | Apri l'archivio
+detail.stats.title | Le sue statistiche
+detail.stats.none | Risolva un sudoku e qui compariranno i suoi tempi migliori.
+stats.best | Tempo migliore
+stats.average | Media
+stats.played | Vinte
+sudoku.pause | Pausa
+sudoku.paused | In pausa
+sudoku.resume | Riprendi
+sudoku.timer.hide | Tempo {time}. Tocchi per nascondere il cronometro.
+sudoku.timer.show | Mostra il cronometro
+sudoku.say.paused | In pausa. Il tempo è fermo.
+sudoku.stat.time | Tempo
+sudoku.stat.best | Migliore
+sudoku.stat.average | Media
+sudoku.stat.mistakes | Errori
+sudoku.record | Nuovo record! Il precedente era {previous}.
+sudoku.firstTime | Il suo primo tempo a questo livello. Ben fatto!
+sudoku.streak | {n} giorni di fila!
+sudoku.done.text | Risolto. Ben fatto!
+sudoku.done.daily | Ha risolto la sfida del {date}.
+stats.note | Vinte su giocate
+detail.daily.again | Gioca ancora oggi

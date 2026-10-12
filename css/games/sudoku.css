@@ -7,8 +7,8 @@
 .sudoku-main, .sudoku-controls { width: min(100%, 34rem); display: flex; flex-direction: column; gap: 1rem; }
 
 /* ----- Levens: vijf bloesems, een lege bloesem is een verloren leven ----- */
-.sudoku-lives { display: flex; justify-content: center; gap: .5rem; min-height: 2rem; }
-.life { width: 2rem; height: 2rem; background: url("../../assets/blossom.svg") center / contain no-repeat; }
+.sudoku-lives { display: flex; justify-content: flex-start; gap: .2rem; min-height: 2rem; }
+.life { width: 1.6rem; height: 1.6rem; background: url("../../assets/blossom.svg") center / contain no-repeat; }
 .life.lost { filter: grayscale(1) opacity(.22); }
 html[data-theme="dark"] .life.lost { filter: grayscale(1) opacity(.3); }
 html[data-contrast="high"] .life { filter: none; }
@@ -146,3 +146,44 @@ html[data-textsize="xlarge"] .action-btn { font-size: .65rem; }
 .pad-btn { transition: transform .1s ease, background-color .15s, opacity .3s; }
 .pad-btn:active { transform: scale(.88); background: var(--primary-soft); }
 .pad-btn.done { transform: scale(.8); }
+
+/* ----- Bovenbalk: levens links, de tijd en pauze rechts ----- */
+.sudoku-top { display: flex; align-items: center; justify-content: space-between; gap: .4rem; }
+.sudoku-clock { display: flex; align-items: center; gap: .1rem; margin-left: auto; flex: none; }
+.sudoku-top .sudoku-lives { flex: 1 1 0; min-width: 0; }
+.sudoku-top .life { flex: 0 1 1.6rem; min-width: .9rem; height: auto; aspect-ratio: 1; }
+.sudoku-timer {
+  display: inline-flex; align-items: center; gap: .4rem; min-height: 2.8rem; padding: .2rem .7rem; border: 0; border-radius: 99px; cursor: pointer;
+  background: var(--surface-2); color: var(--text); font: inherit; font-weight: 800; font-size: 1.05rem; font-variant-numeric: tabular-nums; letter-spacing: .02em;
+  -webkit-tap-highlight-color: transparent;
+}
+.sudoku-timer .icon { width: 1.25rem; height: 1.25rem; color: var(--primary); }
+.sudoku-timer.is-hidden { color: var(--text-muted); }
+.sudoku-timer.is-hidden .icon { opacity: .7; }
+.sudoku-timer:focus-visible, .sudoku-pause-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+html[data-contrast="high"] .sudoku-timer { border: 2px solid var(--border); background: none; }
+.sudoku-pause-btn { min-height: 2.8rem; min-width: 2.8rem; padding-inline: .5rem; }
+.sudoku-pause-btn .icon { width: 1.5rem; height: 1.5rem; }
+
+/* Pauze: het rooster is verborgen, zodat je niet kunt meekijken terwijl de tijd stilstaat */
+.sudoku-boardwrap { position: relative; width: 100%; }
+.sudoku-pause {
+  position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; border-radius: .75rem;
+  background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: center; padding: 1rem;
+}
+.sudoku-pause[hidden] { display: none; }
+.sudoku-pause p { margin: 0; font-size: 1.4rem; font-weight: 800; }
+.sudoku.is-paused .sudoku-board { filter: blur(8px); }
+html[data-contrast="high"] .sudoku-pause { background: var(--surface); backdrop-filter: none; border: 3px solid var(--border); }
+
+/* ----- Slotvenster: tijd, beste tijd, gemiddelde, fouten ----- */
+.stat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.2rem, 1fr)); gap: .6rem; }
+.stat-tile { display: flex; flex-direction: column; align-items: center; gap: .15rem; padding: .7rem .4rem; border-radius: 1rem; background: var(--surface-2); text-align: center; }
+.stat-tile small { color: var(--text-muted); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; }
+.stat-tile strong { font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.stat-tile.is-record { background: linear-gradient(145deg, #fff3cf, #ffe39a); color: #4a3200; box-shadow: 0 0 0 2px #e0a92f; }
+.stat-tile.is-record small { color: #6b4a00; }
+.record-banner { display: flex; align-items: center; justify-content: center; gap: .4rem; margin: 0; font-weight: 800; color: var(--primary); }
+.record-banner .icon { width: 1.3rem; height: 1.3rem; }
+.record-first, .streak-note { margin: 0; text-align: center; }
+.streak-note { font-weight: 800; color: var(--accent); }

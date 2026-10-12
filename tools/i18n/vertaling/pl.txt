@@ -775,3 +775,63 @@ play.bigView | Duży widok
 play.smallView | Zwykły widok
 common.congrats | Gratulacje!
 common.congratsName | Gratulacje, {name}!
+
+##### 190-sudoku-tijd
+daily.archiveTitle | Łamigłówki dnia
+daily.archiveText | Co dzień nowe sudoku, takie samo dla wszystkich. Ominąłeś dzień? Zagraj w nie tutaj.
+daily.play | Zagraj w dzisiejszą łamigłówkę
+daily.continue | Kontynuuj dzisiejszą łamigłówkę
+daily.playAgain | Zagraj w dzisiejszą jeszcze raz
+daily.prevMonth | Poprzedni miesiąc
+daily.nextMonth | Następny miesiąc
+daily.monthProgress | Rozwiązane: {done} z {total}
+daily.stat.streak | Seria
+daily.stat.longest | Najdłuższa
+daily.stat.solved | Rozwiązane
+daily.day.done | {date}: rozwiązane w {time}
+daily.day.busy | {date}: rozpoczęte
+daily.day.open | {date}: jeszcze nie grane
+daily.day.today | {date} (dziś): jeszcze nie grane
+daily.day.closed | {date}: niedostępne
+daily.legend.done | Rozwiązane
+daily.legend.today | Dziś
+daily.legend.busy | W trakcie
+daily.levelNote | Poziom zmienia się z dnia na dzień: spokojnie na początku tygodnia, trudniej w weekend.
+daily.again.title | Już rozwiązane
+daily.again.text | Tę łamigłówkę rozwiązałeś w {time}. Zagrać jeszcze raz?
+daily.again.yes | Zagraj jeszcze raz
+daily.again.no | Wstecz
+play.done.archive | Archiwum
+home.dailyDoneTime | Rozwiązane w {time}
+home.dailyBusy | W trakcie
+home.dailyStreak_one | {n} dzień z rzędu
+home.dailyStreak_few | {n} dni z rzędu
+home.dailyStreak_many | {n} dni z rzędu
+home.dailyHint | Co dzień nowe sudoku
+home.dailyArchive | Archiwum
+detail.daily.title | Łamigłówka dnia
+detail.daily.text | Co dzień nowe sudoku, takie samo dla wszystkich. Ominąłeś dzień? Jest w archiwum.
+detail.daily.play | Zagraj dziś
+detail.daily.archive | Otwórz archiwum
+detail.stats.title | Twoje statystyki
+detail.stats.none | Rozwiąż sudoku, a tu pojawią się twoje najlepsze czasy.
+stats.best | Najlepszy czas
+stats.average | Średnia
+stats.played | Wygrane
+sudoku.pause | Pauza
+sudoku.paused | Wstrzymano
+sudoku.resume | Wznów
+sudoku.timer.hide | Czas {time}. Dotknij, aby ukryć czas.
+sudoku.timer.show | Pokaż czas
+sudoku.say.paused | Wstrzymano. Czas stoi.
+sudoku.stat.time | Czas
+sudoku.stat.best | Najlepszy
+sudoku.stat.average | Średnia
+sudoku.stat.mistakes | Błędy
+sudoku.record | Nowy rekord! Poprzedni wynosił {previous}.
+sudoku.firstTime | Twój pierwszy czas na tym poziomie. Dobra robota!
+sudoku.streak | {n} dni z rzędu!
+sudoku.done.text | Rozwiązane. Pięknie!
+sudoku.done.daily | Rozwiązałeś łamigłówkę z dnia {date}.
+stats.note | Wygrane z rozegranych
+detail.daily.again | Zagraj dziś jeszcze raz

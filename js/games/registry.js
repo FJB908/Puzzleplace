@@ -85,11 +85,5 @@ export const getGameInfo = (id) => games.find((g) => g.id === id);
 export const isReady = (g) => g.status === 'ready' && typeof g.load === 'function';
 export const readyGames = () => games.filter(isReady);
 
-// "Puzzel van de dag": elke dag een ander speelbaar spel, voor iedereen hetzelfde.
-export function dailyGame() {
-  const ready = readyGames().filter((g) => g.id !== 'demo');
-  const list = ready.length ? ready : readyGames();
-  if (!list.length) return null;
-  const dayNumber = Math.floor(new Date().setHours(12, 0, 0, 0) / 86400000);
-  return list[dayNumber % list.length];
-}
+// "Puzzel van de dag": altijd Sudoku, voor iedereen dezelfde (de seed is de datum). Oudere dagen staan in het archief.
+export const dailyGame = () => getGameInfo('sudoku');

@@ -8,7 +8,10 @@
 import { h, icon, choiceDialog } from '../../ui.js';
 import { generate, candidateMask, bitCount, PEERS } from './engine.js';
 import { burst, rain, motionOK } from '../../effects.js';
-import { t } from '../../i18n/index.js';
+import { t, datumTekst } from '../../i18n/index.js';
+import * as store from '../../store.js';
+import { tijdTekst, reeks } from '../../shared/dagelijks.js';
+import { felicitatie } from '../../shared/felicitatie.js';
 
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const MAX_HISTORY = 300;
@@ -18,7 +21,7 @@ const LIVES = { makkelijk: 5, gemiddeld: 4, moeilijk: 3, extreem: 3 };
 // Alles wat bewaard wordt is gewoon JSON: puzzel, oplossing, ingevulde cijfers, notities, stappen, levens.
 function newState(ctx) {
   const { puzzle, solution } = generate(ctx.seed, ctx.difficulty);
-  return { puzzle, solution, values: [...puzzle], notes: new Array(81).fill(0), history: [], lives: LIVES[ctx.difficulty] ?? 3 };
+  return { puzzle, solution, values: [...puzzle], notes: new Array(81).fill(0), history: [], lives: LIVES[ctx.difficulty] ?? 3, time: 0 };
 }
 
 function validState(s) {
@@ -28,7 +31,7 @@ function validState(s) {
 export function mount(container, ctx) {
   const maxLives = LIVES[ctx.difficulty] ?? 3;
   const state = validState(ctx.saved)
-    ? { history: [], lives: maxLives, ...ctx.saved }
+    ? { history: [], lives: maxLives, time: 0, ...ctx.saved }
     : newState(ctx);
   const { puzzle, solution, values, notes } = state;
 
@@ -79,12 +82,54 @@ export function mount(container, ctx) {
   const tipButton = action('bulb', t('common.hint'), tip);
   const actions = h('div', { class: 'sudoku-actions' }, undoButton, pencilButton, tipButton);
 
+  // ----- De tijd: loopt alleen als het spel in beeld is, staat stil bij pauze en na afloop; verbergen kan met een tik -----
+  const timeText = h('span', { class: 'time-text' });
+  const timerButton = h('button', { type: 'button', class: 'sudoku-timer', onclick: toggleTimer }, icon('clock'), timeText);
+  const pauseButton = h('button', { type: 'button', class: 'btn btn-quiet sudoku-pause-btn', onclick: () => setPaused(!paused), 'aria-label': t('sudoku.pause') }, icon('pause'));
+  const pauseCover = h('div', { class: 'sudoku-pause', hidden: true },
+    h('p', {}, t('sudoku.paused')),
+    h('button', { type: 'button', class: 'btn btn-primary', onclick: () => setPaused(false) }, icon('play'), t('sudoku.resume')));
+  const top = h('div', { class: 'sudoku-top' }, livesEl, h('div', { class: 'sudoku-clock' }, timerButton, pauseButton));
   const root = h('div', { class: 'sudoku' },
-    h('div', { class: 'sudoku-main' }, livesEl, board, message),
+    h('div', { class: 'sudoku-main' }, top, h('div', { class: 'sudoku-boardwrap' }, board, pauseCover), message),
     h('div', { class: 'sudoku-controls' }, pad, actions));
 
   container.classList.add('stage--bare');
   container.append(root);
+
+  let seconds = state.time || 0, since = 0, paused = false, ticker = null, lastSave = 0;
+  const visible = () => !document.hidden;
+  const running = () => since > 0;
+  const elapsed = () => seconds + (running() ? (performance.now() - since) / 1000 : 0);
+  function clockOn() { if (!finished && !paused && visible() && !running()) since = performance.now(); }
+  function clockOff() { if (running()) { seconds += (performance.now() - since) / 1000; since = 0; } }
+  function showTime() {
+    const hidden = store.getSettings().showTimer === false;
+    timeText.textContent = hidden ? '' : tijdTekst(elapsed());
+    timerButton.classList.toggle('is-hidden', hidden);
+    timerButton.setAttribute('aria-pressed', String(!hidden));
+    timerButton.setAttribute('aria-label', hidden ? t('sudoku.timer.show') : t('sudoku.timer.hide', { time: tijdTekst(elapsed()) }));
+  }
+  function toggleTimer() { store.setSetting('showTimer', store.getSettings().showTimer === false); showTime(); }
+  function tick() {
+    showTime();
+    if (running() && performance.now() - lastSave > 15000) { lastSave = performance.now(); save(); }          // de tijd niet kwijt als je de app sluit
+  }
+  function setPaused(on) {
+    if (finished && on) return;
+    paused = on;
+    if (on) clockOff(); else clockOn();
+    pauseCover.hidden = !on;
+    root.classList.toggle('is-paused', on);
+    board.inert = on; pad.inert = on;
+    pauseButton.hidden = on;                                     // tijdens de pauze is er één grote knop: Verder
+    say(on ? t('sudoku.say.paused') : '');
+    showTime(); save();
+    if (!on) cells[selected].focus({ preventScroll: true });
+  }
+  function onVisibility() { if (document.hidden) { clockOff(); save(); } else clockOn(); }
+  document.addEventListener('visibilitychange', onVisibility);
+  function save() { state.time = elapsed(); ctx.save(state, { progress: progress() }); }
 
   // ----- Weergave -----
   function say(text) { message.textContent = text; }
@@ -211,13 +256,15 @@ export function mount(container, ctx) {
   };
 
   function afterChange() {
-    ctx.save(state, { progress: progress() });
+    save();
     render();
     if (values.every((v, i) => v === solution[i])) win();
   }
 
   async function win() {
     finished = true;
+    clockOff(); clearInterval(ticker); showTime();
+    const time = Math.round(seconds);
     render();
     say(t('sudoku.say.won'));
     if (motionOK()) {                                    // eerst even genieten: golf over het hele rooster en een bui van blaadjes
@@ -227,7 +274,26 @@ export function mount(container, ctx) {
       burst({ x, y, count: 26, power: 420, cone: [-170, -10], size: [14, 26], life: [1500, 2300] });
       rain({ count: 40 });
     }
-    ctx.complete({ difficulty: ctx.difficulty, livesLeft: state.lives, delay: motionOK() ? 1400 : 0 });   // meteen vastleggen, het slotbericht komt na de animatie
+    const info = ctx.recordWin({ time });                         // beste tijd en statistieken, bij de puzzel van de dag ook het archief
+    ctx.complete({ title: felicitatie(), text: t(ctx.daily ? 'sudoku.done.daily' : 'sudoku.done.text', { date: ctx.daily ? datumTekst(new Date(`${ctx.day}T12:00:00`), { day: 'numeric', month: 'long' }) : '' }), body: resultaat(time, info), time, delay: motionOK() ? 1400 : 0 });   // meteen vastleggen, het slotbericht komt na de animatie
+  }
+
+  // Het slotvenster: je tijd, je beste tijd (en of dat een nieuw record is), het gemiddelde en, bij de puzzel van de dag, je reeks
+  function resultaat(time, info) {
+    const tegel = (label, waarde, klas = '') => h('div', { class: `stat-tile ${klas}` }, h('small', {}, label), h('strong', {}, waarde));
+    const nieuwRecord = info && info.record && info.previous != null;
+    const tegels = [tegel(t('sudoku.stat.time'), tijdTekst(time)), tegel(t('sudoku.stat.best'), tijdTekst(info?.best ?? time), nieuwRecord ? 'is-record' : '')];
+    if (info && !info.repeat && info.won > 1) tegels.push(tegel(t('sudoku.stat.average'), tijdTekst(info.average)));
+    tegels.push(tegel(t('sudoku.stat.mistakes'), String(maxLives - state.lives)));
+    const kaart = [];
+    if (nieuwRecord) kaart.push(h('p', { class: 'record-banner' }, icon('check'), t('sudoku.record', { previous: tijdTekst(info.previous) })));
+    else if (info && !info.repeat && info.won === 1) kaart.push(h('p', { class: 'muted record-first' }, t('sudoku.firstTime')));
+    kaart.push(h('div', { class: 'stat-tiles' }, tegels));
+    if (ctx.daily) {
+      const n = reeks(store.getDaily('sudoku'), store.todayKey());
+      if (n > 1) kaart.push(h('p', { class: 'streak-note' }, t('sudoku.streak', { n })));
+    }
+    return h('div', { class: 'stack' }, kaart);
   }
 
   // ----- Fout gemaakt: een leven eraf -----
@@ -248,6 +314,7 @@ export function mount(container, ctx) {
 
   async function gameOver() {
     finished = true;
+    clockOff(); showTime();
     render();
     say(t('sudoku.say.noLives'));
     const choice = await choiceDialog({
@@ -268,9 +335,9 @@ export function mount(container, ctx) {
     notes.fill(0);
     state.history.length = 0;
     state.lives = maxLives;
-    finished = false;
+    seconds = 0; since = 0; finished = false; clockOn();                     // opnieuw beginnen: ook de tijd begint opnieuw
     selected = Math.max(0, firstEmptyOrWrong());
-    ctx.save(state, { progress: progress() });
+    save();
     say(t('sudoku.say.retry'));
     render();
     cells[selected].focus({ preventScroll: true });
@@ -307,7 +374,7 @@ export function mount(container, ctx) {
     if (right) { say(''); celebrateRight(selected, before); afterChange(); return; }
 
     loseLife();
-    ctx.save(state, { progress: progress() });
+    save();
     render();
     if (state.lives <= 0) { gameOver(); return; }
     say(t('sudoku.say.wrong', { n: state.lives }));
@@ -328,7 +395,7 @@ export function mount(container, ctx) {
     for (const [i, v, n] of [...record].reverse()) { values[i] = v; notes[i] = n; }
     selected = record[0][0];
     say(t('sudoku.say.undone'));
-    ctx.save(state, { progress: progress() });
+    save();
     render();
     cells[selected].focus({ preventScroll: true });
   }
@@ -381,6 +448,9 @@ export function mount(container, ctx) {
   }
 
   render();
-  if (!ctx.saved) ctx.save(state, { progress: progress() });     // nieuw spel meteen bewaren, zodat "Verder spelen" klopt
+  if (!ctx.saved) save();     // nieuw spel meteen bewaren, zodat "Verder spelen" klopt
   if (state.lives <= 0) gameOver();   // een eerder verloren spel: opnieuw de keuze tonen
+  else { clockOn(); ticker = setInterval(tick, 500); }
+  showTime();
+  return () => { document.removeEventListener('visibilitychange', onVisibility); clearInterval(ticker); clockOff(); if (!finished) save(); };
 }

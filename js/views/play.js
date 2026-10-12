@@ -6,40 +6,43 @@ import { h, icon, choiceDialog, announce } from '../ui.js';
 import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { notFoundView } from './notFound.js';
-import { t, getTaal } from '../i18n/index.js';
+import { t, getTaal, datumTekst } from '../i18n/index.js';
 import { TALEN } from '../shared/talen.js';
+import { dagMoeilijkheid, speelbaar, tijdTekst } from '../shared/dagelijks.js';
 
-export async function playView({ id, mode }, app) {
+export async function playView({ id, mode, date }, app) {
   const game = getGameInfo(id);
   if (!game) return notFoundView();
   if (!isReady(game)) { location.replace(`#/spel/${id}`); return null; }
 
   const daily = mode === 'dagelijks';
-  const slotName = daily ? 'daily' : 'normal';
   const today = store.todayKey();
+  const day = daily ? (date || today) : null;                         // de dag van de puzzel: vandaag, of een dag uit het archief
+  if (daily && (id !== 'sudoku' || !speelbaar(day, today))) { location.replace(id === 'sudoku' && date ? '#/spel/sudoku/dagelijks' : `#/spel/${id}`); return null; }
+  const slotName = daily ? store.dailySlot(day) : 'normal';
   const record = store.getGame(id);
+  const alOpgelost = daily ? record.daily?.[day] ?? null : null;
 
-  // Het bewaarde spel van een andere dag telt niet meer mee.
   let slot = store.getSlot(id, slotName);
-  if (daily && slot && slot.day !== today) slot = null;
   // Een spel dat je nog niet bent begonnen volgt de taal van nu; een spel dat al loopt blijft in zijn eigen taal (oude spellen waren Nederlands)
   if (slot && slot.state == null && slot.taal !== getTaal()) slot = null;
 
   // Nieuw slot aanmaken als dat nog niet bestaat.
   if (!slot) {
     slot = {
-      seed: daily ? today : Math.random().toString(36).slice(2, 10),
+      seed: daily ? day : Math.random().toString(36).slice(2, 10),
       taal: getTaal(),
-      difficulty: daily ? 'gemiddeld' : record.difficulty,
+      difficulty: daily ? dagMoeilijkheid(day) : record.difficulty,
       ...(!daily && record.persona ? { persona: record.persona } : {}),                // een virtuele speler (Woordtuin)
       state: null,
       updatedAt: Date.now(),
-      ...(daily ? { day: today } : {}),
+      ...(daily ? { day } : {}),
     };
     store.updateGame(id, (r) => { r.slots[slotName] = slot; });
+    if (!alOpgelost) store.countStart(id, slot.difficulty);                 // telt mee voor "gespeeld" (een dag die je al had opgelost niet nog eens)
   }
 
-  const backHref = daily ? '#/' : `#/spel/${id}`;
+  const backHref = daily ? (day === today ? '#/' : `#/spel/${id}/dagelijks`) : `#/spel/${id}`;
   const level = game.difficulties.find((d) => d.id === slot.difficulty)?.label || '';
   const stage = h('div', { class: 'stage' }, h('p', { class: 'muted', role: 'status' }, t('play.loading')));
 
@@ -82,7 +85,7 @@ export async function playView({ id, mode }, app) {
       grootKnop, helpButton,
       h('header', { class: 'play-title' },
         h('h1', { tabindex: '-1' }, daily ? t('play.dailyTitle', { game: game.name }) : game.name),
-        h('p', { class: 'muted' }, level))),
+        h('p', { class: 'muted' }, daily ? [datumTekst(new Date(`${day}T12:00:00`), { day: 'numeric', month: 'long' }), level].filter(Boolean).join(' · ') : level))),
     stage,
     h('p', { class: 'save-note' }, t('play.autosave')),
   );
@@ -95,6 +98,9 @@ export async function playView({ id, mode }, app) {
   const ctx = {
     gameId: id,
     daily,
+    day,
+    // Een gewonnen spel met een tijd (seconden) vastleggen: beste tijd, statistieken en (bij de puzzel van de dag) het archief. Geeft { record, previous, best, won, average, repeat }.
+    recordWin: ({ time }) => store.recordWin(id, { difficulty: slot.difficulty, time, day }),
     difficulty: slot.difficulty,
     persona: slot.persona || null,
     seed: slot.seed,
@@ -129,7 +135,11 @@ export async function playView({ id, mode }, app) {
       store.updateGame(id, (r) => {
         r.completed = (r.completed || 0) + 1;
         r.slots[slotName] = store.clearedSlot();
-        if (daily) r.dailyDone = today;
+        if (daily) {
+          if (day === today) r.dailyDone = today;
+          r.daily ||= {};
+          if (!r.daily[day]) r.daily[day] = { difficulty: slot.difficulty, time: result.time ?? null };
+        }
       });
       if (result.delay) await new Promise((resolve) => setTimeout(resolve, result.delay));
       if (gone) return;
@@ -143,6 +153,7 @@ export async function playView({ id, mode }, app) {
           closable: result.closable ?? true,                                 // met een kruisje kun je het bord nog bekijken; "Toon de uitslag" brengt het venster terug
           actions: [
             { label: daily ? t('play.done.backHome') : t('play.done.again'), value: daily ? 'home' : 'again', primary: true, autofocus: true },
+            ...(daily ? [{ label: t('play.done.archive'), value: 'archive' }] : []),
             { label: t('play.done.otherGame'), value: 'games' },
             ...(daily ? [] : [{ label: t('play.done.toHome'), value: 'home' }]),
           ],
@@ -154,7 +165,7 @@ export async function playView({ id, mode }, app) {
           viewKnop.onclick = toon;
           return;
         }
-        location.hash = choice === 'again' ? `#/spel/${id}` : choice === 'games' ? '#/spellen' : choice === 'detail' ? `#/spel/${id}` : '#/';
+        location.hash = choice === 'again' ? `#/spel/${id}` : choice === 'games' ? '#/spellen' : choice === 'archive' ? `#/spel/${id}/dagelijks` : choice === 'detail' ? `#/spel/${id}` : '#/';
       };
       await toon();
     },
@@ -174,7 +185,7 @@ export async function playView({ id, mode }, app) {
       dismissValue: 'houd',
     });
     if (keuze !== 'nieuw') return;
-    slot = { seed: daily ? today : Math.random().toString(36).slice(2, 10), taal: naar, difficulty: slot.difficulty, ...(slot.persona ? { persona: slot.persona } : {}), state: null, updatedAt: Date.now(), ...(daily ? { day: today } : {}) };
+    slot = { seed: daily ? day : Math.random().toString(36).slice(2, 10), taal: naar, difficulty: slot.difficulty, ...(slot.persona ? { persona: slot.persona } : {}), state: null, updatedAt: Date.now(), ...(daily ? { day } : {}) };
     store.updateGame(id, (r) => { r.slots[slotName] = slot; });
     Object.assign(ctx, { seed: slot.seed, taal: naar, saved: null });
   }
@@ -183,6 +194,16 @@ export async function playView({ id, mode }, app) {
   const start = async () => {
     try {
       await taalKeuze();
+      // Een dag uit het archief die je al had opgelost: eerst vragen of je hem nog eens wilt spelen
+      if (alOpgelost && slot.state == null) {
+        const keuze = await choiceDialog({
+          title: t('daily.again.title'),
+          text: t('daily.again.text', { time: alOpgelost.time != null ? tijdTekst(alOpgelost.time) : '–' }),
+          actions: [{ label: t('daily.again.yes'), value: 'ja', primary: true, autofocus: true }, { label: t('daily.again.no'), value: 'nee' }],
+          dismissValue: 'nee',
+        });
+        if (keuze !== 'ja') { if (!gone) location.hash = backHref; return; }
+      }
       const mod = await game.load();
       stage.replaceChildren();
       const result = await mod.mount(stage, ctx);

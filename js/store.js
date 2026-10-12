@@ -4,7 +4,9 @@
 // Vorm van de data (versie 1):
 //   profile:  { name }
 //   settings: { textSize, theme, contrast, calm, decor, welcomeDone }
-//   games:    { [gameId]: { difficulty, completed, dailyDone, slots: { normal, daily } } }
+//   games:    { [gameId]: { difficulty, completed, dailyDone, slots: { normal, 'daily:JJJJ-MM-DD' }, stats?, daily? } }
+//             stats: { [niveau]: { started, won, best, total } }   (beste tijd en totaal in seconden; alleen spellen met een tijd, zoals Sudoku)
+//             daily: { [JJJJ-MM-DD]: { time, difficulty } }         (de dagen die je hebt opgelost: het archief van de puzzel van de dag)
 //   lastGame: { id, slot } | null
 //
 // Een "slot" is een bewaard spel: { seed, difficulty, state, updatedAt, progress?, day? }, of een wismarkering { cleared: true, updatedAt }.
@@ -75,7 +77,7 @@ export const setLastGame = (id, slot) => { data.lastGame = { id, slot }; persist
 export function getSlot(id, slot = 'normal') {
   const s = getGame(id).slots[slot];
   if (!s || s.cleared) return null;
-  if (slot === 'daily' && s.day !== todayKey()) return null;     // de dagpuzzel van gisteren telt niet meer mee
+  if (slot === 'daily' && s.day !== todayKey()) return null;     // (oude vorm) de dagpuzzel van gisteren telt niet meer mee; nieuwe plekken heten 'daily:JJJJ-MM-DD' en horen bij hun eigen dag
   return s;
 }
 export const clearedSlot = () => ({ cleared: true, updatedAt: Date.now() });
@@ -99,6 +101,37 @@ export function resetAll() {
   data.settings.taal = taal;
   persist();
 }
+
+// ----- Statistieken en het archief van de puzzel van de dag -----
+export const dailySlot = (day) => `daily:${day}`;
+export const isDailySlot = (slot) => slot === 'daily' || String(slot).startsWith('daily:');
+export const slotDay = (slot, s) => (String(slot).startsWith('daily:') ? String(slot).slice(6) : s?.day ?? null);
+
+// Een spel is begonnen (telt mee voor "gespeeld")
+export function countStart(id, difficulty) {
+  updateGame(id, (r) => { r.stats ||= {}; const s = (r.stats[difficulty] ||= { started: 0, won: 0, best: null, total: 0 }); s.started++; });
+}
+
+// Een spel is gewonnen met een tijd (in seconden). Geeft terug wat er nieuw is: { record, previous, best, won, average }.
+// Een dagpuzzel die je al eerder had opgelost telt niet nog eens mee (alleen een snellere tijd wordt bewaard).
+export function recordWin(id, { difficulty, time, day = null }) {
+  let info = null;
+  updateGame(id, (r) => {
+    r.stats ||= {}; r.daily ||= {};
+    const s = (r.stats[difficulty] ||= { started: 0, won: 0, best: null, total: 0 });
+    const eerder = day ? r.daily[day] : null;
+    if (day) r.daily[day] = { difficulty, time: eerder ? Math.min(eerder.time ?? time, time) : time };
+    if (eerder) { info = { record: false, previous: s.best, best: s.best, won: s.won, average: s.won ? Math.round(s.total / s.won) : time, repeat: true }; return; }
+    const previous = s.best;
+    s.won++; s.total += time;
+    const record = previous == null || time < previous;
+    if (record) s.best = time;
+    info = { record, previous, best: s.best, won: s.won, average: Math.round(s.total / s.won), repeat: false };
+  });
+  return info;
+}
+export const getStats = (id) => getGame(id).stats || {};
+export const getDaily = (id) => getGame(id).daily || {};
 
 // ----- Hulpjes voor datums -----
 export const todayKey = () => new Date().toLocaleDateString('sv-SE'); // JJJJ-MM-DD, lokale tijd

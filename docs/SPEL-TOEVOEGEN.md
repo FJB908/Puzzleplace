@@ -26,6 +26,13 @@ Dat is alles: de kaart in "Spellen", de uitlegpagina, de niveaukeuze, bewaren va
 
 De drie spellen in `js/games/` zijn de voorbeelden: `engine.js` bevat alleen logica (met tests in `tests/`), het andere bestand het scherm. Een spel mag een functie teruggeven uit `mount` om op te ruimen (de kruiswoordpuzzel doet dat voor zijn toetsenbord).
 
+## Tijd, beste tijd en de puzzel van de dag (Sudoku)
+
+- Sudoku houdt de **tijd** bij (alleen terwijl het spel in beeld is, met pauze en een knop om de tijd te verbergen) en bewaart hem in de spelstand (`state.time`).
+- Bij winst roept het spel `ctx.recordWin({ time })` aan: dat legt de **beste tijd**, het gemiddelde en het aantal gewonnen/gespeelde spellen vast per niveau (`store.recordWin`) en geeft terug of het een nieuw record is. Daarna `ctx.complete({ ..., body })` met een eigen slotvenster.
+- De **puzzel van de dag is altijd Sudoku** (`dailyGame()` in `registry.js`). De seed is de datum, het niveau hangt van de weekdag af (`js/shared/dagelijks.js`). Oudere dagen staan in het **archief** (`#/spel/sudoku/dagelijks`, een kalender per maand); een dag spelen is `#/spel/sudoku/speel/dagelijks/JJJJ-MM-DD`. Opgeloste dagen staan in `games.sudoku.daily`, de reeks (dagen achter elkaar) wordt daaruit berekend.
+- Een ander spel met een tijd? Doe hetzelfde: `ctx.recordWin` en de statistieken verschijnen vanzelf op de pagina van het spel als je `statsKaart` in `gameDetail.js` ook voor dat spel aanzet.
+
 ## Een spel voor twee spelers
 
 Woordtuin is ook het voorbeeld voor spelen **tegen een vriend**: de regels staan in een gewone module (`js/games/woordtuin/engine.js`) die zowel de app als de server gebruikt; de server heeft er een dun bestand voor (`server/games/woordtuin.mjs`) en het scherm (`paneel.js`) is hetzelfde voor spelen tegen de computer en tegen een vriend. Zie [`ACCOUNTS.md`](ACCOUNTS.md) voor het contract en [`NIEUW-SPEL-VOOR-TWEE.md`](NIEUW-SPEL-VOOR-TWEE.md) voor de keuzes.

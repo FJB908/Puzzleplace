@@ -61,3 +61,14 @@ test('zonder voortgang op de server blijft alles lokaal', () => {
   const a = { profile: { name: 'A' }, games: {}, lastGame: null };
   assert.equal(mergeSnapshots(a, null), a);
 });
+
+test('statistieken en archief van de puzzel van de dag worden samengevoegd', () => {
+  const a = { profile: {}, games: { sudoku: { stats: { makkelijk: { started: 5, won: 3, best: 300, total: 1200 } }, daily: { '2026-10-10': { time: 400, difficulty: 'moeilijk' } }, slots: {} } }, lastGame: null };
+  const b = { profile: {}, games: { sudoku: { stats: { makkelijk: { started: 4, won: 4, best: 280, total: 1500 }, gemiddeld: { started: 1, won: 0, best: null, total: 0 } }, daily: { '2026-10-10': { time: 350, difficulty: 'moeilijk' }, '2026-10-11': { time: 500, difficulty: 'moeilijk' } }, slots: {} } }, lastGame: null };
+  const m = mergeSnapshots(a, b), n = mergeSnapshots(b, a);
+  assert.deepEqual(m.games.sudoku.daily, { '2026-10-10': { time: 350, difficulty: 'moeilijk' }, '2026-10-11': { time: 500, difficulty: 'moeilijk' } });
+  assert.deepEqual(m.games.sudoku.stats.makkelijk, { started: 5, won: 4, best: 280, total: 1500 });
+  assert.equal(m.games.sudoku.stats.gemiddeld.started, 1);
+  assert.deepEqual(m.games, n.games, 'volgorde maakt niet uit');
+  assert.ok(sameSnapshot(mergeSnapshots(m, m), m));
+});

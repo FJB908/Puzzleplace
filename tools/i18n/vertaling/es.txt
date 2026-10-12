@@ -752,3 +752,62 @@ play.bigView | Pantalla grande
 play.smallView | Pantalla normal
 common.congrats | ¡Felicidades!
 common.congratsName | ¡Felicidades, {name}!
+
+##### 190-sudoku-tijd
+daily.archiveTitle | Retos del día
+daily.archiveText | Cada día un Sudoku nuevo, el mismo para todos. ¿Se le pasó un día? Juéguelo aquí.
+daily.play | Jugar el reto de hoy
+daily.continue | Continuar el reto de hoy
+daily.playAgain | Jugar otra vez el reto de hoy
+daily.prevMonth | Mes anterior
+daily.nextMonth | Mes siguiente
+daily.monthProgress | {done} de {total} resueltos
+daily.stat.streak | Racha
+daily.stat.longest | Más larga
+daily.stat.solved | Resueltos
+daily.day.done | {date}: resuelto en {time}
+daily.day.busy | {date}: empezado
+daily.day.open | {date}: aún sin jugar
+daily.day.today | {date} (hoy): aún sin jugar
+daily.day.closed | {date}: no disponible
+daily.legend.done | Resuelto
+daily.legend.today | Hoy
+daily.legend.busy | Empezado
+daily.levelNote | El nivel cambia según el día: tranquilo a principios de semana, más difícil el fin de semana.
+daily.again.title | Ya resuelto
+daily.again.text | Resolvió este reto en {time}. ¿Quiere jugarlo otra vez?
+daily.again.yes | Jugar otra vez
+daily.again.no | Atrás
+play.done.archive | Archivo
+home.dailyDoneTime | Resuelto en {time}
+home.dailyBusy | Empezado
+home.dailyStreak_one | {n} día seguido
+home.dailyStreak_other | {n} días seguidos
+home.dailyHint | Cada día un Sudoku nuevo
+home.dailyArchive | Archivo
+detail.daily.title | Reto del día
+detail.daily.text | Cada día un Sudoku nuevo, el mismo para todos. ¿Se le pasó un día? Está en el archivo.
+detail.daily.play | Jugar hoy
+detail.daily.archive | Abrir el archivo
+detail.stats.title | Sus estadísticas
+detail.stats.none | Resuelva un sudoku y aquí aparecerán sus mejores tiempos.
+stats.best | Mejor tiempo
+stats.average | Promedio
+stats.played | Ganados
+sudoku.pause | Pausa
+sudoku.paused | En pausa
+sudoku.resume | Continuar
+sudoku.timer.hide | Tiempo {time}. Toque para ocultar el cronómetro.
+sudoku.timer.show | Mostrar el cronómetro
+sudoku.say.paused | En pausa. El tiempo está detenido.
+sudoku.stat.time | Tiempo
+sudoku.stat.best | Mejor
+sudoku.stat.average | Promedio
+sudoku.stat.mistakes | Errores
+sudoku.record | ¡Nuevo récord! El anterior era {previous}.
+sudoku.firstTime | Su primer tiempo en este nivel. ¡Bien hecho!
+sudoku.streak | ¡{n} días seguidos!
+sudoku.done.text | Resuelto. ¡Bien hecho!
+sudoku.done.daily | Resolvió el reto del {date}.
+stats.note | Ganados de jugados
+detail.daily.again | Jugar hoy otra vez

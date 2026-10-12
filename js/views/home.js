@@ -10,6 +10,7 @@ import { t, datumTekst, foutTekst, getTaal, taalInfo } from '../i18n/index.js';
 import { TALEN } from '../shared/talen.js';
 import * as store from '../store.js';
 import { getGameInfo, dailyGame } from '../games/registry.js';
+import { dagMoeilijkheid, reeks, tijdTekst } from '../shared/dagelijks.js';
 import { gameArt } from '../games/art.js';
 import { gameTiles } from './games.js';
 import { FEATURES, inviteBase } from '../config.js';
@@ -132,7 +133,8 @@ function continueRow() {
   if (!(info && slot && slot.state != null)) {
     return null;                                       // geen spel bezig: de spellen staan hieronder al open
   }
-  const href = `#/spel/${info.id}/speel${last.slot === 'daily' ? '/dagelijks' : ''}`;
+  const dagen = store.isDailySlot(last.slot) ? store.slotDay(last.slot, slot) : null;
+  const href = `#/spel/${info.id}/speel${dagen ? `/dagelijks${dagen === store.todayKey() ? '' : `/${dagen}`}` : ''}`;
   const level = info.difficulties.find((d) => d.id === slot.difficulty)?.label;
   const pct = slot.progress != null ? Math.round(slot.progress * 100) : null;
   return h('a', { class: 'rij rij-spel', href, 'aria-label': pct != null ? t('home.continueAria', { game: info.name, pct }) : t('home.continueAriaNoPct', { game: info.name }) },
@@ -144,19 +146,28 @@ function continueRow() {
     icon('chevron'));
 }
 
-// ----- Puzzel van de dag -----
+// ----- Puzzel van de dag: altijd Sudoku, met je reeks en een weg naar het archief -----
 function dailyRow() {
   const game = dailyGame();
   if (!game) return null;
-  const now = new Date();
-  const done = store.getGame(game.id).dailyDone === store.todayKey();
+  const now = new Date(), today = store.todayKey();
+  const rec = store.getGame(game.id).daily || {};
+  const gedaan = rec[today];
+  const bezig = !gedaan && store.getSlot(game.id, store.dailySlot(today))?.state != null;
+  const n = reeks(rec, today);
   const month = datumTekst(now, { month: 'short' }).replace('.', '');
-  return h('a', { class: `daily${done ? ' is-done' : ''}`, href: `#/spel/${game.id}/speel/dagelijks` },
-    h('span', { class: 'cal', 'aria-hidden': 'true' }, h('small', {}, month), h('b', {}, String(now.getDate()))),
-    h('span', { class: 'daily-text' },
-      h('strong', {}, t('home.daily')),
-      h('span', { class: 'muted' }, game.name),
-      done ? h('span', { class: 'chip chip-done' }, icon('check'), t('home.dailyDone')) : null));
+  const level = game.difficulties.find((d) => d.id === dagMoeilijkheid(today))?.label;
+  return h('div', { class: 'daily-wrap' },
+    h('a', { class: `daily${gedaan ? ' is-done' : ''}`, href: `#/spel/${game.id}/speel/dagelijks` },
+      h('span', { class: 'cal', 'aria-hidden': 'true' }, h('small', {}, month), h('b', {}, String(now.getDate()))),
+      h('span', { class: 'daily-text' },
+        h('strong', {}, t('home.daily')),
+        h('span', { class: 'muted' }, [game.name, level].filter(Boolean).join(' · ')),
+        gedaan ? h('span', { class: 'chip chip-done' }, icon('check'), gedaan.time != null ? t('home.dailyDoneTime', { time: tijdTekst(gedaan.time) }) : t('home.dailyDone'))
+          : bezig ? h('span', { class: 'chip chip-busy' }, t('home.dailyBusy')) : null)),
+    h('div', { class: 'daily-extra' },
+      n > 0 ? h('span', { class: 'streak' }, icon('flame'), t('home.dailyStreak', { n })) : h('span', { class: 'muted' }, t('home.dailyHint')),
+      h('a', { class: 'btn', href: `#/spel/${game.id}/dagelijks` }, icon('calendar'), t('home.dailyArchive'))));
 }
 
 export function homeView(_params, app) {
