@@ -49,7 +49,7 @@ export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you
   const tipKnop = onTip ? h('button', { type: 'button', class: 'btn', onclick: tip }, icon('bulb'), h('span', {}, t('common.hint'))) : null;
   const terugKnop = onTerug ? h('button', { type: 'button', class: 'btn', onclick: terug }, icon('undo'), t('woordtuin.undo')) : null;
   const knoppen = h('div', { class: 'wt-knoppen' }, wis, klaarKnop);
-  const pasKnop = onPas ? h('button', { type: 'button', class: 'btn', onclick: pas }, icon('close'), h('span', {}, t('woordtuin.pass'))) : null;
+  const pasKnop = onPas ? h('button', { type: 'button', class: 'btn', onclick: pas }, icon('skip'), h('span', {}, t('woordtuin.pass'))) : null;
   const extra = h('div', { class: 'wt-extra' }, tipKnop, terugKnop, pasKnop, typKnop);
 
   const hekje = h('span', {}); hekje.innerHTML = HEK; hekje.append(` ${t('woordtuin.legend')}`);

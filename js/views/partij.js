@@ -71,7 +71,7 @@ export function partijView({ id }, app) {
     const klaar = m.status !== 'active';
     banner.textContent = klaar ? uitslagTekst(m, user.id, opp) : '';
     banner.hidden = !klaar;
-    uitslagKnop.hidden = !klaar || !!m.result?.resigned;
+    uitslagKnop.hidden = !klaar;
     wacht.hidden = klaar || m.yourTurn;
     wacht.textContent = t('match.waitNote', { name: opp, friends: t('nav.friends') });
     stop.hidden = klaar;

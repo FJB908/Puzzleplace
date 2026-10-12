@@ -113,16 +113,16 @@ export async function playView({ id, mode }, app) {
           text: result.text ?? t(daily ? 'play.done.text.daily' : 'play.done.text'),
           body: result.body,
           joy: result.joy ?? true,
-          closable: !!result.closable,                                 // met een kruisje kun je het bord nog bekijken; "Toon de uitslag" brengt het venster terug
+          closable: result.closable ?? true,                                 // met een kruisje kun je het bord nog bekijken; "Toon de uitslag" brengt het venster terug
           actions: [
             { label: daily ? t('play.done.backHome') : t('play.done.again'), value: daily ? 'home' : 'again', primary: true, autofocus: true },
             { label: t('play.done.otherGame'), value: 'games' },
             ...(daily ? [] : [{ label: t('play.done.toHome'), value: 'home' }]),
           ],
-          dismissValue: result.closable ? 'blijf' : daily ? 'home' : 'detail',
+          dismissValue: (result.closable ?? true) ? 'blijf' : daily ? 'home' : 'detail',
         });
+        if (gone) return;                                                // je bent al ergens anders heen gegaan: niet opnieuw wegsturen
         if (choice === 'blijf') {
-          if (gone) return;
           if (!viewKnop.isConnected) node.insertBefore(viewKnop, stage);
           viewKnop.onclick = toon;
           return;

@@ -262,6 +262,8 @@ main { view-transition-name: page; }
 .btn-quiet { color: var(--text-muted); }
 .btn-block { width: 100%; }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .4; cursor: not-allowed; background: transparent; }
+.btn-primary[disabled], .btn-primary[aria-disabled="true"] { background: var(--primary); opacity: .45; }      /* een hoofdknop die nog niet kan: wel te zien (anders staat er witte tekst op niets) */
+[hidden] { display: none !important; }                                                                       /* verborgen blijft verborgen, ook voor elementen die zelf een display hebben (knoppen) */
 .btn .icon { width: 1.5rem; height: 1.5rem; }
 
 .back { align-self: flex-start; padding-left: .6rem; margin-left: -.6rem; color: var(--primary); }
