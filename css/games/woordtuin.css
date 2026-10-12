@@ -19,9 +19,10 @@ html[data-theme="dark"] .wt-stand { border: 1px solid var(--border); }
 html[data-contrast="high"] .wt-stand { border: 3px solid var(--border); }
 .wt-stand { container-type: inline-size; }
 @container (max-width: 15rem) { .wt-stand .wt-bol { display: none; } }
-.wt-kant { display: flex; align-items: center; gap: .6rem; font-weight: 700; min-width: 0; padding: .45rem .6rem; border-radius: 1rem; transition: box-shadow .35s ease, background-color .35s ease; }
-.wt-kant.aanZet.mijn { background: color-mix(in srgb, var(--mijn-rand) 12%, transparent); box-shadow: 0 0 0 .14rem var(--mijn-rand), 0 0 1.1rem .15rem color-mix(in srgb, var(--mijn-rand) 60%, transparent), inset 0 0 .9rem color-mix(in srgb, var(--mijn-rand) 28%, transparent); }
-.wt-kant.aanZet.hun { background: color-mix(in srgb, var(--hun-rand) 12%, transparent); box-shadow: 0 0 0 .14rem var(--hun-rand), 0 0 1.1rem .15rem color-mix(in srgb, var(--hun-rand) 60%, transparent), inset 0 0 .9rem color-mix(in srgb, var(--hun-rand) 28%, transparent); }
+.wt-kant { display: flex; align-items: center; gap: .6rem; font-weight: 700; min-width: 0; padding: .45rem .6rem; border-radius: 1rem; }
+.wt-kant { background: linear-gradient(to right, transparent, transparent); }
+.wt-kant.aanZet.mijn { background: linear-gradient(to right, color-mix(in srgb, var(--mijn-rand) 55%, transparent) 0%, color-mix(in srgb, var(--mijn-rand) 22%, transparent) 55%, transparent 100%); }
+.wt-kant.aanZet.hun { background: linear-gradient(to left, color-mix(in srgb, var(--hun-rand) 55%, transparent) 0%, color-mix(in srgb, var(--hun-rand) 22%, transparent) 55%, transparent 100%); }
 .wt-kant.hun { justify-content: flex-end; text-align: right; }
 .wt-kant > div { min-width: 0; }
 .wt-kant b { display: block; font-size: 1.6rem; line-height: 1; }
