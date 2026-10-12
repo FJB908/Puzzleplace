@@ -101,7 +101,7 @@ function mahjong() {
 function solitaire() {
   const letters = { 1: 'A', 11: 'J', 12: 'Q', 13: 'K' };
   const kaart = (k, x, y, hoek) => `<g transform="translate(${x} ${y}) rotate(${hoek}) scale(.78)"><rect class="ga-sol-kaart" width="60" height="84" rx="6"/>${kaartSvg(k, letters)}</g>`;
-  return wrap(`<rect class="ga-sol-vilt" x="8" y="8" width="144" height="104" rx="16"/><rect class="ga-sol-rand" x="8" y="8" width="144" height="104" rx="16"/>${kaart(12, 32, 30, -14)}${kaart(24, 58, 24, 0)}${kaart(26, 88, 30, 14)}`);
+  return wrap(`<rect class="ga-sol-vilt" x="8" y="8" width="144" height="104" rx="16"/><rect class="ga-sol-rand" x="8" y="8" width="144" height="104" rx="16"/>${kaart(0, 32, 30, -14)}${kaart(13, 58, 24, 0)}${kaart(26, 88, 30, 14)}`);
 }
 
 const ART = { sudoku, woordzoeker, kruiswoord, woordtuin, mahjong, solitaire };
