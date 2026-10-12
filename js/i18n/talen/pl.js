@@ -342,7 +342,7 @@ export default {
   "mahjong.dragon.2": "Biały smok",
   "mahjong.flower": "Kwiat",
   "mahjong.season": "Pora roku",
-  "solitaire.name": "Pasjans",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "Klasyczna gra karciana na zielonym stole: ułóż cztery kolory od asa do króla.",
   "solitaire.howTo.1": "Przesuwaj karty na siedmiu kolumnach tak, by malały od króla do asa i na przemian były czerwone i czarne.",
   "solitaire.howTo.2": "Dotknij karty, a potem miejsca, gdzie ma trafić, albo przeciągnij kartę tam. Jeśli dotkniesz wybranej karty jeszcze raz, sama pójdzie na najlepsze miejsce.",

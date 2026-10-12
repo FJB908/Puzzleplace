@@ -325,7 +325,7 @@ export default {
   "mahjong.dragon.2": "Dragão branco",
   "mahjong.flower": "Flor",
   "mahjong.season": "Estação",
-  "solitaire.name": "Paciência",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "O clássico jogo de cartas numa mesa verde: construa os quatro naipes do ás ao rei.",
   "solitaire.howTo.1": "Mova as cartas das sete colunas de modo que desçam do rei ao ás, alternando vermelho e preto.",
   "solitaire.howTo.2": "Toque numa carta e depois no lugar para onde deve ir, ou arraste a carta até lá. Se tocar outra vez na carta escolhida, ela vai sozinha para o melhor lugar.",

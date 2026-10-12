@@ -325,7 +325,7 @@ export default {
   "mahjong.dragon.2": "Dragon blanc",
   "mahjong.flower": "Fleur",
   "mahjong.season": "Saison",
-  "solitaire.name": "Patience",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "Le jeu de cartes classique sur un tapis vert : empilez les quatre couleurs de l'as au roi.",
   "solitaire.howTo.1": "Déplacez les cartes sur les sept colonnes pour qu'elles descendent du roi à l'as, en alternant rouge et noir.",
   "solitaire.howTo.2": "Touchez une carte puis l'endroit où elle doit aller, ou faites-la glisser jusque-là. Touchez encore la carte choisie : elle va toute seule au meilleur endroit.",

@@ -325,7 +325,7 @@ export default {
   "mahjong.dragon.2": "Dragón blanco",
   "mahjong.flower": "Flor",
   "mahjong.season": "Estación",
-  "solitaire.name": "Solitario",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "El clásico juego de cartas sobre un tapete verde: forme los cuatro palos del as al rey.",
   "solitaire.howTo.1": "Mueva las cartas de las siete columnas para que bajen del rey al as, alternando rojo y negro.",
   "solitaire.howTo.2": "Toque una carta y luego el lugar donde debe ir, o arrastre la carta hasta allí. Si vuelve a tocar la carta elegida, va sola al mejor lugar.",

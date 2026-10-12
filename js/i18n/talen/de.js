@@ -325,7 +325,7 @@ export default {
   "mahjong.dragon.2": "Weißer Drache",
   "mahjong.flower": "Blume",
   "mahjong.season": "Jahreszeit",
-  "solitaire.name": "Patience",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "Das klassische Kartenspiel auf grünem Tisch: Legen Sie die vier Farben vom Ass bis zum König auf.",
   "solitaire.howTo.1": "Bewegen Sie die Karten auf den sieben Spalten so, dass sie vom König zum Ass absteigen und abwechselnd rot und schwarz sind.",
   "solitaire.howTo.2": "Tippen Sie auf eine Karte und dann auf den Platz, wohin sie soll, oder ziehen Sie die Karte dorthin. Tippen Sie noch einmal auf die gewählte Karte, geht sie von selbst auf den besten Platz.",

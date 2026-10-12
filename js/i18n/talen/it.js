@@ -325,7 +325,7 @@ export default {
   "mahjong.dragon.2": "Drago bianco",
   "mahjong.flower": "Fiore",
   "mahjong.season": "Stagione",
-  "solitaire.name": "Solitario",
+  "solitaire.name": "Solitaire",
   "solitaire.summary": "Il classico gioco di carte su un tavolo verde: costruisca i quattro semi dall'asso al re.",
   "solitaire.howTo.1": "Sposti le carte sulle sette colonne in modo che scendano dal re all'asso, alternando rosso e nero.",
   "solitaire.howTo.2": "Tocchi una carta e poi il punto dove deve andare, oppure trascini la carta fin lì. Se tocca ancora la carta scelta, va da sola nel punto migliore.",
