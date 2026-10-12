@@ -53,7 +53,10 @@ export function kaartSvg(k, letters, hof = null) {
   const kl = isRood(k) ? '#c62f3b' : '#1f2937';
   const tekst = r === 1 || r > 10 ? letters[r] : String(r);
   const breed = tekst.length > 1 ? 17 : 10;
-  const hoek = `<text x="4.500" y="15" font-size="15.500" font-weight="800" fill="${kl}" font-family="Georgia, 'Times New Roman', serif">${tekst}</text>${kleurSvg(s, 4.500 + breed + 1.500, 4, 11.500, `fill="${kl}"`)}`;
+  // Een hofkaart met plaatje heeft de kleur al groot in het plaatje: dan staat in de hoek alleen de letter (groter)
+  const alleenLetter = r > 10 && !!hof?.[k];
+  const hoek = `<text x="${alleenLetter ? 4.500 : 4.500}" y="${alleenLetter ? 15.500 : 15}" font-size="${alleenLetter ? 17 : 15.500}" font-weight="800" fill="${kl}" font-family="Georgia, 'Times New Roman', serif">${tekst}</text>`
+    + (alleenLetter ? '' : kleurSvg(s, 4.500 + breed + 1.500, 4, 11.500, `fill="${kl}"`));
   let midden = '';
   if (r === 1) midden = kleurSvg(s, 17, 30, 26, `fill="${kl}"`);
   else if (r <= 10) {
