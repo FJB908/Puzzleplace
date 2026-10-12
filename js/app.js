@@ -126,7 +126,7 @@ async function render(moveFocus = true) {
   if (mine !== token || result == null) return; // ondertussen ergens anders heen of doorgestuurd
 
   const swap = () => {
-    if (moveFocus) document.querySelectorAll('dialog[open]').forEach((d) => d.close(''));      // een venster hoort bij het scherm waarin het openging (bijv. na "Terug" van de telefoon)
+    if (moveFocus) document.querySelectorAll('dialog[open]').forEach((d) => { if (d.dataset.route !== location.hash) d.close(''); });      // een venster hoort bij het scherm waarin het openging (bijv. na "Terug" van de telefoon)
     current?.cleanup?.();
     current = result;
 

@@ -103,6 +103,7 @@ export function choiceDialog({ title, text, body, actions, dismissValue = null, 
           onclick: () => finish(i),
         }, a.label))),
     );
+    dlg.dataset.route = location.hash;                   // een venster hoort bij het scherm waarin het openging: gaat de app ergens anders heen (bijv. Terug), dan sluit het (zie app.js)
     dlg.addEventListener('cancel', (e) => { e.preventDefault(); finish(-1); });   // Escape
     dlg.addEventListener('close', () => {
       const i = dlg.returnValue === '' ? -1 : Number(dlg.returnValue);

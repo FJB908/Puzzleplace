@@ -77,6 +77,7 @@ export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you
     else if (state.turn === me) beurt.textContent = `${t('woordtuin.yourTurn')}${nog}`;
     else beurt.textContent = `${tegenComputer ? t('woordtuin.theirTurnPc') : t('woordtuin.theirTurn', { name: names[state.turn] })}${nog}`;
     beurt.classList.toggle('jij', !state.over && state.turn === me);
+    el.classList.toggle('over', !!state.over);                                    // afgelopen: geen knoppen die toch niets meer doen
     kantMijn.classList.toggle('aanZet', !state.over && state.turn === me);        // een gekleurde gloed in het vak van wie aan de beurt is
     kantHun.classList.toggle('aanZet', !state.over && state.turn === hun);
     if (state.passed && !state.over) laatste.textContent = zinMet('passed', other(state.turn));

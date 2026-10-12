@@ -154,3 +154,6 @@ html[data-textsize="xlarge"] .ut-spelers { grid-template-columns: minmax(0, 1fr)
 .uitslag .ut-woorden { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .3rem; }
 .ut-woorden li { padding: .1rem .6rem; border-radius: 1rem; background: var(--border); font-size: .95rem; }
 .ut-woorden li.mijn { background: var(--mijn); color: var(--mijn-tekst); } .ut-woorden li.hun { background: var(--hun); color: var(--hun-tekst); }
+
+/* Afgelopen: de knoppen om te spelen zijn weg, het bord en de uitslag blijven */
+.wt.over .wt-knoppen, .wt.over .wt-extra, .wt.over .wt-typ-body, .wt.over .wt-uitleg { display: none; }

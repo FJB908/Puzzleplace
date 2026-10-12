@@ -56,9 +56,6 @@ De ondertitelfrequenties (OpenSubtitles) en wordfreq worden alleen gebruikt om t
 
 ## Let op bij het uitbrengen
 
-* De woordenlijsten zijn uit deze woordenboeken **afgeleid** (een selectie woorden, zonder de regels van het woordenboek). Of dat onder de licentie van het
-  woordenboek een afgeleid werk is (en dus bijvoorbeeld GPL-voorwaarden meebrengt voor de rest van de app) is een juridische vraag die hier niet is beantwoord.
-  Dat speelt vooral bij de woordenboeken die **alleen** onder GPL staan (Tsjechisch, Noors, Italiaans; Duits GPL 2 of 3). Laat dit beoordelen voordat de app commercieel
-  of in een winkel wordt uitgebracht. De woordenboeken met een keuze (LGPL, MPL, BSD) zijn minder zorgelijk; geef bij MPL en LGPL wel de bronvermelding (die staat in Help).
-* Zijn de Hunspell-bestanden zelf nodig voor een nieuwe versie? Haal ze dan opnieuw op met `haal-bronnen.sh`; ze staan niet in de repository.
-* Namen van woordenboeken en hun licenties kunnen veranderen: controleer ze bij elke nieuwe ophaalronde.
+* Woorden van een taal zijn geen eigendom van iemand: losse woorden en feiten (zoals "dit woord komt zo vaak voor") zijn niet auteursrechtelijk beschermd. De woordenlijsten zijn bovendien niet een kopie van een woordenboek: de woorden komen uit de frequentielijsten van echte tekst, en het spellingswoordenboek wordt alleen gebruikt als filter ("bestaat dit woord?"). Daarna is er een eigen selectie gemaakt (3 tot 7 letters, zonder namen, Engels en grove woorden, met de hand nagekeken).
+* Wat overblijft is klein: in de EU kan een grote, zorgvuldig samengestelde verzameling woorden een eigen "databankrecht" hebben (het gaat dan om het kopiëren van een wezenlijk deel van zo'n verzameling), en BSD/CC BY vragen om het noemen van de bron (dat gebeurt in Help). Een korte controle door een jurist vóór de Play Store is verstandig maar geen reden om te wachten met testen.
+* Wil je extra zeker zijn: neem per taal alleen woorden die in meer dan één onafhankelijke bron staan, of laat de lijst van een taal uit een bron met een milde licentie (BSD, MIT, CC0) komen. Dat is het meest zinvol voor de talen met alleen een GPL-woordenboek (Duits en Italiaans).
