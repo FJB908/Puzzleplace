@@ -6,6 +6,7 @@ import { KUNST } from './art-woorden.js';
 import { FREQ } from './woordzoeker/frequentie.js';
 import { getTaal } from '../i18n/index.js';
 import { plaatjeSvg } from './mahjong/tegels.js';
+import { kaartSvg } from './solitaire/kaarten.js';
 
 const wrap = (inner, size = 11) => `<svg class="game-art" viewBox="0 0 160 120" style="font-size:${size}px" aria-hidden="true" focusable="false">${inner}</svg>`;
 
@@ -96,7 +97,14 @@ function mahjong() {
   return wrap(`<g transform="translate(8 4)">${tegel(2, 50, 4)}${tegel(52, 50, 12)}${tegel(102, 50, 34)}${tegel(52, 14, 31)}</g>`);
 }
 
-const ART = { sudoku, woordzoeker, kruiswoord, woordtuin, mahjong };
+// Patience: een groene mat met drie kaarten in een waaier
+function solitaire() {
+  const letters = { 1: 'A', 11: 'J', 12: 'Q', 13: 'K' };
+  const kaart = (k, x, y, hoek) => `<g transform="translate(${x} ${y}) rotate(${hoek}) scale(.78)"><rect class="ga-sol-kaart" width="60" height="84" rx="6"/>${kaartSvg(k, letters)}</g>`;
+  return wrap(`<rect class="ga-sol-vilt" x="8" y="8" width="144" height="104" rx="16"/><rect class="ga-sol-rand" x="8" y="8" width="144" height="104" rx="16"/>${kaart(12, 32, 30, -14)}${kaart(24, 58, 24, 0)}${kaart(26, 88, 30, 14)}`);
+}
+
+const ART = { sudoku, woordzoeker, kruiswoord, woordtuin, mahjong, solitaire };
 
 export function gameArt(id) {
   const make = ART[id];

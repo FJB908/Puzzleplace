@@ -1,0 +1,55 @@
+##### Patience (Klondike): kaarten op volgorde leggen tot alle vier de kleuren van aas tot heer op hun eigen stapel liggen
+# Naam van het spel: het gewone woord voor dit kaartspel in jouw taal (in het Engels "Solitaire", in het Nederlands "Patience").
+solitaire.name | Solitaire | Patience
+solitaire.summary | The classic card game on a green table: build the four suits from ace to king. | Het klassieke kaartspel op een groene tafel: leg de vier kleuren op van aas tot heer.
+# Uitleg: {undo}, {hint} en {finish} zijn de namen van de knoppen.
+solitaire.howTo.1 | Move the cards on the seven columns so that they run down in order, from king to ace, and alternate between red and black. | Verplaats de kaarten op de zeven stapels zo dat ze aflopen van heer naar aas, en afwisselend rood en zwart zijn.
+solitaire.howTo.2 | Tap a card and then a highlighted spot, or drag the card there. Tap a chosen card again and it goes to the best spot by itself. | Tik op een kaart en daarna op een gemarkeerde plek, of sleep de kaart erheen. Tik je nog een keer op de gekozen kaart, dan gaat hij vanzelf naar de beste plek.
+solitaire.howTo.3 | Only a king may go on an empty column. Take new cards from the pile at the top left. The four spots at the top right collect each suit, from ace upwards. | Alleen een heer mag op een lege stapel. Pak nieuwe kaarten van de voorraad linksboven. Op de vier plekken rechtsboven verzamel je elke kleur, van aas omhoog.
+solitaire.howTo.4 | Stuck? Use "{undo}" as often as you like, or ask for a "{hint}". When every card is face up, "{finish}" does the rest. | Zit je vast? Gebruik "{undo}" zo vaak je wilt, of vraag een "{hint}". Liggen alle kaarten open, dan maakt "{finish}" de rest af.
+solitaire.level.makkelijk | One card at a time, always winnable | Eén kaart tegelijk, altijd te winnen
+solitaire.level.gemiddeld | One card at a time, shuffled as in a real game | Eén kaart tegelijk, gewoon geschud (niet elk spel is te winnen)
+solitaire.level.moeilijk | Three cards at a time, always winnable | Drie kaarten tegelijk, altijd te winnen
+solitaire.level.extreem | Three cards at a time, shuffled as in a real game | Drie kaarten tegelijk, gewoon geschud (niet elk spel is te winnen)
+# Knoppen onder de tafel (kort). "Hint" komt uit common.hint.
+solitaire.undo | Undo | Zet terug
+solitaire.finish | Finish | Afmaken
+# Boven de tafel: hoeveel kaarten al op de vier stapels rechtsboven liggen (van de 52).
+solitaire.home | Placed: {n} of 52 | Gelegd: {n} van 52
+# Schermlezertekst
+solitaire.stock | Pile of face-down cards, {n} left | Voorraad, nog {n} kaarten
+solitaire.stockEmpty | Pile is empty | De voorraad is leeg
+solitaire.recycle | Pile is empty. Turn the discards over to use them again. | De voorraad is leeg. Draai de afgelegde kaarten om om ze opnieuw te gebruiken.
+solitaire.cardDown | Face-down card | Dichte kaart
+solitaire.foundation | Foundation for {suit}, {n} cards | Stapel voor {suit}, {n} kaarten
+solitaire.columnEmpty | Empty column {n} | Lege stapel {n}
+# De naam van een kaart: {rank} is bijvoorbeeld "Ace", "7" of "Queen", {suit} is de kleur.
+solitaire.card | {rank} of {suit} | {suit} {rank}
+solitaire.suit.0 | spades | schoppen
+solitaire.suit.1 | hearts | harten
+solitaire.suit.2 | diamonds | ruiten
+solitaire.suit.3 | clubs | klaveren
+solitaire.rank.1 | Ace | aas
+solitaire.rank.11 | Jack | boer
+solitaire.rank.12 | Queen | vrouw
+solitaire.rank.13 | King | heer
+# De letter in de hoek van de kaart (één teken): aas, boer, vrouw, heer.
+solitaire.letter.1 | A | A
+solitaire.letter.11 | J | B
+solitaire.letter.12 | Q | V
+solitaire.letter.13 | K | H
+# Meldingen onder de titel. Vriendelijk en kort; er is nooit iets "fout".
+solitaire.msg.start | Tap a card, then a highlighted spot. Dragging works too. | Tik op een kaart en daarna op een gemarkeerde plek. Slepen kan ook.
+solitaire.msg.picked | Now tap a highlighted spot, or drag the card there. | Tik nu op een gemarkeerde plek, of sleep de kaart erheen.
+solitaire.msg.nowhere | That card has nowhere to go right now. | Die kaart kan nu nergens heen.
+solitaire.msg.closed | That card is face down. It turns over once the cards on top of it are moved. | Die kaart ligt nog dicht. Hij gaat open als de kaarten erop zijn verplaatst.
+solitaire.msg.recycled | The discards are back on the pile. Take cards again. | De afgelegde kaarten liggen weer op de voorraad. Pak ze opnieuw.
+solitaire.msg.canFinish | All the cards are face up. Tap "{finish}" and the rest goes by itself. | Alle kaarten liggen open. Tik op "{finish}" en de rest gaat vanzelf.
+solitaire.msg.tipMove | Move the marked card to the marked spot. | Verplaats de gemarkeerde kaart naar de gemarkeerde plek.
+solitaire.msg.tipDraw | Take a new card from the pile. | Pak een nieuwe kaart van de voorraad.
+solitaire.msg.tipRecycle | Turn the discards over and go through the pile again. | Draai de afgelegde kaarten om en loop de voorraad opnieuw door.
+solitaire.msg.lost | This game cannot be won from here any more. Undo a few moves, or start a new game. | Vanaf hier is dit spel niet meer te winnen. Zet een paar zetten terug, of begin een nieuw spel.
+solitaire.msg.noTip | I can't find a move that helps. Try undoing a few moves. | Ik zie geen zet die verder helpt. Probeer een paar zetten terug te zetten.
+solitaire.msg.undone | Move undone. | Zet teruggedaan.
+solitaire.done.title | You did it! | Het is gelukt!
+solitaire.done.text | All the cards are on the four piles. Beautifully played. | Alle kaarten liggen op de vier stapels. Mooi gespeeld.

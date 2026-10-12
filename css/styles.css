@@ -516,11 +516,13 @@ html[data-calm="true"] *, html[data-calm="true"] *::before, html[data-calm="true
 .game--kruiswoord { --tint: #f6eedf; --tint-2: #ecdcba; }
 .game--woordtuin { --tint: #e9f2e6; --tint-2: #d3e6cd; }
 .game--mahjong { --tint: #e3f1ee; --tint-2: #c9e4dd; }
+.game--solitaire { --tint: #dff0e2; --tint-2: #c3e3ca; }
 html[data-theme="dark"] .game--sudoku { --tint: #20393f; --tint-2: #284850; }
 html[data-theme="dark"] .game--woordzoeker { --tint: #3b2631; --tint-2: #4b303e; }
 html[data-theme="dark"] .game--kruiswoord { --tint: #39311f; --tint-2: #4b4028; }
 html[data-theme="dark"] .game--woordtuin { --tint: #25382a; --tint-2: #2f4a35; }
 html[data-theme="dark"] .game--mahjong { --tint: #1f3a38; --tint-2: #284a46; }
+html[data-theme="dark"] .game--solitaire { --tint: #1f3a29; --tint-2: #284a35; }
 html[data-contrast="high"] [class*="game--"] { --tint: var(--surface); --tint-2: var(--surface); }
 
 /* Illustraties */
@@ -537,6 +539,7 @@ html[data-contrast="high"] [class*="game--"] { --tint: var(--surface); --tint-2:
 .ga-cw { fill: var(--surface); stroke: var(--text); stroke-width: 1.4; }
 .ga-cw.ga-sel { fill: var(--primary); stroke: var(--primary); }
 .ga-pill { stroke-width: 15; stroke-linecap: round; fill: none; opacity: .7; }
+.ga-sol-vilt { fill: #2d8757; } .ga-sol-rand { fill: none; stroke: #8a5b34; stroke-width: 4; } .ga-sol-kaart { fill: #fbf7ec; stroke: rgba(80, 60, 30, .5); stroke-width: 1; }
 .ga-mj-gezicht { fill: #fbf7ec; stroke: rgba(120, 100, 60, .45); stroke-width: .8; } .ga-mj-dikte { fill: #2f8a73; }
 .ga-tile { fill: var(--surface); stroke: color-mix(in srgb, var(--text) 18%, transparent); stroke-width: .8; }
 .ga-tile.ga-mine { fill: #f6d3df; stroke: none; } .ga-tile.ga-theirs { fill: #cfe6ea; stroke: none; } .ga-tile.ga-sel { fill: var(--primary); stroke: none; }

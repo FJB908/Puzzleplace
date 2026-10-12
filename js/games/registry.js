@@ -57,6 +57,12 @@ const GAMES = [
     wide: true,
     load: () => import('./mahjong/mahjong.js'),
   }, () => ({ undo: t('mahjong.undo'), hint: t('common.hint'), shuffle: t('mahjong.shuffle') })),
+  spel('solitaire', {
+    icon: 'solitaire',
+    status: 'ready',
+    wide: true,
+    load: () => import('./solitaire/solitaire.js'),
+  }, () => ({ undo: t('solitaire.undo'), hint: t('common.hint'), finish: t('solitaire.finish') })),
 ];
 
 // Voorbeeldspel om de flow te testen. Alleen zichtbaar via  index.html?demo=1

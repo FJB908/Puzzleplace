@@ -725,3 +725,51 @@ mahjong.flower | Kwiat
 mahjong.season | Pora roku
 mahjong.bigger | Większe
 mahjong.smaller | Mniejsze
+
+##### 160-solitaire
+solitaire.name | Pasjans
+solitaire.summary | Klasyczna gra karciana na zielonym stole: ułóż cztery kolory od asa do króla.
+solitaire.howTo.1 | Przesuwaj karty na siedmiu kolumnach tak, by malały od króla do asa i na przemian były czerwone i czarne.
+solitaire.howTo.2 | Dotknij karty, a potem zaznaczonego miejsca, albo przeciągnij kartę tam. Jeśli dotkniesz wybranej karty jeszcze raz, sama pójdzie na najlepsze miejsce.
+solitaire.howTo.3 | Tylko król może trafić na pustą kolumnę. Nowe karty bierzesz ze stosu w lewym górnym rogu. Na czterech miejscach w prawym górnym rogu zbierasz każdy kolor, od asa w górę.
+solitaire.howTo.4 | Utknąłeś? Używaj „{undo}” tyle razy, ile chcesz, albo poproś o „{hint}”. Gdy wszystkie karty leżą odkryte, „{finish}” zrobi resztę.
+solitaire.level.makkelijk | Jedna karta naraz, zawsze do wygrania
+solitaire.level.gemiddeld | Jedna karta naraz, potasowane jak w prawdziwej grze (nie każda gra jest do wygrania)
+solitaire.level.moeilijk | Trzy karty naraz, zawsze do wygrania
+solitaire.level.extreem | Trzy karty naraz, potasowane jak w prawdziwej grze (nie każda gra jest do wygrania)
+solitaire.undo | Cofnij
+solitaire.finish | Dokończ
+solitaire.home | Ułożone: {n} z 52
+solitaire.stock | Stos kart, jeszcze {n}
+solitaire.stockEmpty | Stos jest pusty
+solitaire.recycle | Stos jest pusty. Odwróć odłożone karty, żeby użyć ich jeszcze raz.
+solitaire.cardDown | Karta zakryta
+solitaire.foundation | Stos docelowy dla koloru {suit}, kart: {n}
+solitaire.columnEmpty | Pusta kolumna {n}
+solitaire.card | {rank} {suit}
+solitaire.suit.0 | pik
+solitaire.suit.1 | kier
+solitaire.suit.2 | karo
+solitaire.suit.3 | trefl
+solitaire.rank.1 | as
+solitaire.rank.11 | walet
+solitaire.rank.12 | dama
+solitaire.rank.13 | król
+solitaire.letter.1 | A
+solitaire.letter.11 | W
+solitaire.letter.12 | D
+solitaire.letter.13 | K
+solitaire.msg.start | Dotknij karty, a potem zaznaczonego miejsca. Można też przeciągać.
+solitaire.msg.picked | Teraz dotknij zaznaczonego miejsca albo przeciągnij kartę tam.
+solitaire.msg.nowhere | Ta karta nie może teraz nigdzie pójść.
+solitaire.msg.closed | Ta karta leży zakryta. Odkryje się, gdy karty na niej zostaną przesunięte.
+solitaire.msg.recycled | Odłożone karty wróciły na stos. Bierz je jeszcze raz.
+solitaire.msg.canFinish | Wszystkie karty leżą odkryte. Dotknij „{finish}”, a reszta pójdzie sama.
+solitaire.msg.tipMove | Przesuń zaznaczoną kartę na zaznaczone miejsce.
+solitaire.msg.tipDraw | Weź nową kartę ze stosu.
+solitaire.msg.tipRecycle | Odwróć odłożone karty i przejrzyj stos jeszcze raz.
+solitaire.msg.lost | Stąd nie da się już wygrać tej gry. Cofnij kilka ruchów albo zacznij nową grę.
+solitaire.msg.noTip | Nie widzę ruchu, który by pomógł. Spróbuj cofnąć kilka ruchów.
+solitaire.msg.undone | Ruch cofnięty.
+solitaire.done.title | Udało się!
+solitaire.done.text | Wszystkie karty leżą na czterech stosach docelowych. Pięknie zagrane.

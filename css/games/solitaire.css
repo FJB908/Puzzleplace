@@ -1,0 +1,101 @@
+/* Patience. Een groene mat in een houten rand; de maten komen uit solitaire.js (--cw, --ch) en alle kaarten staan op een eigen plek
+   (translate), zodat ze er zacht naartoe kunnen glijden. Rood en zwart zijn ook aan de vorm te zien. */
+
+.sol { width: min(100%, 46rem); margin-inline: auto; display: flex; flex-direction: column; gap: .7rem; }
+.sol-kop { display: flex; align-items: center; justify-content: space-between; gap: .8rem; font-weight: 700; }
+.sol-aantal { font-size: 1.05rem; }
+.sol-balk { flex: 0 1 6rem; min-width: 3rem; }
+.sol-melding { margin: 0; min-height: 2.7em; text-align: center; color: var(--text-muted); font-size: 1rem; display: grid; align-items: center; }
+
+/* De mat: viltgroen met een zachte lichtval, een fijn korrel en een rand van donker hout */
+.sol-tafel {
+  --vilt-1: #34945f; --vilt-2: #24774b; --vilt-3: #175a38;
+  position: relative; border-radius: 1.5rem; border: .55rem solid transparent; touch-action: pan-y;
+  background:
+    radial-gradient(120% 80% at 50% 12%, var(--vilt-1) 0%, var(--vilt-2) 52%, var(--vilt-3) 100%) padding-box,
+    linear-gradient(150deg, #9a6a3f 0%, #6a4524 45%, #8a5b34 100%) border-box;
+  box-shadow: 0 .35rem .9rem rgba(30, 40, 30, .28), inset 0 .3rem 1.4rem rgba(0, 25, 12, .45);
+  -webkit-user-select: none; user-select: none;
+}
+.sol-tafel::before {
+  content: ""; position: absolute; inset: 0; border-radius: 1rem; pointer-events: none; opacity: .5; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"] .sol-tafel { --vilt-1: #2a7a4d; --vilt-2: #1c6039; --vilt-3: #124428; }
+html[data-contrast="high"] .sol-tafel { --vilt-1: #14532d; --vilt-2: #14532d; --vilt-3: #14532d; border-color: #000; background: #14532d; }
+html[data-contrast="high"] .sol-tafel::before { display: none; }
+
+/* Vakken: een zachte omlijning waar kaarten komen te liggen */
+.sol-vak {
+  position: absolute; padding: 0; margin: 0; z-index: 0; cursor: pointer; display: grid; place-items: center; -webkit-tap-highlight-color: transparent;
+  border: .14rem dashed rgba(255, 255, 255, .3); border-radius: calc(var(--cw) * .12); background: rgba(0, 0, 0, .1); color: rgba(255, 255, 255, .34);
+  box-shadow: inset 0 .1rem .25rem rgba(0, 0, 0, .25);
+}
+.sol-aflegger { cursor: default; background: none; border-color: rgba(255, 255, 255, .15); }
+.sol-vak[hidden] { display: none; }
+.sol-vak:disabled { cursor: default; }
+.sol-kleur { display: grid; place-items: center; opacity: .75; }
+.sol-kleur svg { width: calc(var(--cw) * .5); height: calc(var(--cw) * .5); }
+.sol-cirkel { display: grid; place-items: center; opacity: 0; }
+.sol-voorraad.kan .sol-cirkel { opacity: .9; }
+.sol-cirkel .icon { width: calc(var(--cw) * .5); height: calc(var(--cw) * .5); stroke-width: 2.2; }
+.sol-vak:focus-visible { outline: .22rem solid #ffe37a; outline-offset: .12rem; }
+.sol-vak.doel { border-style: solid; border-color: #fff4b8; background: rgba(255, 244, 184, .22); box-shadow: 0 0 .9rem .2rem rgba(255, 238, 150, .55); }
+.sol-vak.tip { border-style: solid; border-color: #ffd45a; box-shadow: 0 0 1rem .3rem rgba(255, 212, 90, .75); }
+.sol-voorraad.kan { border-style: solid; border-color: rgba(255, 255, 255, .55); }
+
+/* De kaarten */
+.sol-kaart {
+  position: absolute; left: 0; top: 0; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; z-index: 1;
+  width: var(--cw); height: var(--ch); font-size: var(--cw); perspective: calc(var(--cw) * 7); touch-action: none; -webkit-tap-highlight-color: transparent;
+}
+.sol-kaart.vliegt { z-index: 900 !important; }
+.sol-kaart.sleept { z-index: 950 !important; transition: none; cursor: grabbing; }
+.sol-kaart:focus-visible { outline: none; }
+.sol-kaart:focus-visible .sol-voor { box-shadow: 0 0 0 .1em #ffe37a, 0 0 0 .16em #3a2a00; }
+.sol-binnen { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .4s cubic-bezier(.3, .1, .3, 1); transition-delay: var(--fd, 0s); }
+.sol-kaart.op .sol-binnen { transform: rotateY(180deg); }
+.sol-voor, .sol-achter {
+  position: absolute; inset: 0; border-radius: .11em; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden;
+  box-shadow: 0 .012em .035em rgba(0, 20, 10, .55), 0 .03em .09em rgba(0, 20, 10, .3), 0 0 0 .01em rgba(40, 30, 10, .55);
+}
+.sol-voor { transform: rotateY(180deg); background: linear-gradient(160deg, #fffefb 0%, #f6f1e5 100%); }
+.sol-voor svg { display: block; width: 100%; height: 100%; }
+/* De rug: diep blauw met een ruitpatroon, een crème rand en een gouden bloem in het midden */
+.sol-achter {
+  background:
+    radial-gradient(circle at 50% 50%, #f1dca0 0 9%, #c79a3e 10% 13%, transparent 14%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, .17) 0 .02em, transparent .02em .1em),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, .17) 0 .02em, transparent .02em .1em),
+    linear-gradient(150deg, #3d55a3 0%, #26377a 100%);
+  box-shadow: inset 0 0 0 .05em #f7f2e4, inset 0 0 0 .075em #2a3a7c, 0 .012em .035em rgba(0, 20, 10, .55), 0 .03em .09em rgba(0, 20, 10, .3);
+}
+html[data-contrast="high"] .sol-voor { box-shadow: 0 0 0 .02em #000; }
+html[data-contrast="high"] .sol-achter { background: repeating-linear-gradient(45deg, #fff 0 .03em, #1d2f6b .03em .1em); box-shadow: 0 0 0 .02em #000, inset 0 0 0 .05em #fff; }
+
+.sol-kaart.diep .sol-voor { box-shadow: 0 0 0 .01em rgba(40, 30, 10, .5); }
+.sol-kaart.diep .sol-achter { box-shadow: inset 0 0 0 .05em #f7f2e4, inset 0 0 0 .075em #2a3a7c; }
+
+/* Wat kun je doen? Kaarten die je kunt pakken krijgen bij aanwijzen een tikje omhoog; gekozen kaarten gloeien */
+@media (hover: hover) { .sol-kaart.speelbaar:hover .sol-voor { filter: brightness(1.05); } }
+.sol-kaart.gekozen .sol-voor { box-shadow: 0 0 0 .045em #ffd45a, 0 0 .22em .09em rgba(255, 212, 90, .85), 0 .03em .09em rgba(0, 20, 10, .35); }
+.sol-kaart.doel .sol-voor { box-shadow: 0 0 0 .045em #fff4b8, 0 0 .22em .08em rgba(255, 244, 184, .8), 0 .03em .09em rgba(0, 20, 10, .35); }
+.sol-kaart.tip .sol-voor { box-shadow: 0 0 0 .05em #ffd45a, 0 0 .3em .12em rgba(255, 212, 90, .9); }
+.sol-kaart.sleept .sol-voor { box-shadow: 0 .12em .28em rgba(0, 20, 10, .5), 0 0 0 .045em #ffd45a; }
+html[data-contrast="high"] .sol-kaart.gekozen .sol-voor, html[data-contrast="high"] .sol-kaart.doel .sol-voor, html[data-contrast="high"] .sol-kaart.tip .sol-voor { box-shadow: 0 0 0 .08em #ff7a00; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-calm="true"]) .sol-kaart.tip .sol-voor, html:not([data-calm="true"]) .sol-vak.tip { animation: sol-tip 1s ease-in-out infinite alternate; }
+  html:not([data-calm="true"]) .sol-kaart.doel .sol-voor, html:not([data-calm="true"]) .sol-vak.doel { animation: sol-doel 1.3s ease-in-out infinite alternate; }
+}
+@keyframes sol-tip { from { filter: brightness(1); } to { filter: brightness(1.12); } }
+@keyframes sol-doel { from { filter: brightness(1); } to { filter: brightness(1.08); } }
+html[data-calm="true"] .sol-binnen { transition: none; }
+
+.sol-knoppen { display: flex; flex-wrap: wrap; gap: .5rem; position: sticky; bottom: 0; z-index: 1000; padding: 1rem 0 .6rem; margin-top: -.4rem; background: linear-gradient(to bottom, transparent, var(--bg) 30%); }
+.sol-knoppen .btn { flex: 1 1 6rem; min-height: 3.5rem; padding-inline: .6rem; }
+.sol-knoppen .btn[disabled] { background: transparent; }
+.sol-knoppen .btn[hidden] { display: none; }
+
+/* Op een smal scherm mag de tafel de randen van de pagina opzoeken: grotere kaarten zijn prettiger om aan te tikken */
+@media (max-width: 34rem) { .sol-tafel { margin-inline: -.8rem; border-width: .35rem; border-radius: 1.2rem; } }

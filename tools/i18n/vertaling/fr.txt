@@ -702,3 +702,51 @@ mahjong.flower | Fleur
 mahjong.season | Saison
 mahjong.bigger | Agrandir
 mahjong.smaller | Réduire
+
+##### 160-solitaire
+solitaire.name | Patience
+solitaire.summary | Le jeu de cartes classique sur un tapis vert : empilez les quatre couleurs de l'as au roi.
+solitaire.howTo.1 | Déplacez les cartes sur les sept colonnes pour qu'elles descendent du roi à l'as, en alternant rouge et noir.
+solitaire.howTo.2 | Touchez une carte puis un emplacement en surbrillance, ou faites glisser la carte jusque-là. Touchez encore la carte choisie : elle va toute seule au meilleur endroit.
+solitaire.howTo.3 | Seul un roi peut aller sur une colonne vide. Prenez de nouvelles cartes dans la pioche en haut à gauche. Sur les quatre emplacements en haut à droite, vous rassemblez chaque couleur, de l'as vers le haut.
+solitaire.howTo.4 | Vous êtes bloqué ? Utilisez « {undo} » autant que vous voulez, ou demandez un « {hint} ». Quand toutes les cartes sont retournées, « {finish} » fait le reste.
+solitaire.level.makkelijk | Une carte à la fois, toujours gagnable
+solitaire.level.gemiddeld | Une carte à la fois, mélangée comme au jeu (toutes les parties ne sont pas gagnables)
+solitaire.level.moeilijk | Trois cartes à la fois, toujours gagnable
+solitaire.level.extreem | Trois cartes à la fois, mélangée comme au jeu (toutes les parties ne sont pas gagnables)
+solitaire.undo | Annuler
+solitaire.finish | Terminer
+solitaire.home | Placées : {n} sur 52
+solitaire.stock | Pioche, encore {n} cartes
+solitaire.stockEmpty | La pioche est vide
+solitaire.recycle | La pioche est vide. Retournez les cartes défaussées pour les réutiliser.
+solitaire.cardDown | Carte face cachée
+solitaire.foundation | Fondation pour {suit}, {n} cartes
+solitaire.columnEmpty | Colonne vide {n}
+solitaire.card | {rank} de {suit}
+solitaire.suit.0 | pique
+solitaire.suit.1 | cœur
+solitaire.suit.2 | carreau
+solitaire.suit.3 | trèfle
+solitaire.rank.1 | As
+solitaire.rank.11 | Valet
+solitaire.rank.12 | Dame
+solitaire.rank.13 | Roi
+solitaire.letter.1 | A
+solitaire.letter.11 | V
+solitaire.letter.12 | D
+solitaire.letter.13 | R
+solitaire.msg.start | Touchez une carte, puis un emplacement en surbrillance. Le glisser fonctionne aussi.
+solitaire.msg.picked | Touchez maintenant un emplacement en surbrillance, ou faites glisser la carte jusque-là.
+solitaire.msg.nowhere | Cette carte ne peut aller nulle part pour le moment.
+solitaire.msg.closed | Cette carte est face cachée. Elle se retourne quand les cartes qui la couvrent sont déplacées.
+solitaire.msg.recycled | Les cartes défaussées sont de nouveau dans la pioche. Reprenez-les.
+solitaire.msg.canFinish | Toutes les cartes sont retournées. Touchez « {finish} » et le reste se fait tout seul.
+solitaire.msg.tipMove | Déplacez la carte marquée vers l'emplacement marqué.
+solitaire.msg.tipDraw | Prenez une nouvelle carte dans la pioche.
+solitaire.msg.tipRecycle | Retournez les cartes défaussées et parcourez de nouveau la pioche.
+solitaire.msg.lost | À partir d'ici, cette partie n'est plus gagnable. Annulez quelques coups ou commencez une nouvelle partie.
+solitaire.msg.noTip | Je ne trouve pas de coup qui aide. Essayez d'annuler quelques coups.
+solitaire.msg.undone | Coup annulé.
+solitaire.done.title | Bravo, c'est réussi !
+solitaire.done.text | Toutes les cartes sont sur les quatre fondations. Très bien joué.
