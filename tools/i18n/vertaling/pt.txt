@@ -71,7 +71,7 @@ home.chooseGameHint | Sudoku, sopa de letras e muito mais
 home.continue | Continuar
 home.continueAria | Continuar {game}, progresso de {pct} por cento
 home.continueAriaNoPct | Continuar {game}
-home.daily | Desafio do dia
+home.daily | Sudoku de hoje
 home.dailyDone | Feito hoje
 common.hint | Dica
 sudoku.gridAria | Grelha de sudoku
@@ -197,7 +197,7 @@ kruiswoord.level.gemiddeld | 12 palavras
 kruiswoord.level.moeilijk | 16 palavras · algumas mais difíceis
 kruiswoord.level.extreem | 22 palavras · muito juntas
 woordtuin.you | Eu
-woordtuin.computer | Computador
+woordtuin.computer | Jogador virtual
 woordtuin.boardAria | O tabuleiro, {n} por {n} letras
 woordtuin.tileAria | Letra {letter}, linha {r}, coluna {c}, {owner}{extra}
 woordtuin.owner.open | ainda livre
@@ -304,12 +304,12 @@ detail.start | Começar o jogo
 play.howTo | Instruções
 play.howToTitle | Como jogar: {game}
 play.understood | Percebi
-play.dailyTitle | Desafio do dia: {game}
+play.dailyTitle | Sudoku de hoje
 play.autosave | O seu progresso é guardado automaticamente.
 play.loading | O jogo está a carregar…
 play.loadFailed | Não foi possível carregar o jogo. Verifique a sua ligação e tente de novo.
 play.done.title | Muito bem!
-play.done.text.daily | Terminou o desafio de hoje.
+play.done.text.daily | Terminou o Sudoku de hoje.
 play.done.text | Terminou este jogo.
 play.done.announce | Muito bem! O jogo terminou.
 play.done.again | Jogar de novo
@@ -359,8 +359,8 @@ help.q3 | Como continuo um jogo?
 help.a3 | No ecrã Início encontra o jogo que estava a jogar. Toque nele para continuar. Também o encontra na página do próprio jogo.
 help.q4 | Como recomeço?
 help.a4 | Abra o jogo em «{games}» e toque em «{newGame}». Primeiro é-lhe perguntado se quer mesmo, por isso nunca apaga nada por engano.
-help.q5 | O que é o desafio do dia?
-help.a5 | Há um novo desafio todos os dias. No ecrã Início pode começá-lo com um toque.
+help.q5 | O que é o Sudoku de hoje?
+help.a5 | Todos os dias há um Sudoku novo, igual para todos. Encontra-o no ecrã inicial e no menu de Sudoku, com um arquivo dos dias anteriores.
 help.q6 | Posso pôr o Puzzleplace no ecrã principal como uma aplicação?
 help.a6 | Sim. Abra o menu do seu navegador e escolha «Adicionar ao ecrã principal» ou «Instalar aplicação».
 help.q7 | Tenho de iniciar sessão?
@@ -754,11 +754,11 @@ common.congrats | Parabéns!
 common.congratsName | Parabéns, {name}!
 
 ##### 190-sudoku-tijd
-daily.archiveTitle | Desafios do dia
+daily.archiveTitle | Arquivo de Sudoku
 daily.archiveText | Todos os dias um Sudoku novo, igual para todos. Perdeu um dia? Jogue-o aqui.
-daily.play | Jogar o desafio de hoje
-daily.continue | Continuar o desafio de hoje
-daily.playAgain | Jogar outra vez o desafio de hoje
+daily.play | Jogar o Sudoku de hoje
+daily.continue | Continuar o Sudoku de hoje
+daily.playAgain | Jogar outra vez o Sudoku de hoje
 daily.prevMonth | Mês anterior
 daily.nextMonth | Mês seguinte
 daily.monthProgress | {done} de {total} resolvidos
@@ -773,9 +773,8 @@ daily.day.closed | {date}: indisponível
 daily.legend.done | Resolvido
 daily.legend.today | Hoje
 daily.legend.busy | Começado
-daily.levelNote | O nível muda consoante o dia: calmo no início da semana, mais difícil ao fim de semana.
 daily.again.title | Já resolvido
-daily.again.text | Resolveu este desafio em {time}. Quer jogá-lo outra vez?
+daily.again.text | Resolveu este Sudoku em {time}. Quer jogá-lo outra vez?
 daily.again.yes | Jogar outra vez
 daily.again.no | Voltar
 play.done.archive | Arquivo
@@ -783,12 +782,8 @@ home.dailyDoneTime | Resolvido em {time}
 home.dailyBusy | Começado
 home.dailyStreak_one | {n} dia seguido
 home.dailyStreak_other | {n} dias seguidos
-home.dailyHint | Todos os dias um Sudoku novo
+home.dailyHint | Novo todos os dias
 home.dailyArchive | Arquivo
-detail.daily.title | Desafio do dia
-detail.daily.text | Todos os dias um Sudoku novo, igual para todos. Perdeu um dia? Está no arquivo.
-detail.daily.play | Jogar hoje
-detail.daily.archive | Abrir o arquivo
 detail.stats.title | As suas estatísticas
 detail.stats.none | Resolva um sudoku e os seus melhores tempos aparecem aqui.
 stats.best | Melhor tempo
@@ -808,6 +803,6 @@ sudoku.record | Novo recorde! O anterior era {previous}.
 sudoku.firstTime | O seu primeiro tempo neste nível. Muito bem!
 sudoku.streak | {n} dias seguidos!
 sudoku.done.text | Resolvido. Muito bem!
-sudoku.done.daily | Resolveu o desafio de {date}.
+sudoku.done.daily | Resolveu o Sudoku de {date}.
 stats.note | Ganhos em jogados
-detail.daily.again | Jogar hoje outra vez
+sudoku.stat.level | Nível

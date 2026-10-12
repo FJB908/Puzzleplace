@@ -13,8 +13,8 @@ help.a3 | On the Home screen you will find the game you were playing. Tap it to 
 help.q4 | How do I start over? | Hoe begin ik opnieuw?
 # {games} is de naam van het menu Spellen, {newGame} de knop Nieuw spel
 help.a4 | Open the game under "{games}" and tap "{newGame}". You will be asked first, so you never erase anything by accident. | Open het spel bij "{games}" en tik op "{newGame}". Je krijgt eerst een vraag, zodat je niets per ongeluk wist.
-help.q5 | What is the puzzle of the day? | Wat is de puzzel van de dag?
-help.a5 | A new puzzle is ready every day. On the Home screen you can start it with one tap. | Elke dag staat er een nieuwe puzzel klaar. Op het startscherm kun je er met één tik aan beginnen.
+help.q5 | What is today's Sudoku? | Wat is de Sudoku van vandaag?
+help.a5 | A new Sudoku is ready every day, the same for everyone. You find it on the Home screen and in the Sudoku menu, with an archive of earlier days. | Elke dag staat er een nieuwe Sudoku klaar, voor iedereen dezelfde. Je vindt hem op het startscherm en in het Sudoku-menu, met een archief van eerdere dagen.
 help.q6 | Can I put Puzzleplace on my home screen as an app? | Kan ik Puzzelplaats als app op mijn beginscherm zetten?
 # Gebruik de woorden die jouw browser zelf gebruikt voor deze menukeuzes
 help.a6 | Yes. Open your browser's menu and choose "Add to home screen" or "Install app". | Ja. Open het menu van je browser en kies "Toevoegen aan beginscherm" of "App installeren".

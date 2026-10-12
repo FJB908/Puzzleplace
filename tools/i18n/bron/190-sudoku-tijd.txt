@@ -1,9 +1,9 @@
 ##### Sudoku: tijd, beste tijd, statistieken, puzzel van de dag en het archief
-daily.archiveTitle | Daily puzzles | Puzzels van de dag
+daily.archiveTitle | Sudoku archive | Sudoku-archief
 daily.archiveText | A new Sudoku every day, the same for everyone. Missed a day? Play it here. | Elke dag een nieuwe Sudoku, voor iedereen dezelfde. Een dag gemist? Speel hem hier alsnog.
-daily.play | Play today's puzzle | Speel de puzzel van vandaag
-daily.continue | Continue today's puzzle | Verder met de puzzel van vandaag
-daily.playAgain | Play today's puzzle again | Speel de puzzel van vandaag nog eens
+daily.play | Play today's Sudoku | Speel de Sudoku van vandaag
+daily.continue | Continue today's Sudoku | Verder met de Sudoku van vandaag
+daily.playAgain | Play today's Sudoku again | Speel de Sudoku van vandaag nog eens
 daily.prevMonth | Previous month | Vorige maand
 daily.nextMonth | Next month | Volgende maand
 daily.monthProgress | {done} of {total} solved | {done} van {total} opgelost
@@ -18,9 +18,8 @@ daily.day.closed | {date}: not available | {date}: niet beschikbaar
 daily.legend.done | Solved | Opgelost
 daily.legend.today | Today | Vandaag
 daily.legend.busy | In progress | Bezig
-daily.levelNote | The level changes by day: calm at the start of the week, tougher at the weekend. | Het niveau wisselt per dag: rustig aan het begin van de week, pittiger in het weekend.
 daily.again.title | Already solved | Al opgelost
-daily.again.text | You solved this puzzle in {time}. Play it again? | Deze puzzel heb je al opgelost in {time}. Wil je hem nog eens spelen?
+daily.again.text | You solved this Sudoku in {time}. Play it again? | Deze Sudoku heb je al opgelost in {time}. Wil je hem nog eens spelen?
 daily.again.yes | Play again | Nog eens spelen
 daily.again.no | Back | Terug
 play.done.archive | Archive | Archief
@@ -28,12 +27,8 @@ home.dailyDoneTime | Solved in {time} | Opgelost in {time}
 home.dailyBusy | In progress | Bezig
 home.dailyStreak_one | {n} day in a row | {n} dag op rij
 home.dailyStreak_other | {n} days in a row | {n} dagen op rij
-home.dailyHint | A new Sudoku every day | Elke dag een nieuwe Sudoku
+home.dailyHint | New every day | Elke dag nieuw
 home.dailyArchive | Archive | Archief
-detail.daily.title | Puzzle of the day | Puzzel van de dag
-detail.daily.text | A new Sudoku every day, the same for everyone. Missed a day? It is in the archive. | Elke dag een nieuwe Sudoku, voor iedereen dezelfde. Een dag gemist? Die staat in het archief.
-detail.daily.play | Play today | Speel vandaag
-detail.daily.archive | Open the archive | Open het archief
 detail.stats.title | Your statistics | Jouw statistieken
 detail.stats.none | Solve a puzzle and your best times appear here. | Los een puzzel op en je beste tijden verschijnen hier.
 stats.best | Best time | Beste tijd
@@ -53,6 +48,6 @@ sudoku.record | New best time! The old one was {previous}. | Nieuw record! Je ou
 sudoku.firstTime | Your first time at this level. Well done! | Je eerste tijd op dit niveau. Goed gedaan!
 sudoku.streak | {n} days in a row! | {n} dagen op rij!
 sudoku.done.text | Solved. Well done! | Opgelost. Mooi gedaan!
-sudoku.done.daily | You solved the puzzle of {date}. | Je hebt de puzzel van {date} opgelost.
+sudoku.done.daily | You solved the Sudoku of {date}. | Je hebt de Sudoku van {date} opgelost.
 stats.note | Won out of played | Gewonnen van gespeeld
-detail.daily.again | Play today again | Speel vandaag nog eens
+sudoku.stat.level | Level | Niveau

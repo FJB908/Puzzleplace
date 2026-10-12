@@ -16,12 +16,14 @@ import { felicitatie } from '../../shared/felicitatie.js';
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const MAX_HISTORY = 300;
 const LIVES = { makkelijk: 5, gemiddeld: 4, moeilijk: 3, extreem: 3 };
+// De Sudoku van vandaag heeft altijd evenveel levens: het aantal verklapt anders het niveau, en dat zie je pas na afloop
+const livesFor = (ctx) => (ctx.daily ? 4 : LIVES[ctx.difficulty] ?? 3);
 
 // ----- Staat -----
 // Alles wat bewaard wordt is gewoon JSON: puzzel, oplossing, ingevulde cijfers, notities, stappen, levens.
 function newState(ctx) {
   const { puzzle, solution } = generate(ctx.seed, ctx.difficulty);
-  return { puzzle, solution, values: [...puzzle], notes: new Array(81).fill(0), history: [], lives: LIVES[ctx.difficulty] ?? 3, time: 0 };
+  return { puzzle, solution, values: [...puzzle], notes: new Array(81).fill(0), history: [], lives: livesFor(ctx), time: 0 };
 }
 
 function validState(s) {
@@ -29,7 +31,7 @@ function validState(s) {
 }
 
 export function mount(container, ctx) {
-  const maxLives = LIVES[ctx.difficulty] ?? 3;
+  const maxLives = livesFor(ctx);
   const state = validState(ctx.saved)
     ? { history: [], lives: maxLives, time: 0, ...ctx.saved }
     : newState(ctx);
@@ -285,6 +287,7 @@ export function mount(container, ctx) {
     const tegels = [tegel(t('sudoku.stat.time'), tijdTekst(time)), tegel(t('sudoku.stat.best'), tijdTekst(info?.best ?? time), nieuwRecord ? 'is-record' : '')];
     if (info && !info.repeat && info.won > 1) tegels.push(tegel(t('sudoku.stat.average'), tijdTekst(info.average)));
     tegels.push(tegel(t('sudoku.stat.mistakes'), String(maxLives - state.lives)));
+    tegels.push(tegel(t('sudoku.stat.level'), t(`level.${ctx.difficulty}`)));                // het niveau van de Sudoku van vandaag is pas nu te zien
     const kaart = [];
     if (nieuwRecord) kaart.push(h('p', { class: 'record-banner' }, icon('check'), t('sudoku.record', { previous: tijdTekst(info.previous) })));
     else if (info && !info.repeat && info.won === 1) kaart.push(h('p', { class: 'muted record-first' }, t('sudoku.firstTime')));

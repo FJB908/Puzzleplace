@@ -78,7 +78,7 @@ home.chooseGameHint | Sudoku, Wortsuche und mehr
 home.continue | Weiterspielen
 home.continueAria | {game} fortsetzen, {pct} Prozent geschafft
 home.continueAriaNoPct | {game} fortsetzen
-home.daily | Rätsel des Tages
+home.daily | Sudoku von heute
 home.dailyDone | Heute geschafft
 
 ##### 100-sudoku
@@ -212,7 +212,7 @@ kruiswoord.level.extreem | 22 Wörter · dicht beieinander
 
 ##### 130-wordgarden
 woordtuin.you | Sie
-woordtuin.computer | Computer
+woordtuin.computer | Virtueller Spieler
 woordtuin.boardAria | Das Spielfeld, {n} mal {n} Buchstaben
 woordtuin.tileAria | Buchstabe {letter}, Zeile {r}, Spalte {c}, {owner}{extra}
 woordtuin.owner.open | noch frei
@@ -316,8 +316,8 @@ detail.levelLocked | Sie spielen dieses Spiel bereits. Wählen Sie „{newGame}�
 detail.newGameConfirmTitle | Neues Spiel beginnen?
 detail.newGameConfirmText | Ihr gespeicherter Spielstand wird dann ersetzt.
 detail.newGameConfirmYes | Ja, neues Spiel
-detail.continue | Weiterspielen
-detail.continuePct | Weiterspielen · {pct} %
+detail.continue | Weiter
+detail.continuePct | Weiter · {pct} %
 detail.newGame | Neues Spiel
 detail.start | Spiel starten
 
@@ -325,12 +325,12 @@ detail.start | Spiel starten
 play.howTo | Anleitung
 play.howToTitle | {game}: So geht’s
 play.understood | Verstanden
-play.dailyTitle | Tagesrätsel: {game}
+play.dailyTitle | Sudoku von heute
 play.autosave | Ihr Spielstand wird automatisch gespeichert.
 play.loading | Das Spiel wird geladen…
 play.loadFailed | Das Spiel konnte nicht geladen werden. Prüfen Sie Ihre Internetverbindung und versuchen Sie es noch einmal.
 play.done.title | Gut gemacht!
-play.done.text.daily | Sie haben das Rätsel des Tages gelöst.
+play.done.text.daily | Sie haben das heutige Sudoku gelöst.
 play.done.text | Sie haben dieses Spiel geschafft.
 play.done.announce | Gut gemacht! Das Spiel ist beendet.
 play.done.again | Noch eine Runde
@@ -384,8 +384,8 @@ help.q3 | Wie setze ich ein Spiel fort?
 help.a3 | Auf der Startseite finden Sie das Spiel, das Sie angefangen haben. Tippen Sie darauf, um weiterzuspielen. Sie finden es auch auf der Seite des Spiels selbst.
 help.q4 | Wie fange ich neu an?
 help.a4 | Öffnen Sie das Spiel unter „{games}“ und tippen Sie auf „{newGame}“. Sie werden vorher gefragt, damit Sie nie versehentlich etwas löschen.
-help.q5 | Was ist das Rätsel des Tages?
-help.a5 | Jeden Tag steht ein neues Rätsel bereit. Auf der Startseite starten Sie es mit einem Fingertipp.
+help.q5 | Was ist das Sudoku von heute?
+help.a5 | Jeden Tag steht ein neues Sudoku bereit, für alle dasselbe. Sie finden es auf dem Startbildschirm und im Sudoku-Menü, mit einem Archiv früherer Tage.
 help.q6 | Kann ich Puzzleplace als App auf meinen Startbildschirm legen?
 help.a6 | Ja. Öffnen Sie das Menü Ihres Browsers und wählen Sie „Zum Startbildschirm hinzufügen“ oder „App installieren“.
 help.q7 | Muss ich mich anmelden?
@@ -789,11 +789,11 @@ common.congrats | Herzlichen Glückwunsch!
 common.congratsName | Herzlichen Glückwunsch, {name}!
 
 ##### 190-sudoku-tijd
-daily.archiveTitle | Rätsel des Tages
+daily.archiveTitle | Sudoku-Archiv
 daily.archiveText | Jeden Tag ein neues Sudoku, für alle dasselbe. Einen Tag verpasst? Spielen Sie es hier nach.
-daily.play | Das heutige Rätsel spielen
-daily.continue | Mit dem heutigen Rätsel weitermachen
-daily.playAgain | Das heutige Rätsel noch einmal spielen
+daily.play | Das heutige Sudoku spielen
+daily.continue | Mit dem heutigen Sudoku weitermachen
+daily.playAgain | Das heutige Sudoku noch einmal spielen
 daily.prevMonth | Vorheriger Monat
 daily.nextMonth | Nächster Monat
 daily.monthProgress | {done} von {total} gelöst
@@ -808,9 +808,8 @@ daily.day.closed | {date}: nicht verfügbar
 daily.legend.done | Gelöst
 daily.legend.today | Heute
 daily.legend.busy | Begonnen
-daily.levelNote | Das Niveau wechselt je nach Tag: ruhig zu Wochenbeginn, anspruchsvoller am Wochenende.
 daily.again.title | Schon gelöst
-daily.again.text | Dieses Rätsel haben Sie in {time} gelöst. Möchten Sie es noch einmal spielen?
+daily.again.text | Dieses Sudoku haben Sie in {time} gelöst. Möchten Sie es noch einmal spielen?
 daily.again.yes | Noch einmal spielen
 daily.again.no | Zurück
 play.done.archive | Archiv
@@ -818,12 +817,8 @@ home.dailyDoneTime | Gelöst in {time}
 home.dailyBusy | Begonnen
 home.dailyStreak_one | {n} Tag in Folge
 home.dailyStreak_other | {n} Tage in Folge
-home.dailyHint | Jeden Tag ein neues Sudoku
+home.dailyHint | Jeden Tag neu
 home.dailyArchive | Archiv
-detail.daily.title | Rätsel des Tages
-detail.daily.text | Jeden Tag ein neues Sudoku, für alle dasselbe. Einen Tag verpasst? Er steht im Archiv.
-detail.daily.play | Heute spielen
-detail.daily.archive | Archiv öffnen
 detail.stats.title | Ihre Statistik
 detail.stats.none | Lösen Sie ein Rätsel, dann erscheinen hier Ihre Bestzeiten.
 stats.best | Bestzeit
@@ -843,6 +838,6 @@ sudoku.record | Neue Bestzeit! Die alte war {previous}.
 sudoku.firstTime | Ihre erste Zeit auf diesem Niveau. Gut gemacht!
 sudoku.streak | {n} Tage in Folge!
 sudoku.done.text | Gelöst. Schön gemacht!
-sudoku.done.daily | Sie haben das Rätsel vom {date} gelöst.
+sudoku.done.daily | Sie haben das Sudoku vom {date} gelöst.
 stats.note | Gewonnen von gespielt
-detail.daily.again | Heute noch einmal
+sudoku.stat.level | Niveau

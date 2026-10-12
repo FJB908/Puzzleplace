@@ -3,7 +3,7 @@
 # Small label under your score.
 woordtuin.you | You | Jij
 # Small label under the computer's score. Short.
-woordtuin.computer | Computer | Computer
+woordtuin.computer | Virtual player | Virtuele speler
 woordtuin.boardAria | The board, {n} by {n} letters | Het bord, {n} bij {n} letters
 # Schermlezertekst bij een letter: {letter}, {r} = rij, {c} = kolom, {owner} = van wie het vakje is, {extra} = eventuele toevoegingen (beginnen met een komma)
 woordtuin.tileAria | Letter {letter}, row {r}, column {c}, {owner}{extra} | Letter {letter}, rij {r}, kolom {c}, {owner}{extra}

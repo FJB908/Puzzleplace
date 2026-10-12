@@ -85,7 +85,7 @@ export async function playView({ id, mode, date }, app) {
       grootKnop, helpButton,
       h('header', { class: 'play-title' },
         h('h1', { tabindex: '-1' }, daily ? t('play.dailyTitle', { game: game.name }) : game.name),
-        h('p', { class: 'muted' }, daily ? [datumTekst(new Date(`${day}T12:00:00`), { day: 'numeric', month: 'long' }), level].filter(Boolean).join(' · ') : level))),
+        h('p', { class: 'muted' }, daily ? datumTekst(new Date(`${day}T12:00:00`), { day: 'numeric', month: 'long' }) : level))),
     stage,
     h('p', { class: 'save-note' }, t('play.autosave')),
   );

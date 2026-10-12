@@ -5,7 +5,7 @@ import { h, icon } from '../ui.js';
 import { t, datumTekst } from '../i18n/index.js';
 import * as store from '../store.js';
 import { gameArt } from '../games/art.js';
-import { BEGIN, dagMoeilijkheid, maandRooster, reeks, langsteReeks, speelbaar, tijdTekst } from '../shared/dagelijks.js';
+import { BEGIN, maandRooster, reeks, langsteReeks, speelbaar, tijdTekst } from '../shared/dagelijks.js';
 
 const ID = 'sudoku';
 const naarDatum = (dag) => { const [j, m, d] = dag.split('-').map(Number); return new Date(j, m - 1, d, 12); };
@@ -52,9 +52,8 @@ export function dagArchiefView() {
     const staat = rec ? 'done' : isBezig ? 'busy' : kan ? 'open' : 'closed';
     const label = rec ? t('daily.day.done', { date: lang, time: rec.time != null ? tijdTekst(rec.time) : '–' })
       : isBezig ? t('daily.day.busy', { date: lang }) : kan ? t(isVandaag ? 'daily.day.today' : 'daily.day.open', { date: lang }) : t('daily.day.closed', { date: lang });
-    const kleur = dagMoeilijkheid(dag);
     const inhoud = [h('span', { class: 'dag-nr' }, String(nummer)), rec ? h('span', { class: 'dag-bloem', 'aria-hidden': 'true' }) : null, isBezig ? h('span', { class: 'dag-stip', 'aria-hidden': 'true' }) : null];
-    const attrs = { class: `dag dag--${staat}${isVandaag ? ' is-today' : ''}`, 'data-niveau': kleur, role: 'gridcell', 'aria-label': label };
+    const attrs = { class: `dag dag--${staat}${isVandaag ? ' is-today' : ''}`, role: 'gridcell', 'aria-label': label };
     if (!kan) return h('span', { ...attrs, 'aria-disabled': 'true' }, inhoud);
     return h('a', { ...attrs, href: `#/spel/${ID}/speel/dagelijks${isVandaag ? '' : `/${dag}`}` }, inhoud);
   }
@@ -95,6 +94,6 @@ export function dagArchiefView() {
     h('section', { class: 'card dag-kalender', 'aria-labelledby': 'dag-maand-titel' },
       h('div', { class: 'dag-kop' }, vorige, (maandTitel.id = 'dag-maand-titel', maandTitel), volgende),
       voortgang, weekdagen, raster, legenda,
-      h('p', { class: 'muted dag-uitleg' }, t('daily.levelNote'))));
+      null));
   return { title: t('daily.archiveTitle'), nav: 'games', decor: 'hang-rechts', node };
 }

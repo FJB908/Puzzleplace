@@ -54,5 +54,5 @@ home.continueAria | Continue {game}, {pct} percent done | Verder met {game}, {pc
 home.continueAriaNoPct | Continue {game} | Verder met {game}
 
 # Puzzel van de dag
-home.daily | Puzzle of the day | Puzzel van de dag
+home.daily | Today's Sudoku | Sudoku van vandaag
 home.dailyDone | Done today | Vandaag gedaan

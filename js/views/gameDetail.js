@@ -1,14 +1,10 @@
 // Voor het spelen: wat is dit spel, welk niveau, en dan één grote knop.
 // Flow: Spellen -> dit scherm -> Spelen. Nooit meer dan drie tikken vanaf Start.
 
-import { h, icon, avatar, confirmDialog } from '../ui.js';
+import { h, icon, confirmDialog } from '../ui.js';
 import { FEATURES } from '../config.js';
-import * as auth from '../services/auth.js';
-import * as social from '../services/social.js';
-import * as matches from '../services/matches.js';
-import { meestGespeeld } from '../shared/startvrienden.js';
-import { nieuwePartij } from './partij.js';
-import { SPELERS } from '../games/woordtuin/spelers.js';
+import { dagLint } from './dagLint.js';
+import { vriendenKiezer } from './vriendenKiezer.js';
 import { getGameInfo, isReady } from '../games/registry.js';
 import * as store from '../store.js';
 import { gameArt } from '../games/art.js';
@@ -105,79 +101,20 @@ export function gameDetailView({ id }, app) {
 
   // Woordtuin: ook tegen een vriend, met de meest gespeelde vrienden bovenaan
   const vriendenBlok = id === 'woordtuin' && FEATURES.friends ? vriendenSectie() : null;
-  const virtueel = id === 'woordtuin' ? virtueleSpelers(game) : null;
 
   return {
     title: game.name, nav: 'games', decor: 'hang-rechts',
-    node: h('div', { class: 'view' }, header, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), id === 'sudoku' ? dagBlok() : null, id === 'sudoku' ? statsKaart(game) : null, virtueel, vriendenBlok?.el),
+    node: h('div', { class: 'view' }, header, id === 'sudoku' ? dagLint() : null, vriendenBlok?.el, levelPicker, howTo, h('div', { class: 'actionbar' }, actions), id === 'sudoku' ? statsKaart(game) : null),
     cleanup: () => vriendenBlok?.off(),
   };
 }
 
 
-// "Speel tegen een vriend": zonder account een uitnodiging om in te loggen, anders de vrienden (meest gespeeld eerst) met één knop per vriend
+// "Speel tegen een vriend": bovenaan de pagina van Woordtuin, met de meest gespeelde vrienden en één knop per vriend
 function vriendenSectie() {
-  const lijst = h('div', { class: 'stack' });
-  const el = h('section', { class: 'card stack detail-vrienden', 'aria-labelledby': 'dv-titel' }, h('h2', { id: 'dv-titel' }, t('detail.friend.title')), lijst);
-  const nodig = () => h('a', { class: 'btn btn-block', href: '#/account/inloggen' }, icon('user'), t('detail.friend.loginButton'));
-  function render() {
-    const u = auth.getUser();
-    if (!u) { lijst.replaceChildren(h('p', {}, t('detail.friend.login')), nodig()); return; }
-    const data = social.cached(), partijen = matches.cached();
-    if (!(social.isLoaded() && matches.isLoaded())) { lijst.replaceChildren(h('p', { class: 'muted' }, t('common.loading'))); return; }
-    const rijen = meestGespeeld(u.id, data.friends, partijen);
-    if (!rijen.length) { lijst.replaceChildren(h('p', {}, t('detail.friend.none')), h('a', { class: 'btn btn-block', href: '#/vrienden' }, icon('friends'), t('detail.friend.addButton'))); return; }
-    const MAX = 6;
-    lijst.replaceChildren(...[
-      h('ul', { class: 'dv-lijst' }, rijen.slice(0, MAX).map(({ friend, aantal, lopend }) => h('li', { class: 'dv-rij' },
-        avatar(friend.name, friend.id),
-        h('span', { class: 'dv-wie' }, h('strong', {}, friend.name), aantal ? h('small', { class: 'muted' }, t('detail.friend.played', { n: aantal })) : null),
-        lopend
-          ? h('a', { class: 'btn btn-primary', href: `#/partij/${lopend.id}` }, icon('play'), t('detail.continue'))
-          : h('button', { type: 'button', class: 'btn btn-primary', onclick: () => nieuwePartij(friend) }, icon('play'), t('detail.newGame'))))),
-      rijen.length > MAX ? h('a', { class: 'link-quiet', href: '#/vrienden' }, t('detail.friend.all')) : null].filter(Boolean));
-  }
-  render();
-  if (auth.getUser()) { social.list().catch(() => {}); matches.list().catch(() => {}); }
-  const offs = [social.subscribe(render), matches.subscribe(render), auth.subscribe(render)];
-  return { el, off: () => offs.forEach((f) => f()) };
-}
-
-
-// Virtuele spelers: de computer met een naam en een eigen tempo; werkt zonder account en zonder internet
-function virtueleSpelers(game) {
-  const label = (niveau) => game.difficulties.find((d) => d.id === niveau)?.label || '';
-  const speel = async (sp) => {
-    if (store.getSlot('woordtuin', 'normal')?.state != null) {
-      const ok = await confirmDialog({ title: t('detail.newGameConfirmTitle'), text: t('detail.newGameConfirmText'), confirmLabel: t('detail.newGameConfirmYes') });
-      if (!ok) return;
-    }
-    store.updateGame('woordtuin', (r) => { r.slots.normal = store.clearedSlot(); r.difficulty = sp.niveau; r.persona = sp.id; });
-    location.hash = '#/spel/woordtuin/speel';
-  };
-  return h('section', { class: 'card stack detail-vrienden', 'aria-labelledby': 'dvs-titel' },
-    h('h2', { id: 'dvs-titel' }, t('detail.virtual.title')),
-    h('p', { class: 'muted' }, t('detail.virtual.text')),
-    h('ul', { class: 'dv-lijst' }, SPELERS.map((sp) => h('li', { class: 'dv-rij' },
-      avatar(sp.naam, sp.id),
-      h('span', { class: 'dv-wie' }, h('strong', {}, sp.naam), h('small', { class: 'muted' }, label(sp.niveau))),
-      h('button', { type: 'button', class: 'btn btn-primary', onclick: () => speel(sp) }, icon('play'), t('detail.virtual.play'))))));
-}
-
-
-// Sudoku: de puzzel van de dag (met je reeks) en een weg naar het archief
-function dagBlok() {
-  const today = store.todayKey();
-  const rec = store.getDaily('sudoku');
-  const n = reeks(rec, today);
-  const klaar = !!rec[today];
-  return h('section', { class: 'card stack', 'aria-labelledby': 'dagblok-titel' },
-    h('h2', { id: 'dagblok-titel' }, t('detail.daily.title')),
-    h('p', {}, t('detail.daily.text')),
-    n > 0 ? h('p', { class: 'streak' }, icon('flame'), t('home.dailyStreak', { n })) : null,
-    h('div', { class: 'stack' },
-      h('a', { class: `btn ${klaar ? '' : 'btn-primary'} btn-block`, href: '#/spel/sudoku/speel/dagelijks' }, h('span', {}, t(klaar ? 'detail.daily.again' : 'detail.daily.play'))),
-      h('a', { class: 'btn btn-block', href: '#/spel/sudoku/dagelijks' }, icon('calendar'), h('span', {}, t('detail.daily.archive')))));
+  const kiezer = vriendenKiezer({ max: 6 });
+  const el = h('section', { class: 'card stack detail-vrienden', 'aria-labelledby': 'dv-titel' }, h('h2', { id: 'dv-titel' }, icon('friends'), t('detail.friend.title')), kiezer.el);
+  return { el, off: kiezer.off };
 }
 
 // Je statistieken per niveau: gespeeld, gewonnen, beste en gemiddelde tijd
