@@ -1,0 +1,76 @@
+/* Mahjong. De tegels staan op een groene mat; de maten komen uit mahjong.js (--uw, --uh, --d, --tw), zodat het bord altijd past.
+   Een tegel is een ivoren gezicht op een groene dikte (rechts en onder); hogere lagen staan een stukje naar linksboven. */
+
+.mj { width: min(100%, 46rem); margin-inline: auto; display: flex; flex-direction: column; gap: .7rem; }
+.mj-kop { display: flex; align-items: center; justify-content: space-between; gap: .8rem; font-weight: 700; }
+.mj-aantal { font-size: 1.15rem; }
+.mj-balk { flex: 1 1 6rem; max-width: 12rem; }
+.mj-melding { margin: 0; min-height: 2.7em; text-align: center; color: var(--text-muted); font-size: 1rem; display: grid; align-items: center; }
+
+.mj-veld {
+  display: flex; justify-content: center; overflow-x: auto; padding: .7rem .5rem 1rem; border-radius: 1.5rem;
+  background: radial-gradient(130% 90% at 50% 0%, #eaf5f0 0%, #d3e8df 60%, #c3ddd2 100%);
+  box-shadow: inset 0 .15rem .6rem rgba(40, 90, 75, .18);
+}
+html[data-theme="dark"] .mj-veld { background: radial-gradient(130% 90% at 50% 0%, #2c4a44 0%, #223a36 60%, #1b2f2c 100%); box-shadow: inset 0 .15rem .8rem rgba(0, 0, 0, .35); }
+html[data-contrast="high"] .mj-veld { background: #fff; border: 3px solid var(--border); }
+
+.mj-veld.groot { justify-content: flex-start; max-height: 74vh; overflow: auto; overscroll-behavior: contain; }
+.mj-bord { position: relative; flex: none; margin: .1rem; }
+.mj-tegel {
+  position: absolute; padding: 0; border: 0; background: none; cursor: pointer; font-size: var(--tw); -webkit-tap-highlight-color: transparent;
+  left: calc(var(--x) * var(--uw) + (var(--zmax) - var(--z)) * var(--d));
+  top: calc(var(--y) * var(--uh) + (var(--zmax) - var(--z)) * var(--d));
+  width: calc(var(--uw) * 2); height: calc(var(--uh) * 2);
+  z-index: calc(var(--z) * 100 + var(--y));
+  transition: transform .18s ease;
+}
+.mj-tegel:focus-visible { outline: none; }
+.mj-tegel:focus-visible .mj-gezicht { box-shadow: 0 0 0 .12em var(--focus), 0 0 0 .2em #fff, inset .05em .05em 0 rgba(255, 255, 255, .9); }
+.mj-tegel.weg { display: none; }
+.mj-dikte {
+  position: absolute; left: var(--d); top: var(--d); right: 0; bottom: 0; border-radius: .16em;
+  background: linear-gradient(145deg, #3ca287 0%, #26705d 100%);
+  box-shadow: 0 .05em .14em rgba(15, 45, 38, .45);
+}
+.mj-gezicht {
+  position: absolute; left: 0; top: 0; right: var(--d); bottom: var(--d); border-radius: .16em; display: grid; place-items: center; padding: 8% 10%;
+  background: linear-gradient(145deg, #fffdf6 0%, #f1e8d4 100%);
+  box-shadow: inset .05em .05em 0 rgba(255, 255, 255, .95), inset -.04em -.04em 0 rgba(150, 125, 80, .3), 0 0 0 .03em rgba(120, 100, 60, .35);
+  transition: filter .28s ease, box-shadow .18s ease, transform .18s ease;
+}
+.mj-gezicht.bloem { background: linear-gradient(145deg, #fffbfc 0%, #f7e2e6 100%); }
+.mj-gezicht.seizoen { background: linear-gradient(145deg, #fffcf0 0%, #f4e7bd 100%); }
+.mj-plaatje { width: 100%; height: 100%; display: block; }
+
+/* Vast: donkerder en wat grijzer, vrij: licht. Zo zie je zonder nadenken wat je kunt pakken. */
+.mj-tegel.vast .mj-gezicht { filter: brightness(.84) saturate(.72); }
+html[data-theme="dark"] .mj-gezicht { filter: brightness(.95); }
+html[data-theme="dark"] .mj-tegel.vast .mj-gezicht { filter: brightness(.68) saturate(.7); }
+html[data-contrast="high"] .mj-gezicht { box-shadow: 0 0 0 .08em #000; }
+html[data-contrast="high"] .mj-tegel.vast .mj-gezicht { filter: brightness(.7); background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, .12) 0 .12em, transparent .12em .3em), linear-gradient(145deg, #fffdf6, #f1e8d4); }
+.mj-tegel.vrij:hover .mj-gezicht { transform: translate(-.02em, -.04em); }
+
+/* Gekozen: een stukje omhoog met een roze gloed. Passende vrije tegels hebben een gouden rand. */
+.mj-tegel.gekozen { transform: translate(-.03em, -.1em); }
+.mj-tegel.gekozen .mj-gezicht { box-shadow: 0 0 0 .1em #d9467f, 0 0 .55em .12em rgba(217, 70, 127, .6), inset .05em .05em 0 rgba(255, 255, 255, .95); }
+.mj-tegel.maatje .mj-gezicht { box-shadow: 0 0 0 .09em #e0a92f, 0 0 .4em .06em rgba(224, 169, 47, .55), inset .05em .05em 0 rgba(255, 255, 255, .95); }
+.mj-tegel.tip .mj-gezicht { box-shadow: 0 0 0 .1em #e0a92f, 0 0 .6em .2em rgba(224, 169, 47, .7), inset .05em .05em 0 rgba(255, 255, 255, .95); }
+html[data-contrast="high"] .mj-tegel.gekozen .mj-gezicht { box-shadow: 0 0 0 .14em #8a0f3c; }
+html[data-contrast="high"] .mj-tegel.maatje .mj-gezicht, html[data-contrast="high"] .mj-tegel.tip .mj-gezicht { box-shadow: 0 0 0 .14em #004d57; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-calm="true"]) .mj-tegel.maatje .mj-gezicht { animation: mj-maatje 1.6s ease-in-out infinite alternate; }
+  html:not([data-calm="true"]) .mj-tegel.tip .mj-gezicht { animation: mj-tip 1s ease-in-out infinite alternate; }
+  html:not([data-calm="true"]) .mj-knoppen .btn.wijs { animation: mj-wijs 1.1s ease-in-out infinite alternate; }
+  html:not([data-calm="true"]) .mj-bord.husselt-uit .mj-gezicht { transform: rotateY(90deg); transition: transform .24s ease-in; transition-delay: calc(var(--i) * 1ms); }
+  html:not([data-calm="true"]) .mj-bord.husselt-in .mj-gezicht { animation: mj-draai .5s ease-out both; animation-delay: calc(var(--i) * 2ms); }
+}
+@keyframes mj-maatje { from { box-shadow: 0 0 0 .09em #e0a92f, 0 0 .2em .02em rgba(224, 169, 47, .3), inset .05em .05em 0 rgba(255, 255, 255, .95); } to { box-shadow: 0 0 0 .09em #e0a92f, 0 0 .5em .1em rgba(224, 169, 47, .65), inset .05em .05em 0 rgba(255, 255, 255, .95); } }
+@keyframes mj-tip { from { box-shadow: 0 0 0 .1em #e0a92f, 0 0 .3em .05em rgba(224, 169, 47, .5), inset .05em .05em 0 rgba(255, 255, 255, .95); } to { box-shadow: 0 0 0 .13em #e0a92f, 0 0 .8em .3em rgba(224, 169, 47, .8), inset .05em .05em 0 rgba(255, 255, 255, .95); } }
+@keyframes mj-wijs { from { box-shadow: 0 0 0 0 rgba(217, 70, 127, 0); } to { box-shadow: 0 0 0 .3rem rgba(217, 70, 127, .35); } }
+@keyframes mj-draai { from { transform: rotateY(90deg) scale(.9); } to { transform: rotateY(0) scale(1); } }
+
+.mj-knoppen { display: flex; flex-wrap: wrap; gap: .5rem; position: sticky; bottom: 0; z-index: 400; padding: 1rem 0 .6rem; margin-top: -.4rem; background: linear-gradient(to bottom, transparent, var(--bg) 30%); }
+.mj-knoppen .btn { flex: 1 1 5.2rem; min-height: 3.5rem; padding-inline: .6rem; }
+.mj-knoppen .btn[disabled] { background: transparent; }

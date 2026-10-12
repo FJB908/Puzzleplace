@@ -661,3 +661,44 @@ detail.virtual.title | Jugar contra un jugador virtual
 detail.virtual.text | Los jugadores virtuales son el ordenador con un nombre y su propio ritmo. Juegan en tu dispositivo, así que no necesitas cuenta ni internet.
 detail.virtual.play | Jugar
 err.deviceToken | No se pudo registrar este dispositivo para las notificaciones.
+mahjong.name | Mahjong
+mahjong.summary | Quita parejas de fichas iguales hasta vaciar el tablero.
+mahjong.howTo.1 | Una ficha está libre si no hay nada encima y su lado izquierdo o derecho está abierto. Las fichas libres se ven claras.
+mahjong.howTo.2 | Toca una ficha libre y luego otra ficha libre con el mismo dibujo. La pareja desaparece.
+mahjong.howTo.3 | Cada flor va con cualquier otra flor, y cada estación con cualquier otra estación.
+mahjong.howTo.4 | ¿Te has atascado? Usa «{undo}» todas las veces que quieras, pide una «{hint}» o pulsa «{shuffle}» para mezclar las fichas que quedan: el tablero siempre se puede terminar.
+mahjong.level.makkelijk | 36 fichas grandes
+mahjong.level.gemiddeld | 60 fichas
+mahjong.level.moeilijk | 100 fichas
+mahjong.level.extreem | 144 fichas, el juego completo
+mahjong.undo | Deshacer
+mahjong.shuffle | Mezclar
+mahjong.left | Fichas restantes: {n}
+mahjong.boardAria | Tablero de mahjong, quedan {n} fichas
+mahjong.tile.free | {face}, libre
+mahjong.tile.blocked | {face}, bloqueada
+mahjong.msg.start | Toca una ficha libre y luego una que combine.
+mahjong.msg.picked | Ahora toca la ficha que combina. Las que combinan tienen un borde dorado.
+mahjong.msg.noPartner | Todavía no hay ninguna ficha libre que combine. Elige otra o quita antes otra ficha.
+mahjong.msg.pair | ¡Una pareja! Fichas restantes: {n}.
+mahjong.msg.blocked | Esa ficha está atascada: hay algo encima, o sus dos lados están cerrados. Las fichas claras están libres.
+mahjong.msg.noMoves | Ya no quedan parejas. Toca «{shuffle}»: las fichas se mezclan y puedes seguir.
+mahjong.msg.shuffled | ¡Mezcladas! Hay una forma de terminar este tablero.
+mahjong.msg.tip | Estas dos fichas van juntas.
+mahjong.msg.undone | Devuelta a su sitio.
+mahjong.done.title | ¡El tablero está vacío!
+mahjong.done.text | Muy bien. Ya no queda ninguna ficha.
+mahjong.suit.dots | Círculos {n}
+mahjong.suit.bamboo | Bambú {n}
+mahjong.suit.numbers | Número {n}
+mahjong.wind.0 | Viento norte
+mahjong.wind.1 | Viento este
+mahjong.wind.2 | Viento sur
+mahjong.wind.3 | Viento oeste
+mahjong.dragon.0 | Dragón rojo
+mahjong.dragon.1 | Dragón verde
+mahjong.dragon.2 | Dragón blanco
+mahjong.flower | Flor
+mahjong.season | Estación
+mahjong.bigger | Más grande
+mahjong.smaller | Más pequeño

@@ -5,6 +5,7 @@
 import { KUNST } from './art-woorden.js';
 import { FREQ } from './woordzoeker/frequentie.js';
 import { getTaal } from '../i18n/index.js';
+import { plaatjeSvg } from './mahjong/tegels.js';
 
 const wrap = (inner, size = 11) => `<svg class="game-art" viewBox="0 0 160 120" style="font-size:${size}px" aria-hidden="true" focusable="false">${inner}</svg>`;
 
@@ -89,7 +90,13 @@ function woordtuin() {
   return wrap(`<g transform="translate(27 7)">${out}</g>`, 10);
 }
 
-const ART = { sudoku, woordzoeker, kruiswoord, woordtuin };
+// Mahjong: drie tegels op een rij met één tegel bovenop, met echte plaatjes
+function mahjong() {
+  const tegel = (x, y, p) => `<g transform="translate(${x} ${y})"><rect class="ga-mj-dikte" x="4" y="4" width="40" height="52" rx="5.500"/><rect class="ga-mj-gezicht" width="40" height="52" rx="5.500"/><g transform="translate(0 0)">${plaatjeSvg(p)}</g></g>`;
+  return wrap(`<g transform="translate(8 4)">${tegel(2, 50, 4)}${tegel(52, 50, 12)}${tegel(102, 50, 34)}${tegel(52, 14, 31)}</g>`);
+}
+
+const ART = { sudoku, woordzoeker, kruiswoord, woordtuin, mahjong };
 
 export function gameArt(id) {
   const make = ART[id];

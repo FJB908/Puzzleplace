@@ -51,6 +51,12 @@ const GAMES = [
     wide: true,
     load: () => import('./kruiswoord/kruiswoord.js'),
   }, () => ({ hint: t('common.hint'), word: t('kruiswoord.word') })),
+  spel('mahjong', {
+    icon: 'mahjong',
+    status: 'ready',
+    wide: true,
+    load: () => import('./mahjong/mahjong.js'),
+  }, () => ({ undo: t('mahjong.undo'), hint: t('common.hint'), shuffle: t('mahjong.shuffle') })),
 ];
 
 // Voorbeeldspel om de flow te testen. Alleen zichtbaar via  index.html?demo=1

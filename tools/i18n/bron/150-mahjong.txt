@@ -1,0 +1,50 @@
+##### Mahjong (tegels paren): losse tegels in paren van het bord halen, tot het bord leeg is
+# Naam van het spel (het gewone woord in jouw taal; Mahjong blijft meestal Mahjong).
+mahjong.name | Mahjong | Mahjong
+mahjong.summary | Remove pairs of matching tiles until the board is empty. | Haal paren van gelijke tegels weg tot het bord leeg is.
+# Uitleg: {undo}, {hint} en {shuffle} zijn de namen van de knoppen.
+mahjong.howTo.1 | A tile is free when nothing lies on top of it and its left or right side is open. Free tiles are bright. | Een tegel is vrij als er niets bovenop ligt en links of rechts open is. Vrije tegels zijn licht.
+mahjong.howTo.2 | Tap a free tile and then a free tile with the same picture. The pair disappears. | Tik op een vrije tegel en daarna op een vrije tegel met hetzelfde plaatje. Het paar verdwijnt.
+mahjong.howTo.3 | Every flower matches every other flower, and every season matches every other season. | Elke bloem past bij elke andere bloem, en elk seizoen past bij elk ander seizoen.
+mahjong.howTo.4 | Stuck? Use "{undo}" as often as you like, ask for a "{hint}", or press "{shuffle}" to mix the tiles that are left: the board can always be finished. | Zit je vast? Gebruik "{undo}" zo vaak je wilt, vraag een "{hint}", of druk op "{shuffle}" om de tegels die nog liggen te mengen: het bord is altijd uit te spelen.
+mahjong.level.makkelijk | 36 big tiles | 36 grote tegels
+mahjong.level.gemiddeld | 60 tiles | 60 tegels
+mahjong.level.moeilijk | 100 tiles | 100 tegels
+mahjong.level.extreem | 144 tiles, the full set | 144 tegels, de hele set
+# Knoppen onder het bord (kort). "Hint" komt uit common.hint.
+mahjong.undo | Undo | Zet terug
+mahjong.shuffle | Shuffle | Husselen
+# Boven het bord: hoeveel tegels er nog liggen.
+mahjong.left | Tiles left: {n} | Tegels over: {n}
+mahjong.boardAria | Mahjong board, {n} tiles left | Mahjong-bord, nog {n} tegels
+# Schermlezertekst bij een tegel: {face} is de naam van het plaatje.
+mahjong.tile.free | {face}, free | {face}, vrij
+mahjong.tile.blocked | {face}, blocked | {face}, vast
+# Meldingen onder de titel. Vriendelijk en kort; er is nooit iets "fout".
+mahjong.msg.start | Tap a free tile, then a tile that matches it. | Tik op een vrije tegel en daarna op een tegel die erbij past.
+mahjong.msg.picked | Now tap the matching tile. The matches have a golden edge. | Tik nu op de tegel die erbij past. Die hebben een gouden rand.
+mahjong.msg.noPartner | No free tile matches this one yet. Pick another, or take a tile away first. | Er is nog geen vrije tegel die hierbij past. Kies een andere, of haal eerst een andere tegel weg.
+mahjong.msg.pair | A pair! Tiles left: {n}. | Een paar! Tegels over: {n}.
+mahjong.msg.blocked | That tile is stuck: something lies on it, or both of its sides are blocked. Bright tiles are free. | Die tegel zit vast: er ligt iets op, of beide kanten zijn dicht. Lichte tegels zijn vrij.
+mahjong.msg.noMoves | No more pairs can be made. Tap "{shuffle}": the tiles are mixed and you can carry on. | Er zijn geen paren meer. Tik op "{shuffle}": de tegels worden gemengd en je kunt verder.
+mahjong.msg.shuffled | Mixed! There is a way to finish this board. | Gemengd! Er is een manier om dit bord uit te spelen.
+mahjong.msg.tip | These two tiles belong together. | Deze twee tegels horen bij elkaar.
+mahjong.msg.undone | Put back. | Teruggelegd.
+mahjong.done.title | The board is clear! | Het bord is leeg!
+mahjong.done.text | Beautifully done. All the tiles are gone. | Mooi gedaan. Alle tegels zijn weg.
+# Namen van de plaatjes (voor schermlezers). {n} is 1 tot en met 9.
+mahjong.suit.dots | Dots {n} | Stippen {n}
+mahjong.suit.bamboo | Bamboo {n} | Bamboe {n}
+mahjong.suit.numbers | Number {n} | Getal {n}
+mahjong.wind.0 | North wind | Noordenwind
+mahjong.wind.1 | East wind | Oostenwind
+mahjong.wind.2 | South wind | Zuidenwind
+mahjong.wind.3 | West wind | Westenwind
+mahjong.dragon.0 | Red dragon | Rode draak
+mahjong.dragon.1 | Green dragon | Groene draak
+mahjong.dragon.2 | White dragon | Witte draak
+mahjong.flower | Flower | Bloem
+mahjong.season | Season | Seizoen
+# Knop onder het bord: de tegels groter maken (het bord schuift dan), en weer kleiner. Kort.
+mahjong.bigger | Bigger | Groter
+mahjong.smaller | Smaller | Kleiner
