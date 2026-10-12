@@ -95,6 +95,7 @@ export function mount(container, ctx) {
     balk.style.width = `${Math.round(progress(state) * 100)}%`;
     bordEl.setAttribute('aria-label', t('mahjong.boardAria', { n }));
     terugKnop.disabled = state.history.length === 0;
+    tipKnop.disabled = !!state.tip || afgerond;
     wisFocusAnker();
   }
   // Eén tegel is bereikbaar met Tab (de rest met de pijltjes): liefst de gekozen of de laatst gebruikte, anders de eerste vrije
@@ -198,10 +199,11 @@ export function mount(container, ctx) {
     else { flip(); zeg(t('mahjong.msg.undone')); }
   }
   function geefTip() {
-    if (afgerond || bezig) return;
+    if (afgerond || bezig || state.tip) return;                        // één tip per spel
     wisTip();
     const z = tip(state);
     if (!z) { zeg(t('mahjong.msg.noMoves', { shuffle: t('mahjong.shuffle') })); wijsHussel(); return; }
+    state = { ...state, tip: true }; bewaar();
     gekozen = null; verfris();
     for (const i of z) tegels[i].classList.add('tip');
     tegels[z[0]].scrollIntoView?.({ block: 'center', behavior: motionOK() ? 'smooth' : 'auto' });

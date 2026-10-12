@@ -185,6 +185,7 @@ export async function mount(container, ctx) {
     aantal.textContent = t('solitaire.home', { n });
     balk.style.width = `${Math.round(E.progress(g) * 100)}%`;
     terugKnop.disabled = state.zetten.length === 0 || bezig;
+    tipKnop.disabled = !!state.tip || afgerond;
     klaarKnop.hidden = !E.kanAfmaken(g) || afgerond;
     zetFocusAnker();
   }
@@ -374,12 +375,13 @@ export async function mount(container, ctx) {
 
   // ----- Tip -----
   function geefTip() {
-    if (afgerond || bezig) return;
+    if (afgerond || bezig || state.tip) return;                        // één tip per spel
     wisTip(); sel = null; teken();
     const r = E.tip(g, plan);
     plan = r.plan ?? plan;
     if (!r.zet) { zeg(t(r.bewezenVerloren ? 'solitaire.msg.lost' : 'solitaire.msg.noTip')); return; }
     const z = r.zet, soort = z[0];
+    state.tip = true; bewaar(); tipKnop.disabled = true;
     const markeer = (el, rol = 'doel') => { if (el) { el.classList.add('tip'); el.dataset.rol = rol; } };
     if (soort === 'd' || soort === 'r') { markeer(voorraadVak, 'bron'); zeg(t(soort === 'd' ? 'solitaire.msg.tipDraw' : 'solitaire.msg.tipRecycle')); voorraadVak.scrollIntoView?.({ block: 'nearest' }); }
     else {

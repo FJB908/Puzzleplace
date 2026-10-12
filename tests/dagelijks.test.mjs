@@ -9,12 +9,12 @@ test('datums: geldig, verschuiven over maand- en jaargrenzen', () => {
   assert.equal(verschuif('2026-12-31', 1), '2027-01-01');
 });
 
-test('elke weekdag een vast niveau, voor iedereen hetzelfde', () => {
-  assert.equal(dagMoeilijkheid('2026-10-12'), 'makkelijk');      // maandag
-  assert.equal(dagMoeilijkheid('2026-10-14'), 'gemiddeld');      // woensdag
-  assert.equal(dagMoeilijkheid('2026-10-17'), 'moeilijk');       // zaterdag
-  assert.equal(dagMoeilijkheid('2026-10-18'), 'moeilijk');       // zondag
-  for (let k = 0; k < 400; k++) assert.ok(['makkelijk', 'gemiddeld', 'moeilijk'].includes(dagMoeilijkheid(verschuif('2025-01-01', k))));
+test('het niveau van de dag ligt tussen gemiddeld en moeilijk, vast voor elke dag, en beide komen voor', () => {
+  const niveaus = new Set();
+  for (let k = 0; k < 400; k++) { const dag = verschuif('2025-01-01', k), n = dagMoeilijkheid(dag); assert.ok(['gemiddeld', 'moeilijk'].includes(n)); assert.equal(dagMoeilijkheid(dag), n); niveaus.add(n); }
+  assert.equal(niveaus.size, 2);
+  const aantal = Array.from({ length: 365 }, (_, k) => dagMoeilijkheid(verschuif('2026-01-01', k))).filter((n) => n === 'moeilijk').length;
+  assert.ok(aantal > 120 && aantal < 245, `ongeveer de helft moeilijk: ${aantal}`);
 });
 
 test('speelbaar: niet in de toekomst, niet voor het begin van het archief', () => {

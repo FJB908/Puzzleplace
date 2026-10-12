@@ -177,7 +177,7 @@ export function mount(container, ctx) {
     });
     eraseButton.disabled = finished;
     undoButton.disabled = finished || state.history.length === 0;
-    tipButton.disabled = finished;
+    tipButton.disabled = finished || !!state.tip;
     pencilButton.disabled = finished;
     pencilButton.setAttribute('aria-pressed', String(pencil));
     pencilButton.querySelector('.action-label').textContent = pencil ? t('sudoku.pencilOn') : t('sudoku.pencil');
@@ -337,7 +337,7 @@ export function mount(container, ctx) {
     values.splice(0, 81, ...puzzle);
     notes.fill(0);
     state.history.length = 0;
-    state.lives = maxLives;
+    state.lives = maxLives; state.tip = false;
     seconds = 0; since = 0; finished = false; clockOn();                     // opnieuw beginnen: ook de tijd begint opnieuw
     selected = Math.max(0, firstEmptyOrWrong());
     save();
@@ -412,7 +412,7 @@ export function mount(container, ctx) {
   // Tip: vul het goede cijfer in. Zonder leven te kosten.
   // Gekozen vakje als dat leeg of fout is, anders een fout vakje, anders het vakje met de minste mogelijkheden.
   function tip() {
-    if (finished) return;
+    if (finished || state.tip) return;                                 // één tip per spel
     let target = !puzzle[selected] && (!values[selected] || isWrong(selected)) ? selected : -1;
     if (target < 0) target = values.findIndex((_, i) => isWrong(i));
     if (target < 0) {
@@ -425,6 +425,7 @@ export function mount(container, ctx) {
     }
     if (target < 0) { say(t('sudoku.say.nothingLeft')); return; }
 
+    state.tip = true;
     const d = solution[target];
     selected = target;
     const before = completeUnits();

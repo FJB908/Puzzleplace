@@ -8,9 +8,12 @@ export const dagSleutel = (datum) => datum.toLocaleDateString('sv-SE');
 export const geldigeDag = (dag) => typeof dag === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dag) && dagSleutel(naarDatum(dag)) === dag;
 export const verschuif = (dag, n) => { const d = naarDatum(dag); d.setDate(d.getDate() + n); return dagSleutel(d); };
 
-// Elke dag een vast niveau, voor iedereen hetzelfde: rustig in het begin van de week, wat pittiger in het weekend
-const PER_WEEKDAG = ['moeilijk', 'makkelijk', 'makkelijk', 'gemiddeld', 'gemiddeld', 'gemiddeld', 'moeilijk'];       // zondag eerst
-export const dagMoeilijkheid = (dag) => PER_WEEKDAG[naarDatum(dag).getDay()];
+// Elke dag een vast niveau, voor iedereen hetzelfde: ergens tussen gemiddeld en moeilijk (de ene dag wat rustiger, de andere wat pittiger)
+export function dagMoeilijkheid(dag) {
+  let n = 0;
+  for (const ch of dag) n = (n * 31 + ch.charCodeAt(0)) >>> 0;
+  return (n >> 3) % 2 ? 'moeilijk' : 'gemiddeld';
+}
 
 // Mag deze dag gespeeld worden? Niet in de toekomst en niet van voor het begin van het archief.
 export const speelbaar = (dag, vandaag) => geldigeDag(dag) && dag >= BEGIN && dag <= vandaag;
