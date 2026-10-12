@@ -32,6 +32,7 @@ export function mount(container, ctx) {
 
   // ----- Het scherm -----
   const aantal = h('span', { class: 'mj-aantal' });
+  const paren = h('span', { class: 'mj-paren' });
   const balk = h('i', {});
   const melding = h('p', { class: 'mj-melding', role: 'status', 'aria-live': 'polite' });
   const bordEl = h('div', { class: 'mj-bord', role: 'group' });
@@ -42,7 +43,7 @@ export function mount(container, ctx) {
   const grootKnop = h('button', { type: 'button', class: 'btn', 'aria-pressed': String(groot), onclick: wisselGroot }, icon('woordzoeker'), h('span', {}, t(groot ? 'mahjong.smaller' : 'mahjong.bigger')));
   container.classList.add('stage--bare');
   container.append(h('div', { class: 'mj' },
-    h('div', { class: 'mj-kop' }, aantal, h('span', { class: 'ws-bar mj-balk', 'aria-hidden': 'true' }, balk)),
+    h('div', { class: 'mj-kop' }, h('div', { class: 'mj-tellers' }, aantal, paren), h('span', { class: 'ws-bar mj-balk', 'aria-hidden': 'true' }, balk)),
     melding, veld, h('div', { class: 'mj-knoppen' }, terugKnop, tipKnop, husselKnop, grootKnop)));
 
   const tegels = b.tegels.map((tg, i) => {
@@ -85,6 +86,11 @@ export function mount(container, ctx) {
   function verfris({ behoud = [] } = {}) {
     const weg = wegSet(state);
     const matchFace = gekozen !== null ? state.faces[gekozen] : null;
+    // Welke vrije tegels hebben nu een vrije tegel die erbij past? Die zijn te zien aan een gouden randje, en geteld boven het bord.
+    const vrijen = tegels.flatMap((_, i) => (!weg.has(i) && isVrij(state, i, weg) ? [i] : []));
+    const heeftMaatje = new Set(vrijen.filter((i) => vrijen.some((j) => j !== i && passen(state.faces[i], state.faces[j]))));
+    let nMogelijk = 0;
+    { const gebruikt = new Set(); for (const i of vrijen) { if (gebruikt.has(i)) continue; const j = vrijen.find((x) => x !== i && !gebruikt.has(x) && passen(state.faces[i], state.faces[x])); if (j !== undefined) { gebruikt.add(i); gebruikt.add(j); nMogelijk++; } } }
     tegels.forEach((el, i) => {
       const f = state.faces[i], isWeg = weg.has(i);
       if (el._f !== f) {
@@ -96,6 +102,7 @@ export function mount(container, ctx) {
       el.classList.toggle('weg', isWeg && !behoud.includes(i));
       el.classList.toggle('vrij', vrij); el.classList.toggle('vast', !isWeg && !vrij);
       el.classList.toggle('gekozen', gekozen === i);
+      el.classList.toggle('speelbaar', vrij && heeftMaatje.has(i));
       el.classList.toggle('maatje', vrij && gekozen !== null && i !== gekozen && passen(matchFace, f));
       el.disabled = isWeg && !behoud.includes(i);
       el.setAttribute('aria-pressed', String(gekozen === i));
@@ -103,6 +110,7 @@ export function mount(container, ctx) {
     });
     const n = tegelsOver(state);
     aantal.textContent = t('mahjong.left', { n });
+    paren.textContent = klaar(state) ? '' : t('mahjong.pairs', { n: nMogelijk });
     balk.style.width = `${Math.round(progress(state) * 100)}%`;
     bordEl.setAttribute('aria-label', t('mahjong.boardAria', { n }));
     terugKnop.disabled = state.history.length === 0;
@@ -162,8 +170,9 @@ export function mount(container, ctx) {
 
   // ----- Animaties (alleen als beweging mag) -----
   function wiebel(el) {
+    el.classList.add('schud'); setTimeout(() => el.classList.remove('schud'), 450);
     if (!motionOK()) return;
-    el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-.28em)' }, { transform: 'translateX(.28em)' }, { transform: 'translateX(-.2em)' }, { transform: 'translateX(0)' }], { duration: 320, easing: 'ease-in-out' });
+    el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-.4em)' }, { transform: 'translateX(.4em)' }, { transform: 'translateX(-.32em)' }, { transform: 'translateX(.26em)' }, { transform: 'translateX(-.12em)' }, { transform: 'translateX(0)' }], { duration: 420, easing: 'ease-in-out' });
   }
   function vlieg(e1, e2) {
     const verberg = () => { for (const e of [e1, e2]) { e.classList.add('weg'); e.disabled = true; } };

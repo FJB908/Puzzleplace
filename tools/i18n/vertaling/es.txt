@@ -663,7 +663,7 @@ detail.virtual.play | Jugar
 err.deviceToken | No se pudo registrar este dispositivo para las notificaciones.
 mahjong.name | Mahjong
 mahjong.summary | Quita parejas de fichas iguales hasta vaciar el tablero.
-mahjong.howTo.1 | Una ficha está libre si no hay nada encima y su lado izquierdo o derecho está abierto. Las fichas libres se ven claras.
+mahjong.howTo.1 | Una ficha está libre cuando nada la cubre y su lado izquierdo o derecho está abierto. Las fichas libres que tienen pareja tienen un borde dorado.
 mahjong.howTo.2 | Toca una ficha libre y luego otra ficha libre con el mismo dibujo. La pareja desaparece.
 mahjong.howTo.3 | Cada flor va con cualquier otra flor, y cada estación con cualquier otra estación.
 mahjong.howTo.4 | ¿Te has atascado? Usa «{undo}» todas las veces que quieras, pide una «{hint}» o pulsa «{shuffle}» para mezclar las fichas que quedan: el tablero siempre se puede terminar.
@@ -681,7 +681,7 @@ mahjong.msg.start | Toca una ficha libre y luego una que combine.
 mahjong.msg.picked | Ahora toca la ficha que combina. Las que combinan tienen un borde dorado.
 mahjong.msg.noPartner | Todavía no hay ninguna ficha libre que combine. Elige otra o quita antes otra ficha.
 mahjong.msg.pair | ¡Una pareja! Fichas restantes: {n}.
-mahjong.msg.blocked | Esa ficha está atascada: hay algo encima, o sus dos lados están cerrados. Las fichas claras están libres.
+mahjong.msg.blocked | Esa ficha está bloqueada: algo la cubre o sus dos lados están cerrados. Puede tomar las fichas con borde dorado.
 mahjong.msg.noMoves | Ya no quedan parejas. Toca «{shuffle}»: las fichas se mezclan y puedes seguir.
 mahjong.msg.shuffled | ¡Mezcladas! Hay una forma de terminar este tablero.
 mahjong.msg.tip | Estas dos fichas van juntas.
@@ -750,3 +750,4 @@ solitaire.msg.noTip | No encuentro ningún movimiento que ayude. Pruebe a deshac
 solitaire.msg.undone | Movimiento deshecho.
 solitaire.done.title | ¡Lo ha conseguido!
 solitaire.done.text | Todas las cartas están en las cuatro bases. Muy bien jugado.
+mahjong.pairs | Parejas posibles: {n}

@@ -7,15 +7,15 @@ const laag = (ox, oy, rijen) => ({ ox, oy, rijen });
 export const LAYOUTS = {
   // 36 tegels: een kleine piramide, grote tegels
   makkelijk: [
-    laag(0, 0, ['XXXXXX', 'XXXXXX', 'XXXXXX', 'XXXXXX']),
+    laag(0, 0, ['.XXXX.', 'XXXXXX', 'XXXXXX', 'XXXXXX', '.XXXX.']),
     laag(2, 2, ['XXXX', 'XXXX']),
-    laag(4, 2, ['XX', 'XX']),
+    laag(4, 3, ['XX']),
   ],
-  // 60 tegels: een kasteel
+  // 60 tegels: een pagode, breed onderaan en smal naar boven
   gemiddeld: [
-    laag(0, 0, ['XXXXXXXX', 'XXXXXXXX', 'XXXXXXXX', 'XXXXXXXX', 'XXXXXXXX']),
-    laag(2, 2, ['XXXXXX', 'XXXXXX', 'XXXXXX']),
-    laag(6, 4, ['XX']),
+    laag(0, 0, ['.XXXXXX.', 'XXXXXXXX', 'XXXXXXXX', 'XXXXXXXX', 'XXXXXXXX', '.XXXXXX.']),
+    laag(4, 2, ['XXXX', 'XXXX', 'XXXX']),
+    laag(6, 3, ['XX', 'XX']),
   ],
   // 100 tegels: een vlinder
   moeilijk: [

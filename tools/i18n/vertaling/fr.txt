@@ -663,7 +663,7 @@ detail.virtual.play | Jouer
 err.deviceToken | Cet appareil n’a pas pu être enregistré pour les notifications.
 mahjong.name | Mahjong
 mahjong.summary | Retirez les paires de tuiles identiques jusqu’à ce que le plateau soit vide.
-mahjong.howTo.1 | Une tuile est libre si rien ne repose dessus et si son côté gauche ou droit est dégagé. Les tuiles libres sont claires.
+mahjong.howTo.1 | Une tuile est libre si rien ne la recouvre et si son côté gauche ou droit est dégagé. Les tuiles libres qui ont une tuile assortie ont un bord doré.
 mahjong.howTo.2 | Touchez une tuile libre, puis une tuile libre avec le même dessin. La paire disparaît.
 mahjong.howTo.3 | Chaque fleur va avec n’importe quelle autre fleur, et chaque saison avec n’importe quelle autre saison.
 mahjong.howTo.4 | Vous êtes bloqué ? Utilisez « {undo} » autant de fois que vous voulez, demandez un « {hint} », ou appuyez sur « {shuffle} » pour mélanger les tuiles restantes : le plateau peut toujours être terminé.
@@ -681,7 +681,7 @@ mahjong.msg.start | Touchez une tuile libre, puis une tuile assortie.
 mahjong.msg.picked | Touchez maintenant la tuile assortie. Les tuiles assorties ont un bord doré.
 mahjong.msg.noPartner | Aucune tuile libre ne correspond encore. Choisissez-en une autre, ou retirez d’abord une autre tuile.
 mahjong.msg.pair | Une paire ! Tuiles restantes : {n}.
-mahjong.msg.blocked | Cette tuile est bloquée : quelque chose repose dessus, ou ses deux côtés sont fermés. Les tuiles claires sont libres.
+mahjong.msg.blocked | Cette tuile est bloquée : quelque chose la recouvre, ou ses deux côtés sont fermés. Vous pouvez prendre les tuiles à bord doré.
 mahjong.msg.noMoves | Il n’y a plus de paires. Touchez « {shuffle} » : les tuiles sont mélangées et vous pouvez continuer.
 mahjong.msg.shuffled | Mélangé ! Il existe un moyen de terminer ce plateau.
 mahjong.msg.tip | Ces deux tuiles vont ensemble.
@@ -750,3 +750,4 @@ solitaire.msg.noTip | Je ne trouve pas de coup qui aide. Essayez d'annuler quelq
 solitaire.msg.undone | Coup annulé.
 solitaire.done.title | Bravo, c'est réussi !
 solitaire.done.text | Toutes les cartes sont sur les quatre fondations. Très bien joué.
+mahjong.pairs | Paires possibles : {n}
