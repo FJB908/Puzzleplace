@@ -18,9 +18,9 @@ export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you
   const num = (cls) => h('b', { class: cls }, '0');
   const mijnTal = num('wt-tal'), hunTal = num('wt-tal');
   let open = 0;
-  const stand = h('div', { class: 'wt-stand' },
-    h('div', { class: 'wt-kant mijn' }, h('span', { class: 'wt-bol', 'aria-hidden': 'true' }, '✿'), h('div', {}, mijnTal, h('small', {}, names[me]))),
-    h('div', { class: 'wt-kant hun' }, h('div', {}, hunTal, h('small', {}, names[other(me)])), (() => { const e = h('span', { class: 'wt-bol', 'aria-hidden': 'true' }); e.innerHTML = TULP; return e; })()));
+  const kantMijn = h('div', { class: 'wt-kant mijn' }, h('span', { class: 'wt-bol', 'aria-hidden': 'true' }, '✿'), h('div', {}, mijnTal, h('small', {}, names[me])));
+  const kantHun = h('div', { class: 'wt-kant hun' }, h('div', {}, hunTal, h('small', {}, names[other(me)])), (() => { const e = h('span', { class: 'wt-bol', 'aria-hidden': 'true' }); e.innerHTML = TULP; return e; })());
+  const stand = h('div', { class: 'wt-stand' }, kantMijn, kantHun);;
 
   const beurt = h('p', { class: 'wt-beurt', role: 'status', 'aria-live': 'polite' });
   const laatste = h('p', { class: 'wt-laatste' });
@@ -77,6 +77,8 @@ export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you
     else if (state.turn === me) beurt.textContent = `${t('woordtuin.yourTurn')}${nog}`;
     else beurt.textContent = `${tegenComputer ? t('woordtuin.theirTurnPc') : t('woordtuin.theirTurn', { name: names[state.turn] })}${nog}`;
     beurt.classList.toggle('jij', !state.over && state.turn === me);
+    kantMijn.classList.toggle('aanZet', !state.over && state.turn === me);        // een gekleurde gloed in het vak van wie aan de beurt is
+    kantHun.classList.toggle('aanZet', !state.over && state.turn === hun);
     if (state.passed && !state.over) laatste.textContent = zinMet('passed', other(state.turn));
     else if (state.last?.pass) laatste.textContent = t(`woordtuin.last.${wie(state.last.player)}.pass`, { name: state.last.player === me ? names[hun] : names[state.last.player] });
     else if (state.last) {

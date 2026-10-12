@@ -12,8 +12,8 @@ import { neighbors, isProtected } from './engine.js';
 
 const svgNS = 'http://www.w3.org/2000/svg';
 
-// Een beschermd vakje staat achter een tuinhek: een fijn tralie van kruislingse latjes over het hele vakje, in de kleur van de eigenaar
-export const HEK = '<svg viewBox="0 0 24 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 8L8 0M0 16L16 0M0 24L24 0M8 24L24 8M16 24L24 16M0 16L8 24M0 8L16 24M0 0L24 24M8 0L24 16M16 0L24 8" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="square"/></svg>';
+// Een beschermd vakje zit achter tralies: stevige staafjes met een dwarsbalk boven en onder, zacht (lage dekking) in de kleur van de eigenaar
+export const HEK = '<svg viewBox="0 0 24 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4.500 0V24M9.500 0V24M14.500 0V24M19.500 0V24M0 5H24M0 19H24" fill="none" stroke="currentColor" stroke-width="2.400" vector-effect="non-scaling-stroke" stroke-linecap="butt"/></svg>';
 
 // De bloem van de ander: een tulp (de jouwe is een rond bloemetje, ✿)
 export const TULP = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 2.500c-1.600 0-2.700 1-3.400 2.400C7.500 4.200 6 4.300 5.300 5.500c-.9 1.600-.3 4.800 1.600 6.700 1.200 1.200 3 1.800 5.100 1.800s3.900-.6 5.100-1.800c1.900-1.900 2.500-5.100 1.600-6.700-.7-1.200-2.200-1.300-3.300-.6C14.700 3.500 13.600 2.500 12 2.500z"/><path d="M11.200 13.500h1.600V21h-1.600z"/><path d="M12 20.500c-3.600.1-5.700-1.700-6.300-5 3.200-.2 5.600 1.300 6.300 5zM12 20.500c3.600.1 5.700-1.700 6.300-5-3.200-.2-5.600 1.300-6.300 5z" opacity=".9"/></svg>';
