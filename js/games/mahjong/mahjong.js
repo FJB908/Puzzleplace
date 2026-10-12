@@ -58,7 +58,7 @@ export function mount(container, ctx) {
     if (breedte <= 0) return;
     const kolommen = b.breed / 2, lagen = b.lagen - 1, rijen = b.hoog / 2;
     const perBreedte = breedte / (kolommen + (lagen + 1) * DIEPTE);
-    const maxHoogte = Math.max(380, window.innerHeight * (ctx.grootBeeld?.actief ? 0.8 : 0.74));
+    const maxHoogte = Math.max(380, window.innerHeight * (ctx.grootBeeld?.actief ? 0.82 : 0.74));
     const perHoogte = maxHoogte / (rijen * RATIO + (lagen + 1) * DIEPTE);
     const tw = Math.max(30, Math.min(perBreedte, Math.max(perHoogte, 44), 96));
     const th = tw * RATIO, d = tw * DIEPTE;

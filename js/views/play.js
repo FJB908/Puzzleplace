@@ -61,12 +61,15 @@ export async function playView({ id, mode }, app) {
     if (aan === groot) return;
     groot = aan;
     document.body.classList.toggle('groot-beeld', aan);
+    if (aan) document.body.dataset.groot = id; else delete document.body.dataset.groot;
+    if (aan) document.addEventListener('keydown', bijEscape); else document.removeEventListener('keydown', bijEscape);
     grootLabel();
     if (scherm) {                                                    // waar de browser het kan ook echt beeldvullend (niet overal mogelijk: dan blijft het bij de grote weergave)
       try { if (aan) document.documentElement.requestFullscreen?.()?.catch?.(() => {}); else if (document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {}); } catch { /* geen beeldvullend: prima */ }
     }
     window.dispatchEvent(new Event('resize'));
   }
+  const bijEscape = (e) => { if (e.key === 'Escape' && !document.querySelector('dialog[open]')) { zelfGekozen = true; zetGroot(false, { scherm: true }); } };
   const bijSchermWissel = () => { if (groot && !document.fullscreenElement && fullscreenGevraagd) { zetGroot(false); zelfGekozen = true; } };
   let fullscreenGevraagd = false;
   document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) fullscreenGevraagd = true; else { bijSchermWissel(); fullscreenGevraagd = false; } });
@@ -194,5 +197,5 @@ export async function playView({ id, mode }, app) {
     }
   };
 
-  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => { gone = true; if (groot) { document.body.classList.remove('groot-beeld'); try { if (document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {}); } catch { /* niets aan te doen */ } } if (cleanup) cleanup(); } };
+  return { title: game.name, nav: null, view: 'play', wide: !!game.wide, node, onShow: start, cleanup: () => { gone = true; if (groot) { document.body.classList.remove('groot-beeld'); delete document.body.dataset.groot; document.removeEventListener('keydown', bijEscape); try { if (document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {}); } catch { /* niets aan te doen */ } } if (cleanup) cleanup(); } };
 }

@@ -455,10 +455,30 @@ html[data-textsize="xlarge"] .nav a { font-size: min(.66rem, 3.1vw); }
 .stage { background: var(--surface); border-radius: var(--radius); padding: 1rem; min-height: 16rem; box-shadow: var(--shadow); }
 .stage--bare { background: none; box-shadow: none; padding: 0; min-height: 0; }
 .play-bar .big-view[aria-pressed="true"] { background: var(--blush); }
-/* Groot beeld: alleen terug en "Normaal beeld" blijven over; het spel krijgt de hele breedte */
-body.groot-beeld main { max-width: none; padding: .5rem .4rem 1rem; }
-body.groot-beeld .play-title, body.groot-beeld .play-bar .btn:not(.back):not(.big-view), body.groot-beeld .save-note { display: none; }
-body.groot-beeld .view { gap: .5rem; }
+/* Groot beeld: alleen het spel, beeldvullend. Geen kop, geen menu, geen uitleg: alleen de speeltafel, de knoppen van het spel en een klein
+   knopje om terug te gaan. Patience en Mahjong krijgen daarbij een donkere, rustige omgeving. */
+body.groot-beeld { overflow: hidden; }
+body.groot-beeld main {
+  position: fixed; inset: 0; z-index: 800; width: auto; max-width: none; margin: 0; overflow: auto; display: flex; flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); background: var(--bg);
+}
+body.groot-beeld .view { flex: 1; gap: 0; min-height: 0; width: 100%; }
+body.groot-beeld .view > * { animation: none; }
+body.groot-beeld .play-bar > :not(.big-view), body.groot-beeld .save-note, body.groot-beeld .view-result { display: none; }
+body.groot-beeld .play-bar { position: fixed; z-index: 900; top: calc(.45rem + env(safe-area-inset-top)); right: calc(.45rem + env(safe-area-inset-right)); margin: 0; }
+body.groot-beeld .play-bar .big-view { min-height: 2.6rem; padding-inline: .8rem; background: color-mix(in srgb, var(--surface) 88%, transparent); box-shadow: 0 .1rem .6rem rgba(0, 0, 0, .25); backdrop-filter: blur(6px); }
+body.groot-beeld .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 3.4rem .3rem .3rem; background: none; box-shadow: none; min-height: 0; }
+body.groot-beeld[data-groot="solitaire"] main, body.groot-beeld[data-groot="mahjong"] main {
+  --bg: #0b1410; --surface: #15231b; --surface-2: #1c2d23; --text: #e8f2ec; --text-muted: #a9c0b2; --primary: #9bdcba; --on-primary: #0b2016; --primary-soft: #1d3a2b;
+  --border: #26382d; --control-border: #7fa08b; --focus: #ffd166;
+  background: radial-gradient(120% 90% at 50% 20%, #12261c 0%, #0b1410 70%);
+}
+body.groot-beeld .mj-kop, body.groot-beeld .mj-melding, body.groot-beeld .sol-kop, body.groot-beeld .sol-melding { display: none; }
+body.groot-beeld .sol, body.groot-beeld .mj { width: 100%; max-width: none; flex: 1; justify-content: center; gap: .3rem; }
+body.groot-beeld .sol-tafel { min-height: calc(100dvh - 8.4rem); }
+body.groot-beeld .mj-veld { flex: 1; align-items: center; }
+body.groot-beeld .sol-knoppen, body.groot-beeld .mj-knoppen { padding: .3rem 0 .4rem; margin: 0; background: none; position: static; }
+body.groot-beeld .sol-knoppen .btn, body.groot-beeld .mj-knoppen .btn { min-height: 2.9rem; }
 .save-note { color: var(--text-muted); font-size: .95rem; text-align: center; }
 
 .notice { background: var(--surface-2); border-radius: var(--radius); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
