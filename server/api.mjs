@@ -7,6 +7,8 @@
 import { hashSecret, verifySecret, DUMMY, newToken, sha, newId, newFriendCode, newRecoveryCode, cleanCode, formatCode } from './crypto.mjs';
 import { createLimiter } from './ratelimit.mjs';
 import { createMailer } from './mail.mjs';
+import { createPush } from './push.mjs';
+import { pushTekst, PUSH_TALEN } from './pushteksten.mjs';
 import { mailTekst, MAIL_TALEN } from './mailteksten.mjs';
 import { ApiError, fail, engelseTekst, cleanName, cleanEmail, cleanPassword, isObject } from './validate.mjs';
 
@@ -19,8 +21,9 @@ export class RuleError extends Error {
   constructor(key, params) { super(engelseTekst(key, params)); this.key = key; this.params = params || null; }
 }
 
-export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0', facebook = null, mailer = createMailer() }) {
+export function createApi({ db, games = {}, now = Date.now, limiter = createLimiter(now), version = '0.1.0', facebook = null, mailer = createMailer(), push = createPush({ log: () => {} }) }) {
   const D = db.data;
+  D.devices ||= {};
   const day = (t) => new Date(t).toISOString().slice(0, 10);
 
   // ----- Hulpjes -----
@@ -58,6 +61,39 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
 
   function limit(req, name, max, windowMs, key = 'tooFast') {
     if (!limiter.hit(`${name}:${req.ip}`, max, windowMs)) fail(429, 'te-snel', key);
+  }
+
+  // ----- Pushmeldingen: apparaten van de app (Capacitor) melden zich aan; bij een zet, vriendverzoek enzovoort gaat er een melding uit -----
+  const MAX_APPARATEN = 10;
+  function apparaten(userId) { return Object.entries(D.devices).filter(([, d]) => d.userId === userId); }
+  // Fire-and-forget: een melding mag het antwoord aan de speler nooit ophouden of laten mislukken
+  function notify(userId, soort, params = {}, data = {}) {
+    for (const [sleutel, d] of apparaten(userId)) {
+      const { title, body } = pushTekst(soort, PUSH_TALEN.includes(d.taal) ? d.taal : 'en', params);
+      push.send(d.token, { title, body, data: { soort, ...data } }).then((r) => {
+        if (r.ongeldig) { delete D.devices[sleutel]; db.save(); }
+      }).catch((e) => console.error(`pushmelding mislukt: ${e.message}`));
+    }
+  }
+  function registreerApparaat(req) {
+    const { user } = auth(req);
+    limit(req, 'device', 60, 3600_000);
+    const token = String(req.body.token ?? '').trim();
+    if (token.length < 20 || token.length > 4096) fail(400, 'token', 'deviceToken');
+    const platform = ['android', 'ios', 'web'].includes(req.body.platform) ? req.body.platform : 'android';
+    const taal = PUSH_TALEN.includes(req.body.taal) ? req.body.taal : 'en';
+    const sleutel = sha(token);
+    D.devices[sleutel] = { userId: user.id, token, platform, taal, updated: now() };           // hetzelfde apparaat op een ander account: het nieuwste telt
+    const mijn = apparaten(user.id).sort((a, b) => a[1].updated - b[1].updated);
+    for (const [k] of mijn.slice(0, Math.max(0, mijn.length - MAX_APPARATEN))) delete D.devices[k];
+    db.save();
+    return { body: { ok: true } };
+  }
+  function verwijderApparaat(req) {
+    const { user } = auth(req);
+    const d = D.devices[sha(String(req.body.token ?? '').trim())];
+    if (d && d.userId === user.id) { delete D.devices[sha(String(req.body.token).trim())]; db.save(); }
+    return { body: { ok: true } };
   }
 
   // ----- Accounts -----
@@ -231,6 +267,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     if (user.email) delete D.emails[user.email];
     if (user.facebookId) delete D.facebook[user.facebookId];
     delete D.codes[user.code]; delete D.users[user.id];
+    for (const [k] of apparaten(user.id)) delete D.devices[k];                      // geen meldingen meer voor een verwijderd account
     for (const [k, f] of Object.entries(D.friendships)) if (f.a === user.id || f.b === user.id) delete D.friendships[k];
     for (const [mid, m] of Object.entries(D.matches)) {
       if (!m.players.includes(user.id)) continue;
@@ -354,6 +391,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     if (existing) {                                                 // die ander vroeg jou al: dan is het meteen gelukt
       existing.status = 'accepted'; existing.acceptedAt = now();
       db.save();
+      notify(target.id, 'vriend', { name: user.name }, { naar: 'vrienden' });
       return { body: { status: 'accepted', friend: otherView(target) } };
     }
     const pending = Object.values(D.friendships).filter((f) => f.status === 'pending' && f.from === user.id).length;
@@ -362,6 +400,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const [a, b] = [user.id, target.id].sort();
     D.friendships[key] = { a, b, status: 'pending', from: user.id, at: now() };
     db.save();
+    notify(target.id, 'verzoek', { name: user.name }, { naar: 'vrienden' });
     return { status: 201, body: { status: 'pending', friend: otherView(target) } };
   }
 
@@ -375,6 +414,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
       f.status = 'accepted'; f.acceptedAt = now();
     } else delete D.friendships[key];
     db.save();
+    if (accept) notify(f.from, 'vriend', { name: user.name }, { naar: 'vrienden' });
     return { body: { ok: true } };
   }
 
@@ -445,6 +485,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     const id = newId();
     D.matches[id] = { id, game: req.body.game, players, config, pub: made.pub, secret: made.secret ?? null, turn: made.turn ?? players[0], status: 'active', version: 1, createdAt: now(), updatedAt: now() };
     db.save();
+    notify(other.id, 'nieuwePartij', { name: user.name }, { naar: 'partij', matchId: id });
     return { status: 201, body: { match: matchView(D.matches[id], user.id) } };
   }
 
@@ -475,6 +516,11 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     m.pub = out.pub; m.secret = out.secret ?? m.secret; m.turn = out.turn ?? null; m.version++; m.updatedAt = now();
     if (out.turn == null) { m.status = 'done'; m.result = out.result ?? null; }
     db.save();
+    const ander = m.players.find((p) => p !== user.id);
+    if (ander && userById(ander)) {
+      if (out.turn == null) notify(ander, 'afgelopen', { name: user.name }, { naar: 'partij', matchId: m.id });
+      else if (out.turn === ander) notify(ander, out.pub.last?.pass ? 'beurtPas' : 'beurt', { name: user.name, word: (out.pub.last?.word || '').toUpperCase() }, { naar: 'partij', matchId: m.id });
+    }
     return { body: { match: matchView(m, user.id) } };
   }
 
@@ -483,6 +529,8 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     if (m.status !== 'active') fail(409, 'klaar', 'matchOver');
     m.status = 'done'; m.turn = null; m.result = { resigned: user.id }; m.version++; m.updatedAt = now();
     db.save();
+    const tegen = m.players.find((p) => p !== user.id);
+    if (tegen && userById(tegen)) notify(tegen, 'gestopt', { name: user.name }, { naar: 'partij', matchId: m.id });
     return { body: { match: matchView(m, user.id) } };
   }
 
@@ -493,7 +541,7 @@ export function createApi({ db, games = {}, now = Date.now, limiter = createLimi
     ['POST', '/api/signup', signup], ['POST', '/api/login', login], ['POST', '/api/recover', recover], ['POST', '/api/forgot', forgot], ['POST', '/api/reset', reset],
     ['POST', '/api/logout', (req) => { const { key } = auth(req); delete D.sessions[key]; db.save(); return { body: { ok: true } }; }],
     ['GET', '/api/me', me], ['PATCH', '/api/me', rename], ['DELETE', '/api/me', deleteAccount],
-    ['POST', '/api/me/password', changePassword], ['POST', '/api/me/password/code', changePasswordCode], ['POST', '/api/me/code', newFriendCodeFor], ['POST', '/api/me/recovery', newRecovery],
+    ['POST', '/api/me/devices', registreerApparaat], ['DELETE', '/api/me/devices', verwijderApparaat], ['POST', '/api/me/password', changePassword], ['POST', '/api/me/password/code', changePasswordCode], ['POST', '/api/me/code', newFriendCodeFor], ['POST', '/api/me/recovery', newRecovery],
     ['GET', '/api/users/by-code/:code', codeLookup],
     ['GET', '/api/friends', listFriends], ['POST', '/api/friends/request', friendRequest],
     ['POST', '/api/friends/:id/accept', (r) => answerFriend(r, true)], ['POST', '/api/friends/:id/decline', (r) => answerFriend(r, false)],

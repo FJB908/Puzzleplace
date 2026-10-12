@@ -662,4 +662,5 @@ export default {
   "err.mailCodeNeeded": "Escribe el código del correo.",
   "err.mailFailed": "Ahora no hemos podido enviar el correo. Inténtalo de nuevo dentro de un rato.",
   "err.noEmail": "Esta cuenta no tiene correo electrónico, así que no podemos enviar un código.",
+  "err.deviceToken": "No se pudo registrar este dispositivo para las notificaciones.",
 };

@@ -695,3 +695,4 @@ detail.friend.all | Alle Freunde
 detail.virtual.title | Gegen einen virtuellen Spieler spielen
 detail.virtual.text | Virtuelle Spieler sind der Computer mit einem Namen und ihrem eigenen Tempo. Sie spielen auf Ihrem Gerät, Sie brauchen also kein Konto und kein Internet.
 detail.virtual.play | Spielen
+err.deviceToken | Dieses Gerät konnte nicht für Benachrichtigungen angemeldet werden.

@@ -15,7 +15,8 @@ Geen pakketten nodig (alleen Node 20+). De server dient ook de app zelf, dus `ht
 | Variabele | Betekenis |
 |---|---|
 | `PORT`, `HOST` | Waar hij luistert (standaard 127.0.0.1:8000; zet `HOST=0.0.0.0` om van buiten bereikbaar te zijn) |
-| `DATA_DIR` | Waar `db.json` komt (standaard `server/data/`, staat in `.gitignore`) |
+| `DATA_DIR` | Waar de database `db.sqlite` komt, met dagelijkse back-ups in `backups/` (standaard `server/data/`, staat in `.gitignore`). Een oud `db.json` wordt de eerste keer overgenomen. |
+| `FCM_SERVICE_ACCOUNT` | Pushmeldingen naar de Android-app, zie `docs/ANDROID.md` |
 | `TRUST_PROXY=1` | Zet dit aan als er een proxy voor staat (nginx, Caddy, ...) die `X-Forwarded-For` meegeeft. Anders tellen de limieten per proxy in plaats van per bezoeker. |
 | `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`, `PUBLIC_URL` | Alle drie instellen om "Doorgaan met Facebook" aan te zetten, zie *Inloggen met Facebook* hieronder. `PUBLIC_URL` is het adres waarop mensen de app openen (bijv. `https://puzzelplaats.nl`, zonder `/` erachter). |
 | `SMTP_URL`, `MAIL_FROM` | E-mail voor de codes bij *wachtwoord vergeten* en *wachtwoord veranderen*. `SMTP_URL` is bijv. `smtps://gebruiker:wachtwoord@smtp.voorbeeld.nl:465` (versleuteld) of `smtp://…:587` (STARTTLS); `MAIL_FROM` bijv. `"Puzzleplace <noreply@voorbeeld.nl>"`. Zonder `SMTP_URL` wordt er niets verstuurd: de e-mail verschijnt in het venster van de server, zodat je alles kunt uitproberen. Zet het vóór je de app echt gebruikt. |
@@ -23,7 +24,7 @@ Geen pakketten nodig (alleen Node 20+). De server dient ook de app zelf, dus `ht
 
 **Draai hem altijd achter HTTPS** (Caddy of nginx met een certificaat). Wachtwoorden en sleutels gaan anders onbeschermd over de lijn.
 
-**Back-up:** kopieer `db.json` (veilig tijdens draaien: er wordt atomisch naar geschreven). **Schaal:** één bestand is prima tot enkele duizenden accounts. Daarboven vervang je `server/db.mjs` door een echte database; de rest praat alleen met `db.data` en `db.save()`.
+**Back-up:** elke dag maakt de server zelf een kopie in `backups/` (de laatste 7 blijven); een kopie maken kan ook terwijl de server draait. **Schaal:** één bestand is prima tot enkele duizenden accounts. Daarboven vervang je `server/db.mjs` door een echte database; de rest praat alleen met `db.data` en `db.save()`.
 
 ## Hoe aanmelden werkt (en waarom)
 

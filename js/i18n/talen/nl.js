@@ -662,4 +662,5 @@ export default {
   "err.mailCodeNeeded": "Vul de code uit de e-mail in.",
   "err.mailFailed": "De e-mail kon nu niet worden verstuurd. Probeer het zo nog eens.",
   "err.noEmail": "Dit account heeft geen e-mailadres, dus we kunnen geen code sturen.",
+  "err.deviceToken": "Dit apparaat kon niet worden aangemeld voor meldingen.",
 };

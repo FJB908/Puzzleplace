@@ -1,0 +1,9 @@
+{
+  "appId": "nl.example.puzzleplace",
+  "appName": "Puzzleplace",
+  "webDir": "www",
+  "server": { "androidScheme": "https" },
+  "plugins": {
+    "PushNotifications": { "presentationOptions": ["badge", "sound", "alert"] }
+  }
+}

@@ -30,6 +30,7 @@ import * as auth from './services/auth.js';
 import * as social from './services/social.js';
 import * as matches from './services/matches.js';
 import * as sync from './services/sync.js';
+import * as push from './services/push.js';
 import { notFoundView } from './views/notFound.js';
 
 // ----- Menu: één lijst; nieuwe onderdelen komen hier bij -----
@@ -206,6 +207,7 @@ async function startServer() {
   social.startPolling();
   matches.init();
   sync.init();
+  push.init().catch(() => {});                 // meldingen in de Capacitor-app; in de browser een no-op
   // Schermen die pas met de server compleet zijn (Start met vrienden, account, partijen), nu opnieuw tekenen
   const route = location.hash.replace(/^#/, '') || '/';
   if (route === '/' || /^\/(account|vrienden|partij|instellingen|hulp)(\/|$)/.test(route) || route === '/spel/woordtuin') render(false);

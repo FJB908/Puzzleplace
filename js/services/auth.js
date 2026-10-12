@@ -71,7 +71,10 @@ export async function recover({ email, recoveryCode, password }) {
   return { user: r.user, recoveryCode: r.recoveryCode };
 }
 
+const voorUitloggen = new Set();
+export const beforeSignOut = (fn) => { voorUitloggen.add(fn); };      // bijv. het apparaat afmelden voor meldingen, nog voordat de sessie weg is
 export async function signOut() {
+  for (const fn of voorUitloggen) { try { await fn(); } catch { /* uitloggen gaat altijd door */ } }
   try { await api('POST', '/api/logout', {}, { quiet: true }); } catch { /* ook zonder verbinding uitloggen op dit apparaat */ }
   setToken(''); set(null);
 }

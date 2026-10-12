@@ -12,7 +12,7 @@ import * as store from '../store.js';
 import { getGameInfo, dailyGame } from '../games/registry.js';
 import { gameArt } from '../games/art.js';
 import { gameTiles } from './games.js';
-import { FEATURES } from '../config.js';
+import { FEATURES, inviteBase } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as social from '../services/social.js';
 import * as matches from '../services/matches.js';
@@ -92,7 +92,7 @@ function friendsSection() {
 
   async function deelCode() {
     const u = auth.getUser();
-    const url = `${location.origin}${location.pathname}#/vrienden/toevoegen/${u.code.replace('-', '')}`;
+    const url = `${inviteBase()}#/vrienden/toevoegen/${u.code.replace('-', '')}`;
     const r = await shareText({ title: t('app.name'), text: t('home.friends.shareText', { code: u.code }), url });
     if (r === 'gekopieerd') announce(t('home.friends.linkCopied'));
   }

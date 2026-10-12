@@ -7,18 +7,20 @@
 //   PORT          poort (standaard 8000)
 //   HOST          adres (standaard 127.0.0.1; zet 0.0.0.0 om er van buiten bij te kunnen)
 //   DATA_DIR      waar de gegevens staan (standaard server/data)
-//   ALLOW_ORIGIN  alleen nodig als de app op een ANDER adres staat dan de server (bijv. https://mijnapp.nl)
+//   ALLOW_ORIGIN  alleen nodig als de app op een ANDER adres staat dan de server (bijv. https://mijnapp.nl, of voor Capacitor: https://localhost,capacitor://localhost)
 //   TRUST_PROXY   zet op 1 als de server achter een proxy staat die X-Forwarded-For meegeeft
 //   SMTP_URL, MAIL_FROM   e-mail voor de codes bij "wachtwoord vergeten" en "wachtwoord veranderen" (zie docs/ACCOUNTS.md). Zonder SMTP_URL wordt er niets verstuurd: de mail verschijnt in dit venster.
+//   FCM_SERVICE_ACCOUNT (of FCM_SERVICE_ACCOUNT_FILE)   pushmeldingen "jij bent aan de beurt" naar de app (zie docs/ANDROID.md); zonder sleutel verschijnen ze in dit venster
 //   FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, PUBLIC_URL   zet je deze alle drie, dan verschijnt "Doorgaan met Facebook" (zie docs/ACCOUNTS.md)
 
 import { createServer as httpServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join, normalize, extname, sep } from 'node:path';
-import { Db } from './db.mjs';
+import { Db, SqliteDb, dagelijkseBackup } from './db.mjs';
 import { createApi } from './api.mjs';
 import { createMailer } from './mail.mjs';
+import { createPush, leesServiceAccount } from './push.mjs';
 import { laadInstellingen } from './instellingen.mjs';
 import { engelseTekst } from './validate.mjs';
 import { GAMES } from './games/index.mjs';
@@ -35,7 +37,8 @@ const TYPES = {
 const CSP = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'";
 
 export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trustProxy = false, games = GAMES, api: apiOptions = {} } = {}) {
-  const db = new Db(dataFile);
+  // Een bestand dat op .sqlite eindigt is een SQLite-database (met een oud .json ernaast wordt dat eenmalig overgenomen); anders één JSON-bestand
+  const db = dataFile?.endsWith('.sqlite') ? new SqliteDb(dataFile, { migrateFrom: dataFile.replace(/\.sqlite$/, '.json') }) : new Db(dataFile);
   const api = createApi({ db, games, ...apiOptions });
 
   const baseHeaders = {
@@ -67,8 +70,9 @@ export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trus
   async function handleApi(req, res, url) {
     const cors = {};
     const origin = req.headers.origin;
-    if (allowOrigin && origin === allowOrigin) {
-      Object.assign(cors, { 'Access-Control-Allow-Origin': allowOrigin, 'Vary': 'Origin', 'Access-Control-Allow-Headers': 'Authorization, Content-Type', 'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS', 'Access-Control-Max-Age': '600' });
+    const toegestaan = String(allowOrigin || '').split(',').map((x) => x.trim()).filter(Boolean);        // meer adressen mag, door komma's gescheiden (bijv. de Android- en iOS-app)
+    if (origin && toegestaan.includes(origin)) {
+      Object.assign(cors, { 'Access-Control-Allow-Origin': origin, 'Vary': 'Origin', 'Access-Control-Allow-Headers': 'Authorization, Content-Type', 'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS', 'Access-Control-Max-Age': '600' });
     }
     if (req.method === 'OPTIONS') return send(res, 204, '', cors);
 
@@ -127,7 +131,7 @@ export function createApp({ dataFile = null, root = ROOT, allowOrigin = '', trus
     }
   });
   const sweep = setInterval(() => api.limiter.sweep(), 600_000); sweep.unref();
-  server.on('close', () => { clearInterval(sweep); db.flush(); });
+  server.on('close', () => { clearInterval(sweep); db.flush(); db.close?.(); });
   return { server, db, api };
 }
 
@@ -139,7 +143,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const { FACEBOOK_APP_ID: appId, FACEBOOK_APP_SECRET: appSecret } = process.env;
   const publicUrl = (process.env.PUBLIC_URL || `http://localhost:${port}`).replace(/\/+$/, '');
   const facebook = appId && appSecret ? { appId, appSecret, publicUrl } : null;
-  const { server, db } = createApp({ dataFile: join(dataDir, 'db.json'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook, mailer: createMailer({ url: process.env.SMTP_URL || '', from: process.env.MAIL_FROM || '' }) } });
+  const { server, db } = createApp({ dataFile: join(dataDir, 'db.sqlite'), allowOrigin: process.env.ALLOW_ORIGIN || '', trustProxy: process.env.TRUST_PROXY === '1', api: { facebook, mailer: createMailer({ url: process.env.SMTP_URL || '', from: process.env.MAIL_FROM || '' }), push: createPush({ serviceAccount: leesServiceAccount() }) } });
+  // Een back-up per dag (de laatste 7 blijven), bij het starten en daarna elke 24 uur
+  const backupMap = join(dataDir, 'backups');
+  const backup = () => { try { dagelijkseBackup(db, backupMap); } catch (e) { console.error(`Back-up mislukt: ${e.message}`); } };
+  backup(); setInterval(backup, 24 * 3600_000).unref();
   // Is de poort bezet? Zonder PORT probeert de server vanzelf de volgende (8001, 8002, ...); met PORT zegt hij het gewoon.
   let nu = port;
   const luister = () => server.listen(nu, host, () => console.log(`Puzzleplace draait op http://${host === '0.0.0.0' ? 'localhost' : host}:${nu}  (gegevens in ${dataDir})`));

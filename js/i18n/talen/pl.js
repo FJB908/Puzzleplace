@@ -685,4 +685,5 @@ export default {
   "err.mailCodeNeeded": "Wpisz kod z e-maila.",
   "err.mailFailed": "Nie udało się teraz wysłać e-maila. Spróbuj ponownie za chwilę.",
   "err.noEmail": "To konto nie ma adresu e-mail, więc nie możemy wysłać kodu.",
+  "err.deviceToken": "Nie udało się zarejestrować tego urządzenia do powiadomień.",
 };

@@ -683,3 +683,4 @@ detail.friend.all | Wszyscy znajomi
 detail.virtual.title | Graj z wirtualnym graczem
 detail.virtual.text | Wirtualni gracze to komputer z imieniem i własnym tempem gry. Grają na Twoim urządzeniu, więc nie potrzebujesz konta ani internetu.
 detail.virtual.play | Graj
+err.deviceToken | Nie udało się zarejestrować tego urządzenia do powiadomień.

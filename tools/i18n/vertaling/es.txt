@@ -660,3 +660,4 @@ detail.friend.all | Todos los amigos
 detail.virtual.title | Jugar contra un jugador virtual
 detail.virtual.text | Los jugadores virtuales son el ordenador con un nombre y su propio ritmo. Juegan en tu dispositivo, así que no necesitas cuenta ni internet.
 detail.virtual.play | Jugar
+err.deviceToken | No se pudo registrar este dispositivo para las notificaciones.

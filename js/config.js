@@ -26,6 +26,9 @@ export const FEATURES = {
 // kunnen laten inloggen op een andere server.
 export const API_BASE = '';
 
+// Het adres dat in een uitnodigingslink komt: de server als de app op een ander adres staat (zoals in de Capacitor-app, waar het adres van de app zelf https://localhost is), anders het adres van deze pagina.
+export const inviteBase = () => (API_BASE ? `${API_BASE.replace(/\/+$/, '')}/` : `${location.origin}${location.pathname}`);
+
 // Moeilijkheidsniveaus die elk spel standaard krijgt. Een spel kan eigen
 // niveaus meegeven in de registry.
 export const niveau = (id, hint) => ({ id, get label() { return t(`level.${id}`); }, get hint() { return hint(); } });

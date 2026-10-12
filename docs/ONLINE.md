@@ -10,7 +10,7 @@ Puzzleplace is één Node-server die de app **en** de accounts/partijen levert. 
 
 **Wat je moet weten van het gratis plan** (dit is hoe de gratis plannen bij dit soort diensten meestal werken; kijk op de site van Render voor de voorwaarden van nu):
 * De server gaat na ongeveer een kwartier zonder bezoek slapen. De eerste keer daarna duurt het laden even (een halve minuut tot een minuut).
-* De gratis server heeft **geen blijvende schijf**: accounts en partijen staan in een bestand (`server/data/db.json`) en dat kan verdwijnen als de server opnieuw start of opnieuw wordt uitgerold. Voor spelen met een paar vrienden is dat vaak te overzien, maar je kunt dan opnieuw moeten aanmelden. Wil je dat het blijft, neem dan een betaald plan met een schijf en zet `DATA_DIR` op de map van die schijf.
+* De gratis server heeft **geen blijvende schijf**: accounts en partijen staan in een SQLite-bestand (`db.sqlite` in `DATA_DIR`) en dat kan verdwijnen als de server opnieuw start of opnieuw wordt uitgerold. Voor spelen met een paar vrienden is dat vaak te overzien, maar je kunt dan opnieuw moeten aanmelden. Wil je dat het blijft, neem dan een betaald plan met een schijf en zet `DATA_DIR` op de map van die schijf.
 * E-mail (codes bij wachtwoord vergeten) werkt alleen als je `SMTP_URL` instelt (zie `docs/ACCOUNTS.md`); zonder dat kan iemand zijn wachtwoord herstellen met de herstelcode of, als hij ingelogd is, een nieuw wachtwoord kiezen.
 
 ## Optie 2: vanaf je eigen computer, gratis en met blijvende gegevens

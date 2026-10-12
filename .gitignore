@@ -3,3 +3,6 @@ server/data/
 *.tmp
 .woordenbron/
 .env
+www/
+android/
+ios/

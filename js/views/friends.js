@@ -11,7 +11,7 @@ import { t, foutTekst, getTaal } from '../i18n/index.js';
 import { TALEN } from '../shared/talen.js';
 import { partijTaal } from '../shared/startvrienden.js';
 import { getGameInfo } from '../games/registry.js';
-import { FEATURES } from '../config.js';
+import { FEATURES, inviteBase } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as social from '../services/social.js';
 import * as matches from '../services/matches.js';
@@ -22,7 +22,7 @@ import { backendKnown } from '../services/backend.js';
 import { rememberFriendCode } from './account.js';
 
 const page = (node, extra = {}) => ({ title: t('nav.friends'), nav: 'friends', decor: 'spray', node, ...extra });
-const inviteLink = (code) => `${location.origin}${location.pathname}#/vrienden/toevoegen/${code.replace('-', '')}`;
+const inviteLink = (code) => `${inviteBase()}#/vrienden/toevoegen/${code.replace('-', '')}`;
 
 function loggedOut(code) {
   if (code) rememberFriendCode(code);
