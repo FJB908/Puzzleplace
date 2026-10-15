@@ -33,7 +33,7 @@ const STIP = {
 };
 const PETAAL = 'M0 0C-7.200-4.200-9.600-12.400-4.800-15.600-2.800-16.800-1-16 0-14.200 1-16 2.800-16.800 4.800-15.600 9.600-12.400 7.200-4.200 0 0Z';
 // Eén kersenbloesem: vijf blaadjes met een inkeping, adertjes en meeldraden van goud. cx, cy en r (de straal) bepalen de plek en de grootte.
-function bloesemFig(cx, cy, r, rijk = false) {
+export function bloesemFig(cx, cy, r, rijk = false) {
   const sc = r / 16.8, sw = f(0.5 / sc);
   const blaadjes = [0, 1, 2, 3, 4].map((k) => `<path transform="rotate(${k * 72})" d="${PETAAL}" fill="url(#mjPetaal)" stroke="#c4456b" stroke-width="${sw}" stroke-linejoin="round"/>`).join('');
   const aderen = rijk || r > 8 ? [0, 1, 2, 3, 4].map((k) => `<path transform="rotate(${k * 72})" d="M0 -3.600L0 -10" stroke="#d96a8d" stroke-width="${f(0.45 / sc)}" stroke-linecap="round"/>`).join('') : '';

@@ -11,7 +11,7 @@ import { h, icon } from '../../ui.js';
 import { t } from '../../i18n/index.js';
 import { burst, motionOK } from '../../effects.js';
 import * as E from './engine.js';
-import { kaartSvg, kleurIcoon } from './kaarten.js';
+import { kaartSvg, kleurIcoon, rugSvg, SOL_DEFS } from './kaarten.js';
 import { felicitatie } from '../../shared/felicitatie.js';
 import { HOFPLAATJES } from './hofplaatjes.js';
 
@@ -66,9 +66,12 @@ export async function mount(container, ctx) {
   const afleggerVak = h('div', { class: 'sol-vak sol-aflegger', 'aria-hidden': 'true' });
   tafel.append(afleggerVak, voorraadVak, ...fundVakken, ...stapelVakken);
 
+  if (!document.getElementById('sol-defs')) document.body.insertAdjacentHTML('beforeend', `<svg id="sol-defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">${SOL_DEFS}</svg>`);   // de kleurverlopen van de kaarten
+  const RUG = rugSvg();
   const kaarten = Array.from({ length: 52 }, (_, k) => {
     const el = h('button', { type: 'button', class: 'sol-kaart', 'data-k': k, tabindex: '-1', onclick: (e) => { if (e.detail === 0) tikKaart(k); } },
       h('span', { class: 'sol-binnen', 'aria-hidden': 'true' }, h('span', { class: 'sol-voor' }), h('span', { class: 'sol-achter' })));
+    el.querySelector('.sol-achter').innerHTML = RUG;
     el.querySelector('.sol-voor').innerHTML = `<svg viewBox="0 0 60 84" focusable="false">${kaartSvg(k, letters, HOFPLAATJES)}</svg>`;
     el._x = el._y = null; el._up = null;
     return el;

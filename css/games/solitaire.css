@@ -60,20 +60,15 @@ html[data-contrast="high"] .sol-tafel::before { display: none; }
 }
 .sol-voor { transform: rotateY(180deg); background: linear-gradient(160deg, #fffefb 0%, #f6f1e5 100%); }
 .sol-voor svg { display: block; width: 100%; height: 100%; }
-/* De rug: diep blauw met een ruitpatroon, een crème rand en een gouden bloem in het midden */
-.sol-achter {
-  background:
-    radial-gradient(circle at 50% 50%, #f1dca0 0 9%, #c79a3e 10% 13%, transparent 14%),
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, .17) 0 .02em, transparent .02em .1em),
-    repeating-linear-gradient(-45deg, rgba(255, 255, 255, .17) 0 .02em, transparent .02em .1em),
-    linear-gradient(150deg, #3d55a3 0%, #26377a 100%);
-  box-shadow: inset 0 0 0 .05em #f7f2e4, inset 0 0 0 .075em #2a3a7c, 0 .012em .035em rgba(0, 20, 10, .55), 0 .03em .09em rgba(0, 20, 10, .3);
-}
+/* De rug is een tekening (zie rugSvg in kaarten.js): blauw met een gouden golfpatroon en een kersenbloesem */
+.sol-achter { background: #26397f; box-shadow: 0 .012em .035em rgba(0, 20, 10, .55), 0 .03em .09em rgba(0, 20, 10, .3); }
+.sol-achter svg { display: block; width: 100%; height: 100%; }
 html[data-contrast="high"] .sol-voor { box-shadow: 0 0 0 .02em #000; }
 html[data-contrast="high"] .sol-achter { background: repeating-linear-gradient(45deg, #fff 0 .03em, #1d2f6b .03em .1em); box-shadow: 0 0 0 .02em #000, inset 0 0 0 .05em #fff; }
+html[data-contrast="high"] .sol-achter svg { display: none; }
 
 .sol-kaart.diep .sol-voor { box-shadow: 0 0 0 .01em rgba(40, 30, 10, .5); }
-.sol-kaart.diep .sol-achter { box-shadow: inset 0 0 0 .05em #f7f2e4, inset 0 0 0 .075em #2a3a7c; }
+.sol-kaart.diep .sol-achter { box-shadow: none; }
 
 /* Wat kun je doen? Kaarten die je kunt pakken krijgen bij aanwijzen een tikje omhoog; gekozen kaarten gloeien */
 .sol-kaart.gekozen .sol-voor { box-shadow: 0 0 0 .045em #ffd45a, 0 0 .22em .09em rgba(255, 212, 90, .85), 0 .03em .09em rgba(0, 20, 10, .35); }

@@ -1,9 +1,23 @@
-// Patience: het plaatje van een speelkaart (een SVG van 60 bij 84) en de vier kleuren. Alles zelf getekend.
+// Solitaire: het plaatje van een speelkaart (een SVG van 60 bij 84), de kaartrug en de vier kleuren. Alles zelf getekend, in dezelfde stijl als de
+// Mahjong-tegels: glanzende lak, een gouden inlegrand, kersenbloesem.
 //
 // Rechtsboven in het plaatje staat niets: de hoekmarkering (rang + kleur) staat linksboven, naast elkaar, zodat hij leesbaar blijft
 // als de kaarten over elkaar liggen. Rood en zwart zijn ook aan de vorm te onderscheiden.
 
 import { rang, kleur, isRood } from './engine.js';
+import { bloesemFig, PLAATJE_DEFS } from '../mahjong/tegels.js';
+
+// De kleurverlopen en het golfpatroon van de kaartrug. Eén keer in de pagina zetten (onzichtbaar maar wel aanwezig); de kaarten verwijzen ernaar.
+export const SOL_DEFS = PLAATJE_DEFS
+  + `<defs><linearGradient id="solInkt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d6c88"/><stop offset=".5" stop-color="#232d44"/><stop offset="1" stop-color="#0b101c"/></linearGradient>`
+  + `<radialGradient id="solRing" cx=".5" cy=".42" r=".7"><stop offset="0" stop-color="#fffdf4"/><stop offset="1" stop-color="#f3e7c6"/></radialGradient>`
+  + `<linearGradient id="solRug" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3c5aa8"/><stop offset=".55" stop-color="#26397f"/><stop offset="1" stop-color="#18235a"/></linearGradient>`
+  + `<pattern id="solGolf" width="12" height="12" patternUnits="userSpaceOnUse"><g fill="none" stroke="#e9c766" stroke-opacity=".5" stroke-width=".45">`
+  + [[0, 0], [12, 0], [6, 6], [0, 12], [12, 12]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6"/><circle cx="${x}" cy="${y}" r="4.200"/><circle cx="${x}" cy="${y}" r="2.400"/>`).join('')
+  + `</g></pattern></defs>`;
+
+const ROOD = '#c62f3b', ZWART = '#1b2333';
+const GOUD = '#cda24a';
 
 // De kleuren in een vakje van 24 bij 24: schoppen, harten, ruiten, klaver
 const KLEUREN = [
@@ -14,11 +28,19 @@ const KLEUREN = [
 ];
 // Klaver: drie cirkels op een steeltje
 const KLAVER = '<circle cx="12" cy="6.400" r="4.800"/><circle cx="6.200" cy="14.200" r="4.800"/><circle cx="17.800" cy="14.200" r="4.800"/><path d="M12 11.800c0 4.200-1 7.800-3.400 10.600h6.800C13 19.600 12 16 12 11.800z"/>';
+// Glans: een lichte streep (of bij de ruit een lichte helft) op de lak, alleen bij de grote kleuren
+const GLANS = [
+  '<path d="M6.400 15.200C5 13.800 5.200 12.200 7 10.400" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.400" stroke-linecap="round"/><path d="M12 4.600C10.600 6 9.600 7 8.800 8.200" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.200" stroke-linecap="round"/>',
+  '<path d="M4.400 8.400C4.800 6.400 6.400 5.200 8.200 5.400" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.500" stroke-linecap="round"/>',
+  '<path d="M12 1 3.200 12H12z" fill="#fff" fill-opacity=".2"/><path d="M12 3.400 6 10.800" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="1" stroke-linecap="round"/>',
+  '<path d="M8.600 4.800C9.600 3.600 11 3.200 12.200 3.600M3.400 12.800C3.800 11.400 4.800 10.600 6.200 10.400M14.400 12.200C15.200 11 16.400 10.400 17.600 10.600" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.200" stroke-linecap="round"/>',
+];
 
-// Een kleur op een plek: x, y linksboven, grootte s
-export function kleurSvg(k, x, y, s, extra = '') {
+// Een kleur op een plek: x, y linksboven, grootte s. Met `glans`: gelakt (verloop en een lichte streep), anders vlak (extra bevat dan de kleur).
+export function kleurSvg(k, x, y, s, extra = '', glans = false) {
   const t = `translate(${x} ${y}) scale(${s / 24})`;
-  return k === 3 ? `<g transform="${t}" ${extra}>${KLAVER}</g>` : `<path transform="${t}" d="${KLEUREN[k]}" ${extra}/>`;
+  const vorm = k === 3 ? `<g ${glans ? `fill="url(#solInkt)"` : extra}>${KLAVER}</g>` : `<path d="${KLEUREN[k]}" ${glans ? `fill="${k === 1 || k === 2 ? 'url(#mjLak)' : 'url(#solInkt)'}"` : extra}/>`;
+  return `<g transform="${t}">${vorm}${glans ? GLANS[k] : ''}</g>`;
 }
 export const kleurIcoon = (k, grootte = 24) => `<svg viewBox="0 0 24 24" width="${grootte}" height="${grootte}" aria-hidden="true" focusable="false">${kleurSvg(k, 0, 0, 24, 'fill="currentColor"')}</svg>`;
 
@@ -37,11 +59,26 @@ const PIPS = {
   10: [[L, 0], [R, 0], [M, 0.167], [L, 0.333], [R, 0.333], [L, 0.667], [R, 0.667], [M, 0.833], [L, 1], [R, 1]],
 };
 
-// Boer, vrouw en heer: de figuur is een plaatje (zie hofplaatjes.js), met een zelfgetekende hoekmarkering eromheen. Zonder plaatje een eenvoudig kader.
+// De rand van een kaart: een dun gouden lijntje net binnen de rand, zoals de inlegrand op de tegels
+const RAND = `<rect x="2.200" y="2.200" width="55.600" height="79.600" rx="4.200" fill="none" stroke="${GOUD}" stroke-width=".55" opacity=".95"/>`;
+
+// Boer, vrouw en heer: de figuur is een plaatje (zie hofplaatjes.js), in een gouden lijst met een zachte tint. Zonder plaatje een eenvoudig kader.
 function hofkaart(k, s, kl, hof) {
   const plaatje = hof?.[k];
-  if (plaatje) return `<image href="${plaatje}" x="12.750" y="14.500" width="34.500" height="55.500" preserveAspectRatio="none"/>`;
+  const tint = isRood(k) ? '#fde9e6' : '#e9edf5';
+  if (plaatje) {
+    return `<rect x="12.200" y="15.800" width="35.600" height="56.200" rx="2.400" fill="${tint}" stroke="${GOUD}" stroke-width="1"/>`
+      + `<rect x="13" y="16.600" width="34" height="54.600" rx="1.800" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width=".4"/>`
+      + `<image href="${plaatje}" x="13.800" y="17.400" width="32.400" height="52.200" preserveAspectRatio="none"/>`;
+  }
   return `<rect x="12" y="17" width="36" height="50" rx="3.500" fill="none" stroke="${kl}" stroke-width="1" opacity=".6"/>`;
+}
+
+// Het aas: één grote kleur in een gouden ring met een zachte glans, tussen acht gouden knopjes
+function aas(s) {
+  const knopjes = Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return `<circle cx="${(30 + 16.6 * Math.sin(a)).toFixed(2)}" cy="${(44 - 16.6 * Math.cos(a)).toFixed(2)}" r="1" fill="${GOUD}"/>`; }).join('');
+  return `<circle cx="30" cy="44" r="16" fill="url(#solRing)" stroke="${GOUD}" stroke-width="1.100"/><circle cx="30" cy="44" r="13.800" fill="none" stroke="${GOUD}" stroke-width=".4" stroke-dasharray="1 1.400"/>`
+    + knopjes + kleurSvg(s, 18.500, 32.500, 23, '', true);
 }
 
 const cache = new Map();
@@ -50,25 +87,37 @@ export function kaartSvg(k, letters, hof = null) {
   const sl = `${k}|${letters[1]}${letters[11]}${letters[12]}${letters[13]}${hof ? 'h' : ''}`;
   if (cache.has(sl)) return cache.get(sl);
   const r = rang(k) + 1, s = kleur(k);
-  const kl = isRood(k) ? '#c62f3b' : '#1f2937';
+  const kl = isRood(k) ? ROOD : ZWART;
   const tekst = r === 1 || r > 10 ? letters[r] : String(r);
   const breed = tekst.length > 1 ? 17 : 10;
   // Een hofkaart met plaatje heeft de kleur al groot in het plaatje: dan staat in de hoek alleen de letter (groter)
   const alleenLetter = r > 10 && !!hof?.[k];
-  const hoek = `<text x="${alleenLetter ? 4.500 : 4.500}" y="${alleenLetter ? 15.500 : 15}" font-size="${alleenLetter ? 17 : 15.500}" font-weight="800" fill="${kl}" font-family="Georgia, 'Times New Roman', serif">${tekst}</text>`
+  const hoek = `<text x="4.500" y="${alleenLetter ? 15.500 : 15}" font-size="${alleenLetter ? 17 : 15.500}" font-weight="800" fill="${kl}" font-family="Georgia, 'Times New Roman', serif">${tekst}</text>`
     + (alleenLetter ? '' : kleurSvg(s, 4.500 + breed + 1.500, 4, 11.500, `fill="${kl}"`));
   let midden = '';
-  if (r === 1) midden = kleurSvg(s, 17, 30, 26, `fill="${kl}"`);
+  if (r === 1) midden = aas(s);
   else if (r <= 10) {
-    const x0 = 12.500, y0 = 22, bx = 35, by = 44, p = r > 6 ? 11 : 12.500;
+    const xs = [21, 30, 39], y0 = 23, by = 38, p = r <= 3 ? 16 : r <= 6 ? 14 : r === 10 ? 11 : 12;
     midden = PIPS[r].map(([x, y]) => {
-      const cx = x0 + x * bx, cy = y0 + y * by, omlaag = y > 0.5 || (y === 0.5 && false);
-      return omlaag ? `<g transform="rotate(180 ${cx} ${cy})">${kleurSvg(s, cx - p / 2, cy - p / 2, p, `fill="${kl}"`)}</g>` : kleurSvg(s, cx - p / 2, cy - p / 2, p, `fill="${kl}"`);
+      const cx = xs[x === L ? 0 : x === R ? 2 : 1], cy = y0 + y * by, omlaag = y > 0.5;
+      const kleurPlaatje = kleurSvg(s, cx - p / 2, cy - p / 2, p, '', true);
+      return omlaag ? `<g transform="rotate(180 ${cx} ${cy})">${kleurPlaatje}</g>` : kleurPlaatje;
     }).join('');
   } else {
     midden = hofkaart(k, s, kl, hof);
   }
-  const uit = `${midden}${hoek}<g transform="rotate(180 30 42)">${hoek}</g>`;
+  const uit = `${RAND}${midden}${hoek}<g transform="rotate(180 30 42)">${hoek}</g>`;
   cache.set(sl, uit);
   return uit;
+}
+
+// De rug: diep blauw met een golfpatroon in goud, een crème en gouden rand en een kersenbloesem in een gouden ring in het midden
+export function rugSvg() {
+  return `<svg viewBox="0 0 60 84" focusable="false"><rect width="60" height="84" fill="url(#solRug)"/><rect width="60" height="84" fill="url(#solGolf)"/>`
+    + `<rect x="2.600" y="2.600" width="54.800" height="78.800" rx="3.600" fill="none" stroke="#f7f0dc" stroke-width="1.300"/><rect x="5" y="5" width="50" height="74" rx="2.400" fill="none" stroke="${GOUD}" stroke-width=".7"/>`
+    + `<circle cx="30" cy="42" r="14.500" fill="#1d2b6c" stroke="${GOUD}" stroke-width="1.200"/><circle cx="30" cy="42" r="12.600" fill="url(#solRing)"/>`
+    + bloesemFig(30, 42, 11.200, true)
+    + [[30, 24.500], [30, 59.500], [12.500, 42], [47.500, 42]].map(([x, y]) => `<path d="M${x} ${y - 2.200}L${x + 1.500} ${y}L${x} ${y + 2.200}L${x - 1.500} ${y}Z" fill="${GOUD}"/>`).join('')
+    + [[9.500, 9.500], [50.500, 9.500], [9.500, 74.500], [50.500, 74.500]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.300" fill="${GOUD}"/>`).join('')
+    + `</svg>`;
 }
