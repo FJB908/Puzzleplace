@@ -1,6 +1,6 @@
 // De plaatjes op de tegels, zelf getekend (viewBox 0 0 40 52). De soorten zijn te onderscheiden op vorm, niet alleen op kleur:
-//   0-8 bloesems 1-9, 9-17 bamboe 1-9, 18-26 lantaarns 1-9, 27-30 winden (kompasroos met een gekleurde punt N, O, Z, W), 31-33 draken (vlam, blad, kader),
-//   34-37 bloemen (kersenbloesem, pioen, chrysant, orchidee), 38-41 seizoenen (spruit, zon, herfstblad, sneeuwvlok)
+//   0-8 bloesems 1-9, 9-17 bamboe 1-9, 18-26 lantaarns 1-9, 27-30 winden (kompasroos met een gekleurde punt N, O, Z, W), 31-33 draken (koi, blad, kader),
+//   34-37 bloemen (pruimentak, pioen, chrysant, orchidee), 38-41 seizoenen (spruit, zon, herfstblad, sneeuwvlok)
 
 // De kleuren zijn glazuur en lak: verlopen in plaats van vlakke kleuren (zie PLAATJE_DEFS). Ze verlopen van boven (licht) naar onder (diep), per tegel.
 const INK = 'url(#mjInkt)', BLAUW = 'url(#mjBlauw)', GROEN = 'url(#mjGroen)', ROOD = 'url(#mjRood)', GOUD = 'url(#mjGoud)', ROZE = 'url(#mjRoze)', PAARS = 'url(#mjPaars)', IVOOR = '#fbf7ec';
@@ -109,14 +109,21 @@ function wind(i) {
     + `<circle cx="20" cy="26" r="2.1" fill="${GOUD}" stroke="#7a5a1a" stroke-width=".4"/><circle cx="19.400" cy="25.300" r=".6" fill="#fff" opacity=".8"/>`;
 }
 
-// ----- Draken: vuur, jade en een leeg porseleinen kader -----
+// ----- Draken: een rode koi, jade en een leeg porseleinen kader -----
 function draak(i) {
-  if (i === 0) {                                  // rood: een vlam met een gouden kern en vonkjes
-    return `<path d="M20 5C25 14 33 19 33 31C33 40 27.500 46.500 20 46.500C12.500 46.500 7 40 7 31C7 24 11.500 21 13.500 14.500C15.500 18.500 17 19.500 19 20.500C18 15.500 17.500 10.500 20 5Z" fill="${ROOD}" stroke="#7a1218" stroke-width=".6" stroke-linejoin="round"/>`
-      + `<path d="M20 22C24 27.500 27 30 27 35.500C27 40 24 42.500 20 42.500C16 42.500 13 40 13 35.500C13 32 15.500 30 16.500 26.500C17.500 28.500 18.500 29.500 20 29.500Z" fill="${GOUD}"/>`
-      + `<path d="M20 31C22 34 23.500 35 23.500 37.500C23.500 39.500 22 40.500 20 40.500C18 40.500 16.500 39.500 16.500 37.500C16.500 36 17.700 35 18.200 33.500Z" fill="#fff3c4"/>`
-      + `<path d="M9.500 11l.7 1.700 1.700.7-1.700.7-.7 1.700-.7-1.700-1.700-.7 1.700-.7Z M31 7l.6 1.400 1.400.6-1.400.6-.6 1.400-.6-1.400-1.400-.6 1.400-.6Z" fill="#d9a93a"/>`
-      + `<ellipse cx="14.600" cy="30" rx="1.300" ry="4" fill="#fff" opacity=".35" transform="rotate(12 14.600 30)"/>`;
+  if (i === 0) {                                  // rood: een rode koi, de karper die een draak wordt, met gouden rimpels in het water
+    return `<g transform="rotate(10 20 26)">`
+      + `<path d="M20 35C13 38.500 9.500 43 10.500 49.500 14.500 46.500 17.500 47 20 43.500 22.500 47 25.500 46.500 29.500 49.500 30.500 43 27 38.500 20 35Z" fill="#e8564a" stroke="#7a1218" stroke-width=".5" stroke-linejoin="round"/>`
+      + `<path d="M20 37V43M16.500 38.500L14.500 45M23.500 38.500L25.500 45" stroke="#f9b8a8" stroke-width=".6" stroke-linecap="round"/>`
+      + `<path d="M14.500 15C9 15.500 6.500 20 7.500 24.500 11 22.500 13.500 21.500 15.500 20.500Z M25.500 15C31 15.500 33.500 20 32.500 24.500 29 22.500 26.500 21.500 24.500 20.500Z" fill="#f08a78" stroke="#7a1218" stroke-width=".5" stroke-linejoin="round"/>`
+      + `<path d="M20 3.500C26.500 5.500 29 13 27.500 22 26.500 29 24.500 33 22.500 38H17.500C15.500 33 13.500 29 12.500 22 11 13 13.500 5.500 20 3.500Z" fill="${ROOD}" stroke="#7a1218" stroke-width=".6" stroke-linejoin="round"/>`
+      + `<path d="M15.800 19C17.500 16.500 21.500 16.500 23.500 18.500 25.500 21 24 24.500 21.500 25 18.500 25.500 15.200 22.500 15.800 19Z M18.500 28C20.500 26.500 23.500 27.500 23.800 30 24 32.500 21.500 34.500 19.500 33.500 17.800 32.500 17.500 29.200 18.500 28Z" fill="#fff6e6" opacity=".95"/>`
+      + [[20, 12], [17, 16], [23, 16], [14.800, 21.500], [25.200, 21.500], [17.500, 26.500], [23, 27], [19.500, 31.500]].map(([x, y]) => `<path d="M${x - 1.500} ${y}Q${x} ${y + 2} ${x + 1.500} ${y}" fill="none" stroke="#b98826" stroke-width=".5" opacity=".75" stroke-linecap="round"/>`).join('')
+      + `<path d="M13.800 12.500Q20 15.500 26.200 12.500" fill="none" stroke="#7a1218" stroke-width=".6" stroke-linecap="round"/>`
+      + `<circle cx="16.400" cy="8.800" r="1.700" fill="#fff6e6" stroke="#2a1d12" stroke-width=".3"/><circle cx="23.600" cy="8.800" r="1.700" fill="#fff6e6" stroke="#2a1d12" stroke-width=".3"/><circle cx="16.200" cy="8.900" r=".95" fill="#1a1210"/><circle cx="23.800" cy="8.900" r=".95" fill="#1a1210"/>`
+      + `<path d="M18.700 5.200Q20 6.200 21.300 5.200" fill="none" stroke="#7a1218" stroke-width=".5" stroke-linecap="round"/>`
+      + `<ellipse cx="15" cy="27" rx="1.200" ry="5" fill="#fff" opacity=".28"/></g>`
+      + `<path d="M3 44Q6 41 9 44M31 11Q34 8 37 11M33.500 46.500Q35.500 44.500 37.500 46.500" fill="none" stroke="${GOUD}" stroke-width=".9" stroke-linecap="round"/>`;
   }
   if (i === 1) {                                  // groen: twee jadebladeren en een gouden dauwdruppel
     return `<path d="M8 44C3 25 14 8 32 7C36 25 28 42 8 44Z" fill="${GROEN}" stroke="#0e4a2c" stroke-width=".6"/><path d="M9 43C16 32 23 21 31 9" fill="none" stroke="#e8f6df" stroke-width="1.6" stroke-linecap="round"/>`
@@ -134,11 +141,14 @@ function draak(i) {
 const blad = (x, y, hoek, lang, breed, kleur) => `<ellipse cx="${f(x)}" cy="${f(y)}" rx="${breed}" ry="${lang}" fill="${kleur}" transform="rotate(${hoek} ${f(x)} ${f(y)})"/>`;
 function bloem(i) {
   const M = [20, 25];
-  if (i === 0) {                                  // kersenbloesem: vijf blaadjes met een inkeping, meeldraden van goud
-    const petal = 'M0 0C-7.200-4.200-9.600-12.400-4.800-15.600-2.800-16.800-1-16 0-14.200 1-16 2.800-16.800 4.800-15.600 9.600-12.400 7.200-4.200 0 0Z';
-    return [0, 1, 2, 3, 4].map((k) => `<path transform="translate(${M[0]} ${M[1]}) rotate(${k * 72}) scale(.98)" d="${petal}" fill="url(#mjPetaal)" stroke="#c4456b" stroke-width=".6" stroke-linejoin="round"/>`).join('')
-      + [0, 1, 2, 3, 4].map((k) => `<path transform="translate(${M[0]} ${M[1]}) rotate(${k * 72})" d="M0 -3.600L0 -9.400" stroke="#d96a8d" stroke-width=".5" stroke-linecap="round"/>`).join('')
-      + cirkel(...M, 3.4, '#f7b6c8') + [0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const [x, y] = polair(M[0], M[1], 5.4, k * 45 + 10), [x0, y0] = polair(M[0], M[1], 1.2, k * 45 + 10); return `<path d="M${f(x0)} ${f(y0)}L${f(x)} ${f(y)}" stroke="#c98a2a" stroke-width=".5"/>` + cirkel(x, y, 0.85, GOUD); }).join('') + cirkel(...M, 1.3, '#b8325f');
+  if (i === 0) {                                  // pruimenbloesem: een kronkelende tak met bloemen en knoppen (anders dan de ene grote bloesem op de bloesems-1)
+    const pruim = (x, y, r) => `<g transform="translate(${x} ${y})">` + [0, 1, 2, 3, 4].map((k) => { const [px, py] = polair(0, 0, r * 0.62, k * 72); return `<circle cx="${f(px)}" cy="${f(py)}" r="${f(r * 0.6)}" fill="url(#mjPetaal)" stroke="#c4456b" stroke-width=".35"/>`; }).join('')
+      + cirkel(0, 0, r * 0.3, '#fff1f5') + [0, 1, 2, 3, 4].map((k) => { const [px, py] = polair(0, 0, r * 0.5, k * 72 + 36); return cirkel(px, py, r * 0.1, GOUD); }).join('') + `</g>`;
+    return `<path d="M5 49C9 43 13 41 17 37C21 33 20 29 24 25C28 21 28 15 31 9" fill="none" stroke="#3b271c" stroke-width="3.200" stroke-linecap="round"/>`
+      + `<path d="M5 49C9 43 13 41 17 37C21 33 20 29 24 25C28 21 28 15 31 9" fill="none" stroke="#7a5238" stroke-width=".9" stroke-linecap="round" transform="translate(-.7 -.3)"/>`
+      + `<path d="M17 37C12 35 9 31 8 26M24 25C29 26 32 29 34 34M21 31C17 28 15 24 15 19M26.500 18C30 16 33 14 35 10" fill="none" stroke="#3b271c" stroke-width="1.500" stroke-linecap="round"/>`
+      + pruim(8, 24, 4.600) + pruim(15, 17.500, 4.200) + pruim(34, 36, 4.400) + pruim(33, 21, 4.100) + pruim(31, 7, 4.800) + pruim(14, 41, 3.800)
+      + cirkel(36, 8.500, 1.500, '#e58aa8') + cirkel(27, 31, 1.400, '#e58aa8') + cirkel(10, 33, 1.300, '#f4a0ba') + cirkel(21, 12, 1.400, '#e58aa8');
   }
   if (i === 1) {                                  // pioen: twee lagen puntige bladeren
     return [0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const [x, y] = polair(M[0], M[1], 9, k * 45); return blad(x, y, k * 45, 8.5, 4.6, 'url(#mjPioen)'); }).join('')
