@@ -688,9 +688,9 @@ mahjong.msg.tip | Ces deux tuiles vont ensemble.
 mahjong.msg.undone | Remis en place.
 mahjong.done.title | Le plateau est vide !
 mahjong.done.text | Bravo. Toutes les tuiles ont disparu.
-mahjong.suit.dots | Ronds {n}
+mahjong.suit.dots | Fleurs de cerisier {n}
 mahjong.suit.bamboo | Bambous {n}
-mahjong.suit.numbers | Caractère {n}
+mahjong.suit.numbers | Lanternes {n}
 mahjong.wind.0 | Vent du nord
 mahjong.wind.1 | Vent de l’est
 mahjong.wind.2 | Vent du sud

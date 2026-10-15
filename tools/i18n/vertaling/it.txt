@@ -688,9 +688,9 @@ mahjong.msg.tip | Queste due tessere stanno insieme.
 mahjong.msg.undone | Rimessa a posto.
 mahjong.done.title | La tavola è vuota!
 mahjong.done.text | Ben fatto. Le tessere sono finite.
-mahjong.suit.dots | Cerchi {n}
+mahjong.suit.dots | Fiori di ciliegio {n}
 mahjong.suit.bamboo | Bambù {n}
-mahjong.suit.numbers | Carattere {n}
+mahjong.suit.numbers | Lanterne {n}
 mahjong.wind.0 | Vento del nord
 mahjong.wind.1 | Vento dell’est
 mahjong.wind.2 | Vento del sud

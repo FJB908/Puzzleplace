@@ -711,9 +711,9 @@ mahjong.msg.tip | Te dwa kamienie do siebie pasują.
 mahjong.msg.undone | Odłożone.
 mahjong.done.title | Plansza jest pusta!
 mahjong.done.text | Pięknie. Wszystkie kamienie zniknęły.
-mahjong.suit.dots | Kółka {n}
+mahjong.suit.dots | Kwiaty wiśni {n}
 mahjong.suit.bamboo | Bambus {n}
-mahjong.suit.numbers | Liczba {n}
+mahjong.suit.numbers | Lampiony {n}
 mahjong.wind.0 | Wiatr północny
 mahjong.wind.1 | Wiatr wschodni
 mahjong.wind.2 | Wiatr południowy

@@ -33,9 +33,9 @@ mahjong.msg.undone | Put back. | Teruggelegd.
 mahjong.done.title | The board is clear! | Het bord is leeg!
 mahjong.done.text | Beautifully done. All the tiles are gone. | Mooi gedaan. Alle tegels zijn weg.
 # Namen van de plaatjes (voor schermlezers). {n} is 1 tot en met 9.
-mahjong.suit.dots | Dots {n} | Stippen {n}
+mahjong.suit.dots | Blossoms {n} | Bloesems {n}
 mahjong.suit.bamboo | Bamboo {n} | Bamboe {n}
-mahjong.suit.numbers | Number {n} | Getal {n}
+mahjong.suit.numbers | Lanterns {n} | Lantaarns {n}
 mahjong.wind.0 | North wind | Noordenwind
 mahjong.wind.1 | East wind | Oostenwind
 mahjong.wind.2 | South wind | Zuidenwind
