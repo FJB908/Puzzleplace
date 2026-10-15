@@ -34,22 +34,47 @@ html[data-contrast="high"] .mj-veld::before, html[data-contrast="high"] .mj-veld
   transition: transform .18s ease;
 }
 .mj-tegel:focus-visible { outline: none; }
-.mj-tegel:focus-visible .mj-gezicht { box-shadow: 0 0 0 .12em var(--focus), 0 0 0 .2em #fff, inset .05em .05em 0 rgba(255, 255, 255, .9); }
+.mj-tegel:focus-visible .mj-gezicht { box-shadow: 0 0 0 .12em var(--focus), 0 0 0 .2em #fff; }
 .mj-tegel.weg { display: none; }
+/* Het thema: bloesemporselein. Een tegel is een stukje glanzend porselein met een gouden inlegrandje, op een zijkant van jade met een zacht
+   golfpatroon. De plaatjes zijn lak en glazuur (verlopen, een glans, een fijn reliëf); in de hoek ligt een heel vage bloesem. */
 .mj-dikte {
-  position: absolute; left: var(--d); top: var(--d); right: 0; bottom: 0; border-radius: .16em;
-  background: linear-gradient(145deg, #3fae8e 0%, #1f6a56 100%);
-  box-shadow: 0 .06em .16em rgba(5, 25, 20, .6), inset .03em .03em 0 rgba(255, 255, 255, .25);
+  position: absolute; left: var(--d); top: var(--d); right: 0; bottom: 0; border-radius: .17em; overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 120%, transparent 0 34%, rgba(255, 255, 255, .17) 35% 41%, transparent 42%) 0 0 / .34em .17em,
+    radial-gradient(circle at 0% 100%, transparent 0 34%, rgba(255, 255, 255, .13) 35% 41%, transparent 42%) .17em .085em / .34em .17em,
+    linear-gradient(150deg, #66d0ae 0%, #2f9478 38%, #17604e 100%);
+  box-shadow: 0 .05em .09em rgba(4, 24, 18, .55), 0 .11em .24em rgba(4, 24, 18, .38), inset .04em .04em 0 rgba(255, 255, 255, .34), inset -.03em -.04em .06em rgba(0, 40, 28, .45);
 }
 .mj-gezicht {
-  position: absolute; left: 0; top: 0; right: var(--d); bottom: var(--d); border-radius: .16em; display: grid; place-items: center; padding: 8% 10%;
-  background: linear-gradient(145deg, #fffdf6 0%, #f1e8d4 100%);
-  box-shadow: inset .05em .05em 0 rgba(255, 255, 255, .95), inset -.04em -.04em 0 rgba(150, 125, 80, .3), 0 0 0 .03em rgba(120, 100, 60, .35);
+  position: absolute; left: 0; top: 0; right: var(--d); bottom: var(--d); border-radius: .17em; display: grid; place-items: center; padding: 7% 8.5%; overflow: hidden;
+  background:
+    radial-gradient(130% 95% at 20% 8%, #ffffff 0%, #fffaf0 40%, #f4ead3 78%, #ead9b6 100%);
+  box-shadow: inset .05em .05em 0 rgba(255, 255, 255, .98), inset -.045em -.05em .05em rgba(160, 125, 70, .34), 0 0 0 .028em rgba(125, 95, 45, .4);
   transition: filter .28s ease, box-shadow .18s ease, transform .18s ease;
 }
-.mj-gezicht.bloem { background: linear-gradient(145deg, #fffbfc 0%, #f7e2e6 100%); }
-.mj-gezicht.seizoen { background: linear-gradient(145deg, #fffcf0 0%, #f4e7bd 100%); }
-.mj-plaatje { width: 100%; height: 100%; display: block; }
+/* een dun gouden inlegrandje */
+.mj-gezicht::before {
+  content: ""; position: absolute; inset: .07em; border-radius: .11em; pointer-events: none;
+  border: .022em solid transparent;
+  background: linear-gradient(135deg, #f7e2a0, #cf9f3a 50%, #f3d98c) border-box;
+  -webkit-mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) exclude, linear-gradient(#000 0 0) padding-box;
+  -webkit-mask-composite: xor; mask-composite: exclude; opacity: .85;
+}
+/* een glanzende streep linksboven en een roze waas met een vage bloesem rechtsonder */
+.mj-gezicht::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background:
+    linear-gradient(122deg, rgba(255, 255, 255, .78) 0%, rgba(255, 255, 255, .26) 22%, rgba(255, 255, 255, 0) 40%),
+    url("../../assets/blossom.svg") right -18% bottom -18% / 50% no-repeat;
+  opacity: .55;
+}
+.mj-gezicht.bloem { background: radial-gradient(130% 95% at 20% 8%, #fffefe 0%, #fff4f6 42%, #f9dfe6 80%, #efc7d3 100%); }
+.mj-gezicht.seizoen { background: radial-gradient(130% 95% at 20% 8%, #fffef6 0%, #fff7dc 42%, #f6e5b3 80%, #e9cf8a 100%); }
+.mj-plaatje {
+  position: relative; z-index: 1; width: 100%; height: 100%; display: block;
+  filter: drop-shadow(.012em .02em .006em rgba(255, 255, 255, .95)) drop-shadow(0 .018em .03em rgba(70, 38, 18, .32));      /* gelakt reliëf: een lichtrandje en een zachte schaduw */
+}
 
 /* Alle tegels zijn gewoon verlicht. Wat kan, heeft een gouden randje; een tegel die vastzit schudt als je hem aantikt. */
 html[data-theme="dark"] .mj-gezicht { filter: brightness(.95); }
@@ -62,7 +87,8 @@ html[data-contrast="high"] .mj-gezicht { box-shadow: 0 0 0 .08em #000; }
 html[data-contrast="high"] .mj-tegel.gekozen .mj-gezicht { box-shadow: 0 0 0 .14em #8a0f3c; }
 html[data-contrast="high"] 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-calm="true"])   html:not([data-calm="true"]) .mj-tegel.tip .mj-gezicht { animation: mj-tip 1s ease-in-out infinite alternate; }
+  html:not([data-calm="true"]) .mj-bord.glanst .mj-gezicht { animation: mj-glans 1.3s ease-out both; animation-delay: calc(var(--i) * 6ms + 500ms); }
+  html:not([data-calm="true"]) .mj-tegel.tip .mj-gezicht { animation: mj-tip 1s ease-in-out infinite alternate; }
   html:not([data-calm="true"]) .mj-knoppen .btn.wijs { animation: mj-wijs 1.1s ease-in-out infinite alternate; }
   html:not([data-calm="true"]) .mj-bord.husselt-uit .mj-gezicht { transform: rotateY(90deg); transition: transform .24s ease-in; transition-delay: calc(var(--i) * 1ms); }
   html:not([data-calm="true"]) .mj-bord.husselt-in .mj-gezicht { animation: mj-draai .5s ease-out both; animation-delay: calc(var(--i) * 2ms); }
@@ -77,3 +103,5 @@ html[data-contrast="high"]
 .mj-knoppen .btn[disabled] { background: transparent; }
 
 .mj-tegel.schud .mj-gezicht { box-shadow: 0 0 0 .08em #c0453a, 0 0 .4em .08em rgba(192, 69, 58, .55), inset .05em .05em 0 rgba(255, 255, 255, .95); }
+
+@keyframes mj-glans { 0% { filter: brightness(1); } 35% { filter: brightness(1.22) saturate(1.1); } 100% { filter: brightness(1); } }

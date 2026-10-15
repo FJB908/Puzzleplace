@@ -2,7 +2,17 @@
 //   0-8 stippen 1-9, 9-17 bamboe 1-9, 18-26 getallen 1-9, 27-30 winden (pijl N, O, Z, W), 31-33 draken (vlam, blad, kader),
 //   34-37 bloemen (kersenbloesem, pioen, chrysant, orchidee), 38-41 seizoenen (spruit, zon, herfstblad, sneeuwvlok)
 
-const INK = '#27343c', BLAUW = '#2c63a8', GROEN = '#2b8a57', ROOD = '#c23b32', GOUD = '#c8962e', ROZE = '#e0708f', PAARS = '#7a4fa3', IVOOR = '#fbf7ec';
+// De kleuren zijn glazuur en lak: verlopen in plaats van vlakke kleuren (zie PLAATJE_DEFS). Ze verlopen van boven (licht) naar onder (diep), per tegel.
+const INK = 'url(#mjInkt)', BLAUW = 'url(#mjBlauw)', GROEN = 'url(#mjGroen)', ROOD = 'url(#mjRood)', GOUD = 'url(#mjGoud)', ROZE = 'url(#mjRoze)', PAARS = 'url(#mjPaars)', IVOOR = '#fbf7ec';
+const VERLOPEN = [
+  ['mjRood', '#f0705c', '#a31d24'], ['mjBlauw', '#5b92d9', '#1c4789'], ['mjGroen', '#4cb784', '#12633d'], ['mjInkt', '#46556d', '#121a29'],
+  ['mjRoze', '#fbb3c8', '#d4547d'], ['mjPaars', '#bd94e2', '#65399a'],
+];
+// Eén keer in de pagina zetten (onzichtbaar maar wel aanwezig); alle tegels verwijzen ernaar
+export const PLAATJE_DEFS = `<defs>${VERLOPEN.map(([id, a, b]) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="50"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`).join('')}`
+  + `<linearGradient id="mjGoud" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="50"><stop offset="0" stop-color="#fbe9a8"/><stop offset=".45" stop-color="#d9a93a"/><stop offset="1" stop-color="#a97312"/></linearGradient>`
+  + `<radialGradient id="mjPetaal" cx=".5" cy=".85" r="1"><stop offset="0" stop-color="#d4547d"/><stop offset=".5" stop-color="#f4a0ba"/><stop offset="1" stop-color="#fff1f5"/></radialGradient>`
+  + `<radialGradient id="mjPioen" cx=".5" cy=".9" r="1"><stop offset="0" stop-color="#b3205a"/><stop offset=".6" stop-color="#e5588f"/><stop offset="1" stop-color="#fbb4cc"/></radialGradient></defs>`;
 const f = (n) => Number(n.toFixed(2));
 const cirkel = (x, y, r, fill, extra = '') => `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" fill="${fill}" ${extra}/>`;
 const polair = (cx, cy, r, hoek) => [cx + r * Math.sin(hoek * Math.PI / 180), cy - r * Math.cos(hoek * Math.PI / 180)];
@@ -23,7 +33,9 @@ function stippen(n) {
   const kleuren = [BLAUW, GROEN, ROOD];
   return STIP[n].map(([x, y, r], i) => {
     const k = n === 1 ? ROOD : kleuren[i % 3], ring = n === 1 ? BLAUW : k;
-    return cirkel(x, y, r, ring) + cirkel(x, y, r * 0.66, IVOOR) + cirkel(x, y, r * 0.38, k) + (r > 10 ? cirkel(x, y, r * 0.16, IVOOR) + `<circle cx="${x}" cy="${y}" r="${f(r * 0.82)}" fill="none" stroke="${IVOOR}" stroke-width="1"/>` : '');
+    const glans = `<ellipse cx="${f(x - r * 0.34)}" cy="${f(y - r * 0.42)}" rx="${f(r * 0.3)}" ry="${f(r * 0.15)}" fill="#fff" opacity=".55" transform="rotate(-38 ${f(x - r * 0.34)} ${f(y - r * 0.42)})"/>`;
+    return cirkel(x, y, r, ring) + cirkel(x, y, r * 0.66, IVOOR) + cirkel(x, y, r * 0.38, k) + cirkel(x, y, r * 0.14, '#fbe9a8')
+      + (r > 10 ? `<circle cx="${x}" cy="${y}" r="${f(r * 0.82)}" fill="none" stroke="#fbe9a8" stroke-width="1"/>` + [0, 1, 2, 3, 4, 5, 6, 7].map((q) => { const [bx, by] = polair(x, y, r * 0.52, q * 45 + 22); return cirkel(bx, by, 0.9, GOUD); }).join('') : '') + glans;
   }).join('');
 }
 
@@ -43,8 +55,8 @@ function stok(x, y, h, rood, w = 5.2) {
   const top = y - h / 2, knopen = h > 15 ? [y] : [];
   return `<rect x="${f(x - w / 2)}" y="${f(top)}" width="${w}" height="${h}" rx="${w / 2}" fill="${kleur}"/>`
     + `<rect x="${f(x - w / 2 + 0.9)}" y="${f(top + 1.4)}" width="1.1" height="${f(h - 2.8)}" rx="0.55" fill="${licht}"/>`
-    + knopen.map((k) => `<path d="M${f(x - w / 2)} ${k}h${w}" stroke="${IVOOR}" stroke-width="1.1"/>`).join('')
-    + (h > 15 ? `<path d="M${f(x - w / 2)} ${f(top + h * 0.28)}h${w}M${f(x - w / 2)} ${f(top + h * 0.72)}h${w}" stroke="${IVOOR}" stroke-width=".8" opacity=".9"/>` : `<path d="M${f(x - w / 2)} ${y}h${w}" stroke="${IVOOR}" stroke-width=".9"/>`);
+    + knopen.map((k) => `<path d="M${f(x - w / 2)} ${k}h${w}" stroke="#f6e7ae" stroke-width="1.1"/>`).join('')
+    + (h > 15 ? `<path d="M${f(x - w / 2)} ${f(top + h * 0.28)}h${w}M${f(x - w / 2)} ${f(top + h * 0.72)}h${w}" stroke="#f6e7ae" stroke-width=".8" opacity=".95"/>` : `<path d="M${f(x - w / 2)} ${y}h${w}" stroke="${IVOOR}" stroke-width=".9"/>`);
 }
 function bamboe(n) {
   if (n === 1) {                                 // een jonge scheut met blaadjes
@@ -57,21 +69,21 @@ function bamboe(n) {
 
 // ----- Getallen -----
 function getal(n) {
-  const bloesem = [0, 1, 2, 3, 4].map((i) => { const [x, y] = polair(20, 42, 3.6, i * 72); return cirkel(x, y, 2.1, ROOD); }).join('') + cirkel(20, 42, 1.4, IVOOR);
-  return `<text x="20" y="32" font-size="30" font-weight="800" text-anchor="middle" fill="${ROOD}" font-family="Georgia, 'Times New Roman', serif">${n}</text>`
+  const bloesem = [0, 1, 2, 3, 4].map((i) => { const [x, y] = polair(20, 43, 3.5, i * 72); return cirkel(x, y, 2.4, ROZE) + cirkel(x, y, 2.4, 'none', 'stroke="#c0446b" stroke-width=".35"'); }).join('') + cirkel(20, 43, 1.5, GOUD);
+  return `<text x="20" y="32" font-size="31" font-weight="800" text-anchor="middle" fill="${ROOD}" stroke="#fff" stroke-opacity=".55" stroke-width=".9" paint-order="stroke" font-family="Georgia, 'Times New Roman', serif">${n}</text>`
     + bloesem;
 }
 
 // ----- Winden: een pijl in een ring (noord omhoog, oost naar rechts, zuid omlaag, west naar links) -----
 function wind(i) {
   const kleur = [BLAUW, ROOD, GROEN, GOUD][i];
-  return `<circle cx="20" cy="26" r="16" fill="none" stroke="${INK}" stroke-width="2.2"/><circle cx="20" cy="26" r="13" fill="none" stroke="${kleur}" stroke-width=".9" stroke-dasharray="2 2.2"/>`
-    + `<g transform="rotate(${i * 90} 20 26)"><path d="M20 12 L28 26 L22.2 24 L22.2 38 L17.8 38 L17.8 24 L12 26Z" fill="${kleur}" stroke="${INK}" stroke-width="1" stroke-linejoin="round"/></g>`;
+  return `<circle cx="20" cy="26" r="16" fill="none" stroke="${GOUD}" stroke-width="2.4"/><circle cx="20" cy="26" r="13.4" fill="none" stroke="${INK}" stroke-width=".5"/><circle cx="20" cy="26" r="12" fill="none" stroke="${kleur}" stroke-width=".9" stroke-dasharray="2 2.2"/>`
+    + `<g transform="rotate(${i * 90} 20 26)"><path d="M20 12 L28 26 L22.2 24 L22.2 38 L17.8 38 L17.8 24 L12 26Z" fill="${kleur}" stroke="#2a1d12" stroke-width=".8" stroke-linejoin="round"/></g>`;
 }
 
 // ----- Draken -----
 function draak(i) {
-  if (i === 0) return `<path d="M20 6 C25 15 32 20 32 31 C32 40 27 46 20 46 C13 46 8 40 8 31 C8 24 12 21 14 15 C16 19 17 20 19 21 C18 16 18 11 20 6Z" fill="${ROOD}"/><path d="M20 24 C23 29 26 31 26 36 C26 40 23 42 20 42 C17 42 14 40 14 36 C14 33 16 31 17 28 C18 30 19 31 20 31Z" fill="#f0a39a"/>`;
+  if (i === 0) return `<path d="M20 6 C25 15 32 20 32 31 C32 40 27 46 20 46 C13 46 8 40 8 31 C8 24 12 21 14 15 C16 19 17 20 19 21 C18 16 18 11 20 6Z" fill="${ROOD}"/><path d="M20 24 C23 29 26 31 26 36 C26 40 23 42 20 42 C17 42 14 40 14 36 C14 33 16 31 17 28 C18 30 19 31 20 31Z" fill="#ffd9a6"/>`;
   if (i === 1) return `<path d="M9 43 C5 24 17 8 33 8 C36 25 27 41 9 43Z" fill="${GROEN}"/><path d="M10 42 C16 32 23 22 32 10" fill="none" stroke="${IVOOR}" stroke-width="1.8" stroke-linecap="round"/><path d="M17 33 C19 28 15 27 13 29M23 25 C26 22 22 19 20 21" fill="none" stroke="${IVOOR}" stroke-width="1.2" stroke-linecap="round"/>`;
   return `<rect x="8" y="8" width="24" height="36" rx="4.5" fill="none" stroke="${BLAUW}" stroke-width="2.6"/><rect x="12.5" y="12.5" width="15" height="27" rx="2.5" fill="none" stroke="${BLAUW}" stroke-width="1.2"/>`;
 }
@@ -80,16 +92,18 @@ function draak(i) {
 const blad = (x, y, hoek, lang, breed, kleur) => `<ellipse cx="${f(x)}" cy="${f(y)}" rx="${breed}" ry="${lang}" fill="${kleur}" transform="rotate(${hoek} ${f(x)} ${f(y)})"/>`;
 function bloem(i) {
   const M = [20, 25];
-  if (i === 0) {                                  // kersenbloesem
-    return [0, 1, 2, 3, 4].map((k) => { const [x, y] = polair(M[0], M[1], 8.5, k * 72); return cirkel(x, y, 7.4, ROZE) + cirkel(x, y, 7.4, 'none', `stroke="#c24a6c" stroke-width=".8"`); }).join('')
-      + cirkel(...M, 4.2, '#fff0f3') + [0, 1, 2, 3, 4].map((k) => { const [x, y] = polair(M[0], M[1], 2.4, k * 72 + 36); return cirkel(x, y, 0.9, GOUD); }).join('');
+  if (i === 0) {                                  // kersenbloesem: vijf blaadjes met een inkeping, meeldraden van goud
+    const petal = 'M0 0C-7.200-4.200-9.600-12.400-4.800-15.600-2.800-16.800-1-16 0-14.200 1-16 2.800-16.800 4.800-15.600 9.600-12.400 7.200-4.200 0 0Z';
+    return [0, 1, 2, 3, 4].map((k) => `<path transform="translate(${M[0]} ${M[1]}) rotate(${k * 72}) scale(.98)" d="${petal}" fill="url(#mjPetaal)" stroke="#c4456b" stroke-width=".6" stroke-linejoin="round"/>`).join('')
+      + [0, 1, 2, 3, 4].map((k) => `<path transform="translate(${M[0]} ${M[1]}) rotate(${k * 72})" d="M0 -3.600L0 -9.400" stroke="#d96a8d" stroke-width=".5" stroke-linecap="round"/>`).join('')
+      + cirkel(...M, 3.4, '#f7b6c8') + [0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const [x, y] = polair(M[0], M[1], 5.4, k * 45 + 10), [x0, y0] = polair(M[0], M[1], 1.2, k * 45 + 10); return `<path d="M${f(x0)} ${f(y0)}L${f(x)} ${f(y)}" stroke="#c98a2a" stroke-width=".5"/>` + cirkel(x, y, 0.85, GOUD); }).join('') + cirkel(...M, 1.3, '#b8325f');
   }
   if (i === 1) {                                  // pioen: twee lagen puntige bladeren
-    return [0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const [x, y] = polair(M[0], M[1], 9, k * 45); return blad(x, y, k * 45, 8.5, 4.6, '#d9467f'); }).join('')
+    return [0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const [x, y] = polair(M[0], M[1], 9, k * 45); return blad(x, y, k * 45, 8.5, 4.6, 'url(#mjPioen)'); }).join('')
       + [0, 1, 2, 3, 4, 5].map((k) => { const [x, y] = polair(M[0], M[1], 5.2, k * 60 + 30); return blad(x, y, k * 60 + 30, 5.6, 3.3, '#f08cae'); }).join('') + cirkel(...M, 2.4, GOUD);
   }
   if (i === 2) {                                  // chrysant: veel smalle bladeren
-    return Array.from({ length: 18 }, (_, k) => { const [x, y] = polair(M[0], M[1], 9.4, k * 20); return blad(x, y, k * 20, 7, 1.7, k % 2 ? '#e8a22b' : '#f0be4d'); }).join('')
+    return Array.from({ length: 18 }, (_, k) => { const [x, y] = polair(M[0], M[1], 9.4, k * 20); return blad(x, y, k * 20, 7, 1.7, k % 2 ? 'url(#mjGoud)' : '#f6d36a'); }).join('')
       + cirkel(...M, 4, '#b8741a') + cirkel(...M, 1.8, '#f7d68a');
   }
   return blad(20, 17, 0, 10, 5.4, PAARS) + blad(11.5, 28, -62, 9, 4.6, '#9a6fc4') + blad(28.5, 28, 62, 9, 4.6, '#9a6fc4') + blad(15, 35, -150, 5.5, 3.2, '#c7a6e3') + blad(25, 35, 150, 5.5, 3.2, '#c7a6e3') + cirkel(20, 28, 2.6, GOUD);

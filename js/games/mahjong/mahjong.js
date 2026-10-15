@@ -8,7 +8,7 @@ import { h, icon } from '../../ui.js';
 import { t } from '../../i18n/index.js';
 import { burst, motionOK } from '../../effects.js';
 import { bord, newGame, neemWeg, zetTerug, hussel, tip, isVrij, wegSet, klaar, tegelsOver, vastgelopen, passen, progress } from './engine.js';
-import { plaatjeSvg, plaatjeNaam } from './tegels.js';
+import { plaatjeSvg, plaatjeNaam, PLAATJE_DEFS } from './tegels.js';
 import { felicitatie } from '../../shared/felicitatie.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
@@ -25,6 +25,7 @@ function plaatje(f) {
 }
 
 export function mount(container, ctx) {
+  if (!document.getElementById('mj-defs')) document.body.insertAdjacentHTML('beforeend', `<svg id="mj-defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">${PLAATJE_DEFS}</svg>`);       // de kleurverlopen van de tegels
   let state = geldig(ctx.saved) ? ctx.saved : newGame(ctx.seed, ctx.difficulty);
   const b = bord(state.niveau);
   let gekozen = null, focus = 0, tipTimer = null, bezig = false, afgerond = false, dood = false;
@@ -182,6 +183,7 @@ export function mount(container, ctx) {
   // Het uitdelen aan het begin: de tegels vallen laag voor laag neer
   function uitdelen() {
     if (!motionOK()) return;
+    bordEl.classList.add('glanst'); setTimeout(() => bordEl.classList.remove('glanst'), 3200);                // na het uitdelen glanst het porselein even op
     tegels.forEach((el, i) => {
       const tg = b.tegels[i], vertraging = tg.z * 140 + (tg.y * 22 + tg.x * 9);
       el.animate([{ transform: 'translateY(-1.6em) scale(.9)', opacity: 0 }, { transform: 'translateY(0) scale(1)', opacity: 1 }], { duration: 420, delay: Math.min(vertraging, 900), easing: 'cubic-bezier(.2,.8,.3,1.1)', fill: 'backwards' });
