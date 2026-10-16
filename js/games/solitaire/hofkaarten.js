@@ -30,6 +30,7 @@ export const HOF_DEFS = '<defs>'
   + '<radialGradient id="hofParel" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f3e8d0"/><stop offset="1" stop-color="#cdbb92"/></radialGradient>'
   + '<radialGradient id="hofJade" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#bfeed3"/><stop offset=".55" stop-color="#4fb987"/><stop offset="1" stop-color="#14663f"/></radialGradient>'
   + '<linearGradient id="hofKaak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a4a30" stop-opacity=".26"/><stop offset=".3" stop-color="#8a4a30" stop-opacity="0"/><stop offset=".8" stop-color="#8a4a30" stop-opacity="0"/><stop offset="1" stop-color="#8a4a30" stop-opacity=".16"/></linearGradient>'
+  + '<linearGradient id="hofBaard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2030"/><stop offset=".55" stop-color="#40374b"/><stop offset="1" stop-color="#8d8699"/></linearGradient>'
   + '<radialGradient id="hofRand" cx=".5" cy=".5" r=".62"><stop offset=".62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3a2410" stop-opacity=".22"/></radialGradient>'
   + '<radialGradient id="hofSchijn" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'
   + '<pattern id="hofPatK" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r=".34" fill="#cda24a" fill-opacity=".9"/><circle cx="0" cy="0" r=".22" fill="#cda24a" fill-opacity=".7"/><circle cx="5" cy="0" r=".22" fill="#cda24a" fill-opacity=".7"/><circle cx="0" cy="5" r=".22" fill="#cda24a" fill-opacity=".7"/><circle cx="5" cy="5" r=".22" fill="#cda24a" fill-opacity=".7"/></pattern>'
@@ -112,8 +113,10 @@ const ermel = (cx, s, licht, y = 61.8) => {
   return `<path d="${mouw}" fill="url(#hofDonker${s})"/><path d="${mouw}" fill="url(#hofPat${s})" opacity=".5"/>`
     + `<path d="M${l} ${y}Q${cx} ${f(y + 1.2)} ${r} ${y}L${f(cx + 3.9)} ${f(y + 2.6)}Q${cx} ${f(y + 3.8)} ${f(cx - 3.9)} ${f(y + 2.6)}Z" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".3"/><path d="M${l} ${f(y + 0.9)}Q${cx} ${f(y + 2.1)} ${r} ${f(y + 0.9)}" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".25"/>`;
 };
-// Een vuist om een stok of een steel; x en y zijn het midden
-const vuist = (x, y) => `<g transform="translate(${x} ${y}) scale(.86)"><path d="M-1.9 -1.5C-1.9 -2.4-1-2.9 0-2.9 1-2.9 1.9-2.4 1.9-1.5L2 1C2 2.2 1 3 0 3-1 3-2 2.2-2 1Z" fill="${HUID}"/><path d="M-1.9 -.5H1.9M-1.9 .9H1.9" stroke="#c4967a" stroke-width=".2" fill="none"/><ellipse cx=".2" cy="-2.7" rx="1.1" ry=".75" fill="${HUID}"/></g>`;
+// Een vuist om een stok of een steel (vier vingers en een duim); x en y zijn het midden
+const vuist = (x, y) => `<g transform="translate(${x} ${y}) scale(.9)"><rect x="-1.4" y="2" width="2.8" height="2" rx=".6" fill="${HUID}"/>`
+  + [-1.7, -0.5, 0.7, 1.9].map((fy) => `<rect x="-1.95" y="${f(fy - 0.62)}" width="3.9" height="1.26" rx=".63" fill="${HUID}" stroke-width=".2"/>`).join('')
+  + `<ellipse cx=".5" cy="-2.55" rx="1.3" ry=".8" transform="rotate(-15 .5 -2.55)" fill="${HUID}" stroke-width=".2"/></g>`;
 const hals = () => `<path d="${HALS}" fill="url(#hofHals)"/>`;
 const gezicht = () => `<path d="${GEZICHT}" fill="${HUID}"/><path d="${GEZICHT}" fill="url(#hofKaak)" stroke="none"/>`;
 const oog = '<path d="M25.2 33.8Q26.9 32.5 28.6 33.8Q26.9 34.9 25.2 33.8Z" fill="#fffdf8" stroke="#3a2418" stroke-width=".15"/><circle cx="26.9" cy="33.75" r=".82" fill="#2b1a14" stroke="none"/><circle cx="27.2" cy="33.45" r=".28" fill="#fff" stroke="none"/><path d="M24.9 33.9Q26.9 31.9 28.9 33.8" fill="none" stroke="#1d120e" stroke-width=".42" stroke-linecap="round"/>';
@@ -126,6 +129,20 @@ const BROW = {
   boer: 'M29.1 31.1Q27 29.7 24.7 31.1Q27 30.6 29.1 31.5Z',
 };
 const haarGlans = (d, k = 0.3) => `<path d="${d}" fill="none" stroke="#fff" stroke-opacity="${k}" stroke-width=".6" stroke-linecap="round"/>`;
+
+// Een klein embleem voor een medaillon, een waaier of een sjerp (op een licht vlak): schoppen de maan, harten de bloesem, ruiten de zon, klaver bamboe
+function embleem(s, x, y, r) {
+  if (s === 1) return bloesemFig(x, y, r * 0.95, true);
+  if (s === 2) {
+    const stralen = Array.from({ length: 8 }, (_, i) => { const [x1, y1] = polair(x, y, r * 0.6, i * 45), [x2, y2] = polair(x, y, r * 0.98, i * 45); return `M${f(x1)} ${f(y1)}L${f(x2)} ${f(y2)}`; }).join('');
+    return `<path d="${stralen}" stroke="#e8a52c" stroke-width="${f(r * 0.17)}" stroke-linecap="round" fill="none"/><circle cx="${x}" cy="${y}" r="${f(r * 0.46)}" fill="#f6b92d" stroke="#b9700c" stroke-width=".2"/>`;
+  }
+  if (s === 0) {
+    return `<g transform="translate(${x} ${y}) scale(${f(r / 5.4)}) translate(-44.2 -28)"><path d="M46.65 24.14A4.8 4.8 0 1 0 43.25 31.78A4.2 4.2 0 1 1 46.65 24.14Z" fill="#33448f" stroke="#1b2565" stroke-width=".3"/></g>` + funkel(f(x + r * 0.5), f(y - r * 0.4), f(r * 0.3), '#e0a82c') + funkel(f(x + r * 0.62), f(y + r * 0.34), f(r * 0.18), '#e0a82c');
+  }
+  return `<path d="M${x} ${f(y + r * 0.9)}V${f(y - r * 0.1)}" stroke="#2d9f6b" stroke-width="${f(r * 0.14)}" stroke-linecap="round"/>`
+    + blad(f(x - r * 0.42), f(y - r * 0.3), -48, f(r * 0.5), f(r * 0.2), '#2d9f6b') + blad(f(x + r * 0.42), f(y - r * 0.3), 48, f(r * 0.5), f(r * 0.2), '#2d9f6b') + blad(x, f(y - r * 0.55), 0, f(r * 0.52), f(r * 0.2), '#55c792');
+}
 
 // ----- De heer -----
 function heer(s, h) {
@@ -144,7 +161,7 @@ function heer(s, h) {
   const gordel = `<path d="M10 63.4Q30 66.6 50 63.4V67.2H10Z" fill="url(#hofDonker${s})"/><path d="M10 63.4Q30 66.6 50 63.4" fill="none" stroke="#cda24a" stroke-width=".6"/>`
     + [23.4, 36.6].map((x) => `<rect x="${f(x - 1.4)}" y="64.4" width="2.8" height="2.4" rx=".5" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".18"/>`).join('')
     + '<circle cx="30" cy="65.4" r="2.2" fill="url(#hofJade)" stroke="#cda24a" stroke-width=".5"/><circle cx="30" cy="65.4" r=".7" fill="#0e4a2c" opacity=".7" stroke="none"/>';
-  const medaljon = `<circle cx="30" cy="55.4" r="4.6" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".25"/><circle cx="30" cy="55.4" r="3.4" fill="url(#hofRobe${s})"/>${bloesemFig(30, 55.4, 2.9, true)}`;
+  const medaljon = `<circle cx="30" cy="55.4" r="4.6" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".25"/><circle cx="30" cy="55.4" r="3.5" fill="#fff6e2" stroke="#b9852a" stroke-width=".2"/>${embleem(s, 30, 55.4, 3.3)}`;
   const zwaard = '<path d="M43.6 23.6L44.45 26.6V57.4H42.75V26.6Z" fill="url(#hofStaal)" stroke="#6f7f99" stroke-width=".2"/><path d="M43.6 27V57.2" stroke="#fff" stroke-opacity=".75" stroke-width=".3"/>'
     + '<rect x="40.2" y="57.2" width="6.8" height="1.5" rx=".7" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".2"/><rect x="42.7" y="58.6" width="1.8" height="5.4" fill="url(#mjLak)" stroke="#7a1218" stroke-width=".2"/><circle cx="43.6" cy="64.2" r="1.1" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".2"/>';
   return [
@@ -153,7 +170,7 @@ function heer(s, h) {
     gezicht(),
     twee(oog + blos + brauw(BROW.heer)), neus,
     '<path d="M28.9 39.9Q30 40.5 31.1 39.9" fill="none" stroke="#9a4a42" stroke-width=".35" stroke-linecap="round"/>',
-    `<path d="${baard}" fill="${HAAR}"/>${baardLijnen}`, snor,
+    `<path d="${baard}" fill="url(#hofBaard)"/>${baardLijnen}`, snor,
     `<path d="${kroonSpits}" fill="url(#mjGoudB)"/>`, kroonZij, `<path d="${kroonBand}" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".25"/>`,
     '<path d="M24.6 25.5Q30 24.4 35.4 25.5" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".3"/>',
     twee(parel(25.8, 25.9) + parel(27.8, 26.2)), '<circle cx="30" cy="26" r="1.25" fill="url(#mjLak)" stroke="#7a1218" stroke-width=".2"/><circle cx="29.6" cy="25.6" r=".3" fill="#fff" opacity=".8" stroke="none"/>',
@@ -173,11 +190,11 @@ function vrouw(s, h) {
   const band = `<path d="M10 59.6Q30 63.2 50 59.6V63.6Q30 67.2 10 63.6Z" fill="url(#hofDonker${s})"/><path d="M10 59.6Q30 63.2 50 59.6M10 63.6Q30 67.2 50 63.6" fill="none" stroke="#cda24a" stroke-width=".5"/>`
     + '<circle cx="30" cy="63.4" r="2.6" fill="url(#hofJade)" stroke="#cda24a" stroke-width=".55"/><circle cx="30" cy="63.4" r=".8" fill="#0e4a2c" opacity=".7" stroke="none"/>';
   const waaier = '<path d="M40.4 61L40.4 66" stroke="url(#mjGoudB)" stroke-width="1.1" stroke-linecap="round"/><circle cx="40.4" cy="55.4" r="5.8" fill="#fff8e8" stroke="#cda24a" stroke-width=".8"/><circle cx="40.4" cy="55.4" r="4.7" fill="none" stroke="#cda24a" stroke-width=".25"/>'
-    + `<path d="M36.6 58.6C38 56.6 40 55.4 43.6 53.2" fill="none" stroke="#6b4a2a" stroke-width=".5" stroke-linecap="round"/>${bloesemFig(41.8, 53.2, 2.6)}${bloesemFig(38.4, 57, 1.9)}`;
+    + (s === 1 ? `<path d="M36.6 58.6C38 56.6 40 55.4 43.6 53.2" fill="none" stroke="#6b4a2a" stroke-width=".5" stroke-linecap="round"/>${bloesemFig(41.8, 53.2, 2.6)}${bloesemFig(38.4, 57, 1.9)}` : embleem(s, 40.4, 55.2, 4));
   const haarbloemen = [[22.2, 24.6], [37.8, 24.6]].map(([x, y]) => blad(x + (x < 30 ? -2.6 : 2.6), y + 1.2, x < 30 ? -50 : 50, 2.2, 1, '#4aa86f') + bloesemFig(x, y, 3.5, true)).join('');
   const haarspelden = twee('<path d="M21.4 28L20.7 36.2M23 27.6L22.8 33.6" stroke="#cda24a" stroke-width=".35" fill="none"/>' + parel(20.7, 37, 0.75) + parel(22.8, 34.2, 0.6));
   return [
-    `<path d="${haarAchter}" fill="${HAAR}"/>`, haarGlans('M23.6 22.4Q26 19.6 30 19.2', 0.3),
+    `<path d="${haarAchter}" fill="${HAAR}"/>`, haarGlans('M23.6 22.4Q26 19.6 30 19.2', 0.3), twee('<path d="M22.2 27C21.6 32 21.8 38 22.4 44M23.4 29C22.9 34 23 39 23.4 44" fill="none" stroke="#6b5c7d" stroke-opacity=".5" stroke-width=".22"/>'),
     lijf(s), hals(), sluier, '<path d="M26.4 45L30 56.4 33.6 45Z" fill="#fff6e6"/>', kraag, band,
     gezicht(),
     twee(oog + blos + brauw(BROW.vrouw)), neus,
@@ -196,7 +213,7 @@ function boer(s, h) {
   const pony = symVlak(30, 25.2, ['C', 26, 25.2, 23.9, 27.4, 24.1, 31.4], ['C', 25.6, 29.6, 27.6, 28.4, 30, 28.4]);
   const kraag = `<path d="M25.4 45C27 47.4 33 47.4 34.6 45L35.4 47C32.6 49.6 27.4 49.6 24.6 47Z" fill="${h.licht}" stroke="#cda24a" stroke-width=".5"/>`;
   const sjerp = '<path d="M15 48L20 46.2 50 62.6V66.6Z" fill="url(#mjLak)" stroke="#7a1218" stroke-width=".3"/><path d="M15.8 48.6L49.4 66" fill="none" stroke="#cda24a" stroke-width=".4"/>'
-    + `<circle cx="36.6" cy="57" r="2.3" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".25"/>${bloesemFig(36.6, 57, 1.8)}`;
+    + `<circle cx="36.6" cy="57" r="2.7" fill="url(#mjGoudB)" stroke="#8a5a10" stroke-width=".25"/><circle cx="36.6" cy="57" r="2" fill="#fff6e2" stroke="#b9852a" stroke-width=".15"/>${embleem(s, 36.6, 57, 1.9)}`;
   const gordel = `<path d="M10 62.4Q30 65.6 50 62.4V67.2H10Z" fill="url(#hofDonker${s})"/><path d="M10 62.4Q30 65.6 50 62.4" fill="none" stroke="#cda24a" stroke-width=".6"/>`;
   const speer = '<path d="M16.4 30V67" stroke="#8a5a2a" stroke-width="1.1" stroke-linecap="round"/><path d="M16.4 24C17.9 26.8 18.1 29.4 16.4 31.6 14.7 29.4 14.9 26.8 16.4 24Z" fill="url(#hofStaal)" stroke="#6f7f99" stroke-width=".25"/>'
     + '<path d="M16.4 31.6q-2.7 2.6-2.4 6.4 1-1.6 2.4-2.1 1.4.5 2.4 2.1.3-3.8-2.4-6.4Z" fill="url(#mjLak)" stroke="#7a1218" stroke-width=".2"/><rect x="15.5" y="31" width="1.8" height=".9" fill="url(#mjGoudB)"/>';
