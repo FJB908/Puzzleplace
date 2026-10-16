@@ -49,7 +49,7 @@ def vouw(w):
     return ''.join(u)
 
 LET = re.compile(r'^[^\W\d_]+$', re.UNICODE)
-CLITIC = re.compile(r'[áéíóú][a-zñ]*?(me|te|se|nos|os|lo|la|le|los|las|les)(lo|la|los|las|le|les)?$')
+ES_GERUNDIO = re.compile(r'(ándo|éndo|iéndo|yéndo|ando|iendo|yendo)(me|te|se|nos|os|lo|la|le|los|las|les){1,2}$')
 
 def lees(pad):
     """Een lijst met woorden uit een tekstbestand (een of meer per regel, # begint een toelichting)."""
@@ -58,6 +58,8 @@ def lees(pad):
 blok = lees(os.path.join(REPO, 'tools/scrabble/lijst', taal, 'blokkeerlijst.txt')) | lees(os.path.join(REPO, 'tools/woordtuin', taal, 'blokkeerlijst.txt'))
 toe = lees(os.path.join(REPO, 'tools/scrabble/lijst', taal, 'toegestaan.txt'))
 kort = lees(os.path.join(REPO, 'tools/scrabble/lijst', taal, 'kort.txt'))      # de tweeletterwoorden: een lijst met de hand (woordenboeken kennen ook afkortingen)
+# wat voor dit spel is goedgekeurd (toegestaan.txt) wint van de blokkeerlijst van Woordtuin (die is strenger: daar mogen ook leenwoorden en bijna-namen niet in)
+blok -= toe | kort | {vouw(x) for x in toe | kort}
 ruw = lees(os.path.join(REPO, 'tools/scrabble/lijst', taal, 'ruw.txt')) | lees(os.path.join(REPO, 'tools/woordtuin', taal, 'ruw.txt'))
 
 # 1. kandidaten uit echte tekst: ondertitels (met hoofdletters apart geteld) en de woordenlijst van wordfreq
@@ -129,6 +131,11 @@ else:
 # 3. in echte tekst voorgekomen? (alleen voor de woorden uit een woordenboek: een lijst als OpenTaal of ENABLE is zelf al zorgvuldig gekeurd)
 def zipf(w):
     return zipf_frequency(w, taal) if len(w) < 40 else 0
+# Patronen die geen woorden zijn, per taal (met de uitzonderingen die wel woorden zijn)
+BLOK_RE = {
+    'pl': [(re.compile(r'^[^aąeęioóuy]+$'), set()), (re.compile(r'(orum|arum|ibus|itatem|ensis)$'), {'forum', 'kworum', 'minibus', 'omnibus'})],
+    'es': [(re.compile(r'(ando|iendo|yendo)(me|te|se|nos|os|lo|la|le|los|las|les){1,2}$'), set())],
+}
 rij = {}
 KORT = {vouw(x) for x in kort}
 afgekeurd = []
@@ -136,9 +143,11 @@ for w, b in geldig.items():
     f = vouw(w)
     if not (2 <= len(f) <= 15) or any(c not in LETTERS for c in f): continue
     if w in blok or f in blok: continue
+    if any(r.search(f) and f not in uitz for r, uitz in BLOK_RE.get(taal, ())): continue                    # patronen die de beoordelaars vonden (zie BEOORDELING.md)
     if len(f) == 2 and f not in KORT: continue
+    if taal == 'nl' and (b != 'toegestaan') and (any(c in w for c in 'äöñ') or w.startswith(('http', 'www'))): continue     # geen Nederlandse letters: een vreemd woord of een internetadres
     if len(f) == 3 and b != 'toegestaan' and (not any(c in VOKAAL for c in f)): continue     # geen klinker: een afkorting
-    if len(f) <= 3 and taal == 'en' and b != 'lijst': continue                                  # korte Engelse woorden: alleen die van ENABLE
+    if len(f) <= 3 and taal == 'en' and b not in ('lijst', 'toegestaan'): continue                                  # korte Engelse woorden: alleen die van ENABLE
     n = klein.get(w, 0) + (hoofd.get(w, 0) if b == 'zelfst.nw.' else 0)
     if b != 'toegestaan' and len(f) <= 5 and hoog.get(w, 0) >= 30 and hoog.get(w, 0) > 3 * max(n, 1):     # staat vooral in hoofdletters: een afkorting
         afgekeurd.append((f, w + ' (afkorting)', n, 0)); continue
@@ -148,8 +157,8 @@ for w, b in geldig.items():
     if taal == 'en' and b == 'woordenboek' and len(f) <= 5 and z < 3.0: continue                  # Engelse woorden van 4 en 5 letters uit het woordenboek (niet ENABLE): vooral afkortingen en namen
     gezien = n >= 2 or z >= 1.0
     if not gezien and VORM_ALLES and ((w in vorm_klein) or (b == 'zelfst.nw.' and w in vorm_hoofd)):
-        # een vorm uit het woordenboek die nergens voorkomt: toelaten, behalve werkwoorden met aangeplakte voornaamwoorden ("echándonosla"), die geen woord zijn
-        if not (taal == 'es' and CLITIC.search(w)): gezien = True
+        gezien = True                                                      # een vorm uit het woordenboek die nergens voorkomt: toch toelaten
+    if taal == 'es' and ES_GERUNDIO.search(w): continue                    # gerundium met aangeplakte voornaamwoorden ("abalanzándose"): geen woord in het Scrabble
     if b in ('woordenboek', 'zelfst.nw.') and not gezien:
         afgekeurd.append((f, w, n, z)); continue
     old = rij.get(f)

@@ -1,0 +1,175 @@
+# --- PL review: afkortingen en niet-Poolse/onbestaande 2-4 letter woorden (handmatig) ---
+abo abp abpa acer achy acti adze afty agad agam agd akio alby alda aldy alf alla alni amer ami anch ang anim
+anni ars art artu atm bess bibl bien bier biff bin boye bpa brei brie bzzz chrz cit con ctrl cyt dag daw dei
+dem der det doc doi dypl egz ekg etc etym ewang ewid fabr fiz fragm frrr geogr geol gosp hab hau hebr hist
+hiszp hmmm hoc http ibn ilustr inf insp inst instr int inż jap jęz kbit kbks kbps kin kmdr kmdt koi kol kom
+kupn lai lei lim mal mes mia mjra mos nadkom nadzw nil nut obr odc ode odp oprac osp pchor pen phi pis podst
+pon poz ppanc ppor ppoż ppłk proj prok przeł przym przyp pseud red res rozdz rozm rus sem sic sil sin skoml
+soi sygn tabl tao techn tez tow tri tyg ukr ula une uniw wewn wlkp wsch wyd wydz wyj wyk wym wys yin zacz zagr
+zakł zal zarz zał zewn zob ćśśś łac
+# --- PL review: namen/merken in kleine letters (kop heeft hoofdletter-tweeling in Hunspell) ---
+adasia adasiem adasiu adaś adidasa adidasem aerostar agfa agfy agila alcatel almera altimy altimą altimę
+amstrad amstrada antek antka antki antkiem antkowi antku apollina aspazja aspazji aspazję astrą astrę asus
+asusa austina austinem austinie austinowi austinów autosan autosana aygo bakoma baleno barbie basiek batman
+batmanem batmanie batmanowi batmany batmanów baśka baśki baśką baśkę bentleyami bentleyem bentleyowi bentleyu
+bentleyów berettami beretty berettą berettę bluebird boeing boeinga boeingami boeingi boeingiem boeingu
+boeingów bolek bolka bolki bolkiem bolkowi bolku bolków buick buicka buickami buicki buickiem buicku buicków
+bundeswehr bundeswehra bundeswehry bundeswehrze cadillac cadillacach cadillacami cadillaców calibra calibrę
+camry canona canonem canonie canonowi carina carinie cariny cariną carinę cayenne celica celice chrysler
+chryslera chryslerem chryslerowi chryslerze chryslerów corolla corollach corollą corollę corsy corsą corsę
+dacia dacii dacio dacią dacię daimler daimlera daimlerem datsun datsuna datsunami datsunem datsunie datsunowi
+datsuny dedra defender defendera defenderem disneyland disneylandem disneylandu disneylandzie dornier dorniera
+dorniery elantra elantry ericssonem ericssonie escorcie escortów ewie ewy ewą ewę fabia fabii fabio fabią
+fabię fender fendera fenderze fiesta fiesty fiestą fiestę fieście firebirda firebirdami firebirdem firebirdzie
+focus fokkera fokkerem fokkerze fokkerów forester forestera foresterem foresterów frani frania franie franio
+franiu franię frontera frontery fronterze fronterą fronterę fuji goodyear goodyeara grundig heinekena
+heinekenie heinekeny heinekenów hermina herminie hermino herminą herminę hillmana hillmanem hillmanie
+hillmanowi hillmanów hitachi hond honda hondach hondy hondzie hondą hondę humber humbera humberze hummer
+hummera hummerach hummerami hummerem hummery hummerze hummerów hyundai impala impale impali impalą impalę
+isuzu jaguar jaguara jaguarach jaguarami jaguarem jaguarowi jaguary jaguarze jaguarów jetcie jett jetty jettę
+jimny jola jolce jole jolek joli jolka jolki jolo jolu jolą jolę junkersa junkersy junkersów kadett kadetta
+kamaz kamaza kangoo kawasaki kia korando lamborghini lancia lancie lancii lancią lancię lanos lanosa leganza
+lincoln lincolna lincolnami lincolnem lincolnie lincolnowi lincolny lincolnów ludek ludka ludkach ludkami
+ludki ludkiem ludkom ludkowie ludku ludków macintosh macintosha macintoshem macintoshowi macintoshu
+macintoshów mackintosh mackintosha mackintoshowi mikasa mikasy mikasą mikasę panasonica pontiac pontiaców
+roleksa roleksem roleksie roleksy roleksów sebringiem sylwek sylwka sylwkiem wicek wickiem wickowi zafira
+zafiro zafirze zafirę zośce zośka zośki zośką zośkę
+# --- PL review: vreemde woorden (Engels/Latijn/Frans/Italiaans), n-gram top + handmatig gecontroleerd ---
+absentia accel accelerando accent accenta accord accorda accordem acida acidum actio action actus addio adidas
+adieu aeterna aeternum afrikaans agatis agend agere aggiornamento agile agitato agreement aidsa airedale akbar
+albee albus aldis aletheia allel allele allemande allure almer aloes alright altea altei alter altera alteri
+altima amabile amandi amaretto american amore amoroso anchois ancien ancora angelica angelicus anglaise annos
+annuit anten anticoli antipasti antipasto apage apeiron apella apelle aphelium appeal applause aprilis arche
+archi arctic arcus arden ardente arend arete arhat arhata arietta arietty arioso arrangement arsen artes
+artificial artis asdic asembler aspera aspergillus assai assembler assemblera asset assunta aston atest
+attitude audience auditing aurea aureus auriga aurigi austin autocasco autocross ayrshire babbit background
+balboa banderillero banging banshee barchetta baroness barrel bassa bassem basset basseta basso bassom
+battement battuta beaujolais bechstein bedeker beeper beetle beguine belli benefis bentley bentleya bentleye
+benzoes berest berett beretta beretto berkel berlinger berlingo bessa besso bestseller bestselleru beurre
+bhakti bhangra biffo billing binder bismilla bismillah bitels bitrate black blade blanche bleed blend
+blizzarda blockers blogger bloggera bloodhound bloodhounda bloomers bluetooth bluetootha bluetoothem bluff
+bobbies bocce boeuf bolognese bonjour bonza bonzai bookcrossing booker borgis bouillabaisse boules boulle
+bounty bourgeois bourguignonne brain branding brasileiro brasse brasserie breakdance briard brief briefing
+brillant brillante brindisi broadband broadcasting brunche brunette brushing brutta buffa buffo bugatti
+building buras burberry burito buritos bushido busido business businesswoman businesswomen button caballero
+caballeros cabrio caccia cache cachet caddie caddies cadenza cadet cadillaca cadillacu cadillaki cahors
+callback calmato calypso camaro cambio campanelle campesina campo campos canarinhos candi candid candida
+candido candidy candiru canoe canon canotier canta canticum cantina canto cantus capella capita capite
+cappella capriccio caput carding carens carillon carin carino carisma caritas carlsberg carlsberga carmagnole
+carne carpe carry carte cartridge casco cassis cassoulet cathedra cauda caudillo causa cefal celle cellulitis
+centella centre cerato cercle cereus cetera ceteris chablis challenge challenger chalumeau chambertin chamois
+change chanson chansons chanterelle chantilly chapeau chaperon chaps charmant charme chassis chasuble
+cheerleaders cherchez cherla cherokee cherry chewing chianti chiaroscuro chicano chicanos chief chillout
+chinoiserie chinon chuan cinemascope circenses cissus citizen citroen citta clarin clarino clarus class
+classic clausus clematis clinch clinchem clitoris clostridium clydesdale cocktail cocktaile cocktaili
+cocktailu cogito cohabitation cointreau coitus coleslaw colitis colla collage collar collateral collect
+collectanea college collegium colon comber combi comes comica commedia commedii commercial commodore common
+communautaire commune communis communities comodo compact compound comte comtesse concertina concierge
+concorde concours condita confer confetti config confiteor congo consensus consentire consilium consort
+constans consuetudo consulting consummatum contessa contessie contesso contessy continental continentala
+continentale continua continuum conto contra contrario contras contro control controlling cookies copia
+copyright corda cordiale corgi corner cornish cornisha corolle corolli coronat corporate corpore corps corrado
+corral corrala correct correctness corrida corrido corridy corsa corsie corso cortland cosinus cougar couleur
+count countdown counter countera country county courant couture crack cracking crash crawl creator creda
+credere credit credo cricket cricketa cricketem crimen croissant croma cromo crossfire crown crucis crudo
+cruise cruiser cruisera cruiserem cruisery cruisie crust cruzeiro culpa cumberland cunnilingus cuore curacao
+curio curiosa currente curriculum cursus daewoo daihatsu dairy dames danse dansing death debugger debugging
+decathlon deesis delete delicti delicto della delle delli delto dementi demos derrik desce designer
+desperandum dessous detto dhoti diable diabolo dialogue dicta dictator dictu dieffenbachia difficile digambar
+digestif digger diggera diggerem digital digitus dignitatem dimer diminuendo diner dinghy dingue dinks dinner
+dirce direct directe directory dirge dirty disclosure discopolo discount disengagement disputandum ditto
+doctor dodge dogger doloris doors doppio dottore double dramatis dream dresing dribling drifting dripping
+drugstore dualis ducato duchess duchesse duende dunder dunhill dunhilla dunhille dunst echinacei eclipse
+ecstasy editing editio edition efraima egerio einstein einsteina electric eleison eluent emaus emerging
+emmental emoticon empanadas empereur empire emploi enchilad endocarditis enduro energio enfant engagement
+engine engineering ensalada ensemble entente enterprise entourage entre episcopus episteme erectus ericsson
+ericssona erlang errare esaule escape escort escorta escortem escudo escudos esemes espace espero essence
+faber facies facile faciunt facsimile facto factory factum faites falang faldo familias farsi farthing
+farthinga fasces fashionable fastback fecit feeder feeling feeria fellatio fellows femme fengshui fenig feret
+ferman fermer fermi ferre ferro ferrum festina fetta fettuccine fetty fianchetto fidei fides field fieri fiero
+fiest filius filler finans finis finito fiorino fireball fireballa firebird firefly firmus firmware first
+flagrante flagranti flair flaming flanco flatter flattery flica flint fliper flipper flippera floren flores
+floresa floret fluid fluoresceina flutter fokker fontes fontina fontino foolproof football forcing forlan
+forming fortes fosgen fossa foudre frankenstein freelander freestyle freiherr freikorps fresco friko frittata
+frittaty fromage frond fronte frontman frote frottage froufrou frutti fugas fuleren fulla fulle fullem fulli
+funky fuoco furio furioso furlan furlong future futures futuri gaelic galla galloper gangsta garden garri
+gastarbeiter gathy gauchos gaudeamus gaudium gauleiter gauleitera geara geary gemmo generation generis genre
+gentil gentila gentile gentilhomme gentium gentlemen genui genuy gerber gestae geste gestia geter getta gettem
+getter getto ghostwriter gibbon gillette girland girls girlsband gites giusto gloriosa gloss glossa glutation
+goalkeeper goldwasser gourde gourmand grandioso grandis gratia gratias gratin grazioso green greenhorn
+greenhornem greyhound greyhounda gringo gringos grissini grossi grosso groupies grouppie guacamole guerilla
+guerilli guerre guerrilla guffy guide guignol guilder guinness guinnessa guinnessem guinnessie guinnessy
+gustibus gutta habas habeas habet haden hadith haggis haggisie haida halle halli halling hallo hands haori
+happening happy harde hardware hariss harissa harissy harleya harleyach harleyami harleye harleyu hartley
+hatha haust haute headhunter headline headset healer hebel hedging heimat heineken heinkel heling helis
+helling hellinga hello helpa hercules hereford hermandad hermo herold heros hester heter highbrow highway
+hilal hillman hinduisto hippies hobbits hockey hockeya hollandaise hollin homage homines hommage hondo honky
+honoris horse horst hortus hosanna hossa hotline hours housie huerta huerto human hunting hurling hurricane
+hybris iacta ibidem ichabod ichtiolog idared ignorantia illuminati image imagines imbus immediate immelman
+immobiliser impas impeachment impedimenta imperfecta imperfectum implicite impres imprimatur inbred incipit
+incognita incommunicado incredibile incroyable independent indesit indor indos indult inert infiniti infinitum
+influenca influence influency inform informal infra ingres initio initium inkas inlet innuendo insert
+insourcing instant intacta intaglio integro intellectum intelligence inter intercity interface interlingua
+interregnum intra intrepid ippon irbis ischias isolation italo itinerarium iuris jamboree jardin jetta jetto
+jingle jinja jiujitsu jockey jockeya joule jubei juhas jujitsu jujutsu junkers juste kairos kaizen karoshi
+kasting katharsis katzenjammer kelin kentucky kenzan kerner kerosen kerrie kiang kirin kirke knecht knorra
+konfetti korrida kyokushin lacetti lacrimosa lacrosse ladies ladino laesae lambert lambretta lancashire lanco
+lando laogai largactil large lassa lassem lassie lassu latimeria latina laude laufer least lector leges
+leggiadro leghorn legis lelum lente leonberger leones leser lessu lettres liaison liang libella libelle
+libelli liber liberales libero liberum libet librett libretta libretto libri libris licentia licet liftback
+light lighta lightem lighty limes limited limousin linea lingua linguae littera llano lorens lotion loulou
+lucid lucida ludens luffy luidor lunche lutze lyddit macabre macce macchiato machen macht macintoshe mackenzie
+mademoiselle maggi maggiore maiestatis mainframe maior maison majorette malla malle malocchio mamma manitou
+mannlicher manus marathi marbella marbello marcato maree marei maren margaritas margine margines mariage marin
+marine marines marlo marshall marshalle martini maruti mascarpone maserati masse matias matiz mayday mclaren
+meches mecum medias medico medres mehari mehendi meistersinger melas melos melting melton memoriae menarche
+mendel mendo menos mensur mente mentos menuet merenga meridian merit merita meritum meritus merla merle merlo
+meron mescal messa messe messel messenger messengera messengerem messerschmitt messerschmitta messerschmitty
+messieurs mesto metallica metres meursault mezza micra micro middle mifepristone milori mimesis minetta minjan
+miracle mirinda miscellanea miser miserere missing misterioso mistress mitsubishi modern mohel moher molos
+molto molton monde mondeo money monopoly monseigneur monsieur monsignore moonies moren mores moriar moriendi
+morio morion mornay morris morrisa mortis moshing mosso motta moulage mulle multipla multiplayer multiple
+mundi mungo muppets musso mutandis mutatis muter mystica nascendi nauseam necessarium nefas neogen nereid
+nereida netsuke netta night nightmare nihil nihilo ninjutsu noblesse nocere noctis noirs noisette nomen
+notabene nugget nulla nullum number nurse obscura occidental oculos oeconomicus offbeat offertorium officio
+offie oldenburg oldenburga oldsmobile omnes operandi optima oratio orienteering otello ouija outlander
+outplacement outsider package pageant painting papillons pares paribus partes passim passo passus pasticcio
+patche pathfinder patois patriae pectoris pedes peerel peleng penang pendant penguin pente penthousie
+pentimento pentiti pepin pepperoni perfect perfecta perfectum perilla perillo perseid pershing pershinga
+pershingi person personae pesos petit petite phaeton phishing phishingu picadillo picanto picasso piccola
+piccoli piccolo pilling pinen pirelli pisco pitie pitta placement placido playgirl pluralis pluribus poetica
+polacca poliomyelitis political politicus pollen polloi ponticelli poppers position possibile posteriori
+praesens prest prestidigitator prestissimo pride prima primae primer primero primo primum primus prince
+princess princessa principale print printed priori professional profundis proof prosciutto prostatitis
+publishing pueblos puller putta puttanesca puttu rallye range rappa ratatouille ratha ratio rebirthing recipe
+recte recto reductio reengineering reform regens regres reisefieber relations reling remastering remoulade
+rendering renderingu reprint researcher resources restante resting resurs retard retinol retour rhythm ribat
+richelieu ricott rider ridera riesling rieslinga rieslingi riffach riffami riffem riffie riffu riffy rigatoni
+right rights rigor riksdag ringa ringi ringu rinpoche risorgimento risotta risottem ritardando ritmo
+rockabilly rockers rolling romantic rondin rooibos rookies roomster rough roughy rutherford rutherforda
+rutinoscorbin sacra sacro saecula saeculorum sagem saida salad salis salus samadhi samos sancta sanctus
+sandwiche sangha sanghi sangho sanghy sanguinis santim sapere sapiens sarang saren saris sariss saros satis
+sauternes scaba scanner scanning schadenfreude scher schmaltz sclerosis scoop scoopy scouse scrabbli scratch
+scratchem scratching scratchingu scratchu screen screenach screenami screenem screenie screening screeningu
+screeny scroll scrub scull seaborg seans sebring sebringa secco second seconda secondhand secondo secundo
+seder sedes sedici sefirot segars seicento seigneur semper semperit sempre sendo senes senon sensus sente
+sententiae sepsis serendipity sereno sermo session sgraffito shake shaki shamisen sharan shareware sharp shell
+shella shellem shellu sherlock shift shifty shimmy shire shoah shocking showgirl shows shuma silent sille
+simens simile singel singelton singer singera singularis sinto skiffle skylight slams sleep sleeping slide
+sling slums small smartphone smiling smirnoff smooth snello snickers sniffer sniffera social software solaris
+solfeggio sombrera sommelier sommeliera sommelierem sordino sorento sorry sortie sosen sotho sotto soubise
+soule sparring spectatores spirituals spiritus spitfire spoofing sportage spring sprite spumante ssangyong
+stable staccato staffordshire stall standing static sterlinga sterlingu stile stilo stilon stilton stiltona
+stinger stingera stingerem stingery stracciatella stracciatelli streptococcus stress strett stretta stricte
+stricto stridor string stringer strit strong studies stuff subito subspecies success succotash sucre sugar
+suito summarum summum sundae sunfire superbo superhit superintendent superstar suples surprise surround sursum
+suspens tabbouleh tabes tableau tacce tacet taguan taino tangelo tangere tanto tartuffe tchibo teges teido
+telef telle tellur tellurium tempore temporis tenere tenge tenue tergit tergo terminus terms terrano terrible
+terrine terris tertio tertium tertius tesser tessera teter thalia theatrum thema theremin thermidor thesaurus
+theta thinking thomson thrash thrashem thrashu thrombosis tifosi tifoso tigra tilak tilbury timbr timbre
+tingle tinol tinta tinto tiret toilette tomatillo tondo tontine toolbar topline torero torped torreador
+torrero tortille tortilli toshiba touareg touche toujours touran touru trade tremens triangel trick tricolor
+trier triste troppo tsingtao tsuba tsubo tsugi tsutsumu tubing tummim turismo ulisses ultima ultimo ulysse
+unitis update upgrade upload upper watussi welcome wellington wendetta wherry whippet whirlpool white willys
+wireless wishful world wunderwaffe yacht yachting yardu yaris yarisa yassem yellow yerba yorkshire yucca
+yunnan yuppie yuppies zhuang zicher

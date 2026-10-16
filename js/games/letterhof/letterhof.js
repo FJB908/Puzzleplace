@@ -62,6 +62,7 @@ export async function mount(container, ctx) {
   container.append(h('div', { class: 'lh' },
     h('div', { class: 'lh-kop' }, plaatJij, zakTeller, plaatPc),
     meldEl, bordWrap,
+    h('ul', { class: 'lh-legenda', 'aria-hidden': 'true' }, ...['L2', 'L3', 'W2', 'W3'].map((k) => h('li', { class: k }, h('i'), t(PREMIE_NAAM[k])))),
     h('div', { class: 'lh-onder' }, h('div', { class: 'lh-rekrij' }, rekEl, husselKnop), zoomKnop,
       h('div', { class: 'lh-knoppen' }, speelKnop, terugKnop, wisselKnop, passKnop, tipKnop))));
 
@@ -84,11 +85,13 @@ export async function mount(container, ctx) {
   function pasMaat() {
     const breedte = bordWrap.clientWidth;
     if (breedte <= 0) return;
-    const hoogteRuimte = Math.max(300, window.innerHeight * (ctx.grootBeeld?.actief ? 0.62 : 0.5));
-    let vak = Math.floor(Math.min(breedte - 4, ingezoomd ? 99999 : Math.max(hoogteRuimte, 15 * 20)) / N);
+    const stijl = getComputedStyle(bordWrap), rand = parseFloat(stijl.paddingLeft) + parseFloat(stijl.paddingRight);
+    const ruimte = breedte - rand - 14 - 4 - 6;                       // min de randjes en de naden tussen de vakjes
+    let vak = Math.floor(ruimte / N);
     vak = Math.max(18, Math.min(vak, 46));
-    if (ingezoomd) vak = Math.max(vak, Math.min(46, Math.floor(breedte / 9)));
+    if (ingezoomd) vak = Math.max(vak, Math.min(46, Math.floor(breedte / 8.5)));
     bordEl.style.setProperty('--vak', `${vak}px`);
+    bordEl.classList.toggle('klein', vak < 30);
     bordWrap.classList.toggle('ingezoomd', ingezoomd);
     zoomKnop.replaceChildren(icon(ingezoomd ? 'shrink' : 'expand'), h('span', {}, t(ingezoomd ? 'letterhof.zoomOut' : 'letterhof.zoomIn')));
   }
