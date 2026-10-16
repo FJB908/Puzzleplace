@@ -1,0 +1,2 @@
+# Alle tweeletterwoorden die in dit spel mogen (met de hand beoordeeld: spellingswoordenboeken kennen ook afkortingen en vreemde woorden). Een woord per token.
+ad ah ai al ci da di do ed eh fa fu ha ho il io la le li lo ma me mi ne no od oh pi po re sa se si so su ti tu un va vi

@@ -63,6 +63,12 @@ const GAMES = [
     wide: true,
     load: () => import('./solitaire/solitaire.js'),
   }, () => ({ undo: t('solitaire.undo'), hint: t('common.hint'), finish: t('solitaire.finish') })),
+  spel('letterhof', {
+    icon: 'letterhof',
+    status: 'ready',
+    wide: true,
+    load: () => import('./letterhof/letterhof.js'),
+  }, () => ({ play: t('letterhof.play'), exchange: t('letterhof.exchange'), pass: t('letterhof.pass'), hint: t('common.hint') })),
 ];
 
 // Voorbeeldspel om de flow te testen. Alleen zichtbaar via  index.html?demo=1

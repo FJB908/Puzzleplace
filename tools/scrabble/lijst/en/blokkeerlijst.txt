@@ -1,0 +1,9 @@
+# abbreviations, 4-5 letters (woordenboek)
+abbr acct advt assn asst attn atty bdrm biog biol bldg blvd capt chem chge coll comm conj cont corr dded diam dict dist eccl ecol econ educ elem elev ency excl foll freq ftps furn geog geom govt hosp ibid incl incs inst ital masc meas mfrs misc natl neut orig phys pkwy pref pres prev pron prov ques quot rcpt recd resp secy sens situ subj supp supt swiz tbsp terr ttys univ wkly xref yest
+assoc contd equiv illus imper instr ioctl suppl treas dding abbrev approx colloq imperf specif transl initio
+# roman numerals
+clix lvii lxii lxiv lxix lxvi lxvii viii xiii xvii xviii xxii xxiii xxiv xxix xxvi xxvii xxviii xxxi xxxii xxxiii xxxiv xxxv xxxvi xxxvii xxxviii xxxix xcii xcvi
+# not standard dictionary words (slang spellings, jargon, brand/character names, typos)
+mkay betcha lemme sorta geddit wotcha wabbit foobar lolcat lolcats regex regexp lexer xterm warez smurf smurfs waldo waldos milf milfs crayola crayolas chyron chyrons crufts scotchs woulds notwork builtin newline newlines tarball tarballs segfault slumdog whatshername whatshisname sonsofbitches pointblank christian amazonian ceteris nauseam paribus fayer emf
+# hateful slurs aimed at groups
+abo abos chinks coon coons coolie coolies dago dagos dagoes darkey darkeys darkie darkies darky fags faggots gook gooks honky honkey honkeys honkies hebe hebes jew jews jewed jewing jigaboo kaffir kaffirs kike kikes kraut krauts lez lezzie lezzies lezzy micks mongoloid mongoloids negroid negroids niggas niggaz niggers ofay ofays pickaninny poof poofs poofter poofters redskin redskins retards sambo sambos sheeny sheenies spic spick spics spaz spazzes squaw squaws wetback wetbacks whitey whiteys wog wogs wop wops yid yids hun huns boche limey limeys dikey dykey

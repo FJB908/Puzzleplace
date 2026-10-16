@@ -1,0 +1,10 @@
+# Portugees: geldige woorden die de lijst mist (juiste spelling). Let op: bouw.py laat de Woordtuin-blokkeerlijst ook gelden en die wint van toegestaan.txt;
+# esporte, onibus, mamae, papai, aluguel, curtir, curte, turne, carona, sacola, xicara, bobagem, bacana, grana, hein, cade, hum, opa, afro, funk, nerd, bilhao,
+# bilhoes, garcom, vovo staan daar op en moeten daar vandaan (of: blok -= toe).
+
+bit cãs cós dês fel hum ipê jaú lãs moa olé opa pró rãs til use tez uai ohm lux iça iço ene eme toe aia íon hein cadê mano vovó boné nerd
+dual tsar romã puré aloé pavê yoga píer ácer vial liar gagá afro funk blog site link time note more some vote case core role mine date file
+cure come move rode uses toes sues unto ônibus mamãe papai aluguel curtir curte turnê carona sacola xícara bobagem bacana grana bilhão
+bilhões esporte vovô acção acções actividade actividades activo activa activos activas actual actuais actualmente actuação acto actos actor
+actores actriz directa directo directamente director directores direcção direcções exactamente exacto exacta factor objecto objectos
+objectivos projecto projectos protecção reacção selecção colecção espectáculo arquitectura electricidade

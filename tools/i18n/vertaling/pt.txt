@@ -806,3 +806,63 @@ sudoku.done.text | Resolvido. Muito bem!
 sudoku.done.daily | Resolveu o Sudoku de {date}.
 stats.note | Ganhos em jogados
 sudoku.stat.level | Nível
+
+##### 200-letterhof
+letterhof.name | Pátio das letras
+letterhof.summary | Forme palavras num tabuleiro de flores: coloque peças, ganhe pontos com as casas coloridas e vença o jogador virtual.
+letterhof.howTo.1 | Toque numa peça do seu suporte e depois numa casa do tabuleiro, ou arraste-a até lá. Forme uma palavra numa linha ou coluna. A primeira palavra tem de passar pela flor ao centro.
+letterhof.howTo.2 | Cada palavra seguinte tem de ligar-se às do tabuleiro, e todas as palavras que formar ou cruzar têm de existir. Toque numa peça que acabou de pôr para a retirar. A peça em branco (com a flor) pode ser qualquer letra.
+letterhof.howTo.3 | As casas coloridas ajudam: verde-claro duplica uma letra, verde triplica-a, roxo duplica a palavra toda, vermelho triplica-a. Só contam para as peças que põe agora. Se usar as sete peças de uma vez, ganha um bom bónus.
+letterhof.howTo.4 | Toque em «{play}» para confirmar a palavra. Preso? Use «{exchange}» ou «{pass}», ou peça uma «{hint}». O jogo termina quando o saco está vazio e alguém fica sem peças.
+letterhof.level.makkelijk | O jogador virtual só conhece palavras comuns e joga muitas vezes mal
+letterhof.level.gemiddeld | Palavras comuns, joga razoavelmente
+letterhof.level.moeilijk | Conhece também palavras raras e encontra muitas vezes uma boa jogada
+letterhof.level.extreem | Conhece todas as palavras e procura sempre a melhor jogada
+letterhof.you | Você
+letterhof.rack | As suas peças
+letterhof.play | Jogar
+letterhof.recall | Retirar
+letterhof.exchange | Trocar peças
+letterhof.pass | Passar
+letterhof.shuffle | Baralhar
+letterhof.zoomIn | Aumentar
+letterhof.zoomOut | Diminuir
+letterhof.cancel | Cancelar
+letterhof.bag | Saco: {n}
+letterhof.blank | Peça em branco
+letterhof.cell | Linha {r}, coluna {c}
+letterhof.premie.L2 | letra dupla
+letterhof.premie.L3 | letra tripla
+letterhof.premie.W2 | palavra dupla
+letterhof.premie.W3 | palavra tripla
+letterhof.yourTurn | A sua vez: ponha peças no tabuleiro.
+letterhof.firstMove | Comece com uma palavra que passe pela flor ao centro.
+letterhof.thinking | O jogador virtual está a pensar…
+letterhof.preview | {word} (e o que tocar) vale {points} pontos se todas as palavras forem válidas.
+letterhof.scored | Jogou {word} por {points} pontos.
+letterhof.bingo | As sete peças: +{points} de bónus!
+letterhof.theyPlayed | {name} jogou {word} por {points} pontos.
+letterhof.theySwapped | {name} trocou peças.
+letterhof.theyPassed | {name} passou.
+letterhof.youSwapped | Trocou peças.
+letterhof.youPassed | Passou.
+letterhof.cantExchange | Só se pode trocar enquanto houver pelo menos 7 peças no saco.
+letterhof.exchangeText | Toque nas peças que quer trocar por novas. Isso termina a sua vez.
+letterhof.exchangeDo | Trocar
+letterhof.passTitle | Passar esta vez?
+letterhof.passText | Não joga nenhuma palavra e é a vez do jogador virtual.
+letterhof.noHint | Não há nenhuma boa jogada a sugerir. Experimente trocar peças.
+letterhof.hintText | Dica: {word} por {points} pontos. As peças estão postas; toque em Jogar ou altere-as.
+letterhof.chooseLetter | Que letra deve ser a peça em branco?
+letterhof.fout.lijn | Ponha todas as peças numa só linha ou coluna.
+letterhof.fout.gat | Há uma casa vazia entre as suas peças.
+letterhof.fout.midden | A primeira palavra tem de passar pela flor ao centro.
+letterhof.fout.kort | A primeira palavra precisa de pelo menos duas letras.
+letterhof.fout.los | A sua palavra tem de ligar-se às peças do tabuleiro.
+letterhof.fout.leeg | Ponha primeiro pelo menos uma peça.
+letterhof.fout.woord | Não está na lista de palavras: {words}. Altere as peças e tente de novo.
+letterhof.won | Ganhou com {you} pontos contra {them}.
+letterhof.lost | O jogador virtual ganhou com {them} pontos contra os seus {you}. Bem jogado!
+letterhof.lostTitle | Bem jogado!
+letterhof.draw | Empate: {points} pontos cada.
+letterhof.drawTitle | Empate!

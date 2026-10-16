@@ -1,0 +1,151 @@
+# Blokkeerlijst Nederlands (tegelvorm, kolom 1 van nl.tsv). Gegenereerd door beoordeling; zie BEOORDELING.md.
+
+# 3-letterwoorden: afkortingen, namen, Latijn/Frans, niet-woorden (38)
+aad alv ama apr atb bie cum deo det dpi est feb fte ins int joh jul kee loc mbo mic meg mer mor nas naw nom
+nov obs okt ont quo rus spe tos tri vie vwo
+
+# afkortingen en internetadressen (6)
+vmbo http https zmlk bvba lbgo
+
+# 4-letterwoorden onder zipf 3: afkortingen, Frans/Latijn/Spaans/Duits, niet-woorden (113)
+aagt aamt afat afga ahob aigu alge alii amto apis bauw bega baco bics cier cire cour crea crue deux dixi djak
+eaux eins ette fait fata faux faut febr feut frul geve hash haio heao hebi hobu hudo hyve iaat iade iaen inco
+isme jawl jock jour kcal kine kirt kiyu kuch leba lifo lome lota meao mirt moee neeg neme noel noni nunc obia
+olim omga opat opga orbi ordi orni peau piot piso poco quid rasa rata rato reco refo rins roro scha situ soca
+soit tact thio trac ugli uiig urbi vair vela vide vivo voce vota voto weck wisi witz yank yelt yuko zmok aart
+alla lion deja
+
+# 5-letterwoorden: Engels en niet-woorden (64)
+baggy campy cheek chimp chook chose chute colts coups cours coute crank crawl creep croon crude crypt draws
+dumps folly folky heats highe jawls pairs plait queue quilt quorn shaky shawl showy slams slums swaps trays
+tweak unzip yanks yells yield pulls putts prefs ounce casht casts ampex bahco camjo kevie joego ohade ohaen
+majem aanga geoha onera uitat teaen zerpe teloh waarst spast
+
+# scheldwoorden op bevolkingsgroepen (neger-, moffen-, kaffer-, mongool-, zigeuner-) (80)
+bosneger bosnegerdorp bosnegers excuusneger excuusnegers huisneger huisnegers kankerneger kankernegers
+negerbevolking negerbloed negerdans negerdansen negerde negerhut negerhutten negerijen negerinnen negerinnetje
+negerinnetjes negerjongen negerjongens negerkind negerkinderen negermuziek negerras negerslaaf negerslaven
+negerstaat negerstam negerstammen negerstaten negertje negertjes negervraagstuk negerwijk negerwijken
+negerzaad negerzanger negerzangers negerzoen negerzoenen genegerd kankerjood kankerjoden rotmof rotmoffen
+moffenhoer moffenmeid moffenpijp moffin moffinnen mofje mofokoranti kaffer kaffers boerenkaffer boerenkaffers
+mongoloide mongooltje mongolisme zigeuner zigeuners zigeunerin zigeunerinnen zigeunerinnetje zigeunerachtig
+zigeunerachtige zigeunerjongen zigeunermeisje zigeunermeisjes zigeunervrouw zigeunervrouwen zigeunerkind
+zigeunerkindjes zigeunerkoning zigeunertroep zigeunervolk zigeunervolken zigeunerfamilie
+
+# buitenlandse woorden met diakriet (tegelvorm): Spaans/Duits/Frans (16)
+senor senora senores senorita buhne buhnen buhnes aufklarung gotterdammerung uberhaupt ubermensch ubermenschen
+rucksichtslos salonfahig salonfahige fraiche
+
+# Engels, frequent: niet in Nederlandse woordenboeken (459)
+abandon abject accounting acres addict addicts administrators advocates aerobic airline alerts aloud amused
+antigen approach array arrays arteries artwork artworks asparagus attachment aussie backbone backdrop backer
+background backing backs barring basement basics baskets batsman batter batters batting beaten belief benefit
+berries bidder bidders biscuits bitches bitten black blackmail bladder blanket blanks blatant block bloody
+boards bonkers boring bracelet brains braking broom browse brushes building buildings built bulletins bullets
+cancel candlelight capita captains carve censor censors centers ceremonies chargers charges chatter cheat
+chiefs choice cinderella claiming classes cleaner cleaners click clicks clinical clinics closes clouds coffee
+coffees collect collectors colour combine combines coming commentators commodity common communist community
+composer composers conceptual condition conditioning connectors consent contestant contests continue cooker
+cottages counsel counseling counselor counselors crews crochet culture cultures curators curves darren dealt
+death debating decade decades delete delicious demand demons descendant designers designs desks desperate
+detectors detriment device devote diets different diocese director discomfort discontinue disparate dispatch
+dixie doctors doctrines donkeys doubt downtown dragons drain drains efficiency elect employee employees
+entering enters entertain entrepreneur entrepreneurs environment environments equator equilibrium escapes
+excerpt expanded exposure extended extension factors fading fairs farmers farms feces fiber fibers fiction
+field fielder fightingspirit flashlight flashy flightrecorder flightrecorders fluorescent follower followers
+fortnight fortnights foundations freefight freefighten fundraiser fundraising future fuzzy gaping gasoline
+gearing gospels graphic greed grief grieve grimes halls hands happen harmonies havent hazards highteade
+highteaden highteaen highteaetagere highteamenu hispanic hispanics histories homes hooked hurling important
+imprint inaccurate inadequate inches incomplete indeed independent independents inhaling insignificant
+interest interrupt interrupts invite invites jokes jubilee juicy kidnap kidnappers kidnapping kinds kristen
+lancaster large latenightshow latenightshows latitude launch leagues levers listen listening lives looms
+magnitude malls manage managing manchester marches market marketplace matching mates matter matters mayor
+mediocre memories messes metallic middle military mines minors mirrors missing mixture mixtures modest
+molecule molecules moustache moves multiple multiplier museums music nobody novels nurse nurses occasion
+occasions offer offers official officials opens opinion opponent organizer organizers overlapping overruled
+pages pantry paper papers parentheses participation peacekeeping percent picture piece pissed places plane
+planes plans plenty pockets polls ponder popes postgraduate postman practical pregnant presents pretoria
+probate produce prophecy prove proven questionnaire questionnaires queues rafters rages raiders raids reach
+readers reading ready reins relations remedial remedies reminder reminders repel research resource resources
+response reuters riches ridicule rinse roaring robber robbers rocks roommate roost rotting ruling rulings
+safer safest scenery schools second secret secure seizing select selects separate shorten sister sisters
+slapping sleep sloping small smaller soften songs sophisticated sparing speaking spied state statement
+statements stores study stuff sudden suffer suffers surround teacher teachers teaching telling terrible
+thinking tongue torment traditional trees twenties typewriter unfair veins victories violent wakes warden
+waste watering waterloo wedding weeks wellington wetland wetlands winchester without wrong yankees godfather
+godfathers jonathan
+
+# Engels, zeldzaam (uit Wiktionary-achtige bron) (160)
+appendage appendages appetizers astroturf automakers backbenchers behemoths benefice bladders blinkers bobbed
+bolsters bridgend brooches checkbox chokes chrysanthemums cosponsors coterie counterparty dampers debrief
+disclaimers discounts dispensers dissenters doling dominions doormat downgrading downloader drugstores
+elevators employability eocene excrement exuberant fatten fiancee fielders fieldwork flashlights floodlights
+genotypes glories goalies goalkeepers grilling grungy hairstylist handrail harington highbrow hippopotamus
+holocene homespun hostesses infanticide ingot intakes invert kidnappings lapel linesman linotype loafer
+lorries lozenge luminescent matting meltdowns metastases microwaves miocene miseries modulators multipliers
+obstinate oligocene opulent oscillators overdone overflows overrule overstatement paddocks pangs parenthesis
+pedestals pedigrees penitent perimeters plating premiums presides pretext prompts prospectors pubescent
+puddings pummel racketeering radii referees referendums repels reprints resonators respirator respirators
+roadblocks roofing roosting rusting sacrosanct scrip shuffles signet silage skunks slacks slashes slumps
+smashes soldering sounders spectators spillage spurts starlings stoppage stoppages straddles stutter stutters
+subcontract subcontractor subsets sunroof superhighway superiors superoxide tater tempering tonsil tonsillitis
+tosses tumblers turtleneck tycoons typecast typewriters upmarket usernames verbiage vintages weeps
+wicketkeeper winches wyandotte
+
+# Frans/Italiaans/Spaans (niet-Nederlands) (443)
+abondance abstracto abundante accompagnement adoptant adopter adressant agences agenturen agroalimentaire
+alchimie alignement alliage amants analysen anarchiste anthologie arde arrive arrives attaques auditeurs
+ausdauer autonomen aviso backen balladen batte beautes bedenke behaart berceau bescheid bestens betont
+betrachte bewies bewiesen bewilligt bilde bilden bitteren blanda bonheur bonhomme boulanger boussole brique
+brosser brutalen bucht caracoles carga cerises changeant changement chantant chanteurs charcuterie chauffage
+chinois choquant chroniqueurs cites colere combattant comestibles communale comparant conduite conformer
+conjugale conservatrice constituante contemporain contradictoire contribuant couverture couvertures criant
+critica cuisines cuisinier cumul danses danseur danseurs danseuse danseuses dauphins decheance degenere
+dentiste dessen directrices disagio diste docentes doctores doler douanes douceur echeance elegance
+elektrischer elften emigrantes energetici entend epoche epochen erlangt etappen etnie exemplaire exil
+explicite extenso facteurs familiales fantasme faveur faveurs felsen femme femmes ferment fermer ferroviaire
+fichier fichiers filiale filippine folter fondement formant forti fraudes frisuren frust funeraria gatten
+gebilde gebot geheimdienst gelegene gelten gemocht genialer gepasst gerechter gerichten geschrei gestes
+getrost geweckt gewinnen gewisser gleis globaler glutine gomma gramme grandezza gratuite grazioso grilles
+guste hering herstellers historischer horreur illegaler illusoire importants impressionante indecente
+indicateur indicateurs indirects infantes infernale informante initiale inschrift inschriften instantane
+instinkt interlocuteur interpreten journalistes jumelles juristes karotten kissen kiste klammer kleiden
+klingel klingelt komischer kranke kranker krasser lacher lance landrat lastwagen legalen leggende lentejas
+leuten liquida literarisch literarische lobt locken longues lunaire lustiger macher magnifici malchance
+malentendu malers malheurs mangels mangelt manifestant manifester marque marques masken masque metafora miese
+minestra mineurs modeste moduli morde morgenpost mortels municipale napoletano nassen nationaliste nazie
+nervig nervige neutralen nouveaute nouveautes nuancen nutten odeurs onkels ornement outillage pannes paradoxe
+paralysie parolen passagiere passagieren passte patente perdue perfecta performant permis peur pierde pierden
+pilotage pions piscines plurale ponen portables porti pranger precario presenten presidentes pressen preste
+presten privaten prives profes promesses pronte provisoire pudeur puissance puissances puissante puissants
+pulver rabatte raciste raisonnement rames rappels ravages recherches recul referenten reformen regelwerk
+regionalen relance remboursement remplacant ressource ressources retours reussite reussites revenu richtige
+richtiger rigueur rissen rivales romantisme romper routen ruche salut sammelt saucisse schichten schiefer
+schinken schluss schmieren schob schrank schranken schrei schreit seigneurs sensibel separaten serveuse soleil
+sortiment souche souches sous soutien soutiens specialite specialites specifica sperren sponde sprengt stalle
+starren stationnement strassen studentin studentinnen succursale suisses superbes suspecte sympathisch
+sympathischer syndicalisme tailles tarde teilen tels temen temer temporaire terribles theologe thesen tiras
+tortures toten tournure transito transitoire transitoria tras triangulaire trompette typischer unies urbanisme
+valer valere valeurs veine vendu verflucht vergas verlas vermeiden vermissen vermochte versagen verschenken
+verschenkt verstanden vertes verwenden verwies verwiesen vicepresidente vigilantes violente visiteur visiteurs
+vistas vivants voiles voiture voitures volontaire volontaires vont voyageurs vues wassers wecken weckt weckte
+weit wette wichtig wichtige wichtiger wichtigere wichtigste wiesen zwingen
+
+# Duits/Spaans/Portugees (niet-Nederlands) (178)
+aberrante abstracta adherente adoptante aspirante astringente beende beneficia beneficie bereist bersten
+beschenken beschenkt bestraften bewilligen bezichtigt biste blubbert brisante burlen camarilla centuriones
+christinnen cliques coadjutor contactarme correspondentes cruzeiro dankend deponie dilettantisch dissidentes
+drein dringendst eindrang energieminister erachten erbarmt erkennende escapen firmante foltert formol
+fulminante garimpeiro garnieren gastfamilie gastrecht gebrachten gedenktafel gedulden gehort gehupt gekochten
+geladener gelegener gepocht geram gerem germanistische geschaft geschenkartikel geschenkpapier geschminkten
+gigawatts grashalm grimmen gummiband harre heuser hoert hofnarren incongruente independente insolvente inverte
+izabel kieser kleide knistert kramt kribbelt kunstleder langarm lingeries lustigste marchen marotten
+mecklenburger monstra mortales motoras muffig muit muleta murmel murmelt neutra obligo omnipotente optas
+pagara passendere pastorales pelzig penden pestilente pinkelt porem possen postboten postulante prachtvolle
+preceptor predominante prepare presidia protestantes provisoria pusten rabatten rectores repelen revelen
+revieren revoltante rieden ringel riste rolladen rollenden sammel schallend schemel schimmelt schmiert
+schreiend schreiende schriller schrot seibel seist septimo serafines sicav spielereien stillende stilling
+stipendiaten strengt strikten stuft stufte subsector sultanes superiores takte takten tarnen tarnt tildes
+tinas titelt torturen toxica traste unverfroren verdor volksarmee vulgo weckten wessi windel wissend witzen
+zapatista zweien zwing
+

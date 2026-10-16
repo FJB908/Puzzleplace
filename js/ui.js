@@ -68,6 +68,8 @@ const ICONS = {
   woordzoeker: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M16 16l5 5"/>',
   kruiswoord: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h8M13 15h8M9 3v6M13 9v12M9 15v6"/>',
   mahjong: '<rect x="6" y="3" width="12" height="16" rx="2.4"/><path d="M9 7.500h6M9 11h6M9 14.500h3.500"/><path d="M8.500 21h9"/>',
+  swap: '<path d="M4 8h13M13 4l4 4-4 4M20 16H7M11 12l-4 4 4 4"/>',
+  letterhof: '<rect x="3" y="4" width="9" height="11" rx="1.800"/><rect x="12" y="9" width="9" height="11" rx="1.800"/><path d="M5.500 12l1.500-5 1.500 5M6 10.500h2"/>',
   shuffle: '<path d="M3 7h3.500c3 0 4 2 5.500 5s2.500 5 5.500 5H21M3 17h3.500c1.500 0 2.600-.6 3.500-1.800M14 8.100C14.800 7.400 15.800 7 17.500 7H21"/><path d="M18 4l3 3-3 3M18 14l3 3-3 3"/>',
   solitaire: '<rect x="5" y="3" width="14" height="18" rx="2.400"/><path d="M12 16.500c-3.200-2-4.200-3.500-4.200-5.200a2.100 2.100 0 0 1 4.200-.8 2.100 2.100 0 0 1 4.200.8c0 1.700-1 3.200-4.200 5.200z"/>',
   clock: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4.500l3 2M9 3h6"/>',

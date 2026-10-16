@@ -1,0 +1,24 @@
+# Valid common modern words and interjections missing from the list (ENABLE lacks them, or the pipeline dropped them as names/abbreviations). Checked: none are in en.tsv.
+app ebook ebooks wifi gameplay webpage webpages cybersecurity cyberattack cyberattacks cyberbullying
+influencer influencers livestream livestreams livestreamed livestreaming vlog vlogs vlogger vloggers vlogging
+upvote upvoted upvotes downvote downvoted downvotes unfollow unfollowed staycation staycations superfood
+superfoods telehealth telemedicine telework microplastic probiotic probiotics biofuel biofuels biodiesel
+upskill upskilling reskill reskilling onboarding onboarded offboarding crowdsource crowdsourced crowdsourcing
+declutter decluttered decluttering declutters upcycle upcycled upcycling gaslighting mansplain mansplained
+mansplaining manspread manspreading bromance bromances hangry glamping trackpad touchpad passcode newsfeed
+screencast rideshare ridesharing polyamorous genderqueer genderfluid aromantic microaggressions thrifting
+paddleboarding kitesurfing renewables wellbeing geotag geotagged geotagging chatbot chatbots autocorrect
+autofill autoplay middleware nanotech cryptocurrencies hashtagged hashtagging noob fintech esports decarbonise
+decarbonisation greenwash greenwashing doomscrolling doomscroll videoconferencing workspaces superstorm
+coworking audiobook audiobooks eyeshadow fairytale fairytales roadmap roadmaps timeframe timeframes seatbelt
+seatbelts primetime dubstep hotspot hotspots motorsport motorsports frontman rollercoaster rollercoasters
+mixtape mixtapes graphene ketamine setlist setlists matchday headshot headshots facelift photoshoot
+photoshoots videogame videogames voiceover voiceovers wishlist wishlists signup signups lightsaber lightsabers
+leaderboard leaderboards infographic infographics eurozone nanoparticle nanoparticles nanomaterial
+nanomaterials impactful customizable commenter commenters collab collabs convo convos comms fanfic fanfics
+offseason pharma ecommerce fanbase rainforest rainforests ramen gotcha meds shite dumbass dumbasses storyline
+storylines astroturf astroturfing codebase kombucha macaron macarons macchiato microbiome microbiomes
+microbiota panini paninis photobomb photobombed photobombing pushback qubit qubits seitan shawarma sexted
+docuseries mockumentary gastropub gastropubs americano catfishing aha blah hmm huh ooh oops ouch ugh wow whoa
+whoops yikes jeez duh eek shh tsk eta ems abs amp cwm cox cos dis don dos lux pow sol sen ting cor bey twitter
+yahoo harry josh peter hector

@@ -565,6 +565,8 @@ html[data-contrast="high"] [class*="game--"] { --tint: var(--surface); --tint-2:
 .ga-cw.ga-sel { fill: var(--primary); stroke: var(--primary); }
 .ga-pill { stroke-width: 15; stroke-linecap: round; fill: none; opacity: .7; }
 .ga-sol-vilt { fill: #2d8757; } .ga-sol-rand { fill: none; stroke: #8a5b34; stroke-width: 4; } .ga-sol-kaart { fill: #fbf7ec; stroke: rgba(80, 60, 30, .5); stroke-width: 1; }
+.ga-lh-rand { fill: #14382f; stroke: #cda24a; stroke-width: 2.500; } .ga-lh-leeg { fill: #efe7cc; } .ga-lh-L2 { fill: #b2dcc6; } .ga-lh-L3 { fill: #2b8666; } .ga-lh-W2 { fill: #b99fdc; } .ga-lh-W3 { fill: #c52a33; }
+.ga-lh-steen { fill: #fbf5e4; stroke: #cda24a; stroke-width: 1.200; } .ga-lh-dikte { fill: #1f7a55; } .ga-lh-l { font: 800 11px Georgia, serif; fill: #2b2430; } .ga-lh-w { font: 700 4.500px system-ui, sans-serif; fill: #6b5226; }
 .ga-mj-gezicht { fill: #fbf7ec; stroke: rgba(120, 100, 60, .45); stroke-width: .8; } .ga-mj-dikte { fill: #2f8a73; }
 .ga-tile { fill: var(--surface); stroke: color-mix(in srgb, var(--text) 18%, transparent); stroke-width: .8; }
 .ga-tile.ga-mine { fill: #f6d3df; stroke: none; } .ga-tile.ga-theirs { fill: #cfe6ea; stroke: none; } .ga-tile.ga-sel { fill: var(--primary); stroke: none; }

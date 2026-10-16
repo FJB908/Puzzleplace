@@ -1,0 +1,24 @@
+# Toegestaan: gewone Nederlandse woorden die in de lijst ontbreken (correcte spelling)
+# Bijvoeglijke naamwoorden afgeleid van landen/talen/streken (kleine letter, standaardspelling)
+nederlands nederlandse frans franse duits duitse engels engelse spaans spaanse italiaans italiaanse grieks
+griekse russisch russische chinese japans japanse amerikaans amerikaanse canadese mexicaans mexicaanse
+braziliaans braziliaanse australisch australische indonesisch indonesische turks turkse arabisch arabische
+europees europese afrikaans afrikaanse aziatisch aziatische belgisch belgische brits britse iers ierse poolse
+noors noorse deens deense zweeds zweedse fins finse zwitsers zwitserse oostenrijks oostenrijkse portugees
+portugese hongaars hongaarse tsjechisch tsjechische roemeens roemeense bulgaars bulgaarse servisch servische
+kroatisch kroatische oekraïens oekraïense vlaams vlaamse hollands hollandse friese limburgs limburgse brabants
+brabantse surinaams surinaamse marokkaans marokkaanse israëlisch israëlische iraans iraanse iraaks iraakse
+syrisch syrische egyptisch egyptische indiaas indiaase pakistaans pakistaanse koreaans koreaanse thais thaise
+vietnamese filipijns filipijnse peruaans peruaanse argentijns argentijnse chileens chileense colombiaans
+colombiaanse cubaans cubaanse keniaans keniaanse nigeriaans nigeriaanse mongools mongoolse tibetaans
+tibetaanse nepalees nepalese afghaans afghaanse perzisch perzische hebreeuws hebreeuwse latijns latijnse
+germaans germaanse keltisch keltische slavisch slavische scandinavisch scandinavische amsterdams amsterdamse
+utrechts utrechtse rotterdams rotterdamse haags haagse gronings groningse drents drentse gelders gelderse
+zeeuws zeeuwse overijsels overijselse palestijns palestijnse albanees albanese armeens armeense ottomaans
+ottomaanse koerdisch koerdische ethiopisch ethiopische caribisch caribische canarisch canarische catalaans
+catalaanse waals waalse bijbelse gents gentse leids leidse antwerps antwerpse brussels brusselse berlijns
+berlijnse londens londense franstalig franstalige engelstalig engelstalige
+
+# Overige ontbrekende gewone woorden en vormen
+critici kamerlid kamerleden dankje kado kados kadootje effe achtig achtige goeiemorgen okee wauw emoji emojis
+influencer influencers vloggen vloggde gevlogd streamde gestreamd retweeten retweetde

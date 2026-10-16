@@ -1,0 +1,102 @@
+# Portugees: blokkeerlijst (tegelvorm). Gegenereerd uit het onderzoek in BEOORDELING.md.
+# 3 letters: afkortingen, namen, vreemde of niet-bestaande woorden
+
+abi abr ade ado ati bia boo cis cri csi del emi eng eve fac fev fox geo hua ias ica ile ips ita itu jan jul nai nov ota pag pal pat pen rom
+sax sec ses sic sta tos tri uri var vii vis xii xiv
+
+# 4 letters met zipf>=3: namen, merken, Engels, afkortingen
+
+aids babi baja bane beja beto bibi brie bugs caim cali chat choi dete duda exmo fifa flex glam gugu guto hari http jana java lego lugo mali
+malu mani mara nair nani nara noir nuno otis paco paim peri poco pole poli prof rojo rute sada sage sama siao sidi sine sita situ sosa soto
+tejo tete togo tops tris tube vigo vita wifi xvii zola
+
+# aan werkwoorden geplakte voornaamwoorden (sentirmo = sentir-mo) en dialect/onzin
+
+adaptarmo afastarmo amarmo apaixonarmo apercebermo aproximarmo concentrarmo conhecermo deixarmo depararmo divertirmo encontrarmo esforçarmo
+esquecermo focarmo habituarmo intermo juntarmo lembrarmo levantarmo libertarmo livrarmo mermo preocuparmo prepararmo questionarmo sentarmo
+sentirmo tornarmo trocarte unirmo vernos
+
+# Engels en vaktaal-onzin (geen Portugees woord of Portugese vorm)
+
+aardvark aegypti aficionado aficionados aids akan alter anchor aptitude arcane argyll arrival assemblage assemblages attache automate
+automotive avocado avocados avuncular azure balsam bamboo bandage bane banes baptismal baptize baptizes barnacle barricade basenji
+benefactor beneficial bimbo bipartite bitter blase blastomyces blister boeing boons bride brides brogue brogues browser browsers bugle
+bugles bulldozer bulldozers bullying burrito burritos cable cables caddie caddies caduceus caftan calendar calzone camber campylobacter
+candies candor canola canonical cantilever capitol carmine carter cassava casserole cassis caudillo center centers centipede centipedes
+chaos chaparral chevron chevrons cheyne chicane chicanes chlamydia cicada cicadas cinchona clear clearance cline cloisonne cocoa codices
+color combe condo contender cornice cortices coupe coupes cracker crackers crude curio custodial cuter deadline deadlines dealer defense
+dense destabilize destabilizes diabolical divisional dorado drogue dumbo emigre encore encores enter entertainer entrance erlenmeyer erode
+error escalade esperance eternal evangelical excise familial feral fetus fife flavor flipper flite flume flutter fortune fortunes fuzzy
+gadget gadgets games garage gazebo gazebos glide granite gratitude guise guises halter heres histolytica hobos hovercraft humane
+impeachments improve include includes infomercial injector injustice input inputs insider iodine irises issei jingo jinx kandoriana
+kandoriano kandorianos kartings kartismo komi kryptoniana kryptonianas kryptoniano kryptonianos lane lanes langur later lebensraum lingo
+lintel liquor lite literature lives logical logon logout lounge lounges louse lucerne lyme macaque macaques machine machines madras madrassa
+madrassas magnate magnates mainframe mainframes mainstream majorette majorettes mangle mangles mangrove mantel mantis maple maples
+maquiladoras marge margrave marinara marital masque matinee maxim mediator medical microbial microscope miniature minor moderne mongoose
+monocytogenes mosque multitude muscle muscles mycoplasma naira naive native natives nature natures niche nicotine nines nisei noise noises
+nomenclature nonsense novel novice oblique octane offline opaque output outputs overbooking overflow ozone pager palace palaces pales panes
+parachute parachutes paralegal parse parser parses passive password passwords patrol pence perceptual performer perjure pimple pinhole
+playground playstation pneumocystis poise presume presumes pretense pretenses primal primeval primitive pristine procedural profile profiles
+profiteroles proteges putter pyogenes rales rance rappel raptor rares ravine reaves recode redeem reemerge reexamine refile refine refines
+require requires resort response responses reuse revel reversal reverse revise revival revive reye ringer riposte risque roadie roadster
+robe robes ronde rondo rouges round rounds router rules rutabaga rutabagas sable sables saccharomyces safer safes sage sages saline salter
+sample samples saran sassafras scone scones scope scopes screensaver secretarial secrete secure senatorial septa sequins sequoia sequoias
+servitude setter shell single singles sire sires slide socialite socket sockets sorta spans spins split sponsor standards stands stops stout
+streptomyces stresses string strings stripper suede superstar tabor tamale tamales tamari tease teases techno teenager teleprompter
+telescope tender textural tine tissues trade trades translator trial triple triples trips trite turnover upgrade upgrades upload uploads
+urealyticum usual varietal vaudeville vernal verve virtue virtues voucher waffle wifi wireless yagi yobi
+
+# 4 letters met zipf<3: alleen een met de hand goedgekeurde witlijst blijft over; de rest is vooral namen, Tupi/Afrikaanse eigennamen, niet-bestaande werkwoordsvormen
+
+abai abal abam abar abaz abda abem aber abes abie abir abis aboa abor abou abul abus acai acal acas achi acio acle acna acor acra acro acua
+acus adar adas adel adem ades adil adir adis ador adua adur afas afra agam agas agla agna agne agno aiai aido aina aine aino ainu aira akan
+alai alam alco alei ales alfo alis alor alou alua aluz amao amba ambi ambu amil amim ampa amus anco anga ania anja anji anoa anto apas apio
+apre apui apus arau ardi arel arga argo arie ario arni arpe arra arro arua arus asai asmo atia atim atis atoa atto auga aule aulo aune aure
+auri auro avao avas avel azal azem azes aças açor aços baal babo babu baca baco bacu bada badi bage bagi bagu baie bais bajo baju bana bani
+bano bapo bari baro baru basa baso baza bazo beia beis beje bele bema bena beno bera bero beru bete beti beça biar biba bibo bida bidu bifa
+bigu bila bilo bina bine bino bipa bipo bips biri biru biso bita bito biza bizu blau blis boal bobe bobi boco bodi bodo boes boga bogo boio
+bole boli boma bori bosa bosi bozo boça brau brca bria brix bual bubi bubu buco bucu budu bues buia buiu buja buli bulo buna buri buro buru
+buso buta buto buza buzi buzo buzu caba cabu cace cado calu cani cari caru casu cati caua cavi caxa cebo ceca ceco ceie ceio celo cene ceno
+ceou cere cero ceru ceso ceta ceto ceva cevo chai cham chie chim chis chor chua chui ciba cibe cibo cica cide cifa cila cilo cina cira cisa
+cise ciso clau coba cobo cobu codo cofo coge coia coim coio coja cojo coli cori coxe coza cras creu crus csis cual cucu cuda cudo cufa cula
+cule cuma cumi cuna cupa cupi curi cuta cuva cuxa dabi dabo dabu dace dala damo dato deba debe debo deca deci deda dede deia dero desa dese
+deso diau dibo dico dila dilo dima dipa diro disa dite dius dixe djim dlim dobo doli domo dopa dopo dore dosa doto doum doxa dras dres duco
+duga dumo duns duru ecam ecas ecto ecus edia edis edra edta eduo egas egbe egeu egle egum eima eiro eive eixe elam elar elei elem elou elus
+emes emia emis empa empo enas endo enel enes enga engo enho enol enta enxu eque erar erei erem eres eris erse esma esme etal etao etas etno
+etos eval evas evei evem evoe evos evou exao exis exma faco faga fago faim fali fana fane fano fari fata febo fela fele felo fena fene fero
+fida fido fife fifi fima fini fira firo fisa fise fite flox foia foio fojo fola foma fomo fona fono fota frea fuca fuco fufa fufu fugo fuje
+fula funa fune fure fute fuzo fuça fuço gade gafa gage gaie gali gane gani gano gare garo garu gaus gava geas geba gebe gebo geco geia gele
+geno geos geri gero geso geta gido gigo gila gima gios gita giza gize glia gobo goda gode goga gogo goia goio gois gojo goli gome goni gono
+gonu gote goto grei grio grou guai guar guau gude guei guna gune gura guro guta gute haco haje haji hala heis hela heme hemi hena hene hepa
+heta hete hexa hias hila hina hipo hola holo hopi hopo hore horo hote hova hubo huis hula humo huna huno hura husa hutu iago iaia iama iapu
+iaso iati iave ibas icas icei icio icor icos idia idio idis ieis ifes igui ilas iles ilhe ilho ilus imba imbe imos impa impe impo inae indi
+ines inge ingo inos ioda iola iole ione ipua irai irie irio irum isas ista itai itas itau itos iuca iuiu iupi iuri ivai ixas içai içam içar
+içou jaba jabe jabu jaci jada jaga jala jami jano japa japi jara jaro jaru jata jati jaua jaus jave jaze jazo jaça jeba jeca jeje jeju jeni
+jero jesu jina jinx jipi jira jito joar joba jobe joco jola joli jolo jomo jona jone jono jopa jour joça jucu juga juju jula jule juma juna
+juru juto kbps komi laas labo laco lada ladu laga lala lale lalo lami lano lapo lari laro lati laza lazo laça leba leca leco lede lega lela
+lele lelo lene leni leno lero lese leta leto liba libe libi lica liem linx liou lipa lipe liri liro lise lita lite lito liva lize lizo liça
+lobi loci locu loes lofa loga loia lolo lope lopo loro losa loso loti luba luco luda lufe luga luia lulo luni luos lupe lupo lura luro luxa
+luza luze luzo lyme maar maba mabu macu mada madi mafe maie mair maja maju malo mame manx maro masa mati matu maza meao meei meji mele mene
+meni meno meru meso meul meça meço miai miam miao mias mida miei mies miga migo mije mili milu miri misa mise miso mita mitu mixa mixe mixo
+miza mmol moal moel mogo moho moia moio mois moja mojo moli molo mols moma mome moni mons mopi mori moru mosa moti moxo mube mubi mugo muio
+mumu muna mune muni muno mure muri muru muta muti muça naba nabi naca nade nadi naga nagi naia naji nala nale nalu nama nane naru nava naxa
+naze nebo neda neja nelo nema nena neno nens nera nhor nhum nial nibu nica nida nide nido nila nili nini nita nito nive niza noas noca noco
+noda noja noje nola noma nomo nops nuba nuda numo nunc nune nuta nute nuto obas obre obro obte ocam oche odos odum odus oena oeta ogam ogue
+oiga oigo oiça olam olia olor ombo onco ondo opai opar opas opie orce orco ordo oria oris orix orle orta orça osca osce osma osmo oste otao
+otas otim otos otus ouga oura outa outo ovem ovis paba pada pade pado padu pama pami pana pani pape papu paru pati paxa peba pegu peio pema
+peni peno pepa peps perm peul peva pexe piai picu pida piga pili pilo pima pipo pire piri piro pite piti pitu piva piça pleo plex pnom poas
+poer poio pojo pola pona pone pons popo pota poti poto proo prum prus psis puba puco puer pues pufe puis puiu puna puno pupe pupo pupu puri
+puti puva puça quil quio quir rafi rafo raga ragu raje rajo rame rane rani ranu rapo rase rati raus rava raxa reba rebe rebo rebu reca reco
+reia reio reja rejo relo repa reso rete reye ribe ribu rida rido riga rigo rila rilo rime rimo rina rino ripo risa riza rize rizo riça riço
+robe roco roel roga roja roli rone rons rora roro roso roço rufa rufe ruis ruja rujo rula rulo ruma rume rumi runo rupa rupe rupo ruça ruço
+sace sade sadi sael saim salo salu samo sapu sare sari saro saru sati sava saxa saxe seba sedo sego sejo sele sema sene sere seri seto seva
+seve sexa sexe siai siba sibe sica sico sila sile sini sipe sira sire siro sise siva sode soei sogo somo sona sopo sote spas sras stas suca
+sudo sufi sugo sula sulo sume suna suri suro suru suso suta suto tabe tabi taci tael tali tama tamo tana tane tani tano taos tapo tare tari
+taua taxe tcha tche teba tebi teco tefe teja teju telo tene teno tepe tere tero teça teço tial tiau tiba tibe tibi tibo tica tifa tila tilo
+tima tine tini tipe tipu tlim toba tofo tojo tole toli tolu tono toou toru tose toso toto tova toxi trol trom truz tsua tubi tuca tuco tuga
+tula tule tulo tunc tuns tupa tupe tupo tura turi turo turu tuta tute tuto tuxa tuza uaua ucha ufos ugar ugro uira ulas ulmo umbe unai unas
+unci unei unos upam upar upas upei upes upou urai uras urda urdu urim uris urro urus ussa utam utas utra vaco vage vaie vaio vare vari vars
+vata vaus vava vaze vazo vede veis vele veri vete veza veze vido viia vili vina vini vise vite vitu viço vldl voda vodu vogo vola volo volt
+vudu vupt xate xena xeno xero xeva xexe xiba xica xico xilo xina xine xira xiri xiru xiça xoco xona xone xota xoxo xuis xuri xuxo yagi yobi
+zaca zama zana zape zava zazo zele zena zeni zeno zera zere zimo zina zine zini zino zipe zito zoli zuca zula zule zulo zuna zune zuni zuno
+zupa

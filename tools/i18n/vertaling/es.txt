@@ -806,3 +806,63 @@ sudoku.done.text | Resuelto. ¡Bien hecho!
 sudoku.done.daily | Resolvió el Sudoku del {date}.
 stats.note | Ganados de jugados
 sudoku.stat.level | Nivel
+
+##### 200-letterhof
+letterhof.name | Patio de letras
+letterhof.summary | Forme palabras en un tablero de flores: coloque fichas, sume puntos con las casillas de colores y venza al jugador virtual.
+letterhof.howTo.1 | Toque una ficha de su atril y luego una casilla del tablero, o arrástrela hasta allí. Forme una palabra en una fila o columna. La primera palabra debe pasar por la flor del centro.
+letterhof.howTo.2 | Cada palabra siguiente debe conectar con las del tablero, y todas las palabras que forme o cruce deben existir. Toque una ficha recién colocada para retirarla. La ficha en blanco (con la flor) puede ser cualquier letra.
+letterhof.howTo.3 | Las casillas de colores ayudan: verde claro duplica una letra, verde la triplica, morado duplica toda la palabra, rojo la triplica. Solo cuentan para las fichas que coloca ahora. Si usa las siete fichas de una vez, obtiene una buena bonificación.
+letterhof.howTo.4 | Pulse «{play}» para confirmar su palabra. ¿Atascado? Use «{exchange}» o «{pass}», o pida una «{hint}». La partida termina cuando la bolsa está vacía y alguien se queda sin fichas.
+letterhof.level.makkelijk | El jugador virtual solo conoce palabras corrientes y suele jugar flojo
+letterhof.level.gemiddeld | Palabras corrientes, juega razonablemente
+letterhof.level.moeilijk | Conoce también palabras raras y suele encontrar una buena jugada
+letterhof.level.extreem | Conoce todas las palabras y busca siempre la mejor jugada
+letterhof.you | Usted
+letterhof.rack | Sus fichas
+letterhof.play | Jugar
+letterhof.recall | Retirar
+letterhof.exchange | Cambiar fichas
+letterhof.pass | Pasar
+letterhof.shuffle | Mezclar
+letterhof.zoomIn | Acercar
+letterhof.zoomOut | Alejar
+letterhof.cancel | Cancelar
+letterhof.bag | Bolsa: {n}
+letterhof.blank | Ficha en blanco
+letterhof.cell | Fila {r}, columna {c}
+letterhof.premie.L2 | letra doble
+letterhof.premie.L3 | letra triple
+letterhof.premie.W2 | palabra doble
+letterhof.premie.W3 | palabra triple
+letterhof.yourTurn | Su turno: coloque fichas en el tablero.
+letterhof.firstMove | Empiece con una palabra que pase por la flor del centro.
+letterhof.thinking | El jugador virtual está pensando…
+letterhof.preview | {word} (y lo que toque) vale {points} puntos si todas las palabras son válidas.
+letterhof.scored | Jugó {word} por {points} puntos.
+letterhof.bingo | Las siete fichas: +{points} de bonificación.
+letterhof.theyPlayed | {name} jugó {word} por {points} puntos.
+letterhof.theySwapped | {name} cambió fichas.
+letterhof.theyPassed | {name} pasó.
+letterhof.youSwapped | Cambió fichas.
+letterhof.youPassed | Pasó.
+letterhof.cantExchange | Solo se puede cambiar mientras queden al menos 7 fichas en la bolsa.
+letterhof.exchangeText | Toque las fichas que quiere cambiar por otras nuevas. Con eso termina su turno.
+letterhof.exchangeDo | Cambiar
+letterhof.passTitle | ¿Pasar este turno?
+letterhof.passText | No juega ninguna palabra y le toca al jugador virtual.
+letterhof.noHint | No veo ninguna buena jugada que proponer. Pruebe a cambiar fichas.
+letterhof.hintText | Pista: {word} por {points} puntos. Las fichas están colocadas; pulse Jugar o cámbielas.
+letterhof.chooseLetter | ¿Qué letra debe ser la ficha en blanco?
+letterhof.fout.lijn | Coloque todas las fichas en una sola fila o columna.
+letterhof.fout.gat | Hay una casilla vacía entre sus fichas.
+letterhof.fout.midden | La primera palabra debe pasar por la flor del centro.
+letterhof.fout.kort | La primera palabra necesita al menos dos letras.
+letterhof.fout.los | Su palabra debe conectar con las fichas del tablero.
+letterhof.fout.leeg | Coloque primero al menos una ficha.
+letterhof.fout.woord | No está en la lista de palabras: {words}. Cambie sus fichas e inténtelo de nuevo.
+letterhof.won | Ha ganado por {you} puntos contra {them}.
+letterhof.lost | El jugador virtual ganó con {them} puntos contra sus {you}. ¡Bien jugado!
+letterhof.lostTitle | ¡Bien jugado!
+letterhof.draw | Empate: {points} puntos cada uno.
+letterhof.drawTitle | ¡Empate!

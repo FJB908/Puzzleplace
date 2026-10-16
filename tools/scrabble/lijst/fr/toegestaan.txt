@@ -1,0 +1,18 @@
+# fr toegestaan - valid French words dropped by the pipeline (3-4 letter words where English is more frequent, 3-letter words with zipf<3, 5-letter words mostly seen in capitals). All are valid Hunspell (Dicollecte) forms. Raw spelling.
+
+bût lové sûre thé rêne casé liké mâle pût hâve havé usé usés soûl fées unît mâté maté mâte réal haïr camé ridé
+gavé gâte gâté héro thaï piné âcre dopé béé bée rôt gît olé viné talé râpé râpe môle lût cré rôdé rôde rodé
+béât béat lacé saké têt fusé mél ohé avé urgé oïl ové famé ôta réé rée mût éon saï caté ripé séga névé hués
+hère zêta vêt méat péta bâte bâté flué omît ânon dîna bées hème êta vés béer celé cèle jaïn bâta lône ipé aéra
+usât vête zée zoés sodé zûna lofé moyé râpa rées rhé hylé foxé fêla énol lésa tûta gâta bêla tuât oaï zûné
+zûne nafé mégi korê goï noça géos tûté tûte rûte raïa suât têts béez muât gîta goïs vêts pâma réât rûta réai
+liât ôtas puça laça zées téju vêla béas huât redû bégu taël rhô but for inde sure lot out off doc case like
+hum cash heu set euh pull soul tank chi unit rush tons pet laid body cars mate gap shot mile fat sets must
+drop paf legs bit spin tara cake ride pool step kick item lulu ouh hits dia skin log sole mess dual fuel drag
+slam chip acre uses pets dope cos sofa ors cil plot zou rot fez jar cep obi hem tale tau bans zig bop rut dey
+oud coi wok vau lace osa lob suc grip fuse fic glu ifs bue hep ber spi gis tif zob nem pies axis dag cob lava
+bau dru rua tuf taco eth guru fla ohm goy tore yak kir rye lied urge jas orc fats ers erg tof foc fore ache
+pore mua putt tub ure lof kot mut yod hie foil sues raft lek khi baht hast pua moly taxa hues amok gyms byte
+cabs ksi czar kelp nua flue omit exon qat muon four fine due lots oups miam ouah sua hua mouais beurk alpha
+japon gallo henry brésil canada kremlin martin robin moreau maxwell spencer tommy doris jésus diane jenny
+fanny

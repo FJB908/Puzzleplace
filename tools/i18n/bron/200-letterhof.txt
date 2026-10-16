@@ -1,0 +1,60 @@
+##### Letterhof (woordenlegspel): letters op een bord leggen tot woorden, met bonusvakjes; tegen de virtuele speler
+# Naam van het spel: een eigen naam, dus niet "Scrabble" (dat is een merk).
+letterhof.name | Letter Court | Letterhof
+letterhof.summary | Build words on a blossom board: place tiles, score with the coloured squares and beat the virtual player. | Bouw woorden op een bloesembord: leg stenen, scoor punten met de gekleurde vakjes en versla de virtuele speler.
+letterhof.howTo.1 | Tap a tile in your rack and then a square on the board, or drag it there. Make one word in a row or column. The first word must cover the flower in the middle. | Tik een steen in je rek en daarna een vakje op het bord, of sleep hem erheen. Maak één woord in een rij of kolom. Het eerste woord moet over de bloem in het midden lopen.
+letterhof.howTo.2 | Every next word must connect to the words on the board, and all words you make or cross must be real words. Tap a tile you just placed to take it back. The blank tile (with the blossom) can be any letter. | Elk volgend woord moet aansluiten op wat al op het bord ligt, en alle woorden die je maakt of kruist moeten echte woorden zijn. Tik op een steen die je net legde om hem terug te nemen. De lege steen (met de bloesem) mag elke letter zijn.
+letterhof.howTo.3 | The coloured squares help: pale green doubles a letter, green triples a letter, purple doubles the whole word, red triples the whole word. They only count for tiles you place now. Use all seven tiles at once for a big bonus. | De gekleurde vakjes helpen: lichtgroen verdubbelt een letter, groen verdrievoudigt een letter, paars verdubbelt het hele woord, rood verdrievoudigt het hele woord. Ze tellen alleen voor stenen die je nu legt. Leg je alle zeven stenen in één keer, dan krijg je een flinke bonus.
+letterhof.howTo.4 | Press "{play}" to confirm your word. Stuck? Use "{exchange}" or "{pass}", or ask for one "{hint}". The game ends when the bag is empty and someone has no tiles left. | Druk op "{play}" om je woord vast te leggen. Zit je vast? Gebruik "{exchange}" of "{pass}", of vraag één "{hint}". Het spel eindigt als de zak leeg is en iemand geen stenen meer heeft.
+letterhof.level.makkelijk | The virtual player knows only everyday words and often plays weakly | De virtuele speler kent alleen gewone woorden en speelt vaak zwak
+letterhof.level.gemiddeld | Everyday words, plays reasonably well | Gewone woorden, speelt redelijk
+letterhof.level.moeilijk | Knows rare words too and often finds a strong move | Kent ook zeldzame woorden en vindt vaak een sterke zet
+letterhof.level.extreem | Knows every word and always looks for the best move | Kent elk woord en zoekt altijd de beste zet
+letterhof.you | You | Jij
+letterhof.rack | Your tiles | Je stenen
+letterhof.play | Play | Spelen
+letterhof.recall | Take back | Terugnemen
+letterhof.exchange | Swap tiles | Stenen wisselen
+letterhof.pass | Pass | Passen
+letterhof.shuffle | Shuffle your tiles | Husselen
+letterhof.zoomIn | Zoom in | Inzoomen
+letterhof.zoomOut | Zoom out | Uitzoomen
+letterhof.cancel | Cancel | Annuleren
+letterhof.bag | Bag: {n} | Zak: {n}
+letterhof.blank | Blank tile | Lege steen
+letterhof.cell | Row {r}, column {c} | Rij {r}, kolom {c}
+letterhof.premie.L2 | letter times 2 | letter x2
+letterhof.premie.L3 | letter times 3 | letter x3
+letterhof.premie.W2 | word times 2 | woord x2
+letterhof.premie.W3 | word times 3 | woord x3
+letterhof.yourTurn | Your turn: place tiles on the board. | Jouw beurt: leg stenen op het bord.
+letterhof.firstMove | Start with a word over the flower in the middle. | Begin met een woord over de bloem in het midden.
+letterhof.thinking | The virtual player is thinking… | De virtuele speler denkt na…
+letterhof.preview | {word} (and anything it touches) is worth {points} points if all words are valid. | {word} (en wat het raakt) levert {points} punten op als alle woorden kloppen.
+letterhof.scored | You played {word} for {points} points. | Jij speelde {word} voor {points} punten.
+letterhof.bingo | All seven tiles: +{points} bonus! | Alle zeven stenen: +{points} bonus!
+letterhof.theyPlayed | {name} played {word} for {points} points. | {name} speelde {word} voor {points} punten.
+letterhof.theySwapped | {name} swapped some tiles. | {name} wisselde stenen.
+letterhof.theyPassed | {name} passed. | {name} paste.
+letterhof.youSwapped | You swapped some tiles. | Je hebt stenen gewisseld.
+letterhof.youPassed | You passed. | Je hebt gepast.
+letterhof.cantExchange | Swapping is only possible while at least 7 tiles are left in the bag. | Wisselen kan alleen zolang er minstens 7 stenen in de zak zitten.
+letterhof.exchangeText | Tap the tiles you want to swap for new ones. This ends your turn. | Tik de stenen aan die je wilt wisselen voor nieuwe. Daarmee is je beurt voorbij.
+letterhof.exchangeDo | Swap | Wisselen
+letterhof.passTitle | Pass this turn? | Deze beurt passen?
+letterhof.passText | You do not play a word and it is the virtual player’s turn. | Je legt geen woord en de virtuele speler is aan de beurt.
+letterhof.noHint | There is no good move to suggest. Try swapping tiles. | Er is geen goede zet om voor te stellen. Probeer stenen te wisselen.
+letterhof.hintText | Hint: {word} for {points} points. The tiles are laid down; press Play or change them. | Tip: {word} voor {points} punten. De stenen liggen klaar; druk op Spelen of pas ze aan.
+letterhof.chooseLetter | Which letter should the blank tile be? | Welke letter moet de lege steen zijn?
+letterhof.fout.lijn | Place all tiles in one row or one column. | Leg alle stenen in één rij of één kolom.
+letterhof.fout.gat | There is an empty square between your tiles. | Er zit een leeg vakje tussen je stenen.
+letterhof.fout.midden | The first word must cover the flower in the middle. | Het eerste woord moet over de bloem in het midden lopen.
+letterhof.fout.kort | The first word needs at least two letters. | Het eerste woord heeft minstens twee letters nodig.
+letterhof.fout.los | Your word must connect to the tiles on the board. | Je woord moet aansluiten op de stenen op het bord.
+letterhof.fout.leeg | Place at least one tile first. | Leg eerst minstens één steen neer.
+letterhof.fout.woord | Not in the word list: {words}. Change your tiles and try again. | Staat niet in de woordenlijst: {words}. Pas je stenen aan en probeer opnieuw.
+letterhof.won | You won with {you} points against {them}. | Je hebt gewonnen met {you} punten tegen {them}.
+letterhof.lost | The virtual player won with {them} points against your {you}. Well played! | De virtuele speler won met {them} punten tegen jouw {you}. Mooi gespeeld!
+letterhof.lostTitle | Well played! | Mooi gespeeld!
+letterhof.draw | A draw: {points} points each. | Gelijkspel: allebei {points} punten.
+letterhof.drawTitle | A draw! | Gelijkspel!

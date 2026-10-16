@@ -7,6 +7,7 @@ import { FREQ } from './woordzoeker/frequentie.js';
 import { getTaal } from '../i18n/index.js';
 import { plaatjeSvg, PLAATJE_DEFS } from './mahjong/tegels.js';
 import { kaartSvg, SOL_DEFS } from './solitaire/kaarten.js';
+import { bloesemFig } from './mahjong/tegels.js';
 
 const wrap = (inner, size = 11) => `<svg class="game-art" viewBox="0 0 160 120" style="font-size:${size}px" aria-hidden="true" focusable="false">${inner}</svg>`;
 
@@ -104,7 +105,19 @@ function solitaire() {
   return wrap(`${SOL_DEFS}<rect class="ga-sol-vilt" x="8" y="8" width="144" height="104" rx="16"/><rect class="ga-sol-rand" x="8" y="8" width="144" height="104" rx="16"/>${kaart(0, 32, 30, -14)}${kaart(13, 58, 24, 0)}${kaart(26, 88, 30, 14)}`);
 }
 
-const ART = { sudoku, woordzoeker, kruiswoord, woordtuin, mahjong, solitaire };
+// Letterhof: een stukje bord met bonusvakjes en een paar stenen die een woord vormen
+function letterhof() {
+  const vak = (x, y, soort) => `<rect class="ga-lh-${soort}" x="${x}" y="${y}" width="16" height="16" rx="2.500"/>`;
+  const steen = (x, y, l, w) => `<g transform="translate(${x} ${y})"><rect class="ga-lh-dikte" x="0" y="1.400" width="16" height="16" rx="3"/><rect class="ga-lh-steen" width="16" height="16" rx="3"/><text class="ga-lh-l" x="8" y="12.200" text-anchor="middle">${l}</text><text class="ga-lh-w" x="13.400" y="14.400" text-anchor="end">${w}</text></g>`;
+  const rooster = [['', 'L2', '', 'W3', '', 'L2'], ['L2', '', 'L3', '', 'W2', ''], ['', 'W2', '', 'L2', '', 'L3']];
+  let v = '';
+  rooster.forEach((rij, r) => rij.forEach((s, c) => { v += vak(18 + c * 17, 13 + r * 17, s || 'leeg'); }));
+  const w = [...(woorden().wt?.[0] || 'LETTER')].slice(0, 5);
+  const t = w.map((l, k) => steen(18 + k * 17 + 0, 47, l.toUpperCase(), 1 + (k * 7 % 4))).join('');
+  return wrap(`<rect class="ga-lh-rand" x="8" y="6" width="144" height="108" rx="14"/>${v}<g transform="translate(120 86) scale(.62)">${'<svg x="-20" y="-20" width="40" height="40" viewBox="-20 -20 40 40">' + bloesemFig(0, 0, 13, true) + '</svg>'}</g>${t}`);
+}
+
+const ART = { sudoku, woordzoeker, kruiswoord, woordtuin, mahjong, solitaire, letterhof };
 
 export function gameArt(id) {
   const make = ART[id];
