@@ -34,6 +34,7 @@
 }
 .lh-vak:focus-visible { outline: .2rem solid #ffd45a; outline-offset: -.15rem; z-index: 3; }
 .lh-vak.doel { outline: .2rem dashed #ffd45a; outline-offset: -.12rem; }
+.lh-vak > * { grid-area: 1 / 1; }
 .lh-glyf { position: absolute; top: 9%; left: 0; right: 0; display: flex; justify-content: center; opacity: .78; }
 .lh-glyf svg { width: calc(var(--vak) * .34); height: calc(var(--vak) * .34); }
 .lh-num { position: relative; top: 10%; font: 800 calc(var(--vak) * .52) / 1 Georgia, 'Times New Roman', serif; }
@@ -64,17 +65,17 @@
 .lh-onder { display: flex; flex-direction: column; gap: .6rem; }
 .lh-rekrij { display: flex; align-items: center; gap: .6rem; }
 .lh-rek {
-  flex: 1; display: flex; justify-content: center; gap: .45rem; padding: .7rem .8rem .9rem; min-height: 4.6rem; border-radius: 1.1rem;
+  flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .7rem .7rem .9rem; min-height: 4.6rem; border-radius: 1.1rem;
   background: linear-gradient(180deg, #16463a, #0e2f27); box-shadow: inset 0 .25rem .5rem rgba(0, 0, 0, .45), inset 0 0 0 .14rem #cda24a, 0 .18rem .5rem rgba(20, 40, 30, .3);
 }
-.lh-rekstee { position: relative; flex: 0 1 3.4rem; aspect-ratio: 1 / 1.08; min-width: 2.2rem; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; --vak: 3.2rem; transition: transform .15s; -webkit-tap-highlight-color: transparent; }
+.lh-rekstee { position: relative; flex: 1 1 0; max-width: 3.4rem; min-width: 0; aspect-ratio: 1 / 1.08; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; --vak: 3.2rem; transition: transform .15s; -webkit-tap-highlight-color: transparent; }
 .lh-rekstee .lh-l { font-size: 1.85rem; }
 .lh-rekstee .lh-w { font-size: .85rem; }
 .lh-rekstee.gekozen { transform: translateY(-.55rem) scale(1.06); }
 .lh-rekstee.gekozen .lh-steen { box-shadow: 0 .09em 0 #1f7a55, 0 0 0 .1em #ffd45a, 0 0 .6rem .15rem rgba(255, 212, 90, .75), inset 0 0 0 .055em rgba(205, 162, 74, .95); }
 .lh-rekstee:focus-visible { outline: .22rem solid #ffd45a; outline-offset: .15rem; border-radius: .5rem; }
 .lh-rekstee.weg { opacity: .3; }
-.lh-hussel, .lh-zoom { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 3.2rem; min-width: 3.2rem; padding: 0 .8rem; border-radius: 1rem; border: .12rem solid var(--line, #d8c690); background: var(--card, #fffdf6); color: var(--text); cursor: pointer; font: inherit; font-weight: 700; }
+.lh-hussel, .lh-zoom { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 3.2rem; min-width: 3.2rem; padding: 0 .8rem; border-radius: 1rem; border: .12rem solid #d8c690; background: linear-gradient(160deg, #fffefb, #f4ecd8); color: #2b2430; cursor: pointer; font: inherit; font-weight: 700; box-shadow: 0 .1rem .3rem rgba(60, 40, 10, .2); }
 .lh-hussel:disabled { opacity: .45; }
 .lh-zoom { align-self: center; }
 .lh-spook { position: fixed; left: 0; top: 0; z-index: 3000; pointer-events: none; opacity: .92; transform-origin: center; --vak: 3.2rem; filter: drop-shadow(0 .5rem .5rem rgba(0, 0, 0, .35)); }
@@ -98,14 +99,14 @@ html[data-calm="true"] .lh-steen, html[data-calm="true"] .lh-pop { animation: no
 @media (prefers-reduced-motion: reduce) { .lh-steen, .lh-pop { animation: none !important; } }
 
 /* Dialogen: een letter kiezen voor een lege steen, stenen wisselen */
-.lh-dialoog { border: 0; border-radius: 1.4rem; padding: 1.2rem; max-width: min(92vw, 30rem); background: var(--card, #fffdf6); color: var(--text); box-shadow: 0 1rem 3rem rgba(0, 0, 0, .4); }
+.lh-dialoog { border: 0; border-radius: 1.4rem; padding: 1.2rem; max-width: min(92vw, 30rem); background: #fffdf6; color: #2b2430; box-shadow: 0 1rem 3rem rgba(0, 0, 0, .4); }
 .lh-dialoog::backdrop { background: rgba(10, 30, 20, .55); }
 .lh-dialoog h2 { margin: 0 0 .6rem; font-size: 1.3rem; }
 .lh-letterkeuze { display: grid; grid-template-columns: repeat(auto-fill, minmax(3.2rem, 1fr)); gap: .45rem; margin-bottom: 1rem; }
 .lh-lk { min-height: 3.2rem; border-radius: .9rem; border: .12rem solid #cda24a; background: linear-gradient(160deg, #fffefb, #f1e6c6); font: 800 1.5rem Georgia, serif; color: #2b2430; cursor: pointer; }
 .lh-lk:hover, .lh-lk:focus-visible { background: #fff1b8; outline: .2rem solid #ffd45a; }
 .lh-wisselrij { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: 1rem 0; }
-.lh-wisselrij .lh-rekstee { flex: 0 0 3.6rem; --vak: 3.4rem; }
+.lh-wisselrij .lh-rekstee { flex: 0 0 3.6rem; max-width: none; --vak: 3.4rem; }
 .lh-dlg-knoppen { display: flex; gap: .6rem; justify-content: flex-end; flex-wrap: wrap; }
 
 @media (max-width: 34rem) {
@@ -140,3 +141,5 @@ body.groot-beeld .lh-bordwrap { margin-inline: 0; }
 .lh-plaat.aan::before { content: ""; position: absolute; left: -.55rem; top: -.55rem; width: 1.5rem; height: 1.5rem; background: url("../../assets/blossom.svg") center / contain no-repeat; filter: drop-shadow(0 .1rem .15rem rgba(0, 0, 0, .3)); }
 .lh-plaat.pc.aan::before { left: auto; right: -.55rem; }
 html[data-theme="dark"] .lh-melding { color: var(--text); }
+
+body.groot-beeld .lh { padding-top: 3.2rem; }
