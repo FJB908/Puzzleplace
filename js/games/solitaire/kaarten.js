@@ -6,9 +6,10 @@
 
 import { rang, kleur, isRood } from './engine.js';
 import { bloesemFig, PLAATJE_DEFS } from '../mahjong/tegels.js';
+import { hofSvg, HOF_DEFS } from './hofkaarten.js';
 
 // De kleurverlopen en het golfpatroon van de kaartrug. Eén keer in de pagina zetten (onzichtbaar maar wel aanwezig); de kaarten verwijzen ernaar.
-export const SOL_DEFS = PLAATJE_DEFS
+export const SOL_DEFS = PLAATJE_DEFS + HOF_DEFS
   + `<defs><linearGradient id="solInkt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d6c88"/><stop offset=".5" stop-color="#232d44"/><stop offset="1" stop-color="#0b101c"/></linearGradient>`
   + `<radialGradient id="solRing" cx=".5" cy=".42" r=".7"><stop offset="0" stop-color="#fffdf4"/><stop offset="1" stop-color="#f3e7c6"/></radialGradient>`
   + `<linearGradient id="solRug" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3c5aa8"/><stop offset=".55" stop-color="#26397f"/><stop offset="1" stop-color="#18235a"/></linearGradient>`
@@ -62,18 +63,6 @@ const PIPS = {
 // De rand van een kaart: een dun gouden lijntje net binnen de rand, zoals de inlegrand op de tegels
 const RAND = `<rect x="2.200" y="2.200" width="55.600" height="79.600" rx="4.200" fill="none" stroke="${GOUD}" stroke-width=".55" opacity=".95"/>`;
 
-// Boer, vrouw en heer: de figuur is een plaatje (zie hofplaatjes.js), in een gouden lijst met een zachte tint. Zonder plaatje een eenvoudig kader.
-function hofkaart(k, s, kl, hof) {
-  const plaatje = hof?.[k];
-  const tint = isRood(k) ? '#fde9e6' : '#e9edf5';
-  if (plaatje) {
-    return `<rect x="12.200" y="15.800" width="35.600" height="56.200" rx="2.400" fill="${tint}" stroke="${GOUD}" stroke-width="1"/>`
-      + `<rect x="13" y="16.600" width="34" height="54.600" rx="1.800" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width=".4"/>`
-      + `<image href="${plaatje}" x="13.800" y="17.400" width="32.400" height="52.200" preserveAspectRatio="none"/>`;
-  }
-  return `<rect x="12" y="17" width="36" height="50" rx="3.500" fill="none" stroke="${kl}" stroke-width="1" opacity=".6"/>`;
-}
-
 // Het aas: één grote kleur in een gouden ring met een zachte glans, tussen acht gouden knopjes
 function aas(s) {
   const knopjes = Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return `<circle cx="${(30 + 16.6 * Math.sin(a)).toFixed(2)}" cy="${(44 - 16.6 * Math.cos(a)).toFixed(2)}" r="1" fill="${GOUD}"/>`; }).join('');
@@ -83,17 +72,14 @@ function aas(s) {
 
 const cache = new Map();
 // letters: de letter in de hoek voor aas, boer, vrouw en heer ({1: 'A', 11: 'J', 12: 'Q', 13: 'K'} of in de taal van de app)
-export function kaartSvg(k, letters, hof = null) {
-  const sl = `${k}|${letters[1]}${letters[11]}${letters[12]}${letters[13]}${hof ? 'h' : ''}`;
+export function kaartSvg(k, letters) {
+  const sl = `${k}|${letters[1]}${letters[11]}${letters[12]}${letters[13]}`;
   if (cache.has(sl)) return cache.get(sl);
   const r = rang(k) + 1, s = kleur(k);
   const kl = isRood(k) ? ROOD : ZWART;
   const tekst = r === 1 || r > 10 ? letters[r] : String(r);
   const breed = tekst.length > 1 ? 17 : 10;
-  // Een hofkaart met plaatje heeft de kleur al groot in het plaatje: dan staat in de hoek alleen de letter (groter)
-  const alleenLetter = r > 10 && !!hof?.[k];
-  const hoek = `<text x="4.500" y="${alleenLetter ? 15.500 : 15}" font-size="${alleenLetter ? 17 : 15.500}" font-weight="800" fill="${kl}" font-family="Georgia, 'Times New Roman', serif">${tekst}</text>`
-    + (alleenLetter ? '' : kleurSvg(s, 4.500 + breed + 1.500, 4, 11.500, `fill="${kl}"`));
+  const hoek = `<text x="4.500" y="15" font-size="15.500" font-weight="800" fill="${kl}" font-family="Georgia, 'Times New Roman', serif">${tekst}</text>` + kleurSvg(s, 4.500 + breed + 1.500, 4, 11.500, `fill="${kl}"`);
   let midden = '';
   if (r === 1) midden = aas(s);
   else if (r <= 10) {
@@ -104,7 +90,7 @@ export function kaartSvg(k, letters, hof = null) {
       return omlaag ? `<g transform="rotate(180 ${cx} ${cy})">${kleurPlaatje}</g>` : kleurPlaatje;
     }).join('');
   } else {
-    midden = hofkaart(k, s, kl, hof);
+    midden = hofSvg(k, s, r);
   }
   const uit = `${RAND}${midden}${hoek}<g transform="rotate(180 30 42)">${hoek}</g>`;
   cache.set(sl, uit);

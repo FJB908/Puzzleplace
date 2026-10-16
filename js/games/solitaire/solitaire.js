@@ -13,7 +13,6 @@ import { burst, motionOK } from '../../effects.js';
 import * as E from './engine.js';
 import { kaartSvg, kleurIcoon, rugSvg, SOL_DEFS } from './kaarten.js';
 import { felicitatie } from '../../shared/felicitatie.js';
-import { HOFPLAATJES } from './hofplaatjes.js';
 
 const RATIO = 1.4;                      // hoogte van een kaart ten opzichte van de breedte
 const GAP = 0.11;                       // ruimte tussen de stapels, als deel van de kaartbreedte
@@ -72,7 +71,7 @@ export async function mount(container, ctx) {
     const el = h('button', { type: 'button', class: 'sol-kaart', 'data-k': k, tabindex: '-1', onclick: (e) => { if (e.detail === 0) tikKaart(k); } },
       h('span', { class: 'sol-binnen', 'aria-hidden': 'true' }, h('span', { class: 'sol-voor' }), h('span', { class: 'sol-achter' })));
     el.querySelector('.sol-achter').innerHTML = RUG;
-    el.querySelector('.sol-voor').innerHTML = `<svg viewBox="0 0 60 84" focusable="false">${kaartSvg(k, letters, HOFPLAATJES)}</svg>`;
+    el.querySelector('.sol-voor').innerHTML = `<svg viewBox="0 0 60 84" focusable="false">${kaartSvg(k, letters)}</svg>`;
     el._x = el._y = null; el._up = null;
     return el;
   });
