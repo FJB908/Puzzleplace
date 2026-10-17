@@ -8,6 +8,8 @@
 //             stats: { [niveau]: { started, won, best, total } }   (beste tijd en totaal in seconden; alleen spellen met een tijd, zoals Sudoku)
 //             daily: { [JJJJ-MM-DD]: { time, difficulty } }         (de dagen die je hebt opgelost: het archief van de puzzel van de dag)
 //   lastGame: { id, slot } | null
+//   steun:    { sinds, supporter, nee, laatsteVraag }   (zie js/steun/: sinds = eerste gebruik, supporter = de eenmalige bijdrage is gedaan, nee/laatsteVraag = hoe vaak "Nu niet" is gekozen)
+//             Dit hoort bij het apparaat (en bij de winkelaccount), niet bij je voortgang: het gaat dus nooit mee met synchroniseren.
 //
 // Een "slot" is een bewaard spel: { seed, difficulty, state, updatedAt, progress?, day? }, of een wismarkering { cleared: true, updatedAt }.
 // Later kan een account deze hele structuur synchroniseren (services/sync.js).
@@ -20,6 +22,7 @@ const defaults = () => ({
   settings: { textSize: 'normal', theme: 'auto', contrast: 'normal', calm: false, decor: true, welcomeDone: false, taal: null },
   games: {},
   lastGame: null,
+  steun: { sinds: null, supporter: false, nee: 0, laatsteVraag: null },
 });
 
 let data = load();
@@ -36,6 +39,7 @@ function load() {
         profile: { ...base.profile, ...saved.profile },
         settings: { ...base.settings, ...saved.settings },
         games: saved.games || {},
+        steun: { ...base.steun, ...saved.steun },
       };
     }
   } catch { /* kapotte of geblokkeerde opslag: begin opnieuw */ }
@@ -97,10 +101,18 @@ export function importSync(snapshot) {
 
 export function resetAll() {
   const taal = data.settings.taal ?? null;                // de gekozen taal blijft: anders moet je haar opnieuw kiezen
+  const steun = data.steun;                               // en wie de app heeft gesteund, blijft Supporter (dat is betaald)
   data = defaults();
   data.settings.taal = taal;
+  data.steun = { ...steun, nee: 0, laatsteVraag: null };
   persist();
 }
+
+// ----- Steun (extra tips, de eenmalige bijdrage) -----
+export const getSteun = () => data.steun;
+export const setSteun = (patch) => { Object.assign(data.steun, patch); persist(); };
+// Hoeveel spellen er in totaal zijn uitgespeeld (over alle spellen)
+export const totalCompleted = () => Object.values(data.games).reduce((n, g) => n + (g.completed || 0), 0);
 
 // ----- Statistieken en het archief van de puzzel van de dag -----
 export const dailySlot = (day) => `daily:${day}`;

@@ -1,0 +1,55 @@
+##### Steun: een extra tip met een korte video, de eenmalige bijdrage "Supporter" en de uitleg daarover
+# Let op: "Supporter" is bewust niet "Vriend": de app heeft al Vrienden (andere spelers). Een Supporter heeft de app eenmalig gesteund.
+# De tipknop als er een video nodig is: "Nog een tip" met een opvallend label "Video" erop.
+steun.moreTip | Another hint | Nog een tip
+steun.moreTipAria | Another hint, after a short video | Nog een tip, na een korte video
+steun.videoBadge | Video | Video
+
+# De vraag vóór de video
+steun.video.title | Another hint? | Nog een tip?
+steun.video.text | Watch a short video (about 30 seconds) and you get one more hint. When the video is over, close it with the cross in the top corner. | Bekijk een korte video (ongeveer 30 seconden) en je krijgt nog een tip. Is de video afgelopen, sluit hem dan met het kruisje in de hoek.
+steun.video.watch | Watch video | Video bekijken
+steun.video.no | No, thank you | Nee, bedankt
+steun.video.supporter | No more videos: become a Supporter | Geen video's meer: word Supporter
+steun.video.stopped.title | No extra hint this time | Nu geen extra tip
+steun.video.stopped.text | The video stopped before the end, so there is no extra hint. You can try again whenever you like. | De video stopte voor het einde, dus er is geen extra tip. Je kunt het altijd opnieuw proberen.
+
+# Meldingen als het niet lukt (met een groot kruis)
+steun.errorMark | Not possible | Niet gelukt
+steun.offline.title | No internet connection | Geen internetverbinding
+steun.offline.video | A video needs internet. Check your Wi-Fi or mobile data and try again. Your game is saved. | Voor een video is internet nodig. Controleer je wifi of mobiele data en probeer het opnieuw. Je spel blijft bewaard.
+steun.offline.buy | Supporting the app needs internet. Check your Wi-Fi or mobile data and try again. | Om de app te steunen is internet nodig. Controleer je wifi of mobiele data en probeer het opnieuw.
+steun.noVideo.title | No video available | Geen video beschikbaar
+steun.noVideo.text | There is no video available right now, so there is no extra hint. Please try again later. | Er is nu geen video beschikbaar, dus ook geen extra tip. Probeer het later nog eens.
+steun.failed.title | That did not work | Dat lukte niet
+steun.failed.video | The video could not be shown, so there is no extra hint. Please try again later. | De video kon niet worden getoond, dus er is geen extra tip. Probeer het later nog eens.
+steun.failed.buy | The purchase did not work. Please try again later. | De aankoop is niet gelukt. Probeer het later nog eens.
+
+# De uitlegpagina "Hoe verdient deze app geld?" ({price} is de prijs, bijvoorbeeld "€ 4,99")
+steun.title | Support Puzzleplace | Steun Puzzelplaats
+steun.settings.supporter | You are a Supporter. Thank you. | Je bent Supporter. Hartelijk dank.
+steun.page.heading | How does this app earn money? | Hoe verdient deze app geld?
+steun.page.lead | An honest answer, in plain words. | Een eerlijk antwoord, in gewone woorden.
+steun.free | Puzzleplace is free. All games and the puzzle of the day stay free, and there are no ads while you play. | Puzzelplaats is gratis. Alle spellen en de puzzel van de dag blijven gratis, en er is geen reclame tijdens het spelen.
+steun.costs | Keeping the app running costs a little money, for example for the servers and for new games. | De app draaiend houden kost een beetje geld, bijvoorbeeld voor de servers en voor nieuwe spellen.
+steun.ways | Two ways to help, both optional | Twee manieren om te helpen, allebei vrijblijvend
+steun.way.video.title | Watch a short video | Een korte video bekijken
+steun.way.video.text | Every game gives you one free hint. For another hint you can watch a short video. A video only starts when you ask for it. | Elk spel geeft je één gratis tip. Voor nog een tip kun je een korte video bekijken. Een video begint alleen als je er zelf om vraagt.
+steun.way.supporter.title | Become a Supporter of Puzzleplace | Supporter van Puzzelplaats worden
+steun.way.supporter.text | You pay once, there is no subscription. Then you have unlimited hints and you never see the video offer again. | Je betaalt één keer, er is geen abonnement. Daarna heb je onbeperkt tips en zie je het videoaanbod nooit meer.
+steun.way.nothing | Doing nothing is fine too. Nobody is ever pushed. | Niets doen is ook prima. Niemand wordt ergens toe gedrukt.
+steun.become | Become a Supporter · {price} | Supporter worden · {price}
+steun.becomeNoPrice | Become a Supporter | Supporter worden
+steun.restore | Restore my purchase | Mijn aankoop herstellen
+steun.restore.done | Your purchase has been restored. | Je aankoop is hersteld.
+steun.restore.none | No earlier purchase found. | Geen eerdere aankoop gevonden.
+steun.thanks.title | Thank you | Hartelijk dank
+steun.thanks.text | You are a Supporter of Puzzleplace. Your hints are unlimited and you will not see video offers any more. | Je bent Supporter van Puzzelplaats. Je tips zijn onbeperkt en je ziet geen videoaanbod meer.
+steun.privacy | A video is shown by an advertising partner, and only when you choose to watch one. | Een video wordt getoond door een advertentiepartner, en alleen als je zelf kiest om er een te bekijken.
+steun.testNote | Test version: no real video and no real payment. | Testversie: geen echte video en geen echte betaling.
+
+# Het kaartje op Start (komt pas na een tijd en na een aantal uitgespeelde spellen, en stopt als je twee keer "Nu niet" kiest)
+steun.card.title | Do you enjoy Puzzleplace? | Bevalt Puzzelplaats?
+steun.card.text | The app is free. If you like, you can help to keep it going. | De app is gratis. Als je wilt, kun je helpen om hem draaiend te houden.
+steun.card.more | How does that work? | Hoe werkt dat?
+steun.card.later | Not now | Nu niet

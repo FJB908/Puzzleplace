@@ -35,3 +35,5 @@ Android 13 en nieuwer vraagt de gebruiker eerst toestemming; de app doet die vra
 ## Voor de Play Store
 
 Zie ook de lijst in het gesprek en `tools/woordenlijst/bronnen.md` (licenties van de woordenlijsten): uitzoeken voordat je publiceert.
+
+Een extra tip met een video en de eenmalige bijdrage ("Supporter") horen bij de Android-app en staan nog uit: zie `docs/STEUN.md` (wat er voor de winkel nog moet: AdMob, Play Billing, toestemmingsscherm, privacytekst).

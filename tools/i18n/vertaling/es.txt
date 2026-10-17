@@ -866,3 +866,49 @@ letterhof.lost | El jugador virtual ganó con {them} puntos contra sus {you}. ¡
 letterhof.lostTitle | ¡Bien jugado!
 letterhof.draw | Empate: {points} puntos cada uno.
 letterhof.drawTitle | ¡Empate!
+
+##### 210-steun
+steun.moreTip | Otra pista
+steun.moreTipAria | Otra pista, tras un vídeo corto
+steun.videoBadge | Vídeo
+steun.video.title | ¿Otra pista?
+steun.video.text | Mira un vídeo corto (unos 30 segundos) y recibirás otra pista. Cuando el vídeo termine, ciérralo con la cruz de la esquina.
+steun.video.watch | Ver vídeo
+steun.video.no | No, gracias
+steun.video.supporter | Sin más vídeos: apoyar Puzzleplace
+steun.video.stopped.title | Esta vez no hay pista extra
+steun.video.stopped.text | El vídeo se detuvo antes del final, así que no hay pista extra. Puedes volver a intentarlo cuando quieras.
+steun.errorMark | No ha sido posible
+steun.offline.title | Sin conexión a internet
+steun.offline.video | Para ver un vídeo hace falta internet. Revisa tu wifi o tus datos móviles e inténtalo de nuevo. Tu partida queda guardada.
+steun.offline.buy | Para apoyar la aplicación hace falta internet. Revisa tu wifi o tus datos móviles e inténtalo de nuevo.
+steun.noVideo.title | No hay ningún vídeo disponible
+steun.noVideo.text | Ahora mismo no hay ningún vídeo disponible, así que tampoco hay pista extra. Inténtalo de nuevo más tarde.
+steun.failed.title | No ha funcionado
+steun.failed.video | No se ha podido mostrar el vídeo, así que no hay pista extra. Inténtalo de nuevo más tarde.
+steun.failed.buy | La compra no ha funcionado. Inténtalo de nuevo más tarde.
+steun.title | Apoyar Puzzleplace
+steun.settings.supporter | Estás apoyando Puzzleplace. Muchas gracias.
+steun.page.heading | ¿Cómo gana dinero esta aplicación?
+steun.page.lead | Una respuesta sincera, con palabras sencillas.
+steun.free | Puzzleplace es gratis. Todos los juegos y el Sudoku de hoy siguen siendo gratis, y no hay publicidad mientras juegas.
+steun.costs | Mantener la aplicación en marcha cuesta un poco de dinero, por ejemplo para los servidores y para juegos nuevos.
+steun.ways | Dos maneras de ayudar, las dos voluntarias
+steun.way.video.title | Ver un vídeo corto
+steun.way.video.text | Cada juego da una pista gratis. Para otra pista puedes ver un vídeo corto. Un vídeo solo empieza si tú lo pides.
+steun.way.supporter.title | Apoyar Puzzleplace una sola vez
+steun.way.supporter.text | Pagas una vez, sin suscripción. Después tus pistas son ilimitadas y nunca vuelves a ver la oferta de vídeo.
+steun.way.nothing | No hacer nada también está bien. A nadie se le presiona.
+steun.become | Apoyar Puzzleplace · {price}
+steun.becomeNoPrice | Apoyar Puzzleplace
+steun.restore | Restaurar mi compra
+steun.restore.done | Tu compra se ha restaurado.
+steun.restore.none | No se ha encontrado ninguna compra anterior.
+steun.thanks.title | Muchas gracias
+steun.thanks.text | Estás apoyando Puzzleplace. Tus pistas son ilimitadas y ya no verás ofertas de vídeo.
+steun.privacy | Un vídeo lo muestra un socio publicitario, y solo si tú decides verlo.
+steun.testNote | Versión de prueba: sin vídeo real ni pago real.
+steun.card.title | ¿Te gusta Puzzleplace?
+steun.card.text | La aplicación es gratis. Si quieres, puedes ayudar a mantenerla en marcha.
+steun.card.more | ¿Cómo funciona?
+steun.card.later | Ahora no

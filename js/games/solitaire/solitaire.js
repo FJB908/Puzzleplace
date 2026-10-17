@@ -13,6 +13,7 @@ import { burst, motionOK } from '../../effects.js';
 import * as E from './engine.js';
 import { kaartSvg, kleurIcoon, rugSvg, SOL_DEFS } from './kaarten.js';
 import { felicitatie } from '../../shared/felicitatie.js';
+import { tipToestemming, tipGebruikt, tipKnopStand } from '../../steun/index.js';
 
 const RATIO = 1.4;                      // hoogte van een kaart ten opzichte van de breedte
 const GAP = 0.11;                       // ruimte tussen de stapels, als deel van de kaartbreedte
@@ -187,7 +188,7 @@ export async function mount(container, ctx) {
     aantal.textContent = t('solitaire.home', { n });
     balk.style.width = `${Math.round(E.progress(g) * 100)}%`;
     terugKnop.disabled = state.zetten.length === 0 || bezig;
-    tipKnop.disabled = !!state.tip || afgerond;
+    tipKnopStand(tipKnop, state, afgerond);
     klaarKnop.hidden = !E.kanAfmaken(g) || afgerond;
     zetFocusAnker();
   }
@@ -376,14 +377,15 @@ export async function mount(container, ctx) {
   }
 
   // ----- Tip -----
-  function geefTip() {
-    if (afgerond || bezig || state.tip) return;                        // één tip per spel
+  async function geefTip() {
+    if (afgerond || bezig) return;                                     // één gratis tip per spel; nog een kan met een korte video (zie js/steun/)
+    if (!(await tipToestemming(state)) || afgerond || bezig || dood) return;
     wisTip(); sel = null; teken();
     const r = E.tip(g, plan);
     plan = r.plan ?? plan;
-    if (!r.zet) { zeg(t(r.bewezenVerloren ? 'solitaire.msg.lost' : 'solitaire.msg.noTip')); return; }
+    if (!r.zet) { zeg(t(r.bewezenVerloren ? 'solitaire.msg.lost' : 'solitaire.msg.noTip')); bewaar(); tipKnopStand(tipKnop, state, afgerond); return; }
     const z = r.zet, soort = z[0];
-    state.tip = true; bewaar(); tipKnop.disabled = true;
+    tipGebruikt(state); bewaar(); tipKnopStand(tipKnop, state, afgerond);
     const markeer = (el, rol = 'doel') => { if (el) { el.classList.add('tip'); el.dataset.rol = rol; } };
     if (soort === 'd' || soort === 'r') { markeer(voorraadVak, 'bron'); zeg(t(soort === 'd' ? 'solitaire.msg.tipDraw' : 'solitaire.msg.tipRecycle')); voorraadVak.scrollIntoView?.({ block: 'nearest' }); }
     else {

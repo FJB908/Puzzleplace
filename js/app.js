@@ -8,6 +8,7 @@
 //   #/spel/:id/speel/dagelijks  Puzzel van de dag (altijd Sudoku); .../dagelijks/JJJJ-MM-DD een dag uit het archief
 //   #/spel/sudoku/dagelijks     Het archief van de puzzel van de dag (kalender)
 //   #/instellingen  #/hulp
+//   #/steun                     Hoe verdient deze app geld? (alleen als steun aan staat, zie js/steun/)
 //   #/account  #/vrienden       (alleen als FEATURES aan staat)
 
 import { h, icon, announce } from './ui.js';
@@ -23,6 +24,8 @@ import { gameDetailView } from './views/gameDetail.js';
 import { playView } from './views/play.js';
 import { dagArchiefView } from './views/dagArchief.js';
 import { settingsView } from './views/settings.js';
+import { steunView } from './views/steun.js';
+import * as steun from './steun/index.js';
 import { helpView } from './views/help.js';
 import { accountView } from './views/account.js';
 import { friendsView } from './views/friends.js';
@@ -53,6 +56,7 @@ const ROUTES = [
   [/^\/instellingen$/, settingsView, () => ({})],
   [/^\/taal$/, taalView, () => ({})],
   [/^\/hulp$/, helpView, () => ({})],
+  [/^\/steun$/, steunView, () => ({})],
   [/^\/account(?:\/(\w+)(?:\/([\w-]+))?)?$/, accountView, (m) => ({ sub: m[1], arg: m[2] })],
   [/^\/vrienden$/, friendsView, () => ({})],
   [/^\/partij\/([\w-]+)$/, partijView, (m) => ({ id: m[1] })],
@@ -169,6 +173,7 @@ async function render(moveFocus = true) {
 if ((navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2)) document.documentElement.dataset.lite = 'true';
 
 applySettings();
+steun.starten();
 new ResizeObserver(() => { if (!navEl.hidden) document.documentElement.style.setProperty('--nav-h', `${navEl.offsetHeight}px`); }).observe(navEl);
 initAmbient();
 initRipple();

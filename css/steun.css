@@ -1,0 +1,51 @@
+/* ---------- Steun: extra tip met een video, melding zonder internet, uitlegpagina ---------- */
+:root { --steun-bg: #a8325a; --steun-fg: #ffffff; }
+html[data-theme="dark"] { --steun-bg: #f19ab8; --steun-fg: #2a0a16; }
+html[data-contrast="high"] { --steun-bg: #8a0030; --steun-fg: #ffffff; }
+html[data-contrast="high"][data-theme="dark"] { --steun-bg: #ffb3cc; --steun-fg: #000000; }
+
+/* De tipknop als er een video nodig is: een opvallend label met een afspeelpictogram op de rand van de knop */
+.btn.tip-met-video { position: relative; overflow: visible; color: var(--text); font-weight: 800; }
+.tip-video {
+  position: absolute; top: -1.35rem; right: -.1rem; z-index: 2; pointer-events: none;
+  display: inline-flex; align-items: center; gap: .3rem; padding: .22rem .65rem .22rem .45rem; border-radius: 99px;
+  background: var(--steun-bg); color: var(--steun-fg); border: 2px solid var(--surface);
+  font-size: .85rem; font-weight: 800; line-height: 1.1; letter-spacing: .02em;
+  box-shadow: 0 .2rem .6rem rgba(0, 0, 0, .3);
+  animation: steun-puls 2.4s ease-in-out 4;
+}
+.tip-video .icon { width: 1.4rem; height: 1.4rem; color: inherit; stroke-width: 1.8; }
+.tip-video .icon path { fill: currentColor; }
+html[data-contrast="high"] .tip-video { border-color: var(--border); }
+html[data-textsize="large"] .tip-video, html[data-textsize="xlarge"] .tip-video { font-size: .75rem; }
+/* De rij met knoppen maakt ruimte voor het label, zodat het nooit over een andere knop of het bord heen valt */
+.sudoku-actions.met-tip-video { padding-top: 1.7rem; }
+.mj-knoppen.met-tip-video, .sol-knoppen.met-tip-video { padding-top: 1.8rem; row-gap: 1.7rem; }
+.lh-knoppen.met-tip-video { padding-top: 1.7rem; row-gap: 1.7rem; }
+@keyframes steun-puls { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+/* Een melding dat het niet lukt: groot kruis (en rechtsboven het kruisje om te sluiten) */
+.steun-fout { display: grid; place-items: center; color: var(--danger); }
+.steun-fout .icon { width: 5.5rem; height: 5.5rem; stroke-width: 1.7; }
+
+/* Het kaartje op Start en de uitlegpagina */
+.steun-kaart { border-left: .4rem solid var(--accent); }
+.steun-acties { display: flex; flex-wrap: wrap; gap: .5rem; }
+.steun-pagina .steun-weg { display: flex; flex-direction: column; gap: .35rem; }
+.steun-pagina .steun-weg h3 { margin: 0; font-size: 1.15rem; }
+.steun-pagina .steun-weg p { margin: 0; }
+.steun-pagina .steun-dank { background: var(--blush); }
+.steun-pagina .steun-test { font-weight: 700; color: var(--accent); }
+
+/* De nepvideo van de testmodus (alleen op localhost) */
+.steun-testvideo {
+  position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  padding: 2rem; text-align: center; background: #101418; color: #fff;
+}
+.steun-testvideo p { margin: 0; font-size: 1.3rem; }
+.steun-testvideo .stv-kop { font-size: 2rem; font-weight: 800; letter-spacing: .15em; color: #ffd166; }
+.steun-testvideo .stv-sluit { position: absolute; top: .8rem; right: .8rem; width: 3.4rem; height: 3.4rem; border-radius: 50%; border: 2px solid #fff; background: rgba(255, 255, 255, .12); color: #fff; font-size: 1.6rem; cursor: pointer; }
+.steun-testvideo.klaar .stv-sluit { background: #fff; color: #101418; }
+
+/* Een venster met een sluitkruisje: de titel loopt niet onder het kruisje door */
+dialog.dialog .dialog-close + h2 { padding-right: 3rem; }

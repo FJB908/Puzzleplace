@@ -143,3 +143,6 @@ body.groot-beeld .lh-bordwrap { margin-inline: 0; }
 html[data-theme="dark"] .lh-melding { color: var(--text); }
 
 body.groot-beeld .lh { padding-top: 3.2rem; }
+
+/* Smal scherm met de grootste tekst: de twee scoreplaten onder elkaar in plaats van een kolom van losse letters */
+@media (max-width: 24rem) { html[data-textsize="xlarge"] .lh-kop { grid-template-columns: minmax(0, 1fr); } }

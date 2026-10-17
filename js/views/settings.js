@@ -6,6 +6,7 @@ import * as store from '../store.js';
 import { FEATURES } from '../config.js';
 import * as auth from '../services/auth.js';
 import * as emails from '../services/emails.js';
+import * as steun from '../steun/index.js';
 import { t, getTaal } from '../i18n/index.js';
 import { TALEN } from '../shared/talen.js';
 
@@ -88,6 +89,13 @@ export function settingsView(_params, app) {
       h('span', { class: 'tile' }, icon('globe')),
       h('span', {}, h('span', { class: 'title' }, t('language.title')), h('br'), h('span', { class: 'desc', lang: TALEN[getTaal()].locale }, TALEN[getTaal()].native)),
       icon('chevron')),
+
+    steun.zichtbaar()
+      ? h('a', { class: 'card card-link', href: '#/steun' },
+          h('span', { class: 'tile' }, icon('heart')),
+          h('span', {}, h('span', { class: 'title' }, t('steun.title')), h('br'), h('span', { class: 'desc' }, steun.isSupporter() ? t('steun.settings.supporter') : t('steun.page.heading'))),
+          icon('chevron'))
+      : null,
 
     h('a', { class: 'card card-link', href: '#/hulp' },
       h('span', { class: 'tile' }, icon('help')),

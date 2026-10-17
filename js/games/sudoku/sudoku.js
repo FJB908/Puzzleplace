@@ -12,6 +12,7 @@ import { t, datumTekst } from '../../i18n/index.js';
 import * as store from '../../store.js';
 import { tijdTekst, reeks } from '../../shared/dagelijks.js';
 import { felicitatie } from '../../shared/felicitatie.js';
+import { tipToestemming, tipGebruikt, tipKnopStand } from '../../steun/index.js';
 
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const MAX_HISTORY = 300;
@@ -177,7 +178,7 @@ export function mount(container, ctx) {
     });
     eraseButton.disabled = finished;
     undoButton.disabled = finished || state.history.length === 0;
-    tipButton.disabled = finished || !!state.tip;
+    tipKnopStand(tipButton, state, finished);
     pencilButton.disabled = finished;
     pencilButton.setAttribute('aria-pressed', String(pencil));
     pencilButton.querySelector('.action-label').textContent = pencil ? t('sudoku.pencilOn') : t('sudoku.pencil');
@@ -411,8 +412,9 @@ export function mount(container, ctx) {
 
   // Tip: vul het goede cijfer in. Zonder leven te kosten.
   // Gekozen vakje als dat leeg of fout is, anders een fout vakje, anders het vakje met de minste mogelijkheden.
-  function tip() {
-    if (finished || state.tip) return;                                 // één tip per spel
+  async function tip() {
+    if (finished) return;                                              // één gratis tip per spel; nog een kan met een korte video (zie js/steun/)
+    if (!(await tipToestemming(state, { voor: clockOff, na: clockOn })) || finished) return;
     let target = !puzzle[selected] && (!values[selected] || isWrong(selected)) ? selected : -1;
     if (target < 0) target = values.findIndex((_, i) => isWrong(i));
     if (target < 0) {
@@ -423,9 +425,9 @@ export function mount(container, ctx) {
         if (n < best) { best = n; target = i; }
       });
     }
-    if (target < 0) { say(t('sudoku.say.nothingLeft')); return; }
+    if (target < 0) { say(t('sudoku.say.nothingLeft')); save(); render(); return; }
 
-    state.tip = true;
+    tipGebruikt(state);
     const d = solution[target];
     selected = target;
     const before = completeUnits();

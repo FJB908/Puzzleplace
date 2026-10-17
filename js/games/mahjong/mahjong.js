@@ -7,6 +7,7 @@
 import { h, icon } from '../../ui.js';
 import { t } from '../../i18n/index.js';
 import { burst, motionOK } from '../../effects.js';
+import { tipToestemming, tipGebruikt, tipKnopStand } from '../../steun/index.js';
 import { bord, newGame, neemWeg, zetTerug, hussel, tip, isVrij, wegSet, klaar, tegelsOver, vastgelopen, passen, progress } from './engine.js';
 import { plaatjeSvg, plaatjeNaam, PLAATJE_DEFS } from './tegels.js';
 import { felicitatie } from '../../shared/felicitatie.js';
@@ -96,7 +97,7 @@ export function mount(container, ctx) {
     balk.style.width = `${Math.round(progress(state) * 100)}%`;
     bordEl.setAttribute('aria-label', t('mahjong.boardAria', { n }));
     terugKnop.disabled = state.history.length === 0;
-    tipKnop.disabled = !!state.tip || afgerond;
+    tipKnopStand(tipKnop, state, afgerond);
     wisFocusAnker();
   }
   // Eén tegel is bereikbaar met Tab (de rest met de pijltjes): liefst de gekozen of de laatst gebruikte, anders de eerste vrije
@@ -200,12 +201,13 @@ export function mount(container, ctx) {
     if (laatste.t === 'p') { binnenKomen([tegels[laatste.a], tegels[laatste.b]]); zeg(t('mahjong.msg.undone')); }
     else { flip(); zeg(t('mahjong.msg.undone')); }
   }
-  function geefTip() {
-    if (afgerond || bezig || state.tip) return;                        // één tip per spel
+  async function geefTip() {
+    if (afgerond || bezig) return;                                     // één gratis tip per spel; nog een kan met een korte video (zie js/steun/)
+    if (!(await tipToestemming(state)) || afgerond || bezig || dood) return;
     wisTip();
     const z = tip(state);
-    if (!z) { zeg(t('mahjong.msg.noMoves', { shuffle: t('mahjong.shuffle') })); wijsHussel(); return; }
-    state = { ...state, tip: true }; bewaar();
+    if (!z) { zeg(t('mahjong.msg.noMoves', { shuffle: t('mahjong.shuffle') })); wijsHussel(); bewaar(); verfris(); return; }
+    state = { ...state }; tipGebruikt(state); bewaar();
     gekozen = null; verfris();
     for (const i of z) tegels[i].classList.add('tip');
     tegels[z[0]].scrollIntoView?.({ block: 'center', behavior: motionOK() ? 'smooth' : 'auto' });

@@ -20,6 +20,15 @@ export const FEATURES = {
   facebookLogin: false,  // "Doorgaan met Facebook": gaat vanzelf aan als de server een Facebook-app heeft (zie docs/ACCOUNTS.md)
 };
 
+// Steun: een extra tip met een korte video, en de eenmalige bijdrage "Supporter van Puzzleplace" (zie docs/STEUN.md en js/steun/).
+// Beide staan uit tot de app in de winkel staat en de aanbieders (video, aankoop) zijn aangesloten: dan ziet niemand er iets van en
+// werkt alles zoals het was. Op localhost kun je de hele keten uitproberen met ?steuntest=1 achter het adres (met nepvideo's en nepbetaling).
+export const STEUN = {
+  video: false,          // een extra tip na een korte video
+  bijdrage: false,       // "Supporter van Puzzleplace": eenmalig, onbeperkt tips, geen videoaanbod meer
+  rustigeDagen: 7,       // de eerste dagen na het eerste gebruik komt er helemaal geen aanbod
+};
+
 // Waar de server staat. Leeg = op hetzelfde adres als de app (zo draait `npm run dev`).
 // Staat de app op een andere plek dan de server, vul dan het volledige adres in, bijv. 'https://api.mijnapp.nl',
 // en zet ALLOW_ORIGIN op de server. Dit staat bewust niet in te stellen via een link: anders zou iemand je

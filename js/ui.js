@@ -62,6 +62,9 @@ const ICONS = {
   skip: '<path d="M5 5l7 7-7 7M13 5l7 7-7 7"/>',
   close: '<path d="M6 6l12 12M18 6L6 18"/>',
   mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+  heart: '<path d="M12 20.500s-8-4.800-8-10.700A4.500 4.500 0 0 1 12 7.200a4.500 4.500 0 0 1 8 2.600c0 5.900-8 10.700-8 10.700z"/>',
+  video: '<rect x="2.500" y="5" width="19" height="14" rx="3.200"/><path d="M10 9v6l5-3z"/>',
+  crossCircle: '<circle cx="12" cy="12" r="9.500"/><path d="M8.500 8.500l7 7M15.500 8.500l-7 7"/>',
   eye: '<path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   // spelpictogrammen
   sudoku: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>',

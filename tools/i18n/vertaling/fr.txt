@@ -866,3 +866,49 @@ letterhof.lost | Le joueur virtuel a gagné avec {them} points contre vos {you}.
 letterhof.lostTitle | Bien joué !
 letterhof.draw | Égalité : {points} points chacun.
 letterhof.drawTitle | Égalité !
+
+##### 210-steun
+steun.moreTip | Un autre indice
+steun.moreTipAria | Un autre indice, après une courte vidéo
+steun.videoBadge | Vidéo
+steun.video.title | Un autre indice ?
+steun.video.text | Regardez une courte vidéo (environ 30 secondes) et vous obtenez un indice de plus. Quand la vidéo est terminée, fermez-la avec la croix dans le coin.
+steun.video.watch | Regarder la vidéo
+steun.video.no | Non, merci
+steun.video.supporter | Plus de vidéos : soutenir Puzzleplace
+steun.video.stopped.title | Pas d’indice en plus cette fois
+steun.video.stopped.text | La vidéo s’est arrêtée avant la fin, il n’y a donc pas d’indice en plus. Vous pouvez réessayer quand vous voulez.
+steun.errorMark | Impossible
+steun.offline.title | Pas de connexion Internet
+steun.offline.video | Une vidéo nécessite Internet. Vérifiez votre Wi-Fi ou vos données mobiles, puis réessayez. Votre partie est enregistrée.
+steun.offline.buy | Pour soutenir l’application, une connexion Internet est nécessaire. Vérifiez votre Wi-Fi ou vos données mobiles, puis réessayez.
+steun.noVideo.title | Aucune vidéo disponible
+steun.noVideo.text | Aucune vidéo n’est disponible pour le moment, il n’y a donc pas d’indice en plus. Réessayez plus tard.
+steun.failed.title | Cela n’a pas fonctionné
+steun.failed.video | La vidéo n’a pas pu être affichée, il n’y a donc pas d’indice en plus. Réessayez plus tard.
+steun.failed.buy | L’achat n’a pas fonctionné. Réessayez plus tard.
+steun.title | Soutenir Puzzleplace
+steun.settings.supporter | Vous soutenez Puzzleplace. Merci beaucoup.
+steun.page.heading | Comment cette application gagne-t-elle de l’argent ?
+steun.page.lead | Une réponse honnête, avec des mots simples.
+steun.free | Puzzleplace est gratuit. Tous les jeux et le Sudoku du jour restent gratuits, et il n’y a pas de publicité pendant que vous jouez.
+steun.costs | Faire fonctionner l’application coûte un peu d’argent, par exemple pour les serveurs et pour de nouveaux jeux.
+steun.ways | Deux façons d’aider, toutes deux facultatives
+steun.way.video.title | Regarder une courte vidéo
+steun.way.video.text | Chaque jeu donne un indice gratuit. Pour un indice de plus, vous pouvez regarder une courte vidéo. Une vidéo ne démarre que si vous le demandez.
+steun.way.supporter.title | Soutenir Puzzleplace une seule fois
+steun.way.supporter.text | Vous payez une seule fois, sans abonnement. Ensuite, vos indices sont illimités et vous ne voyez plus jamais la proposition de vidéo.
+steun.way.nothing | Ne rien faire convient aussi très bien. Personne n’est jamais poussé.
+steun.become | Soutenir Puzzleplace · {price}
+steun.becomeNoPrice | Soutenir Puzzleplace
+steun.restore | Restaurer mon achat
+steun.restore.done | Votre achat a été restauré.
+steun.restore.none | Aucun achat précédent trouvé.
+steun.thanks.title | Merci beaucoup
+steun.thanks.text | Vous soutenez Puzzleplace. Vos indices sont illimités et vous ne voyez plus de proposition de vidéo.
+steun.privacy | Une vidéo est affichée par un partenaire publicitaire, et seulement si vous choisissez d’en regarder une.
+steun.testNote | Version de test : pas de vraie vidéo ni de vrai paiement.
+steun.card.title | Puzzleplace vous plaît ?
+steun.card.text | L’application est gratuite. Si vous le souhaitez, vous pouvez aider à la faire vivre.
+steun.card.more | Comment ça marche ?
+steun.card.later | Pas maintenant

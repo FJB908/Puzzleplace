@@ -18,6 +18,7 @@ import * as social from '../services/social.js';
 import * as matches from '../services/matches.js';
 import { nieuwePartij } from './partij.js';
 import { friendRows, stand, partijTaal } from '../shared/startvrienden.js';
+import * as steun from '../steun/index.js';
 
 function greeting() {
   const hour = new Date().getHours();
@@ -145,11 +146,23 @@ function continueRow() {
     icon('chevron'));
 }
 
+// ----- Steun: een rustig kaartje, pas na een tijd en na een aantal uitgespeelde spellen; stopt als je "Nu niet" kiest (zie js/steun/regels.js) -----
+function steunKaart(app) {
+  if (!steun.toonKaart()) return null;
+  return h('section', { class: 'card stack steun-kaart', 'aria-labelledby': 'steun-kaart-titel' },
+    h('h2', { id: 'steun-kaart-titel' }, t('steun.card.title')),
+    h('p', {}, t('steun.card.text')),
+    h('div', { class: 'steun-acties' },
+      h('a', { class: 'btn btn-primary', href: '#/steun', onclick: () => steun.kaartGezien() }, t('steun.card.more')),
+      h('button', { type: 'button', class: 'btn btn-quiet', onclick: () => { steun.kaartNuNiet(); app.refresh(); } }, t('steun.card.later'))));
+}
+
 export function homeView(_params, app) {
   const vrienden = friendsSection();
   const loggedIn = !!auth.getUser();
   const spellen = h('section', { class: 'home-spellen', 'aria-labelledby': 'home-spellen-titel' }, h('h2', { id: 'home-spellen-titel' }, t('games.title')), gameTiles());
   const delen = loggedIn ? [vrienden?.el, continueRow(), spellen] : [continueRow(), spellen, vrienden?.el];
+  delen.push(steunKaart(app));
 
   const node = h('div', { class: 'view view--home' },
     h('h1', { class: 'home-titel', tabindex: '-1' }, greeting()),

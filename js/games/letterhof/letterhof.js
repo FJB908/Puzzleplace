@@ -12,6 +12,7 @@ import { N, MIDDEN, REK, BINGO, PREMIE, nieuwSpel, beoordeel, speel, pas as pass
 import { laadWoordenboek } from './woordenboek.js';
 import { kiesActie, tipZet } from './computer.js';
 import { LETTERS } from './letters.js';
+import { tipToestemming, tipGebruikt, tipKnopStand } from '../../steun/index.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
 const NIVEAUS = ['makkelijk', 'gemiddeld', 'moeilijk', 'extreem'];
@@ -167,7 +168,7 @@ export async function mount(container, ctx) {
     terugKnop.disabled = !mijn || leg.size === 0;
     wisselKnop.disabled = !mijn || leg.size > 0;
     passKnop.disabled = !mijn || leg.size > 0;
-    tipKnop.disabled = !mijn || st.tip;
+    tipKnopStand(tipKnop, st, !mijn);
     husselKnop.disabled = !mijn;
     meldEl.textContent = melding;
     tipSet = new Set();
@@ -379,12 +380,13 @@ export async function mount(container, ctx) {
     zeg(t('letterhof.youPassed'));
     await na();
   }
-  function geefTip() {
-    if (!eigenBeurt() || st.tip) return;
+  async function geefTip() {
+    if (!eigenBeurt()) return;                                         // één gratis tip per spel; nog een kan met een korte video (zie js/steun/)
+    if (!(await tipToestemming(st)) || !eigenBeurt() || dood) return;
     alleTerug();
     const z = tipZet(st, 0, wb, maakToeval(st.seed + 31 * st.zetten.length + 7));
-    st.tip = true; bewaar();
-    if (!z) { zeg(t('letterhof.noHint')); teken(); return; }
+    if (!z) { zeg(t('letterhof.noHint')); bewaar(); teken(); return; }  // geen tip te geven: er gaat niets van op (ook geen video)
+    tipGebruikt(st); bewaar();
     // leg de stenen van de tip neer; je kunt ze aanpassen of meteen spelen
     const ids = new Set();
     for (const p of z.plaatsingen) {
