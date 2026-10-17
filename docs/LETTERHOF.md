@@ -31,11 +31,17 @@ Wordfeud en Scrabble): de regels van zo'n spel zijn vrij te gebruiken, de naam, 
 ## Uiterlijk
 
 Rustig en minimalistisch, in de kleuren van de rest van de app (teal en roze), in licht, donker en hoog contrast (alle kleuren staan als `--lh-*` bovenaan `css/games/letterhof.css`).
-Het bord is porselein met vlakke bonusvakjes: teal voor letters (licht = x2, donker = x3), roze voor woorden (licht = x2, donker = x3). Ook zonder kleur te lezen: een gewoon
-getal is een letterbonus, een getal in een cirkel een woordbonus. Er is bewust geen legenda op het scherm; de uitleg staat bij "Uitleg". Stenen zijn ivoor met een fijn randje;
+Het bord is porselein met vlakke bonusvakjes met een kort opschrift: 2L en 3L (letter keer 2 of 3, teal; licht = x2, donker = x3) en 2W en 3W (woord keer 2 of 3, roze; licht = x2,
+donker = x3). De letter achter het getal volgt de taal (`letterhof.premie.short.*`: 2L/3L/2W/3W in nl en en, 2B/3B/2W/3W in de, 2L/3L/2M/3M in fr, 2L/3L/2P/3P in es, it en pt, 2L/3L/2S/3S in pl). Er is bewust geen legenda op het scherm; de uitleg staat bij "Uitleg". Stenen zijn ivoor met een fijn randje;
 een steen die je net hebt gelegd heeft een roze rand, het laatste woord van de virtuele speler een teal rand. Onder het bord staat één hoofdknop (Spelen) en een rij
 stille knoppen (Terugnemen, Tip, Stenen wisselen, Passen). Husselen en inzoomen zijn ronde knopjes op de rand van het rek en het bord. De stenen van het rek volgen de
 breedte van het rek (ook op 320 px met de grootste tekst).
+
+## Stenen verplaatsen
+
+Een steen uit je rek kun je tikken en dan op een vakje tikken, of slepen. Een steen die je deze beurt al op het bord legde kun je ook slepen: naar een ander vakje, of terug naar het rek (laat hem in het rek vallen,
+of tik erop). Ligt er op het doelvakje al een steen van deze beurt, dan vliegt die terug naar je rek en komt de nieuwe steen ervoor in de plaats; dat geldt voor tikken en voor slepen, en ook voor een
+liggende steen die je op een andere liggende steen laat vallen. Vastgelegde stenen blijven liggen (`startSlepen`, `verplaats`, `leegVakje` in `js/games/letterhof/letterhof.js`).
 
 ## Eigen werk, geen kopie
 

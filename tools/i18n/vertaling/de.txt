@@ -846,8 +846,8 @@ sudoku.stat.level | Niveau
 letterhof.name | Buchstabenhof
 letterhof.summary | Bilden Sie Wörter auf einem Blütenbrett: Legen Sie Steine, sammeln Sie Punkte mit den farbigen Feldern und schlagen Sie die virtuelle Spielerin.
 letterhof.howTo.1 | Tippen Sie einen Stein in Ihrem Ständer an und dann ein Feld auf dem Brett, oder ziehen Sie ihn dorthin. Bilden Sie ein Wort in einer Reihe oder Spalte. Das erste Wort muss über die Blume in der Mitte laufen.
-letterhof.howTo.2 | Jedes weitere Wort muss an die Wörter auf dem Brett anschließen, und alle Wörter, die Sie bilden oder kreuzen, müssen echte Wörter sein. Tippen Sie auf einen soeben gelegten Stein, um ihn zurückzunehmen. Der leere Stein (mit der Blüte) darf jeder Buchstabe sein.
-letterhof.howTo.3 | Die Felder mit einer Zahl helfen: Eine einfache 2 oder 3 verdoppelt oder verdreifacht diesen Buchstaben, eine 2 oder 3 im Kreis verdoppelt oder verdreifacht das ganze Wort. Sie zählen nur für Steine, die Sie jetzt legen. Legen Sie alle sieben Steine auf einmal, gibt es einen kräftigen Bonus.
+letterhof.howTo.2 | Jedes weitere Wort muss an die Wörter auf dem Brett anschließen, und alle Wörter, die Sie bilden oder kreuzen, müssen echte Wörter sein. Tippen Sie auf einen soeben gelegten Stein, um ihn zurückzunehmen, oder ziehen Sie ihn auf ein anderes Feld. Der leere Stein (mit der Blüte) darf jeder Buchstabe sein.
+letterhof.howTo.3 | Die beschrifteten Felder helfen: 2B und 3B verdoppeln oder verdreifachen einen Buchstaben, 2W und 3W verdoppeln oder verdreifachen das ganze Wort. Sie zählen nur für Steine, die Sie jetzt legen. Legen Sie alle sieben Steine auf einmal, gibt es einen kräftigen Bonus.
 letterhof.howTo.4 | Tippen Sie auf „{play}“, um Ihr Wort zu bestätigen. Kommen Sie nicht weiter? Nutzen Sie „{exchange}“ oder „{pass}“ oder bitten Sie um einen „{hint}“. Das Spiel endet, wenn der Beutel leer ist und jemand keine Steine mehr hat.
 letterhof.level.makkelijk | Die virtuelle Spielerin kennt nur gewöhnliche Wörter und spielt oft schwach
 letterhof.level.gemiddeld | Gewöhnliche Wörter, spielt ordentlich
@@ -870,6 +870,10 @@ letterhof.premie.L2 | Buchstabe mal 2
 letterhof.premie.L3 | Buchstabe mal 3
 letterhof.premie.W2 | Wort mal 2
 letterhof.premie.W3 | Wort mal 3
+letterhof.premie.short.L2 | 2B
+letterhof.premie.short.L3 | 3B
+letterhof.premie.short.W2 | 2W
+letterhof.premie.short.W3 | 3W
 letterhof.yourTurn | Sie sind dran: Legen Sie Steine aufs Brett.
 letterhof.firstMove | Beginnen Sie mit einem Wort über die Blume in der Mitte.
 letterhof.thinking | Die virtuelle Spielerin überlegt …

@@ -63,16 +63,15 @@ html[data-contrast="high"][data-theme="dark"] {
 .lh-vak:focus-visible { outline: .2rem solid var(--focus); outline-offset: -.15rem; z-index: 3; }
 .lh-vak.doel { outline: .2rem dashed var(--focus); outline-offset: -.12rem; }
 .lh-vak > * { grid-area: 1 / 1; }
-.lh-glyf { display: none; }                                         /* (de steensymbolen zijn er niet meer: een gewoon getal is een letterbonus, een getal in een cirkel een woordbonus) */
-.lh-num { position: relative; font-size: calc(var(--vak) * .52); font-weight: 800; line-height: 1; }
+.lh-num { position: relative; display: inline-flex; align-items: baseline; justify-content: center; font-size: calc(var(--vak) * .46); font-weight: 800; line-height: 1; letter-spacing: -.03em; white-space: nowrap; }   /* het opschrift: 2L, 3L, 2W, 3W */
+.lh-num b { font: inherit; }
 .lh-vak.L2 { background: var(--lh-l2); color: var(--lh-l2-t); }
 .lh-vak.L3 { background: var(--lh-l3); color: var(--lh-l3-t); }
 .lh-vak.W2 { background: var(--lh-w2); color: var(--lh-w2-t); }
 .lh-vak.W3 { background: var(--lh-w3); color: var(--lh-w3-t); }
 .lh-vak.midden { background: var(--lh-w2); color: var(--lh-w3); }
-.lh-vak.W2 .lh-num, .lh-vak.W3 .lh-num { display: grid; place-items: center; width: 1.45em; height: 1.45em; border-radius: 50%; box-shadow: inset 0 0 0 .09em currentColor; font-size: calc(var(--vak) * .44); }   /* woord = getal in een ring, letter = los getal */
 .lh-bloem { width: 80%; height: 80%; }
-.lh-vak.bezet .lh-glyf, .lh-vak.bezet .lh-num, .lh-vak.bezet .lh-bloem { opacity: 0; }
+.lh-vak.bezet .lh-num, .lh-vak.bezet .lh-bloem { opacity: 0; }
 
 /* De stenen: ivoor met een fijn randje en een dun schaduwrandje onderaan */
 .lh-steen {
@@ -90,6 +89,10 @@ html[data-contrast="high"][data-theme="dark"] {
 .lh-vak.laatste .lh-steen { box-shadow: 0 .06em 0 var(--lh-steen-diep), 0 0 0 .09em var(--lh-laatste-ring), 0 .1em .16em rgba(30, 25, 15, .22); }
 .lh-steen.leeg .lh-blank { width: 76%; height: 76%; color: var(--lh-w3); }
 .lh-vak .lh-steen { z-index: 1; }
+.lh-vak.los, .lh-vak.los * { touch-action: none; cursor: grab; }       /* een steen van deze beurt kun je pakken en slepen */
+.lh-steen.weg { opacity: .3; }
+.lh-vlieg { animation: none !important; }                             /* een steen die terug naar het rek vliegt (letterhof.js) */
+.lh-rek.doel { box-shadow: inset 0 0 0 .18rem var(--focus); }
 
 /* Het rek: een zacht bakje voor zeven stenen */
 .lh-onder { display: flex; flex-direction: column; gap: .6rem; }

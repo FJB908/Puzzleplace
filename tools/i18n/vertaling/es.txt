@@ -811,8 +811,8 @@ sudoku.stat.level | Nivel
 letterhof.name | Patio de letras
 letterhof.summary | Forme palabras en un tablero de flores: coloque fichas, sume puntos con las casillas de colores y venza al jugador virtual.
 letterhof.howTo.1 | Toque una ficha de su atril y luego una casilla del tablero, o arrástrela hasta allí. Forme una palabra en una fila o columna. La primera palabra debe pasar por la flor del centro.
-letterhof.howTo.2 | Cada palabra siguiente debe conectar con las del tablero, y todas las palabras que forme o cruce deben existir. Toque una ficha recién colocada para retirarla. La ficha en blanco (con la flor) puede ser cualquier letra.
-letterhof.howTo.3 | Las casillas con un número ayudan: un 2 o un 3 sin más duplica o triplica esa letra, un 2 o un 3 dentro de un círculo duplica o triplica toda la palabra. Solo cuentan para las fichas que coloca ahora. Si usa las siete fichas de una vez, obtiene una buena bonificación.
+letterhof.howTo.2 | Cada palabra siguiente debe conectar con las del tablero, y todas las palabras que forme o cruce deben existir. Toque una ficha recién colocada para retirarla, o arrástrela a otra casilla. La ficha en blanco (con la flor) puede ser cualquier letra.
+letterhof.howTo.3 | Las casillas con una marca ayudan: 2L y 3L duplican o triplican una letra, 2P y 3P duplican o triplican toda la palabra. Solo cuentan para las fichas que coloca ahora. Si usa las siete fichas de una vez, obtiene una buena bonificación.
 letterhof.howTo.4 | Pulse «{play}» para confirmar su palabra. ¿Atascado? Use «{exchange}» o «{pass}», o pida una «{hint}». La partida termina cuando la bolsa está vacía y alguien se queda sin fichas.
 letterhof.level.makkelijk | El jugador virtual solo conoce palabras corrientes y suele jugar flojo
 letterhof.level.gemiddeld | Palabras corrientes, juega razonablemente
@@ -835,6 +835,10 @@ letterhof.premie.L2 | letra doble
 letterhof.premie.L3 | letra triple
 letterhof.premie.W2 | palabra doble
 letterhof.premie.W3 | palabra triple
+letterhof.premie.short.L2 | 2L
+letterhof.premie.short.L3 | 3L
+letterhof.premie.short.W2 | 2P
+letterhof.premie.short.W3 | 3P
 letterhof.yourTurn | Su turno: coloque fichas en el tablero.
 letterhof.firstMove | Empiece con una palabra que pase por la flor del centro.
 letterhof.thinking | El jugador virtual está pensando…

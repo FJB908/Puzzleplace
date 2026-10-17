@@ -3,8 +3,8 @@
 letterhof.name | Letter Court | Letterhof
 letterhof.summary | Build words on a blossom board: place tiles, score with the coloured squares and beat the virtual player. | Bouw woorden op een bloesembord: leg stenen, scoor punten met de gekleurde vakjes en versla de virtuele speler.
 letterhof.howTo.1 | Tap a tile in your rack and then a square on the board, or drag it there. Make one word in a row or column. The first word must cover the flower in the middle. | Tik een steen in je rek en daarna een vakje op het bord, of sleep hem erheen. Maak één woord in een rij of kolom. Het eerste woord moet over de bloem in het midden lopen.
-letterhof.howTo.2 | Every next word must connect to the words on the board, and all words you make or cross must be real words. Tap a tile you just placed to take it back. The blank tile (with the blossom) can be any letter. | Elk volgend woord moet aansluiten op wat al op het bord ligt, en alle woorden die je maakt of kruist moeten echte woorden zijn. Tik op een steen die je net legde om hem terug te nemen. De lege steen (met de bloesem) mag elke letter zijn.
-letterhof.howTo.3 | The squares with a number help: a plain 2 or 3 doubles or triples that letter, a 2 or 3 in a circle doubles or triples the whole word. They only count for tiles you place now. Use all seven tiles at once for a big bonus. | De vakjes met een getal helpen: een gewone 2 of 3 verdubbelt of verdrievoudigt die letter, een 2 of 3 in een cirkeltje verdubbelt of verdrievoudigt het hele woord. Ze tellen alleen voor stenen die je nu legt. Leg je alle zeven stenen in één keer, dan krijg je een flinke bonus.
+letterhof.howTo.2 | Every next word must connect to the words on the board, and all words you make or cross must be real words. Tap a tile you just placed to take it back, or drag it to another square. The blank tile (with the blossom) can be any letter. | Elk volgend woord moet aansluiten op wat al op het bord ligt, en alle woorden die je maakt of kruist moeten echte woorden zijn. Tik op een steen die je net legde om hem terug te nemen, of sleep hem naar een ander vakje. De lege steen (met de bloesem) mag elke letter zijn.
+letterhof.howTo.3 | The squares with a label help: 2L and 3L double or triple a letter, 2W and 3W double or triple the whole word. They only count for tiles you place now. Use all seven tiles at once for a big bonus. | De vakjes met een opschrift helpen: 2L en 3L verdubbelen of verdrievoudigen een letter, 2W en 3W verdubbelen of verdrievoudigen het hele woord. Ze tellen alleen voor stenen die je nu legt. Leg je alle zeven stenen in één keer, dan krijg je een flinke bonus.
 letterhof.howTo.4 | Press "{play}" to confirm your word. Stuck? Use "{exchange}" or "{pass}", or ask for one "{hint}". The game ends when the bag is empty and someone has no tiles left. | Druk op "{play}" om je woord vast te leggen. Zit je vast? Gebruik "{exchange}" of "{pass}", of vraag één "{hint}". Het spel eindigt als de zak leeg is en iemand geen stenen meer heeft.
 letterhof.level.makkelijk | The virtual player knows only everyday words and often plays weakly | De virtuele speler kent alleen gewone woorden en speelt vaak zwak
 letterhof.level.gemiddeld | Everyday words, plays reasonably well | Gewone woorden, speelt redelijk
@@ -27,6 +27,11 @@ letterhof.premie.L2 | letter times 2 | letter x2
 letterhof.premie.L3 | letter times 3 | letter x3
 letterhof.premie.W2 | word times 2 | woord x2
 letterhof.premie.W3 | word times 3 | woord x3
+# Het korte opschrift op een bonusvakje: eerst het getal, dan L (letter) of W (woord) in de letter van jouw taal. Maximaal twee tekens.
+letterhof.premie.short.L2 | 2L | 2L
+letterhof.premie.short.L3 | 3L | 3L
+letterhof.premie.short.W2 | 2W | 2W
+letterhof.premie.short.W3 | 3W | 3W
 letterhof.yourTurn | Your turn: place tiles on the board. | Jouw beurt: leg stenen op het bord.
 letterhof.firstMove | Start with a word over the flower in the middle. | Begin met een woord over de bloem in het midden.
 letterhof.thinking | The virtual player is thinking… | De virtuele speler denkt na…

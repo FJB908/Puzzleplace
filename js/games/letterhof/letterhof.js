@@ -23,10 +23,8 @@ const zaadGetal = (tekst) => { let a = 2166136261; for (const c of String(tekst)
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const hoofdletter = (l) => l.toUpperCase();
 
-// De kleine tekeningen op de bonusvakjes: een steen (letterbonus) en drie stenen naast elkaar (woordbonus)
-const GLYF_LETTER = '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="3" y="2.5" width="6" height="7" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>';
-const GLYF_WOORD = '<svg viewBox="0 0 12 12" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1"><rect x="0.8" y="3.6" width="3" height="4.8" rx=".9"/><rect x="4.5" y="3.6" width="3" height="4.8" rx=".9"/><rect x="8.2" y="3.6" width="3" height="4.8" rx=".9"/></g></svg>';
-const PREMIE_TEKST = { L2: ['2', GLYF_LETTER], L3: ['3', GLYF_LETTER], W2: ['2', GLYF_WOORD], W3: ['3', GLYF_WOORD] };
+// Het opschrift op een bonusvakje is kort (2L, 3L, 2W, 3W: letter of woord, keer 2 of 3); de volledige naam hoort bij de schermlezer en de uitleg
+const PREMIE_KORT = { L2: 'letterhof.premie.short.L2', L3: 'letterhof.premie.short.L3', W2: 'letterhof.premie.short.W2', W3: 'letterhof.premie.short.W3' };
 const PREMIE_NAAM = { L2: 'letterhof.premie.L2', L3: 'letterhof.premie.L3', W2: 'letterhof.premie.W2', W3: 'letterhof.premie.W3' };
 
 export async function mount(container, ctx) {
@@ -74,7 +72,7 @@ export async function mount(container, ctx) {
     const pm = PREMIE[i];
     const el = h('div', { class: `lh-vak${pm ? ` ${pm}` : ''}${i === MIDDEN * N + MIDDEN ? ' midden' : ''}`, role: 'gridcell', 'data-i': i, tabindex: '-1' });
     if (i === MIDDEN * N + MIDDEN) el.innerHTML = `<svg class="lh-bloem" viewBox="-20 -20 40 40" aria-hidden="true">${bloesemFig(0, 0, 13, true)}</svg>`;
-    else if (pm) { const [num, glyf] = PREMIE_TEKST[pm]; el.innerHTML = `<span class="lh-glyf">${glyf}</span><span class="lh-num">${num}</span>`; }
+    else if (pm) { const [, cijfer, woord] = /^(\d)(.*)$/.exec(t(PREMIE_KORT[pm])); el.append(h('span', { class: 'lh-num', 'aria-hidden': 'true' }, h('b', {}, cijfer), woord)); }
     el.addEventListener('click', () => klikVak(i));
     el.addEventListener('keydown', (e) => toetsVak(e, i));
     el._i = i; el._r = r; el._c = c;
@@ -196,9 +194,10 @@ export async function mount(container, ctx) {
   }
   async function klikVak(i) {
     if (!eigenBeurt()) return;
+    if (vakken[i]._net && Date.now() - vakken[i]._net < 250) return;                      // net een steen losgelaten op dit vakje: geen tik achteraan
     if (st.bord[i] !== null) return;
     const los = leg.get(i);
-    if (los) { leg.delete(i); gekozen = null; teken(); voorbeeld(); return; }          // een steen die je net legde: terug naar je rek
+    if (los && gekozen === null) { const info = terugVliegen(i); gekozen = null; teken(); voorbeeld(); vliegAnimatie(info); return; }          // een steen die je net legde: terug naar je rek
     if (gekozen === null) { const eerste = nietGelegd()[0]; if (!eerste) return; gekozen = eerste.id; }
     await leegVakje(i, gekozen);
   }
@@ -207,9 +206,49 @@ export async function mount(container, ctx) {
     if (!x) return;
     let l = x.ch;
     if (l === '?') { l = await kiesLetter(); if (!l) return; l = hoofdletter(l); }
+    const oud = leg.has(i) ? terugVliegen(i) : null;                      // ligt er al een steen van deze beurt, dan vliegt die terug naar je rek en komt de nieuwe ervoor in de plaats
     leg.set(i, { l, id });
     gekozen = null;
     teken(); voorbeeld();
+    vliegAnimatie(oud);
+  }
+  // Een liggende steen (van deze beurt) naar een ander vakje; ligt daar al een steen van deze beurt, dan vliegt die terug naar je rek
+  function verplaats(van, naar) {
+    const p = leg.get(van);
+    if (!p || van === naar || st.bord[naar] !== null) return;
+    const oud = leg.has(naar) ? terugVliegen(naar) : null;
+    leg.delete(van); leg.set(naar, p);
+    gekozen = null;
+    teken(); voorbeeld();
+    vliegAnimatie(oud);
+  }
+  // Een steen van het bord weghalen en onthouden waar hij lag (voor de vliegbeweging naar je rek)
+  function terugVliegen(i) {
+    const p = leg.get(i);
+    if (!p) return null;
+    const el = vakken[i].querySelector('.lh-steen');
+    const info = { id: p.id, van: el?.getBoundingClientRect(), kloon: el?.cloneNode(true) };
+    leg.delete(i);
+    return info;
+  }
+  // De steen laten vliegen van het vakje naar zijn plek in het rek (alleen als beweging mag)
+  function vliegAnimatie(info) {
+    if (!info?.van || !info.kloon || !motionOK()) return;
+    const doel = rekEl.querySelector(`.lh-rekstee[data-id="${info.id}"]`);
+    if (!doel) return;
+    const naar = doel.getBoundingClientRect(), van = info.van;
+    const spook = info.kloon;
+    spook.classList.remove('nieuw', 'komt', 'weg');
+    spook.classList.add('lh-vlieg');
+    spook.style.cssText = `position:fixed;left:${van.left}px;top:${van.top}px;width:${van.width}px;height:${van.height}px;margin:0;z-index:3000;pointer-events:none;transform-origin:0 0;--vak:${van.width}px`;
+    document.body.append(spook);
+    doel.style.visibility = 'hidden';
+    const klaar = () => { spook.remove(); doel.style.visibility = ''; };
+    try {
+      spook.animate([{ transform: 'none' }, { transform: `translate(${naar.left - van.left}px, ${naar.top - van.top}px) scale(${naar.width / van.width}, ${naar.height / van.height})` }],
+        { duration: 380, easing: 'cubic-bezier(.2, .8, .3, 1)' }).onfinish = klaar;
+    } catch { klaar(); }
+    setTimeout(klaar, 700);
   }
   function alleTerug() { leg = new Map(); gekozen = null; teken(); voorbeeld(); }
   function husselRek() {
@@ -225,40 +264,56 @@ export async function mount(container, ctx) {
   bordEl.addEventListener('focusin', (e) => { const el = e.target.closest('.lh-vak'); bordEl.querySelectorAll('.lh-vak[tabindex="0"]').forEach((x) => { if (x !== el) x.tabIndex = -1; }); if (el) el.tabIndex = 0; });
   vakken[MIDDEN * N + MIDDEN].tabIndex = 0;
 
-  // ----- Slepen: een steen uit je rek (of een los liggende steen op het bord) naar een vakje -----
+  // ----- Slepen: een steen uit je rek, of een steen die je deze beurt al op het bord legde, naar een vakje (of een liggende steen terug naar je rek) -----
+  // Ligt er op het doelvakje al een steen van deze beurt, dan vliegt die terug naar je rek en komt de gesleepte steen ervoor in de plaats.
+  function startSlepen(e, { el, id = null, van = null }) {
+    if (!eigenBeurt() || e.button > 0) return;
+    const x0 = e.clientX, y0 = e.clientY;
+    let spook = null, sleept = false;
+    const doelVak = (ev) => document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.lh-vak');
+    const geldig = (v) => v && st.bord[v._i] === null && v._i !== van;
+    const op = (ev) => {
+      if (!sleept && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 8) return;
+      if (!sleept) {
+        sleept = true;
+        if (van === null) { spook = el.cloneNode(true); const r = el.getBoundingClientRect(); spook.style.width = `${r.width}px`; spook.style.height = `${r.height}px`; }
+        else { spook = maakSteen(leg.get(van).l); spook.style.width = '3.2rem'; spook.style.height = '3.45rem'; }
+        spook.classList.add('lh-spook'); document.body.append(spook);
+        el.classList.add('weg');
+      }
+      spook.style.transform = `translate(${ev.clientX - spook.offsetWidth / 2}px, ${ev.clientY - spook.offsetHeight / 1.2}px)`;
+      const doel = doelVak(ev);
+      bordEl.querySelectorAll('.lh-vak.doel').forEach((v) => v.classList.remove('doel'));
+      if (geldig(doel)) doel.classList.add('doel');
+      rekEl.classList.toggle('doel', van !== null && !!document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.lh-rek'));
+    };
+    const klaar = (ev) => {
+      window.removeEventListener('pointermove', op); window.removeEventListener('pointerup', klaar); window.removeEventListener('pointercancel', klaar);
+      bordEl.querySelectorAll('.lh-vak.doel').forEach((v) => v.classList.remove('doel'));
+      rekEl.classList.remove('doel');
+      if (!sleept) return;
+      spook.remove(); el.classList.remove('weg');
+      el._net = Date.now();
+      if (van !== null) vakken[van]._net = Date.now();
+      if (ev.type === 'pointercancel') return;
+      const doel = doelVak(ev);
+      if (geldig(doel)) { if (van === null) leegVakje(doel._i, id); else verplaats(van, doel._i); }
+      else if (van !== null && document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.lh-rek')) {            // een liggende steen in het rek laten vallen: hij vliegt er niet heen, hij is er meteen
+        leg.delete(van); gekozen = null; teken(); voorbeeld();
+      }
+    };
+    window.addEventListener('pointermove', op); window.addEventListener('pointerup', klaar); window.addEventListener('pointercancel', klaar);
+  }
   function slepen(el, bron) {
-    el.addEventListener('pointerdown', (e) => {
-      if (!eigenBeurt() || e.button > 0) return;
-      const x0 = e.clientX, y0 = e.clientY;
-      let spook = null, sleept = false;
-      const id = bron.id;
-      const op = (ev) => {
-        if (!sleept && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 8) return;
-        if (!sleept) {
-          sleept = true;
-          spook = el.cloneNode(true); spook.classList.add('lh-spook'); document.body.append(spook);
-          const r = el.getBoundingClientRect(); spook.style.width = `${r.width}px`; spook.style.height = `${r.height}px`;
-          el.classList.add('weg');
-        }
-        spook.style.transform = `translate(${ev.clientX - spook.offsetWidth / 2}px, ${ev.clientY - spook.offsetHeight / 1.2}px)`;
-        const doel = document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.lh-vak');
-        bordEl.querySelectorAll('.lh-vak.doel').forEach((v) => v.classList.remove('doel'));
-        if (doel && st.bord[doel._i] === null && !leg.has(doel._i)) doel.classList.add('doel');
-      };
-      const klaar = (ev) => {
-        window.removeEventListener('pointermove', op); window.removeEventListener('pointerup', klaar); window.removeEventListener('pointercancel', klaar);
-        bordEl.querySelectorAll('.lh-vak.doel').forEach((v) => v.classList.remove('doel'));
-        if (!sleept) return;
-        spook.remove(); el.classList.remove('weg');
-        const doel = document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.('.lh-vak');
-        el._net = Date.now();
-        if (doel && st.bord[doel._i] === null && !leg.has(doel._i)) leegVakje(doel._i, id);
-      };
-      window.addEventListener('pointermove', op); window.addEventListener('pointerup', klaar); window.addEventListener('pointercancel', klaar);
-    });
+    el.addEventListener('pointerdown', (e) => startSlepen(e, { el, id: bron.id }));
     // na een sleepbeweging hoort er geen tik achteraan
     el.addEventListener('click', (e) => { if (el._net && Date.now() - el._net < 250) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
   }
+  // een steen die je deze beurt al op het bord legde: ook die kun je slepen
+  bordEl.addEventListener('pointerdown', (e) => {
+    const vak = e.target.closest?.('.lh-vak');
+    if (vak && leg.has(vak._i) && e.target.closest('.lh-steen')) startSlepen(e, { el: vak.querySelector('.lh-steen'), van: vak._i });
+  });
 
   // ----- Een letter kiezen voor een lege steen -----
   function kiesLetter() {
