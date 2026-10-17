@@ -447,7 +447,7 @@ export default {
   "letterhof.summary": "Build words on a blossom board: place tiles, score with the coloured squares and beat the virtual player.",
   "letterhof.howTo.1": "Tap a tile in your rack and then a square on the board, or drag it there. Make one word in a row or column. The first word must cover the flower in the middle.",
   "letterhof.howTo.2": "Every next word must connect to the words on the board, and all words you make or cross must be real words. Tap a tile you just placed to take it back. The blank tile (with the blossom) can be any letter.",
-  "letterhof.howTo.3": "The coloured squares help: pale green doubles a letter, green triples a letter, purple doubles the whole word, red triples the whole word. They only count for tiles you place now. Use all seven tiles at once for a big bonus.",
+  "letterhof.howTo.3": "The squares with a number help: a plain 2 or 3 doubles or triples that letter, a 2 or 3 in a circle doubles or triples the whole word. They only count for tiles you place now. Use all seven tiles at once for a big bonus.",
   "letterhof.howTo.4": "Press \"{play}\" to confirm your word. Stuck? Use \"{exchange}\" or \"{pass}\", or ask for one \"{hint}\". The game ends when the bag is empty and someone has no tiles left.",
   "letterhof.level.makkelijk": "The virtual player knows only everyday words and often plays weakly",
   "letterhof.level.gemiddeld": "Everyday words, plays reasonably well",

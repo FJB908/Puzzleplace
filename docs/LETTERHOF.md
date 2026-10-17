@@ -28,6 +28,15 @@ Wordfeud en Scrabble): de regels van zo'n spel zijn vrij te gebruiken, de naam, 
 | Teksten (acht talen) | `tools/i18n/bron/200-letterhof.txt` en `tools/i18n/vertaling/<taal>.txt` |
 | Tests | `tests/letterhof.test.mjs` (regels en computer tegen een traag zoekprogramma), `tests/letterhof-lijsten.test.mjs` (de lijsten) |
 
+## Uiterlijk
+
+Rustig en minimalistisch, in de kleuren van de rest van de app (teal en roze), in licht, donker en hoog contrast (alle kleuren staan als `--lh-*` bovenaan `css/games/letterhof.css`).
+Het bord is porselein met vlakke bonusvakjes: teal voor letters (licht = x2, donker = x3), roze voor woorden (licht = x2, donker = x3). Ook zonder kleur te lezen: een gewoon
+getal is een letterbonus, een getal in een cirkel een woordbonus. Er is bewust geen legenda op het scherm; de uitleg staat bij "Uitleg". Stenen zijn ivoor met een fijn randje;
+een steen die je net hebt gelegd heeft een roze rand, het laatste woord van de virtuele speler een teal rand. Onder het bord staat één hoofdknop (Spelen) en een rij
+stille knoppen (Terugnemen, Tip, Stenen wisselen, Passen). Husselen en inzoomen zijn ronde knopjes op de rand van het rek en het bord. De stenen van het rek volgen de
+breedte van het rek (ook op 320 px met de grootste tekst).
+
 ## Eigen werk, geen kopie
 
 De indeling van de bonusvakjes (een bloemvorm met acht keer gespiegelde vakjes), de verdeling en waarden van de letters (uit de frequentie in de lijst van elke taal), de kleuren, de

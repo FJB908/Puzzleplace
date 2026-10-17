@@ -45,8 +45,8 @@ tipKnopStand(tipKnop, state, spelIsKlaar);    // bij elke verversing van het sch
 ```
 
 `state.tip` is de gratis tip, `state.tipTegoed` een met een video verdiende tip die nog niet is gegeven (bijvoorbeeld omdat er toen geen tip te geven was:
-de video gaat dan niet verloren). Woordzoeker, Kruiswoord en Woordtuin tegen de computer hebben al onbeperkt tips en doen niet mee; bij een partij tegen een vriend
-blijven de 3 tips voor beiden gelijk.
+de video gaat dan niet verloren). Woordzoeker, Kruiswoord en Woordtuin tegen de computer hebben al onbeperkt tips en doen niet mee. Bij een partij tegen een vriend (Woordtuin) heeft elk 3 gratis tips;
+daarna werkt het hetzelfde: "Nog een tip" met een video (`js/games/woordtuin/paneel.js`, via `extraTip`). Een met een video verdiende tip blijft staan tot hij gebruikt is.
 
 ## Uitproberen (testmodus)
 

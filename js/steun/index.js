@@ -12,7 +12,7 @@ import { STEUN } from '../config.js';
 import * as store from '../store.js';
 import { h, icon } from '../ui.js';
 import { t } from '../i18n/index.js';
-import { isRustig, tipStand, tipGebruikt as gebruikt, tipVerdiend, kaartTonen } from './regels.js';
+import { isRustig, tipStand, extraTipWeg, tipGebruikt as gebruikt, tipVerdiend, kaartTonen } from './regels.js';
 import { SteunFout, zetAanbieders, videoAanbieder, aankoopAanbieder, testAanbieders } from './aanbieders.js';
 import * as dlg from './dialogen.js';
 
@@ -95,13 +95,13 @@ export async function tipToestemming(state, { voor, na } = {}) {
 /** De tip is echt gegeven. */
 export const tipGebruikt = (state) => gebruikt(state, kansen());
 
-/** Zet de tipknop goed: uit als er niets meer kan, "Nog een tip" met een opvallend videopictogram als een video een tip oplevert. `geblokkeerd`: het spel zelf laat nu geen tip toe. */
-export function tipKnopStand(knop, state, geblokkeerd = false) {
-  const stand = tipStand(state, kansen());
-  const metVideo = stand === 'video' && !geblokkeerd;
-  knop.disabled = geblokkeerd || stand === null;
+/**
+ * Het uiterlijk van een tipknop: met `metVideo` staat er "Nog een tip" met een opvallend videolabel op de rand (en maakt de rij knoppen ruimte
+ * erboven), anders de gewone tekst `basis`. Een label dat al is gezet wordt niet dubbel gemaakt.
+ */
+export function zetTipKnop(knop, { basis = null, metVideo = false } = {}) {
   const label = [...knop.children].reverse().find((e) => e.tagName === 'SPAN' && !e.classList.contains('tip-video'));
-  if (label) { label.dataset.basis ??= label.textContent; label.textContent = metVideo ? t('steun.moreTip') : label.dataset.basis; }
+  if (label) { label.dataset.basis = basis ?? label.dataset.basis ?? label.textContent; label.textContent = metVideo ? t('steun.moreTip') : label.dataset.basis; }
   knop.classList.toggle('tip-met-video', metVideo);
   knop.parentElement?.classList.toggle('met-tip-video', metVideo);               // de rij met knoppen maakt ruimte boven het label
   if (metVideo) knop.setAttribute('aria-label', t('steun.moreTipAria')); else knop.removeAttribute('aria-label');
@@ -112,6 +112,26 @@ export function tipKnopStand(knop, state, geblokkeerd = false) {
     voorgeladen = true;
     try { videoAanbieder()?.voorlaad?.()?.catch?.(() => { voorgeladen = false; }); } catch { voorgeladen = false; }
   }
+}
+
+/** Zet de tipknop van een spel met één tip per spel goed: uit als er niets meer kan, anders zie zetTipKnop. `geblokkeerd`: het spel zelf laat nu geen tip toe. */
+export function tipKnopStand(knop, state, geblokkeerd = false) {
+  const stand = tipStand(state, kansen());
+  const metVideo = stand === 'video' && !geblokkeerd;
+  knop.disabled = geblokkeerd || stand === null;
+  zetTipKnop(knop, { metVideo });
+}
+
+// ----- Een tip als het aantal tips vastligt (een partij met een vriend: een vast aantal tips, daarna een video) -----
+/** Wat kan de speler doen als de tips op zijn? 'supporter' (gewoon doorgaan), 'video' (eerst een video) of null (niets). */
+export const extraTipStand = () => extraTipWeg(kansen());
+
+/** Mag er nog een tip bij? Een Supporter meteen, anders na een tot het eind bekeken video. */
+export async function extraTip() {
+  const weg = extraTipWeg(kansen());
+  if (weg === 'supporter') return true;
+  if (weg === 'video') return vraagVideo();
+  return false;
 }
 
 // ----- De eenmalige bijdrage -----

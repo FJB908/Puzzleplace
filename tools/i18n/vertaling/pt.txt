@@ -812,7 +812,7 @@ letterhof.name | Pátio das letras
 letterhof.summary | Forme palavras num tabuleiro de flores: coloque peças, ganhe pontos com as casas coloridas e vença o jogador virtual.
 letterhof.howTo.1 | Toque numa peça do seu suporte e depois numa casa do tabuleiro, ou arraste-a até lá. Forme uma palavra numa linha ou coluna. A primeira palavra tem de passar pela flor ao centro.
 letterhof.howTo.2 | Cada palavra seguinte tem de ligar-se às do tabuleiro, e todas as palavras que formar ou cruzar têm de existir. Toque numa peça que acabou de pôr para a retirar. A peça em branco (com a flor) pode ser qualquer letra.
-letterhof.howTo.3 | As casas coloridas ajudam: verde-claro duplica uma letra, verde triplica-a, roxo duplica a palavra toda, vermelho triplica-a. Só contam para as peças que põe agora. Se usar as sete peças de uma vez, ganha um bom bónus.
+letterhof.howTo.3 | As casas com um número ajudam: um 2 ou um 3 simples duplica ou triplica essa letra, um 2 ou um 3 dentro de um círculo duplica ou triplica a palavra toda. Só contam para as peças que põe agora. Se usar as sete peças de uma vez, ganha um bom bónus.
 letterhof.howTo.4 | Toque em «{play}» para confirmar a palavra. Preso? Use «{exchange}» ou «{pass}», ou peça uma «{hint}». O jogo termina quando o saco está vazio e alguém fica sem peças.
 letterhof.level.makkelijk | O jogador virtual só conhece palavras comuns e joga muitas vezes mal
 letterhof.level.gemiddeld | Palavras comuns, joga razoavelmente

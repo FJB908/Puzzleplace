@@ -447,7 +447,7 @@ export default {
   "letterhof.summary": "Formez des mots sur un plateau fleuri : posez des jetons, marquez des points avec les cases colorées et battez le joueur virtuel.",
   "letterhof.howTo.1": "Touchez un jeton de votre chevalet puis une case du plateau, ou faites-le glisser. Formez un mot sur une ligne ou une colonne. Le premier mot doit passer par la fleur du centre.",
   "letterhof.howTo.2": "Chaque mot suivant doit se raccorder aux mots du plateau, et tous les mots formés ou croisés doivent exister. Touchez un jeton que vous venez de poser pour le reprendre. Le jeton blanc (avec la fleur) peut être n’importe quelle lettre.",
-  "letterhof.howTo.3": "Les cases colorées aident : vert pâle double une lettre, vert la triple, violet double le mot entier, rouge le triple. Elles ne comptent que pour les jetons posés maintenant. Posez vos sept jetons d’un coup pour un gros bonus.",
+  "letterhof.howTo.3": "Les cases avec un chiffre aident : un 2 ou un 3 simple double ou triple cette lettre, un 2 ou un 3 dans un cercle double ou triple le mot entier. Elles ne comptent que pour les jetons posés maintenant. Posez vos sept jetons d’un coup pour un gros bonus.",
   "letterhof.howTo.4": "Touchez « {play} » pour valider votre mot. Bloqué ? Utilisez « {exchange} » ou « {pass} », ou demandez un « {hint} ». La partie se termine quand le sac est vide et que quelqu’un n’a plus de jetons.",
   "letterhof.level.makkelijk": "Le joueur virtuel ne connaît que des mots courants et joue souvent faiblement",
   "letterhof.level.gemiddeld": "Mots courants, joue correctement",

@@ -21,7 +21,8 @@ html[data-textsize="large"] .tip-video, html[data-textsize="xlarge"] .tip-video 
 /* De rij met knoppen maakt ruimte voor het label, zodat het nooit over een andere knop of het bord heen valt */
 .sudoku-actions.met-tip-video { padding-top: 1.7rem; }
 .mj-knoppen.met-tip-video, .sol-knoppen.met-tip-video { padding-top: 1.8rem; row-gap: 1.7rem; }
-.lh-knoppen.met-tip-video { padding-top: 1.7rem; row-gap: 1.7rem; }
+.lh-acties.met-tip-video { padding-top: 1.9rem; }
+.wt-extra.met-tip-video { padding-top: 1.7rem; row-gap: 1.7rem; }
 @keyframes steun-puls { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
 /* Een melding dat het niet lukt: groot kruis (en rechtsboven het kruisje om te sluiten) */

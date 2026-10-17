@@ -447,7 +447,7 @@ export default {
   "letterhof.summary": "Bouw woorden op een bloesembord: leg stenen, scoor punten met de gekleurde vakjes en versla de virtuele speler.",
   "letterhof.howTo.1": "Tik een steen in je rek en daarna een vakje op het bord, of sleep hem erheen. Maak één woord in een rij of kolom. Het eerste woord moet over de bloem in het midden lopen.",
   "letterhof.howTo.2": "Elk volgend woord moet aansluiten op wat al op het bord ligt, en alle woorden die je maakt of kruist moeten echte woorden zijn. Tik op een steen die je net legde om hem terug te nemen. De lege steen (met de bloesem) mag elke letter zijn.",
-  "letterhof.howTo.3": "De gekleurde vakjes helpen: lichtgroen verdubbelt een letter, groen verdrievoudigt een letter, paars verdubbelt het hele woord, rood verdrievoudigt het hele woord. Ze tellen alleen voor stenen die je nu legt. Leg je alle zeven stenen in één keer, dan krijg je een flinke bonus.",
+  "letterhof.howTo.3": "De vakjes met een getal helpen: een gewone 2 of 3 verdubbelt of verdrievoudigt die letter, een 2 of 3 in een cirkeltje verdubbelt of verdrievoudigt het hele woord. Ze tellen alleen voor stenen die je nu legt. Leg je alle zeven stenen in één keer, dan krijg je een flinke bonus.",
   "letterhof.howTo.4": "Druk op \"{play}\" om je woord vast te leggen. Zit je vast? Gebruik \"{exchange}\" of \"{pass}\", of vraag één \"{hint}\". Het spel eindigt als de zak leeg is en iemand geen stenen meer heeft.",
   "letterhof.level.makkelijk": "De virtuele speler kent alleen gewone woorden en speelt vaak zwak",
   "letterhof.level.gemiddeld": "Gewone woorden, speelt redelijk",

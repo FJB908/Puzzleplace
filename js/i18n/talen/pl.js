@@ -467,7 +467,7 @@ export default {
   "letterhof.summary": "Układaj słowa na kwiecistej planszy: kładź płytki, zdobywaj punkty na kolorowych polach i pokonaj wirtualnego gracza.",
   "letterhof.howTo.1": "Dotknij płytki na stojaku, a potem pola na planszy albo przeciągnij ją tam. Ułóż jedno słowo w wierszu lub kolumnie. Pierwsze słowo musi przechodzić przez kwiat pośrodku.",
   "letterhof.howTo.2": "Każde kolejne słowo musi łączyć się ze słowami na planszy, a wszystkie utworzone lub skrzyżowane słowa muszą istnieć. Dotknij właśnie położonej płytki, aby ją zabrać. Pusta płytka (z kwiatem) może być dowolną literą.",
-  "letterhof.howTo.3": "Kolorowe pola pomagają: jasnozielone podwaja literę, zielone potraja literę, fioletowe podwaja całe słowo, czerwone potraja całe słowo. Liczą się tylko dla płytek kładzionych teraz. Wyłóż wszystkie siedem płytek naraz, a dostaniesz wysoką premię.",
+  "letterhof.howTo.3": "Pomagają pola z liczbą: zwykła 2 lub 3 podwaja lub potraja tę literę, 2 lub 3 w kółku podwaja lub potraja całe słowo. Liczą się tylko dla płytek kładzionych teraz. Wyłóż wszystkie siedem płytek naraz, a dostaniesz wysoką premię.",
   "letterhof.howTo.4": "Dotknij „{play}”, aby zatwierdzić słowo. Utknąłeś? Użyj „{exchange}” lub „{pass}” albo poproś o „{hint}”. Gra kończy się, gdy worek jest pusty, a komuś skończą się płytki.",
   "letterhof.level.makkelijk": "Wirtualny gracz zna tylko zwykłe słowa i często gra słabo",
   "letterhof.level.gemiddeld": "Zwykłe słowa, gra przyzwoicie",

@@ -6,11 +6,14 @@ import { h, icon, choiceDialog } from '../../ui.js';
 import { t, foutTekst } from '../../i18n/index.js';
 import { TALEN, vouw, isAlfabet, typInvoer } from '../../shared/talen.js';
 import { maakBord, HEK, TULP } from './bord.js';
+import { zetTipKnop, extraTipStand, extraTip } from '../../steun/index.js';
 import { checkMove, MoveError, counts, pathsFor, MIN_LEN, other, taalVan } from './engine.js';
 
 // tegenComputer: de tegenstander is de computer (dan zeggen we "de computer" in plaats van een naam)
 export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you'), 2: t('match.opponent') }, tegenComputer = false, tips = null, onZet, onTip, onTerug = null, kanTerug = () => true }) {
   let state = null, busy = false, tipsOver = tips, plekken = [], plek = 0;
+  let tegoed = 0;                                       // tips die met een video zijn verdiend en nog niet gebruikt (bijvoorbeeld omdat er toen geen woord te vinden was)
+  const tipsOp = () => tipsOver !== null && tipsOver <= 0 && tegoed <= 0;       // de vaste tips zijn op: nog een tip kan alleen met een video (of als Supporter)
 
   const bord = maakBord({ onChange: (path, bron) => bijwerken(bron) });
 
@@ -96,7 +99,7 @@ export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you
     bord.setEnabled(mag);
     invoer.disabled = !mag;
     typKnop.disabled = !mag;
-    if (tipKnop) tipKnop.disabled = !mag || (tipsOver !== null && tipsOver <= 0);
+    if (tipKnop) tipKnop.disabled = !mag || (tipsOp() && !extraTipStand());
     if (terugKnop) terugKnop.disabled = !mag || !kanTerug();
     if (pasKnop) pasKnop.disabled = !mag;
   }
@@ -170,19 +173,30 @@ export function maakPaneel({ onPas = null, me = 1, names = { 1: t('woordtuin.you
 
   async function tip() {
     if (!aanDeBeurt()) return;
-    if (tipsOver !== null && tipsOver <= 0) { uitleg.textContent = t('woordtuin.noHintsLeft'); return; }
+    let extra = false;                                     // een tip na de vaste tips: met een eerder verdiend tegoed of een video
+    if (tipsOver !== null && tipsOver <= 0) {
+      extra = true;
+      if (tegoed <= 0) {
+        if (!extraTipStand()) { uitleg.textContent = t('woordtuin.noHintsLeft'); return; }
+        if (!(await extraTip()) || !aanDeBeurt()) return;
+        tegoed++;
+      }
+    }
     try {
       const hint = await onTip();
-      if (!hint) { uitleg.textContent = t('woordtuin.noWordLeft'); return; }
-      if (tipsOver !== null) { tipsOver--; tipLabel(); }
+      if (!hint) { uitleg.textContent = t('woordtuin.noWordLeft'); tipLabel(); beschikbaar(); return; }
+      if (extra) tegoed--; else if (tipsOver !== null) tipsOver--;
+      tipLabel();
       bord.wijs(hint.start);
       uitleg.textContent = t('woordtuin.hintText', { n: hint.length });
     } catch (e) { uitleg.textContent = foutTekst(e); }
   }
   function tipLabel() {
     if (!tipKnop) return;
-    tipKnop.lastChild.textContent = tipsOver === null ? t('common.hint') : t('woordtuin.hintLeft', { n: tipsOver });
-    tipKnop.disabled = tipsOver !== null && tipsOver <= 0;
+    const op = tipsOp();
+    const weg = op ? extraTipStand() : null;
+    zetTipKnop(tipKnop, { basis: tipsOver === null || weg === 'supporter' ? t('common.hint') : t('woordtuin.hintLeft', { n: tipsOver }), metVideo: weg === 'video' });
+    tipKnop.disabled = op && !weg;
   }
 
   // Passen: eerst vragen (en uitleggen dat het spel afloopt als de ander ook past), dan doorgeven

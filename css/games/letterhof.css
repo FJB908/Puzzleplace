@@ -1,93 +1,141 @@
-/* Letterhof: een bord als een lakdienblad met gouden inlegwerk; de stenen zijn porselein met een gouden rand en een rand van jade; de bonusvakjes zijn email.
+/* Letterhof: rustig en minimalistisch. Een bord van porselein in zachte kleuren die bij de rest van de app horen (teal en roze); de stenen zijn ivoor met een fijn randje.
+   De bonusvakjes zijn vlakke kleuren met een getal en een klein steensymbool (één steen = letter, drie stenen = woord), zodat ze ook zonder kleur te lezen zijn.
    De maten komen uit letterhof.js (--vak). Niets licht op om te laten zien wat kan: je zoekt zelf. */
 
-.lh { width: min(100%, 48rem); margin-inline: auto; display: flex; flex-direction: column; gap: .7rem; }
-
-/* De kop: twee naamplaatjes en de zak */
-.lh-kop { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: .6rem; }
-.lh-plaat {
-  display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; padding: .55rem .9rem; border-radius: 1rem; font-weight: 700;
-  background: linear-gradient(160deg, #fffefb, #f4ecd8); color: #2b2430; border: .12rem solid #d8c690;
-  box-shadow: 0 .12rem .35rem rgba(60, 40, 10, .18), inset 0 0 0 .1rem rgba(255, 255, 255, .8); transition: box-shadow .3s, transform .3s, border-color .3s;
+:root {
+  --lh-bord: #ece4d7; --lh-lijn: #d9cdba; --lh-vak: #f8f4ec;
+  --lh-l2: #cfe4e2; --lh-l2-t: #1c5860; --lh-l3: #388890; --lh-l3-t: #ffffff;
+  --lh-w2: #f4cfda; --lh-w2-t: #85284a; --lh-w3: #a8325a; --lh-w3-t: #ffffff;
+  --lh-steen: #fffdf8; --lh-steen-rand: #dacfb9; --lh-steen-diep: #c8baa0; --lh-inkt: #232c33; --lh-punt: #7b6f5b;
+  --lh-nieuw: #fff0f4; --lh-nieuw-ring: #a8325a; --lh-laatste-ring: #388890;
 }
-.lh-plaat-naam { font-size: .85rem; line-height: 1.15; min-width: 0; overflow-wrap: anywhere; }
-.lh-score-n { font-size: 1.5rem; font-family: Georgia, 'Times New Roman', serif; font-variant-numeric: tabular-nums; }
-.lh-plaat.aan { border-color: #cda24a; box-shadow: 0 0 0 .18rem rgba(205, 162, 74, .5), 0 .2rem .6rem rgba(60, 40, 10, .25); transform: translateY(-.08rem); }
+html[data-theme="dark"] {
+  --lh-bord: #1a2226; --lh-lijn: #0f1619; --lh-vak: #243035;
+  --lh-l2: #2a4a4f; --lh-l2-t: #bfe3e1; --lh-l3: #2f7f87; --lh-l3-t: #f2fcfc;
+  --lh-w2: #5a2e40; --lh-w2-t: #f7cddb; --lh-w3: #c04b78; --lh-w3-t: #ffffff;
+  --lh-steen: #f1ebe0; --lh-steen-rand: #cfc3ad; --lh-steen-diep: #8b806a; --lh-inkt: #1f2930; --lh-punt: #6f634f;
+  --lh-nieuw: #ffe9ef; --lh-nieuw-ring: #f19ab8; --lh-laatste-ring: #6fc0c8;
+}
+html[data-contrast="high"] {
+  --lh-bord: #ffffff; --lh-lijn: #000000; --lh-vak: #ffffff;
+  --lh-l2: #b6e1e6; --lh-l2-t: #000000; --lh-l3: #00606b; --lh-l3-t: #ffffff; --lh-w2: #ffc2d4; --lh-w2-t: #000000; --lh-w3: #8a0030; --lh-w3-t: #ffffff;
+  --lh-steen: #ffffff; --lh-steen-rand: #000000; --lh-steen-diep: #000000; --lh-inkt: #000000; --lh-punt: #000000;
+  --lh-nieuw: #ffe9a8; --lh-nieuw-ring: #8a0030; --lh-laatste-ring: #00606b;
+}
+html[data-contrast="high"][data-theme="dark"] {
+  --lh-bord: #000000; --lh-lijn: #ffffff; --lh-vak: #000000;
+  --lh-l2: #1c5860; --lh-l2-t: #ffffff; --lh-l3: #7fd4de; --lh-l3-t: #000000; --lh-w2: #6a2342; --lh-w2-t: #ffffff; --lh-w3: #ffb3cc; --lh-w3-t: #000000;
+  --lh-steen: #ffffff; --lh-steen-rand: #ffffff; --lh-steen-diep: #ffffff; --lh-inkt: #000000; --lh-punt: #000000;
+  --lh-nieuw: #ffe600; --lh-nieuw-ring: #ffb3cc; --lh-laatste-ring: #7fd4de;
+}
+
+.lh { width: min(100%, 48rem); margin-inline: auto; display: flex; flex-direction: column; gap: .65rem; }
+
+/* De kop: twee scoreplaatjes en de zak. Wie aan de beurt is, heeft een gekleurde rand. */
+.lh-kop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: .3rem .5rem; }
+.lh-plaat {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .45rem .85rem; border-radius: .95rem; font-weight: 700;
+  background: var(--surface); color: var(--text); border: 2px solid var(--border); transition: border-color .25s, background .25s;
+}
+.lh-plaat-naam { font-size: .9rem; line-height: 1.15; min-width: 0; overflow-wrap: anywhere; color: var(--text-muted); }
+.lh-score-n { flex: none; font-size: 1.5rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.lh-plaat.aan { border-color: var(--primary); background: var(--primary-soft); }
+.lh-plaat.aan .lh-plaat-naam { color: var(--text); }
 .lh-plaat.pc { flex-direction: row-reverse; }
-.lh-zak { font-size: .9rem; font-weight: 700; color: var(--text-muted); text-align: center; line-height: 1.2; }
-.lh-melding { margin: 0; min-height: 2.9em; text-align: center; color: var(--text); font-size: 1.05rem; display: grid; align-items: center; }
+.lh-zak { grid-column: 1 / -1; order: 3; font-size: .85rem; font-weight: 600; color: var(--text-muted); text-align: center; line-height: 1.2; }
+.lh-melding { margin: 0; min-height: 2.6em; text-align: center; color: var(--text); font-size: 1rem; display: grid; align-items: center; }
 
 /* Het bord */
+.lh-bordkader { position: relative; margin-bottom: 1.5rem; }
 .lh-bordwrap {
-  position: relative; border-radius: 1.4rem; padding: .55rem; overflow: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y;
-  background: linear-gradient(150deg, #1d4a3d 0%, #0f2f27 55%, #17433a 100%);
-  box-shadow: 0 .4rem 1rem rgba(20, 40, 30, .35), inset 0 0 0 .14rem #cda24a, inset 0 0 0 .26rem #0b241e, inset 0 0 0 .3rem rgba(255, 233, 160, .55);
+  position: relative; border-radius: 1.1rem; padding: .4rem; overflow: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y;
+  background: var(--lh-bord); box-shadow: var(--shadow), inset 0 0 0 1px var(--lh-lijn);
 }
 .lh-bordwrap:not(.ingezoomd) { display: grid; place-items: center; }
 .lh-bord {
-  --vak: 24px; display: grid; grid-template-columns: repeat(15, var(--vak)); grid-template-rows: repeat(15, var(--vak)); gap: 1px; width: max-content; margin: .35rem auto;
-  background: #b9944a; padding: 2px; border-radius: .5rem; box-shadow: 0 0 0 1px #8a6a1f, 0 .1rem .5rem rgba(0, 0, 0, .45);
+  --vak: 24px; position: relative; display: grid; grid-template-columns: repeat(15, var(--vak)); grid-template-rows: repeat(15, var(--vak)); gap: 1px; width: max-content; margin: .15rem auto;
+  background: var(--lh-lijn); padding: 2px; border-radius: .5rem;
 }
 .lh-vak {
-  position: relative; display: grid; place-items: center; width: var(--vak); height: var(--vak); box-sizing: border-box; border-radius: calc(var(--vak) * .12); cursor: pointer; -webkit-tap-highlight-color: transparent;
-  background: linear-gradient(160deg, #f7f1de, #ebe2c4); box-shadow: inset 0 0 0 1px rgba(160, 120, 40, .22);
+  position: relative; display: grid; place-items: center; width: var(--vak); height: var(--vak); box-sizing: border-box; border-radius: calc(var(--vak) * .1); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  background: var(--lh-vak);
 }
-.lh-vak:focus-visible { outline: .2rem solid #ffd45a; outline-offset: -.15rem; z-index: 3; }
-.lh-vak.doel { outline: .2rem dashed #ffd45a; outline-offset: -.12rem; }
+.lh-vak:focus-visible { outline: .2rem solid var(--focus); outline-offset: -.15rem; z-index: 3; }
+.lh-vak.doel { outline: .2rem dashed var(--focus); outline-offset: -.12rem; }
 .lh-vak > * { grid-area: 1 / 1; }
-.lh-glyf { position: absolute; top: 9%; left: 0; right: 0; display: flex; justify-content: center; opacity: .78; }
-.lh-glyf svg { width: calc(var(--vak) * .34); height: calc(var(--vak) * .34); }
-.lh-num { position: relative; top: 10%; font: 800 calc(var(--vak) * .52) / 1 Georgia, 'Times New Roman', serif; }
-.lh-vak.L2 { background: linear-gradient(160deg, #d9efe3, #b2dcc6); color: #135c3b; box-shadow: inset 0 0 0 1px rgba(19, 92, 59, .3), inset 0 .08em .12em rgba(255, 255, 255, .7); }
-.lh-vak.L3 { background: linear-gradient(160deg, #5fb797, #2b8666); color: #f3fff8; box-shadow: inset 0 0 0 1px rgba(8, 60, 40, .5), inset 0 .08em .12em rgba(255, 255, 255, .35); }
-.lh-vak.W2 { background: linear-gradient(160deg, #e0d0f2, #b99fdc); color: #3d2468; box-shadow: inset 0 0 0 1px rgba(61, 36, 104, .35), inset 0 .08em .12em rgba(255, 255, 255, .6); }
-.lh-vak.W3 { background: linear-gradient(160deg, #ee6a5e, #b3212b); color: #ffe9a8; box-shadow: inset 0 0 0 1px rgba(100, 10, 20, .6), inset 0 0 0 calc(var(--vak) * .07) rgba(255, 224, 140, .55), inset 0 .08em .12em rgba(255, 255, 255, .3); }
-.lh-vak.midden { background: radial-gradient(circle at 50% 40%, #fff6d6, #f2d98b); box-shadow: inset 0 0 0 1px rgba(150, 110, 20, .5), inset 0 0 0 calc(var(--vak) * .07) rgba(205, 162, 74, .7); }
-.lh-bloem { width: 86%; height: 86%; }
+.lh-glyf { display: none; }                                         /* (de steensymbolen zijn er niet meer: een gewoon getal is een letterbonus, een getal in een cirkel een woordbonus) */
+.lh-num { position: relative; font-size: calc(var(--vak) * .52); font-weight: 800; line-height: 1; }
+.lh-vak.L2 { background: var(--lh-l2); color: var(--lh-l2-t); }
+.lh-vak.L3 { background: var(--lh-l3); color: var(--lh-l3-t); }
+.lh-vak.W2 { background: var(--lh-w2); color: var(--lh-w2-t); }
+.lh-vak.W3 { background: var(--lh-w3); color: var(--lh-w3-t); }
+.lh-vak.midden { background: var(--lh-w2); color: var(--lh-w3); }
+.lh-vak.W2 .lh-num, .lh-vak.W3 .lh-num { display: grid; place-items: center; width: 1.45em; height: 1.45em; border-radius: 50%; box-shadow: inset 0 0 0 .09em currentColor; font-size: calc(var(--vak) * .44); }   /* woord = getal in een ring, letter = los getal */
+.lh-bloem { width: 80%; height: 80%; }
 .lh-vak.bezet .lh-glyf, .lh-vak.bezet .lh-num, .lh-vak.bezet .lh-bloem { opacity: 0; }
 
-/* De stenen: porselein met een gouden inlegrand en een rand van jade onderaan */
+/* De stenen: ivoor met een fijn randje en een dun schaduwrandje onderaan */
 .lh-steen {
-  position: relative; display: grid; place-items: center; width: 100%; height: 100%; box-sizing: border-box; border-radius: calc(var(--vak, 24px) * .16); color: #2b2430;
-  background: radial-gradient(130% 110% at 25% 15%, #ffffff 0%, #fbf5e6 45%, #efe3c4 100%);
-  box-shadow: 0 .09em 0 #1f7a55, 0 .12em .18em rgba(10, 30, 20, .5), inset 0 0 0 .055em rgba(205, 162, 74, .95), inset 0 .06em .08em rgba(255, 255, 255, .95);
+  position: relative; display: grid; place-items: center; width: 100%; height: 100%; box-sizing: border-box; border-radius: calc(var(--vak, 24px) * .18); color: var(--lh-inkt);
+  background: var(--lh-steen);
+  box-shadow: 0 .06em 0 var(--lh-steen-diep), 0 .1em .16em rgba(30, 25, 15, .22), inset 0 0 0 .04em var(--lh-steen-rand);
   -webkit-user-select: none; user-select: none;
 }
-.lh-l { font: 800 calc(var(--vak, 24px) * .6) / 1 Georgia, 'Times New Roman', serif; transform: translateY(-.02em); text-shadow: 0 .02em 0 rgba(255, 255, 255, .8); }
-.lh-w { position: absolute; right: 9%; bottom: 3%; font: 700 calc(var(--vak, 24px) * .27) / 1 system-ui, sans-serif; color: #6b5226; }
-.lh-steen.joker .lh-l { color: #c4456b; }
-.lh-steen.nieuw { background: radial-gradient(130% 110% at 25% 15%, #ffffff 0%, #fff4cc 50%, #f6dc8c 100%); box-shadow: 0 .09em 0 #1f7a55, 0 0 0 .1em #ffd45a, 0 .16em .3em rgba(10, 30, 20, .5), inset 0 0 0 .055em rgba(205, 162, 74, .95); }
-.lh-vak.laatste .lh-steen { box-shadow: 0 .09em 0 #1f7a55, 0 0 0 .1em #f08ca8, 0 .12em .18em rgba(10, 30, 20, .5), inset 0 0 0 .055em rgba(205, 162, 74, .95); }
-.lh-steen.leeg .lh-blank { width: 78%; height: 78%; }
+.lh-l { font-size: calc(var(--vak, 24px) * .62); font-weight: 700; line-height: 1; transform: translate(-.02em, -.03em); }
+.lh-w { position: absolute; right: 10%; bottom: 6%; font-size: calc(var(--vak, 24px) * .27); font-weight: 700; line-height: 1; color: var(--lh-punt); }
+.lh-bord.klein .lh-w { display: none; }                                   /* op een klein bord liever grotere letters dan onleesbare puntjes */
+.lh-bord.klein .lh-l { font-size: calc(var(--vak, 24px) * .7); }
+.lh-steen.joker .lh-l { color: var(--lh-w3); }
+.lh-steen.nieuw { background: var(--lh-nieuw); box-shadow: 0 .06em 0 var(--lh-steen-diep), 0 0 0 .09em var(--lh-nieuw-ring), 0 .14em .22em rgba(30, 25, 15, .3); }
+.lh-vak.laatste .lh-steen { box-shadow: 0 .06em 0 var(--lh-steen-diep), 0 0 0 .09em var(--lh-laatste-ring), 0 .1em .16em rgba(30, 25, 15, .22); }
+.lh-steen.leeg .lh-blank { width: 76%; height: 76%; color: var(--lh-w3); }
 .lh-vak .lh-steen { z-index: 1; }
 
-/* Het rek: een gelakt plankje voor zeven stenen */
+/* Het rek: een zacht bakje voor zeven stenen */
 .lh-onder { display: flex; flex-direction: column; gap: .6rem; }
-.lh-rekrij { display: flex; align-items: center; gap: .6rem; }
+.lh-rekrij { position: relative; }
 .lh-rek {
-  flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .7rem .7rem .9rem; min-height: 4.6rem; border-radius: 1.1rem;
-  background: linear-gradient(180deg, #16463a, #0e2f27); box-shadow: inset 0 .25rem .5rem rgba(0, 0, 0, .45), inset 0 0 0 .14rem #cda24a, 0 .18rem .5rem rgba(20, 40, 30, .3);
+  --vak: 3.2rem; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .95rem .6rem .85rem; min-height: 4.8rem; border-radius: 1.1rem;
+  background: var(--surface-2); box-shadow: inset 0 .12rem .35rem rgba(0, 0, 0, .1); border: 1px solid var(--border);
 }
-.lh-rekstee { position: relative; flex: 1 1 0; max-width: 3.4rem; min-width: 0; aspect-ratio: 1 / 1.08; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; --vak: 3.2rem; transition: transform .15s; -webkit-tap-highlight-color: transparent; }
-.lh-rekstee .lh-l { font-size: 1.85rem; }
-.lh-rekstee .lh-w { font-size: .85rem; }
-.lh-rekstee.gekozen { transform: translateY(-.55rem) scale(1.06); }
-.lh-rekstee.gekozen .lh-steen { box-shadow: 0 .09em 0 #1f7a55, 0 0 0 .1em #ffd45a, 0 0 .6rem .15rem rgba(255, 212, 90, .75), inset 0 0 0 .055em rgba(205, 162, 74, .95); }
-.lh-rekstee:focus-visible { outline: .22rem solid #ffd45a; outline-offset: .15rem; border-radius: .5rem; }
+.lh-rekstee { position: relative; flex: none; width: var(--vak); height: calc(var(--vak) * 1.08); padding: 0; border: 0; background: none; cursor: grab; touch-action: none; transition: transform .15s; -webkit-tap-highlight-color: transparent; z-index: 1; }
+.lh-rekstee .lh-l { transform: translate(-.08em, -.06em); }
+.lh-rekstee .lh-w { font-size: calc(var(--vak) * .24); right: 8%; bottom: 5%; }
+.lh-rekstee.gekozen { transform: translateY(-.5rem) scale(1.06); }
+.lh-rekstee.gekozen .lh-steen { box-shadow: 0 .06em 0 var(--lh-steen-diep), 0 0 0 .09em var(--lh-nieuw-ring), 0 .35em .6em rgba(30, 25, 15, .3); }
+.lh-rekstee:focus-visible { outline: .22rem solid var(--focus); outline-offset: .15rem; border-radius: .5rem; }
 .lh-rekstee.weg { opacity: .3; }
-.lh-hussel, .lh-zoom { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 3.2rem; min-width: 3.2rem; padding: 0 .8rem; border-radius: 1rem; border: .12rem solid #d8c690; background: linear-gradient(160deg, #fffefb, #f4ecd8); color: #2b2430; cursor: pointer; font: inherit; font-weight: 700; box-shadow: 0 .1rem .3rem rgba(60, 40, 10, .2); }
-.lh-hussel:disabled { opacity: .45; }
-.lh-zoom { align-self: center; }
-.lh-spook { position: fixed; left: 0; top: 0; z-index: 3000; pointer-events: none; opacity: .92; transform-origin: center; --vak: 3.2rem; filter: drop-shadow(0 .5rem .5rem rgba(0, 0, 0, .35)); }
-.lh-spook .lh-steen { box-shadow: 0 .09em 0 #1f7a55, 0 0 0 .1em #ffd45a, inset 0 0 0 .055em rgba(205, 162, 74, .95); }
+.lh-hussel {
+  position: absolute; left: .8rem; top: -1.9rem; z-index: 3; display: grid; place-items: center; width: 2.7rem; height: 2.7rem; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 92%, transparent); color: var(--primary); box-shadow: 0 .1rem .5rem rgba(0, 0, 0, .18);
+}
+.lh-hussel:hover { background: var(--primary-soft); }
+.lh-hussel:disabled { opacity: .45; cursor: default; }
+.lh-hussel:focus-visible, .lh-zoom:focus-visible { outline: .22rem solid var(--focus); outline-offset: .15rem; }
+.lh-spook { position: fixed; left: 0; top: 0; z-index: 3000; pointer-events: none; opacity: .94; transform-origin: center; --vak: 3.2rem; filter: drop-shadow(0 .5rem .5rem rgba(0, 0, 0, .3)); }
+.lh-spook .lh-steen { box-shadow: 0 .06em 0 var(--lh-steen-diep), 0 0 0 .09em var(--lh-nieuw-ring); }
 
-.lh-knoppen { display: flex; flex-wrap: wrap; gap: .5rem; padding: .2rem 0 .6rem; }
-.lh-knoppen .btn { flex: 1 1 6rem; min-height: 3.5rem; padding-inline: .6rem; }
-.lh-knoppen .btn[disabled] { opacity: .5; }
-.lh-knoppen .lh-speel { flex-basis: 100%; min-height: 3.8rem; font-size: 1.15rem; }
+/* Inzoomen: een rond knopje op de onderrand van het bord, zodat het geen enkel vakje bedekt */
+.lh-zoom {
+  position: absolute; right: 1rem; bottom: -1.4rem; z-index: 5; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 92%, transparent); color: var(--text); box-shadow: 0 .1rem .5rem rgba(0, 0, 0, .18);
+}
+.lh-zoom:hover { background: var(--surface); }
+.lh-zoom .icon { width: 1.4rem; height: 1.4rem; }
+
+/* De knoppen: één hoofdknop en daaronder vier stille knoppen met een pictogram */
+.lh-knoppen { display: flex; flex-direction: column; gap: .5rem; padding: .1rem 0 .6rem; }
+.lh-speel { width: 100%; min-height: 3.8rem; font-size: 1.15rem; }
+.lh-speel[disabled] { opacity: .45; }
+.lh-acties { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem; border-top: 1px solid var(--border); padding-top: .6rem; }
+.lh-acties .action-btn { flex-direction: row; justify-content: flex-start; gap: .5rem; min-width: 0; min-height: 3.3rem; padding: .3rem .6rem; font-size: .9rem; text-align: left; }
+.lh-acties .action-btn span { overflow-wrap: anywhere; hyphens: auto; line-height: 1.15; }
+.lh-acties .action-btn .icon { flex: none; }
+.lh-acties .action-btn[disabled] { opacity: .4; }
+@media (min-width: 34rem) { .lh-acties { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 /* Een punten-bubbel die opstijgt, en de beweging van stenen */
-.lh-pop { position: absolute; left: 50%; top: 0; z-index: 8; transform: translate(-50%, -30%); padding: .15rem .55rem; border-radius: 1rem; font: 800 1.1rem / 1.1 Georgia, serif; color: #fff7d6; background: linear-gradient(160deg, #e0574d, #a81c27); box-shadow: 0 .15rem .4rem rgba(0, 0, 0, .35); white-space: nowrap; pointer-events: none; animation: lh-pop 1.4s ease-out forwards; }
+.lh-pop { position: absolute; left: 50%; top: 0; z-index: 8; transform: translate(-50%, -30%); padding: .15rem .55rem; border-radius: 1rem; font-size: 1.05rem; font-weight: 800; line-height: 1.1; color: #fff; background: var(--lh-w3); box-shadow: 0 .15rem .4rem rgba(0, 0, 0, .3); white-space: nowrap; pointer-events: none; animation: lh-pop 1.4s ease-out forwards; }
 @keyframes lh-pop { 0% { opacity: 0; transform: translate(-50%, 20%) scale(.7); } 15% { opacity: 1; transform: translate(-50%, -40%) scale(1.1); } 100% { opacity: 0; transform: translate(-50%, -190%) scale(1); } }
 .lh-steen.komt { animation: lh-komt .45s cubic-bezier(.2, .9, .3, 1.2) both; }
 @keyframes lh-komt { 0% { opacity: 0; transform: translateY(-1.2em) scale(1.35); } 100% { opacity: 1; transform: none; } }
@@ -99,50 +147,25 @@ html[data-calm="true"] .lh-steen, html[data-calm="true"] .lh-pop { animation: no
 @media (prefers-reduced-motion: reduce) { .lh-steen, .lh-pop { animation: none !important; } }
 
 /* Dialogen: een letter kiezen voor een lege steen, stenen wisselen */
-.lh-dialoog { border: 0; border-radius: 1.4rem; padding: 1.2rem; max-width: min(92vw, 30rem); background: #fffdf6; color: #2b2430; box-shadow: 0 1rem 3rem rgba(0, 0, 0, .4); }
-.lh-dialoog::backdrop { background: rgba(10, 30, 20, .55); }
+.lh-dialoog { border: 0; border-radius: 1.4rem; padding: 1.2rem; max-width: min(92vw, 30rem); background: var(--surface); color: var(--text); box-shadow: 0 1rem 3rem rgba(0, 0, 0, .4); }
+html[data-theme="dark"] .lh-dialoog { border: 1px solid var(--border); }
+.lh-dialoog::backdrop { background: rgba(20, 24, 27, .55); }
 .lh-dialoog h2 { margin: 0 0 .6rem; font-size: 1.3rem; }
 .lh-letterkeuze { display: grid; grid-template-columns: repeat(auto-fill, minmax(3.2rem, 1fr)); gap: .45rem; margin-bottom: 1rem; }
-.lh-lk { min-height: 3.2rem; border-radius: .9rem; border: .12rem solid #cda24a; background: linear-gradient(160deg, #fffefb, #f1e6c6); font: 800 1.5rem Georgia, serif; color: #2b2430; cursor: pointer; }
-.lh-lk:hover, .lh-lk:focus-visible { background: #fff1b8; outline: .2rem solid #ffd45a; }
+.lh-lk { min-height: 3.2rem; border-radius: .9rem; border: 1px solid var(--lh-steen-rand); background: var(--lh-steen); font-size: 1.5rem; font-weight: 700; color: var(--lh-inkt); cursor: pointer; box-shadow: 0 .06rem 0 var(--lh-steen-diep); }
+.lh-lk:hover, .lh-lk:focus-visible { background: var(--lh-nieuw); outline: .2rem solid var(--focus); }
 .lh-wisselrij { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: 1rem 0; }
-.lh-wisselrij .lh-rekstee { flex: 0 0 3.6rem; max-width: none; --vak: 3.4rem; }
+.lh-wisselrij .lh-rekstee { --vak: 3.4rem; }
 .lh-dlg-knoppen { display: flex; gap: .6rem; justify-content: flex-end; flex-wrap: wrap; }
 
 @media (max-width: 34rem) {
-  .lh-kop { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .lh-bordwrap { margin-inline: -.6rem; border-radius: 1.1rem; padding: .3rem; }
-  .lh-zak { grid-column: 1 / -1; order: 3; }
-  .lh-rek { gap: .3rem; padding-inline: .5rem; }
-  .lh-rekstee .lh-l { font-size: 1.55rem; }
+  .lh-bordwrap { margin-inline: -.6rem; border-radius: 1rem; padding: .3rem; }
+  .lh-rek { gap: .3rem; padding-inline: .45rem; }
 }
-html[data-contrast="high"] .lh-bordwrap { background: #0b2a21; }
-html[data-contrast="high"] .lh-vak { box-shadow: inset 0 0 0 1px #000; }
-html[data-contrast="high"] .lh-steen { box-shadow: 0 0 0 .08em #000; }
+/* Smal scherm met de grootste tekst: de twee scoreplaatjes onder elkaar in plaats van een kolom van losse letters */
+@media (max-width: 24rem) { html[data-textsize="xlarge"] .lh-kop { grid-template-columns: minmax(0, 1fr); } html[data-textsize="xlarge"] .lh-zak { grid-column: auto; } }
+html[data-contrast="high"] .lh-plaat.aan { border-width: 4px; }
+html[data-contrast="high"] .lh-vak { box-shadow: none; }
+html[data-contrast="high"] .lh-steen { box-shadow: 0 0 0 .06em #000; }
 body.groot-beeld .lh-bordwrap { margin-inline: 0; }
-
-/* Wat de kleuren betekenen */
-.lh-legenda { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem .8rem; margin: 0; padding: 0; list-style: none; font-size: .85rem; color: var(--text-muted); }
-.lh-legenda li { display: inline-flex; align-items: center; gap: .35rem; }
-.lh-legenda i { display: inline-block; width: 1.1rem; height: 1.1rem; border-radius: .25rem; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25); }
-.lh-legenda .L2 i { background: #b2dcc6; } .lh-legenda .L3 i { background: #2b8666; } .lh-legenda .W2 i { background: #b99fdc; } .lh-legenda .W3 i { background: #c52a33; }
-.lh-bord.klein .lh-glyf { display: none; }
-.lh-bord.klein .lh-num { top: 0; }
-
-/* Extra zorg voor de uitstraling: een vage bloesem in de hoeken van het bord en het rek, gouden knopjes in de hoeken van de lijst, een bloesem bij wie aan de beurt is */
-.lh-bordwrap::before, .lh-bordwrap::after { content: ""; position: absolute; width: 38%; aspect-ratio: 1; pointer-events: none; background: url("../../assets/blossom.svg") center / contain no-repeat; opacity: .16; z-index: 0; }
-.lh-bordwrap::before { right: -9%; top: -9%; transform: rotate(18deg); }
-.lh-bordwrap::after { left: -9%; bottom: -9%; transform: rotate(-24deg); }
-.lh-bord { position: relative; z-index: 1; }
-.lh-rek { position: relative; overflow: hidden; }
-.lh-rek::after { content: ""; position: absolute; right: -2.2rem; bottom: -2.4rem; width: 8rem; aspect-ratio: 1; background: url("../../assets/blossom.svg") center / contain no-repeat; opacity: .13; pointer-events: none; }
-.lh-rekstee { z-index: 1; }
-.lh-plaat { position: relative; }
-.lh-plaat.aan::before { content: ""; position: absolute; left: -.55rem; top: -.55rem; width: 1.5rem; height: 1.5rem; background: url("../../assets/blossom.svg") center / contain no-repeat; filter: drop-shadow(0 .1rem .15rem rgba(0, 0, 0, .3)); }
-.lh-plaat.pc.aan::before { left: auto; right: -.55rem; }
-html[data-theme="dark"] .lh-melding { color: var(--text); }
-
 body.groot-beeld .lh { padding-top: 3.2rem; }
-
-/* Smal scherm met de grootste tekst: de twee scoreplaten onder elkaar in plaats van een kolom van losse letters */
-@media (max-width: 24rem) { html[data-textsize="xlarge"] .lh-kop { grid-template-columns: minmax(0, 1fr); } }

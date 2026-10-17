@@ -53,19 +53,19 @@ export async function mount(container, ctx) {
   const rekEl = h('div', { class: 'lh-rek', role: 'group', 'aria-label': t('letterhof.rack') });
   const knop = (klas, ico, tekst, onclick) => h('button', { type: 'button', class: `btn ${klas}`.trim(), onclick }, icon(ico), h('span', {}, tekst));
   const speelKnop = knop('btn-primary lh-speel', 'check', t('letterhof.play'), () => speelZet());
-  const terugKnop = knop('', 'undo', t('letterhof.recall'), () => alleTerug());
-  const wisselKnop = knop('', 'swap', t('letterhof.exchange'), () => wisselDialoog());
-  const passKnop = knop('', 'skip', t('letterhof.pass'), () => passBevestig());
-  const tipKnop = knop('', 'bulb', t('common.hint'), () => geefTip());
+  const actie = (ico, tekst, onclick) => knop('action-btn', ico, tekst, onclick);          // een pictogram met een woord eronder, zoals bij Sudoku
+  const terugKnop = actie('undo', t('letterhof.recall'), () => alleTerug());
+  const wisselKnop = actie('swap', t('letterhof.exchange'), () => wisselDialoog());
+  const passKnop = actie('skip', t('letterhof.pass'), () => passBevestig());
+  const tipKnop = actie('bulb', t('common.hint'), () => geefTip());
   const husselKnop = h('button', { type: 'button', class: 'lh-hussel', 'aria-label': t('letterhof.shuffle'), title: t('letterhof.shuffle'), onclick: () => husselRek() }, icon('shuffle'));
-  const zoomKnop = h('button', { type: 'button', class: 'lh-zoom', onclick: () => zoom() });
+  const zoomKnop = h('button', { type: 'button', class: 'lh-zoom', onclick: () => zoom() });         // een rond knopje op het bord (pictogram, met een naam voor schermlezers)
   container.classList.add('stage--bare');
   container.append(h('div', { class: 'lh' },
     h('div', { class: 'lh-kop' }, plaatJij, zakTeller, plaatPc),
-    meldEl, bordWrap,
-    h('ul', { class: 'lh-legenda', 'aria-hidden': 'true' }, ...['L2', 'L3', 'W2', 'W3'].map((k) => h('li', { class: k }, h('i'), t(PREMIE_NAAM[k])))),
-    h('div', { class: 'lh-onder' }, h('div', { class: 'lh-rekrij' }, rekEl, husselKnop), zoomKnop,
-      h('div', { class: 'lh-knoppen' }, speelKnop, terugKnop, wisselKnop, passKnop, tipKnop))));
+    meldEl, h('div', { class: 'lh-bordkader' }, bordWrap, zoomKnop),
+    h('div', { class: 'lh-onder' }, h('div', { class: 'lh-rekrij' }, rekEl, husselKnop),
+      h('div', { class: 'lh-knoppen' }, speelKnop, h('div', { class: 'lh-acties' }, terugKnop, tipKnop, wisselKnop, passKnop)))));
 
   // het bord: 225 vakjes
   const vakken = [];
@@ -84,6 +84,11 @@ export async function mount(container, ctx) {
 
   // ----- Maten -----
   function pasMaat() {
+    const rekB = rekEl.clientWidth;                                    // de stenen van het rek vullen het rek (zeven naast elkaar), ook op een smal scherm met grote tekst
+    if (rekB > 0) {
+      const ps = getComputedStyle(rekEl), pad = parseFloat(ps.paddingLeft) + parseFloat(ps.paddingRight), gat = parseFloat(ps.columnGap) || 4;
+      rekEl.style.setProperty('--vak', `${Math.max(28, Math.min(Math.floor((rekB - pad - gat * (REK - 1) - 2) / REK), 56))}px`);
+    }
     const breedte = bordWrap.clientWidth;
     if (breedte <= 0) return;
     const stijl = getComputedStyle(bordWrap), rand = parseFloat(stijl.paddingLeft) + parseFloat(stijl.paddingRight);
@@ -94,7 +99,8 @@ export async function mount(container, ctx) {
     bordEl.style.setProperty('--vak', `${vak}px`);
     bordEl.classList.toggle('klein', vak < 30);
     bordWrap.classList.toggle('ingezoomd', ingezoomd);
-    zoomKnop.replaceChildren(icon(ingezoomd ? 'shrink' : 'expand'), h('span', {}, t(ingezoomd ? 'letterhof.zoomOut' : 'letterhof.zoomIn')));
+    zoomKnop.replaceChildren(icon(ingezoomd ? 'shrink' : 'expand'));
+    zoomKnop.setAttribute('aria-label', t(ingezoomd ? 'letterhof.zoomOut' : 'letterhof.zoomIn')); zoomKnop.title = t(ingezoomd ? 'letterhof.zoomOut' : 'letterhof.zoomIn');
   }
   function zoom() {
     ingezoomd = !ingezoomd;
@@ -106,7 +112,7 @@ export async function mount(container, ctx) {
     w.scrollTo({ left: el.offsetLeft - w.clientWidth / 2 + el.offsetWidth / 2, top: el.offsetTop - w.clientHeight / 2 + el.offsetHeight / 2, behavior: motionOK() ? 'smooth' : 'auto' });
   }
   const ro = new ResizeObserver(() => pasMaat());
-  ro.observe(bordWrap);
+  ro.observe(bordWrap); ro.observe(rekEl);
 
   // ----- Het rek -----
   function synchroniseerRek() {
@@ -277,6 +283,7 @@ export async function mount(container, ctx) {
     const pl = plaatsingen();
     const w = woordenVan(st, pl);
     if (w.fout) { zeg(t(FOUTEN[w.fout] ?? 'letterhof.fout.lijn')); return; }
+    if (!w.woorden.length) { zeg(t(FOUTEN[bordLeeg(st) ? 'kort' : 'los'])); return; }       // één losse steen maakt nog geen woord
     const { totaal } = puntenVan(taal, w.woorden, w.nieuw);
     const bingo = pl.length === REK ? BINGO : 0;
     zeg(t('letterhof.preview', { points: totaal + bingo, word: w.woorden[0].tekst.toUpperCase() }));

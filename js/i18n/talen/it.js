@@ -447,7 +447,7 @@ export default {
   "letterhof.summary": "Formi parole su una tavola fiorita: posizioni le tessere, faccia punti con le caselle colorate e batta il giocatore virtuale.",
   "letterhof.howTo.1": "Tocchi una tessera del suo leggio e poi una casella della tavola, oppure la trascini. Formi una parola su una riga o una colonna. La prima parola deve passare sul fiore al centro.",
   "letterhof.howTo.2": "Ogni parola successiva deve collegarsi a quelle sulla tavola, e tutte le parole che forma o incrocia devono esistere. Tocchi una tessera appena messa per riprenderla. La tessera bianca (con il fiore) può essere qualsiasi lettera.",
-  "letterhof.howTo.3": "Le caselle colorate aiutano: verde chiaro raddoppia una lettera, verde la triplica, viola raddoppia tutta la parola, rosso la triplica. Contano solo per le tessere che mette ora. Se usa tutte e sette le tessere insieme, ottiene un bel bonus.",
+  "letterhof.howTo.3": "Le caselle con un numero aiutano: un 2 o un 3 semplice raddoppia o triplica quella lettera, un 2 o un 3 in un cerchio raddoppia o triplica tutta la parola. Contano solo per le tessere che mette ora. Se usa tutte e sette le tessere insieme, ottiene un bel bonus.",
   "letterhof.howTo.4": "Tocchi «{play}» per confermare la parola. Bloccato? Usi «{exchange}» o «{pass}», oppure chieda un «{hint}». La partita finisce quando il sacchetto è vuoto e qualcuno ha finito le tessere.",
   "letterhof.level.makkelijk": "Il giocatore virtuale conosce solo parole comuni e gioca spesso debolmente",
   "letterhof.level.gemiddeld": "Parole comuni, gioca discretamente",
